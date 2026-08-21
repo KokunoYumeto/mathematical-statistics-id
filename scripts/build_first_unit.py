@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import argparse
+import base64
 import csv
 import hashlib
 import io
@@ -29,6 +30,12 @@ OUTPUT = BUILD_DIR / "html-id"
 MANIFEST = BUILD_DIR / "FIRST_UNIT_MANIFEST.csv"
 BUILD_RECEIPT = BUILD_DIR / "FIRST_UNIT_BUILD_RECEIPT.json"
 QA_SCRIPT = ROOT / "scripts" / "qa_first_unit.py"
+RUNTIME_ROOT = ROOT / "authority" / "runtime" / "MathJax-3.1.2"
+RUNTIME_BASE64 = RUNTIME_ROOT / "boldsymbol.js.base64"
+RUNTIME_RECEIPT = RUNTIME_ROOT / "RUNTIME_RECEIPT.json"
+RUNTIME_READER_PATH = PurePosixPath("MathJax/input/tex/extensions/boldsymbol.js")
+RUNTIME_BYTES = 4709
+RUNTIME_SHA256 = "716cf8735d00abfb1627f8adbbf4aeb915ac9b5c55d47aeaf276e73dac6a2aa1"
 
 SOURCE_MANIFEST_HEADER = (
     "relative_path",
@@ -553,6 +560,61 @@ def _validated_file_record(
     return data, record
 
 
+def _runtime_payload() -> tuple[bytes, dict[str, Any]]:
+    encoded = read_regular(RUNTIME_BASE64)
+    receipt_data = read_regular(RUNTIME_RECEIPT)
+    try:
+        receipt = json.loads(receipt_data.decode("utf-8"))
+    except (UnicodeDecodeError, json.JSONDecodeError) as exc:
+        raise RuntimeError(f"invalid MathJax runtime receipt: {exc}") from exc
+    expected = {
+        "schema": "o006.mathjax-runtime.v1",
+        "component": "MathJax",
+        "version": "3.1.2",
+        "license": "Apache-2.0",
+        "official_repository": "https://github.com/mathjax/MathJax",
+        "tag": "3.1.2",
+        "commit": "c8292351190ce249f7143f224dbe7a190c8228fe",
+        "git_path": "es5/input/tex/extensions/boldsymbol.js",
+        "git_blob_sha1": "4570456930955792300c57537ad580ef14311335",
+        "raw_url": (
+            "https://raw.githubusercontent.com/mathjax/MathJax/3.1.2/"
+            "es5/input/tex/extensions/boldsymbol.js"
+        ),
+        "encoded_authority": {
+            "path": RUNTIME_BASE64.relative_to(ROOT).as_posix(),
+            "encoding": "base64",
+            "bytes": 6281,
+            "sha256": "c613a859a03f6aff52641565de9d05d616add490072d3860598de5803deeaf33",
+        },
+        "decoded_runtime": {
+            "reader_path": RUNTIME_READER_PATH.as_posix(),
+            "bytes": RUNTIME_BYTES,
+            "sha256": RUNTIME_SHA256,
+        },
+    }
+    if receipt != expected:
+        raise RuntimeError("MathJax runtime receipt differs from the admitted exact profile")
+    if (
+        len(encoded) != receipt["encoded_authority"]["bytes"]
+        or sha256_bytes(encoded) != receipt["encoded_authority"]["sha256"]
+    ):
+        raise RuntimeError("MathJax encoded authority bytes do not match the runtime receipt")
+    try:
+        compact = b"".join(encoded.split())
+        decoded = base64.b64decode(compact, validate=True)
+    except (ValueError, base64.binascii.Error) as exc:
+        raise RuntimeError(f"invalid MathJax runtime base64: {exc}") from exc
+    if len(decoded) != RUNTIME_BYTES or sha256_bytes(decoded) != RUNTIME_SHA256:
+        raise RuntimeError("decoded MathJax runtime bytes do not match the pinned release asset")
+    return decoded, {
+        "authority_receipt_path": RUNTIME_RECEIPT.relative_to(ROOT).as_posix(),
+        "authority_receipt_bytes": len(receipt_data),
+        "authority_receipt_sha256": sha256_bytes(receipt_data),
+        **receipt,
+    }
+
+
 def _validate_target_corrections(
     authority_data: dict[str, bytes], target_data: dict[str, bytes]
 ) -> None:
@@ -641,6 +703,11 @@ def collect_inputs() -> tuple[dict[PurePosixPath, bytes], dict[str, Any]]:
 
     _validate_target_corrections(authority_data, target_data)
 
+    runtime_data, runtime_input = _runtime_payload()
+    if RUNTIME_READER_PATH in payload:
+        raise RuntimeError(f"duplicate reader runtime path: {RUNTIME_READER_PATH}")
+    payload[RUNTIME_READER_PATH] = runtime_data
+
     reader_customizations: list[dict[str, Any]] = []
     for rel in SUPPORT:
         row = source_rows.get(rel.as_posix())
@@ -698,6 +765,7 @@ def collect_inputs() -> tuple[dict[PurePosixPath, bytes], dict[str, Any]]:
         "authority_inputs": sorted(authority_inputs, key=lambda item: item["relative_path"].casefold()),
         "target_inputs": sorted(target_inputs, key=lambda item: item["relative_path"].casefold()),
         "license_inputs": sorted(license_inputs, key=lambda item: item["relative_path"].casefold()),
+        "runtime_inputs": [runtime_input],
         "generated_inputs": sorted(
             generated_inputs, key=lambda item: item["reader_relative_path"].casefold()
         ),
@@ -746,6 +814,7 @@ def expected_receipt(
             "authority": evidence["authority_inputs"],
             "targets": evidence["target_inputs"],
             "licenses": evidence["license_inputs"],
+            "runtime": evidence["runtime_inputs"],
             "generated": evidence["generated_inputs"],
         },
         "bounded_text_corrections": list(BOUNDED_TEXT_CORRECTIONS),

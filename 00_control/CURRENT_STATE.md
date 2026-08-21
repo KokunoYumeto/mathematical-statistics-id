@@ -6,9 +6,12 @@ Updated: 2026-08-21
 
 Source admitted; exact authority and component-rights freezes complete; the
 first three contiguous Indonesian pages and the full 29-page machine backend
-are verified. The initial GitHub/Pages checkpoint is authorized and queued for
-immediate publication. No public URL is claimed live until anonymous byte and
-browser readback passes; the complete 29-page course is not yet claimed.
+are verified. The repository and first Pages deployment are public, but browser
+verification rejected that deployment because the local MathJax bundle lacked
+its dynamically loaded `boldsymbol.js` module. The exact official 3.1.2 module
+is now pinned in the authority closure and the repaired reader passes local
+replay; immediate redeployment and browser readback remain in progress. The
+complete 29-page course is not yet claimed.
 
 ## Admitted source
 
@@ -80,20 +83,21 @@ exercise-section only, 42 native `app`/`stat` only, and 500 neither.
 
 Core ordinals 1–3 are complete: `random/sample/index.html`,
 `random/sample/Introduction.html`, and `random/sample/Mean.html`. The build is
-25 files / 1,840,700 bytes; canonical manifest SHA-256
-`5c3d51affcc8df38ea2c5067c8eec42b3f6f8e6fe79ad37bcf170e88309b06b5`.
+26 files / 1,845,409 bytes; canonical manifest SHA-256
+`52edafb9d815fb07c1c51a46ab036e71989436088b418270b33ab0465d366a8f`.
 Build-receipt SHA-256 is
-`bbc22b59996e94b267a2d3d8ed1eb448b0a78feb477b20e8a3311d63f2275fbe`;
+`82675f175706287a52292bb48e01cfa0cc93b06253c8641925381e6ab9eb8a94`;
 QA-receipt SHA-256 is
-`d1c2ccce9c1c05f80aa745fe94be4f81826c279fa637021c44686dc3e58ebee8`.
+`b2520463e7b68319555e4dfa0cdc8160d4df65e70cd6cee33b5494256861b546`.
 
 The final QA census is 3 pages, 48 units, 39 disclosures, 466 TeX spans,
 five declared protected-math repairs, 56 local references, and 8 local
 fragments. Reader copies are byte-identical to translation targets; topology,
 scripts/styles, IDs, HTTPS policy, local closure, privacy, licensing assets,
-and the exact responsive CSS append pass. Two consecutive build/QA check-only
-replays returned identical hashes. The checkpoint details and page hashes are
-in `CHECKPOINT_2026-08-21_THREE_PAGE.md`.
+the exact responsive CSS append, and the pinned MathJax runtime pass. Two
+consecutive build/QA check-only replays returned identical hashes. The
+checkpoint details and page hashes are in
+`CHECKPOINT_2026-08-21_THREE_PAGE.md`.
 
 ## Reversal conditions
 
@@ -127,13 +131,15 @@ sample-mean wording and punctuation, an inconsistent union index, a missing
 display delimiter, the wrong ambient-dimension subscript, a rounding endpoint,
 and a malformed interval. Open findings are the VarianceTest link family, the
 interval `two2` fragment, the unavailable ExponentialExperiment companion, and
-the missing `Moments.html#poi` fragment. Authority bytes remain immutable. Do
-not contact upstream during production.
+the missing `Moments.html#poi` fragment. It also records the rejected first
+Pages deployment and the local runtime-closure repair as a non-upstream build
+incident. Authority bytes remain immutable. Do not contact upstream during
+production.
 
 ## Next work
 
-1. Publish the exact three-page GitHub/Pages checkpoint and complete anonymous
-   byte plus desktop/mobile browser verification.
+1. Redeploy the repaired three-page GitHub/Pages checkpoint and complete
+   anonymous byte plus desktop/mobile browser verification.
 2. Continue immediately with `random/sample/LLN.html` (core ordinal 4).
 3. Advance contiguously through the remaining 26 source pages, growing the
    same deterministic reader and stable-ID backend.

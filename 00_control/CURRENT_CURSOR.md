@@ -9,12 +9,14 @@
   `authority/SOURCE_FREEZE_RECEIPT.json`
 - Last completed source page: `random/sample/Mean.html` (core ordinal 3 of 29)
 - Next contiguous source page: `random/sample/LLN.html` (core ordinal 4)
-- Latest reader: 3 translated pages; 25 files; 1,840,700 bytes; manifest
-  SHA-256 `5c3d51affcc8df38ea2c5067c8eec42b3f6f8e6fe79ad37bcf170e88309b06b5`
+- Latest reader: 3 translated pages; 26 files; 1,845,409 bytes; manifest
+  SHA-256 `52edafb9d815fb07c1c51a46ab036e71989436088b418270b33ab0465d366a8f`
 - Latest deterministic QA receipt SHA-256:
-  `d1c2ccce9c1c05f80aa745fe94be4f81826c279fa637021c44686dc3e58ebee8`
-- Public state: initial GitHub/Pages checkpoint is the immediate authorized
-  boundary; do not mark it public until anonymous readback passes.
+  `b2520463e7b68319555e4dfa0cdc8160d4df65e70cd6cee33b5494256861b546`
+- Public state: repository and Pages exist, but the first deployment was
+  rejected by browser QA for an omitted MathJax dynamic module. The exact
+  repaired runtime closure passes locally and is awaiting immediate redeploy;
+  do not mark the checkpoint verified until rendered-math readback passes.
 
 Resume by reading this file, `CURRENT_STATE.md`, the freeze receipt, and the
 last row of `TRANSLATION_LEDGER.csv`. Continue with `random/sample/LLN.html`;

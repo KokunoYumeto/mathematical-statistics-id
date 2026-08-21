@@ -347,6 +347,34 @@
         "url": "https://raw.githubusercontent.com/mathjax/MathJax/3.1.2/LICENSE"
       }
     ],
+    "runtime": [
+      {
+        "authority_receipt_bytes": 901,
+        "authority_receipt_path": "authority/runtime/MathJax-3.1.2/RUNTIME_RECEIPT.json",
+        "authority_receipt_sha256": "9668ae41d64447438b777739e92844ce194783932496e63fcb016c58b157a3fe",
+        "commit": "c8292351190ce249f7143f224dbe7a190c8228fe",
+        "component": "MathJax",
+        "decoded_runtime": {
+          "bytes": 4709,
+          "reader_path": "MathJax/input/tex/extensions/boldsymbol.js",
+          "sha256": "716cf8735d00abfb1627f8adbbf4aeb915ac9b5c55d47aeaf276e73dac6a2aa1"
+        },
+        "encoded_authority": {
+          "bytes": 6281,
+          "encoding": "base64",
+          "path": "authority/runtime/MathJax-3.1.2/boldsymbol.js.base64",
+          "sha256": "c613a859a03f6aff52641565de9d05d616add490072d3860598de5803deeaf33"
+        },
+        "git_blob_sha1": "4570456930955792300c57537ad580ef14311335",
+        "git_path": "es5/input/tex/extensions/boldsymbol.js",
+        "license": "Apache-2.0",
+        "official_repository": "https://github.com/mathjax/MathJax",
+        "raw_url": "https://raw.githubusercontent.com/mathjax/MathJax/3.1.2/es5/input/tex/extensions/boldsymbol.js",
+        "schema": "o006.mathjax-runtime.v1",
+        "tag": "3.1.2",
+        "version": "3.1.2"
+      }
+    ],
     "targets": [
       {
         "bytes": 11759,
@@ -411,7 +439,7 @@
   ],
   "reader": {
     "directory": "build/html-id",
-    "file_count": 25,
+    "file_count": 26,
     "files": [
       {
         "bytes": 533,
@@ -432,6 +460,11 @@
         "bytes": 11358,
         "relative_path": "licenses/MathJax-3.1.2-LICENSE.txt",
         "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+      },
+      {
+        "bytes": 4709,
+        "relative_path": "MathJax/input/tex/extensions/boldsymbol.js",
+        "sha256": "716cf8735d00abfb1627f8adbbf4aeb915ac9b5c55d47aeaf276e73dac6a2aa1"
       },
       {
         "bytes": 1704911,
@@ -539,10 +572,10 @@
         "sha256": "3f676d2cf6a4e111bff4fc2dbbd082e5305250e40a2c91b67b532dc72f13a78f"
       }
     ],
-    "manifest_bytes": 2400,
+    "manifest_bytes": 2513,
     "manifest_path": "build/FIRST_UNIT_MANIFEST.csv",
-    "manifest_sha256": "5c3d51affcc8df38ea2c5067c8eec42b3f6f8e6fe79ad37bcf170e88309b06b5",
-    "total_bytes": 1840700
+    "manifest_sha256": "52edafb9d815fb07c1c51a46ab036e71989436088b418270b33ab0465d366a8f",
+    "total_bytes": 1845409
   },
   "reader_customizations": [
     {
@@ -563,14 +596,14 @@
   "schema": "o006.random.first-unit-build.v1",
   "scripts": {
     "build": {
-      "bytes": 33959,
+      "bytes": 37086,
       "path": "scripts/build_first_unit.py",
-      "sha256": "017e701932a3e57b29d198dbbce252cbb8c59d4ca82a70cfe35c347f00c033e2"
+      "sha256": "f5107a566033dfee0bf5696132e930a5727cad227f6bfd5b8375c14b74900a62"
     },
     "qa": {
-      "bytes": 43706,
+      "bytes": 45748,
       "path": "scripts/qa_first_unit.py",
-      "sha256": "ca2e9c3524afde4bff69652bd515ae7a474d0f299b8b1d12e01b898eebdaa97b"
+      "sha256": "dddc7584ecdd600408b81dd490a5270e0dbd3d58e9a35da511086f9587f7abf8"
     }
   },
   "transport_hardening": [

@@ -10,6 +10,9 @@ build/** -text
 *.py text eol=lf
 *.yml text eol=lf
 *.yaml text eol=lf
+00_control/*.json text eol=lf
+00_control/*.jsonl text eol=lf
+00_control/*.csv text eol=lf
 requirements.txt text eol=lf
 .gitignore text eol=lf
 .gitattributes text eol=lf

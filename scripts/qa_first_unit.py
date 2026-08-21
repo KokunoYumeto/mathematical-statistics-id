@@ -696,6 +696,45 @@ def check_reader_references() -> dict[str, int]:
     return dict(sorted(counts.items()))
 
 
+def check_mathjax_runtime() -> dict[str, Any]:
+    expected_runtime, authority_record = build_pipeline._runtime_payload()
+    runtime_path = READER / Path(build_pipeline.RUNTIME_READER_PATH.as_posix())
+    runtime_data = read(runtime_path)
+    if runtime_data != expected_runtime:
+        fail("reader MathJax boldsymbol runtime differs from the pinned official bytes")
+    bundle_path = READER / "MathJax" / "tex-svg.js"
+    bundle_data = read(bundle_path)
+    if b'"[tex]/boldsymbol"' not in bundle_data:
+        fail("MathJax bundle no longer declares the local boldsymbol autoload component")
+    script_pages: list[str] = []
+    for rel in PAIRS:
+        page = READER / Path(rel.as_posix())
+        parsed = soup(read(page), f"mathjax-runtime:{rel}")
+        for script in parsed.find_all("script", src=True):
+            target, fragment = _local_target(page, str(script["src"]))
+            if target == bundle_path.resolve():
+                if fragment:
+                    fail(f"MathJax script reference unexpectedly has a fragment: {rel}")
+                script_pages.append(rel.as_posix())
+    expected_script_pages = [
+        "random/sample/Introduction.html",
+        "random/sample/Mean.html",
+    ]
+    if script_pages != expected_script_pages:
+        fail(f"MathJax bundle reference pages changed: {script_pages}")
+    return {
+        "reader_relative_path": build_pipeline.RUNTIME_READER_PATH.as_posix(),
+        "bytes": len(runtime_data),
+        "sha256": sha256_bytes(runtime_data),
+        "official_tag": authority_record["tag"],
+        "official_commit": authority_record["commit"],
+        "git_blob_sha1": authority_record["git_blob_sha1"],
+        "script_page_references": len(script_pages),
+        "script_pages": script_pages,
+        "runtime_file_count": 1,
+    }
+
+
 def check_readable_reflow() -> dict[str, Any]:
     rel = PurePosixPath("random/Screen.css")
     authority_data = read(AUTHORITY / Path(rel.as_posix()))
@@ -736,6 +775,7 @@ def expected_qa_receipt(
     build_summary: dict[str, Any],
     results: dict[str, dict[str, Any]],
     reference_counts: dict[str, int],
+    mathjax_runtime: dict[str, Any],
     readable_reflow: dict[str, Any],
 ) -> dict[str, Any]:
     build_receipt_data = read(build_pipeline.BUILD_RECEIPT)
@@ -760,6 +800,7 @@ def expected_qa_receipt(
             int(result["protected_math_replacements"]) for result in results.values()
         ),
         "readable_layout_css_appends": 1,
+        "mathjax_runtime_files": int(mathjax_runtime["runtime_file_count"]),
         "units": sum(int(result["units"]) for result in results.values()),
         "details": sum(int(result["details"]) for result in results.values()),
         "ids": sum(int(result["ids"]) for result in results.values()),
@@ -792,6 +833,7 @@ def expected_qa_receipt(
         "transport_hardening": list(build_pipeline.TRANSPORT_HARDENING),
         "bounded_text_corrections": list(build_pipeline.BOUNDED_TEXT_CORRECTIONS),
         "protected_math_corrections": list(build_pipeline.PROTECTED_MATH_CORRECTIONS),
+        "mathjax_runtime": mathjax_runtime,
         "readable_reflow": readable_reflow,
         "results": results,
         "pass_counts": counts,
@@ -809,8 +851,11 @@ def run(*, check_only: bool = False) -> dict[str, Any]:
     if mean["units"] != 26 or mean["details"] != 23 or mean["math_spans"] != 365:
         fail(f"Mean census changed: {mean}")
     reference_counts = check_reader_references()
+    mathjax_runtime = check_mathjax_runtime()
     readable_reflow = check_readable_reflow()
-    receipt = expected_qa_receipt(build_summary, results, reference_counts, readable_reflow)
+    receipt = expected_qa_receipt(
+        build_summary, results, reference_counts, mathjax_runtime, readable_reflow
+    )
     receipt_data = build_pipeline.canonical_json_bytes(receipt)
     if check_only:
         actual = build_pipeline.read_regular(QA_RECEIPT, reject_hardlinks=True)

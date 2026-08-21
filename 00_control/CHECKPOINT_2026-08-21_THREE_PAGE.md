@@ -29,19 +29,30 @@ explicitly allowlisted and counted by the build and QA scripts.
 
 ## Reader build and QA
 
-- Reader: 25 files / 1,840,700 bytes.
-- Canonical manifest: 2,400 bytes; SHA-256
-  `5c3d51affcc8df38ea2c5067c8eec42b3f6f8e6fe79ad37bcf170e88309b06b5`.
+- Reader: 26 files / 1,845,409 bytes.
+- Canonical manifest: 2,513 bytes; SHA-256
+  `52edafb9d815fb07c1c51a46ab036e71989436088b418270b33ab0465d366a8f`.
 - Build receipt SHA-256:
-  `bbc22b59996e94b267a2d3d8ed1eb448b0a78feb477b20e8a3311d63f2275fbe`.
+  `82675f175706287a52292bb48e01cfa0cc93b06253c8641925381e6ab9eb8a94`.
 - QA receipt SHA-256:
-  `d1c2ccce9c1c05f80aa745fe94be4f81826c279fa637021c44686dc3e58ebee8`.
+  `b2520463e7b68319555e4dfa0cdc8160d4df65e70cd6cee33b5494256861b546`.
 - QA census: 3 pages, 48 units, 39 disclosures, 466 TeX spans, five
-  allowlisted protected-math replacements, 56 local references, and 8 local
-  fragments. Reader copies are byte-identical to translated targets.
+  allowlisted protected-math replacements, 56 local references, 8 local
+  fragments, and one pinned MathJax runtime module. Reader copies are
+  byte-identical to translated targets.
 - The exact desktop/mobile CSS appendix is statically verified. Live visual
   and anonymous byte readback are required immediately after Pages deployment
   before this checkpoint may be called publicly verified.
+
+The first Pages deployment passed anonymous byte readback but failed browser
+QA: MathJax 3.1.2 attempted to load the omitted local path
+`MathJax/input/tex/extensions/boldsymbol.js`, leaving equations unrendered.
+The repair pins the official MathJax 3.1.2 tag, commit
+`c8292351190ce249f7143f224dbe7a190c8228fe`, and blob
+`4570456930955792300c57537ad580ef14311335`; the decoded reader file is 4,709
+bytes with SHA-256
+`716cf8735d00abfb1627f8adbbf4aeb915ac9b5c55d47aeaf276e73dac6a2aa1`.
+The failed deployment is rejected evidence, not an accepted checkpoint.
 
 Two consecutive replay pairs passed with identical hashes:
 
