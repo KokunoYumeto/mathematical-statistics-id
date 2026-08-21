@@ -7,11 +7,11 @@ Updated: 2026-08-21
 Source admitted; exact authority and component-rights freezes complete; the
 first four contiguous Indonesian pages and the full 29-page machine backend
 are verified. Every entity on those four pages is now bound to its target
-path, locale, byte count, and SHA-256. The repository and repaired three-page
-Pages checkpoint are publicly verified; the deterministic four-page boundary
-is ready for immediate deployment and public readback. The exact official
-MathJax 3.1.2 `boldsymbol.js` module remains pinned. The complete 29-page course
-is not yet claimed.
+path, locale, byte count, and SHA-256. The repository is public; the repaired
+three-page Pages checkpoint remains historical evidence, and the deterministic
+four-page boundary is now deployed, anonymously read back, and live-render
+verified. The exact official MathJax 3.1.2 `boldsymbol.js` module remains pinned.
+The complete 29-page course is not yet claimed.
 
 ## Admitted source
 
@@ -105,14 +105,16 @@ consecutive build/QA check-only replays returned identical hashes. The
 checkpoint details and page hashes are in
 `CHECKPOINT_2026-08-21_FOUR_PAGE.md`.
 
-The previous accepted public deployment is commit
-`e69aee58a75ff23d57a9ba481ef5773de57b4318`, workflow run `32499866722`,
-and Pages deployment `6024693964`. Anonymous HTTPS readback matched all 26
-manifest rows by size and SHA-256. Live QA rendered 366 MathJax expressions on
-`Mean.html` and 101 on `Introduction.html`, with zero raw delimiters, incomplete
-images, console errors, or page-level horizontal overflow at 1280×720 and
-390×844. Exact evidence is in `PUBLICATION_RECEIPT_2026-08-21.json`; the
-four-page deployment must receive its own anonymous byte and browser evidence.
+The accepted deployment is commit
+`612ff79040b53f2305d367119a26c0b229d0e3b4`, workflow run `32505273448`,
+job `96843911029`, and Pages deployment `6025637584`. Anonymous HTTPS readback
+matched all 27 manifest rows / 1,880,544 bytes by size and SHA-256. Live QA on
+`LLN.html` rendered all 268 MathJax expressions at 1280×720 and 390×844;
+`Mean.html` independently rendered all 366 expressions at 390×844. Both pages
+had zero raw delimiters, incomplete images, console errors, uncontained mobile
+wide elements, or page-level horizontal overflow. Exact evidence is in
+`PUBLICATION_RECEIPT_2026-08-21.json`, SHA-256
+`b96bd77870ba23c3f7635e11b85246fb1dfbfdc6557e64a5607c2d27badb2ffe`.
 
 ## Reversal conditions
 

@@ -1,53 +1,92 @@
 {
   "schema": "o006.github-pages-publication.v1",
-  "checkpoint": "three-page-reader",
-  "verified_at": "2026-08-21T17:57:20+02:00",
+  "checkpoint": "four-page-reader",
+  "verified_at": "2026-08-21T19:00:51+02:00",
   "repository": {
     "url": "https://github.com/KokunoYumeto/mathematical-statistics-id",
     "branch": "main",
     "public": true
   },
   "accepted_deployment": {
-    "source_commit_sha": "e69aee58a75ff23d57a9ba481ef5773de57b4318",
-    "source_tree_sha": "6413259c6ae3da0c43e6a0ad2836ed6df46e0e4f",
-    "workflow_run_id": 32499866722,
-    "workflow_job_id": 96826815910,
-    "workflow_url": "https://github.com/KokunoYumeto/mathematical-statistics-id/actions/runs/32499866722",
+    "source_commit_sha": "612ff79040b53f2305d367119a26c0b229d0e3b4",
+    "source_tree_sha": "dbcd410818d37260e99b17b4450fe5f3612183f9",
+    "workflow_run_id": 32505273448,
+    "workflow_job_id": 96843911029,
+    "workflow_url": "https://github.com/KokunoYumeto/mathematical-statistics-id/actions/runs/32505273448",
     "workflow_status": "completed",
     "workflow_conclusion": "success",
-    "pages_deployment_id": 6024693964,
-    "pages_deployment_status_id": 17128640765,
+    "pages_deployment_id": 6025637584,
+    "pages_deployment_status_id": 17131093081,
     "pages_deployment_status": "success",
-    "pages_exact_sha_status": "succeed",
+    "pages_exact_sha_status": "success",
     "public_url": "https://kokunoyumeto.github.io/mathematical-statistics-id/"
   },
   "reader": {
     "manifest_path": "build/FIRST_UNIT_MANIFEST.csv",
-    "manifest_bytes": 2513,
-    "manifest_sha256": "52edafb9d815fb07c1c51a46ab036e71989436088b418270b33ab0465d366a8f",
-    "build_receipt_sha256": "82675f175706287a52292bb48e01cfa0cc93b06253c8641925381e6ab9eb8a94",
-    "qa_receipt_sha256": "b2520463e7b68319555e4dfa0cdc8160d4df65e70cd6cee33b5494256861b546",
-    "files": 26,
-    "bytes": 1845409,
-    "translated_pages": 3
+    "manifest_bytes": 2607,
+    "manifest_sha256": "d45913699c2970f75a587537e6a9b83383351f592eae880b5d36a4d6b20ab036",
+    "build_receipt_sha256": "cd5aab9787e9da2159d9e7484153922b35a52313c67368fd035a62e8303d0fc1",
+    "qa_receipt_sha256": "a1ed8a964e8167162587606b92e5b780084095ed59b8071fa27a71f482042866",
+    "files": 27,
+    "bytes": 1880544,
+    "translated_pages": 4
   },
   "anonymous_byte_readback": {
     "method": "HTTPS GET of every manifest row with no authorization header",
-    "files_checked": 26,
-    "bytes_checked": 1845409,
+    "files_checked": 27,
+    "bytes_checked": 1880544,
     "size_mismatches": 0,
     "sha256_mismatches": 0
   },
   "browser_verification": {
     "audio_exercised": false,
-    "mean_desktop": {
+    "lln_desktop": {
       "viewport_width": 1280,
       "viewport_height": 720,
+      "document_client_width": 1265,
       "body_width": 1152,
       "body_left": 56.4444465637207,
+      "document_scroll_width": 1265,
+      "horizontal_overflow": false,
+      "units": 21,
+      "details": 13,
+      "mathjax_containers": 268,
+      "mathjax_svg_outputs": 268,
+      "raw_inline_delimiters": 0,
+      "raw_display_delimiters": 0,
+      "incomplete_images": 0,
+      "console_errors": 0
+    },
+    "lln_mobile": {
+      "viewport_width": 390,
+      "viewport_height": 844,
+      "document_client_width": 375,
+      "body_width": 351.1111145019531,
+      "body_left": 12,
+      "document_scroll_width": 375,
+      "horizontal_overflow": false,
+      "units": 21,
+      "details": 13,
+      "wide_elements": 225,
+      "uncontained_wide_elements": 0,
+      "mathjax_containers": 268,
+      "mathjax_svg_outputs": 268,
+      "raw_inline_delimiters": 0,
+      "raw_display_delimiters": 0,
+      "incomplete_images": 0,
+      "console_errors": 0
+    },
+    "mean_mobile_regression": {
+      "viewport_width": 390,
+      "viewport_height": 844,
+      "document_client_width": 375,
+      "body_width": 351.1111145019531,
+      "body_left": 12,
+      "document_scroll_width": 375,
       "horizontal_overflow": false,
       "units": 26,
       "details": 23,
+      "uncontained_wide_elements": 0,
       "mathjax_containers": 366,
       "mathjax_svg_outputs": 366,
       "raw_inline_delimiters": 0,
@@ -55,35 +94,29 @@
       "incomplete_images": 0,
       "console_errors": 0
     },
-    "mean_mobile": {
-      "viewport_width": 390,
-      "viewport_height": 844,
-      "body_width": 351.1111145019531,
-      "body_left": 12,
-      "document_scroll_width": 375,
-      "horizontal_overflow": false,
-      "uncontained_visible_wide_elements": 0,
-      "mathjax_containers": 366,
-      "raw_inline_delimiters": 0,
-      "raw_display_delimiters": 0,
-      "incomplete_images": 0,
-      "console_errors": 0
-    },
-    "introduction_mobile": {
-      "viewport_width": 390,
-      "viewport_height": 844,
-      "horizontal_overflow": false,
-      "units": 22,
-      "details": 16,
-      "mathjax_containers": 101,
-      "mathjax_svg_outputs": 101,
-      "raw_inline_delimiters": 0,
-      "raw_display_delimiters": 0,
-      "incomplete_images": 0,
-      "console_errors": 0
-    },
     "html_lang": "id-ID",
+    "visual_snapshot_review": "pass",
+    "temporary_viewport_reset": true,
     "result": "pass"
+  },
+  "backend": {
+    "entities": 6567,
+    "relations": 9035,
+    "translated_entity_bindings": 664,
+    "untranslated_entity_bindings": 5903,
+    "entities_sha256": "6427f46c6c5f8ea5bd0e6af441759d1d00b3c5104400011a64c42092fd522427",
+    "relations_sha256": "b235f4d4d724c7fe8653dfd06b075b2225cc2d116f3b87d0fda950d47030159a",
+    "receipt_sha256": "e905bfbe3cb08ad5950423edbd1a9f9b8093d62dc3c551b629df0f819c38cd10",
+    "translation_ledger_sha256": "5c0dd978d479f84c5dc9e97878c59e1d593d896c11064eb153f3764ac6f0e8cb"
+  },
+  "previous_accepted_deployment": {
+    "checkpoint": "three-page-reader",
+    "source_commit_sha": "e69aee58a75ff23d57a9ba481ef5773de57b4318",
+    "workflow_run_id": 32499866722,
+    "pages_deployment_id": 6024693964,
+    "reader_files": 26,
+    "reader_bytes": 1845409,
+    "status": "superseded-by-verified-four-page-reader"
   },
   "rejected_deployment": {
     "source_commit_sha": "54cb556dd1759134107f0caee5b5c4e300a0a5d6",
@@ -95,7 +128,7 @@
   },
   "scope": {
     "complete_course_claimed": false,
-    "next_source": "random/sample/LLN.html",
+    "next_source": "random/sample/CLT.html",
     "upstream_contacted": false
   }
 }

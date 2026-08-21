@@ -13,8 +13,9 @@ kelengkapan dini.
 
 Checkpoint empat halaman lulus build dan QA deterministik: 27 berkas pembaca,
 69 unit instruksional, 52 pengungkapan jawaban/rincian, dan 734 rentang TeX.
-Checkpoint publik tiga halaman sebelumnya tetap tercatat; penerapan dan
-pembacaan balik publik checkpoint ini berlangsung melalui alur kerja Pages.
+Seluruh 27 berkas publik cocok dengan manifes byte demi byte. Halaman LLN dan
+halaman regresi Mean juga lulus pemeriksaan visual desktop/seluler: seluruh
+rumus dirender, tanpa galat konsol, aset gagal, atau luapan horizontal halaman.
 Produksi berikutnya berlanjut dari `sample/CLT.html`.
 
 - Pembaca web: <https://kokunoyumeto.github.io/mathematical-statistics-id/>

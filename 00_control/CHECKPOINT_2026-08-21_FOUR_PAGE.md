@@ -70,12 +70,22 @@ receipts and `ADVERSE_LEDGER.jsonl`.
 
 ## Publication state
 
-The repaired three-page public checkpoint remains the last accepted public
-state while this four-page commit is deployed. Acceptance requires successful
-CI, anonymous HTTPS readback of every manifest row, and live desktop/mobile
-browser checks for MathJax, images, console errors, raw delimiters, and
-page-level overflow. The exact deployment evidence will be added to
-`PUBLICATION_RECEIPT_2026-08-21.json` after those checks; no confirmation pause
-is required.
+The accepted source commit is
+`612ff79040b53f2305d367119a26c0b229d0e3b4` (tree
+`dbcd410818d37260e99b17b4450fe5f3612183f9`). Workflow run `32505273448`, job
+`96843911029`, Pages deployment `6025637584`, and deployment-status record
+`17131093081` all succeeded. Anonymous HTTPS readback matched all 27 manifest
+rows / 1,880,544 bytes by size and SHA-256.
+
+Live browser QA rendered 268/268 MathJax outputs on LLN at 1280×720 and
+390×844, with 21 units and 13 disclosures. At mobile width, 225 wide
+mathematical elements were contained by local scroll surfaces and none escaped
+to page-level overflow. The Mean regression page rendered 366/366 expressions
+at 390×844. All checks found zero raw TeX delimiters, incomplete images,
+console errors, uncontained wide elements, or page-level horizontal overflow.
+The desktop and mobile snapshots were visually reviewed and the temporary
+viewport override was reset. Exact evidence is in
+`PUBLICATION_RECEIPT_2026-08-21.json`, 4,747 bytes, SHA-256
+`b96bd77870ba23c3f7635e11b85246fb1dfbfdc6557e64a5607c2d27badb2ffe`.
 
 Next source cursor: `random/sample/CLT.html` (core ordinal 5).
