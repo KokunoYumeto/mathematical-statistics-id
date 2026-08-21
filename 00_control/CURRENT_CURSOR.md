@@ -13,10 +13,11 @@
   SHA-256 `52edafb9d815fb07c1c51a46ab036e71989436088b418270b33ab0465d366a8f`
 - Latest deterministic QA receipt SHA-256:
   `b2520463e7b68319555e4dfa0cdc8160d4df65e70cd6cee33b5494256861b546`
-- Public state: repository and Pages exist, but the first deployment was
-  rejected by browser QA for an omitted MathJax dynamic module. The exact
-  repaired runtime closure passes locally and is awaiting immediate redeploy;
-  do not mark the checkpoint verified until rendered-math readback passes.
+- Public state: repaired three-page checkpoint verified at
+  <https://kokunoyumeto.github.io/mathematical-statistics-id/>. Accepted source
+  commit `e69aee58a75ff23d57a9ba481ef5773de57b4318`; all 26 public files matched
+  the manifest and both equation-bearing pages passed desktop/mobile render
+  checks. Receipt: `PUBLICATION_RECEIPT_2026-08-21.json`.
 
 Resume by reading this file, `CURRENT_STATE.md`, the freeze receipt, and the
 last row of `TRANSLATION_LEDGER.csv`. Continue with `random/sample/LLN.html`;

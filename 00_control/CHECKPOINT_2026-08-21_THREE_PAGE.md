@@ -52,7 +52,14 @@ The repair pins the official MathJax 3.1.2 tag, commit
 `4570456930955792300c57537ad580ef14311335`; the decoded reader file is 4,709
 bytes with SHA-256
 `716cf8735d00abfb1627f8adbbf4aeb915ac9b5c55d47aeaf276e73dac6a2aa1`.
-The failed deployment is rejected evidence, not an accepted checkpoint.
+The failed deployment is rejected evidence, not an accepted checkpoint. The
+repair was accepted from commit
+`e69aee58a75ff23d57a9ba481ef5773de57b4318`: workflow run `32499866722` and
+Pages deployment `6024693964` succeeded; all 26 public files matched the local
+manifest by size and SHA-256; and live desktop/mobile checks found 366 rendered
+MathJax expressions on `Mean.html`, 101 on `Introduction.html`, zero raw TeX
+delimiters, zero console errors, zero incomplete images, and no page-level
+horizontal overflow. See `PUBLICATION_RECEIPT_2026-08-21.json`.
 
 Two consecutive replay pairs passed with identical hashes:
 

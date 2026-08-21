@@ -6,12 +6,12 @@ Updated: 2026-08-21
 
 Source admitted; exact authority and component-rights freezes complete; the
 first three contiguous Indonesian pages and the full 29-page machine backend
-are verified. The repository and first Pages deployment are public, but browser
-verification rejected that deployment because the local MathJax bundle lacked
-its dynamically loaded `boldsymbol.js` module. The exact official 3.1.2 module
-is now pinned in the authority closure and the repaired reader passes local
-replay; immediate redeployment and browser readback remain in progress. The
-complete 29-page course is not yet claimed.
+are verified. The repository and repaired three-page Pages checkpoint are
+public and anonymously verified. Browser verification rejected the first
+deployment because the local MathJax bundle lacked its dynamically loaded
+`boldsymbol.js` module; the exact official 3.1.2 module is now pinned, deployed,
+and renders without console errors on desktop and mobile. The complete 29-page
+course is not yet claimed.
 
 ## Admitted source
 
@@ -99,6 +99,14 @@ consecutive build/QA check-only replays returned identical hashes. The
 checkpoint details and page hashes are in
 `CHECKPOINT_2026-08-21_THREE_PAGE.md`.
 
+The accepted deployment is commit
+`e69aee58a75ff23d57a9ba481ef5773de57b4318`, workflow run `32499866722`,
+and Pages deployment `6024693964`. Anonymous HTTPS readback matched all 26
+manifest rows by size and SHA-256. Live QA rendered 366 MathJax expressions on
+`Mean.html` and 101 on `Introduction.html`, with zero raw delimiters, incomplete
+images, console errors, or page-level horizontal overflow at 1280×720 and
+390×844. Exact evidence is in `PUBLICATION_RECEIPT_2026-08-21.json`.
+
 ## Reversal conditions
 
 Reconsider STAT 415-first only if Penn State publishes a complete, license-
@@ -138,10 +146,8 @@ production.
 
 ## Next work
 
-1. Redeploy the repaired three-page GitHub/Pages checkpoint and complete
-   anonymous byte plus desktop/mobile browser verification.
-2. Continue immediately with `random/sample/LLN.html` (core ordinal 4).
-3. Advance contiguously through the remaining 26 source pages, growing the
+1. Continue immediately with `random/sample/LLN.html` (core ordinal 4).
+2. Advance contiguously through the remaining 26 source pages, growing the
    same deterministic reader and stable-ID backend.
-4. Author the required linear-model bridge after the admitted core, then close
+3. Author the required linear-model bridge after the admitted core, then close
    the conditional large-sample decision from evidence.

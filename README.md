@@ -10,6 +10,10 @@ Status pembaca: **3 dari 29 halaman sumber inti telah diterjemahkan**
 Korpus dan jembatan model linear belum selesai; repositori ini tidak mengklaim
 kelengkapan dini.
 
+Checkpoint tiga halaman ini telah diverifikasi secara publik: seluruh 26 berkas
+pembaca cocok dengan manifes, dan rumus MathJax serta tata letak desktop/seluler
+lulus pemeriksaan langsung. Produksi berikutnya berlanjut dari `sample/LLN.html`.
+
 - Pembaca web: <https://kokunoyumeto.github.io/mathematical-statistics-id/>
 - Sumber dan bukti: <https://github.com/KokunoYumeto/mathematical-statistics-id>
 - Karya sumber resmi: <https://www.randomservices.org/random/>

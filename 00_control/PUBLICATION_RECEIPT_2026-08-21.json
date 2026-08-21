@@ -1,0 +1,101 @@
+{
+  "schema": "o006.github-pages-publication.v1",
+  "checkpoint": "three-page-reader",
+  "verified_at": "2026-08-21T17:57:20+02:00",
+  "repository": {
+    "url": "https://github.com/KokunoYumeto/mathematical-statistics-id",
+    "branch": "main",
+    "public": true
+  },
+  "accepted_deployment": {
+    "source_commit_sha": "e69aee58a75ff23d57a9ba481ef5773de57b4318",
+    "source_tree_sha": "6413259c6ae3da0c43e6a0ad2836ed6df46e0e4f",
+    "workflow_run_id": 32499866722,
+    "workflow_job_id": 96826815910,
+    "workflow_url": "https://github.com/KokunoYumeto/mathematical-statistics-id/actions/runs/32499866722",
+    "workflow_status": "completed",
+    "workflow_conclusion": "success",
+    "pages_deployment_id": 6024693964,
+    "pages_deployment_status_id": 17128640765,
+    "pages_deployment_status": "success",
+    "pages_exact_sha_status": "succeed",
+    "public_url": "https://kokunoyumeto.github.io/mathematical-statistics-id/"
+  },
+  "reader": {
+    "manifest_path": "build/FIRST_UNIT_MANIFEST.csv",
+    "manifest_bytes": 2513,
+    "manifest_sha256": "52edafb9d815fb07c1c51a46ab036e71989436088b418270b33ab0465d366a8f",
+    "build_receipt_sha256": "82675f175706287a52292bb48e01cfa0cc93b06253c8641925381e6ab9eb8a94",
+    "qa_receipt_sha256": "b2520463e7b68319555e4dfa0cdc8160d4df65e70cd6cee33b5494256861b546",
+    "files": 26,
+    "bytes": 1845409,
+    "translated_pages": 3
+  },
+  "anonymous_byte_readback": {
+    "method": "HTTPS GET of every manifest row with no authorization header",
+    "files_checked": 26,
+    "bytes_checked": 1845409,
+    "size_mismatches": 0,
+    "sha256_mismatches": 0
+  },
+  "browser_verification": {
+    "audio_exercised": false,
+    "mean_desktop": {
+      "viewport_width": 1280,
+      "viewport_height": 720,
+      "body_width": 1152,
+      "body_left": 56.4444465637207,
+      "horizontal_overflow": false,
+      "units": 26,
+      "details": 23,
+      "mathjax_containers": 366,
+      "mathjax_svg_outputs": 366,
+      "raw_inline_delimiters": 0,
+      "raw_display_delimiters": 0,
+      "incomplete_images": 0,
+      "console_errors": 0
+    },
+    "mean_mobile": {
+      "viewport_width": 390,
+      "viewport_height": 844,
+      "body_width": 351.1111145019531,
+      "body_left": 12,
+      "document_scroll_width": 375,
+      "horizontal_overflow": false,
+      "uncontained_visible_wide_elements": 0,
+      "mathjax_containers": 366,
+      "raw_inline_delimiters": 0,
+      "raw_display_delimiters": 0,
+      "incomplete_images": 0,
+      "console_errors": 0
+    },
+    "introduction_mobile": {
+      "viewport_width": 390,
+      "viewport_height": 844,
+      "horizontal_overflow": false,
+      "units": 22,
+      "details": 16,
+      "mathjax_containers": 101,
+      "mathjax_svg_outputs": 101,
+      "raw_inline_delimiters": 0,
+      "raw_display_delimiters": 0,
+      "incomplete_images": 0,
+      "console_errors": 0
+    },
+    "html_lang": "id-ID",
+    "result": "pass"
+  },
+  "rejected_deployment": {
+    "source_commit_sha": "54cb556dd1759134107f0caee5b5c4e300a0a5d6",
+    "workflow_run_id": 32498465450,
+    "workflow_job_id": 96822386685,
+    "workflow_conclusion": "success",
+    "reader_acceptance": "rejected",
+    "reason": "Browser QA found raw TeX and a failed local MathJax boldsymbol.js autoload; static byte closure alone was insufficient."
+  },
+  "scope": {
+    "complete_course_claimed": false,
+    "next_source": "random/sample/LLN.html",
+    "upstream_contacted": false
+  }
+}
