@@ -8,10 +8,10 @@ Edition source admitted; exact authority and component-rights freezes complete; 
 first five contiguous Indonesian pages and the full 29-page machine backend
 are verified. Every entity on those five pages is now bound to its target
 path, locale, byte count, and SHA-256. The repository is public; the repaired
-three-page Pages checkpoint remains historical evidence, and the deterministic
-four-page boundary remains the last public deployment. The five-page boundary
-through the central limit theorem has passed its bounded target audit and two
-deterministic replays and is entering publication. The exact official MathJax
+three- and four-page Pages checkpoints remain historical evidence. The
+five-page boundary through the central limit theorem has passed its bounded
+target audit, two deterministic replays, deployment, anonymous byte readback,
+and desktop/mobile live rendering. The exact official MathJax
 3.1.2 `boldsymbol.js` module remains pinned. The complete 29-page edition is not
 yet claimed.
 
@@ -145,8 +145,14 @@ page alone preserves 424 elements, 38 units, 21 disclosures, 394 TeX spans,
 three raw script/style blocks, and the authority hierarchy SHA-256
 `911fcd5705e0e358fb92492b30dea1d53265df24da8d86bf68b10a7f3d56c870`.
 Its 14 protected mathematical repairs and one TeX-text localization are exact
-and declared. Publication remains pending only until the final replay and
-public transaction; this is not a claim that the 29-page edition is complete.
+and declared. Source commit `79d6adf164a28ba4ba6c9894397ff8cd4d6286df`,
+workflow `32528680262`, and Pages deployment `6029599489` succeeded. Anonymous
+readback matched all 28 files / 1,926,717 bytes. Desktop/mobile CLT checks
+rendered 394/394 expressions without raw TeX, missing images, console errors,
+uncontained wide elements, or page-level overflow. Publication-receipt
+SHA-256 is
+`35ca61902a110eea71ea1a06e0ac566a81b1f27d7dbfac4e4cb006d50220276c`.
+This is not a claim that the 29-page edition is complete.
 
 ## Rights boundary
 
@@ -174,12 +180,10 @@ Authority bytes remain immutable. Do not contact upstream during production.
 
 ## Next work
 
-1. Complete deterministic replay, push, anonymous public-byte readback, and
-   live desktop/mobile verification of the five-page Random checkpoint.
-2. Continue immediately with `random/sample/Variance.html` (core ordinal 6).
-3. Advance contiguously through the remaining 24 source pages, growing the
+1. Continue immediately with `random/sample/Variance.html` (core ordinal 6).
+2. Advance contiguously through the remaining 24 source pages, growing the
    same deterministic reader and stable-ID backend.
-4. Keep Penn State reconstruction, the one-page Random completeness donor, and
+3. Keep Penn State reconstruction, the one-page Random completeness donor, and
    original C140 companion in separate component paths/repositories; begin
    them only after this clean checkpoint or in a demonstrably non-overlapping
    path.

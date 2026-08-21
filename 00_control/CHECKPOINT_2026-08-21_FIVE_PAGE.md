@@ -79,9 +79,22 @@ now resolve to local `CLT.html`. Authority bytes remain immutable.
 
 ## Publication state
 
-The four-page boundary remains the last public state while this checkpoint is
-prepared. Publish the five-page source/build/backend boundary immediately after
-the required deterministic replay, then record commit, workflow/deployment,
-anonymous manifest readback, and desktop/mobile live-render evidence in the
-sanitized publication receipt. Next source cursor:
-`random/sample/Variance.html` (ordinal 6 of 29).
+Published from source commit
+`79d6adf164a28ba4ba6c9894397ff8cd4d6286df` (tree
+`3dea7921607a44069be287db10ef35ccdd15a298`). Workflow run `32528680262`,
+job `96916114133`, Pages deployment `6029599489`, and final deployment-status
+record `17141386238` all succeeded.
+
+Anonymous HTTPS readback matched all 28 manifest rows / 1,926,717 bytes by
+size and SHA-256. Live CLT QA at 1280×720 and 390×844 rendered all 394 MathJax
+expressions, 38 units, and 21 disclosures. Desktop body width was 1,152 px and
+centered at x=56.44 within a 1,265 px document client. Mobile body width was
+351.11 px at x=12 within a 375 px document client; all 130 wide elements were
+contained and document scroll width stayed 375 px. Both viewports had zero raw
+TeX delimiters, incomplete images, console warnings/errors, or page-level
+horizontal overflow. Visual snapshots passed; the temporary viewport was reset
+and the temporary tab closed. The sanitized exact evidence is in
+`PUBLICATION_RECEIPT_2026-08-21.json`.
+
+Public reader: <https://kokunoyumeto.github.io/mathematical-statistics-id/>.
+Next source cursor: `random/sample/Variance.html` (ordinal 6 of 29).

@@ -13,16 +13,15 @@
   SHA-256 `c853d3c560b041fd3071f390b636aaf3b90b1bf076bfd47457408e6052350dbd`
 - Latest deterministic QA receipt SHA-256:
   `ff55bab5813e402b12c7449e98a05b8135bf2b3c17a0d661ab4ff44fa3a7cd61`
-- Public state: the four-page checkpoint remains the last verified deployment at
+- Public state: the five-page checkpoint is verified at
   <https://kokunoyumeto.github.io/mathematical-statistics-id/> from source
-  commit `612ff79040b53f2305d367119a26c0b229d0e3b4`. All 27 public files matched
-  the manifest, and LLN plus the Mean regression page passed live
-  desktop/mobile rendering. Publication-receipt SHA-256:
-  `b96bd77870ba23c3f7635e11b85246fb1dfbfdc6557e64a5607c2d27badb2ffe`.
+  commit `79d6adf164a28ba4ba6c9894397ff8cd4d6286df`. All 28 public files / 1,926,717
+  bytes matched the manifest, and CLT passed live desktop/mobile rendering with
+  394/394 MathJax outputs and no page-level overflow. Publication-receipt
+  SHA-256: `35ca61902a110eea71ea1a06e0ac566a81b1f27d7dbfac4e4cb006d50220276c`.
 
 Resume by reading this file, `CURRENT_STATE.md`, the freeze receipt, and the
 last row of `TRANSLATION_LEDGER.csv`. Continue with
 `random/sample/Variance.html`; do not restart source selection or repeat the
-completed five-page unit. The bounded target audit and two deterministic replay
-pairs pass; publication, public readback, and live render checks are the active
-transaction.
+completed five-page unit. Continue production at Variance; do not repeat the
+closed publication transaction.

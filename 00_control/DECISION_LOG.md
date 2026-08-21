@@ -118,3 +118,15 @@ multiple-regression, and mastery companion. Keep the Random edition and Penn
 State reconstruction in separate paths/repositories. The exact component,
 rights, production, publication, and terminal boundaries are in
 `C140_CONFIGURED_ARCHITECTURE_2026-08-21.md`.
+
+## O006-D011 — publish the CLT boundary
+
+Date: 2026-08-21
+Status: completed
+
+Treat the first five contiguous pages through CLT as a substantial theorem and
+assessment boundary. After exact topology/math/link QA and two deterministic
+replays, publish it immediately. Commit
+`79d6adf164a28ba4ba6c9894397ff8cd4d6286df` deployed successfully; anonymous
+readback matched 28/28 files and live desktop/mobile QA rendered 394/394 CLT
+expressions without page-level overflow. Continue at Variance.

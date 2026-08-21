@@ -1,46 +1,46 @@
 {
   "schema": "o006.github-pages-publication.v1",
-  "checkpoint": "four-page-reader",
-  "verified_at": "2026-08-21T19:00:51+02:00",
+  "checkpoint": "five-page-reader",
+  "verified_at": "2026-08-21T23:31:21+02:00",
   "repository": {
     "url": "https://github.com/KokunoYumeto/mathematical-statistics-id",
     "branch": "main",
     "public": true
   },
   "accepted_deployment": {
-    "source_commit_sha": "612ff79040b53f2305d367119a26c0b229d0e3b4",
-    "source_tree_sha": "dbcd410818d37260e99b17b4450fe5f3612183f9",
-    "workflow_run_id": 32505273448,
-    "workflow_job_id": 96843911029,
-    "workflow_url": "https://github.com/KokunoYumeto/mathematical-statistics-id/actions/runs/32505273448",
+    "source_commit_sha": "79d6adf164a28ba4ba6c9894397ff8cd4d6286df",
+    "source_tree_sha": "3dea7921607a44069be287db10ef35ccdd15a298",
+    "workflow_run_id": 32528680262,
+    "workflow_job_id": 96916114133,
+    "workflow_url": "https://github.com/KokunoYumeto/mathematical-statistics-id/actions/runs/32528680262",
     "workflow_status": "completed",
     "workflow_conclusion": "success",
-    "pages_deployment_id": 6025637584,
-    "pages_deployment_status_id": 17131093081,
+    "pages_deployment_id": 6029599489,
+    "pages_deployment_status_id": 17141386238,
     "pages_deployment_status": "success",
     "pages_exact_sha_status": "success",
     "public_url": "https://kokunoyumeto.github.io/mathematical-statistics-id/"
   },
   "reader": {
     "manifest_path": "build/FIRST_UNIT_MANIFEST.csv",
-    "manifest_bytes": 2607,
-    "manifest_sha256": "d45913699c2970f75a587537e6a9b83383351f592eae880b5d36a4d6b20ab036",
-    "build_receipt_sha256": "cd5aab9787e9da2159d9e7484153922b35a52313c67368fd035a62e8303d0fc1",
-    "qa_receipt_sha256": "a1ed8a964e8167162587606b92e5b780084095ed59b8071fa27a71f482042866",
-    "files": 27,
-    "bytes": 1880544,
-    "translated_pages": 4
+    "manifest_bytes": 2701,
+    "manifest_sha256": "c853d3c560b041fd3071f390b636aaf3b90b1bf076bfd47457408e6052350dbd",
+    "build_receipt_sha256": "364ec734f8e50ea033d4c9ff8dc6a947baf2b062634ef7ffdbd928aa2f89635a",
+    "qa_receipt_sha256": "ff55bab5813e402b12c7449e98a05b8135bf2b3c17a0d661ab4ff44fa3a7cd61",
+    "files": 28,
+    "bytes": 1926717,
+    "translated_pages": 5
   },
   "anonymous_byte_readback": {
     "method": "HTTPS GET of every manifest row with no authorization header",
-    "files_checked": 27,
-    "bytes_checked": 1880544,
+    "files_checked": 28,
+    "bytes_checked": 1926717,
     "size_mismatches": 0,
     "sha256_mismatches": 0
   },
   "browser_verification": {
     "audio_exercised": false,
-    "lln_desktop": {
+    "clt_desktop": {
       "viewport_width": 1280,
       "viewport_height": 720,
       "document_client_width": 1265,
@@ -48,16 +48,17 @@
       "body_left": 56.4444465637207,
       "document_scroll_width": 1265,
       "horizontal_overflow": false,
-      "units": 21,
-      "details": 13,
-      "mathjax_containers": 268,
-      "mathjax_svg_outputs": 268,
+      "units": 38,
+      "details": 21,
+      "mathjax_containers": 394,
+      "mathjax_svg_outputs": 394,
       "raw_inline_delimiters": 0,
       "raw_display_delimiters": 0,
       "incomplete_images": 0,
-      "console_errors": 0
+      "uncontained_wide_elements": 0,
+      "console_errors_or_warnings": 0
     },
-    "lln_mobile": {
+    "clt_mobile": {
       "viewport_width": 390,
       "viewport_height": 844,
       "document_client_width": 375,
@@ -65,58 +66,46 @@
       "body_left": 12,
       "document_scroll_width": 375,
       "horizontal_overflow": false,
-      "units": 21,
-      "details": 13,
-      "wide_elements": 225,
+      "units": 38,
+      "details": 21,
+      "wide_elements": 130,
       "uncontained_wide_elements": 0,
-      "mathjax_containers": 268,
-      "mathjax_svg_outputs": 268,
+      "mathjax_containers": 394,
+      "mathjax_svg_outputs": 394,
       "raw_inline_delimiters": 0,
       "raw_display_delimiters": 0,
       "incomplete_images": 0,
-      "console_errors": 0
-    },
-    "mean_mobile_regression": {
-      "viewport_width": 390,
-      "viewport_height": 844,
-      "document_client_width": 375,
-      "body_width": 351.1111145019531,
-      "body_left": 12,
-      "document_scroll_width": 375,
-      "horizontal_overflow": false,
-      "units": 26,
-      "details": 23,
-      "uncontained_wide_elements": 0,
-      "mathjax_containers": 366,
-      "mathjax_svg_outputs": 366,
-      "raw_inline_delimiters": 0,
-      "raw_display_delimiters": 0,
-      "incomplete_images": 0,
-      "console_errors": 0
+      "console_errors_or_warnings": 0
     },
     "html_lang": "id-ID",
     "visual_snapshot_review": "pass",
     "temporary_viewport_reset": true,
+    "temporary_tab_closed": true,
     "result": "pass"
   },
   "backend": {
     "entities": 6567,
     "relations": 9035,
-    "translated_entity_bindings": 664,
-    "untranslated_entity_bindings": 5903,
-    "entities_sha256": "6427f46c6c5f8ea5bd0e6af441759d1d00b3c5104400011a64c42092fd522427",
+    "translated_entity_bindings": 949,
+    "untranslated_entity_bindings": 5618,
+    "entities_sha256": "243b4f4294535a421fe18a811795336fae9830ead97a049e2f3f009faa435d55",
     "relations_sha256": "b235f4d4d724c7fe8653dfd06b075b2225cc2d116f3b87d0fda950d47030159a",
-    "receipt_sha256": "e905bfbe3cb08ad5950423edbd1a9f9b8093d62dc3c551b629df0f819c38cd10",
-    "translation_ledger_sha256": "5c0dd978d479f84c5dc9e97878c59e1d593d896c11064eb153f3764ac6f0e8cb"
+    "receipt_sha256": "1f0fad93c4bd875b7abfa6548c283704922aa6fe4c986e82eb1df1b293e29a45",
+    "translation_ledger_sha256": "30553ced7cbf723efb8a20b77b4a8035a088245f0d8a6bd4e3766b9753824d42"
+  },
+  "checkpoint_record": {
+    "path": "00_control/CHECKPOINT_2026-08-21_FIVE_PAGE.md",
+    "bytes": 5902,
+    "sha256": "6192499ac016bbb34491345d87e9f769097cf1e1eba1296dcd2111bf2a839ee5"
   },
   "previous_accepted_deployment": {
-    "checkpoint": "three-page-reader",
-    "source_commit_sha": "e69aee58a75ff23d57a9ba481ef5773de57b4318",
-    "workflow_run_id": 32499866722,
-    "pages_deployment_id": 6024693964,
-    "reader_files": 26,
-    "reader_bytes": 1845409,
-    "status": "superseded-by-verified-four-page-reader"
+    "checkpoint": "four-page-reader",
+    "source_commit_sha": "612ff79040b53f2305d367119a26c0b229d0e3b4",
+    "workflow_run_id": 32505273448,
+    "pages_deployment_id": 6025637584,
+    "reader_files": 27,
+    "reader_bytes": 1880544,
+    "status": "superseded-by-verified-five-page-reader"
   },
   "rejected_deployment": {
     "source_commit_sha": "54cb556dd1759134107f0caee5b5c4e300a0a5d6",
@@ -127,8 +116,9 @@
     "reason": "Browser QA found raw TeX and a failed local MathJax boldsymbol.js autoload; static byte closure alone was insufficient."
   },
   "scope": {
-    "complete_course_claimed": false,
-    "next_source": "random/sample/CLT.html",
+    "complete_random_edition_claimed": false,
+    "configured_c140_complete_claimed": false,
+    "next_random_source": "random/sample/Variance.html",
     "upstream_contacted": false
   }
 }
