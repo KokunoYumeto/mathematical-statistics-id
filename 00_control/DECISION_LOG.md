@@ -77,3 +77,15 @@ repository without calling a partial reader complete. The first boundary is
 three contiguous pages (3/29), the full locale-neutral backend catalogue, the
 exact source/right witnesses needed to replay it, and a deterministic Pages
 workflow. Continue production immediately from LLN after public verification.
+
+## O006-D008 — LLN is the next publication boundary
+
+Date: 2026-08-21
+Status: controlling
+
+The completed law-of-large-numbers page is a coherent theorem/exercise unit
+and advances the contiguous reader to 4/29 pages. Publish this verified
+four-page boundary immediately, including its locale-bound backend, rather
+than withholding a working reader until the next chapter subsection. Continue
+from `random/sample/CLT.html` after public-byte and live-render verification;
+do not describe the partial edition as the complete course.

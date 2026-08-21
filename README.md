@@ -5,14 +5,17 @@ Statistika Matematis. Sumber inti yang diterima adalah bab statistika
 matematis (bab 5–8) dari karya Kyle Siegrist, *Random: Probability,
 Mathematical Statistics, and Stochastic Processes*.
 
-Status pembaca: **3 dari 29 halaman sumber inti telah diterjemahkan**
-(`sample/index.html`, `sample/Introduction.html`, dan `sample/Mean.html`).
+Status pembaca: **4 dari 29 halaman sumber inti telah diterjemahkan**
+(`sample/index.html`, `sample/Introduction.html`, `sample/Mean.html`, dan
+`sample/LLN.html`).
 Korpus dan jembatan model linear belum selesai; repositori ini tidak mengklaim
 kelengkapan dini.
 
-Checkpoint tiga halaman ini telah diverifikasi secara publik: seluruh 26 berkas
-pembaca cocok dengan manifes, dan rumus MathJax serta tata letak desktop/seluler
-lulus pemeriksaan langsung. Produksi berikutnya berlanjut dari `sample/LLN.html`.
+Checkpoint empat halaman lulus build dan QA deterministik: 27 berkas pembaca,
+69 unit instruksional, 52 pengungkapan jawaban/rincian, dan 734 rentang TeX.
+Checkpoint publik tiga halaman sebelumnya tetap tercatat; penerapan dan
+pembacaan balik publik checkpoint ini berlangsung melalui alur kerja Pages.
+Produksi berikutnya berlanjut dari `sample/CLT.html`.
 
 - Pembaca web: <https://kokunoyumeto.github.io/mathematical-statistics-id/>
 - Sumber dan bukti: <https://github.com/KokunoYumeto/mathematical-statistics-id>

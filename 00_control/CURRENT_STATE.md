@@ -5,13 +5,13 @@ Updated: 2026-08-21
 ## Status
 
 Source admitted; exact authority and component-rights freezes complete; the
-first three contiguous Indonesian pages and the full 29-page machine backend
-are verified. The repository and repaired three-page Pages checkpoint are
-public and anonymously verified. Browser verification rejected the first
-deployment because the local MathJax bundle lacked its dynamically loaded
-`boldsymbol.js` module; the exact official 3.1.2 module is now pinned, deployed,
-and renders without console errors on desktop and mobile. The complete 29-page
-course is not yet claimed.
+first four contiguous Indonesian pages and the full 29-page machine backend
+are verified. Every entity on those four pages is now bound to its target
+path, locale, byte count, and SHA-256. The repository and repaired three-page
+Pages checkpoint are publicly verified; the deterministic four-page boundary
+is ready for immediate deployment and public readback. The exact official
+MathJax 3.1.2 `boldsymbol.js` module remains pinned. The complete 29-page course
+is not yet claimed.
 
 ## Admitted source
 
@@ -69,43 +69,50 @@ entities and 9,035 relations. It contains 29 documents, 366 sections, 760
 structural units, 451 disclosures, 2,891 math-text containers, 24 figures, 236
 assets, and 1,810 internal links. The source-grounded exercise rule designates
 260 units and leaves 500 undesignated; its exact basis is 123 both, 95
-exercise-section only, 42 native `app`/`stat` only, and 500 neither.
+exercise-section only, 42 native `app`/`stat` only, and 500 neither. All 664
+entities on the four translated pages carry verified id-ID bindings; the other
+5,903 entities have explicit untranslated/null locale fields.
 
-- Entity JSONL: 8,810,386 bytes; SHA-256
-  `b7f807b9ac6701c54b719c44053cc015bbabcec7cfd0b30fd2c39b588bc19d3c`.
+- Entity JSONL: 10,180,060 bytes; SHA-256
+  `6427f46c6c5f8ea5bd0e6af441759d1d00b3c5104400011a64c42092fd522427`.
 - Relation CSV: 1,182,589 bytes; SHA-256
   `b235f4d4d724c7fe8653dfd06b075b2225cc2d116f3b87d0fda950d47030159a`.
 - Backend receipt SHA-256:
-  `06ccf5bed11f5ff5dcbd9624156a42692845f5d042e66908a876767d557f4cfa`.
+  `e905bfbe3cb08ad5950423edbd1a9f9b8093d62dc3c551b629df0f819c38cd10`.
+- Bound translation-ledger SHA-256:
+  `5c0dd978d479f84c5dc9e97878c59e1d593d896c11064eb153f3764ac6f0e8cb`.
 - Replay: `python scripts/generate_random_backend.py --check-only`.
 
-## Three-page reader checkpoint
+## Four-page reader checkpoint
 
-Core ordinals 1–3 are complete: `random/sample/index.html`,
-`random/sample/Introduction.html`, and `random/sample/Mean.html`. The build is
-26 files / 1,845,409 bytes; canonical manifest SHA-256
-`52edafb9d815fb07c1c51a46ab036e71989436088b418270b33ab0465d366a8f`.
+Core ordinals 1–4 are complete: `random/sample/index.html`,
+`random/sample/Introduction.html`, `random/sample/Mean.html`, and
+`random/sample/LLN.html`. The build is 27 files / 1,880,544 bytes; canonical
+manifest SHA-256
+`d45913699c2970f75a587537e6a9b83383351f592eae880b5d36a4d6b20ab036`.
 Build-receipt SHA-256 is
-`82675f175706287a52292bb48e01cfa0cc93b06253c8641925381e6ab9eb8a94`;
+`cd5aab9787e9da2159d9e7484153922b35a52313c67368fd035a62e8303d0fc1`;
 QA-receipt SHA-256 is
-`b2520463e7b68319555e4dfa0cdc8160d4df65e70cd6cee33b5494256861b546`.
+`a1ed8a964e8167162587606b92e5b780084095ed59b8071fa27a71f482042866`.
 
-The final QA census is 3 pages, 48 units, 39 disclosures, 466 TeX spans,
-five declared protected-math repairs, 56 local references, and 8 local
-fragments. Reader copies are byte-identical to translation targets; topology,
+The local QA census is 4 pages, 69 units, 52 disclosures, 734 TeX spans,
+ten declared protected-math repairs, nine exact TeX-text localizations, 85
+local references, and 15 local fragments. Reader copies are byte-identical to
+translation targets; topology,
 scripts/styles, IDs, HTTPS policy, local closure, privacy, licensing assets,
 the exact responsive CSS append, and the pinned MathJax runtime pass. Two
 consecutive build/QA check-only replays returned identical hashes. The
 checkpoint details and page hashes are in
-`CHECKPOINT_2026-08-21_THREE_PAGE.md`.
+`CHECKPOINT_2026-08-21_FOUR_PAGE.md`.
 
-The accepted deployment is commit
+The previous accepted public deployment is commit
 `e69aee58a75ff23d57a9ba481ef5773de57b4318`, workflow run `32499866722`,
 and Pages deployment `6024693964`. Anonymous HTTPS readback matched all 26
 manifest rows by size and SHA-256. Live QA rendered 366 MathJax expressions on
 `Mean.html` and 101 on `Introduction.html`, with zero raw delimiters, incomplete
 images, console errors, or page-level horizontal overflow at 1280×720 and
-390×844. Exact evidence is in `PUBLICATION_RECEIPT_2026-08-21.json`.
+390×844. Exact evidence is in `PUBLICATION_RECEIPT_2026-08-21.json`; the
+four-page deployment must receive its own anonymous byte and browser evidence.
 
 ## Reversal conditions
 
@@ -132,22 +139,21 @@ the site-wide notice; they must be cleared, replaced, or linked externally.
 
 ## Known upstream defects (do not silently alter authority)
 
-`ADVERSE_LEDGER.jsonl` contains 15 source findings at this boundary: 11
-determinate repairs applied only in the three translated targets and four open
-items on later pages. Applied findings include filename/case link defects,
-sample-mean wording and punctuation, an inconsistent union index, a missing
-display delimiter, the wrong ambient-dimension subscript, a rounding endpoint,
-and a malformed interval. Open findings are the VarianceTest link family, the
-interval `two2` fragment, the unavailable ExponentialExperiment companion, and
-the missing `Moments.html#poi` fragment. It also records the rejected first
-Pages deployment and the local runtime-closure repair as a non-upstream build
-incident. Authority bytes remain immutable. Do not contact upstream during
-production.
+`ADVERSE_LEDGER.jsonl` contains 25 source findings at this boundary: 21
+determinate repairs applied only in translated targets and four open items on
+later pages. LLN repairs include the missing negative-part factor, the correct
+fixed-partition empirical-density limit and measurability qualifications,
+sample-size subscripts, answer mapping, and three terminology/notation fixes.
+Open findings are the VarianceTest link family, the interval `two2` fragment,
+the unavailable ExponentialExperiment companion, and the missing
+`Moments.html#poi` fragment. The ledger also records the rejected first Pages
+deployment and local runtime-closure repair as one non-upstream build incident.
+Authority bytes remain immutable. Do not contact upstream during production.
 
 ## Next work
 
-1. Continue immediately with `random/sample/LLN.html` (core ordinal 4).
-2. Advance contiguously through the remaining 26 source pages, growing the
+1. Continue immediately with `random/sample/CLT.html` (core ordinal 5).
+2. Advance contiguously through the remaining 25 source pages, growing the
    same deterministic reader and stable-ID backend.
 3. Author the required linear-model bridge after the admitted core, then close
    the conditional large-sample decision from evidence.

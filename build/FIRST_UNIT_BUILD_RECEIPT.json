@@ -283,6 +283,17 @@
         "url": "https://www.randomservices.org/random/sample/Introduction.html"
       },
       {
+        "bytes": 30754,
+        "content_type": "text/html",
+        "etag": "\"7822-69b43de5-68cbf969b36fd1e0;;;\"",
+        "last_modified": "Fri, 13 Mar 2026 16:40:05 GMT",
+        "purpose": "translation_authority",
+        "relative_path": "random/sample/LLN.html",
+        "role": "core",
+        "sha256": "8662dfc55683fa40c79a5d453a450730e2ba151716a20eb61a2db307c33f5e85",
+        "url": "https://www.randomservices.org/random/sample/LLN.html"
+      },
+      {
         "bytes": 42746,
         "content_type": "text/html",
         "etag": "\"a6fa-69b43de5-e966185a7363ee57;;;\"",
@@ -377,19 +388,24 @@
     ],
     "targets": [
       {
-        "bytes": 11759,
+        "bytes": 11714,
         "relative_path": "random/sample/index.html",
-        "sha256": "5673cb96ddccad719ed00e84ed5817cd4d378419ee0b1aaf7e226f6bfb3c02ed"
+        "sha256": "257b7ba98e4eca06ed0b4afc340844a27477a3488def13964c64310d022103cb"
       },
       {
-        "bytes": 36788,
+        "bytes": 36698,
         "relative_path": "random/sample/Introduction.html",
-        "sha256": "ab861c521bf9d078bf35db60b45bde1f6e6f7749dd3b77c712397bb6bc3f1c4e"
+        "sha256": "c38dfaa8dcc2e74f073d1f8975c3d66a14dd9995be5c75c8a753bdcf3e71aad6"
       },
       {
-        "bytes": 46411,
+        "bytes": 35360,
+        "relative_path": "random/sample/LLN.html",
+        "sha256": "c302b38e338f2e582320e86d4f916440b152d7a70b7a97c761ad01fd12473416"
+      },
+      {
+        "bytes": 46321,
         "relative_path": "random/sample/Mean.html",
-        "sha256": "2df29d408c4e8194ac81d68a4abf623b908660adc098deccbb1d15c09c7e0fa9"
+        "sha256": "8dc9b5e1f5d21c49df5ce4075f8e9b1dbb6628aff4ae57533f34a64d21dd2e00"
       }
     ]
   },
@@ -435,11 +451,51 @@
       "reason": "remove the unmatched literal parenthesis after the interval",
       "replacements": 1,
       "surface": "math_span"
+    },
+    {
+      "new": "= \\frac{1}{n} \\sum_{i=1}^n X_i^+ - \\frac{1}{n} \\sum_{i=1}^n X_i^- \\to",
+      "old": "= \\frac{1}{n} \\sum_{i=1}^n X_i^+ - \\sum_{i=1}^n X_i^- \\to",
+      "page": "random/sample/LLN.html",
+      "reason": "the negative-part term in the sample-mean decomposition also requires the factor 1/n",
+      "replacements": 1,
+      "surface": "math_span"
+    },
+    {
+      "new": "\\[ f_n(x) \\to \\frac{\\P(X \\in A_j)}{\\lambda_d(A_j)} = \\frac{1}{\\lambda_d(A_j)} \\int_{A_j} f(u) \\, du \\text{ ketika } n \\to \\infty, \\quad j \\in J, \\; x \\in A_j \\]",
+      "old": "\\[ f_n(x) \\approx f(x), \\quad x \\in S \\]",
+      "page": "random/sample/LLN.html",
+      "reason": "for a fixed partition the empirical density converges to the cell-average density, not generally to f(x)",
+      "replacements": 1,
+      "surface": "math_span"
+    },
+    {
+      "new": "\\(P_9\\left(\\left[0, \\frac{1}{2}\\right]\\right)\\)",
+      "old": "\\(P\\left(\\left[0, \\frac{1}{2}\\right]\\right)\\)",
+      "page": "random/sample/LLN.html",
+      "reason": "the empirical probability is based on the stated sample size 9",
+      "replacements": 1,
+      "surface": "math_span"
+    },
+    {
+      "new": "\\(P_{16}\\left([2, 3]\\right)\\)",
+      "old": "\\(P\\left([2, 3]\\right)\\)",
+      "page": "random/sample/LLN.html",
+      "reason": "the empirical probability is based on the stated sample size 16",
+      "replacements": 1,
+      "surface": "math_span"
+    },
+    {
+      "new": "\\(\\frac{19}{216}, \\frac{3743}{746 \\, 496}\\)",
+      "old": "\\(\\frac{19}{216}, \\frac{3743}{746 \\; 496}\\)",
+      "page": "random/sample/LLN.html",
+      "reason": "the denominator is the integer 746496; use narrow grouping rather than a binary-relation-sized gap",
+      "replacements": 1,
+      "surface": "math_span"
     }
   ],
   "reader": {
     "directory": "build/html-id",
-    "file_count": 26,
+    "file_count": 27,
     "files": [
       {
         "bytes": 533,
@@ -552,19 +608,24 @@
         "sha256": "17bbf2b59e4b0902a84e8ea66f1b40a0343ddff578359ce842c60f109ea047ae"
       },
       {
-        "bytes": 11759,
+        "bytes": 11714,
         "relative_path": "random/sample/index.html",
-        "sha256": "5673cb96ddccad719ed00e84ed5817cd4d378419ee0b1aaf7e226f6bfb3c02ed"
+        "sha256": "257b7ba98e4eca06ed0b4afc340844a27477a3488def13964c64310d022103cb"
       },
       {
-        "bytes": 36788,
+        "bytes": 36698,
         "relative_path": "random/sample/Introduction.html",
-        "sha256": "ab861c521bf9d078bf35db60b45bde1f6e6f7749dd3b77c712397bb6bc3f1c4e"
+        "sha256": "c38dfaa8dcc2e74f073d1f8975c3d66a14dd9995be5c75c8a753bdcf3e71aad6"
       },
       {
-        "bytes": 46411,
+        "bytes": 35360,
+        "relative_path": "random/sample/LLN.html",
+        "sha256": "c302b38e338f2e582320e86d4f916440b152d7a70b7a97c761ad01fd12473416"
+      },
+      {
+        "bytes": 46321,
         "relative_path": "random/sample/Mean.html",
-        "sha256": "2df29d408c4e8194ac81d68a4abf623b908660adc098deccbb1d15c09c7e0fa9"
+        "sha256": "8dc9b5e1f5d21c49df5ce4075f8e9b1dbb6628aff4ae57533f34a64d21dd2e00"
       },
       {
         "bytes": 5922,
@@ -572,10 +633,10 @@
         "sha256": "3f676d2cf6a4e111bff4fc2dbbd082e5305250e40a2c91b67b532dc72f13a78f"
       }
     ],
-    "manifest_bytes": 2513,
+    "manifest_bytes": 2607,
     "manifest_path": "build/FIRST_UNIT_MANIFEST.csv",
-    "manifest_sha256": "52edafb9d815fb07c1c51a46ab036e71989436088b418270b33ab0465d366a8f",
-    "total_bytes": 1845409
+    "manifest_sha256": "d45913699c2970f75a587537e6a9b83383351f592eae880b5d36a4d6b20ab036",
+    "total_bytes": 1880544
   },
   "reader_customizations": [
     {
@@ -596,14 +657,14 @@
   "schema": "o006.random.first-unit-build.v1",
   "scripts": {
     "build": {
-      "bytes": 37086,
+      "bytes": 40021,
       "path": "scripts/build_first_unit.py",
-      "sha256": "f5107a566033dfee0bf5696132e930a5727cad227f6bfd5b8375c14b74900a62"
+      "sha256": "789ab83a450fbd385be71842d7e8680a7c528fe5a32b538360f84f101a9b5978"
     },
     "qa": {
-      "bytes": 45748,
+      "bytes": 51078,
       "path": "scripts/qa_first_unit.py",
-      "sha256": "dddc7584ecdd600408b81dd490a5270e0dbd3d58e9a35da511086f9587f7abf8"
+      "sha256": "ac1363bca5263db7c63d663f9cd9144df956129e8d266fbe474b582386ed0b6f"
     }
   },
   "transport_hardening": [

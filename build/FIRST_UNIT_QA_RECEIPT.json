@@ -52,13 +52,43 @@
     }
   ],
   "build": {
-    "reader_file_count": 26,
-    "reader_manifest_sha256": "52edafb9d815fb07c1c51a46ab036e71989436088b418270b33ab0465d366a8f",
-    "reader_total_bytes": 1845409,
-    "receipt_bytes": 26356,
+    "reader_file_count": 27,
+    "reader_manifest_sha256": "d45913699c2970f75a587537e6a9b83383351f592eae880b5d36a4d6b20ab036",
+    "reader_total_bytes": 1880544,
+    "receipt_bytes": 29016,
     "receipt_path": "build/FIRST_UNIT_BUILD_RECEIPT.json",
-    "receipt_sha256": "82675f175706287a52292bb48e01cfa0cc93b06253c8641925381e6ab9eb8a94"
+    "receipt_sha256": "cd5aab9787e9da2159d9e7484153922b35a52313c67368fd035a62e8303d0fc1"
   },
+  "math_text_localizations": [
+    {
+      "new": "\\text{ ketika }",
+      "old": "\\text{ as }",
+      "page": "random/sample/LLN.html",
+      "replacements": 5,
+      "surface": "math_span"
+    },
+    {
+      "new": "\\text{ untuk tak hingga banyak }",
+      "old": "\\text{ for infinitely many }",
+      "page": "random/sample/LLN.html",
+      "replacements": 2,
+      "surface": "math_span"
+    },
+    {
+      "new": "\\text{Untuk suatu bilangan rasional }",
+      "old": "\\text{For some rational }",
+      "page": "random/sample/LLN.html",
+      "replacements": 1,
+      "surface": "math_span"
+    },
+    {
+      "new": "\\text{ untuk setiap }",
+      "old": "\\text{ for every }",
+      "page": "random/sample/LLN.html",
+      "replacements": 1,
+      "surface": "math_span"
+    }
+  ],
   "mathjax_runtime": {
     "bytes": 4709,
     "git_blob_sha1": "4570456930955792300c57537ad580ef14311335",
@@ -66,10 +96,11 @@
     "official_tag": "3.1.2",
     "reader_relative_path": "MathJax/input/tex/extensions/boldsymbol.js",
     "runtime_file_count": 1,
-    "script_page_references": 2,
+    "script_page_references": 3,
     "script_pages": [
       "random/sample/Introduction.html",
-      "random/sample/Mean.html"
+      "random/sample/Mean.html",
+      "random/sample/LLN.html"
     ],
     "sha256": "716cf8735d00abfb1627f8adbbf4aeb915ac9b5c55d47aeaf276e73dac6a2aa1"
   },
@@ -78,28 +109,30 @@
     "controlled_filename_case_corrections": 4,
     "css_files": 1,
     "css_refs": 11,
-    "details": 39,
-    "external_https_anchors": 177,
+    "details": 52,
+    "external_https_anchors": 225,
     "external_https_metadata_links": 3,
-    "fragments": 8,
-    "href_delta_entries": 108,
-    "href_delta_occurrences": 162,
-    "html_pages": 5,
-    "ids": 84,
-    "local_refs": 56,
-    "math_spans": 466,
+    "fragments": 15,
+    "href_delta_entries": 141,
+    "href_delta_occurrences": 206,
+    "html_pages": 6,
+    "ids": 117,
+    "local_refs": 85,
+    "math_spans": 734,
+    "math_text_localization_categories": 4,
+    "math_text_localization_replacements": 9,
     "mathjax_runtime_files": 1,
-    "protected_math_correction_categories": 5,
-    "protected_math_replacements": 5,
-    "raw_script_style_blocks": 7,
+    "protected_math_correction_categories": 10,
+    "protected_math_replacements": 10,
+    "raw_script_style_blocks": 10,
     "readable_layout_css_appends": 1,
-    "reader_bytes": 1845409,
-    "reader_files": 26,
-    "source_elements": 1138,
+    "reader_bytes": 1880544,
+    "reader_files": 27,
+    "source_elements": 1443,
     "svg_files": 10,
-    "translated_pages": 3,
+    "translated_pages": 4,
     "transport_hardening_deltas": 7,
-    "units": 48
+    "units": 69
   },
   "protected_math_corrections": [
     {
@@ -143,6 +176,46 @@
       "reason": "remove the unmatched literal parenthesis after the interval",
       "replacements": 1,
       "surface": "math_span"
+    },
+    {
+      "new": "= \\frac{1}{n} \\sum_{i=1}^n X_i^+ - \\frac{1}{n} \\sum_{i=1}^n X_i^- \\to",
+      "old": "= \\frac{1}{n} \\sum_{i=1}^n X_i^+ - \\sum_{i=1}^n X_i^- \\to",
+      "page": "random/sample/LLN.html",
+      "reason": "the negative-part term in the sample-mean decomposition also requires the factor 1/n",
+      "replacements": 1,
+      "surface": "math_span"
+    },
+    {
+      "new": "\\[ f_n(x) \\to \\frac{\\P(X \\in A_j)}{\\lambda_d(A_j)} = \\frac{1}{\\lambda_d(A_j)} \\int_{A_j} f(u) \\, du \\text{ ketika } n \\to \\infty, \\quad j \\in J, \\; x \\in A_j \\]",
+      "old": "\\[ f_n(x) \\approx f(x), \\quad x \\in S \\]",
+      "page": "random/sample/LLN.html",
+      "reason": "for a fixed partition the empirical density converges to the cell-average density, not generally to f(x)",
+      "replacements": 1,
+      "surface": "math_span"
+    },
+    {
+      "new": "\\(P_9\\left(\\left[0, \\frac{1}{2}\\right]\\right)\\)",
+      "old": "\\(P\\left(\\left[0, \\frac{1}{2}\\right]\\right)\\)",
+      "page": "random/sample/LLN.html",
+      "reason": "the empirical probability is based on the stated sample size 9",
+      "replacements": 1,
+      "surface": "math_span"
+    },
+    {
+      "new": "\\(P_{16}\\left([2, 3]\\right)\\)",
+      "old": "\\(P\\left([2, 3]\\right)\\)",
+      "page": "random/sample/LLN.html",
+      "reason": "the empirical probability is based on the stated sample size 16",
+      "replacements": 1,
+      "surface": "math_span"
+    },
+    {
+      "new": "\\(\\frac{19}{216}, \\frac{3743}{746 \\, 496}\\)",
+      "old": "\\(\\frac{19}{216}, \\frac{3743}{746 \\; 496}\\)",
+      "page": "random/sample/LLN.html",
+      "reason": "the denominator is the integer 746496; use narrow grouping rather than a binary-relation-sized gap",
+      "replacements": 1,
+      "surface": "math_span"
     }
   ],
   "readable_reflow": {
@@ -169,20 +242,46 @@
       },
       "elements": 390,
       "hierarchy_sha256": "bd051917296943b992b386456e522e94e16d29bdbb6dcb7a407b1975fcbc3c37",
-      "href_delta_entries": 41,
-      "href_delta_occurrences": 66,
+      "href_delta_entries": 40,
+      "href_delta_occurrences": 64,
       "ids": 35,
       "math_spans": 101,
+      "math_text_localization_replacements": 0,
       "protected_math_replacements": 0,
       "raw_script_style_blocks": 3,
-      "reader_bytes": 36788,
-      "reader_sha256": "ab861c521bf9d078bf35db60b45bde1f6e6f7749dd3b77c712397bb6bc3f1c4e",
+      "reader_bytes": 36698,
+      "reader_sha256": "c38dfaa8dcc2e74f073d1f8975c3d66a14dd9995be5c75c8a753bdcf3e71aad6",
       "reader_target_byte_identical": true,
       "source_bytes": 31343,
       "source_sha256": "0af72fbf0202413525cae99e696cfa70014a803d6c5ac7a7dcafd1577742414f",
-      "target_bytes": 36788,
-      "target_sha256": "ab861c521bf9d078bf35db60b45bde1f6e6f7749dd3b77c712397bb6bc3f1c4e",
+      "target_bytes": 36698,
+      "target_sha256": "c38dfaa8dcc2e74f073d1f8975c3d66a14dd9995be5c75c8a753bdcf3e71aad6",
       "units": 22
+    },
+    "random/sample/LLN.html": {
+      "details": 13,
+      "edition_notice": {
+        "bytes": 1142,
+        "links": 4,
+        "sha256": "08fb4fa43d51a1d0882f780de159199be12bfbb4e47ced1c478dec73113d1722"
+      },
+      "elements": 305,
+      "hierarchy_sha256": "5c0d5dbd8f5ce20bd12602452d97e7e74779ee36a0186126919674afc4789a07",
+      "href_delta_entries": 36,
+      "href_delta_occurrences": 49,
+      "ids": 33,
+      "math_spans": 268,
+      "math_text_localization_replacements": 9,
+      "protected_math_replacements": 5,
+      "raw_script_style_blocks": 3,
+      "reader_bytes": 35360,
+      "reader_sha256": "c302b38e338f2e582320e86d4f916440b152d7a70b7a97c761ad01fd12473416",
+      "reader_target_byte_identical": true,
+      "source_bytes": 30754,
+      "source_sha256": "8662dfc55683fa40c79a5d453a450730e2ba151716a20eb61a2db307c33f5e85",
+      "target_bytes": 35360,
+      "target_sha256": "c302b38e338f2e582320e86d4f916440b152d7a70b7a97c761ad01fd12473416",
+      "units": 21
     },
     "random/sample/Mean.html": {
       "details": 23,
@@ -193,19 +292,20 @@
       },
       "elements": 585,
       "hierarchy_sha256": "7ce39c793fb28a3924a045db4c7e38d57530c52fb0501dc34642de3325029f92",
-      "href_delta_entries": 25,
-      "href_delta_occurrences": 33,
+      "href_delta_entries": 24,
+      "href_delta_occurrences": 31,
       "ids": 43,
       "math_spans": 365,
+      "math_text_localization_replacements": 0,
       "protected_math_replacements": 5,
       "raw_script_style_blocks": 3,
-      "reader_bytes": 46411,
-      "reader_sha256": "2df29d408c4e8194ac81d68a4abf623b908660adc098deccbb1d15c09c7e0fa9",
+      "reader_bytes": 46321,
+      "reader_sha256": "8dc9b5e1f5d21c49df5ce4075f8e9b1dbb6628aff4ae57533f34a64d21dd2e00",
       "reader_target_byte_identical": true,
       "source_bytes": 42746,
       "source_sha256": "e21a3da7773a6f7f925b4cb0c583d5331abb1656fe01ed952c8d42b26f238cab",
-      "target_bytes": 46411,
-      "target_sha256": "2df29d408c4e8194ac81d68a4abf623b908660adc098deccbb1d15c09c7e0fa9",
+      "target_bytes": 46321,
+      "target_sha256": "8dc9b5e1f5d21c49df5ce4075f8e9b1dbb6628aff4ae57533f34a64d21dd2e00",
       "units": 26
     },
     "random/sample/index.html": {
@@ -217,33 +317,34 @@
       },
       "elements": 163,
       "hierarchy_sha256": "6a96ead836c5ac42b781f0ade81b07aa852dac73946f60028b3ba8b43d4829ba",
-      "href_delta_entries": 42,
-      "href_delta_occurrences": 63,
+      "href_delta_entries": 41,
+      "href_delta_occurrences": 62,
       "ids": 6,
       "math_spans": 0,
+      "math_text_localization_replacements": 0,
       "protected_math_replacements": 0,
       "raw_script_style_blocks": 1,
-      "reader_bytes": 11759,
-      "reader_sha256": "5673cb96ddccad719ed00e84ed5817cd4d378419ee0b1aaf7e226f6bfb3c02ed",
+      "reader_bytes": 11714,
+      "reader_sha256": "257b7ba98e4eca06ed0b4afc340844a27477a3488def13964c64310d022103cb",
       "reader_target_byte_identical": true,
       "source_bytes": 8952,
       "source_sha256": "9f7b9a075c430efbae92192e131152c6728f7827dc3dde987ce871ec9d6ae35c",
-      "target_bytes": 11759,
-      "target_sha256": "5673cb96ddccad719ed00e84ed5817cd4d378419ee0b1aaf7e226f6bfb3c02ed",
+      "target_bytes": 11714,
+      "target_sha256": "257b7ba98e4eca06ed0b4afc340844a27477a3488def13964c64310d022103cb",
       "units": 0
     }
   },
   "schema": "o006.random.first-unit-qa.v1",
   "scripts": {
     "build": {
-      "bytes": 37086,
+      "bytes": 40021,
       "path": "scripts/build_first_unit.py",
-      "sha256": "f5107a566033dfee0bf5696132e930a5727cad227f6bfd5b8375c14b74900a62"
+      "sha256": "789ab83a450fbd385be71842d7e8680a7c528fe5a32b538360f84f101a9b5978"
     },
     "qa": {
-      "bytes": 45748,
+      "bytes": 51078,
       "path": "scripts/qa_first_unit.py",
-      "sha256": "dddc7584ecdd600408b81dd490a5270e0dbd3d58e9a35da511086f9587f7abf8"
+      "sha256": "ac1363bca5263db7c63d663f9cd9144df956129e8d266fbe474b582386ed0b6f"
     }
   },
   "transport_hardening": [

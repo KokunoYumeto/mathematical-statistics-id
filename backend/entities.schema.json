@@ -1,5 +1,5 @@
 {
-  "$id": "urn:o006:random:backend:entity:v1",
+  "$id": "urn:o006:random:backend:entity:v2",
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "additionalProperties": false,
   "allOf": [
@@ -120,6 +120,67 @@
           "link_target_resolved",
           "link_target_status"
         ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "translation_status": {
+            "const": "complete"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "translation_ledger_ordinal": {
+            "maximum": 29,
+            "minimum": 1,
+            "type": "integer"
+          },
+          "translation_target_bytes": {
+            "minimum": 1,
+            "type": "integer"
+          },
+          "translation_target_locale": {
+            "const": "id-ID"
+          },
+          "translation_target_path": {
+            "pattern": "^source/id-ID/random/(sample|point|interval|hypothesis)/[^/]+\\.html$",
+            "type": "string"
+          },
+          "translation_target_sha256": {
+            "pattern": "^[0-9a-f]{64}$",
+            "type": "string"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "translation_status": {
+            "const": "untranslated"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "translation_ledger_ordinal": {
+            "type": "null"
+          },
+          "translation_target_bytes": {
+            "type": "null"
+          },
+          "translation_target_locale": {
+            "type": "null"
+          },
+          "translation_target_path": {
+            "type": "null"
+          },
+          "translation_target_sha256": {
+            "type": "null"
+          }
+        }
       }
     }
   ],
@@ -385,7 +446,7 @@
       ]
     },
     "schema_version": {
-      "const": "o006.random.backend.entity.v1"
+      "const": "o006.random.backend.entity.v2"
     },
     "section_entity_id": {
       "anyOf": [
@@ -441,6 +502,50 @@
       "minLength": 1,
       "type": "string"
     },
+    "translation_ledger_ordinal": {
+      "maximum": 29,
+      "minimum": 1,
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "translation_status": {
+      "enum": [
+        "complete",
+        "untranslated"
+      ]
+    },
+    "translation_target_bytes": {
+      "minimum": 1,
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "translation_target_locale": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "translation_target_path": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "translation_target_sha256": {
+      "anyOf": [
+        {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
     "unit_classes": {
       "items": {
         "minLength": 1,
@@ -486,7 +591,13 @@
     "source_text",
     "source_text_sha256",
     "source_url",
-    "target_id"
+    "target_id",
+    "translation_ledger_ordinal",
+    "translation_status",
+    "translation_target_bytes",
+    "translation_target_locale",
+    "translation_target_path",
+    "translation_target_sha256"
   ],
   "title": "O006 Random core backend entity",
   "type": "object",

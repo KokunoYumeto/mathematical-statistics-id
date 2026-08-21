@@ -25,9 +25,9 @@ from typing import Any, Iterable
 from urllib.parse import unquote, urlsplit
 
 
-ENTITY_SCHEMA_VERSION = "o006.random.backend.entity.v1"
+ENTITY_SCHEMA_VERSION = "o006.random.backend.entity.v2"
 RELATION_SCHEMA_VERSION = "o006.random.backend.relation.v1"
-RECEIPT_SCHEMA_VERSION = "o006.random.backend.receipt.v1"
+RECEIPT_SCHEMA_VERSION = "o006.random.backend.receipt.v2"
 
 RECEIPT_REL = PurePosixPath("authority/SOURCE_FREEZE_RECEIPT.json")
 MANIFEST_REL = PurePosixPath("authority/SOURCE_URL_MANIFEST.csv")
@@ -36,6 +36,20 @@ ENTITY_SCHEMA_REL = PurePosixPath("backend/entities.schema.json")
 ENTITIES_REL = PurePosixPath("backend/entities.jsonl")
 RELATIONS_REL = PurePosixPath("backend/relations.csv")
 BACKEND_RECEIPT_REL = PurePosixPath("backend/BACKEND_RECEIPT.json")
+TRANSLATION_LEDGER_REL = PurePosixPath("00_control/TRANSLATION_LEDGER.csv")
+
+TRANSLATION_LEDGER_COLUMNS = [
+    "ordinal",
+    "source_path",
+    "target_path",
+    "status",
+    "source_bytes",
+    "source_sha256",
+    "target_bytes",
+    "target_sha256",
+    "notes",
+]
+TARGET_LOCALE = "id-ID"
 
 TYPE_CODE = {
     "document": 0,
@@ -569,6 +583,176 @@ def load_inputs(root: Path) -> tuple[dict[str, Any], bytes, dict[str, dict[str, 
     return receipt, receipt_bytes, manifest, sources
 
 
+def canonical_positive_integer(value: str, *, field_name: str, row_number: int) -> int:
+    """Parse an unsigned canonical decimal integer from a ledger cell."""
+    if not value or not value.isascii() or not value.isdecimal():
+        raise BackendError(
+            f"translation ledger row {row_number} has invalid {field_name}: {value!r}"
+        )
+    parsed = int(value)
+    if parsed < 1 or str(parsed) != value:
+        raise BackendError(
+            f"translation ledger row {row_number} has non-canonical {field_name}: {value!r}"
+        )
+    return parsed
+
+
+def load_translation_bindings(
+    root: Path, sources: list[dict[str, Any]]
+) -> tuple[bytes, dict[str, dict[str, Any]], list[dict[str, Any]]]:
+    """Verify and bind the exact id-ID translation ledger to core pages.
+
+    The ledger is a canonical, contiguous prefix of the frozen core order. A
+    row is admitted only when both its authority-side and live target-side byte
+    claims verify. The resolved target must stay below source/id-ID even if a
+    path component is a symlink.
+    """
+    ledger_path = path_from_posix(root, TRANSLATION_LEDGER_REL)
+    ledger_bytes = ledger_path.read_bytes()
+    if ledger_bytes.startswith(b"\xef\xbb\xbf"):
+        raise BackendError("translation ledger must be UTF-8 without BOM")
+    try:
+        ledger_text = ledger_bytes.decode("utf-8")
+    except UnicodeDecodeError as exc:
+        raise BackendError(f"translation ledger is not UTF-8: {exc}") from exc
+
+    reader = csv.DictReader(io.StringIO(ledger_text, newline=""))
+    if reader.fieldnames != TRANSLATION_LEDGER_COLUMNS:
+        raise BackendError(
+            f"unexpected translation ledger columns: {reader.fieldnames}"
+        )
+    rows = list(reader)
+    if any(None in row or any(value is None for value in row.values()) for row in rows):
+        raise BackendError("malformed translation ledger row")
+    if len(rows) > len(sources):
+        raise BackendError("translation ledger contains more rows than the frozen core")
+
+    target_root = path_from_posix(root, PurePosixPath("source/id-ID")).resolve()
+    source_paths_seen: set[str] = set()
+    target_paths_seen: set[str] = set()
+    bindings: dict[str, dict[str, Any]] = {}
+    verified_rows: list[dict[str, Any]] = []
+
+    for row_number, row in enumerate(rows, 2):
+        expected_ordinal = row_number - 1
+        ordinal = canonical_positive_integer(
+            row["ordinal"], field_name="ordinal", row_number=row_number
+        )
+        if ordinal != expected_ordinal:
+            raise BackendError(
+                f"translation ledger row {row_number} is not in contiguous ordinal order"
+            )
+        source = sources[ordinal - 1]
+        source_path = row["source_path"]
+        if source_path != source["source_path"]:
+            raise BackendError(
+                f"translation ledger ordinal {ordinal} is not the canonical core path: "
+                f"expected {source['source_path']}, found {source_path}"
+            )
+        if source_path in source_paths_seen:
+            raise BackendError(f"duplicate translation source path: {source_path}")
+        source_paths_seen.add(source_path)
+        if row["status"] != "complete":
+            raise BackendError(
+                f"translation ledger ordinal {ordinal} has unsupported status: "
+                f"{row['status']!r}"
+            )
+
+        source_bytes = canonical_positive_integer(
+            row["source_bytes"], field_name="source_bytes", row_number=row_number
+        )
+        if source_bytes != source["source_bytes"]:
+            raise BackendError(
+                f"translation ledger source byte mismatch at ordinal {ordinal}"
+            )
+        if not SHA256_RE.fullmatch(row["source_sha256"]):
+            raise BackendError(
+                f"translation ledger has invalid source SHA-256 at ordinal {ordinal}"
+            )
+        if row["source_sha256"] != source["source_sha256"]:
+            raise BackendError(
+                f"translation ledger source SHA-256 mismatch at ordinal {ordinal}"
+            )
+
+        target_path = row["target_path"]
+        if "\\" in target_path:
+            raise BackendError(
+                f"translation ledger target path must use POSIX separators: {target_path}"
+            )
+        target_rel = PurePosixPath(target_path)
+        if (
+            target_rel.is_absolute()
+            or not target_path
+            or str(target_rel) != target_path
+            or "." in target_rel.parts
+            or ".." in target_rel.parts
+            or target_rel.parts[:2] != ("source", "id-ID")
+        ):
+            raise BackendError(f"unsafe or non-canonical translation target path: {target_path}")
+        expected_target_path = str(PurePosixPath("source/id-ID") / source_path)
+        if target_path != expected_target_path:
+            raise BackendError(
+                f"translation target path does not mirror its source at ordinal {ordinal}: "
+                f"expected {expected_target_path}, found {target_path}"
+            )
+        if target_path in target_paths_seen:
+            raise BackendError(f"duplicate translation target path: {target_path}")
+        target_paths_seen.add(target_path)
+
+        target_file = path_from_posix(root, target_rel)
+        resolved_target = target_file.resolve(strict=True)
+        try:
+            resolved_target.relative_to(target_root)
+        except ValueError as exc:
+            raise BackendError(
+                f"translation target resolves outside source/id-ID: {target_path}"
+            ) from exc
+        if not resolved_target.is_file():
+            raise BackendError(f"translation target is not a file: {target_path}")
+        target_data = resolved_target.read_bytes()
+        target_bytes = canonical_positive_integer(
+            row["target_bytes"], field_name="target_bytes", row_number=row_number
+        )
+        if len(target_data) != target_bytes:
+            raise BackendError(
+                f"translation target byte mismatch at ordinal {ordinal}: {target_path}"
+            )
+        if not SHA256_RE.fullmatch(row["target_sha256"]):
+            raise BackendError(
+                f"translation ledger has invalid target SHA-256 at ordinal {ordinal}"
+            )
+        target_sha256 = sha256_bytes(target_data)
+        if target_sha256 != row["target_sha256"]:
+            raise BackendError(
+                f"translation target SHA-256 mismatch at ordinal {ordinal}: {target_path}"
+            )
+
+        binding = {
+            "translation_ledger_ordinal": ordinal,
+            "translation_status": "complete",
+            "translation_target_bytes": target_bytes,
+            "translation_target_locale": TARGET_LOCALE,
+            "translation_target_path": target_path,
+            "translation_target_sha256": target_sha256,
+        }
+        bindings[source_path] = binding
+        verified_rows.append(
+            {
+                "ordinal": ordinal,
+                "source_bytes": source_bytes,
+                "source_path": source_path,
+                "source_sha256": source["source_sha256"],
+                "status": row["status"],
+                "target_bytes": target_bytes,
+                "target_locale": TARGET_LOCALE,
+                "target_path": target_path,
+                "target_sha256": target_sha256,
+            }
+        )
+
+    return ledger_bytes, bindings, verified_rows
+
+
 def entity_id(document_order: int, entity_type: str, kind_order: int) -> str:
     return f"O006-{document_order:03d}-{TYPE_CODE[entity_type]:02d}-{kind_order:04d}"
 
@@ -577,7 +761,9 @@ def injected_id(document_order: int, entity_type: str, kind_order: int) -> str:
     return f"o006-{document_order:03d}-{TYPE_CODE[entity_type]:02d}-{kind_order:04d}"
 
 
-def parse_document(source: dict[str, Any]) -> dict[str, Any]:
+def parse_document(
+    source: dict[str, Any], translation_binding: dict[str, Any] | None
+) -> dict[str, Any]:
     parser = CorpusHTMLParser()
     parser.feed(source["html"])
     parser.close()
@@ -647,6 +833,14 @@ def parse_document(source: dict[str, Any]) -> dict[str, Any]:
             occurrence = native_nodes[native_id].index(node) + 1
         target_id = native_id or injected_id(source["document_order"], entity_type, kind_order)
         label = title if entity_type == "document" else source_label(node, entity_type)
+        page_binding = translation_binding or {
+            "translation_ledger_ordinal": None,
+            "translation_status": "untranslated",
+            "translation_target_bytes": None,
+            "translation_target_locale": None,
+            "translation_target_path": None,
+            "translation_target_sha256": None,
+        }
         record: dict[str, Any] = {
             "component_rights_class": RIGHTS_RANDOM,
             "document_order": source["document_order"],
@@ -674,6 +868,7 @@ def parse_document(source: dict[str, Any]) -> dict[str, Any]:
             "source_text_sha256": sha256_bytes(label.encode("utf-8")),
             "source_url": source["source_url"],
             "target_id": target_id,
+            **page_binding,
         }
         if entity_type == "section":
             record["section_level"] = int(node.tag[1])
@@ -1023,6 +1218,9 @@ def validate_records(records: list[dict[str, Any]]) -> None:
         "schema_version", "section_entity_id", "sibling_order", "source_column",
         "source_line", "source_order", "source_path", "source_sha256",
         "source_text", "source_text_sha256", "source_url", "target_id",
+        "translation_ledger_ordinal", "translation_status",
+        "translation_target_bytes", "translation_target_locale",
+        "translation_target_path", "translation_target_sha256",
     }
     records_by_id = {record["entity_id"]: record for record in records}
     seen: set[str] = set()
@@ -1043,6 +1241,31 @@ def validate_records(records: list[dict[str, Any]]) -> None:
             raise BackendError(f"invalid text SHA-256: {stable_id}")
         if sha256_bytes(record["source_text"].encode("utf-8")) != record["source_text_sha256"]:
             raise BackendError(f"text SHA-256 mismatch: {stable_id}")
+        if record["translation_status"] == "complete":
+            if not isinstance(record["translation_ledger_ordinal"], int):
+                raise BackendError(f"complete entity lacks ledger ordinal: {stable_id}")
+            if record["translation_target_locale"] != TARGET_LOCALE:
+                raise BackendError(f"complete entity has wrong target locale: {stable_id}")
+            if not isinstance(record["translation_target_bytes"], int):
+                raise BackendError(f"complete entity lacks target bytes: {stable_id}")
+            if not isinstance(record["translation_target_path"], str):
+                raise BackendError(f"complete entity lacks target path: {stable_id}")
+            if not isinstance(record["translation_target_sha256"], str) or not SHA256_RE.fullmatch(
+                record["translation_target_sha256"]
+            ):
+                raise BackendError(f"complete entity has invalid target SHA-256: {stable_id}")
+        elif record["translation_status"] == "untranslated":
+            nullable_fields = (
+                "translation_ledger_ordinal",
+                "translation_target_bytes",
+                "translation_target_locale",
+                "translation_target_path",
+                "translation_target_sha256",
+            )
+            if any(record[field_name] is not None for field_name in nullable_fields):
+                raise BackendError(f"untranslated entity has target binding: {stable_id}")
+        else:
+            raise BackendError(f"invalid translation status: {stable_id}")
         if record["hierarchy"][-1] != stable_id:
             raise BackendError(f"hierarchy does not terminate at entity: {stable_id}")
         expected_source_order[record["document_order"]] += 1
@@ -1063,6 +1286,22 @@ def validate_records(records: list[dict[str, Any]]) -> None:
     parent_ids = {record["parent_entity_id"] for record in records if record["parent_entity_id"]}
     if not parent_ids.issubset(seen):
         raise BackendError(f"missing parent entity IDs: {sorted(parent_ids - seen)}")
+    page_bindings: dict[str, tuple[Any, ...]] = {}
+    binding_fields = (
+        "translation_ledger_ordinal",
+        "translation_status",
+        "translation_target_bytes",
+        "translation_target_locale",
+        "translation_target_path",
+        "translation_target_sha256",
+    )
+    for record in records:
+        binding = tuple(record[field_name] for field_name in binding_fields)
+        prior = page_bindings.setdefault(record["source_path"], binding)
+        if binding != prior:
+            raise BackendError(
+                f"inconsistent translation binding within page: {record['source_path']}"
+            )
 
 
 def make_relations(records: list[dict[str, Any]]) -> list[dict[str, str]]:
@@ -1174,7 +1413,13 @@ def csv_bytes(rows: list[dict[str, str]]) -> bytes:
 
 def build(root: Path) -> tuple[dict[PurePosixPath, bytes], dict[str, Any]]:
     freeze_receipt, freeze_receipt_bytes, manifest, sources = load_inputs(root)
-    parsed_documents = [parse_document(source) for source in sources]
+    ledger_bytes, translation_bindings, verified_translation_rows = (
+        load_translation_bindings(root, sources)
+    )
+    parsed_documents = [
+        parse_document(source, translation_bindings.get(source["source_path"]))
+        for source in sources
+    ]
     classify_targets(parsed_documents, sources, manifest)
     records = [
         record
@@ -1249,6 +1494,21 @@ def build(root: Path) -> tuple[dict[PurePosixPath, bytes], dict[str, Any]]:
         and record["link_target_status"] == "out-of-freeze-internal"
         for record in records
     )
+    translated_entity_count = sum(
+        record["translation_status"] == "complete" for record in records
+    )
+    translated_ordinals = [row["ordinal"] for row in verified_translation_rows]
+    final_ledger_bytes, final_bindings, final_verified_rows = (
+        load_translation_bindings(root, sources)
+    )
+    if (
+        final_ledger_bytes != ledger_bytes
+        or final_bindings != translation_bindings
+        or final_verified_rows != verified_translation_rows
+    ):
+        raise BackendError(
+            "translation ledger or a bound target changed during backend generation"
+        )
     receipt = {
         "core": {
             "bytes": sum(source["source_bytes"] for source in sources),
@@ -1309,6 +1569,30 @@ def build(root: Path) -> tuple[dict[PurePosixPath, bytes], dict[str, Any]]:
             "schema": freeze_receipt["schema"],
             "source_manifest_path": str(MANIFEST_REL),
             "source_manifest_sha256": freeze_receipt["source_manifest_sha256"],
+        },
+        "translation_binding": {
+            "documents": {
+                "total": len(sources),
+                "translated": len(verified_translation_rows),
+                "untranslated": len(sources) - len(verified_translation_rows),
+            },
+            "entities": {
+                "total": len(records),
+                "translated": translated_entity_count,
+                "untranslated": len(records) - translated_entity_count,
+            },
+            "ledger_bytes": len(ledger_bytes),
+            "ledger_columns": TRANSLATION_LEDGER_COLUMNS,
+            "ledger_path": str(TRANSLATION_LEDGER_REL),
+            "ledger_rows": len(verified_translation_rows),
+            "ledger_sha256": sha256_bytes(ledger_bytes),
+            "status_counts": {
+                "complete": len(verified_translation_rows),
+                "untranslated": len(sources) - len(verified_translation_rows),
+            },
+            "target_locale": TARGET_LOCALE,
+            "translated_document_ordinals": translated_ordinals,
+            "verified_rows": verified_translation_rows,
         },
         "unresolved_classification": {
             "asset_rights_entity_ids": assets_undetermined,

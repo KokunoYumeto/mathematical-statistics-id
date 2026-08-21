@@ -64,6 +64,7 @@ TARGETS = (
     PurePosixPath("random/sample/index.html"),
     PurePosixPath("random/sample/Introduction.html"),
     PurePosixPath("random/sample/Mean.html"),
+    PurePosixPath("random/sample/LLN.html"),
 )
 
 # Screen.css references all of these local assets. Keeping the complete exact set
@@ -276,6 +277,80 @@ PROTECTED_MATH_CORRECTIONS = (
         "replacements": 1,
         "surface": "math_span",
         "reason": "remove the unmatched literal parenthesis after the interval",
+    },
+    {
+        "page": "random/sample/LLN.html",
+        "old": r"= \frac{1}{n} \sum_{i=1}^n X_i^+ - \sum_{i=1}^n X_i^- \to",
+        "new": r"= \frac{1}{n} \sum_{i=1}^n X_i^+ - \frac{1}{n} \sum_{i=1}^n X_i^- \to",
+        "replacements": 1,
+        "surface": "math_span",
+        "reason": "the negative-part term in the sample-mean decomposition also requires the factor 1/n",
+    },
+    {
+        "page": "random/sample/LLN.html",
+        "old": r"\[ f_n(x) \approx f(x), \quad x \in S \]",
+        "new": r"\[ f_n(x) \to \frac{\P(X \in A_j)}{\lambda_d(A_j)} = \frac{1}{\lambda_d(A_j)} \int_{A_j} f(u) \, du \text{ ketika } n \to \infty, \quad j \in J, \; x \in A_j \]",
+        "replacements": 1,
+        "surface": "math_span",
+        "reason": "for a fixed partition the empirical density converges to the cell-average density, not generally to f(x)",
+    },
+    {
+        "page": "random/sample/LLN.html",
+        "old": r"\(P\left(\left[0, \frac{1}{2}\right]\right)\)",
+        "new": r"\(P_9\left(\left[0, \frac{1}{2}\right]\right)\)",
+        "replacements": 1,
+        "surface": "math_span",
+        "reason": "the empirical probability is based on the stated sample size 9",
+    },
+    {
+        "page": "random/sample/LLN.html",
+        "old": r"\(P\left([2, 3]\right)\)",
+        "new": r"\(P_{16}\left([2, 3]\right)\)",
+        "replacements": 1,
+        "surface": "math_span",
+        "reason": "the empirical probability is based on the stated sample size 16",
+    },
+    {
+        "page": "random/sample/LLN.html",
+        "old": r"\(\frac{19}{216}, \frac{3743}{746 \; 496}\)",
+        "new": r"\(\frac{19}{216}, \frac{3743}{746 \, 496}\)",
+        "replacements": 1,
+        "surface": "math_span",
+        "reason": "the denominator is the integer 746496; use narrow grouping rather than a binary-relation-sized gap",
+    },
+)
+
+# Reader-facing language inside TeX \text{...} remains protected mathematics:
+# these exact substitutions localize words while leaving every operator,
+# identifier, delimiter, and formula position unchanged.
+MATH_TEXT_LOCALIZATIONS = (
+    {
+        "page": "random/sample/LLN.html",
+        "old": r"\text{ as }",
+        "new": r"\text{ ketika }",
+        "replacements": 5,
+        "surface": "math_span",
+    },
+    {
+        "page": "random/sample/LLN.html",
+        "old": r"\text{ for infinitely many }",
+        "new": r"\text{ untuk tak hingga banyak }",
+        "replacements": 2,
+        "surface": "math_span",
+    },
+    {
+        "page": "random/sample/LLN.html",
+        "old": r"\text{For some rational }",
+        "new": r"\text{Untuk suatu bilangan rasional }",
+        "replacements": 1,
+        "surface": "math_span",
+    },
+    {
+        "page": "random/sample/LLN.html",
+        "old": r"\text{ for every }",
+        "new": r"\text{ untuk setiap }",
+        "replacements": 1,
+        "surface": "math_span",
     },
 )
 

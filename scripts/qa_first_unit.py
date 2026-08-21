@@ -29,6 +29,7 @@ PAIRS = (
     PurePosixPath("random/sample/index.html"),
     PurePosixPath("random/sample/Introduction.html"),
     PurePosixPath("random/sample/Mean.html"),
+    PurePosixPath("random/sample/LLN.html"),
 )
 
 # This is an exact page/original-href allowlist. There is deliberately no URL
@@ -53,7 +54,6 @@ HREF_DELTA_ALLOWLIST: dict[PurePosixPath, dict[str, str]] = {
         "../markov/index.html": "https://www.randomservices.org/random/markov/index.html",
         "../martingales/index.html": "https://www.randomservices.org/random/martingales/index.html",
         "../brown/index.html": "https://www.randomservices.org/random/brown/index.html",
-        "LLN.html": "https://www.randomservices.org/random/sample/LLN.html",
         "CLT.html": "https://www.randomservices.org/random/sample/CLT.html",
         "Variance.html": "https://www.randomservices.org/random/sample/Variance.html",
         "OrderStatistics.html": "https://www.randomservices.org/random/sample/OrderStatistics.html",
@@ -80,7 +80,6 @@ HREF_DELTA_ALLOWLIST: dict[PurePosixPath, dict[str, str]] = {
     },
     PurePosixPath("random/sample/Introduction.html"): {
         "../index.html": "https://www.randomservices.org/random/index.html",
-        "LLN.html": "https://www.randomservices.org/random/sample/LLN.html",
         "CLT.html": "https://www.randomservices.org/random/sample/CLT.html",
         "Variance.html": "https://www.randomservices.org/random/sample/Variance.html",
         "OrderStatistics.html": "https://www.randomservices.org/random/sample/OrderStatistics.html",
@@ -123,7 +122,6 @@ HREF_DELTA_ALLOWLIST: dict[PurePosixPath, dict[str, str]] = {
     },
     PurePosixPath("random/sample/Mean.html"): {
         "../index.html": "https://www.randomservices.org/random/index.html",
-        "LLN.html": "https://www.randomservices.org/random/sample/LLN.html",
         "CLT.html": "https://www.randomservices.org/random/sample/CLT.html",
         "Variance.html": "https://www.randomservices.org/random/sample/Variance.html",
         "OrderStatistics.html": "https://www.randomservices.org/random/sample/OrderStatistics.html",
@@ -144,6 +142,44 @@ HREF_DELTA_ALLOWLIST: dict[PurePosixPath, dict[str, str]] = {
         "JavaScript:openAncillary('../data/MM.html')": "https://www.randomservices.org/random/data/MM.html",
         "JavaScript:openAncillary('../data/Cicada.html')": "https://www.randomservices.org/random/data/Cicada.html",
         "JavaScript:openAncillary('../data/Pearson.html')": "https://www.randomservices.org/random/data/Pearson.html",
+        "JavaScript:openAncillary('../apps/index.html')": "https://www.randomservices.org/random/apps/index.html",
+        "JavaScript:openAncillary('../data/index.html')": "https://www.randomservices.org/random/data/index.html",
+        "JavaScript:openAncillary('../biographies/index.html')": "https://www.randomservices.org/random/biographies/index.html",
+    },
+    PurePosixPath("random/sample/LLN.html"): {
+        "../index.html": "https://www.randomservices.org/random/index.html",
+        "CLT.html": "https://www.randomservices.org/random/sample/CLT.html",
+        "Variance.html": "https://www.randomservices.org/random/sample/Variance.html",
+        "OrderStatistics.html": "https://www.randomservices.org/random/sample/OrderStatistics.html",
+        "Covariance.html": "https://www.randomservices.org/random/sample/Covariance.html",
+        "Normal.html": "https://www.randomservices.org/random/sample/Normal.html",
+        "../prob/Experiments.html": "https://www.randomservices.org/random/prob/Experiments.html",
+        "../prob/Probability.html": "https://www.randomservices.org/random/prob/Probability.html",
+        "../expect/Properties.html": "https://www.randomservices.org/random/expect/Properties.html",
+        "../expect/Variance.html": "https://www.randomservices.org/random/expect/Variance.html",
+        "../point/Estimators.html": "https://www.randomservices.org/random/point/Estimators.html",
+        "../expect/Spaces.html#con": "https://www.randomservices.org/random/expect/Spaces.html#con",
+        "../prob/Convergence.html#lim2": "https://www.randomservices.org/random/prob/Convergence.html#lim2",
+        "../expect/Variance.html#chb": "https://www.randomservices.org/random/expect/Variance.html#chb",
+        "../prob/Convergence.html#lim1": "https://www.randomservices.org/random/prob/Convergence.html#lim1",
+        "../prob/Convergence.html": "https://www.randomservices.org/random/prob/Convergence.html",
+        "../martingales/Backwards.html#lln": "https://www.randomservices.org/random/martingales/Backwards.html#lln",
+        "../martingales/index.html": "https://www.randomservices.org/random/martingales/index.html",
+        "../bernoulli/Binomial.html": "https://www.randomservices.org/random/bernoulli/Binomial.html",
+        "../dist/CDF.html": "https://www.randomservices.org/random/dist/CDF.html",
+        "../dist/Discrete.html": "https://www.randomservices.org/random/dist/Discrete.html",
+        "../dist/Continuous.html": "https://www.randomservices.org/random/dist/Continuous.html",
+        "JavaScript:openAncillary('../apps/Dice.html')": "https://www.randomservices.org/random/apps/Dice.html",
+        "JavaScript:openAncillary('../apps/BuffonCoin.html')": "https://www.randomservices.org/random/apps/BuffonCoin.html",
+        "JavaScript:openAncillary('../apps/Bertrand.html')": "https://www.randomservices.org/random/apps/Bertrand.html",
+        "JavaScript:openAncillary('../apps/BinomialCoin.html')": "https://www.randomservices.org/random/apps/BinomialCoin.html",
+        "JavaScript:openAncillary('../apps/Match.html')": "https://www.randomservices.org/random/apps/Match.html",
+        "JavaScript:openAncillary('../apps/Poker.html')": "https://www.randomservices.org/random/apps/Poker.html",
+        "JavaScript:openAncillary('../apps/Gamma.html')": "https://www.randomservices.org/random/apps/Gamma.html",
+        "JavaScript:openAncillary('../apps/SpecialSimulator.html')": "https://www.randomservices.org/random/apps/SpecialSimulator.html",
+        "../special/Normal.html": "https://www.randomservices.org/random/special/Normal.html",
+        "../special/Beta.html": "https://www.randomservices.org/random/special/Beta.html",
+        "../special/Pareto.html": "https://www.randomservices.org/random/special/Pareto.html",
         "JavaScript:openAncillary('../apps/index.html')": "https://www.randomservices.org/random/apps/index.html",
         "JavaScript:openAncillary('../data/index.html')": "https://www.randomservices.org/random/data/index.html",
         "JavaScript:openAncillary('../biographies/index.html')": "https://www.randomservices.org/random/biographies/index.html",
@@ -177,6 +213,7 @@ NOTICE_MARKUP_SHA256 = {
     PurePosixPath("random/sample/index.html"): "d56c45b9741ffdb1adbc27999f42e6a6ea2865a5271b413222d4a8c1a40044c6",
     PurePosixPath("random/sample/Introduction.html"): "64ad3ed4c57ffe8c0c91fae7047ba7d57399538bef9f7beae730e1fa4f4fa931",
     PurePosixPath("random/sample/Mean.html"): "b5dbee259ec1dd62c84f5d776320e15142359cc401afa413f9a2524f906fb275",
+    PurePosixPath("random/sample/LLN.html"): "08fb4fa43d51a1d0882f780de159199be12bfbb4e47ced1c478dec73113d1722",
 }
 NOTICE_LINKS = (
     "https://www.randomservices.org/random/",
@@ -309,10 +346,12 @@ def math_spans(text: str) -> list[str]:
     return spans
 
 
-def normalize_authority_math(rel: PurePosixPath, spans: list[str]) -> tuple[list[str], int]:
-    """Apply only the declared, exact source corrections inside TeX spans."""
+def normalize_authority_math(
+    rel: PurePosixPath, spans: list[str]
+) -> tuple[list[str], int, int]:
+    """Apply declared source repairs and reader-language substitutions in TeX."""
     normalized = list(spans)
-    applied = 0
+    corrected = 0
     for change in build_pipeline.PROTECTED_MATH_CORRECTIONS:
         if change["page"] != rel.as_posix() or change["surface"] != "math_span":
             continue
@@ -326,8 +365,23 @@ def normalize_authority_math(rel: PurePosixPath, spans: list[str]) -> tuple[list
                 f"{observed} != {expected}"
             )
         normalized = [span.replace(old, new) for span in normalized]
-        applied += observed
-    return normalized, applied
+        corrected += observed
+    localized = 0
+    for change in build_pipeline.MATH_TEXT_LOCALIZATIONS:
+        if change["page"] != rel.as_posix() or change["surface"] != "math_span":
+            continue
+        old = change["old"]
+        new = change["new"]
+        expected = int(change["replacements"])
+        observed = sum(span.count(old) for span in normalized)
+        if observed != expected:
+            fail(
+                f"{rel}: protected TeX localization authority count changed for {old!r}: "
+                f"{observed} != {expected}"
+            )
+        normalized = [span.replace(old, new) for span in normalized]
+        localized += observed
+    return normalized, corrected, localized
 
 
 def element_stream(parsed: BeautifulSoup) -> list[Tag]:
@@ -429,7 +483,11 @@ def compare_pair(rel: PurePosixPath) -> dict[str, Any]:
         fail(f"{rel}: script/style raw text differs")
     source_math = math_spans(source_text)
     target_math = math_spans(target_text)
-    expected_math, protected_math_replacements = normalize_authority_math(rel, source_math)
+    (
+        expected_math,
+        protected_math_replacements,
+        math_text_localization_replacements,
+    ) = normalize_authority_math(rel, source_math)
     if expected_math != target_math:
         fail(f"{rel}: exact TeX/math sequence changed ({len(source_math)} vs {len(target_math)})")
 
@@ -510,6 +568,7 @@ def compare_pair(rel: PurePosixPath) -> dict[str, Any]:
         "raw_script_style_blocks": len(source_raw),
         "math_spans": len(source_math),
         "protected_math_replacements": protected_math_replacements,
+        "math_text_localization_replacements": math_text_localization_replacements,
         "href_delta_entries": len(seen_deltas),
         "href_delta_occurrences": href_delta_occurrences,
         "units": len(units),
@@ -719,6 +778,7 @@ def check_mathjax_runtime() -> dict[str, Any]:
     expected_script_pages = [
         "random/sample/Introduction.html",
         "random/sample/Mean.html",
+        "random/sample/LLN.html",
     ]
     if script_pages != expected_script_pages:
         fail(f"MathJax bundle reference pages changed: {script_pages}")
@@ -799,6 +859,10 @@ def expected_qa_receipt(
         "protected_math_replacements": sum(
             int(result["protected_math_replacements"]) for result in results.values()
         ),
+        "math_text_localization_categories": len(build_pipeline.MATH_TEXT_LOCALIZATIONS),
+        "math_text_localization_replacements": sum(
+            int(result["math_text_localization_replacements"]) for result in results.values()
+        ),
         "readable_layout_css_appends": 1,
         "mathjax_runtime_files": int(mathjax_runtime["runtime_file_count"]),
         "units": sum(int(result["units"]) for result in results.values()),
@@ -833,6 +897,7 @@ def expected_qa_receipt(
         "transport_hardening": list(build_pipeline.TRANSPORT_HARDENING),
         "bounded_text_corrections": list(build_pipeline.BOUNDED_TEXT_CORRECTIONS),
         "protected_math_corrections": list(build_pipeline.PROTECTED_MATH_CORRECTIONS),
+        "math_text_localizations": list(build_pipeline.MATH_TEXT_LOCALIZATIONS),
         "mathjax_runtime": mathjax_runtime,
         "readable_reflow": readable_reflow,
         "results": results,
@@ -850,6 +915,18 @@ def run(*, check_only: bool = False) -> dict[str, Any]:
     mean = results["random/sample/Mean.html"]
     if mean["units"] != 26 or mean["details"] != 23 or mean["math_spans"] != 365:
         fail(f"Mean census changed: {mean}")
+    lln = results["random/sample/LLN.html"]
+    if (
+        lln["elements"] != 305
+        or lln["hierarchy_sha256"]
+        != "5c0d5dbd8f5ce20bd12602452d97e7e74779ee36a0186126919674afc4789a07"
+        or lln["raw_script_style_blocks"] != 3
+        or lln["units"] != 21
+        or lln["details"] != 13
+        or lln["math_spans"] != 268
+        or lln["ids"] != 33
+    ):
+        fail(f"LLN census changed: {lln}")
     reference_counts = check_reader_references()
     mathjax_runtime = check_mathjax_runtime()
     readable_reflow = check_readable_reflow()

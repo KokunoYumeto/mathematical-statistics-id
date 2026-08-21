@@ -249,7 +249,7 @@
   ],
   "generator": {
     "path": "scripts/generate_random_backend.py",
-    "sha256": "7a3679970e8d50086c2a1c9250d19807395aa42abd86a076251672b2b190a100"
+    "sha256": "08e213756c3331ac1cb1a5c24906726bd36d63f32f6e5d010fc6eb391c21937c"
   },
   "link_target_audit": {
     "known_upstream_defects": [
@@ -372,9 +372,9 @@
   },
   "outputs": {
     "entities.jsonl": {
-      "bytes": 8810386,
+      "bytes": 10180060,
       "records": 6567,
-      "sha256": "b7f807b9ac6701c54b719c44053cc015bbabcec7cfd0b30fd2c39b588bc19d3c"
+      "sha256": "6427f46c6c5f8ea5bd0e6af441759d1d00b3c5104400011a64c42092fd522427"
     },
     "relations.csv": {
       "bytes": 1182589,
@@ -382,11 +382,11 @@
       "sha256": "b235f4d4d724c7fe8653dfd06b075b2225cc2d116f3b87d0fda950d47030159a"
     }
   },
-  "schema": "o006.random.backend.receipt.v1",
+  "schema": "o006.random.backend.receipt.v2",
   "schemas": {
-    "entity": "o006.random.backend.entity.v1",
+    "entity": "o006.random.backend.entity.v2",
     "entity_schema_path": "backend/entities.schema.json",
-    "entity_schema_sha256": "783d6c3d4a69f8b67fd6af3105d6d3992a9ab51645c4cb475fc22ead33fda1cc",
+    "entity_schema_sha256": "c4ef6a1f83a3077871db72360e88fd0c54b0080beecda717377a519d4da955ab",
     "relation": "o006.random.backend.relation.v1"
   },
   "source_freeze": {
@@ -395,6 +395,90 @@
     "schema": "o006.random.source-freeze.v1",
     "source_manifest_path": "authority/SOURCE_URL_MANIFEST.csv",
     "source_manifest_sha256": "d36e0f8bf9fa44a38a7504f9688a08af6787d88ede99298316a3e022b6f799f5"
+  },
+  "translation_binding": {
+    "documents": {
+      "total": 29,
+      "translated": 4,
+      "untranslated": 25
+    },
+    "entities": {
+      "total": 6567,
+      "translated": 664,
+      "untranslated": 5903
+    },
+    "ledger_bytes": 1461,
+    "ledger_columns": [
+      "ordinal",
+      "source_path",
+      "target_path",
+      "status",
+      "source_bytes",
+      "source_sha256",
+      "target_bytes",
+      "target_sha256",
+      "notes"
+    ],
+    "ledger_path": "00_control/TRANSLATION_LEDGER.csv",
+    "ledger_rows": 4,
+    "ledger_sha256": "5c0dd978d479f84c5dc9e97878c59e1d593d896c11064eb153f3764ac6f0e8cb",
+    "status_counts": {
+      "complete": 4,
+      "untranslated": 25
+    },
+    "target_locale": "id-ID",
+    "translated_document_ordinals": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "verified_rows": [
+      {
+        "ordinal": 1,
+        "source_bytes": 8952,
+        "source_path": "random/sample/index.html",
+        "source_sha256": "9f7b9a075c430efbae92192e131152c6728f7827dc3dde987ce871ec9d6ae35c",
+        "status": "complete",
+        "target_bytes": 11714,
+        "target_locale": "id-ID",
+        "target_path": "source/id-ID/random/sample/index.html",
+        "target_sha256": "257b7ba98e4eca06ed0b4afc340844a27477a3488def13964c64310d022103cb"
+      },
+      {
+        "ordinal": 2,
+        "source_bytes": 31343,
+        "source_path": "random/sample/Introduction.html",
+        "source_sha256": "0af72fbf0202413525cae99e696cfa70014a803d6c5ac7a7dcafd1577742414f",
+        "status": "complete",
+        "target_bytes": 36698,
+        "target_locale": "id-ID",
+        "target_path": "source/id-ID/random/sample/Introduction.html",
+        "target_sha256": "c38dfaa8dcc2e74f073d1f8975c3d66a14dd9995be5c75c8a753bdcf3e71aad6"
+      },
+      {
+        "ordinal": 3,
+        "source_bytes": 42746,
+        "source_path": "random/sample/Mean.html",
+        "source_sha256": "e21a3da7773a6f7f925b4cb0c583d5331abb1656fe01ed952c8d42b26f238cab",
+        "status": "complete",
+        "target_bytes": 46321,
+        "target_locale": "id-ID",
+        "target_path": "source/id-ID/random/sample/Mean.html",
+        "target_sha256": "8dc9b5e1f5d21c49df5ce4075f8e9b1dbb6628aff4ae57533f34a64d21dd2e00"
+      },
+      {
+        "ordinal": 4,
+        "source_bytes": 30754,
+        "source_path": "random/sample/LLN.html",
+        "source_sha256": "8662dfc55683fa40c79a5d453a450730e2ba151716a20eb61a2db307c33f5e85",
+        "status": "complete",
+        "target_bytes": 35360,
+        "target_locale": "id-ID",
+        "target_path": "source/id-ID/random/sample/LLN.html",
+        "target_sha256": "c302b38e338f2e582320e86d4f916440b152d7a70b7a97c761ad01fd12473416"
+      }
+    ]
   },
   "unresolved_classification": {
     "asset_rights_entity_ids": [],
