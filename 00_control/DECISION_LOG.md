@@ -1,11 +1,12 @@
 # Decision log
 
-## O006-D001 — Random-first source spine
+## O006-D001 — Random source admitted for this edition
 
 Date: 2026-08-21  
-Status: admitted
+Status: admitted for edition production; curriculum admission remains open
 
-Select only chapters 5–8 of Kyle Siegrist's Random as the O006 source spine.
+Select only chapters 5–8 of Kyle Siegrist's Random as this edition's bounded
+source corpus.
 Reason: direct editable semantic HTML + TeX; reproducible static-serving build;
 public exercises and answer disclosures; strong proofs through sufficiency and
 completeness; classical interval estimation, testing, and introductory Bayes.
@@ -89,3 +90,31 @@ four-page boundary immediately, including its locale-bound backend, rather
 than withholding a working reader until the next chapter subsection. Continue
 from `random/sample/CLT.html` after public-byte and live-render verification;
 do not describe the partial edition as the complete course.
+
+## O006-D009 — edition completion is independent of curriculum admission
+
+Date: 2026-08-21
+Status: controlling
+
+Complete the full bounded Indonesian Random edition already undertaken even if
+the curriculum-selection root later assigns C140 to STAT 415 or a different
+composite.  The edition is independently worthwhile, but its completion and
+the work already invested are not evidence that it is the best curricular
+spine.  Curriculum admission remains a separate comparative decision governed
+by role fit, source/build closure, public assessment closure, overlap, and
+fourteen-language cost.  Do not switch sources or abandon this edition because
+of that later decision.
+
+## O006-D010 — final component-separated C140 selection
+
+Date: 2026-08-21
+Status: controlling; supersedes D001/D002 only as curriculum selection
+
+Complete this repository's full 29-page Random Indonesian edition, but do not
+use it as C140's narrative spine. The final C140 architecture is the complete
+Penn State STAT 415 landing/index plus Lessons 00–12, exactly Random's
+`point/Sufficient.html`, and one original CC BY-SA 4.0 rigor, simulation,
+multiple-regression, and mastery companion. Keep the Random edition and Penn
+State reconstruction in separate paths/repositories. The exact component,
+rights, production, publication, and terminal boundaries are in
+`C140_CONFIGURED_ARCHITECTURE_2026-08-21.md`.

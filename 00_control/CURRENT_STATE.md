@@ -4,14 +4,16 @@ Updated: 2026-08-21
 
 ## Status
 
-Source admitted; exact authority and component-rights freezes complete; the
-first four contiguous Indonesian pages and the full 29-page machine backend
-are verified. Every entity on those four pages is now bound to its target
+Edition source admitted; exact authority and component-rights freezes complete; the
+first five contiguous Indonesian pages and the full 29-page machine backend
+are verified. Every entity on those five pages is now bound to its target
 path, locale, byte count, and SHA-256. The repository is public; the repaired
 three-page Pages checkpoint remains historical evidence, and the deterministic
-four-page boundary is now deployed, anonymously read back, and live-render
-verified. The exact official MathJax 3.1.2 `boldsymbol.js` module remains pinned.
-The complete 29-page course is not yet claimed.
+four-page boundary remains the last public deployment. The five-page boundary
+through the central limit theorem has passed its bounded target audit and two
+deterministic replays and is entering publication. The exact official MathJax
+3.1.2 `boldsymbol.js` module remains pinned. The complete 29-page edition is not
+yet claimed.
 
 ## Admitted source
 
@@ -34,33 +36,44 @@ The complete 29-page course is not yet claimed.
   `8a06fecb45a9696c8308e268cbbdacb5d3685ab48a2e10f9d2b4d534395cb777`.
 - Exact machine authority record: `SOURCE_AUTHORITY.json`.
 
-## Admission decision
+## Edition scope and separate curriculum decision
 
-Random-first is admitted; STAT 415-first is rejected under the hard editable-
-source and public-assessment gates.  Penn State's current 2026-08-19 course is
-a more compact inference syllabus, but the bounded primary-source audit found
-only generated Quarto HTML, no public QMD/configuration/source archive, and
-private Canvas assignments.  Random exposes editable source-shaped HTML with
-TeX, stable structural markup, public exercises, and disclosed details/answers;
-its deterministic build is static serving.
+Random chapters 5–8 are admitted as the bounded source for this Indonesian
+edition. That does not itself admit Random as the final C140 curriculum spine.
+The edition will be completed even if the selection root later chooses STAT
+415 or a deliberate composite, and sunk work is not evidence in that choice.
 
-This decision minimizes overlap by selecting only Random chapters 5–8.  The
-probability foundations and stochastic-process chapters are not imported into
-O006.  O006 owns the Indonesian translation of the complete chapter-5 sampling
-module; O009 consumes its stable IDs as a prerequisite instead of translating
-those bytes a second time.  The exact cross-lane boundary is recorded in
-`CROSS_LANE_BOUNDARY.md`.
+The curriculum-selection root made the separate final C140 decision on
+2026-08-21: the narrative spine is the complete Penn State STAT 415 public
+sequence (landing page plus Lessons 00–12), supplemented by exactly
+`random/point/Sufficient.html` and an original rigor, simulation,
+multiple-regression, and mastery companion. Penn State and the complete Random
+edition must remain separate components and repositories. This final choice
+does not invalidate or truncate the 29-page Random edition, and prior work on
+that edition was not evidence for the curricular choice.
 
-## Required authored bridge
+The exact coordinator manifest is
+`C:\Users\Floris\Documents\interlanguage\outputs\01a01ec1-e685-70d0-b022-211396334723\curriculum_logbook\26_O006_PSU_14_DOCUMENT_MANIFEST_20260821.csv`
+(2,130 bytes; SHA-256
+`d944524e9afb5d6dabba3bd0968b159397d7014a6e736f002f4db0ee2420ce91`).
+Floris's canonical instruction is
+`C:\Users\Floris\Documents\Obsidian notes\Untitled 1693.md` (10,476 bytes;
+SHA-256 `cf913e8cb4d487f4c6958c079b372ccbb2fb5929dd483068441e80cefd6794f2`).
+The executable separation and terminal conditions are recorded in
+`C140_CONFIGURED_ARCHITECTURE_2026-08-21.md`.
 
-Random does not close linear-model inference.  A bounded original bridge must
-cover the fixed-design simple/multiple linear model, Gauss–Markov, the sampling
-distribution of OLS, standard errors, t/F inference, confidence and prediction
-intervals, and ANOVA decomposition.  A second large-sample bridge is added only
-if the final C140 specification requires the continuous-mapping theorem,
-Slutsky, the delta method, and general MLE asymptotic normality; Random already
-covers LLN/CLT, consistency, asymptotic unbiasedness, relative efficiency, and
-distributional approximations.
+## Separate C140 companion boundary
+
+After a clean Random checkpoint, C140 production may begin in a demonstrably
+non-overlapping path. Its original CC BY-SA 4.0 companion must supply regular
+likelihood conditions and proofs; Wald/score/LR and Wilks-type limits;
+Neyman–Pearson equality-set randomization and estimator/test optimality; matrix
+Gaussian simple and multiple regression; Bayesian/frequentist decision
+comparisons; seeded reproducible simulations; 13 mastery sets of at least eight
+problems each; four cumulative assessments; and two open-data capstones with
+keys and rubrics. It must correct STAT 415 Lesson 07's implication that
+consistency alone yields convergence of expectations. None of this companion
+is presented as Penn State or Siegrist prose.
 
 ## Locale-neutral backend
 
@@ -69,18 +82,18 @@ entities and 9,035 relations. It contains 29 documents, 366 sections, 760
 structural units, 451 disclosures, 2,891 math-text containers, 24 figures, 236
 assets, and 1,810 internal links. The source-grounded exercise rule designates
 260 units and leaves 500 undesignated; its exact basis is 123 both, 95
-exercise-section only, 42 native `app`/`stat` only, and 500 neither. All 664
-entities on the four translated pages carry verified id-ID bindings; the other
-5,903 entities have explicit untranslated/null locale fields.
+exercise-section only, 42 native `app`/`stat` only, and 500 neither. All 949
+entities on the five translated pages carry verified id-ID bindings; the other
+5,618 entities have explicit untranslated/null locale fields.
 
-- Entity JSONL: 10,180,060 bytes; SHA-256
-  `6427f46c6c5f8ea5bd0e6af441759d1d00b3c5104400011a64c42092fd522427`.
+- Entity JSONL: 10,206,280 bytes; SHA-256
+  `243b4f4294535a421fe18a811795336fae9830ead97a049e2f3f009faa435d55`.
 - Relation CSV: 1,182,589 bytes; SHA-256
   `b235f4d4d724c7fe8653dfd06b075b2225cc2d116f3b87d0fda950d47030159a`.
 - Backend receipt SHA-256:
-  `e905bfbe3cb08ad5950423edbd1a9f9b8093d62dc3c551b629df0f819c38cd10`.
+  `1f0fad93c4bd875b7abfa6548c283704922aa6fe4c986e82eb1df1b293e29a45`.
 - Bound translation-ledger SHA-256:
-  `5c0dd978d479f84c5dc9e97878c59e1d593d896c11064eb153f3764ac6f0e8cb`.
+  `30553ced7cbf723efb8a20b77b4a8035a088245f0d8a6bd4e3766b9753824d42`.
 - Replay: `python scripts/generate_random_backend.py --check-only`.
 
 ## Four-page reader checkpoint
@@ -116,17 +129,24 @@ wide elements, or page-level horizontal overflow. Exact evidence is in
 `PUBLICATION_RECEIPT_2026-08-21.json`, SHA-256
 `b96bd77870ba23c3f7635e11b85246fb1dfbfdc6557e64a5607c2d27badb2ffe`.
 
-## Reversal conditions
+## Five-page local checkpoint
 
-Reconsider STAT 415-first only if Penn State publishes a complete, license-
-compatible QMD/configuration/assets source closure with a reproducible build
-and a public exercise/answer or mastery bank.  Reconsider Random-first if the
-official licensor withdraws or materially narrows the reusable grant, if exact
-HTML/TeX source can no longer be frozen or served reproducibly, or if component
-rights cannot be separated without removing essential instruction.  A more
-focused candidate may replace Random only if it passes those same gates and
-reduces total fourteen-language work after counting the missing assessment
-bank and authored bridges—not merely page count.
+Core ordinals 1–5 are complete through `random/sample/CLT.html`. The reader is
+28 files / 1,926,717 bytes; canonical manifest SHA-256
+`c853d3c560b041fd3071f390b636aaf3b90b1bf076bfd47457408e6052350dbd`.
+Build-receipt SHA-256 is
+`364ec734f8e50ea033d4c9ff8dc6a947baf2b062634ef7ffdbd928aa2f89635a`;
+QA-receipt SHA-256 is
+`ff55bab5813e402b12c7449e98a05b8135bf2b3c17a0d661ab4ff44fa3a7cd61`.
+
+The QA census is five translated pages, 1,867 source elements, 107 units, 73
+disclosures, 1,128 TeX spans, 118 local references, and 22 fragments. The CLT
+page alone preserves 424 elements, 38 units, 21 disclosures, 394 TeX spans,
+three raw script/style blocks, and the authority hierarchy SHA-256
+`911fcd5705e0e358fb92492b30dea1d53265df24da8d86bf68b10a7f3d56c870`.
+Its 14 protected mathematical repairs and one TeX-text localization are exact
+and declared. Publication remains pending only until the final replay and
+public transaction; this is not a claim that the 29-page edition is complete.
 
 ## Rights boundary
 
@@ -141,11 +161,11 @@ the site-wide notice; they must be cleared, replaced, or linked externally.
 
 ## Known upstream defects (do not silently alter authority)
 
-`ADVERSE_LEDGER.jsonl` contains 25 source findings at this boundary: 21
-determinate repairs applied only in translated targets and four open items on
-later pages. LLN repairs include the missing negative-part factor, the correct
-fixed-partition empirical-density limit and measurability qualifications,
-sample-size subscripts, answer mapping, and three terminology/notation fixes.
+`ADVERSE_LEDGER.jsonl` runs through `O006-ADV-0039`. CLT repairs include the
+zero-origin condition, correlation domain/formula/citation, the rigorous
+characteristic-function proof, continuity notation, dice answer, chi-square
+definition, negative-binomial support/domain/answer mapping, and determinate
+cross-reference, simulator, name, spelling, and punctuation defects.
 Open findings are the VarianceTest link family, the interval `two2` fragment,
 the unavailable ExponentialExperiment companion, and the missing
 `Moments.html#poi` fragment. The ledger also records the rejected first Pages
@@ -154,8 +174,12 @@ Authority bytes remain immutable. Do not contact upstream during production.
 
 ## Next work
 
-1. Continue immediately with `random/sample/CLT.html` (core ordinal 5).
-2. Advance contiguously through the remaining 25 source pages, growing the
+1. Complete deterministic replay, push, anonymous public-byte readback, and
+   live desktop/mobile verification of the five-page Random checkpoint.
+2. Continue immediately with `random/sample/Variance.html` (core ordinal 6).
+3. Advance contiguously through the remaining 24 source pages, growing the
    same deterministic reader and stable-ID backend.
-3. Author the required linear-model bridge after the admitted core, then close
-   the conditional large-sample decision from evidence.
+4. Keep Penn State reconstruction, the one-page Random completeness donor, and
+   original C140 companion in separate component paths/repositories; begin
+   them only after this clean checkpoint or in a demonstrably non-overlapping
+   path.

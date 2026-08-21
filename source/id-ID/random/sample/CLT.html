@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="id-ID">
+
+<head>
+	<meta charset="utf-8">
+	<title>Teorema Limit Pusat</title>
+	<meta name="author" content="Kyle Siegrist">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="keywords" content="probabilitas, statistika, sampel acak, teorema limit pusat, distribusi normal, distribusi gamma, distribusi khi-kuadrat, distribusi binomial, distribusi binomial negatif, distribusi Poisson, jumlah acak, persamaan Wald">
+	<link rel="icon" href="../icons/Icon.svg" type="image/svg">
+	<link rel="stylesheet" href="../Screen.css" type="text/css" media="screen">
+	<script src="../Basic.js"></script>
+	<script src="../../MathJax/tex-svg.js" id="MathJax-script" async></script>
+</head>
+
+<body>
+
+<div class="latex">
+	\(\newcommand{\R}{\mathbb{R}}\)
+	\(\newcommand{\N}{\mathbb{N}}\)
+	\(\newcommand{\Z}{\mathbb{Z}}\)
+	\(\newcommand{\E}{\mathbb{E}}\)
+	\(\newcommand{\P}{\mathbb{P}}\)
+	\(\newcommand{\var}{\text{var}}\)
+	\(\newcommand{\sd}{\text{sd}}\)
+	\(\newcommand{\cov}{\text{cov}}\)
+	\(\newcommand{\cor}{\text{cor}}\)
+	\(\newcommand{\bs}{\boldsymbol}\)
+</div>
+
+<header>
+	<ol class="map">
+		<li class="parent"><a href="https://www.randomservices.org/random/index.html">Random</a></li>
+		<li class="parent"><a href="index.html">5. Sampel Acak</a></li>
+		<li class="child"><a href="Introduction.html" title="Pendahuluan">1</a></li>
+		<li class="child"><a href="Mean.html" title="Rata-Rata Sampel">2</a></li>
+		<li class="child"><a href="LLN.html" title="Hukum Bilangan Besar">3</a></li>
+		<li class="current">4</li>
+		<li class="child"><a href="https://www.randomservices.org/random/sample/Variance.html" title="Varians Sampel">5</a></li>
+		<li class="child"><a href="https://www.randomservices.org/random/sample/OrderStatistics.html" title="Statistik Terurut">6</a></li>
+		<li class="child"><a href="https://www.randomservices.org/random/sample/Covariance.html" title="Korelasi dan Regresi Sampel">7</a></li>
+		<li class="child"><a href="https://www.randomservices.org/random/sample/Normal.html" title="Sifat Khusus Sampel Normal">8</a></li>
+		<li class="details"><button type="button" title="Perluas Rincian" onclick="expandDetails(true);"><img src="../icons/Plus.svg" alt="Perluas"></button></li>
+		<li class="details"><button type="button" title="Ciutkan Rincian" onclick="expandDetails(false);"><img src="../icons/Minus.svg" alt="Ciutkan"></button></li>
+	</ol>
+	<h2 id="o006.random.sample.clt.page">4. Teorema Limit Pusat</h2>
+</header>
+
+<p>Teorema limit pusat dan <a href="LLN.html">hukum bilangan besar</a> merupakan dua <dfn>teorema dasar</dfn> probabilitas. Secara kasar, teorema limit pusat menyatakan bahwa distribusi jumlah (atau rata-rata) sejumlah besar variabel yang independen dan berdistribusi identik akan mendekati distribusi normal, apa pun distribusi dasarnya. Pentingnya teorema limit pusat sukar dilebih-lebihkan; teorema inilah yang memungkinkan banyak prosedur statistika bekerja.</p>
+
+<h3 id="sum">Proses Jumlah Parsial</h3>
+
+<h4 id="dfn">Definisi</h4>
+
+<p>Misalkan \(\bs{X} = (X_1, X_2, \ldots)\) merupakan barisan <a href="https://www.randomservices.org/random/prob/Independence.html">independen</a> dari <a href="https://www.randomservices.org/random/prob/Events.html">variabel acak</a> bernilai riil dan berdistribusi identik, dengan <a href="https://www.randomservices.org/random/dist/Discrete.html">fungsi densitas probabilitas</a> bersama \(f\), <a href="https://www.randomservices.org/random/expect/Properties.html">rata-rata</a> \(\mu\), dan <a href="https://www.randomservices.org/random/expect/Variance.html">varians</a> \(\sigma^2\). Kita mengasumsikan bahwa \(0 \lt \sigma \lt \infty\), sehingga variabel-variabel acak tersebut benar-benar bersifat <em>acak</em>, bukan konstanta. Misalkan
+\[ Y_n = \sum_{i=1}^n X_i, \quad n \in \N \]
+Perhatikan bahwa menurut konvensi, \(Y_0 = 0\), karena penjumlahannya dilakukan atas himpunan indeks kosong. Proses acak \(\bs{Y} = (Y_0, Y_1, Y_2, \ldots)\) disebut <dfn>proses jumlah parsial</dfn> yang berasosiasi dengan \(\bs{X}\). Jenis-jenis khusus proses jumlah parsial telah dibahas di berbagai bagian buku ini; secara khusus, lihat</p>
+
+<ul>
+	<li>distribusi <a href="https://www.randomservices.org/random/bernoulli/Binomial.html">binomial</a> dalam konteks <a href="https://www.randomservices.org/random/bernoulli/index.html">Percobaan Bernoulli</a></li>
+	<li>distribusi <a href="https://www.randomservices.org/random/bernoulli/NegativeBinomial.html">binomial negatif</a> dalam konteks <a href="https://www.randomservices.org/random/bernoulli/index.html">Percobaan Bernoulli</a></li>
+	<li>distribusi <a href="https://www.randomservices.org/random/poisson/Gamma.html">gamma</a> dalam <a href="https://www.randomservices.org/random/poisson/index.html">proses Poisson</a></li>
+	<li>barisan <a href="https://www.randomservices.org/random/renewal/Introduction.html">waktu kedatangan</a> dalam suatu <a href="https://www.randomservices.org/random/renewal/index.html">proses pembaruan umum</a></li>
+</ul>
+
+<p>Ingat bahwa dalam istilah statistika, barisan \(\bs{X}\) bersesuaian dengan pengambilan sampel dari distribusi yang mendasarinya. Secara khusus, \((X_1, X_2, \ldots, X_n)\) merupakan <a href="Introduction.html">sampel acak</a> berukuran \(n\) dari distribusi tersebut, dan rata-rata sampelnya adalah
+\[ M_n = \frac{Y_n}{n} = \frac{1}{n} \sum_{i=1}^n X_i \]
+Menurut <a href="LLN.html">hukum bilangan besar</a>, \(M_n \to \mu\) ketika \(n \to \infty\) dengan probabilitas 1.</p>
+
+<h4 id="inc">Inkremen Stasioner dan Independen</h4>
+
+<p>Proses jumlah parsial yang bersesuaian dengan barisan variabel independen dan berdistribusi identik memiliki dua sifat penting, dan kedua sifat ini pada dasarnya mencirikan proses-proses tersebut.</p>
+
+<div class="unit" id="inc1">
+	<p class="math">Jika \(m \le n\), maka \(Y_n - Y_m\) memiliki distribusi yang sama dengan \(Y_{n-m}\). Dengan demikian, proses \(\bs{Y}\) memiliki <dfn>inkremen stasioner</dfn>.</p>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Perhatikan bahwa \(Y_n - Y_m = \sum_{i = m + 1}^n X_i\) merupakan jumlah dari \(n - m\) variabel independen, yang masing-masing memiliki distribusi bersama tersebut. Tentu saja, \(Y_{n - m}\) juga merupakan jumlah dari \(n - m\) variabel independen, yang masing-masing memiliki distribusi bersama tersebut.</p>
+	</details>
+</div>
+
+<p>Namun, perhatikan bahwa \(Y_n - Y_m\) dan \(Y_{n-m}\) merupakan variabel acak yang sangat berbeda; teorema tersebut hanya menyatakan bahwa keduanya memiliki <em>distribusi</em> yang sama.</p>
+
+<div class="unit" id="inc2">
+	<p class="math">Jika \(n_1 \le n_2 \le n_3 \le \cdots\), maka \(\left(Y_{n_1}, Y_{n_2} - Y_{n_1}, Y_{n_3} - Y_{n_2}, \ldots\right)\) merupakan barisan variabel acak independen. Dengan demikian, proses \(\bs{Y}\) memiliki <dfn>inkremen independen</dfn>.</p>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Suku-suku dalam barisan inkremen \(\left(Y_{n_1}, Y_{n_2} - Y_{n_1}, Y_{n_3} - Y_{n_2}, \ldots\right)\) merupakan jumlah atas kumpulan suku yang saling lepas dalam barisan \(\bs{X}\). Karena barisan \(\bs{X}\) independen, barisan inkremen tersebut juga independen.</p>
+	</details>
+</div>
+
+<div class="unit" id="o006.random.sample.clt.unit.partial-sum-converse">
+	<p class="math">Sebaliknya, misalkan \(\bs{V} = (V_0, V_1, V_2, \ldots), V_0 = 0\) merupakan proses acak dengan inkremen stasioner dan independen. Definisikan \(U_i = V_i - V_{i-1}\) untuk \(i \in \N_+\). Maka \(\bs{U} = (U_1, U_2, \ldots)\) merupakan barisan variabel independen dan berdistribusi identik, dan \(\bs{V}\) merupakan proses jumlah parsial yang berasosiasi dengan \(\bs{U}\).</p>
+</div>
+
+<p>Jadi, proses jumlah parsial merupakan satu-satunya proses acak waktu diskret yang memiliki inkremen stasioner dan independen. Masalah yang menarik, dan jauh lebih sulit, ialah mencirikan proses waktu kontinu yang memiliki inkremen stasioner dan independen. <a href="https://www.randomservices.org/random/poisson/Poisson.html">Proses pencacahan Poisson</a> memiliki inkremen stasioner dan independen, demikian pula <a href="https://www.randomservices.org/random/brown/Standard.html">proses gerak Brown</a>.</p>
+
+<h4 id="mom">Momen</h4>
+
+<div class="unit" id="mom1">
+	<p class="math">Jika \(n \in \N\), maka</p>
+	<ol class="sub">
+		<li>\(\E(Y_n) = n \mu\)</li>
+		<li>\(\var(Y_n) = n \sigma^2\)</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Hasil-hasil ini mengikuti dari sifat-sifat dasar <a href="https://www.randomservices.org/random/expect/Properties.html">nilai harapan</a> dan <a href="https://www.randomservices.org/random/expect/Variance.html">varians</a>. Nilai harapan merupakan operasi linear, sehingga \( \E(Y_n) = \sum_{i=1}^n \E(X_i) = n \mu \). Berdasarkan independensi, \(\var(Y_n) = \sum_{i=1}^n \var(X_i) = n \sigma^2\).</p>
+	</details>
+</div>
+
+<div class="unit" id="o006.random.sample.clt.unit.partial-sum-joint-moments">
+	<p class="math">Jika \(n \in \N_+\) dan \(m \in \N_+\) dengan \(m \le n\), maka</p>
+	<ol class="sub">
+		<li>\(\cov(Y_m, Y_n) = m \sigma^2\)</li>
+		<li>\(\cor(Y_m, Y_n) = \sqrt{\frac{m}{n}}\)</li>
+		<li>\(\E(Y_m Y_n) = m \sigma^2 + m n \mu^2\)</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<ol class="sub">
+			<li>Perhatikan bahwa \(Y_n = Y_m + (Y_n - Y_m)\). Jadi, hasil ini mengikuti dari sifat-sifat dasar <a href="https://www.randomservices.org/random/expect/Covariance.html">kovarians</a>, <a href="#inc1" class="ref"></a>, dan <a href="#inc2" class="ref"></a>:
+			\[ \cov(Y_m, Y_n) = \cov(Y_m, Y_m) + \cov(Y_m, Y_n - Y_m) = \var(Y_m) + 0 = m \sigma^2 \]</li>
+			<li>Hasil ini mengikuti dari bagian (a) di atas dan bagian (b) dari <a href="#mom1" class="ref"></a>
+			\[ \cor(Y_m, Y_n) = \frac{\cov(Y_m, Y_n)}{\sd(Y_m) \sd(Y_n)} = \frac{m \sigma^2}{\sqrt{m \sigma^2} \sqrt{n \sigma^2}} = \sqrt{\frac{m}{n}} \]</li>
+			<li>Hasil ini juga mengikuti dari bagian (a) di atas dan bagian (a) dari <a href="#mom1" class="ref"></a>: \(\E(Y_m Y_n) = \cov(Y_m, Y_n) + \E(Y_m) \E(Y_n) = m \sigma^2 + m \mu n \mu\)</li>
+		</ol>
+	</details>
+</div>
+
+<div class="unit" id="o006.random.sample.clt.unit.partial-sum-mgf">
+	<p class="math">Jika \(X\) memiliki <a href="https://www.randomservices.org/random/expect/Generating.html#mgf">fungsi pembangkit momen</a> \(G\), maka \(Y_n\) memiliki fungsi pembangkit momen \(G^n\).</p>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Hasil ini mengikuti dari sifat dasar fungsi pembangkit: fungsi pembangkit jumlah variabel-variabel independen merupakan hasil kali fungsi pembangkit suku-sukunya.</p>
+	</details>
+</div>
+
+<h4 id="dis">Distribusi</h4>
+
+<div class="unit" id="dis1">
+	<p class="math">Misalkan \(X\) memiliki <a href="https://www.randomservices.org/random/dist/Discrete.html">distribusi diskret</a> atau <a href="https://www.randomservices.org/random/dist/Continuous.html">distribusi kontinu</a> dengan fungsi densitas probabilitas \(f\). Maka fungsi densitas probabilitas \(Y_n\) adalah \(f^{*n} = f * f * \cdots * f\), yaitu <a href="https://www.randomservices.org/random/dist/Transformations.html#sum">pangkat konvolusi</a> dari \(f\) berorde \(n\).</p>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Hasil ini mengikuti dari sifat dasar fungsi densitas probabilitas: fungsi densitas probabilitas jumlah variabel-variabel independen merupakan konvolusi fungsi densitas probabilitas suku-sukunya.</p>
+	</details>
+</div>
+
+<p>Secara lebih umum, kita dapat menggunakan sifat stasioneritas dan independensi untuk memperoleh distribusi gabungan proses jumlah parsial:</p>
+
+<div class="unit" id="o006.random.sample.clt.unit.partial-sum-joint-density">
+	<p class="math">Jika \(n_1 \lt n_2 \lt \cdots \lt n_k\), maka \((Y_{n_1}, Y_{n_2}, \ldots, Y_{n_k})\) memiliki fungsi densitas probabilitas gabungan
+	\[ f_{n_1, n_2, \ldots, n_k}(y_1, y_2, \ldots, y_k) = f^{*n_1}(y_1) f^{*(n_2 - n_1)}(y_2 - y_1) \cdots f^{*(n_k - n_{k-1})}(y_k - y_{k-1}), \quad (y_1, y_2, \ldots, y_k) \in \R^k \]</p>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Hasil ini mengikuti dari <a href="https://www.randomservices.org/random/dist/Transformations.html">teorema perubahan variabel multivariat</a>.</p>
+	</details>
+</div>
+
+<h3 id="clt">Teorema Limit Pusat</h3>
+
+<p>Pertama, mari kita nyatakan teorema limit pusat dengan lebih tepat. Berdasarkan rumus momen dalam <a href="#mom1" class="ref"></a>, kita tidak dapat mengharapkan \(Y_n\) sendiri memiliki distribusi limit. Perhatikan bahwa \(\var(Y_n) \to \infty\) ketika \(n \to \infty\) karena \(\sigma \gt 0\), dan \(\E(Y_n) \to \infty\) ketika \(n \to \infty\) jika \(\mu \gt 0\), sedangkan \(\E(Y_n) \to -\infty\) ketika \(n \to \infty\) jika \(\mu \lt 0\). Demikian pula, kita mengetahui bahwa \(M_n \to \mu\) ketika \(n \to \infty\) dengan probabilitas 1, sehingga distribusi limit rata-rata sampel bersifat degenerat. Jadi, untuk memperoleh distribusi limit \(Y_n\) atau \(M_n\) yang tidak degenerat, kita perlu meninjau bukan variabel-variabel itu sendiri, melainkan <dfn>skor baku</dfn> yang sama bagi keduanya. Jadi, misalkan
+\[ Z_n = \frac{Y_n - n \mu}{\sqrt{n} \sigma} = \frac{M_n - \mu}{\sigma \big/ \sqrt{n}} \]</p>
+
+<div class="unit" id="o006.random.sample.clt.unit.standard-score-moments">
+	<p class="math">\(Z_n\) memiliki rata-rata 0 dan varians 1.</p>
+	<ol class="sub">
+		<li>\(\E(Z_n) = 0\)</li>
+		<li>\(\var(Z_n) = 1\)</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Hasil-hasil ini mengikuti dari sifat-sifat dasar nilai harapan dan varians, dan berlaku untuk skor baku yang berasosiasi dengan setiap variabel acak. Ingat pula bahwa skor baku suatu variabel invarian terhadap transformasi linear dengan kemiringan positif. Kesamaan skor baku \(Y_n\) dan skor baku \(M_n\) merupakan kasus khusus sifat ini.</p>
+	</details>
+</div>
+
+<p>Pernyataan tepat teorema limit pusat ialah bahwa distribusi skor baku \(Z_n\) <a href="https://www.randomservices.org/random/dist/Convergence.html">konvergen</a> ke distribusi normal baku ketika \(n \to \infty\). Ingat bahwa <a href="https://www.randomservices.org/random/special/Normal.html">distribusi normal baku</a> memiliki fungsi densitas probabilitas
+\[ \phi(z) = \frac{1}{\sqrt{2 \pi}} e^{-\frac{1}{2} z^2}, \quad z \in \R \]
+Sebuah kasus khusus teorema limit pusat (untuk percobaan Bernoulli) berasal dari <a href="https://www.randomservices.org/random/biographies/DeMoivre.html" class="ancillary">Abraham De Moivre</a>. Istilah <em>teorema limit pusat</em> dicetuskan oleh <a href="https://www.randomservices.org/random/biographies/Polya.html" class="ancillary">George P&oacute;lya</a> pada tahun 1920. Menurut definisi konvergensi dalam distribusi, teorema limit pusat menyatakan bahwa \(F_n(z) \to \Phi(z)\) ketika \(n \to \infty\) untuk setiap \(z \in \R\), dengan \(F_n\) merupakan <a href="https://www.randomservices.org/random/dist/CDF.html">fungsi distribusi</a> dari \(Z_n\), sedangkan \(\Phi\) merupakan fungsi distribusi normal baku:
+\[ \Phi(z) = \int_{-\infty}^z \phi(x) \, dx = \int_{-\infty}^z \frac{1}{\sqrt{2 \pi}} e^{-\frac{1}{2} x^2} \, dx, \quad z \in \R \]
+Pernyataan ekuivalen teorema limit pusat melibatkan konvergensi <a href="https://www.randomservices.org/random/expect/Generating.html#mgf">fungsi karakteristik</a> yang bersesuaian. Versi inilah yang akan kita nyatakan dan buktikan, tetapi pertama-tama kita memerlukan generalisasi suatu limit terkenal dari kalkulus.</p>
+
+<div class="unit" id="o006.random.sample.clt.unit.exponential-limit">
+	<p class="math">Misalkan \((a_1, a_2, \ldots)\) merupakan barisan bilangan riil dan \(a_n \to a \in \R\) ketika \(n \to \infty\). Maka
+	\[ \left( 1 + \frac{a_n}{n} \right)^n \to e^a \text{ ketika } n \to \infty \]</p>
+</div>
+
+<p>Sekarang, misalkan \(\chi\) menyatakan fungsi karakteristik skor baku dari variabel sampel \(X\), dan misalkan \(\chi_n\) menyatakan fungsi karakteristik skor baku \(Z_n\):
+\[ \chi(t) = \E \left[ \exp\left( i t \frac{X - \mu}{\sigma} \right) \right], \; \chi_n(t) = \E[\exp(i t Z_n)]; \quad t \in \R \]
+Ingat bahwa \(t \mapsto e^{-\frac{1}{2}t^2}\) merupakan fungsi karakteristik distribusi normal baku. Sekarang kita dapat memberikan pembuktiannya.</p>
+
+<div class="unit" id="o006.random.sample.clt.unit.central-limit-theorem">
+	<p class="math"><dfn>Teorema limit pusat</dfn>. Distribusi \(Z_n\) konvergen ke distribusi normal baku ketika \(n \to \infty\). Artinya, \(\chi_n(t) \to e^{-\frac{1}{2}t^2}\) ketika \(n \to \infty\) untuk setiap \(t \in \R\).</p>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Perhatikan bahwa \(\chi(0) = 1\), \(\chi^\prime(0) = 0\), dan \(\chi^{\prime \prime}(0) = -1\). Selanjutnya,
+		\[ Z_n = \frac{1}{\sqrt{n}} \sum_{i=1}^n \frac{X_i - \mu}{\sigma} \]
+		Berdasarkan sifat-sifat fungsi karakteristik, \(\chi_n(t) = \chi^n (t / \sqrt{n})\) untuk \(t \in \R\). Ekspansi orde dua di sekitar nol (bentuk ekspansi Taylor, dinamai menurut <a href="https://www.randomservices.org/random/biographies/Taylor.html" class="ancillary">Brook Taylor</a>) memberi
+		\[ \chi\left(\frac{t}{\sqrt{n}}\right) = 1 - \frac{t^2}{2n} + o\left(\frac{1}{n}\right) \]
+		Suku \(o(1/n)\) tersebut berlaku untuk setiap \(t\) tetap ketika \(n \to \infty\); ekspansi ini mengikuti dari keberhinggaan momen kedua dan konvergensi terdominasi. Limit eksponensial di atas juga berlaku untuk barisan bilangan kompleks. Akhirnya,
+		\[ \chi_n(t) = \left[1 - \frac{t^2}{2n} + o\left(\frac{1}{n}\right)\right]^n \to e^{-\frac{1}{2} t^2} \text{ ketika } n \to \infty \]</p>
+	</details>
+</div>
+
+<h3 id="nor">Aproksimasi Normal</h3>
+
+<p>Teorema limit pusat menyiratkan bahwa jika ukuran sampel \(n\) <q>besar</q>, maka distribusi jumlah parsial \(Y_n\) mendekati distribusi normal dengan rata-rata \(n \mu\) dan varians \(n \sigma^2\). Secara ekuivalen, rata-rata sampel \(M_n\) mendekati distribusi normal dengan rata-rata \(\mu\) dan varians \(\sigma^2 / n\). Teorema limit pusat sangat penting karena berarti bahwa kita dapat mengaproksimasi distribusi statistik tertentu sekalipun kita hanya mengetahui sedikit tentang distribusi populasi yang disampel.</p>
+
+<p>Tentu saja, istilah <q>besar</q> bersifat relatif. Secara kasar, makin <q>tidak normal</q> distribusi dasarnya, makin besar \(n\) yang diperlukan agar aproksimasi normal bekerja dengan baik. Pedoman praktisnya ialah bahwa ukuran sampel \(n\) sedikitnya 30 biasanya memadai jika distribusi dasar tidak terlalu aneh, meskipun bagi banyak distribusi nilai \(n\) yang lebih kecil sudah cukup.</p>
+
+<div class="unit" id="irwin">
+	<p class="math">Misalkan \(Y\) menyatakan jumlah variabel-variabel dalam sampel acak berukuran 30 dari distribusi seragam pada \([0, 1]\). Tentukan aproksimasi normal untuk masing-masing hal berikut:</p>
+	<ol class="sub">
+		<li>\(\P(13 \lt Y \lt 18)\)</li>
+		<li>Persentil ke-90 dari \(Y\)</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<ol class="sub">
+			<li>0.8682</li>
+			<li>17.03</li>
+		</ol>
+	</details>
+</div>
+
+<p>Variabel acak \(Y\) dalam <a href="#irwin" class="ref"></a> memiliki <a href="https://www.randomservices.org/random/special/IrwinHall.html">distribusi Irwin&ndash;Hall</a> berorde 30, yang dinamai menurut Joseph Irwin dan Philip Hall.</p>
+
+<div class="unit" id="o006.random.sample.clt.unit.simulation.irwin-hall">
+	<p class="app">Dalam <a href="https://www.randomservices.org/random/apps/SpecialSimulator.html" class="ancillary">simulator distribusi khusus</a>, pilih distribusi Irwin&ndash;Hall. Variasikan \(n\) dari 1 hingga 10 dan perhatikan bentuk fungsi densitas probabilitasnya. Dengan \(n = 10\), jalankan eksperimen 1.000 kali dan bandingkan fungsi densitas empiris dengan fungsi densitas probabilitas sebenarnya.</p>
+</div>
+
+<div class="unit" id="o006.random.sample.clt.unit.exercise.pareto-normal-approximation">
+	<p class="math">Misalkan \(M\) menyatakan rata-rata sampel dari suatu sampel acak berukuran 50 yang berasal dari distribusi dengan fungsi densitas probabilitas \(f(x) = \frac{3}{x^4}\) untuk \(1 \le x \lt \infty\). Distribusi ini merupakan <dfn>distribusi Pareto</dfn>, yang dinamai menurut <a href="https://www.randomservices.org/random/biographies/Pareto.html" class="ancillary">Vilfredo Pareto</a>. Tentukan aproksimasi normal untuk masing-masing hal berikut:</p>
+	<ol class="sub">
+		<li>\(\P(M \gt 1.6)\)</li>
+		<li>Persentil ke-60 dari \(M\)</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<ol class="sub">
+			<li>0.2071</li>
+			<li>1.531</li>
+		</ol>
+	</details>
+</div>
+
+<h4 id="cor">Koreksi Kontinuitas</h4>
+
+<p>Masalah teknis kecil muncul ketika distribusi populasi yang disampel bersifat diskret. Dalam kasus ini, jumlah parsial juga memiliki distribusi diskret, sehingga kita mengaproksimasi distribusi diskret dengan distribusi kontinu. Misalkan \(X\) bernilai bilangan bulat (kasus yang paling umum), sehingga jumlah parsial \(Y_n\) juga bernilai bilangan bulat. Untuk setiap \(k \in \Z\) dan \(h \in [0, 1)\), perhatikan bahwa kejadian \(\{k - h \le Y_n \le k + h\}\) ekuivalen dengan kejadian \(\{Y_n = k\}\). Nilai \(h\) yang berbeda menghasilkan aproksimasi normal yang berbeda sekalipun kejadian-kejadiannya ekuivalen. Aproksimasi terkecil adalah 0 ketika \(h = 0\), dan aproksimasi tersebut meningkat seiring peningkatan \(h\). Lazimnya, selisih itu dibagi dua dengan menggunakan \(h = \frac{1}{2}\) dalam aproksimasi normal. Hal ini kadang-kadang disebut <dfn>koreksi kontinuitas setengah unit</dfn> atau <dfn>koreksi histogram</dfn>. Koreksi kontinuitas diperluas ke kejadian lain dengan cara yang wajar, menggunakan sifat aditif probabilitas.</p>
+
+<div class="unit" id="o006.random.sample.clt.unit.continuity-correction-rules">
+	<p class="math">Misalkan \(j, k \in \Z\) dengan \(j \le k\).</p>
+	<ol class="sub">
+		<li>Untuk kejadian \(\{j \le Y_n \le k\} = \{j - 1 \lt Y_n \lt k + 1\}\), gunakan \(\{j - \frac{1}{2} \le Y_n \le k + \frac{1}{2}\}\) dalam aproksimasi normal.</li>
+		<li>Untuk kejadian \(\{j \le Y_n\} = \{j - 1 \lt Y_n\}\), gunakan \(\{j - \frac{1}{2} \le Y_n\}\) dalam aproksimasi normal.</li>
+		<li>Untuk kejadian \(\{Y_n \le k\} = \{Y_n \lt k + 1\}\), gunakan \(\{Y_n \le k + \frac{1}{2}\}\) dalam aproksimasi normal.</li>
+	</ol>
+</div>
+
+<div class="unit" id="o006.random.sample.clt.unit.exercise.dice-normal-approximation">
+	<p class="math">Misalkan \(Y\) menyatakan jumlah mata dari 20 dadu seimbang. Hitung aproksimasi normal untuk \(\P(60 \le Y \le 75)\).</p>
+	<details>
+		<summary>Rincian:</summary>
+		<p>0.6797</p>
+	</details>
+</div>
+
+<div class="unit" id="o006.random.sample.clt.unit.simulation.dice-sum">
+	<p class="app">Dalam <a href="https://www.randomservices.org/random/apps/Dice.html" class="ancillary">eksperimen dadu</a>, atur distribusi dadu menjadi seimbang, pilih variabel acak jumlah \(Y\), dan atur \(n = 20\). Jalankan simulasi 1.000 kali dan tentukan masing-masing hal berikut. Bandingkan dengan hasil pada latihan sebelumnya:</p>
+	<ol class="sub">
+		<li>\(\P(60 \le Y \le 75)\)</li>
+		<li>Frekuensi relatif kejadian \(\{60 \le Y \le 75\}\) (dari simulasi)
+		</li>
+	</ol>
+</div>
+
+<h4 id="gam">Aproksimasi Normal untuk Distribusi Gamma</h4>
+
+<p>Ingat bahwa <a href="https://www.randomservices.org/random/special/Gamma.html">distribusi gamma</a> dengan parameter bentuk \(k \in (0, \infty)\) dan parameter skala \(b \in (0, \infty)\) merupakan distribusi kontinu pada \( (0, \infty) \) dengan fungsi densitas probabilitas \( f \) yang diberikan oleh
+\[ f(x) = \frac{1}{\Gamma(k) b^k} x^{k-1} e^{-x/b}, \quad x \in (0, \infty) \]
+Rata-ratanya adalah \( k b \) dan variansnya adalah \( k b ^2 \). Distribusi gamma banyak digunakan untuk memodelkan waktu acak dan variabel acak positif lainnya. Dalam konteks <a href="https://www.randomservices.org/random/poisson/index.html">model Poisson</a> (dengan \(k \in \N_+\)), distribusi gamma juga dikenal sebagai <a href="https://www.randomservices.org/random/poisson/Gamma.html">distribusi Erlang</a>, yang dinamai menurut <a href="https://www.randomservices.org/random/biographies/Erlang.html" class="ancillary">Agner Erlang</a>. Misalkan sekarang \(Y_k\) memiliki distribusi gamma (Erlang) dengan parameter bentuk \(k \in \N_+\) dan parameter skala \(b \gt 0\). Maka
+\[ Y_k = \sum_{i=1}^k X_i \]
+dengan \((X_1, X_2, \ldots)\) merupakan barisan variabel independen yang masing-masing memiliki distribusi eksponensial dengan parameter skala \(b\). (Distribusi eksponensial merupakan kasus khusus distribusi gamma dengan parameter bentuk 1.) Oleh karena itu, jika \(k\) besar, distribusi gamma dapat diaproksimasi dengan distribusi normal yang memiliki rata-rata \(k b\) dan varians \(k b^2\). Pernyataan yang sama sebenarnya berlaku ketika \(k\) bukan bilangan bulat. Berikut pernyataan tepatnya:</p>
+
+<div class="unit" id="o006.random.sample.clt.unit.gamma-limit">
+	<p class="math">Misalkan \( Y_k \) memiliki distribusi gamma dengan parameter skala \( b \in (0, \infty) \) dan parameter bentuk \( k \in (0, \infty) \). Maka distribusi variabel terbakukan \( Z_k \) di bawah ini konvergen ke distribusi normal baku ketika \(k \to \infty\):
+	\[ Z_k = \frac{Y_k - k b}{\sqrt{k} b} \]</p>
+</div>
+
+<div class="unit" id="o006.random.sample.clt.unit.simulation.gamma">
+	<p class="app">Dalam <a href="https://www.randomservices.org/random/apps/SpecialSimulator.html" class="ancillary">simulator distribusi khusus</a>, pilih distribusi gamma. Variasikan parameter \((k, b)\), lalu perhatikan bentuk fungsi densitas probabilitasnya. Dengan \(k = 10\) dan berbagai nilai \(b\), jalankan eksperimen 1.000 kali dan bandingkan fungsi densitas empiris dengan fungsi densitas probabilitas sebenarnya.</p>
+</div>
+
+<div class="unit" id="o006.random.sample.clt.unit.exercise.gamma-normal-approximation">
+	<p class="math">Misalkan \(Y\) memiliki distribusi gamma dengan parameter bentuk \(k = 10\) dan parameter skala \(b = 2\). Tentukan aproksimasi normal untuk masing-masing hal berikut:</p>
+	<ol class="sub">
+		<li>\( \P(18 \le Y \le 23) \)</li>
+		<li>Persentil ke-80 dari \(Y\)</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<ol class="sub">
+			<li>0.3063</li>
+			<li>25.32</li>
+		</ol>
+	</details>
+</div>
+
+<h4 id="chi">Aproksimasi Normal untuk Distribusi Khi-Kuadrat</h4>
+
+<p>Ingat bahwa <a href="https://www.randomservices.org/random/special/ChiSquare.html">distribusi khi-kuadrat</a> dengan \(n \in (0, \infty)\) derajat kebebasan merupakan kasus khusus distribusi gamma, dengan parameter bentuk \(k = n / 2\) dan parameter skala \(b = 2\). Dengan demikian, distribusi khi-kuadrat dengan \(n\) derajat kebebasan memiliki fungsi densitas probabilitas
+\[ f(x) = \frac{1}{\Gamma(n/2) 2^{n/2}} x^{n/2 - 1}e^{-x/2}, \quad 0 \lt x \lt \infty \]
+Jika \( n \) merupakan bilangan bulat positif, distribusi khi-kuadrat mengatur jumlah kuadrat dari \( n \) variabel normal baku yang independen. Oleh sebab itu, distribusi ini merupakan salah satu distribusi terpenting dalam statistika. Dari pembahasan sebelumnya mengenai distribusi gamma, diperoleh bahwa jika \(n\) besar, distribusi khi-kuadrat dapat diaproksimasi dengan distribusi normal yang memiliki rata-rata \(n\) dan varians \(2 n\). Berikut pernyataan tepatnya:</p>
+
+<div class="unit" id="o006.random.sample.clt.unit.chi-square-limit">
+	<p class="math">Misalkan \(Y_n\) memiliki distribusi khi-kuadrat dengan \(n \in (0, \infty) \) derajat kebebasan. Maka distribusi variabel terbakukan \( Z_n \) di bawah ini konvergen ke distribusi normal baku ketika \(n \to \infty\):
+	\[ Z_n = \frac{Y_n - n}{\sqrt{2 n}} \]</p>
+</div>
+
+<div class="unit" id="o006.random.sample.clt.unit.simulation.chi-square">
+	<p class="app">Dalam <a href="https://www.randomservices.org/random/apps/SpecialSimulator.html" class="ancillary">simulator distribusi khusus</a>, pilih distribusi khi-kuadrat. Variasikan \(n\) dan perhatikan bentuk fungsi densitas probabilitasnya. Dengan \(n = 20\), jalankan eksperimen 1.000 kali dan bandingkan fungsi densitas empiris dengan fungsi densitas probabilitas.</p>
+</div>
+
+<div class="unit" id="o006.random.sample.clt.unit.exercise.chi-square-normal-approximation">
+	<p class="math">Misalkan \(Y\) memiliki distribusi khi-kuadrat dengan \(n = 20\) derajat kebebasan. Tentukan aproksimasi normal untuk masing-masing hal berikut:</p>
+	<ol class="sub">
+		<li>\(\P(18 \lt Y \lt 25)\)</li>
+		<li>Persentil ke-75 dari \(Y\)</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<ol class="sub">
+			<li>0.4107</li>
+			<li>24.3</li>
+		</ol>
+	</details>
+</div>
+
+<h4 id="bin">Aproksimasi Normal untuk Distribusi Binomial</h4>
+
+<p>Ingat bahwa <a href="https://www.randomservices.org/random/bernoulli/index.html">barisan percobaan Bernoulli</a>, yang dinamai menurut <a href="https://www.randomservices.org/random/biographies/Bernoulli.html" class="ancillary">Jacob Bernoulli</a>, merupakan barisan \( (X_1, X_2, \ldots) \) variabel indikator independen dan berdistribusi identik, dengan \(\P(X_i = 1) = p\) untuk setiap \(i\), sedangkan \(p \in (0, 1)\) merupakan parameternya. Dalam istilah keandalan yang lazim, \(X_i\) merupakan hasil percobaan ke-\(i\), dengan 1 berarti berhasil dan 0 berarti gagal. Rata-rata bersamanya adalah \(p\) dan varians bersamanya adalah \(p (1 - p)\).</p>
+
+<p>Misalkan \(Y_n = \sum_{i=1}^n X_i\), sehingga \(Y_n\) merupakan banyaknya keberhasilan dalam \(n\) percobaan pertama. Ingat bahwa \(Y_n\) memiliki <a href="https://www.randomservices.org/random/bernoulli/Binomial.html">distribusi binomial</a> dengan parameter \(n\) dan \(p\), serta memiliki fungsi densitas probabilitas
+\[ f(k) = \binom{n}{k} p^k (1 - p)^{n-k}, \quad k \in \{0, 1, \ldots, n\} \]</p>
+
+<p>Dari teorema limit pusat diperoleh bahwa jika \(n\) besar, distribusi binomial dengan parameter \(n\) dan \(p\) dapat diaproksimasi dengan distribusi normal yang memiliki rata-rata \(n p\) dan varians \(n p (1 - p)\). Pedoman praktisnya ialah bahwa \(n\) harus cukup besar sehingga \(n p \ge 5\) dan \(n (1 - p) \ge 5\). (Syarat pertama merupakan syarat penting ketika \(p \lt \frac{1}{2}\), sedangkan syarat kedua merupakan syarat penting ketika \(p \gt \frac{1}{2}\).) Berikut pernyataan tepatnya:</p>
+
+<div class="unit" id="o006.random.sample.clt.unit.binomial-limit">
+	<p class="math">Misalkan \( Y_n \) memiliki distribusi binomial dengan parameter jumlah percobaan \( n \in \N_+ \) dan parameter keberhasilan \( p \in (0, 1) \). Maka distribusi variabel terbakukan \(Z_n\) di bawah ini konvergen ke distribusi normal baku ketika \(n \to \infty\):
+	\[ Z_n = \frac{Y_n - n p}{\sqrt{n p (1 - p)}} \]</p>
+</div>
+
+<div class="unit" id="o006.random.sample.clt.unit.simulation.binomial">
+	<p class="app">Dalam <a href="https://www.randomservices.org/random/apps/BinomialTimeline.html" class="ancillary">eksperimen garis waktu binomial</a>, variasikan \(n\) dan \(p\), lalu perhatikan bentuk fungsi densitas probabilitasnya. Dengan \(n = 50\) dan \(p = 0.3\), jalankan simulasi 1.000 kali dan hitung hal-hal berikut:</p>
+	<ol class="sub">
+		<li>\(\P(12 \le Y \le 16)\)</li>
+		<li>Frekuensi relatif kejadian \(\{12 \le Y \le 16\}\) (dari simulasi)</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<ol class="sub">
+			<li>0.5448</li>
+		</ol>
+	</details>
+</div>
+
+<div class="unit" id="o006.random.sample.clt.unit.exercise.binomial-normal-approximation">
+	<p class="math">Misalkan \(Y\) memiliki distribusi binomial dengan parameter \(n = 50\) dan \(p = 0.3\). Hitung aproksimasi normal untuk \( \P(12 \le Y \le 16) \) (jangan lupakan koreksi kontinuitas), lalu bandingkan dengan hasil latihan sebelumnya.</p>
+	<details>
+		<summary>Rincian:</summary>
+		<p>0.5383</p>
+	</details>
+</div>
+
+<h4 id="poi">Aproksimasi Normal untuk Distribusi Poisson</h4>
+
+<p>Ingat bahwa <a href="https://www.randomservices.org/random/poisson/Poisson.html">distribusi Poisson</a>, yang dinamai menurut <a href="https://www.randomservices.org/random/biographies/Poisson.html" class="ancillary">Simeon Poisson</a>, merupakan distribusi diskret pada \( \N \) dengan fungsi densitas probabilitas \( f \) yang diberikan oleh
+\[ f(x) = e^{-\theta} \frac{\theta^x}{x!}, \quad x \in \N \]
+dengan \(\theta \gt 0\) sebagai parameter. Parameter tersebut sekaligus merupakan rata-rata dan varians distribusi. Distribusi Poisson banyak digunakan untuk memodelkan banyaknya <q>titik acak</q> dalam suatu wilayah waktu atau ruang, khususnya dalam konteks <a href="https://www.randomservices.org/random/poisson/index.html">proses Poisson</a>. Dalam konteks ini, parameternya sebanding dengan ukuran wilayah.</p>
+
+<p>Misalkan sekarang \(Y_n\) memiliki distribusi Poisson dengan parameter \(n \in \N_+\). Maka
+\[ Y_n = \sum_{i=1}^n X_i \]
+dengan \((X_1, X_2, \ldots, X_n)\) merupakan barisan variabel independen yang masing-masing memiliki distribusi Poisson dengan parameter 1. Dari teorema limit pusat diperoleh bahwa jika \(n\) besar, distribusi Poisson dengan parameter \(n\) dapat diaproksimasi dengan distribusi normal yang memiliki rata-rata \(n\) dan varians \(n\). Pernyataan yang sama berlaku ketika parameter \(n\) bukan bilangan bulat. Berikut pernyataan tepatnya:</p>
+
+<div class="unit" id="o006.random.sample.clt.unit.poisson-limit">
+	<p class="math">Misalkan \( Y_\theta \) memiliki distribusi Poisson dengan parameter \( \theta \in (0, \infty) \). Maka distribusi variabel terbakukan \( Z_\theta \) di bawah ini konvergen ke distribusi normal baku ketika \(\theta \to \infty\):</p>
+	\[ Z_\theta = \frac{Y_\theta - \theta}{\sqrt{\theta}} \]
+</div>
+
+<div class="unit" id="o006.random.sample.clt.unit.exercise.poisson-normal-approximation">
+	<p class="math">Misalkan \(Y\) memiliki distribusi Poisson dengan rata-rata 20.</p>
+	<ol class="sub">
+		<li>Hitung nilai sebenarnya dari \(\P(16 \le Y \le 23)\).</li>
+		<li>Hitung aproksimasi normal untuk \(\P(16 \le Y \le 23)\).</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<ol class="sub">
+			<li>0.6310</li>
+			<li>0.6259</li>
+		</ol>
+	</details>
+</div>
+
+<div class="unit" id="o006.random.sample.clt.unit.simulation.poisson">
+	<p class="app">Dalam <a class="ancillary" href="https://www.randomservices.org/random/apps/Poisson.html">eksperimen Poisson</a>, variasikan parameter waktu dan laju \(t\) dan \(r\) (parameter distribusi Poisson dalam eksperimen merupakan hasil kali \(r t\)). Perhatikan bentuk fungsi densitas probabilitasnya. Dengan \(r = 5\) dan \(t = 4\), jalankan eksperimen 1.000 kali dan bandingkan fungsi densitas empiris dengan fungsi densitas probabilitas sebenarnya.</p>
+</div>
+
+<h4 id="nbi">Aproksimasi Normal untuk Distribusi Binomial Negatif</h4>
+
+<p>Versi umum <a href="https://www.randomservices.org/random/bernoulli/NegativeBinomial.html">distribusi binomial negatif</a> merupakan distribusi diskret pada \( \N \), dengan parameter bentuk \( k \in (0, \infty) \) dan parameter keberhasilan \( p \in (0, 1) \). Fungsi densitas probabilitas \( f \) diberikan oleh
+\[ f(n) = \binom{n + k - 1}{n} p^k (1 - p)^n, \quad n \in \N \]
+Rata-ratanya adalah \( k (1 - p) / p \) dan variansnya adalah \( k (1 - p) / p^2 \). Jika \( k \in \N_+ \), distribusi ini mengatur banyaknya kegagalan \( Y_k \) sebelum keberhasilan bernomor \( k \) dalam barisan <a href="https://www.randomservices.org/random/bernoulli/index.html">percobaan Bernoulli</a> dengan parameter keberhasilan \( p \). Jadi, dalam kasus ini,
+\[ Y_k = \sum_{i=1}^k X_i \]
+dengan \((X_1, X_2, \ldots, X_k)\) merupakan barisan variabel independen yang masing-masing memiliki <a href="https://www.randomservices.org/random/bernoulli/Geometric.html">distribusi geometrik</a> pada \(\N\) dengan parameter \(p\). (Distribusi geometrik merupakan kasus khusus distribusi binomial negatif dengan parameter 1 dan \(p\).) Dalam konteks percobaan Bernoulli, \( X_1 \) merupakan banyaknya kegagalan sebelum keberhasilan pertama, dan untuk \( i \in \{2, 3, \ldots\} \), \(X_i\) merupakan banyaknya kegagalan di antara keberhasilan ke-\( i - 1 \) dan keberhasilan ke-\( i \). Oleh karena itu, jika \(k\) besar, distribusi binomial negatif dapat diaproksimasi dengan distribusi normal. Pernyataan yang sama berlaku jika \( k \) bukan bilangan bulat. Berikut pernyataan tepatnya:</p>
+
+<div class="unit" id="o006.random.sample.clt.unit.negative-binomial-limit">
+	<p class="math">Misalkan \( Y_k \) memiliki distribusi binomial negatif dengan parameter bentuk \( k \in (0, \infty) \) dan parameter keberhasilan \( p \in (0, 1) \). Maka distribusi variabel terbakukan \( Z_k \) di bawah ini konvergen ke distribusi normal baku ketika \(k \to \infty\):
+	\[ Z_k = \frac{p Y_k - k(1 - p)}{\sqrt{k (1 - p)}} \]</p>
+</div>
+
+<p>Versi lain distribusi binomial negatif ialah distribusi nomor percobaan \( V_k \) bagi keberhasilan bernomor \( k \in \N_+ \). Jadi, \( V_k = k + Y_k \), sedangkan \( V_k \) memiliki rata-rata \( k / p \) dan varians \( k (1 - p) / p^2 \). Aproksimasi normal juga berlaku untuk distribusi \( V_k \) jika \( k \) besar. Karena kedua distribusi berhubungan melalui transformasi lokasi, skor bakunya sama. Artinya,
+\[ \frac{p V_k - k}{\sqrt{k (1 - p)}} = \frac{p Y_k - k(1 - p)}{\sqrt{k ( 1 - p)}} \]</p>
+
+<div class="unit" id="o006.random.sample.clt.unit.simulation.negative-binomial">
+	<p class="app">Dalam <a href="https://www.randomservices.org/random/apps/NegativeBinomial.html" class="ancillary">eksperimen binomial negatif</a>, variasikan \(k\) dan \(p\), lalu perhatikan bentuk fungsi densitas probabilitasnya. Dengan \(k = 5\) dan \(p = 0.4\), jalankan eksperimen 1.000 kali dan bandingkan fungsi densitas empiris dengan fungsi densitas probabilitas sebenarnya.</p>
+</div>
+
+<div class="unit" id="o006.random.sample.clt.unit.exercise.negative-binomial-normal-approximation">
+	<p class="math">Misalkan \(V\) menyatakan nomor percobaan tempat keberhasilan ke-\(k = 10\) terjadi dalam barisan percobaan Bernoulli dengan parameter keberhasilan \(p = 0.4\). Tentukan aproksimasi normal untuk masing-masing hal berikut:</p>
+	<ol class="sub">
+		<li>\(\P(20 \le V \le 30)\)</li>
+		<li>Persentil ke-80 dari \(V\)</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<ol class="sub">
+			<li>0.6318</li>
+			<li>30.1</li>
+		</ol>
+	</details>
+</div>
+
+<h3 id="rnt">Jumlah Parsial dengan Banyak Suku Acak</h3>
+
+<p>Topik terakhir kita agak lebih esoteris, tetapi masih sesuai dengan konteks umum bagian ini. Ingat bahwa \(\bs{X} = (X_1, X_2, \ldots)\) merupakan barisan variabel acak bernilai riil yang independen dan berdistribusi identik, dengan rata-rata bersama \(\mu\) dan varians bersama \(\sigma^2\). Misalkan sekarang \(N\) merupakan variabel acak (pada ruang probabilitas yang sama) yang bernilai dalam \(\N\), juga dengan rata-rata dan varians berhingga. Maka
+\[ Y_N = \sum_{i=1}^N X_i \]
+merupakan jumlah acak dari variabel-variabel independen dan berdistribusi identik. Artinya, suku-sukunya tentu saja acak, tetapi banyak suku \(N\) juga acak. Kita terutama tertarik pada momen-momen \(Y_N\).</p>
+
+<h4 id="ind">Banyak Suku yang Independen</h4>
+
+<p>Pertama, misalkan \(N\), yaitu banyak suku, independen dari \(\bs{X}\), yaitu barisan suku. Menghitung momen-momen \(Y_N\) merupakan latihan yang baik dalam <a href="https://www.randomservices.org/random/expect/Conditional.html">nilai harapan bersyarat</a>.</p>
+
+<div class="unit" id="ind1">
+	<p class="math">Nilai harapan bersyarat \(Y_N\) jika \(N\) diketahui, dan nilai harapan \(Y_N\), adalah</p>
+	<ol class="sub">
+		<li>\(\E(Y_N \mid N) = N \mu\)</li>
+		<li>\(\E(Y_N) = \E(N) \mu\)</li>
+	</ol>
+</div>
+
+<div class="unit" id="o006.random.sample.clt.unit.random-sum-variance">
+	<p class="math">Varians bersyarat \(Y_N\) jika \(N\) diketahui, dan varians \(Y_N\), adalah</p>
+	<ol class="sub">
+		<li>\(\var(Y_N \mid N) = N \sigma^2\)</li>
+		<li>\(\var(Y_N) = \E(N) \sigma^2 + \var(N) \mu^2\)</li>
+	</ol>
+</div>
+
+<div class="unit" id="o006.random.sample.clt.unit.random-sum-mgf">
+	<p class="math">Misalkan \(H\) menyatakan fungsi pembangkit probabilitas dari \(N\). Tunjukkan bahwa fungsi pembangkit momen dari \(Y_N\) adalah \(H \circ G\).</p>
+	<ol class="sub">
+		<li>\(\E(e^{t Y_N} \mid N) = [G(t)]^N\)</li>
+		<li>\(\E(e^{t Y_N}) = H(G(t))\)</li>
+	</ol>
+</div>
+
+<h4 id="wld">Persamaan Wald</h4>
+
+<p>Hasil pada bagian (b) dari <a href="#ind1" class="ref"></a> dapat digeneralisasi untuk kasus ketika banyak suku acak \(N\) merupakan <a href="https://www.randomservices.org/random/prob/Stop.html">waktu henti</a> bagi barisan \(\bs{X}\). Ini berarti bahwa kejadian \(\{N = n\}\) hanya bergantung pada (secara teknis, <a href="https://www.randomservices.org/random/foundations/Measure.html">terukur</a> terhadap) \((X_1, X_2, \ldots, X_n)\) untuk setiap \(n \in \N\). Generalisasi ini dikenal sebagai <dfn>persamaan Wald</dfn> dan dinamai menurut <a href="https://www.randomservices.org/random/biographies/Wald.html" class="ancillary">Abraham Wald</a>.</p>
+
+<div class="unit" id="o006.random.sample.clt.unit.wald-equation">
+	<p class="math">Jika \(N\) merupakan waktu henti bagi \(\bs{X}\), maka \(\E(Y_N) = \E(N) \mu\).</p>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Pertama, perhatikan bahwa \(Y_N = \sum_{i=1}^\infty X_i \bs{1}(i \le N)\). Namun, \(\{i \le N\} = \{N \lt i\}^c\) hanya bergantung pada \(\{X_1, \ldots, X_{i-1}\}\), sehingga independen dari \(X_i\). Dengan demikian, \(\E[X_i \bs{1}(i \le N)] = \mu \P(N \ge i)\). Misalkan \(X_i \ge 0\) untuk setiap \(i\). Mengambil nilai harapan suku demi suku menghasilkan persamaan Wald dalam kasus khusus ini. Pertukaran urutan penjumlahan dan nilai harapan dibenarkan oleh teorema konvergensi monoton. Persamaan Wald dalam kasus umum kemudian dapat dibuktikan dengan teorema konvergensi terdominasi.</p>
+	</details>
+</div>
+
+<p>Pembuktian yang elegan untuk <a href="https://www.randomservices.org/random/martingales/Stop.html#wld">persamaan Wald</a> diberikan dalam bab mengenai <a href="https://www.randomservices.org/random/martingales/index.html">Martingal</a>.</p>
+
+<div class="unit" id="o006.random.sample.clt.unit.exercise.store-revenue">
+	<p class="math">Misalkan banyaknya pelanggan yang tiba di sebuah toko selama satu hari memiliki <a href="https://www.randomservices.org/random/poisson/Poisson.html">distribusi Poisson</a> dengan parameter 50. Setiap pelanggan, secara independen dari pelanggan lain (dan secara independen dari banyaknya pelanggan), membelanjakan sejumlah uang yang <a href="https://www.randomservices.org/random/dist/Continuous.html#uni">berdistribusi seragam</a> pada interval \([0, 20]\). Tentukan rata-rata dan simpangan baku jumlah uang yang diterima toko tersebut selama satu hari.</p>
+	<details>
+		<summary>Rincian:</summary>
+		<p>500, 81.65</p>
+	</details>
+</div>
+
+<div class="unit" id="o006.random.sample.clt.unit.exercise.component-lifetime">
+	<p class="math">Ketika suatu komponen kritis dalam sebuah sistem gagal, komponen itu segera diganti dengan komponen baru yang identik secara statistik. Komponen-komponen tersebut independen, dan masa pakai masing-masing (dalam jam) <a href="https://www.randomservices.org/random/poisson/Exponential.html">berdistribusi eksponensial</a> dengan parameter skala \(b\). Selama masa pakai sistem, banyaknya komponen kritis yang digunakan memiliki distribusi geometrik pada \(\N_+\) dengan parameter \(p\). Untuk jumlah masa pakai seluruh komponen kritis tersebut,</p>
+	<ol class="sub">
+		<li>Tentukan rata-ratanya.</li>
+		<li>Tentukan simpangan bakunya.</li>
+		<li>Tentukan fungsi pembangkit momennya.</li>
+		<li>Identifikasi nama distribusinya.</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<ol class="sub">
+			<li>\(b / p\)</li>
+			<li>\(b / p\)</li>
+			<li>\(t \mapsto \frac{1}{1 - (b/p)t}\)</li>
+			<li>Distribusi eksponensial dengan parameter skala \(b / p\)</li>
+		</ol>
+	</details>
+</div>
+
+<footer>
+	<ol class="map">
+		<li class="parent"><a href="https://www.randomservices.org/random/index.html">Random</a></li>
+		<li class="parent"><a href="index.html">5. Sampel Acak</a></li>
+		<li class="child"><a href="Introduction.html" title="Pendahuluan">1</a></li>
+		<li class="child"><a href="Mean.html" title="Rata-Rata Sampel">2</a></li>
+		<li class="child"><a href="LLN.html" title="Hukum Bilangan Besar">3</a></li>
+		<li class="current">4</li>
+		<li class="child"><a href="https://www.randomservices.org/random/sample/Variance.html" title="Varians Sampel">5</a></li>
+		<li class="child"><a href="https://www.randomservices.org/random/sample/OrderStatistics.html" title="Statistik Terurut">6</a></li>
+		<li class="child"><a href="https://www.randomservices.org/random/sample/Covariance.html" title="Korelasi dan Regresi Sampel">7</a></li>
+		<li class="child"><a href="https://www.randomservices.org/random/sample/Normal.html" title="Sifat Khusus Sampel Normal">8</a></li>
+		<li class="details"><button type="button" title="Perluas Rincian" onclick="expandDetails(true);"><img src="../icons/Plus.svg" alt="Perluas"></button></li>
+		<li class="details"><button type="button" title="Ciutkan Rincian" onclick="expandDetails(false);"><img src="../icons/Minus.svg" alt="Ciutkan"></button></li>
+	</ol>
+	<ul class="map">
+		<li class="sister"><a href="https://www.randomservices.org/random/apps/index.html" class="ancillary">Aplikasi</a></li>
+		<li class="sister"><a href="https://www.randomservices.org/random/data/index.html" class="ancillary">Himpunan Data</a></li>
+		<li class="child"><a href="https://www.randomservices.org/random/biographies/index.html" class="ancillary">Biografi</a></li>
+	</ul>
+	<section class="edition-notice" data-o006-edition-notice="v1">
+		<p><strong>Pemberitahuan edisi.</strong> Terjemahan Bahasa Indonesia ini mengadaptasi <a href="https://www.randomservices.org/random/">Random: Probabilitas, Statistika Matematis, dan Proses Stokastik</a> karya Kyle Siegrist. Perubahan pada halaman ini mencakup penerjemahan, penambahan ID stabil, pengalihan tautan inti yang belum diterjemahkan ke sumber resmi, pengubahan tautan pelengkap menjadi tautan HTTPS resmi, serta perbaikan terverifikasi pada syarat awal proses jumlah parsial, domain dan rumus korelasi, pembuktian fungsi karakteristik, notasi koreksi kontinuitas, deskripsi khi-kuadrat, nilai aproksimasi dadu, dukungan dan domain distribusi binomial negatif, dan pemetaan latihan nomor percobaan.</p>
+		<p>Situs asal menyatakan <a href="https://creativecommons.org/licenses/by/2.0/">CC BY 2.0</a>, sedangkan halaman <a href="https://www.randomservices.org/random/Credits.html">Kredit</a> menautkan <a href="https://creativecommons.org/licenses/by/1.0/">CC BY 1.0</a>; perbedaan ini dipertahankan. Edisi independen ini tidak didukung maupun disahkan oleh Kyle Siegrist atau Random Services. Tautan ke data dan biografi pihak ketiga tidak menyatakan hak untuk mendistribusikan ulang materi tersebut.</p>
+	</section>
+</footer>
+
+<script>getReferences();</script>
+
+</body>
+</html>

@@ -49,6 +49,13 @@
       "page": "random/sample/Mean.html",
       "reason": "remove duplicated terminal punctuation inherited from the authority",
       "replacements": 1
+    },
+    {
+      "new": "0.6797",
+      "old": "0.6741",
+      "page": "random/sample/CLT.html",
+      "reason": "the continuity-corrected dice probability is approximately 0.6797",
+      "replacements": 1
     }
   ],
   "frozen_manifests": {
@@ -204,6 +211,17 @@
         "role": "asset",
         "sha256": "54bf3c5fd23ccf5dd602750aaf09c42ca6d4b1b10b8333e54bc580580f06686e",
         "url": "https://www.randomservices.org/random/icons/Stop.svg"
+      },
+      {
+        "bytes": 40239,
+        "content_type": "text/html",
+        "etag": "\"9d2f-69b43de5-a9a84ced88dac675;;;\"",
+        "last_modified": "Fri, 13 Mar 2026 16:40:05 GMT",
+        "purpose": "translation_authority",
+        "relative_path": "random/sample/CLT.html",
+        "role": "core",
+        "sha256": "ee6dc9f8e9feb14f19f96a0206c3289a4aedfc014f5e3dabf79422e1dc29f9e3",
+        "url": "https://www.randomservices.org/random/sample/CLT.html"
       },
       {
         "bytes": 1272,
@@ -388,24 +406,29 @@
     ],
     "targets": [
       {
-        "bytes": 11714,
+        "bytes": 46488,
+        "relative_path": "random/sample/CLT.html",
+        "sha256": "427b4e396750be3137894296cde1a0bfc558d53a91009c1880447c250f3b0d56"
+      },
+      {
+        "bytes": 11669,
         "relative_path": "random/sample/index.html",
-        "sha256": "257b7ba98e4eca06ed0b4afc340844a27477a3488def13964c64310d022103cb"
+        "sha256": "bfb55848e53e4cb8cb937501e8c11d13472cad7b119d3c7f01af5fbb0023d15d"
       },
       {
-        "bytes": 36698,
+        "bytes": 36608,
         "relative_path": "random/sample/Introduction.html",
-        "sha256": "c38dfaa8dcc2e74f073d1f8975c3d66a14dd9995be5c75c8a753bdcf3e71aad6"
+        "sha256": "f79a0e459b01a0598ee5f135afd7bde0c6f7020e9cbeda3756a773dde5de8539"
       },
       {
-        "bytes": 35360,
+        "bytes": 35270,
         "relative_path": "random/sample/LLN.html",
-        "sha256": "c302b38e338f2e582320e86d4f916440b152d7a70b7a97c761ad01fd12473416"
+        "sha256": "2083cab957f8b07a0982280548f5c49c6e164ebd0354432036eed25276514ddf"
       },
       {
-        "bytes": 46321,
+        "bytes": 46231,
         "relative_path": "random/sample/Mean.html",
-        "sha256": "8dc9b5e1f5d21c49df5ce4075f8e9b1dbb6628aff4ae57533f34a64d21dd2e00"
+        "sha256": "a30c72a0b9311a5d817cade1f05f2f1e315fa53aea587237c50b511351ee0e7a"
       }
     ]
   },
@@ -491,11 +514,132 @@
       "reason": "the denominator is the integer 746496; use narrow grouping rather than a binary-relation-sized gap",
       "replacements": 1,
       "surface": "math_span"
+    },
+    {
+      "new": "\\(\\bs{V} = (V_0, V_1, V_2, \\ldots), V_0 = 0\\)",
+      "old": "\\(\\bs{V} = (V_0, V_1, V_2, \\ldots)\\)",
+      "page": "random/sample/CLT.html",
+      "reason": "the converse partial-sum characterization requires the process to start at zero",
+      "replacements": 1,
+      "surface": "math_span"
+    },
+    {
+      "new": "\\(m \\in \\N_+\\)",
+      "old": "\\(m \\in \\N\\)",
+      "page": "random/sample/CLT.html",
+      "reason": "cor(Y_0,Y_n) is undefined because Y_0 has zero variance",
+      "replacements": 1,
+      "surface": "math_span"
+    },
+    {
+      "new": "\\[ \\cor(Y_m, Y_n) = \\frac{\\cov(Y_m, Y_n)}{\\sd(Y_m) \\sd(Y_n)} = \\frac{m \\sigma^2}{\\sqrt{m \\sigma^2} \\sqrt{n \\sigma^2}} = \\sqrt{\\frac{m}{n}} \\]",
+      "old": "\\[ \\cor(Y_m, Y_m) = \\frac{\\cov(Y_m, Y_n)}{\\sd(Y_m) \\sd(Y_n)} = \\frac{m \\sigma^2}{\\sqrt{m \\sigma^2} \\sqrt{n \\sigma^2}} = \\sqrt{\\frac{m}{n}} \\]",
+      "page": "random/sample/CLT.html",
+      "reason": "the displayed correlation is between Y_m and Y_n, not Y_m and itself",
+      "replacements": 1,
+      "surface": "math_span"
+    },
+    {
+      "new": "\\[ \\chi\\left(\\frac{t}{\\sqrt{n}}\\right) = 1 - \\frac{t^2}{2n} + o\\left(\\frac{1}{n}\\right) \\]",
+      "old": "\\[ \\chi\\left(\\frac{t}{\\sqrt{n}}\\right) = 1 + \\frac{1}{2} \\chi^{\\prime\\prime}(s_n) \\frac{t^2}{n} \\text{ where } \\left|s_n\\right| \\le \\frac{\\left|t\\right|}{n} \\]",
+      "page": "random/sample/CLT.html",
+      "reason": "use the valid second-order Peano expansion for a complex characteristic function",
+      "replacements": 1,
+      "surface": "math_span"
+    },
+    {
+      "new": "\\(o(1/n)\\)",
+      "old": "\\(s_n \\to 0\\)",
+      "page": "random/sample/CLT.html",
+      "reason": "replace the invalid real-valued Lagrange-remainder intermediate with its Peano remainder",
+      "replacements": 1,
+      "surface": "math_span"
+    },
+    {
+      "new": "\\(t\\)",
+      "old": "\\(\\chi^{\\prime\\prime}(s_n) \\to -1\\)",
+      "page": "random/sample/CLT.html",
+      "reason": "state the fixed characteristic-function argument after replacing the invalid remainder proof",
+      "replacements": 1,
+      "surface": "math_span"
+    },
+    {
+      "new": "\\[ \\chi_n(t) = \\left[1 - \\frac{t^2}{2n} + o\\left(\\frac{1}{n}\\right)\\right]^n \\to e^{-\\frac{1}{2} t^2} \\text{ ketika } n \\to \\infty \\]",
+      "old": "\\[ \\chi_n(t) = \\left[1 + \\frac{1}{2} \\chi^{\\prime\\prime}(s_n) \\frac{t^2}{n} \\right]^n \\to e^{-\\frac{1}{2} t^2} \\text{ as } n \\to \\infty \\]",
+      "page": "random/sample/CLT.html",
+      "reason": "complete the characteristic-function proof with the valid Peano expansion and complex exponential limit",
+      "replacements": 1,
+      "surface": "math_span"
+    },
+    {
+      "new": "\\(\\{Y_n = k\\}\\)",
+      "old": "\\(\\{Y = k\\}\\)",
+      "page": "random/sample/CLT.html",
+      "reason": "the continuity-correction event concerns the indexed sum Y_n",
+      "replacements": 1,
+      "surface": "math_span"
+    },
+    {
+      "new": "<p class=\"app\">Dalam <a href=\"https://www.randomservices.org/random/apps/SpecialSimulator.html\" class=\"ancillary\">simulator distribusi khusus</a>, pilih distribusi gamma. Variasikan parameter \\((k, b)\\), lalu perhatikan bentuk fungsi densitas probabilitasnya. Dengan \\(k = 10\\) dan berbagai nilai \\(b\\), jalankan eksperimen 1.000 kali dan bandingkan fungsi densitas empiris dengan fungsi densitas probabilitas sebenarnya.</p>",
+      "old": "<p class=\"app\">In the <a href=\"JavaScript:openAncillary('../apps/SpecialSimulator.html')\" class=\"ancillary\">special distribution simulator</a>, select the gamma distribution. Vary and \\(b\\) and note the shape of the probability density function. With \\(k = 10\\) and various values of \\(b\\), run the experiment 1000 times and compare the empirical density function to the true probability density function.</p>",
+      "page": "random/sample/CLT.html",
+      "reason": "restore the omitted gamma shape parameter in the simulator instruction",
+      "replacements": 1,
+      "span_index": 202,
+      "span_new": "\\((k, b)\\)",
+      "span_old": "\\(b\\)",
+      "surface": "math_span"
+    },
+    {
+      "new": "\\[ f(n) = \\binom{n + k - 1}{n} p^k (1 - p)^n, \\quad n \\in \\N \\]",
+      "old": "\\[ f(n) = \\binom{n + k - 1}{n} p^k (1 - p)^n, \\quad n \\in \\N_+ \\]",
+      "page": "random/sample/CLT.html",
+      "reason": "a negative-binomial failure count can be zero",
+      "replacements": 1,
+      "surface": "math_span"
+    },
+    {
+      "new": "\\( k \\in (0, \\infty) \\)",
+      "old": "\\( k \\in (0, 1) \\)",
+      "page": "random/sample/CLT.html",
+      "reason": "the negative-binomial shape parameter is positive, not restricted below one",
+      "replacements": 1,
+      "surface": "math_span"
+    },
+    {
+      "new": "<p class=\"math\">Misalkan \\(V\\) menyatakan nomor percobaan tempat keberhasilan ke-\\(k = 10\\) terjadi dalam barisan percobaan Bernoulli dengan parameter keberhasilan \\(p = 0.4\\). Tentukan aproksimasi normal untuk masing-masing hal berikut:</p>",
+      "old": "<p class=\"math\">Suppose that \\(Y\\) has the negative binomial distribution with trial parameter \\(k = 10\\) and success parameter \\(p = 0.4\\). Find normal approximations to each of the following: </p>",
+      "page": "random/sample/CLT.html",
+      "reason": "the retained answers use the trial number of the kth success, not the failure count",
+      "replacements": 1,
+      "span_index": 340,
+      "span_new": "\\(V\\)",
+      "span_old": "\\(Y\\)",
+      "surface": "math_span"
+    },
+    {
+      "new": "\\(\\P(20 \\le V \\le 30)\\)",
+      "old": "\\(\\P(20 \\lt Y \\lt 30)\\)",
+      "page": "random/sample/CLT.html",
+      "reason": "the retained probability answer uses the inclusive trial-number event",
+      "replacements": 1,
+      "surface": "math_span"
+    },
+    {
+      "new": "<li>\\(\\P(20 \\le V \\le 30)\\)</li>\n\t\t<li>Persentil ke-80 dari \\(V\\)</li>",
+      "old": "<li>\\(\\P(20 \\lt Y \\lt 30)\\)</li>\n\t\t<li>The 80th percentile of \\(Y\\)</li>",
+      "page": "random/sample/CLT.html",
+      "reason": "bind the percentile request to the corrected trial-number variable",
+      "replacements": 1,
+      "span_index": 344,
+      "span_new": "\\(V\\)",
+      "span_old": "\\(Y\\)",
+      "surface": "math_span"
     }
   ],
   "reader": {
     "directory": "build/html-id",
-    "file_count": 27,
+    "file_count": 28,
     "files": [
       {
         "bytes": 533,
@@ -583,6 +727,11 @@
         "sha256": "54bf3c5fd23ccf5dd602750aaf09c42ca6d4b1b10b8333e54bc580580f06686e"
       },
       {
+        "bytes": 46488,
+        "relative_path": "random/sample/CLT.html",
+        "sha256": "427b4e396750be3137894296cde1a0bfc558d53a91009c1880447c250f3b0d56"
+      },
+      {
         "bytes": 1272,
         "relative_path": "random/sample/ContinuousDistribution.png",
         "sha256": "273418cb67c56115e2573f47fbd59cbd22aa64cc6768952d6f518edd9d6d3da5"
@@ -608,24 +757,24 @@
         "sha256": "17bbf2b59e4b0902a84e8ea66f1b40a0343ddff578359ce842c60f109ea047ae"
       },
       {
-        "bytes": 11714,
+        "bytes": 11669,
         "relative_path": "random/sample/index.html",
-        "sha256": "257b7ba98e4eca06ed0b4afc340844a27477a3488def13964c64310d022103cb"
+        "sha256": "bfb55848e53e4cb8cb937501e8c11d13472cad7b119d3c7f01af5fbb0023d15d"
       },
       {
-        "bytes": 36698,
+        "bytes": 36608,
         "relative_path": "random/sample/Introduction.html",
-        "sha256": "c38dfaa8dcc2e74f073d1f8975c3d66a14dd9995be5c75c8a753bdcf3e71aad6"
+        "sha256": "f79a0e459b01a0598ee5f135afd7bde0c6f7020e9cbeda3756a773dde5de8539"
       },
       {
-        "bytes": 35360,
+        "bytes": 35270,
         "relative_path": "random/sample/LLN.html",
-        "sha256": "c302b38e338f2e582320e86d4f916440b152d7a70b7a97c761ad01fd12473416"
+        "sha256": "2083cab957f8b07a0982280548f5c49c6e164ebd0354432036eed25276514ddf"
       },
       {
-        "bytes": 46321,
+        "bytes": 46231,
         "relative_path": "random/sample/Mean.html",
-        "sha256": "8dc9b5e1f5d21c49df5ce4075f8e9b1dbb6628aff4ae57533f34a64d21dd2e00"
+        "sha256": "a30c72a0b9311a5d817cade1f05f2f1e315fa53aea587237c50b511351ee0e7a"
       },
       {
         "bytes": 5922,
@@ -633,10 +782,10 @@
         "sha256": "3f676d2cf6a4e111bff4fc2dbbd082e5305250e40a2c91b67b532dc72f13a78f"
       }
     ],
-    "manifest_bytes": 2607,
+    "manifest_bytes": 2701,
     "manifest_path": "build/FIRST_UNIT_MANIFEST.csv",
-    "manifest_sha256": "d45913699c2970f75a587537e6a9b83383351f592eae880b5d36a4d6b20ab036",
-    "total_bytes": 1880544
+    "manifest_sha256": "c853d3c560b041fd3071f390b636aaf3b90b1bf076bfd47457408e6052350dbd",
+    "total_bytes": 1926717
   },
   "reader_customizations": [
     {
@@ -657,14 +806,14 @@
   "schema": "o006.random.first-unit-build.v1",
   "scripts": {
     "build": {
-      "bytes": 40021,
+      "bytes": 46990,
       "path": "scripts/build_first_unit.py",
-      "sha256": "789ab83a450fbd385be71842d7e8680a7c528fe5a32b538360f84f101a9b5978"
+      "sha256": "3c6bb7709e8dff633703c68025177ef573b3a30a5b4d7da3044c80b82017c1ab"
     },
     "qa": {
-      "bytes": 51078,
+      "bytes": 57648,
       "path": "scripts/qa_first_unit.py",
-      "sha256": "ac1363bca5263db7c63d663f9cd9144df956129e8d266fbe474b582386ed0b6f"
+      "sha256": "7710201e1ca09521ed15bb178718e7308b3a2fb981842e93d0a564d7ec101fb7"
     }
   },
   "transport_hardening": [

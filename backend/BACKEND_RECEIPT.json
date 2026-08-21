@@ -372,9 +372,9 @@
   },
   "outputs": {
     "entities.jsonl": {
-      "bytes": 10180060,
+      "bytes": 10206280,
       "records": 6567,
-      "sha256": "6427f46c6c5f8ea5bd0e6af441759d1d00b3c5104400011a64c42092fd522427"
+      "sha256": "243b4f4294535a421fe18a811795336fae9830ead97a049e2f3f009faa435d55"
     },
     "relations.csv": {
       "bytes": 1182589,
@@ -399,15 +399,15 @@
   "translation_binding": {
     "documents": {
       "total": 29,
-      "translated": 4,
-      "untranslated": 25
+      "translated": 5,
+      "untranslated": 24
     },
     "entities": {
       "total": 6567,
-      "translated": 664,
-      "untranslated": 5903
+      "translated": 949,
+      "untranslated": 5618
     },
-    "ledger_bytes": 1461,
+    "ledger_bytes": 1782,
     "ledger_columns": [
       "ordinal",
       "source_path",
@@ -420,18 +420,19 @@
       "notes"
     ],
     "ledger_path": "00_control/TRANSLATION_LEDGER.csv",
-    "ledger_rows": 4,
-    "ledger_sha256": "5c0dd978d479f84c5dc9e97878c59e1d593d896c11064eb153f3764ac6f0e8cb",
+    "ledger_rows": 5,
+    "ledger_sha256": "30553ced7cbf723efb8a20b77b4a8035a088245f0d8a6bd4e3766b9753824d42",
     "status_counts": {
-      "complete": 4,
-      "untranslated": 25
+      "complete": 5,
+      "untranslated": 24
     },
     "target_locale": "id-ID",
     "translated_document_ordinals": [
       1,
       2,
       3,
-      4
+      4,
+      5
     ],
     "verified_rows": [
       {
@@ -440,10 +441,10 @@
         "source_path": "random/sample/index.html",
         "source_sha256": "9f7b9a075c430efbae92192e131152c6728f7827dc3dde987ce871ec9d6ae35c",
         "status": "complete",
-        "target_bytes": 11714,
+        "target_bytes": 11669,
         "target_locale": "id-ID",
         "target_path": "source/id-ID/random/sample/index.html",
-        "target_sha256": "257b7ba98e4eca06ed0b4afc340844a27477a3488def13964c64310d022103cb"
+        "target_sha256": "bfb55848e53e4cb8cb937501e8c11d13472cad7b119d3c7f01af5fbb0023d15d"
       },
       {
         "ordinal": 2,
@@ -451,10 +452,10 @@
         "source_path": "random/sample/Introduction.html",
         "source_sha256": "0af72fbf0202413525cae99e696cfa70014a803d6c5ac7a7dcafd1577742414f",
         "status": "complete",
-        "target_bytes": 36698,
+        "target_bytes": 36608,
         "target_locale": "id-ID",
         "target_path": "source/id-ID/random/sample/Introduction.html",
-        "target_sha256": "c38dfaa8dcc2e74f073d1f8975c3d66a14dd9995be5c75c8a753bdcf3e71aad6"
+        "target_sha256": "f79a0e459b01a0598ee5f135afd7bde0c6f7020e9cbeda3756a773dde5de8539"
       },
       {
         "ordinal": 3,
@@ -462,10 +463,10 @@
         "source_path": "random/sample/Mean.html",
         "source_sha256": "e21a3da7773a6f7f925b4cb0c583d5331abb1656fe01ed952c8d42b26f238cab",
         "status": "complete",
-        "target_bytes": 46321,
+        "target_bytes": 46231,
         "target_locale": "id-ID",
         "target_path": "source/id-ID/random/sample/Mean.html",
-        "target_sha256": "8dc9b5e1f5d21c49df5ce4075f8e9b1dbb6628aff4ae57533f34a64d21dd2e00"
+        "target_sha256": "a30c72a0b9311a5d817cade1f05f2f1e315fa53aea587237c50b511351ee0e7a"
       },
       {
         "ordinal": 4,
@@ -473,10 +474,21 @@
         "source_path": "random/sample/LLN.html",
         "source_sha256": "8662dfc55683fa40c79a5d453a450730e2ba151716a20eb61a2db307c33f5e85",
         "status": "complete",
-        "target_bytes": 35360,
+        "target_bytes": 35270,
         "target_locale": "id-ID",
         "target_path": "source/id-ID/random/sample/LLN.html",
-        "target_sha256": "c302b38e338f2e582320e86d4f916440b152d7a70b7a97c761ad01fd12473416"
+        "target_sha256": "2083cab957f8b07a0982280548f5c49c6e164ebd0354432036eed25276514ddf"
+      },
+      {
+        "ordinal": 5,
+        "source_bytes": 40239,
+        "source_path": "random/sample/CLT.html",
+        "source_sha256": "ee6dc9f8e9feb14f19f96a0206c3289a4aedfc014f5e3dabf79422e1dc29f9e3",
+        "status": "complete",
+        "target_bytes": 46488,
+        "target_locale": "id-ID",
+        "target_path": "source/id-ID/random/sample/CLT.html",
+        "target_sha256": "427b4e396750be3137894296cde1a0bfc558d53a91009c1880447c250f3b0d56"
       }
     ]
   },

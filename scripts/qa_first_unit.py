@@ -30,6 +30,7 @@ PAIRS = (
     PurePosixPath("random/sample/Introduction.html"),
     PurePosixPath("random/sample/Mean.html"),
     PurePosixPath("random/sample/LLN.html"),
+    PurePosixPath("random/sample/CLT.html"),
 )
 
 # This is an exact page/original-href allowlist. There is deliberately no URL
@@ -54,7 +55,6 @@ HREF_DELTA_ALLOWLIST: dict[PurePosixPath, dict[str, str]] = {
         "../markov/index.html": "https://www.randomservices.org/random/markov/index.html",
         "../martingales/index.html": "https://www.randomservices.org/random/martingales/index.html",
         "../brown/index.html": "https://www.randomservices.org/random/brown/index.html",
-        "CLT.html": "https://www.randomservices.org/random/sample/CLT.html",
         "Variance.html": "https://www.randomservices.org/random/sample/Variance.html",
         "OrderStatistics.html": "https://www.randomservices.org/random/sample/OrderStatistics.html",
         "Covariance.html": "https://www.randomservices.org/random/sample/Covariance.html",
@@ -80,7 +80,6 @@ HREF_DELTA_ALLOWLIST: dict[PurePosixPath, dict[str, str]] = {
     },
     PurePosixPath("random/sample/Introduction.html"): {
         "../index.html": "https://www.randomservices.org/random/index.html",
-        "CLT.html": "https://www.randomservices.org/random/sample/CLT.html",
         "Variance.html": "https://www.randomservices.org/random/sample/Variance.html",
         "OrderStatistics.html": "https://www.randomservices.org/random/sample/OrderStatistics.html",
         "Covariance.html": "https://www.randomservices.org/random/sample/Covariance.html",
@@ -122,7 +121,6 @@ HREF_DELTA_ALLOWLIST: dict[PurePosixPath, dict[str, str]] = {
     },
     PurePosixPath("random/sample/Mean.html"): {
         "../index.html": "https://www.randomservices.org/random/index.html",
-        "CLT.html": "https://www.randomservices.org/random/sample/CLT.html",
         "Variance.html": "https://www.randomservices.org/random/sample/Variance.html",
         "OrderStatistics.html": "https://www.randomservices.org/random/sample/OrderStatistics.html",
         "Covariance.html": "https://www.randomservices.org/random/sample/Covariance.html",
@@ -148,7 +146,6 @@ HREF_DELTA_ALLOWLIST: dict[PurePosixPath, dict[str, str]] = {
     },
     PurePosixPath("random/sample/LLN.html"): {
         "../index.html": "https://www.randomservices.org/random/index.html",
-        "CLT.html": "https://www.randomservices.org/random/sample/CLT.html",
         "Variance.html": "https://www.randomservices.org/random/sample/Variance.html",
         "OrderStatistics.html": "https://www.randomservices.org/random/sample/OrderStatistics.html",
         "Covariance.html": "https://www.randomservices.org/random/sample/Covariance.html",
@@ -184,6 +181,62 @@ HREF_DELTA_ALLOWLIST: dict[PurePosixPath, dict[str, str]] = {
         "JavaScript:openAncillary('../data/index.html')": "https://www.randomservices.org/random/data/index.html",
         "JavaScript:openAncillary('../biographies/index.html')": "https://www.randomservices.org/random/biographies/index.html",
     },
+    PurePosixPath("random/sample/CLT.html"): {
+        "../index.html": "https://www.randomservices.org/random/index.html",
+        "Variance.html": "https://www.randomservices.org/random/sample/Variance.html",
+        "OrderStatistics.html": "https://www.randomservices.org/random/sample/OrderStatistics.html",
+        "Covariance.html": "https://www.randomservices.org/random/sample/Covariance.html",
+        "Normal.html": "https://www.randomservices.org/random/sample/Normal.html",
+        "../prob/Independence.html": "https://www.randomservices.org/random/prob/Independence.html",
+        "../prob/Events.html": "https://www.randomservices.org/random/prob/Events.html",
+        "../dist/Discrete.html": "https://www.randomservices.org/random/dist/Discrete.html",
+        "../expect/Properties.html": "https://www.randomservices.org/random/expect/Properties.html",
+        "../expect/Variance.html": "https://www.randomservices.org/random/expect/Variance.html",
+        "../bernoulli/Binomial.html": "https://www.randomservices.org/random/bernoulli/Binomial.html",
+        "../bernoulli/index.html": "https://www.randomservices.org/random/bernoulli/index.html",
+        "../bernoulli/NegativeBinomial.html": "https://www.randomservices.org/random/bernoulli/NegativeBinomial.html",
+        "../poisson/Gamma.html": "https://www.randomservices.org/random/poisson/Gamma.html",
+        "../poisson/index.html": "https://www.randomservices.org/random/poisson/index.html",
+        "../renewal/Introduction.html": "https://www.randomservices.org/random/renewal/Introduction.html",
+        "../renewal/index.html": "https://www.randomservices.org/random/renewal/index.html",
+        "../poisson/Poisson.html": "https://www.randomservices.org/random/poisson/Poisson.html",
+        "../brown/Standard.html": "https://www.randomservices.org/random/brown/Standard.html",
+        "../expect/Covariance.html": "https://www.randomservices.org/random/expect/Covariance.html",
+        "../expect/Generating.html#mgf": "https://www.randomservices.org/random/expect/Generating.html#mgf",
+        "../dist/Continuous.html": "https://www.randomservices.org/random/dist/Continuous.html",
+        "../dist/Transformations.html#sum": "https://www.randomservices.org/random/dist/Transformations.html#sum",
+        "../dist/Transformations.html": "https://www.randomservices.org/random/dist/Transformations.html",
+        "../dist/Convergence.html": "https://www.randomservices.org/random/dist/Convergence.html",
+        "../special/Normal.html": "https://www.randomservices.org/random/special/Normal.html",
+        "JavaScript:openAncillary('../biographies/DeMoivre.html')": "https://www.randomservices.org/random/biographies/DeMoivre.html",
+        "JavaScript:openAncillary('../biographies/Polya.html')": "https://www.randomservices.org/random/biographies/Polya.html",
+        "../dist/CDF.html": "https://www.randomservices.org/random/dist/CDF.html",
+        "JavaScript:openAncillary('../biographies/Taylor.html')": "https://www.randomservices.org/random/biographies/Taylor.html",
+        "../special/IrwinHall.html": "https://www.randomservices.org/random/special/IrwinHall.html",
+        "JavaScript:openAncillary('../apps/SpecialSimulator.html')": "https://www.randomservices.org/random/apps/SpecialSimulator.html",
+        "JavaScript:openAncillary('../biographies/Pareto.html')": "https://www.randomservices.org/random/biographies/Pareto.html",
+        "JavaScript:openAncillary('../apps/Dice.html')": "https://www.randomservices.org/random/apps/Dice.html",
+        "../special/Gamma.html": "https://www.randomservices.org/random/special/Gamma.html",
+        "JavaScript:openAncillary('../biographies/Erlang.html')": "https://www.randomservices.org/random/biographies/Erlang.html",
+        "../special/ChiSquare.html": "https://www.randomservices.org/random/special/ChiSquare.html",
+        "JavaScript:openAncillary('../biographies/Bernoulli.html')": "https://www.randomservices.org/random/biographies/Bernoulli.html",
+        "JavaScript:openAncillary('../apps/BinomialTimeline.html')": "https://www.randomservices.org/random/apps/BinomialTimeline.html",
+        "JavaScript:openAncillary('../biographies/Poisson.html')": "https://www.randomservices.org/random/biographies/Poisson.html",
+        "JavaScript:openAncillary('../apps/Poisson.html')": "https://www.randomservices.org/random/apps/Poisson.html",
+        "../bernoulli/Geometric.html": "https://www.randomservices.org/random/bernoulli/Geometric.html",
+        "JavaScript:openAncillary('../apps/NegativeBinomial.html')": "https://www.randomservices.org/random/apps/NegativeBinomial.html",
+        "../expect/Conditional.html": "https://www.randomservices.org/random/expect/Conditional.html",
+        "../prob/Stop.html": "https://www.randomservices.org/random/prob/Stop.html",
+        "../foundations/Measure.html": "https://www.randomservices.org/random/foundations/Measure.html",
+        "JavaScript:openAncillary('../biographies/Wald.html')": "https://www.randomservices.org/random/biographies/Wald.html",
+        "../martingales/Stop.html#wld": "https://www.randomservices.org/random/martingales/Stop.html#wld",
+        "../martingales/index.html": "https://www.randomservices.org/random/martingales/index.html",
+        "../dist/Continuous.html#uni": "https://www.randomservices.org/random/dist/Continuous.html#uni",
+        "../poisson/Exponential.html": "https://www.randomservices.org/random/poisson/Exponential.html",
+        "JavaScript:openAncillary('../apps/index.html')": "https://www.randomservices.org/random/apps/index.html",
+        "JavaScript:openAncillary('../data/index.html')": "https://www.randomservices.org/random/data/index.html",
+        "JavaScript:openAncillary('../biographies/index.html')": "https://www.randomservices.org/random/biographies/index.html",
+    },
 }
 
 CORRECTION_DELTAS = {
@@ -214,6 +267,7 @@ NOTICE_MARKUP_SHA256 = {
     PurePosixPath("random/sample/Introduction.html"): "64ad3ed4c57ffe8c0c91fae7047ba7d57399538bef9f7beae730e1fa4f4fa931",
     PurePosixPath("random/sample/Mean.html"): "b5dbee259ec1dd62c84f5d776320e15142359cc401afa413f9a2524f906fb275",
     PurePosixPath("random/sample/LLN.html"): "08fb4fa43d51a1d0882f780de159199be12bfbb4e47ced1c478dec73113d1722",
+    PurePosixPath("random/sample/CLT.html"): "9c1477ecc143e8a9bf20f6e0b6239b07d2dad564330df271690796289fa94ac0",
 }
 NOTICE_LINKS = (
     "https://www.randomservices.org/random/",
@@ -358,13 +412,22 @@ def normalize_authority_math(
         old = change.get("span_old", change["old"])
         new = change.get("span_new", change["new"])
         expected = int(change["replacements"])
-        observed = sum(span.count(old) for span in normalized)
+        span_index = change.get("span_index")
+        selected: list[int]
+        if span_index is None:
+            selected = list(range(len(normalized)))
+        else:
+            selected = [int(span_index) - 1]
+            if selected[0] < 0 or selected[0] >= len(normalized):
+                fail(f"{rel}: protected TeX correction span index is out of range: {span_index}")
+        observed = sum(normalized[index].count(old) for index in selected)
         if observed != expected:
             fail(
                 f"{rel}: protected TeX correction authority count changed for {old!r}: "
                 f"{observed} != {expected}"
             )
-        normalized = [span.replace(old, new) for span in normalized]
+        for index in selected:
+            normalized[index] = normalized[index].replace(old, new)
         corrected += observed
     localized = 0
     for change in build_pipeline.MATH_TEXT_LOCALIZATIONS:
@@ -779,6 +842,7 @@ def check_mathjax_runtime() -> dict[str, Any]:
         "random/sample/Introduction.html",
         "random/sample/Mean.html",
         "random/sample/LLN.html",
+        "random/sample/CLT.html",
     ]
     if script_pages != expected_script_pages:
         fail(f"MathJax bundle reference pages changed: {script_pages}")
@@ -927,6 +991,18 @@ def run(*, check_only: bool = False) -> dict[str, Any]:
         or lln["ids"] != 33
     ):
         fail(f"LLN census changed: {lln}")
+    clt = results["random/sample/CLT.html"]
+    if (
+        clt["elements"] != 424
+        or clt["hierarchy_sha256"]
+        != "911fcd5705e0e358fb92492b30dea1d53265df24da8d86bf68b10a7f3d56c870"
+        or clt["raw_script_style_blocks"] != 3
+        or clt["units"] != 38
+        or clt["details"] != 21
+        or clt["math_spans"] != 394
+        or clt["ids"] != 56
+    ):
+        fail(f"CLT census changed: {clt}")
     reference_counts = check_reader_references()
     mathjax_runtime = check_mathjax_runtime()
     readable_reflow = check_readable_reflow()

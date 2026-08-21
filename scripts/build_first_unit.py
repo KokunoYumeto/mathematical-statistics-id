@@ -65,6 +65,7 @@ TARGETS = (
     PurePosixPath("random/sample/Introduction.html"),
     PurePosixPath("random/sample/Mean.html"),
     PurePosixPath("random/sample/LLN.html"),
+    PurePosixPath("random/sample/CLT.html"),
 )
 
 # Screen.css references all of these local assets. Keeping the complete exact set
@@ -233,6 +234,13 @@ BOUNDED_TEXT_CORRECTIONS = (
         "replacements": 1,
         "reason": "remove duplicated terminal punctuation inherited from the authority",
     },
+    {
+        "page": "random/sample/CLT.html",
+        "old": "0.6741",
+        "new": "0.6797",
+        "replacements": 1,
+        "reason": "the continuity-corrected dice probability is approximately 0.6797",
+    },
 )
 
 PROTECTED_MATH_CORRECTIONS = (
@@ -318,12 +326,148 @@ PROTECTED_MATH_CORRECTIONS = (
         "surface": "math_span",
         "reason": "the denominator is the integer 746496; use narrow grouping rather than a binary-relation-sized gap",
     },
+    {
+        "page": "random/sample/CLT.html",
+        "old": r"\(\bs{V} = (V_0, V_1, V_2, \ldots)\)",
+        "new": r"\(\bs{V} = (V_0, V_1, V_2, \ldots), V_0 = 0\)",
+        "replacements": 1,
+        "surface": "math_span",
+        "reason": "the converse partial-sum characterization requires the process to start at zero",
+    },
+    {
+        "page": "random/sample/CLT.html",
+        "old": r"\(m \in \N\)",
+        "new": r"\(m \in \N_+\)",
+        "replacements": 1,
+        "surface": "math_span",
+        "reason": "cor(Y_0,Y_n) is undefined because Y_0 has zero variance",
+    },
+    {
+        "page": "random/sample/CLT.html",
+        "old": r"\[ \cor(Y_m, Y_m) = \frac{\cov(Y_m, Y_n)}{\sd(Y_m) \sd(Y_n)} = \frac{m \sigma^2}{\sqrt{m \sigma^2} \sqrt{n \sigma^2}} = \sqrt{\frac{m}{n}} \]",
+        "new": r"\[ \cor(Y_m, Y_n) = \frac{\cov(Y_m, Y_n)}{\sd(Y_m) \sd(Y_n)} = \frac{m \sigma^2}{\sqrt{m \sigma^2} \sqrt{n \sigma^2}} = \sqrt{\frac{m}{n}} \]",
+        "replacements": 1,
+        "surface": "math_span",
+        "reason": "the displayed correlation is between Y_m and Y_n, not Y_m and itself",
+    },
+    {
+        "page": "random/sample/CLT.html",
+        "old": r"\[ \chi\left(\frac{t}{\sqrt{n}}\right) = 1 + \frac{1}{2} \chi^{\prime\prime}(s_n) \frac{t^2}{n} \text{ where } \left|s_n\right| \le \frac{\left|t\right|}{n} \]",
+        "new": r"\[ \chi\left(\frac{t}{\sqrt{n}}\right) = 1 - \frac{t^2}{2n} + o\left(\frac{1}{n}\right) \]",
+        "replacements": 1,
+        "surface": "math_span",
+        "reason": "use the valid second-order Peano expansion for a complex characteristic function",
+    },
+    {
+        "page": "random/sample/CLT.html",
+        "old": r"\(s_n \to 0\)",
+        "new": r"\(o(1/n)\)",
+        "replacements": 1,
+        "surface": "math_span",
+        "reason": "replace the invalid real-valued Lagrange-remainder intermediate with its Peano remainder",
+    },
+    {
+        "page": "random/sample/CLT.html",
+        "old": r"\(\chi^{\prime\prime}(s_n) \to -1\)",
+        "new": r"\(t\)",
+        "replacements": 1,
+        "surface": "math_span",
+        "reason": "state the fixed characteristic-function argument after replacing the invalid remainder proof",
+    },
+    {
+        "page": "random/sample/CLT.html",
+        "old": r"\[ \chi_n(t) = \left[1 + \frac{1}{2} \chi^{\prime\prime}(s_n) \frac{t^2}{n} \right]^n \to e^{-\frac{1}{2} t^2} \text{ as } n \to \infty \]",
+        "new": r"\[ \chi_n(t) = \left[1 - \frac{t^2}{2n} + o\left(\frac{1}{n}\right)\right]^n \to e^{-\frac{1}{2} t^2} \text{ ketika } n \to \infty \]",
+        "replacements": 1,
+        "surface": "math_span",
+        "reason": "complete the characteristic-function proof with the valid Peano expansion and complex exponential limit",
+    },
+    {
+        "page": "random/sample/CLT.html",
+        "old": r"\(\{Y = k\}\)",
+        "new": r"\(\{Y_n = k\}\)",
+        "replacements": 1,
+        "surface": "math_span",
+        "reason": "the continuity-correction event concerns the indexed sum Y_n",
+    },
+    {
+        "page": "random/sample/CLT.html",
+        "old": r'''<p class="app">In the <a href="JavaScript:openAncillary('../apps/SpecialSimulator.html')" class="ancillary">special distribution simulator</a>, select the gamma distribution. Vary and \(b\) and note the shape of the probability density function. With \(k = 10\) and various values of \(b\), run the experiment 1000 times and compare the empirical density function to the true probability density function.</p>''',
+        "new": r'''<p class="app">Dalam <a href="https://www.randomservices.org/random/apps/SpecialSimulator.html" class="ancillary">simulator distribusi khusus</a>, pilih distribusi gamma. Variasikan parameter \((k, b)\), lalu perhatikan bentuk fungsi densitas probabilitasnya. Dengan \(k = 10\) dan berbagai nilai \(b\), jalankan eksperimen 1.000 kali dan bandingkan fungsi densitas empiris dengan fungsi densitas probabilitas sebenarnya.</p>''',
+        "span_old": r"\(b\)",
+        "span_new": r"\((k, b)\)",
+        "span_index": 202,
+        "replacements": 1,
+        "surface": "math_span",
+        "reason": "restore the omitted gamma shape parameter in the simulator instruction",
+    },
+    {
+        "page": "random/sample/CLT.html",
+        "old": r"\[ f(n) = \binom{n + k - 1}{n} p^k (1 - p)^n, \quad n \in \N_+ \]",
+        "new": r"\[ f(n) = \binom{n + k - 1}{n} p^k (1 - p)^n, \quad n \in \N \]",
+        "replacements": 1,
+        "surface": "math_span",
+        "reason": "a negative-binomial failure count can be zero",
+    },
+    {
+        "page": "random/sample/CLT.html",
+        "old": r"\( k \in (0, 1) \)",
+        "new": r"\( k \in (0, \infty) \)",
+        "replacements": 1,
+        "surface": "math_span",
+        "reason": "the negative-binomial shape parameter is positive, not restricted below one",
+    },
+    {
+        "page": "random/sample/CLT.html",
+        "old": r'''<p class="math">Suppose that \(Y\) has the negative binomial distribution with trial parameter \(k = 10\) and success parameter \(p = 0.4\). Find normal approximations to each of the following: </p>''',
+        "new": r'''<p class="math">Misalkan \(V\) menyatakan nomor percobaan tempat keberhasilan ke-\(k = 10\) terjadi dalam barisan percobaan Bernoulli dengan parameter keberhasilan \(p = 0.4\). Tentukan aproksimasi normal untuk masing-masing hal berikut:</p>''',
+        "span_old": r"\(Y\)",
+        "span_new": r"\(V\)",
+        "span_index": 340,
+        "replacements": 1,
+        "surface": "math_span",
+        "reason": "the retained answers use the trial number of the kth success, not the failure count",
+    },
+    {
+        "page": "random/sample/CLT.html",
+        "old": r"\(\P(20 \lt Y \lt 30)\)",
+        "new": r"\(\P(20 \le V \le 30)\)",
+        "replacements": 1,
+        "surface": "math_span",
+        "reason": "the retained probability answer uses the inclusive trial-number event",
+    },
+    {
+        "page": "random/sample/CLT.html",
+        "old": (
+            r"<li>\(\P(20 \lt Y \lt 30)\)</li>"
+            "\n\t\t"
+            r"<li>The 80th percentile of \(Y\)</li>"
+        ),
+        "new": (
+            r"<li>\(\P(20 \le V \le 30)\)</li>"
+            "\n\t\t"
+            r"<li>Persentil ke-80 dari \(V\)</li>"
+        ),
+        "span_old": r"\(Y\)",
+        "span_new": r"\(V\)",
+        "span_index": 344,
+        "replacements": 1,
+        "surface": "math_span",
+        "reason": "bind the percentile request to the corrected trial-number variable",
+    },
 )
 
 # Reader-facing language inside TeX \text{...} remains protected mathematics:
 # these exact substitutions localize words while leaving every operator,
 # identifier, delimiter, and formula position unchanged.
 MATH_TEXT_LOCALIZATIONS = (
+    {
+        "page": "random/sample/CLT.html",
+        "old": r"\text{ as }",
+        "new": r"\text{ ketika }",
+        "replacements": 1,
+        "surface": "math_span",
+    },
     {
         "page": "random/sample/LLN.html",
         "old": r"\text{ as }",
