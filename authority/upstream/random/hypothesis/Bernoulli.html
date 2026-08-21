@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<title>Tests in the Bernoulli Model</title>
+	<meta name="author" content="Kyle Siegrist">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="keywords" content="probability, statistics, hypothesis test, Bernoulli distribution, proportion, binommial test, normal test, sign test">
+	<link rel="icon" href="../icons/Icon.svg" type="image/svg">
+	<link rel="stylesheet" href="../Screen.css" type="text/css" media="screen">
+	<script src="../Basic.js"></script>
+	<script src="../../MathJax/tex-svg.js" id="MathJax-script" async></script>
+</head>
+
+<body>
+
+<div class="latex">
+	\(\newcommand{\R}{\mathbb{R}}\) 
+	\(\newcommand{\N}{\mathbb{N}}\)
+	\(\newcommand{\Z}{\mathbb{Z}}\)
+	\(\newcommand{\P}{\mathbb{P}}\)
+	\(\newcommand{\E}{\mathbb{E}}\)
+	\(\newcommand{\var}{\text{var}}\)
+	\(\newcommand{\sd}{\text{sd}}\)
+	\(\newcommand{\bs}{\boldsymbol}\)
+</div>
+
+<header>
+	<ol class="map">
+		<li class="parent"><a href="../index.html">Random</a></li>
+		<li class="parent"><a href="index.html">8. Hypothesis Testing</a></li>
+		<li class="child"><a href="Introduction.html" title="Introduction">1</a></li>
+		<li class="child"><a href="Normal.html" title="Tests in the Normal Model">2</a></li>
+		<li class="current">3</li>
+		<li class="child"><a href="BivariateNormal.html" title="Tests in the Two-Sample Normal Model">4</a></li>
+		<li class="child"><a href="Likelihood.html" title="Likelihood Ratio Tests">5</a></li>
+		<li class="child"><a href="ChiSquare.html" title="Chi-Square Tests">6</a></li>
+		<li class="details"><button type="button" title="Expand Details" onclick="expandDetails(true);"><img src="../icons/Plus.svg" alt="Expand"></button></li>
+		<li class="details"><button type="button" title="Contract Details" onclick="expandDetails(false);"><img src="../icons/Minus.svg" alt="Contract"></button></li>
+	</ol>
+	<h2>3. Tests in the Bernoulli Model</h2>
+</header>
+
+<h3 id="bas">Basic Tests</h3>
+
+<h4 id="pre">Preliminaries</h4>
+
+<p>Suppose that \(\bs{X} = (X_1, X_2, \ldots, X_n)\) is a random sample from the <a href="../bernoulli/Introduction.html">Bernoulli distribution</a> with unknown parameter \(p \in (0, 1)\). Thus, these are <a href="../prob/Independence.html">independent random variables</a> taking the values 1 and 0 with probabilities \(p\) and \(1 - p\) respectively. In the usual language of reliability, 1 denotes <dfn>success</dfn> and 0 denotes <dfn>failure</dfn>, but of course these are generic terms.</p>
+
+<div class="unit">
+	<p class="math">Often this model arises in one of the following contexts:</p>
+	<ol class="sub">
+		<li>There is an <em>event</em> of interest in a basic experiment, with unknown probability \(p\). We replicate the experiment \(n\) times and define \(X_i = 1\) if and only if the event occurred on run \(i\).</li>
+		<li>We have a population of objects of several different types; \(p\) is the unknown proportion of objects of a particular type of interest. We select \(n\) objects at random from the population and let \(X_i = 1\) if and only if object \(i\) is of the type of interest.</li>
+	</ol>
+</div>
+
+<p>In part (b), when the sampling is <em>with</em> replacement, the variables really do form a random sample from the Bernoulli distribution. When the sampling is <em>without</em> replacement, the variables are dependent, but the Bernoulli model may still be approximately valid if the population size is very large compared to the sample size \(n\). For more on these points, see the discussion of <a href="../urn/Introduction.html">sampling methods</a> in the chapter on <a href="../urn/index.html">finite sampling models.</a> In this section, we will construct hypothesis tests for the parameter \(p\). The parameter space for \(p\) is the interval \((0, 1)\), and all hypotheses define subsets of this space.  This section parallels the section on <a href="../interval/Bernoulli.html">Estimation in the Bernoulli Model</a> in the Chapter on <a href="../interval/index.html">Interval Estimation</a>.</p>
+
+<h4 id="bin">The Binomial Test</h4>
+
+<p>Recall that the number of successes \(Y = \sum_{i=1}^n X_i\) has the <a href="../bernoulli/Binomial.html">binomial distribution</a> with parameters \(n\) and \(p\), and has probability density function given by
+\[ \P(Y = y) = \binom{n}{y} p^y (1 - p)^{n-y}, \quad y \in \{0, 1, \ldots, n\} \]
+Recall also that the mean is \(\E(Y) = n p\) and variance is \(\var(Y) = n p (1 - p)\). Moreover \(Y\) is <a  href="../point/Sufficient.html#ber">sufficient</a> for \(p\) and hence is a natural candidate to be a test statistic for hypothesis tests about \(p\). For \(\alpha \in (0, 1)\), let \(b_{n, p}(\alpha)\) denote the <a href="../dist/CDF.html#qnt">quantile</a> of order \(\alpha\) for the binomial distribution with  parameters \(n\) and \(p\). Since the binomial distribution is discrete, only certain (exact) quantiles are possible. For the remainder of this discussion, \( p_0 \in (0, 1) \) is a conjectured value of \( p \).</p>
+
+<div class="unit" id="bin1">
+	<p class="math">For every \(\alpha \in (0, 1)\), the following tests have approximate significance level \(\alpha\):</p>
+	<ol class="sub">
+		<li>Reject \(H_0: p = p_0\) versus \(H_1: p \ne p_0\) if and only if \(Y \le b_{n, p_0}(\alpha / 2)\) or \(Y \ge b_{n, p_0}(1 - \alpha / 2)\).</li>
+		<li>Reject \(H_0: p \ge p_0\) versus \(H_1: p \lt p_0\) if and only if \(Y \le b_{n, p_0}(\alpha)\).</li>
+		<li>Reject \(H_0: p \le p_0\) versus \(H_1: p \gt p_0\) if and only if \(Y \ge b_{n, p_0}(1 - \alpha)\).</li>
+	</ol>
+	<details>
+		<summary>Details:</summary>
+		<p>In part (a), \( H_0 \) is a simple hypothesis, and under \( H_0 \) the test statistic \( Y \) has the binomial distribution with parameter \( n \) and \( p_0 \). Thus, if \( H_0 \) is true, then \( \alpha \) is (approximately) the probability of falsely rejecting \( H_0 \) by definition of the quantiles. In parts (b) and (c), \( H_0 \) specifies a range of values of \( p \). But if \( H_0 \) is true, the maximum type 1 probability is (approximately) \( \alpha \) and occurs when \( p = p_0 \).</p>
+	</details>
+</div>
+
+<p>The test in (a) is the standard, symmetric, two-sided test, corresponding to probability \( \alpha / 2 \) (approximately) in both tails of the binomial distribution under \( H_0 \). The test in (b) is the left-tailed and test and the test in (c) is the right-tailed test. As usual, we can generalize the two-sided test by partitioning \( \alpha \) between the left and right tails of the binomial distribution in an arbitrary manner.</p>
+
+<div class="unit" id="bin2">
+	<p class="math">For any \(\alpha, \, r \in (0, 1)\), the following test has (approximate) significance level \(\alpha\): Reject \(H_0: p = p_0\) versus \(H_1: p \ne p_0\) if and only if \(Y \le b_{n, p_0}(\alpha - r \alpha)\) or \(Y \ge b_{n, p_0}(1 - r \alpha)\).</p>
+	<ol class="sub">
+		<li>\( r = \frac{1}{2} \) gives the standard symmetric two-sided test.</li>
+		<li>\( r \downarrow 0 \) gives the left-tailed test.</li>
+		<li>\( r \uparrow 1 \) gives the right-tailed test.</li>
+	</ol>
+	<details>
+		<summary>Details:</summary>
+		<p>Once again, \( H_0 \) is a simple hypothesis and under \( H_0 \), the test statistic \( Y \) has the binomial distribution with parameters \( n \) and \( p_0 \). Thus if \( H_0 \) is true then the probability of falsely rejecting \( H_0 \) is \( \alpha \) by definition of the quantiles. Parts (a)&ndash;(c) follow from properties of the quantile function.</p>
+	</details>
+</div>
+
+<h4 id="nor">An Approximate Normal Test</h4>
+
+<p>When \(n\) is large, the distribution of \(Y\) is <a href="../bernoulli/Binomial.html#nor">approximately normal</a>, by the <a href="../sample/CLT.html">central limit theorem</a>, so we can construct an approximate <a href="Normal.html">normal test</a>. </p>
+
+<div class="unit" id="nor1">
+	<p class="math">Suppose that the sample size \( n \) is large. For a conjectured \( p_0 \in (0, 1) \), define the test statistic
+	\[ Z = \frac{Y - n p_0}{\sqrt{n p_0 (1 - p_0)}} \]
+	<ol class="sub">
+		<li>If \( p = p_0 \), then \( Z \) has approximately a standard normal distribution.</li>
+		<li>If \( p \ne p_0 \), then \( Z \) has approximately a normal distribution with mean \( \sqrt{n} \frac{p - p_0}{\sqrt{p_0 (1 - p_0)}} \) and variance \( \frac{p (1 - p)}{p_0 (1 - p_0)} \)
+	</ol>
+	<details>
+		<summary>Details:</summary>
+		<ol class="sub">
+			<li>This follows from the DeMoivre-Laplace theorem, the special case of the central limit theorem applied to the binomial distribution. Note that \( Z \) is simply the standard score associated with \( Y \).</li>
+			<li>With some fairly simple algebra, we can write 
+			\[ Z = \sqrt{n} \frac{p - p_0}{\sqrt{p_0 (1 - p_0)}} + \sqrt{\frac{p (1 - p)}{p_0 (1 - p_0)}} \frac{Y - n p}{\sqrt{n p (1 - p)}} \]
+			The second factor in the second term is again simply the standard score associated with \( Y \) and hence this factor has approximately a standard normal distribution. So the result follows from the basic linearity property of the normal distribution.</li>
+		</ol>
+	</details>
+</div>
+
+<p>As usual, for \(\alpha \in (0, 1)\), let \(z(\alpha)\) denote the quantile of order \(\alpha\) for the standard normal distribution. For selected values of \(\alpha\), \(z(\alpha)\) can be obtained from the <a href="JavaScript:openAncillary('../apps/QuantileApp.html')" class="ancillary">quantile app</a>, or from most statistical software packages. Recall also by symmetry that \(z(1 - \alpha) = - z(\alpha)\).</p>
+
+<div class="unit" id="nor2">
+	<p class="math">For every \(\alpha \in (0, 1)\), the following tests have approximate significance level \(\alpha\):</p>
+	<ol class="sub">
+		<li>Reject \(H_0: p = p_0\) versus \(H_1: p \ne p_0\) if and only if \(Z \lt -z(1 - \alpha / 2)\) or \(Z \gt z(1 - \alpha / 2)\).</li>
+		<li>Reject \(H_0: p \ge p_0\) versus \(H_1: p \lt p_0\) if and only if \(Z \lt -z(1 - \alpha)\).</li>
+		<li>Reject \(H_0: p \le p_0\) versus \(H_1: p \ge p_0\) if and only if \(Z \gt z(1 - \alpha)\).</li>
+	</ol>
+	<details>
+		<summary>Details:</summary>
+		<p>In part (a), \( H_0 \) is a simple hypothesis and under \( H_0 \) the test statistic \( Z \) has approximately a standard normal distribution. Hence if \( H_0 \) is true then the probability of falsely rejecting \( H_0 \) is approximately \( \alpha \) by definition of the quantiles. In parts (b) and (c), \( H_0 \) specifies a range of values of \( p \), and under \( H_0 \) the test statistic \( Z \) has a nonstandard normal distribution, as described in <a href="#nor1" class="ref"></a>. The maximum type one error probability is \( \alpha \) and occurs when \( p = p_0 \).</p>
+	</details>
+</div>
+
+<p>The test in (a) is the symmetric, two-sided test that corresponds to \( \alpha / 2 \) in both tails of the distribution of \( Z \), under \( H_0 \). The test in (b) is the left-tailed test and the test in (c) is the right-tailed test. As usual, we can construct a more general two-sided test by partitioning \( \alpha \) between the left and right tails of the standard normal distribution in an arbitrary manner.</p>
+
+<div class="unit" id="nor3">
+	<p class="math">For every \(\alpha, \, r \in (0, 1)\) , the following test has approximate significance level \(\alpha\): Reject \(H_0: p = p_0\) versus \(H_1: p \ne p_0\) if and only if \(Z \lt z(\alpha - r  \alpha)\) or \(Z \gt z(1 - r \alpha)\).</p>
+	<ol class="sub">
+		<li>\( r = \frac{1}{2} \) gives the standard, symmetric two-sided test.</li>
+		<li>\( r \downarrow 0 \) gives the left-tailed test.</li>
+		<li>\( r \uparrow 1 \) gives the right-tailed test.</li>
+	</ol>
+	<details>
+		<summary>Details:</summary>
+		<p>In part (a), \( H_0 \) is again a simple hypothesis, and under \( H_0 \) the test statistic \( Z \) has approximately a standard normal distribution. So if \( H_0 \) is true, the probability of falsely rejecting \( H_0 \) is \( \alpha \) by definition of the quantiles.</p>
+	</details>
+</div>
+
+<h4 id="sim">Simulation Exercises</h4>
+
+<div class="unit" id="sim1">
+	<p class="app">In the <a href="JavaScript:openAncillary('../apps/ProportionTest.html')" class="ancillary">proportion test experiment</a>, set \(H_0: p = p_0\), and select sample size 10, significance level 0.1, and \(p_0 = 0.5\). For each \(p \in \{0.1, 0.2, \ldots, 0.9\}\), run the experiment 1000 times and then note the relative frequency of rejecting the null hypothesis. Graph the empirical power function.</p>
+</div>
+
+<div class="unit" id="sim2">
+	<p class="app">In the <a href="JavaScript:openAncillary('../apps/ProportionTest.html')" class="ancillary">proportion test experiment</a>, repeat the previous exercise with sample size 20.</p>
+</div>
+
+<div class="unit" id="sim3">
+	<p class="app">In the <a href="JavaScript:openAncillary('../apps/ProportionTest.html')" class="ancillary">proportion test experiment</a>, set \(H_0: p \le p_0\), and select sample size 15, significance level 0.05, and \(p_0 = 0.3\). For each \(p \in \{0.1, 0.2, \ldots, 0.9\}\), run the experiment 1000 times and note the relative frequency of rejecting the null hypothesis. Graph the empirical power function.</p>
+</div>
+
+<div class="unit" id="sim4">
+	<p class="app">In the <a href="JavaScript:openAncillary('../apps/ProportionTest.html')" class="ancillary">proportion test experiment</a>, repeat the previous exercise with sample size 30.</p>
+</div>
+
+<div class="unit" id="sim5">
+	<p class="app">In the <a href="JavaScript:openAncillary('../apps/ProportionTest.html')" class="ancillary">proportion test experiment</a>, set \(H_0: p \ge p_0\), and select sample size 20, significance level 0.01, and \(p_0 = 0.6\). For each \(p \in \{0.1, 0.2, \ldots, 0.9\}\), run the experiment 1000 times and then note the relative frequency of rejecting the null hypothesis. Graph the empirical power function.</p>
+</div>
+
+<div class="unit" id="sim6">
+	<p class="app">In the <a href="JavaScript:openAncillary('../apps/ProportionTest.html')" class="ancillary">proportion test experiment</a>, repeat the previous exercise with sample size 50.</p>
+</div>
+
+<h4 id="com">Computational Exercises</h4>
+
+<div class="unit" id="com1">
+	<p class="math">In a pole of 1000 registered voters in a certain district, 427 prefer candidate X. At the 0.1 level, is the evidence sufficient to conclude that more that 40% of the registered voters prefer X? </p>
+	<details>
+		<summary>Details:</summary>
+		<p>Test statistic 1.743, critical value 1.282. Reject \(H_0\).</p>
+	</details>
+</div>
+
+<div class="unit" id="com2">
+	<p class="math">A coin is tossed 500 times and results in 302 heads. At the 0.05 level, test to see if the coin is unfair. </p>
+	<details>
+		<summary>Details:</summary>
+		<p>Test statistic 4.651, critical values \(\pm 1.961\). Reject \(H_0\); the coin is almost certainly unfair.</p>
+	</details>
+</div>
+
+<div class="unit" id="com3">
+	<p class="math">A sample of 400 memory chips from a production line are tested, and 32 are defective. At the 0.05 level, test to see if the proportion of defective chips is less than 0.1.</p>
+	<details>
+		<summary>Details:</summary>
+		<p>Test statistic \(-1.333\), critical value \(-1.645\). Fail to reject \(H_0\).</p>
+	</details>
+</div>
+
+<div class="unit" id="com4">
+	<p class="math">A new drug is administered to 50 patients and the drug is effective in 42 cases. At the 0.1 level, test to see if the success rate for the new drug is greater that 0.8.</p>
+	<details>
+		<summary>Details:</summary>
+		<p>Test statistic 0.707, critical value 1.282. Fail to reject \(H_0\).</p>
+	</details>
+</div>
+
+<div class="unit" id="com5">
+	<p class="stat">Using the <a href="JavaScript:openAncillary('../data/MM.html')" class="ancillary">M&amp;M data</a>, test the following alternative hypotheses at the 0.1 significance level: </p>
+	<ol class="sub">
+		<li>The proportion of red M&amp;Ms differs from \(\frac{1}{6}\).</li>
+		<li>The proportion of green M&amp;Ms is less than \(\frac{1}{6}\).</li>
+		<li>The proportion of yellow M&amp;M is greater than \(\frac{1}{6}\).</li>
+	</ol>
+	<details>
+		<summary>Details:</summary>
+		<ol class="sub">
+			<li>Test statistic 0.162, critical values \(\pm 1.645\). Fail to reject \(H_0\).</li>
+			<li>Test statistic \(-4.117\), critical value \(-1.282\). Reject \(H_0\).</li>
+			<li>Test statistic 8.266, critical value 1.282. Reject \(H_0\).</li>
+		</ol>
+	</details>
+</div>
+
+<h3 id="sgn">The Sign Test</h3>
+
+<h4 id="der">Derivation</h4> 
+
+<p>Suppose now that we have a basic <a href="../prob/Experiments.html">random experiment</a> with a <a href="../prob/Probability.html">real-valued random variable</a> \(U\) of interest. We assume that \(U\) has a  <a href="../dist/Continuous.html">continuous distribution</a> with support on an interval of \(S \subseteq \R\). Let \(m\) denote the <a href="../dist/CDF.html#qnt">quantile</a> of a specified order \(p_0 \in (0, 1)\) for the distribution of \(U\). Thus, by definition,
+\[ p_0 = \P(U \le m) \]
+In general of course, \(m\) is unknown, even though \(p_0\) is specified, because we don't know the distribution of \(U\). Suppose that we want to construct hypothesis tests for \(m\). For a given test value \(m_0\), let
+\[ p = \P(U \le m_0) \]
+Note that \(p\) is unknown even though \(m_0\) is specified, because again, we don't know the distribution of \(U\).</p>
+
+<div class="unit" id="der1">
+	<p class="math">Relations</p>
+	<ol class="sub">
+		<li>\(m = m_0\) if and only if \(p = p_0\).</li>
+		<li>\(m \lt m_0\) if and only if \(p \gt p_0\).</li>
+		<li>\(m \gt m_0\) if and only if \(p \lt p_0\).</li>
+	</ol>
+	<details>
+		<summary>Details:</summary>
+		<p>These results follow since we are assuming that the distribution of \(U\) is continuous and is supported on the interval \(S\).</p>
+	</details>
+</div>
+
+<p>As usual, we repeat the basic experiment \(n\) times to generate a <a href="../sample/Introduction.html">random sample</a> \(\bs{U} = (U_1, U_2, \ldots, U_n)\) of size \(n\) from the distribution of \(U\). Let \(X_i = \bs{1}(U_i \le m_0)\) be the indicator variable of the event \(\{U_i \le m_0\}\) for \(i \in \{1, 2, \ldots, n\}\).</p>
+
+<div class="unit" id="der2">
+	<p class="math">Note that \(\bs{X} = (X_1, X_2, \ldots, X_n)\) is a statistic (an observable function of the data vector \(\bs{U}\)) and is a random sample of size \(n\) from the Bernoulli distribution with parameter \(p\).</p>
+</div>
+
+<p>From theorems <a href="#der1" class="ref"></a> and <a href="#der2" class="ref"></a> it follows that tests of the unknown quantile \(m\) can be converted to tests of the Bernoulli parameter \(p\), and thus the tests developed above apply. This procedure is known as the <dfn>sign test</dfn>, because essentially, only the sign of \(U_i - m_0\) is recorded for each \(i\). This procedure is also an example of a <dfn>nonparametric test</dfn>, because no assumptions about the distribution of \(U\) are made (except for continuity). In particular, we do not need to assume that the distribution of \(U\) belongs to a particular parametric family.</p>
+
+<p>The most important special case of the sign test is the case where \(p_0 = \frac{1}{2}\); this is the sign test of the median. If the distribution of \(U\) is known to be symmetric, the median and the mean agree. In this case, sign tests of the median are also tests of the mean.</p>
+
+<h4 id="ssm">Simulation Exercises</h4>
+
+<div class="unit" id="ssm1">
+	<p class="app">In the <a href="JavaScript:openAncillary('../apps/SignTest.html')" class="ancillary">sign test experiment</a>, set the sampling distribution to normal with mean 0 and standard deviation 2. Set the sample size to 10 and the significance level to 0.1. For each of the 9 values of \(m_0\), run the simulation 1000 times.</p>
+	<ol class="sub">
+		<li>When \(m = m_0\), give the empirical estimate of the significance level of the test and compare with 0.1.</li>
+		<li>In the other cases, give the empirical estimate of the power of the test.</li>
+	</ol>
+</div>
+
+<div class="unit" id="ssm2">
+	<p class="app">In the <a href="JavaScript:openAncillary('../apps/SignTest.html')" class="ancillary">sign test experiment</a>, set the sampling distribution to uniform on the interval \([0, 5]\). Set the sample size to 20 and the significance level to 0.05. For each of the 9 values of \(m_0\), run the simulation 1000 times.</p>
+	<ol class="sub">
+		<li>When \(m = m_0\), give the empirical estimate of the significance level of the test and compare with 0.05.</li>
+		<li>In the other cases, give the empirical estimate of the power of the test.</li>
+	</ol>
+</div>
+
+<div class="unit" id="ssm3">
+	<p class="app">In the <a href="JavaScript:openAncillary('../apps/SignTest.html')" class="ancillary">sign test experiment</a>, set the sampling distribution to gamma with shape parameter 2 and scale parameter 1. Set the sample size to 30 and the significance level to 0.025. For each of the 9 values of \(m_0\), run the simulation 1000 times.</p>
+	<ol class="sub">
+		<li>When \(m = m_0\), give the empirical estimate of the significance level of the test and compare with 0.025.</li>
+		<li>In the other cases, give the empirical estimate of the power of the test.</li>
+	</ol>
+</div>
+
+<h4 id="exe">Computational Exercises</h4>
+
+<div class="unit" id="exe1">
+	<p class="stat">Using the <a href="JavaScript:openAncillary('../data/MM.html')" class="ancillary">M&amp;M data</a>, test to see if the median weight exceeds 47.9 grams, at the 0.1 level. </p>
+	<details>
+		<summary>Details:</summary>
+		<p>Test statistic 3.286, critical value 1.282.  Reject \(H_0\).</p>
+	</details>
+</div>
+
+<div class="unit" id="exe2">
+	<p class="stat">Using <a href="JavaScript:openAncillary('../data/Fisher.html')" class="ancillary">Fisher's iris data</a>, perform the following tests, at the 0.1 level: </p>
+	<ol class="sub">
+		<li>The median petal length of Setosa irises differs from 15 mm.</li>
+		<li>The median petal length of Verginica irises is less than 52 mm.</li>
+		<li>The median petal length of Versicolor irises is less than 42 mm.</li>
+	</ol>
+	<details>
+		<summary>Details:</summary>
+		<ol class="sub">
+			<li>Test statistic 3.394, critical values \(\pm 1.645\). Reject \(H_0\).</li>
+			<li>Test statistic \(-1.980\), critical value \(-1.282\). Reject \(H_0\).</li>
+			<li>Test statistic \(-0.566\), critical value \(-1.282\). Fail to reject \(H_0\).</li>
+		</ol>
+	</details>
+</div>
+
+<footer>
+	<ol class="map">
+		<li class="parent"><a href="../index.html">Random</a></li>
+		<li class="parent"><a href="index.html">8. Hypothesis Testing</a></li>
+		<li class="child"><a href="Introduction.html" title="Introduction">1</a></li>
+		<li class="child"><a href="Normal.html" title="Tests in the Normal Model">2</a></li>
+		<li class="current">3</li>
+		<li class="child"><a href="BivariateNormal.html" title="Tests in the Two-Sample Normal Model">4</a></li>
+		<li class="child"><a href="Likelihood.html" title="Likelihood Ratio Tests">5</a></li>
+		<li class="child"><a href="ChiSquare.html" title="Chi-Square Tests">6</a></li>
+		<li class="details"><button type="button" title="Expand Details" onclick="expandDetails(true);"><img src="../icons/Plus.svg" alt="Expand"></button></li>
+		<li class="details"><button type="button" title="Contract Details" onclick="expandDetails(false);"><img src="../icons/Minus.svg" alt="Contract"></button></li>
+	</ol>
+	<ul class="map">
+		<li class="sister"><a href="JavaScript:openAncillary('../apps/index.html')" class="ancillary">Apps</a></li>
+		<li class="sister"><a href="JavaScript:openAncillary('../data/index.html')" class="ancillary">Data Sets</a></li>
+		<li class="child"><a href="JavaScript:openAncillary('../biographies/index.html')" class="ancillary"> Biographies</a></li>
+	</ul>
+</footer>
+
+<script>getReferences();</script>
+
+</body>
+</html>

@@ -1,0 +1,413 @@
+{
+  "core": {
+    "bytes": 1003900,
+    "files": 29,
+    "source_hashes_verified": true,
+    "sources": [
+      {
+        "bytes": 8952,
+        "document_order": 1,
+        "path": "random/sample/index.html",
+        "sha256": "9f7b9a075c430efbae92192e131152c6728f7827dc3dde987ce871ec9d6ae35c",
+        "url": "https://www.randomservices.org/random/sample/index.html"
+      },
+      {
+        "bytes": 31343,
+        "document_order": 2,
+        "path": "random/sample/Introduction.html",
+        "sha256": "0af72fbf0202413525cae99e696cfa70014a803d6c5ac7a7dcafd1577742414f",
+        "url": "https://www.randomservices.org/random/sample/Introduction.html"
+      },
+      {
+        "bytes": 42746,
+        "document_order": 3,
+        "path": "random/sample/Mean.html",
+        "sha256": "e21a3da7773a6f7f925b4cb0c583d5331abb1656fe01ed952c8d42b26f238cab",
+        "url": "https://www.randomservices.org/random/sample/Mean.html"
+      },
+      {
+        "bytes": 30754,
+        "document_order": 4,
+        "path": "random/sample/LLN.html",
+        "sha256": "8662dfc55683fa40c79a5d453a450730e2ba151716a20eb61a2db307c33f5e85",
+        "url": "https://www.randomservices.org/random/sample/LLN.html"
+      },
+      {
+        "bytes": 40239,
+        "document_order": 5,
+        "path": "random/sample/CLT.html",
+        "sha256": "ee6dc9f8e9feb14f19f96a0206c3289a4aedfc014f5e3dabf79422e1dc29f9e3",
+        "url": "https://www.randomservices.org/random/sample/CLT.html"
+      },
+      {
+        "bytes": 55878,
+        "document_order": 6,
+        "path": "random/sample/Variance.html",
+        "sha256": "452e2841007fad173229a9bb069a4acdda8e0d0bc6c1632f7239ef585248b0c6",
+        "url": "https://www.randomservices.org/random/sample/Variance.html"
+      },
+      {
+        "bytes": 63965,
+        "document_order": 7,
+        "path": "random/sample/OrderStatistics.html",
+        "sha256": "19ff485c600d4294e888c1b3d05ff7eb9196449f958d3325fd72b416aca56d63",
+        "url": "https://www.randomservices.org/random/sample/OrderStatistics.html"
+      },
+      {
+        "bytes": 75623,
+        "document_order": 8,
+        "path": "random/sample/Covariance.html",
+        "sha256": "1009a5a6a129ee5592aed6c2b914973ae82bb7e7685c477c4c205dbe47fd7072",
+        "url": "https://www.randomservices.org/random/sample/Covariance.html"
+      },
+      {
+        "bytes": 35940,
+        "document_order": 9,
+        "path": "random/sample/Normal.html",
+        "sha256": "d9a62017ae3a8488aedac3eceedb15d8b68243ae60894104ab88564ace25ff79",
+        "url": "https://www.randomservices.org/random/sample/Normal.html"
+      },
+      {
+        "bytes": 8311,
+        "document_order": 10,
+        "path": "random/point/index.html",
+        "sha256": "b0e3e9e5f55bfd4ebac0047dafff725628d6a0ca6e638d7a2847095b311d637c",
+        "url": "https://www.randomservices.org/random/point/index.html"
+      },
+      {
+        "bytes": 37864,
+        "document_order": 11,
+        "path": "random/point/Estimators.html",
+        "sha256": "10914ffca9034209da0111918cfb534d60982bde0bba142a11d61d43114c6e2a",
+        "url": "https://www.randomservices.org/random/point/Estimators.html"
+      },
+      {
+        "bytes": 48492,
+        "document_order": 12,
+        "path": "random/point/Moments.html",
+        "sha256": "43755b5bee6179fca8d7c1c964e7c6a9bb1a9de6f3916130100c69e666a3194e",
+        "url": "https://www.randomservices.org/random/point/Moments.html"
+      },
+      {
+        "bytes": 49551,
+        "document_order": 13,
+        "path": "random/point/Likelihood.html",
+        "sha256": "f8c94e3de84f7a025fd32395169938f37e7fd7958d5a8be9d56b54ed307d6ffd",
+        "url": "https://www.randomservices.org/random/point/Likelihood.html"
+      },
+      {
+        "bytes": 49645,
+        "document_order": 14,
+        "path": "random/point/Bayes.html",
+        "sha256": "96904b1fd4ab905bbffa62bd5cc0d965b3c969e543a983124e968718ed25d550",
+        "url": "https://www.randomservices.org/random/point/Bayes.html"
+      },
+      {
+        "bytes": 28635,
+        "document_order": 15,
+        "path": "random/point/Unbiased.html",
+        "sha256": "0d9765c5c7b5b8a54b29fc45c3a435d20e2a9200e027609658345087dedcd531",
+        "url": "https://www.randomservices.org/random/point/Unbiased.html"
+      },
+      {
+        "bytes": 57507,
+        "document_order": 16,
+        "path": "random/point/Sufficient.html",
+        "sha256": "4d7402f2a960ea2b4232e57e4ee5992ac29801b9269f300f17f8e83074d5a0e4",
+        "url": "https://www.randomservices.org/random/point/Sufficient.html"
+      },
+      {
+        "bytes": 7789,
+        "document_order": 17,
+        "path": "random/interval/index.html",
+        "sha256": "85fcad0292636fbae0935ebb775a87b9e4dbdf33692b5e2823b353163d168403",
+        "url": "https://www.randomservices.org/random/interval/index.html"
+      },
+      {
+        "bytes": 24577,
+        "document_order": 18,
+        "path": "random/interval/Introduction.html",
+        "sha256": "e5e6cb402c737c1d63a58ef4509975633f9cfa483f8f0afa8860ff9b6dbb4ee3",
+        "url": "https://www.randomservices.org/random/interval/Introduction.html"
+      },
+      {
+        "bytes": 40632,
+        "document_order": 19,
+        "path": "random/interval/Normal.html",
+        "sha256": "21c59dd27f38c17148de5af35d53d94a01c51cd4f230c81d75e91173a9917586",
+        "url": "https://www.randomservices.org/random/interval/Normal.html"
+      },
+      {
+        "bytes": 27886,
+        "document_order": 20,
+        "path": "random/interval/Bernoulli.html",
+        "sha256": "764f961e4f0db2562a3b1e42a446d3b5b3854cd8dc3468d017ee544f3aa87750",
+        "url": "https://www.randomservices.org/random/interval/Bernoulli.html"
+      },
+      {
+        "bytes": 30167,
+        "document_order": 21,
+        "path": "random/interval/BivariateNormal.html",
+        "sha256": "fde8da8c5d1e7b7d583f9eb47dac719234f1a63072c0333bdb815c117078211a",
+        "url": "https://www.randomservices.org/random/interval/BivariateNormal.html"
+      },
+      {
+        "bytes": 23436,
+        "document_order": 22,
+        "path": "random/interval/Bayes.html",
+        "sha256": "f89dfc9ed4b9475b2cd83b467f19cfbfa6164600f14567f4237fdae9076d1cb7",
+        "url": "https://www.randomservices.org/random/interval/Bayes.html"
+      },
+      {
+        "bytes": 8129,
+        "document_order": 23,
+        "path": "random/hypothesis/index.html",
+        "sha256": "4965a9bfd13b94d932cdd44268b3322078f1e9fce934173c84e170c6a6d6ed1f",
+        "url": "https://www.randomservices.org/random/hypothesis/index.html"
+      },
+      {
+        "bytes": 20738,
+        "document_order": 24,
+        "path": "random/hypothesis/Introduction.html",
+        "sha256": "fb05a9d71b55ba113e2f71afa052bc059b35f2c5b6946012c19ecbc693faab1a",
+        "url": "https://www.randomservices.org/random/hypothesis/Introduction.html"
+      },
+      {
+        "bytes": 43435,
+        "document_order": 25,
+        "path": "random/hypothesis/Normal.html",
+        "sha256": "fd7bc50171fc51310f41e9132005b66cdbbd31bf507a70a0246394b05a379ab2",
+        "url": "https://www.randomservices.org/random/hypothesis/Normal.html"
+      },
+      {
+        "bytes": 23703,
+        "document_order": 26,
+        "path": "random/hypothesis/Bernoulli.html",
+        "sha256": "a3691cdf98c1b182bf434ec94479cfea344e1e555c5928ee74555ff09ce0e603",
+        "url": "https://www.randomservices.org/random/hypothesis/Bernoulli.html"
+      },
+      {
+        "bytes": 26540,
+        "document_order": 27,
+        "path": "random/hypothesis/BivariateNormal.html",
+        "sha256": "4a1e7607fc2ca8d18704b5cf8a9edecb5bc45556399ea6bb9ed4965c9d7669f8",
+        "url": "https://www.randomservices.org/random/hypothesis/BivariateNormal.html"
+      },
+      {
+        "bytes": 21772,
+        "document_order": 28,
+        "path": "random/hypothesis/Likelihood.html",
+        "sha256": "60b047835a3f644cd2317c8ab984b8d41ae7669f53c1d32a79705942670b9b04",
+        "url": "https://www.randomservices.org/random/hypothesis/Likelihood.html"
+      },
+      {
+        "bytes": 39651,
+        "document_order": 29,
+        "path": "random/hypothesis/ChiSquare.html",
+        "sha256": "379cf5939801c94b251884c0c82f0e6efc7ecce35cec11a645881d7ca9c7a6aa",
+        "url": "https://www.randomservices.org/random/hypothesis/ChiSquare.html"
+      }
+    ]
+  },
+  "counts": {
+    "entities_by_type": {
+      "asset": 236,
+      "disclosure": 451,
+      "document": 29,
+      "figure": 24,
+      "internal_link": 1810,
+      "math_text": 2891,
+      "section": 366,
+      "unit": 760
+    },
+    "entities_total": 6567,
+    "relations_total": 9035
+  },
+  "determinism": {
+    "csv": "UTF-8 without BOM; RFC 4180 quoting; LF; fixed column and row order",
+    "json": "UTF-8 without BOM; sorted keys; LF; JSONL compact / receipt indented",
+    "volatile_fields_omitted": true
+  },
+  "duplicate_native_ids": [
+    {
+      "entity_ids": [
+        "O006-016-02-0029",
+        "O006-016-02-0030"
+      ],
+      "native_id": "gam2",
+      "occurrences": 2,
+      "source_columns": [
+        0,
+        0
+      ],
+      "source_lines": [
+        400,
+        410
+      ],
+      "source_path": "random/point/Sufficient.html"
+    }
+  ],
+  "generator": {
+    "path": "scripts/generate_random_backend.py",
+    "sha256": "7a3679970e8d50086c2a1c9250d19807395aa42abd86a076251672b2b190a100"
+  },
+  "link_target_audit": {
+    "known_upstream_defects": [
+      {
+        "entity_id": "O006-002-07-0013",
+        "source_path": "random/sample/Introduction.html",
+        "target": "JavaScript:openAncillary('../data/Fisher.html')",
+        "target_resolved": "random/data/Fisher.html"
+      },
+      {
+        "entity_id": "O006-002-07-0020",
+        "source_path": "random/sample/Introduction.html",
+        "target": "../dist/discrete.html",
+        "target_resolved": "random/dist/discrete.html"
+      },
+      {
+        "entity_id": "O006-002-07-0032",
+        "source_path": "random/sample/Introduction.html",
+        "target": "JavaScript:openAncillary('../data/1948Election.html')",
+        "target_resolved": "random/data/1948Election.html"
+      },
+      {
+        "entity_id": "O006-002-07-0039",
+        "source_path": "random/sample/Introduction.html",
+        "target": "JavaScript:openAncillary('../data/Fisher.html')",
+        "target_resolved": "random/data/Fisher.html"
+      },
+      {
+        "entity_id": "O006-002-07-0044",
+        "source_path": "random/sample/Introduction.html",
+        "target": "JavaScript:openAncillary('../data/1948Election.html')",
+        "target_resolved": "random/data/1948Election.html"
+      },
+      {
+        "entity_id": "O006-003-07-0026",
+        "source_path": "random/sample/Mean.html",
+        "target": "JavaScript:openAncillary('../data/Fisher.html')",
+        "target_resolved": "random/data/Fisher.html"
+      },
+      {
+        "entity_id": "O006-006-07-0044",
+        "source_path": "random/sample/Variance.html",
+        "target": "JavaScript:openAncillary('../data/Fisher.html')",
+        "target_resolved": "random/data/Fisher.html"
+      },
+      {
+        "entity_id": "O006-007-07-0061",
+        "source_path": "random/sample/OrderStatistics.html",
+        "target": "JavaScript:openAncillary('../data/Fisher.html')",
+        "target_resolved": "random/data/Fisher.html"
+      },
+      {
+        "entity_id": "O006-011-07-0042",
+        "source_path": "random/point/Estimators.html",
+        "target": "JavaScript:openAncillary('../apps/ExponentialExperiment.html')",
+        "target_resolved": "random/apps/ExponentialExperiment.html"
+      },
+      {
+        "entity_id": "O006-019-07-0040",
+        "source_path": "random/interval/Normal.html",
+        "target": "JavaScript:openAncillary('../data/Fisher.html')",
+        "target_resolved": "random/data/Fisher.html"
+      },
+      {
+        "entity_id": "O006-020-07-0039",
+        "source_path": "random/interval/Bernoulli.html",
+        "target": "two2",
+        "target_resolved": "random/interval/two2"
+      },
+      {
+        "entity_id": "O006-021-07-0037",
+        "source_path": "random/interval/BivariateNormal.html",
+        "target": "JavaScript:openAncillary('../data/Fisher.html')",
+        "target_resolved": "random/data/Fisher.html"
+      },
+      {
+        "entity_id": "O006-023-07-0030",
+        "source_path": "random/hypothesis/index.html",
+        "target": "JavaScript:openAncillary('../apps/VarianceTestExperiment.html')",
+        "target_resolved": "random/apps/VarianceTestExperiment.html"
+      },
+      {
+        "entity_id": "O006-025-07-0063",
+        "source_path": "random/hypothesis/Normal.html",
+        "target": "JavaScript:openAncillary('../apps/VarianceTestExperiment.html')",
+        "target_resolved": "random/apps/VarianceTestExperiment.html"
+      },
+      {
+        "entity_id": "O006-025-07-0070",
+        "source_path": "random/hypothesis/Normal.html",
+        "target": "JavaScript:openAncillary('../apps/VarianceTestExperiment.html')",
+        "target_resolved": "random/apps/VarianceTestExperiment.html"
+      },
+      {
+        "entity_id": "O006-025-07-0072",
+        "source_path": "random/hypothesis/Normal.html",
+        "target": "JavaScript:openAncillary('../apps/VarianceTestExperiment.html')",
+        "target_resolved": "random/apps/VarianceTestExperiment.html"
+      },
+      {
+        "entity_id": "O006-025-07-0077",
+        "source_path": "random/hypothesis/Normal.html",
+        "target": "JavaScript:openAncillary('../data/Fisher.html')",
+        "target_resolved": "random/data/Fisher.html"
+      },
+      {
+        "entity_id": "O006-026-07-0040",
+        "source_path": "random/hypothesis/Bernoulli.html",
+        "target": "JavaScript:openAncillary('../data/Fisher.html')",
+        "target_resolved": "random/data/Fisher.html"
+      },
+      {
+        "entity_id": "O006-027-07-0034",
+        "source_path": "random/hypothesis/BivariateNormal.html",
+        "target": "JavaScript:openAncillary('../data/Fisher.html')",
+        "target_resolved": "random/data/Fisher.html"
+      }
+    ],
+    "out_of_freeze_internal_count": 509
+  },
+  "outputs": {
+    "entities.jsonl": {
+      "bytes": 8810386,
+      "records": 6567,
+      "sha256": "b7f807b9ac6701c54b719c44053cc015bbabcec7cfd0b30fd2c39b588bc19d3c"
+    },
+    "relations.csv": {
+      "bytes": 1182589,
+      "records": 9035,
+      "sha256": "b235f4d4d724c7fe8653dfd06b075b2225cc2d116f3b87d0fda950d47030159a"
+    }
+  },
+  "schema": "o006.random.backend.receipt.v1",
+  "schemas": {
+    "entity": "o006.random.backend.entity.v1",
+    "entity_schema_path": "backend/entities.schema.json",
+    "entity_schema_sha256": "783d6c3d4a69f8b67fd6af3105d6d3992a9ab51645c4cb475fc22ead33fda1cc",
+    "relation": "o006.random.backend.relation.v1"
+  },
+  "source_freeze": {
+    "receipt_path": "authority/SOURCE_FREEZE_RECEIPT.json",
+    "receipt_sha256": "a2acff91b787c87bb7e14925ef854521c582a2ef5735777f967ac2e44b64f232",
+    "schema": "o006.random.source-freeze.v1",
+    "source_manifest_path": "authority/SOURCE_URL_MANIFEST.csv",
+    "source_manifest_sha256": "d36e0f8bf9fa44a38a7504f9688a08af6787d88ede99298316a3e022b6f799f5"
+  },
+  "unresolved_classification": {
+    "asset_rights_entity_ids": [],
+    "details_without_unit_parent_entity_ids": [],
+    "internal_link_targets": [
+      {
+        "entity_id": "O006-016-07-0056",
+        "source_path": "random/point/Sufficient.html",
+        "status": "missing-fragment",
+        "target": "Moments.html#poi",
+        "target_resolved": "random/point/Moments.html#poi"
+      }
+    ],
+    "unit_exercise_entity_ids": []
+  }
+}

@@ -1,0 +1,499 @@
+{
+  "$id": "urn:o006:random:backend:entity:v1",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "entity_type": {
+            "const": "section"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "section_level"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "entity_type": {
+            "const": "unit"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "exercise_like",
+          "exercise_like_basis",
+          "unit_classes",
+          "unit_type"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "entity_type": {
+            "const": "disclosure"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "details_parent_entity_id"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "entity_type": {
+            "const": "math_text"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "math_display_count",
+          "math_dollar_count",
+          "math_inline_count"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "entity_type": {
+            "const": "figure"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "figure_asset_entity_ids"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "entity_type": {
+            "const": "asset"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "asset_attribute",
+          "asset_kind",
+          "asset_manifest_role",
+          "asset_target",
+          "asset_target_bytes",
+          "asset_target_fragment",
+          "asset_target_path",
+          "asset_target_resolved",
+          "asset_target_sha256",
+          "asset_target_status",
+          "asset_target_url"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "entity_type": {
+            "const": "internal_link"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "link_kind",
+          "link_target",
+          "link_target_entity_ids",
+          "link_target_fragment",
+          "link_target_path",
+          "link_target_resolved",
+          "link_target_status"
+        ]
+      }
+    }
+  ],
+  "description": "One canonical stable-ID entity from the exact frozen O006 Random core.",
+  "properties": {
+    "asset_attribute": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "asset_kind": {
+      "enum": [
+        "embedded-resource",
+        "icon",
+        "image",
+        "inline-visual",
+        "linked-resource",
+        "media",
+        "script",
+        "stylesheet"
+      ]
+    },
+    "asset_manifest_role": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "asset_target": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "asset_target_bytes": {
+      "minimum": 0,
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "asset_target_fragment": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "asset_target_path": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "asset_target_resolved": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "asset_target_sha256": {
+      "anyOf": [
+        {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "asset_target_status": {
+      "enum": [
+        "external-or-invalid",
+        "inline",
+        "manifest-resource",
+        "unmanifested-internal"
+      ]
+    },
+    "asset_target_url": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "component_rights_class": {
+      "enum": [
+        "apache-2.0",
+        "cc0-1.0-cards",
+        "cc0-1.0-monty",
+        "random-site-cc-by-notice-discrepancy",
+        "undetermined",
+        "unresolved-third-party-or-data"
+      ]
+    },
+    "details_parent_entity_id": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/entity_id"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "document_order": {
+      "maximum": 29,
+      "minimum": 1,
+      "type": "integer"
+    },
+    "dom_path": {
+      "minLength": 1,
+      "type": "string"
+    },
+    "entity_id": {
+      "$ref": "#/$defs/entity_id"
+    },
+    "entity_type": {
+      "enum": [
+        "asset",
+        "disclosure",
+        "document",
+        "figure",
+        "internal_link",
+        "math_text",
+        "section",
+        "unit"
+      ]
+    },
+    "exercise_like": {
+      "type": "boolean"
+    },
+    "exercise_like_basis": {
+      "enum": [
+        "both",
+        "exercise-section",
+        "native-unit-type",
+        "not-designated"
+      ]
+    },
+    "figure_asset_entity_ids": {
+      "items": {
+        "$ref": "#/$defs/entity_id"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "hierarchy": {
+      "items": {
+        "$ref": "#/$defs/entity_id"
+      },
+      "minItems": 1,
+      "type": "array"
+    },
+    "html_tag": {
+      "pattern": "^[a-z][a-z0-9]*$",
+      "type": "string"
+    },
+    "injected_target_id": {
+      "anyOf": [
+        {
+          "pattern": "^o006-[0-9]{3}-[0-9]{2}-[0-9]{4}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "kind_order": {
+      "minimum": 1,
+      "type": "integer"
+    },
+    "link_kind": {
+      "enum": [
+        "document-relation",
+        "hyperlink",
+        "javascript-open-ancillary"
+      ]
+    },
+    "link_target": {
+      "type": "string"
+    },
+    "link_target_entity_ids": {
+      "items": {
+        "$ref": "#/$defs/entity_id"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "link_target_fragment": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "link_target_path": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "link_target_resolved": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "link_target_status": {
+      "enum": [
+        "ambiguous-native-id",
+        "known-upstream-defect",
+        "manifest-resource",
+        "manifest-resource-fragment-unchecked",
+        "missing-fragment",
+        "native-target-outside-catalog",
+        "out-of-freeze-internal",
+        "resolved-document",
+        "resolved-entity",
+        "unresolved-internal"
+      ]
+    },
+    "math_display_count": {
+      "minimum": 0,
+      "type": "integer"
+    },
+    "math_dollar_count": {
+      "minimum": 0,
+      "type": "integer"
+    },
+    "math_inline_count": {
+      "minimum": 0,
+      "type": "integer"
+    },
+    "native_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "native_id_duplicate": {
+      "type": "boolean"
+    },
+    "native_id_duplicate_count": {
+      "minimum": 0,
+      "type": "integer"
+    },
+    "native_id_occurrence": {
+      "minimum": 1,
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "parent_entity_id": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/entity_id"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "schema_version": {
+      "const": "o006.random.backend.entity.v1"
+    },
+    "section_entity_id": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/entity_id"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "section_level": {
+      "maximum": 4,
+      "minimum": 1,
+      "type": "integer"
+    },
+    "sibling_order": {
+      "minimum": 1,
+      "type": "integer"
+    },
+    "source_column": {
+      "minimum": 0,
+      "type": "integer"
+    },
+    "source_line": {
+      "minimum": 1,
+      "type": "integer"
+    },
+    "source_order": {
+      "minimum": 1,
+      "type": "integer"
+    },
+    "source_path": {
+      "pattern": "^random/(sample|point|interval|hypothesis)/[^/]+\\.html$",
+      "type": "string"
+    },
+    "source_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "source_text": {
+      "type": "string"
+    },
+    "source_text_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "source_url": {
+      "format": "uri",
+      "type": "string"
+    },
+    "target_id": {
+      "minLength": 1,
+      "type": "string"
+    },
+    "unit_classes": {
+      "items": {
+        "minLength": 1,
+        "type": "string"
+      },
+      "minItems": 1,
+      "type": "array",
+      "uniqueItems": true
+    },
+    "unit_type": {
+      "enum": [
+        "app",
+        "dfn",
+        "math",
+        "stat",
+        "unclassified"
+      ]
+    }
+  },
+  "required": [
+    "component_rights_class",
+    "document_order",
+    "dom_path",
+    "entity_id",
+    "entity_type",
+    "hierarchy",
+    "html_tag",
+    "injected_target_id",
+    "kind_order",
+    "native_id",
+    "native_id_duplicate",
+    "native_id_duplicate_count",
+    "native_id_occurrence",
+    "parent_entity_id",
+    "schema_version",
+    "section_entity_id",
+    "sibling_order",
+    "source_column",
+    "source_line",
+    "source_order",
+    "source_path",
+    "source_sha256",
+    "source_text",
+    "source_text_sha256",
+    "source_url",
+    "target_id"
+  ],
+  "title": "O006 Random core backend entity",
+  "type": "object",
+  "$defs": {
+    "entity_id": {
+      "pattern": "^O006-[0-9]{3}-[0-9]{2}-[0-9]{4}$",
+      "type": "string"
+    }
+  }
+}

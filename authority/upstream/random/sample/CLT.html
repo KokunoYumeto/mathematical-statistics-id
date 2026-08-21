@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<title>The Central Limit Theorem</title>
+	<meta name="author" content="Kyle Siegrist">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="keywords" content="probability, statistics, random sample, central limit theorem, normal distribution, gamma distribution, chi-square distribution, binomial distribution, negative binomial distribution, Poisson distribution, random sum, Wald's equation">
+	<link rel="icon" href="../icons/Icon.svg" type="image/svg">
+	<link rel="stylesheet" href="../Screen.css" type="text/css" media="screen">
+	<script src="../Basic.js"></script>
+	<script src="../../MathJax/tex-svg.js" id="MathJax-script" async></script>
+</head>
+
+<body>
+
+<div class="latex">
+	\(\newcommand{\R}{\mathbb{R}}\)
+	\(\newcommand{\N}{\mathbb{N}}\)
+	\(\newcommand{\Z}{\mathbb{Z}}\)
+	\(\newcommand{\E}{\mathbb{E}}\)
+	\(\newcommand{\P}{\mathbb{P}}\)
+	\(\newcommand{\var}{\text{var}}\)
+	\(\newcommand{\sd}{\text{sd}}\)
+	\(\newcommand{\cov}{\text{cov}}\)
+	\(\newcommand{\cor}{\text{cor}}\)
+	\(\newcommand{\bs}{\boldsymbol}\)
+</div>
+
+<header>
+	<ol class="map">
+		<li class="parent"><a href="../index.html">Random</a></li>
+		<li class="parent"><a href="index.html">5. Random Samples</a></li>
+		<li class="child"><a href="Introduction.html" title="Introduction">1</a></li>
+		<li class="child"><a href="Mean.html" title="The Sample Mean">2</a></li>
+		<li class="child"><a href="LLN.html" title="The Law of Large Numbers">3</a></li>
+		<li class="current">4</li>
+		<li class="child"><a href="Variance.html" title="The Sample Variance">5</a></li>
+		<li class="child"><a href="OrderStatistics.html" title="Order Statistics">6</a></li>
+		<li class="child"><a href="Covariance.html" title="Sample Correlation and Regression">7</a></li>
+		<li class="child"><a href="Normal.html" title="Special Properties of Normal Samples">8</a></li>
+		<li class="details"><button type="button" title="Expand Details" onclick="expandDetails(true);"><img src="../icons/Plus.svg" alt="Expand"></button></li>
+		<li class="details"><button type="button" title="Contract Details" onclick="expandDetails(false);"><img src="../icons/Minus.svg" alt="Contract"></button></li>
+	</ol>
+	<h2>4. The Central Limit Theorem</h2>
+</header>
+
+<p>The central limit theorem and the <a href="LLN.html">law of large numbers</a> are the two <dfn>fundamental theorems</dfn> of probability. Roughly, the central limit theorem states that the distribution of the sum (or average) of a large number of independent, identically distributed variables will be approximately normal, regardless of the underlying distribution. The importance of the central limit theorem is hard to overstate; indeed it is the reason that many statistical procedures work.</p>
+
+<h3 id="sum">Partial Sum Processes</h3>
+
+<h4 id="dfn">Definitions</h4>
+
+<p>Suppose that \(\bs{X} = (X_1, X_2, \ldots)\) is a sequence of <a href="../prob/Independence.html">independent</a>, identically distributed, real-valued <a href="../prob/Events.html">random variables</a> with common <a href="../dist/Discrete.html">probability density function</a> \(f\), <a href="../expect/Properties.html">mean</a> \(\mu\), and <a href="../expect/Variance.html">variance</a> \(\sigma^2\). We assume that \(0 \lt \sigma \lt \infty\), so that in particular, the random variables really are <em>random</em> and not constants. Let
+\[ Y_n = \sum_{i=1}^n X_i, \quad n \in \N \]
+Note that by convention, \(Y_0 = 0\), since the sum is over an empty index set. The random process \(\bs{Y} = (Y_0, Y_1, Y_2, \ldots)\) is called the <dfn>partial sum process</dfn> associated with \(\bs{X}\). Special types of partial sum processes have been studied in many places in this text; in particular see</p>
+
+<ul>
+	<li>the <a href="../bernoulli/Binomial.html">binomial distribution</a> in the setting of <a href="../bernoulli/index.html">Bernoulli Trials</a></li>
+	<li>the <a href="../bernoulli/NegativeBinomial.html">negative binomial distribution</a> in the setting of <a href="../bernoulli/index.html">Bernoulli Trials</a></li>
+	<li>the <a href="../poisson/Gamma.html">gamma distribution</a> in the <a href="../poisson/index.html">Poisson process</a></li>
+	<li>the <a href="../renewal/Introduction.html">the arrival times</a> in a general <a href="../renewal/index.html">renewal process</a></li>
+</ul>
+
+<p>Recall that in statistical terms, the sequence \(\bs{X}\) corresponds to sampling from the underlying distribution.  In particular, \((X_1, X_2, \ldots, X_n)\) is a <a href="Introduction.html">random sample</a> of size \(n\) from the distribution, and the corresponding sample mean is
+\[ M_n = \frac{Y_n}{n} = \frac{1}{n} \sum_{i=1}^n X_i \]
+By the <a href="LLN.html">law of large numbers</a>, \(M_n \to \mu\) as \(n \to \infty\) with probability 1.</p>
+
+<h4 id="inc">Stationary, Independent Increments</h4>
+
+<p>The partial sum process corresponding to a sequence of independent, identically distributed variables has two important properties, and these properties essentially characterize such processes.</p>
+
+<div class="unit" id="inc1">
+	<p class="math">If \(m \le n\) then \(Y_n - Y_m\) has the same distribution as \(Y_{n-m}\). Thus the process \(\bs{Y}\) has <dfn>stationary increments</dfn>.</p>
+	<details>
+		<summary>Details:</summary>
+		<p>Note that \(Y_n - Y_m = \sum_{i = m + 1}^n X_i\) and is the sum of \(n - m\) independent variables, each with the common distribution. Of course, \(Y_{n - m}\) is also the sum of \(n - m\) independent variables, each with the common distribution.</p>
+	</details>
+</div>
+
+<p>Note however that \(Y_n - Y_m\) and \(Y_{n-m}\) are very different random variables; the theorem simply states that they have the same <em>distribution</em>.</p>
+
+<div class="unit" id="inc2">
+	<p class="math">If \(n_1 \le n_2 \le n_3 \le \cdots\) then \(\left(Y_{n_1}, Y_{n_2} - Y_{n_1}, Y_{n_3} - Y_{n_2}, \ldots\right)\) is a sequence of independent random variables.  Thus the process \(\bs{Y}\) has <dfn>independent increments</dfn>.</p>
+	<details>
+		<summary>Details:</summary>
+		<p>The terms in the sequence of increments \(\left(Y_{n_1}, Y_{n_2} - Y_{n_1}, Y_{n_3} - Y_{n_2}, \ldots\right)\) are sums over disjoint collections of terms in the sequence \(\bs{X}\). Since the sequence \(\bs{X}\) is independent, so is the sequence of increments.</p>
+	</details>
+</div>
+
+<div class="unit">
+	<p class="math">Conversely, suppose that \(\bs{V} = (V_0, V_1, V_2, \ldots)\) is a random process with stationary, independent increments. Define \(U_i = V_i - V_{i-1}\) for \(i \in \N_+\). Then \(\bs{U} = (U_1, U_2, \ldots)\) is a sequence of independent, identically distributed variables and \(\bs{V}\) is the partial sum process associated with \(\bs{U}\).</p>
+</div>
+
+<p>So partial sum processes are the only discrete-time random processes that have stationary, independent increments. An interesting, and much harder problem, is to characterize the continuous-time processes that have stationary independent increments. The <a href="../poisson/Poisson.html">Poisson counting process</a> has stationary independent increments, as does the <a href="../brown/Standard.html">Brownian motion process</a>.</p>
+
+<h4 id="mom">Moments</h4>
+
+<div class="unit" id="mom1">
+	<p class="math">If \(n \in \N\) then</p>
+	<ol class="sub">
+		<li>\(\E(Y_n) = n \mu\)</li>
+		<li>\(\var(Y_n) = n \sigma^2\)</li>
+	</ol>
+	<details>
+		<summary>Details:</summary>
+		<p>The results follow from basic properties of <a href="../expect/Properties.html">expected value</a> and <a href="../expect/Variance.html">variance</a>. Expected value is a linear operation so \( \E(Y_n) = \sum_{i=1}^n \E(X_i) = n \mu \). By independence, \(\var(Y_n) = \sum_{i=1}^n \var(X_i) = n \sigma^2\).</p>
+	</details>
+</div>
+
+<div class="unit">
+	<p class="math">If \(n \in \N_+\) and \(m \in \N\) with \(m \le n\) then</p>
+	<ol class="sub">
+		<li>\(\cov(Y_m, Y_n) = m \sigma^2\)</li>
+		<li>\(\cor(Y_m, Y_n) = \sqrt{\frac{m}{n}}\)</li>
+		<li>\(\E(Y_m Y_n) = m \sigma^2 + m n \mu^2\)</li>
+	</ol>
+	<details>
+		<summary>Details:</summary>
+		<ol class="sub">
+			<li>Note that \(Y_n = Y_m + (Y_n - Y_m)\). So this result follows from basic properties of <a href="../expect/Covariance.html">covariance</a>, <a href="#inc1" class="ref"></a>, and <a href="#inc2" class="ref"></a>:
+			\[ \cov(Y_m, Y_n) = \cov(Y_m, Y_m) + \cov(Y_m, Y_n - Y_m) = \var(Y_m) + 0 = m \sigma^2 \]</li>
+			<li>This result follows from part (a) of <a href="#mom1" class="ref"></a>
+			\[ \cor(Y_m, Y_m) = \frac{\cov(Y_m, Y_n)}{\sd(Y_m) \sd(Y_n)} = \frac{m \sigma^2}{\sqrt{m \sigma^2} \sqrt{n \sigma^2}} = \sqrt{\frac{m}{n}} \]</li>
+			<li>This result also follows from part (a) of <a href="#mom1" class="ref"></a>: \(\E(Y_m Y_n) = \cov(Y_m, Y_n) + \E(Y_m) \E(Y_n) = m \sigma^2 + m \mu n \mu\)</li>
+		</ol>
+	</details>
+</div>
+
+<div class="unit">
+	<p class="math">If \(X\) has <a href="../expect/Generating.html#mgf">moment generating function</a> \(G\) then \(Y_n\) has moment generating function \(G^n\).</p>
+	<details>
+		<summary>Details:</summary>
+		<p>This follows from a basic property of generating functions: the generating function of a sum of independent variables is the product of the generating functions of the terms.</p>
+	</details>
+</div>
+
+<h4 id="dis">Distributions</h4>
+
+<div class="unit" id="dis1">
+	<p class="math">Suppose that \(X\) has either a <a href="../dist/Discrete.html">discrete distribution</a> or a <a href="../dist/Continuous.html">continuous distribution</a> with probability density function \(f\). Then the probability density function of \(Y_n\) is \(f^{*n} = f * f * \cdots * f\), the <a href="../dist/Transformations.html#sum">convolution power</a> of \(f\) of order \(n\).</p>
+	<details>
+		<summary>Details:</summary>
+		<p>This follows from a basic property of PDFs: the pdf of a sum of independent variables is the convolution of the PDFs of the terms.</p>
+	</details>
+</div>
+
+<p>More generally, we can use the stationary and independence properties to find the joint distributions of the partial sum process:</p>
+
+<div class="unit">
+	<p class="math">If \(n_1 \lt n_2 \lt \cdots \lt n_k\) then \((Y_{n_1}, Y_{n_2}, \ldots, Y_{n_k})\) has joint probability density function
+	\[ f_{n_1, n_2, \ldots, n_k}(y_1, y_2, \ldots, y_k) = f^{*n_1}(y_1) f^{*(n_2 - n_1)}(y_2 - y_1) \cdots f^{*(n_k - n_{k-1})}(y_k - y_{k-1}), \quad (y_1, y_2, \ldots, y_k) \in \R^k \]</p>
+	<details>
+		<summary>Details:</summary>
+		<p>This follows from the <a href="../dist/Transformations.html">multivariate change of variables theorem</a>.</p>
+	</details>
+</div>
+
+<h3 id="clt">The Central Limit Theorem</h3>
+
+<p>First, let's make the central limit theorem more precise. From Theorem 4 in <a href="#mom1" class="ref"></a>, we cannot expect \(Y_n\) itself to have a limiting distribution. Note that \(\var(Y_n) \to \infty\) as \(n \to \infty\) since \(\sigma \gt 0\), and \(\E(Y_n) \to \infty\) as \(n \to \infty\) if \(\mu \gt 0\) while \(\E(Y_n) \to -\infty\) as \(n \to \infty\) if \(\mu \lt 0\). Similarly, we know that \(M_n \to \mu\) as \(n \to \infty\) with probability 1, so the limiting distribution of the sample mean is degenerate. Thus, to obtain a limiting distribution of \(Y_n\) or \(M_n\) that is not degenerate, we need to consider, not these variables themeselves, but rather the common <dfn>standard score</dfn>. Thus, let
+\[ Z_n = \frac{Y_n - n \mu}{\sqrt{n} \sigma} = \frac{M_n - \mu}{\sigma \big/ \sqrt{n}} \]</p>
+
+<div class="unit">
+	<p class="math">\(Z_n\) has mean 0 and variance 1.</p>
+	<ol class="sub">
+		<li>\(\E(Z_n) = 0\)</li>
+		<li>\(\var(Z_n) = 1\)</li>
+	</ol>
+	<details>
+		<summary>Details:</summary>
+		<p>These results follow from basic properties of expected value and variance, and are true for the standard score associated with any random variable. Recall also that the standard score of a variable is invariant under linear transformations with positive slope. The fact that the standard score of \(Y_n\) and the standard score of \(M_n\) are the same is a special case of this.</p>
+	</details>
+</div>
+
+<p>The precise statement of the central limit theorem is that the distribution of the standard score \(Z_n\) <a href="../dist/Convergence.html">converges</a> to the standard normal distribution as \(n \to \infty\). Recall that the <a href="../special/Normal.html">standard normal distribution</a> has probability density function
+\[ \phi(z) = \frac{1}{\sqrt{2 \pi}} e^{-\frac{1}{2} z^2}, \quad z \in \R \]
+A special case of the central limit theorem (to Bernoulli trials), dates to <a href="JavaScript:openAncillary('../biographies/DeMoivre.html')" class="ancillary">Abraham De Moivre</a>.  The term <em>central limit theorem</em> was coined by <a href="JavaScript:openAncillary('../biographies/Polya.html')" class="ancillary">George P&oacute;lya</a> in 1920. By definition of convergence in distribution, the central limit theorem states that \(F_n(z) \to \Phi(z)\) as \(n \to \infty\) for each \(z \in \R\), where \(F_n\) is the <a href="../dist/CDF.html">distribution function</a> of \(Z_n\) and \(\Phi\) is the standard normal distribution function:
+\[ \Phi(z) = \int_{-\infty}^z \phi(x) \, dx = \int_{-\infty}^z \frac{1}{\sqrt{2 \pi}} e^{-\frac{1}{2} x^2} \, dx, \quad z \in \R \]
+An equivalent statment of the central limit theorm involves convergence of the corresponding <a href="../expect/Generating.html#mgf">characteristic functions</a>. This is the version that we will give and prove, but first we need a generalization of a famous limit from calculus.</p>
+
+<div class="unit">
+	<p class="math">Suppose that \((a_1, a_2, \ldots)\) is a sequence of real numbers and that \(a_n \to a \in \R\) as \(n \to \infty\). Then
+	\[ \left( 1 + \frac{a_n}{n} \right)^n \to e^a \text{ as } n \to \infty \]</p>
+</div>
+
+<p>Now let \(\chi\) denote the characteristic function of the standard score of the sample variable \(X\), and let \(\chi_n\) denote the characteristic function of the standard score \(Z_n\):
+\[ \chi(t) = \E \left[ \exp\left( i t \frac{X - \mu}{\sigma} \right) \right], \; \chi_n(t) = \E[\exp(i t Z_n)]; \quad t \in \R \]
+Recall that \(t \mapsto e^{-\frac{1}{2}t^2}\) is the characteristic function of the standard normal distribution. We can now give a proof.</p>
+
+<div class="unit">
+	<p class="math"><dfn>The central limit theorem</dfn>. The distribution of \(Z_n\) converges to the standard normal distribution as \(n \to \infty\). That is, \(\chi_n(t) \to e^{-\frac{1}{2}t^2}\) as \(n \to \infty\) for each \(t \in \R\).</p>
+	<details>
+		<summary>Details:</summary>
+		<p>Note that \(\chi(0) = 1\), \(\chi^\prime(0) = 0\), \(\chi^{\prime \prime}(0) = -1\). Next
+		\[ Z_n = \frac{1}{\sqrt{n}} \sum_{i=1}^n \frac{X_i - \mu}{\sigma} \]
+		From properties of characteristic functions, \(\chi_n(t) = \chi^n (t / \sqrt{n})\) for \(t \in \R\). By Taylor's theorem (named after <a href="JavaScript:openAncillary('../biographies/Taylor.html')" class="ancillary">Brook Taylor</a>),
+		\[ \chi\left(\frac{t}{\sqrt{n}}\right) = 1 + \frac{1}{2} \chi^{\prime\prime}(s_n) \frac{t^2}{n} \text{ where } \left|s_n\right| \le \frac{\left|t\right|}{n} \]
+		But \(s_n \to 0\) and hence \(\chi^{\prime\prime}(s_n) \to -1\) as \(n \to \infty\). Finally,
+		\[ \chi_n(t) = \left[1 + \frac{1}{2} \chi^{\prime\prime}(s_n) \frac{t^2}{n} \right]^n \to e^{-\frac{1}{2} t^2} \text{ as } n \to \infty \]</p>
+	</details>
+</div>
+
+<h3 id="nor">Normal Approximations</h3>
+
+<p>The central limit theorem implies that if the sample size \(n\) is <q>large</q> then the distribution of the partial sum \(Y_n\) is approximately normal with mean \(n \mu\) and variance \(n \sigma^2\). Equivalently the sample mean \(M_n\) is approximately normal with mean \(\mu\) and variance \(\sigma^2 / n\). The central limit theorem is of fundamental importance, because it means that we can approximate the distribution of certain statistics, even if we know very little about the underlying sampling distribution.</p>
+
+<p>Of course, the term <q>large</q> is relative. Roughly, the more <q>abnormal</q> the basic distribution, the larger \(n\) must be for normal approximations to work well. The rule of thumb is that a sample size \(n\) of at least 30 will usually suffice if the basic distribution is not too weird; although for many distributions smaller \(n\) will do.</p>
+
+<div class="unit" id="irwin">
+	<p class="math">Let \(Y\) denote the sum of the variables in a random sample of size 30 from the uniform distribution on \([0, 1]\). Find normal approximations to each of the following: </p>
+	<ol class="sub">
+		<li>\(\P(13 \lt Y \lt 18)\)</li>
+		<li>The 90th percentile of \(Y\)</li>
+	</ol>
+	<details>
+		<summary>Details:</summary>
+		<ol class="sub">
+			<li>0.8682</li>
+			<li>17.03</li>
+		</ol>
+	</details>
+</div>
+
+<p>Random variable \(Y\) in <a href="#irwin" class="ref"></a> has the <a href="../special/IrwinHall.html">Irwin-Hall distribution</a> of order 30, named for Joseph Irwin and Phillip Hall.</p>
+
+<div class="unit">
+	<p class="app">In the <a href="JavaScript:openAncillary('../apps/SpecialSimulator.html')" class="ancillary">special distribution simulator</a>, select the Irwin-Hall distribution. Vary and \(n\) from 1 to 10 and note the shape of the probability density function. With \(n = 10\) run the experiment 1000 times and compare the empirical density function to the true probability density function.</p>
+</div>
+
+<div class="unit">
+	<p class="math">Let \(M\) denote the sample mean of a random sample of size 50 from the distribution with probability density function \(f(x) = \frac{3}{x^4}\) for \(1 \le x \lt \infty\). This is a <dfn>Pareto distribution</dfn>, named for <a href="JavaScript:openAncillary('../biographies/Pareto.html')" class="ancillary">Vilfredo Pareto</a>. Find normal approximations to each of the following:</p>
+	<ol class="sub">
+		<li>\(\P(M \gt 1.6)\)</li>
+		<li>The 60th percentile of \(M\)</li>
+	</ol>
+	<details>
+		<summary>Details:</summary>
+		<ol class="sub">
+			<li>0.2071</li>
+			<li>1.531</li>
+		</ol>
+	</details>
+</div>
+
+<h4 id="cor">The Continuity Correction</h4>
+
+<p>A slight technical problem arises when the sampling distribution is discrete. In this case, the partial sum also has a discrete distribution, and hence we are approximating a discrete distribution with a continuous one. Suppose that \(X\) takes integer values (the most common case) and hence so does the partial sum \(Y_n\). For any \(k \in \Z\) and \(h \in [0, 1)\), note that the event \(\{k - h \le Y_n \le k + h\}\) is equivalent to the event \(\{Y = k\}\). Different values of \(h\) lead to different normal approximations, even though the events are equivalent. The smallest approximation would be 0 when \(h = 0\), and the approximations increase as \(h\) increases. It is customary to split the difference by using \(h = \frac{1}{2}\) for the normal approximation. This is sometimes called the <dfn>half-unit continuity correction</dfn> or the <dfn>histogram correction</dfn>. The continuity correction is extended to other events in the natural way, using the additivity of probability.</p>
+
+<div class="unit">
+	<p class="math">Suppose that \(j, k \in \Z\) with \(j \le k\).</p>
+	<ol class="sub">
+		<li>For the event \(\{j \le Y_n \le k\} = \{j - 1 \lt Y_n \lt k + 1\}\), use \(\{j - \frac{1}{2} \le Y_n \le k + \frac{1}{2}\}\) in the normal approximation.</li>
+		<li>For the event \(\{j \le Y_n\} = \{j - 1 \lt Y_n\}\), use \(\{j - \frac{1}{2} \le Y_n\}\) in the normal approximation.</li>
+		<li>For the event \(\{Y_n \le k\} = \{Y_n \lt k + 1\}\), use \(\{Y_n \le k + \frac{1}{2}\}\) in the normal approximation.</li>
+	</ol>
+</div>
+
+<div class="unit">
+	<p class="math">Let \(Y\) denote the sum of the scores of 20 fair dice. Compute the normal approximation to \(\P(60 \le Y \le 75)\).</p>
+	<details>
+		<summary>Details:</summary>
+		<p>0.6741</p>
+	</details>
+</div>
+
+<div class="unit">
+	<p class="app">In the <a href="JavaScript:openAncillary('../apps/Dice.html')" class="ancillary">dice experiment</a>, set the die distribution to fair, select the sum random variable \(Y\), and set \(n = 20\). Run the simulation 1000 times and find each of the following. Compare with the result in the previous exercise: </p>
+	<ol class="sub">
+		<li>\(\P(60 \le Y \le 75)\)</li>
+		<li>The relative frequency of the event \(\{60 \le Y \le 75\}\) (from the simulation)
+		</li>
+	</ol>
+</div>
+
+<h4 id="gam">Normal Approximation to the Gamma Distribution</h4>
+
+<p>Recall that the <a href="../special/Gamma.html">gamma distribution</a> with shape parameter \(k \in (0, \infty)\) and scale parameter \(b \in (0, \infty)\) is a continuous distribution on \( (0, \infty) \) with  probability density function \( f \) given by
+\[ f(x) = \frac{1}{\Gamma(k) b^k} x^{k-1} e^{-x/b}, \quad x \in (0, \infty) \]
+The mean is \( k b \) and the variance is \( k b ^2 \). The gamma distribution is widely used to model random times and other positive random variables. In the context of the <a href="../poisson/index.html">Poisson model</a> (where \(k \in \N_+\)), the gamma distribution is also known as the <a href="../poisson/Gamma.html">Erlang distribution</a>, named for <a href="JavaScript:openAncillary('../biographies/Erlang.html')" class="ancillary">Agner Erlang</a>. Suppose now that \(Y_k\) has the gamma (Erlang) distribution with shape parameter \(k \in \N_+\) and scale parameter \(b \gt 0\) then
+\[ Y_k = \sum_{i=1}^k X_i \]
+where \((X_1, X_2, \ldots)\) is a sequence of independent variables, each having the exponential distribution with scale parameter \(b\). (The exponential distribution is a special case of the gamma distribution with shape parameter 1.) It follows that if \(k\) is large, the gamma distribution can be approximated by the normal distribution with mean \(k b\) and variance \(k b^2\). The same statement actually holds when \(k\) is not an integer. Here is the precise statement:</p>
+
+<div class="unit">
+	<p class="math">Suppose that \( Y_k \) has the gamma distribution with scale parameter \( b \in (0, \infty) \) and shape parameter \( k \in (0, \infty) \). Then the distribution of the standardized variable \( Z_k \) below converges to the standard normal distribution as \(k \to \infty\):
+	\[ Z_k = \frac{Y_k - k b}{\sqrt{k} b} \]</p>
+</div>
+
+<div class="unit">
+	<p class="app">In the <a href="JavaScript:openAncillary('../apps/SpecialSimulator.html')" class="ancillary">special distribution simulator</a>, select the gamma distribution. Vary and \(b\) and note the shape of the probability density function. With \(k = 10\) and various values of \(b\), run the experiment 1000 times and compare the empirical density function to the true probability density function.</p>
+</div>
+
+<div class="unit">
+	<p class="math">Suppose that \(Y\) has the gamma distribution with shape parameter \(k = 10\) and scale parameter \(b = 2\). Find normal approximations to each of the following: </p>
+	<ol class="sub">
+		<li>\( \P(18 \le Y \le 23) \)</li>
+		<li>The 80th percentile of \(Y\)</li>
+	</ol>
+	<details>
+		<summary>Details:</summary>
+		<ol class="sub">
+			<li>0.3063</li>
+			<li>25.32</li>
+		</ol>
+	</details>
+</div>
+
+<h4 id="chi">Normal Approximation to the Chi-Square Distribution</h4>
+
+<p>Recall that the <a href="../special/ChiSquare.html">chi-square distribution</a> with \(n \in (0, \infty)\) degrees of freedom is a special case of the gamma distribution, with shape parameter \(k = n / 2\) and scale parameter \(b = 2\). Thus, the chi-square distribution with \(n\) degrees of freedom has probability density function
+\[ f(x) = \frac{1}{\Gamma(n/2) 2^{n/2}} x^{n/2 - 1}e^{-x/2}, \quad 0 \lt x \lt \infty \]
+When \( n \) is a positive, integer, the chi-square distribution governs the sum of \( n \) independent, standard normal variables. For this reason, it is one of the most important distributions in statistics. From the previous discussion on gamma distributions, it follows that if \(n\) is large, the chi-square distribution can  be approximated by the normal distribution with mean \(n\) and variance \(2 n\). Here is the precise statement:</p>
+
+<div class="unit">
+	<p class="math">Suppose that \(Y_n\) has the chi-square distribution with \(n \in (0, \infty) \) degrees of freedom. Then the distribution of the standardized variable \( Z_n \) below converges to the standard normal distribution as \(n \to \infty\):
+	\[ Z_n = \frac{Y_n - n}{\sqrt{2 n}} \]</p>
+</div>
+
+<div class="unit">
+	<p class="app">In the <a href="JavaScript:openAncillary('../apps/SpecialSimulator.html')" class="ancillary">special distribution simulator</a>, select the chi-square distribution. Vary \(n\) and note the shape of the probability density function.  With \(n = 20\), run the experiment 1000 times andcompare the empirical density function to the probability density function.</p>
+</div>
+
+<div class="unit">
+	<p class="math">Suppose that \(Y\) has the chi-square distribution with \(n = 20\) degrees of freedom. Find normal approximations to each of the following:</p>
+	<ol class="sub">
+		<li>\(\P(18 \lt Y \lt 25)\)</li>
+		<li>The 75th percentile of \(Y\)</li>
+	</ol>
+	<details>
+		<summary>Details:</summary>
+		<ol class="sub">
+			<li>0.4107</li>
+			<li>24.3</li>
+		</ol>
+	</details>
+</div>
+
+<h4 id="bin">Normal Approximation to the Binomial Distribution</h4>
+
+<p>Recall that a <a href="../bernoulli/index.html">Bernoulli trials sequence</a>, named for <a href="JavaScript:openAncillary('../biographies/Bernoulli.html')" class="ancillary">Jacob Bernoulli</a>, is a sequence \( (X_1, X_2, \ldots) \) of independent, identically distributed indicator variables with \(\P(X_i = 1) = p\) for each \(i\), where \(p \in (0, 1)\) is the parameter.  In the usual language of reliability, \(X_i\) is the outcome of trial \(i\), where 1 means success and 0 means failure. The common mean is \(p\) and the common variance is \(p (1 - p)\).</p>
+
+<p>Let \(Y_n = \sum_{i=1}^n X_i\), so that \(Y_n\) is the number of successes in the first \(n\) trials.  Recall that \(Y_n\) has the <a href="../bernoulli/Binomial.html">binomial distribution</a> with parameters \(n\) and \(p\), and has probability density function
+\[ f(k) = \binom{n}{k} p^k (1 - p)^{n-k}, \quad k \in \{0, 1, \ldots, n\} \]</p>
+
+<p>It follows from the central limit theorem that if \(n\) is large, the binomial distribution with parameters \(n\) and \(p\) can be approximated by the normal distribution with mean \(n p\) and variance \(n p (1 - p)\). The rule of thumb is that \(n\) should be large enough for \(n p \ge 5\) and \(n (1 - p) \ge 5\). (The first condition is the important one when \(p \lt \frac{1}{2}\) and the second condition is the important one when \(p \gt \frac{1}{2}\).) Here is the precise statement:</p>
+
+<div class="unit">
+	<p class="math">Suppose that \( Y_n \) has the binomial distribution with trial parameter \( n \in \N_+ \) and success parameter \( p \in (0, 1) \). Then the distribution of the  standardized variable \(Z_n\) given below converges to the standard normal distribution as \(n \to \infty\):
+	\[ Z_n = \frac{Y_n - n p}{\sqrt{n p (1 - p)}} \]</p>
+</div>
+
+<div class="unit">
+	<p class="app">In the <a href="JavaScript:openAncillary('../apps/BinomialTimeline.html')" class="ancillary">binomial timeline experiment</a>, vary \(n\) and \(p\) and note the shape of the probability density function. With \(n = 50\) and \(p = 0.3\), run the simulation 1000 times and compute the following:</p>
+	<ol class="sub">
+		<li>\(\P(12 \le Y \le 16)\)</li>
+		<li>The relative frequency of the event \(\{12 \le Y \le 16\}\) (from the simulation)</li>
+	</ol>
+	<details>
+		<summary>Details:</summary>
+		<ol class="sub">
+			<li>0.5448</li>
+		</ol>
+	</details>
+</div>
+
+<div class="unit">
+	<p class="math">Suppose that \(Y\) has the binomial distribution with parameters \(n = 50\) and \(p = 0.3\). Compute the normal approximation to \( \P(12 \le Y \le 16) \) (don't forget the continuity correction) and compare with the results of the previous exercise. </p>
+	<details>
+		<summary>Details:</summary>
+		<p>0.5383</p>
+	</details>
+</div>
+
+<h4 id="poi">Normal Approximation to the Poisson Distribution</h4>
+
+<p>Recall that the <a href="../poisson/Poisson.html">Poisson distribution</a>, named for <a href="JavaScript:openAncillary('../biographies/Poisson.html')" class="ancillary">Simeon Poisson</a>, is a discrete distribution on \( \N \) with probability density function \( f \) given by
+\[ f(x) = e^{-\theta} \frac{\theta^x}{x!}, \quad x \in \N \]
+where \(\theta \gt 0\) is a parameter. The parameter is both the mean and the variance of the distribution. The Poisson distribution is widely used to model the number of <q>random points</q> in a region of time or space, particularly in the context of the <a href="../poisson/index.html">Poisson process</a>. In this context, the parameter is proportional to the size of the region.</p>
+
+<p>Suppose now that \(Y_n\) has the Poisson distribution with parameter \(n \in \N_+\). Then
+\[ Y_n = \sum_{i=1}^n X_i \]
+where \((X_1, X_2, \ldots, X_n)\) is a sequence of independent variables, each with the Poisson distribution with parameter 1.  It follows from the central limit theorem that if \(n\) is large, the Poisson distribution with parameter \(n\) can be approximated by the normal distribution with mean \(n\) and variance \(n\). The same statement holds when the parameter \(n\) is not an integer. Here is the precise statement:</p>
+
+<div class="unit">
+	<p class="math">. Suppose that \( Y_\theta \) has the Poisson distribution with parameter \( \theta \in (0, \infty) \). Then the distribution of the standardized variable \( Z_\theta \) below converges to the standard normal distribution as \(\theta \to \infty\):</p>
+	\[ Z_\theta = \frac{Y_\theta - \theta}{\sqrt{\theta}} \]
+</div>
+
+<div class="unit">
+	<p class="math">Suppose that \(Y\) has the Poisson distribution with mean 20. </p>
+	<ol class="sub">
+		<li>Compute the true value of \(\P(16 \le Y \le 23)\).</li>
+		<li>Compute the normal approximation to \(\P(16 \le Y \le 23)\).</li>
+	</ol>
+	<details>
+		<summary>Details:</summary>
+		<ol class="sub">
+			<li>0.6310</li>
+			<li>0.6259</li>
+		</ol>
+	</details>
+</div>
+
+<div class="unit">
+	<p class="app">In the <a class="ancillary" href="JavaScript:openAncillary('../apps/Poisson.html')">Poisson experiment</a>, vary the time and rate parameters \(t\) and \(r\) (the parameter of the Poisson distribution in the experiment is the product \(r t\)). Note the shape of the probability density function. With \(r = 5\) and \(t = 4\), run the experiment 1000 times and compare the empirical density function to the true probability density function.</p>
+</div>
+
+<h4 id="nbi">Normal Approximation to the Negative Binomial Distribution</h4>
+
+<p>The general version of the <a href="../bernoulli/NegativeBinomial.html">negative binomial distribution</a> is a discrete distribution on \( \N \), with shape parameter \( k \in (0, \infty) \) and success parameter \( p \in (0, 1) \). The probability density function \( f \) is given by 
+\[ f(n) = \binom{n + k - 1}{n} p^k (1 - p)^n, \quad n \in \N_+ \]
+The mean is \( k (1 - p) / p \) and the variance is \( k (1 - p) / p^2 \). If \( k \in \N_+ \), the distribution governs the number of failures \( Y_k \) before success number \( k \) in a sequence of <a href="../bernoulli/index.html">Bernoulli trials</a> with success parameter \( p \). So in this case,
+\[ Y_k = \sum_{i=1}^k X_i \]
+where \((X_1, X_2, \ldots, X_k)\) is a sequence of independent variables, each having the <a href="../bernoulli/Geometric.html">geometric distribution</a> on \(\N\) with parameter \(p\). (The geometric distribution is a special case of the negative binomial, with parameters 1 and \(p\).) In the context of the Bernoulli trials, \( X_1 \) is the number of failures before the first success, and for \( i \in \{2, 3, \ldots\} \), \(X_i\) is the number of failures between success number \( i - 1 \) success number \( i \). It follows that if \(k\) is large, the negative binomial distribution can be approximated by the normal distribution. The same statement holds if \( k \) is not an integer. Here is the precise statement:</p>
+
+<div class="unit">
+	<p class="math">Suppose that \( Y_k \) has the negative binomial distribution with shape parameter \( k \in (0, 1) \) and scale parameter \( p \in (0, 1) \). Then the distribution of the standardized variable \( Z_k \) below converges to the standard normal distribution as \(k \to \infty\):
+	\[ Z_k = \frac{p Y_k - k(1 - p)}{\sqrt{k (1 - p)}} \]</p>
+</div>
+
+<p>Another version of the negative binomial distribution is the distribution of the trial number \( V_k \) of success number \( k \in \N_+ \). So \( V_k = k + Y_k \) and \( V_k \) has mean \( k / p \) and variance \( k (1 - p) / p^2 \). The normal approximation applies to the distribution of \( V_k \) as well, if \( k \) is large, and since the distributions are related by a location transformation, the standard scores are the same. That is
+\[ \frac{p V_k - k}{\sqrt{k (1 - p)}} = \frac{p Y_k - k(1 - p)}{\sqrt{k ( 1 - p)}} \]</p>
+
+<div class="unit">
+	<p class="app">In the <a href="JavaScript:openAncillary('../apps/NegativeBinomial.html')" class="ancillary">negative binomial experiment</a>, vary \(k\) and \(p\) and note the shape of the probability density function. With \(k = 5\) and \(p = 0.4\), run the experiment 1000 times and compare the empirical density function to the true probability density function.</p>
+</div>
+
+<div class="unit">
+	<p class="math">Suppose that \(Y\) has the negative binomial distribution with trial parameter \(k = 10\) and success parameter \(p = 0.4\). Find normal approximations to each of the following: </p>
+	<ol class="sub">
+		<li>\(\P(20 \lt Y \lt 30)\)</li>
+		<li>The 80th percentile of \(Y\)</li>
+	</ol>
+	<details>
+		<summary>Details:</summary>
+		<ol class="sub">
+			<li>0.6318</li>
+			<li>30.1</li>
+		</ol>
+	</details>
+</div>
+
+<h3 id="rnt">Partial Sums with a Random Number of Terms</h3>
+
+<p>Our last topic is a bit more esoteric, but still fits with the general setting of this section.  Recall that \(\bs{X} = (X_1, X_2, \ldots)\) is a sequence of independent, identically distributed real-valued random variables with common mean \(\mu\) and variance \(\sigma^2\). Suppose now that \(N\) is a random variable (on the same probability space) taking values in \(\N\), also with finite mean and variance. Then
+\[ Y_N = \sum_{i=1}^N X_i \]
+is a random sum of the independent, identically distributed variables.  That is, the terms are random of course, but so also is the number of terms \(N\).  We are primarily interested in the moments of \(Y_N\).</p>
+
+<h4 id="ind">Independent Number of Terms</h4>
+
+<p>Suppose first that \(N\), the number of terms, is independent of \(\bs{X}\), the sequence of terms.  Computing the moments of \(Y_N\) is a good exercise in <a href="../expect/Conditional.html">conditional expectation</a>.</p>
+
+<div class="unit" id="ind1">
+	<p class="math">The conditional expected value of \(Y_N\) given \(N\), and the expected value of \(Y_N\) are</p>
+	<ol class="sub">
+		<li>\(\E(Y_N \mid N) = N \mu\)</li>
+		<li>\(\E(Y_N) = \E(N) \mu\)</li>
+	</ol>
+</div>
+
+<div class="unit">
+	<p class="math">The conditional variance of \(Y_N\) given \(N\) and the variance of \(Y_N\) are</p>
+	<ol class="sub">
+		<li>\(\var(Y_N \mid N) = N \sigma^2\)</li>
+		<li>\(\var(Y_N) = \E(N) \sigma^2 + \var(N) \mu^2\)</li>
+	</ol>
+</div>
+
+<div class="unit">
+	<p class="math">Let \(H\) denote the probability generating function of \(N\). Show that the moment generating function of \(Y_N\) is \(H \circ G\).</p>
+	<ol class="sub">
+		<li>\(\E(e^{t Y_N} \mid N) = [G(t)]^N\)</li>
+		<li>\(\E(e^{t Y_N}) = H(G(t))\)</li>
+	</ol>
+</div>
+
+<h4 id="wld">Wald's Equation</h4>
+
+<p>The result in part (b) of <a href="#ind1" class="ref"></a> generalizes to the case where the random number of terms \(N\) is a <a href="../prob/Stop.html">stopping time</a> for the sequence \(\bs{X}\).  This means that the event \(\{N = n\}\) depends only on (technically, is <a href="../foundations/Measure.html">measurable</a> with respect to) \((X_1, X_2, \ldots, X_n)\) for each \(n \in \N\). The generalization is knowns as <dfn>Wald's equation</dfn>, and is named for <a href="JavaScript:openAncillary('../biographies/Wald.html')" class="ancillary">Abraham Wald</a>.</p>
+
+<div class="unit">
+	<p class="math">If \(N\) is a stopping time for \(\bs{X}\) then \(\E(Y_N) = \E(N) \mu\).</p>
+	<details>
+		<summary>Details:</summary>
+		<p>First note that \(Y_N = \sum_{i=1}^\infty X_i \bs{1}(i \le N)\). But \(\{i \le N\} = \{N \lt i\}^c\) depends only on \(\{X_1, \ldots, X_{i-1}\}\) and hence is independent of \(X_i\). Thus \(\E[X_i \bs{1}(i \le N)] = \mu \P(N \ge i)\). Suppose that \(X_i \ge 0\) for each \(i\). Taking expected values term by term gives Wald's equation in this special case. The interchange of sum and expected value is justified by the monotone convergence theorem. Now Wald's equation can be established in general by using the dominated convergence theorem.</p>
+	</details>
+</div>
+
+<p>An elgant proof of <a href="../martingales/Stop.html#wld">Wald's equation</a> is given in the chapter on <a href="../martingales/index.html">Martingales</a>.</p>
+
+<div class="unit">
+	<p class="math">Suppose that the number of customers arriving at a store during a given day has the <a href="../poisson/Poisson.html">Poisson distribution</a> with parameter 50.  Each customer, independently of the others (and independently of the number of customers), spends an amount of money that is <a href="../dist/Continuous.html#uni">uniformly distributed</a> on the interval \([0, 20]\).  Find the mean and standard deviation of the amount of money that the store takes in during a day.</p>
+	<details>
+		<summary>Details:</summary>
+		<p>500, 81.65</p>
+	</details>
+</div>
+
+<div class="unit">
+	<p class="math">When a certain critical component in a system fails, it is immediately replaced by a new, statistically identical component.  The components are independent, and the lifetime of each (in hours) is <a href="../poisson/Exponential.html">exponentially distributed</a> with scale parameter \(b\).  During the life of the system, the number of critical components used has a geometric distribution on \(\N_+\) with parameter \(p\). For the total life of the critical component,</p>
+	<ol class="sub">
+		<li>Find the mean.</li>
+		<li>Find the standard deviation.</li>
+		<li>Find the moment generating function.</li>
+		<li>Identify the distribution by name.</li>
+	</ol>
+	<details>
+		<summary>Details:</summary>
+		<ol class="sub">
+			<li>\(b / p\)</li>
+			<li>\(b / p\)</li>
+			<li>\(t \mapsto \frac{1}{1 - (b/p)t}\)</li>
+			<li>Exponential distribution with scale parameter \(b / p\)</li>
+		</ol>
+	</details>
+</div>
+
+<footer>
+	<ol class="map">
+		<li class="parent"><a href="../index.html">Random</a></li>
+		<li class="parent"><a href="index.html">5. Random Samples</a></li>
+		<li class="child"><a href="Introduction.html" title="Introduction">1</a></li>
+		<li class="child"><a href="Mean.html" title="The Sample Mean">2</a></li>
+		<li class="child"><a href="LLN.html" title="The Law of Large Numbers">3</a></li>
+		<li class="current">4</li>
+		<li class="child"><a href="Variance.html" title="The Sample Variance">5</a></li>
+		<li class="child"><a href="OrderStatistics.html" title="Order Statistics">6</a></li>
+		<li class="child"><a href="Covariance.html" title="Sample Correlation and Regression">7</a></li>
+		<li class="child"><a href="Normal.html" title="Special Properties of Normal Samples">8</a></li>
+		<li class="details"><button type="button" title="Expand Details" onclick="expandDetails(true);"><img src="../icons/Plus.svg" alt="Expand"></button></li>
+		<li class="details"><button type="button" title="Contract Details" onclick="expandDetails(false);"><img src="../icons/Minus.svg" alt="Contract"></button></li>
+	</ol>
+	<ul class="map">
+		<li class="sister"><a href="JavaScript:openAncillary('../apps/index.html')" class="ancillary">Apps</a></li>
+		<li class="sister"><a href="JavaScript:openAncillary('../data/index.html')" class="ancillary">Data Sets</a></li>
+		<li class="child"><a href="JavaScript:openAncillary('../biographies/index.html')" class="ancillary"> Biographies</a></li>
+	</ul>
+</footer>
+
+<script>getReferences();</script>
+
+</body>
+</html>

@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="utf-8">
+	<title>Likelihood Ratio Tests</title>
+	<meta name="author" content="Kyle Siegrist">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="keywords" content="probability, statistics, hypothesis test, likelihood ratio test, Neyman-Pearson lemma, exponential distribution, Bernoulli distribution, normal distribution, nonparametric test">
+	<link rel="icon" href="../icons/Icon.svg" type="image/svg">
+	<link rel="stylesheet" href="../Screen.css" type="text/css" media="screen">
+	<script src="../Basic.js"></script>
+	<script src="../../MathJax/tex-svg.js" id="MathJax-script" async></script>
+</head>
+
+<body>
+
+<div class="latex">
+	\(\newcommand{\R}{\mathbb{R}}\) 
+	\(\newcommand{\N}{\mathbb{N}}\)
+	\(\newcommand{\Z}{\mathbb{Z}}\)
+	\(\newcommand{\P}{\mathbb{P}}\)
+	\(\newcommand{\E}{\mathbb{E}}\)
+	\(\newcommand{\var}{\text{var}}\)
+	\(\newcommand{\sd}{\text{sd}}\)
+	\(\newcommand{\bs}{\boldsymbol}\)
+</div>
+
+<header>
+	<ol class="map">
+		<li class="parent"><a href="../index.html">Random</a></li>
+		<li class="parent"><a href="index.html">8. Hypothesis Testing</a></li>
+		<li class="child"><a href="Introduction.html" title="Introduction">1</a></li>
+		<li class="child"><a href="Normal.html" title="Tests in the Normal Model">2</a></li>
+		<li class="child"><a href="Bernoulli.html" title="Tests in the Bernoulli Model">3</a></li>
+		<li class="child"><a href="BivariateNormal.html" title="Tests in the Two-Sample Normal Model">4</a></li>
+		<li class="current">5</li>
+		<li class="child"><a href="ChiSquare.html" title="Chi-Square Tests">6</a></li>
+		<li class="details"><button type="button" title="Expand Details" onclick="expandDetails(true);"><img src="../icons/Plus.svg" alt="Expand"></button></li>
+		<li class="details"><button type="button" title="Contract Details" onclick="expandDetails(false);"><img src="../icons/Minus.svg" alt="Contract"></button></li>
+	</ol>
+	<h2>5. Likelihood Ratio Tests</h2>
+</header>
+
+<h3 id="the">Basic Theory</h3>
+
+<p>As usual, our starting point is a <a href="../prob/Experiments.html">random experiment</a> with an underlying <a href="../prob/Probability2.html">probability space</a>, \((\Omega, \mathscr F, \P)\). In the basic statistical model, we have an observable <a href="../prob/Probability.html">random variable</a> \(\bs{X}\) taking values in a set \(S\). In general, \(\bs{X}\) can have quite a complicated structure. For example, if the experiment is to sample \(n\) objects from a population and record various measurements of interest, then
+
+\[ \bs{X} = (X_1, X_2, \ldots, X_n) \]
+
+where \(X_i\) is the vector of measurements for the \(i\)th object. The most important special case occurs when \((X_1, X_2, \ldots, X_n)\) are independent and identically distributed. In this case, we have a <a href="../sample/Introduction.html">random sample</a> of size \(n\) from the common distribution.</p>
+
+<p>In the previous sections, we developed tests for parameters based on natural test statistics. However, in other cases, the tests may not be parametric, or there may not be an obvious statistic to start with. Thus, we need a more general method for constructing test statistics. Moreover, we do not yet know if the tests constructed so far are the best, in the sense of maximizing the power for the set of alternatives. In this and the next section, we investigate both of these ideas. Likelihood functions, similar to those used in <a href="../point/Likelihood.html">maximum likelihood estimation</a>, will play a key role.</p>
+
+<h4 id="smp">Tests of Simple Hypotheses</h4>
+
+<div class="unit" id="smp0">
+	<p class="dfn">Suppose that \(\bs{X}\) has one of two possible distributions. Our simple hypotheses are</p>
+	<ol class="sub">
+		<li>\(H_0: \bs{X}\) has probability density function \(f_0\).</li>
+		<li>\(H_1: \bs{X}\) has probability density function \(f_1\).</li>
+	</ol>
+</div>
+
+<p>We will use subscripts on the probability measure \(\P\) to indicate the two hypotheses, and we assume that \( f_0 \) and \( f_1 \) are postive on \( S \). The test that we will construct is based on the following simple idea: if we observe \(\bs{X} = \bs{x}\), then the condition \(f_1(\bs{x}) \gt f_0(\bs{x})\) is evidence in favor of the alternative; the opposite inequality is evidence against the alternative.</p>
+
+<div class="unit" id="smp1">
+	<p class="dfn">The <dfn>likelihood ratio function</dfn> \( L: S \to (0, \infty) \) is defined by
+	\[ L(\bs{x}) = \frac{f_0(\bs{x})}{f_1(\bs{x})}, \quad \bs{x} \in S \]
+	The statistic \(L(\bs{X})\) is the <dfn>likelihood ratio statistic</dfn>.</p>
+</div>
+
+<p>Restating our earlier observation, note that small values of \(L\) are evidence in favor of \(H_1\). Thus it seems reasonable that the likelihood ratio statistic may be a good test statistic.</p>
+
+<div class="unit" id="smp2">
+	<p class="math">Consider tests in which we reject \(H_0\) if and only if \(L \le l\), where \(l\) is a constant to be determined. The significance level of the test is \(\alpha = \P_0(L \le l)\).</p>
+</div>
+
+<p>As usual, we can try to construct a test by choosing \(l\) so that \(\alpha\) is a prescribed value. If \(\bs{X}\) has a  discrete distribution, this will only be possible when \(\alpha\) is a value of the <a href="../dist/CDF.html">distribution function</a> of \(L(\bs{X})\). An important special case of this model occurs when the distribution of \(\bs{X}\) depends on a parameter \(\theta\) that has two possible values.</p>
+
+<div class="unit">
+	<p class="dfn">Suppose that the parameter set is \(\{\theta_0, \theta_1\}\), and \(f_0\) denotes the probability density function of \(\bs{X}\) when \(\theta = \theta_0\) and \(f_1\) denotes the probability density function of \(\bs{X}\) when \(\theta = \theta_1\). The hypotheses in <a href="#smp0" class="ref"></a> are equivalent to</p>
+	<ol class="sub">
+		<li>\(H_0: \theta = \theta_0\)</li>
+		<li>\(H_1: \theta = \theta_1\).</li>
+	</ol>
+</div>
+
+<p>As noted earlier, another important special case is when \(\bs X\) is a random sample form a distribution.</p>
+
+<div class="unit">
+	<p class="dfn"> Suppose that \( \bs X = (X_1, X_2, \ldots, X_n) \) is a random sample of size \( n \) from a distribution an underlying random variable \( X \) with values in a set \( R \) and with probability density function \(g\). In this case, \( S = R^n \) and the probability density function \( f \) of \( \bs X \) has the form 
+	\[ f(x_1, x_2, \ldots, x_n) = g(x_1) g(x_2) \cdots g(x_n), \quad (x_1, x_2, \ldots, x_n) \in S \]
+	The hypotheses in <a href="#smp0" class="ref"></a> simplify to</p>
+	<ol class="sub">
+		<li>\( H_0: X \) has probability density function \(g_0 \).</li>
+		<li>\( H_1: X \) has probability density function \(g_1 \).</li> 
+	</ol>
+	<p>The likelihood ratio statistic is
+	\[ L(X_1, X_2, \ldots, X_n) = \prod_{i=1}^n \frac{g_0(X_i)}{g_1(X_i)} \]</p>
+</div>
+
+<p>In this special case, it turns out that under \( H_1 \), the likelihood ratio statistic, as a function of the sample size \( n \), is a <a href="../martingales/index.html">martingale</a>.</p>
+
+<h4 id="ney">The Neyman-Pearson Lemma</h4>
+
+<p>The following theorem is the <dfn>Neyman-Pearson Lemma</dfn>, named for <a href="JavaScript:openAncillary('../biographies/Neyman.html')" class="ancillary">Jerzy Neyman</a> and <a href="JavaScript:openAncillary('../biographies/PearsonE.html')" class="ancillary">Egon Pearson</a>. It shows that the test given above is most powerful. Let
+\[ R = \{\bs{x} \in S: L(\bs{x}) \le l\} \]
+and recall that the <dfn>size</dfn> of a rejection region is the significance of the test with that rejection region.</p>
+
+<div class="unit" id="ney1">
+	<p class="math">Consider the tests with rejection regions \(R\) given above and arbitrary \(A \subseteq S\).  If the size of \(R\) is at least as large as the size of \(A\) then the test with rejection region \(R\) is more powerful than the test with rejection region \(A\). That is, if \(\P_0(\bs{X} \in R) \ge \P_0(\bs{X} \in A)\) then \(\P_1(\bs{X} \in R) \ge \P_1(\bs{X} \in A) \).</p>
+	<details>
+		<summary>Details:</summary>
+		<p>First note that from the definitions of \( L \) and \( R \) that the following inequalities hold:
+		\begin{align}
+			\P_0(\bs{X} \in A) &amp; \le l \, \P_1(\bs{X} \in A) \text{ for } A \subseteq R\\
+			\P_0(\bs{X} \in A) &amp; \ge l \, \P_1(\bs{X} \in A) \text{ for } A \subseteq R^c
+		\end{align}
+		Now for arbitrary \( A \subseteq S \), write \(R = (R \cap A) \cup (R \setminus A)\) and \(A = (A \cap R) \cup (A \setminus R)\). From the additivity of probability and the inequalities above, it follows that
+		\[ \P_1(\bs{X} \in R) - \P_1(\bs{X} \in A) \ge \frac{1}{l} \left[\P_0(\bs{X} \in R) - \P_0(\bs{X} \in A)\right] \]
+		Hence if \(\P_0(\bs{X} \in R) \ge \P_0(\bs{X} \in A)\) then \(\P_1(\bs{X} \in R) \ge \P_1(\bs{X} \in A) \).</p>
+	</details>
+</div>
+
+<p>The Neyman-Pearson lemma is more useful than might be first apparent. In many important cases, the <em>same</em> most powerful test works for a range of alternatives, and so is a <em>uniformly</em> most powerful test for this range. Several special cases are discussed below.</p>
+
+<h4 id="gen">Generalized Likelihood Ratio</h4>
+
+<p>The likelihood ratio statistic can be generalized to composite hypotheses. Suppose again that the probability density function \(f_\theta\) of the data variable \(\bs{X}\) depends on a parameter \(\theta\), with values in a parameter set \(T\). Consider the hypotheses \(\theta \in T_0\) versus \(\theta \notin T_0\), where \(\Theta_0 \subseteq T\).</p>
+
+<div class="unit" id="gen1">
+	<p class="math">Define
+	\[ L(\bs{x}) = \frac{\sup\left\{f_\theta(\bs{x}): \theta \in \Theta_0\right\}}{\sup\left\{f_\theta(\bs{x}): \theta \in T\right\}} \]
+	The function \(L\) is the <dfn>likelihood ratio function</dfn> and \(L(\bs{X})\) is the <dfn>likelihood ratio statistic</dfn>. </p>
+</div>
+
+<p>By the same reasoning as before, small values of \(L(\bs{x})\) are evidence in favor of the alternative hypothesis.</p>
+
+<h3 id="exa">Examples and Special Cases</h3>
+
+<h4 id="exp">Tests for the Exponential Model</h4>
+
+<p>Suppose that \(\bs{X} = (X_1, X_2, \ldots, X_n)\) is a random sample  of size \( n \in \N_+ \) from the <a href="../poisson/Exponential.html">exponential distribution</a> with scale parameter \(b \in (0, \infty)\). The sample variables might represent the lifetimes from a sample of devices of a certain type.</p>
+
+<div class="unit">
+	<p class="dfn">Consier the simple hypotheses \(H_0: b = b_0\) versus \(H_1: b = b_1\), where \(b_0, \, b_1 \in  (0, \infty)\) are distinct specified values.</p>
+</div>
+
+<p>Recall that the sum of the variables is a sufficient statistic for \(b\):
+\[ Y = \sum_{i=1}^n X_i \]
+Recall also that \(Y\) has the <a href="../special/Gamma.html">gamma distribution</a> with shape parameter \(n\) and scale parameter \(b\). For \(\alpha \gt 0\), we will denote the quantile of order \(\alpha\) for the this distribution by \(\gamma_{n, b}(\alpha)\).</p>
+
+<div class="unit" id="exp1">
+	<p class="math">The likelihood ratio statistic is
+	\[ L = \left(\frac{b_1}{b_0}\right)^n \exp\left[\left(\frac{1}{b_1} - \frac{1}{b_0}\right) Y \right] \]</p>
+	<details>
+		<summary>Details:</summary>
+		<p>Recall that the PDF \( g \) of the exponential distribution with scale parameter \( b \in (0, \infty) \) is given by \( g(x) = (1 / b) e^{-x / b} \) for \( x \in (0, \infty) \). If \( g_j \) denotes the PDF when \( b = b_j \) for \( j \in \{0, 1\} \) then
+		\[ \frac{g_0(x)}{g_1(x)} = \frac{(1/b_0) e^{-x / b_0}}{(1/b_1) e^{-x/b_1}} = \frac{b_1}{b_0} e^{(1/b_1 - 1/b_0) x}, \quad x \in (0, \infty) \]
+		Hence the likelihood ratio function is
+		\[ L(x_1, x_2, \ldots, x_n) = \prod_{i=1}^n \frac{g_0(x_i)}{g_1(x_i)} = \left(\frac{b_1}{b_0}\right)^n e^{(1/b_1 - 1/b_0) y}, \quad (x_1, x_2, \ldots, x_n) \in (0, \infty)^n\]
+		where \( y = \sum_{i=1}^n x_i \).</p>
+	</details>
+</div>
+
+<div class="unit" id="exp2">
+	<p class="math">The following tests are most powerful test at the \(\alpha\) level</p>
+	<ol class="sub">
+		<li> Suppose that \(b_1 \gt b_0\). Reject \(H_0: b = b_0\) versus \(H_1: b = b_1\) if and only if \(Y \ge \gamma_{n, b_0}(1 - \alpha)\).</li>
+		<li> Suppose that \(b_1 \lt b_0\). Reject \(H_0: b = b_0\) versus \(H_1: b = b_1\) if and only if \(Y \le \gamma_{n, b_0}(\alpha)\).</li>
+	</ol>
+	<details>
+		<summary>Details:</summary>
+		<p>Under \( H_0 \), \( Y \) has the gamma distribution with parameters \( n \) and \( b_0 \).</p>
+		<ol class="sub">
+			<li>If \( b_1 \gt b_0 \) then \( 1/b_1 \lt 1/b_0 \). From simple algebra, a rejection region of the form \( L(\bs X) \le l \) becomes a rejection region of the form \( Y \ge y \). The precise value of \( y \) in terms of \( l \) is not important. For the test to have significance level \( \alpha \) we must choose \( y = \gamma_{n, b_0}(1 - \alpha) \)</li>
+			<li>If \( b_1 \lt b_0 \) then \( 1/b_1 \gt 1/b_0 \). From simple algebra, a rejection region of the form \( L(\bs X) \le l \) becomes a rejection region of the form \( Y \le y \). Again, the precise value of \( y \) in terms of \( l \) is not important. For the test to have significance level \( \alpha \) we must choose \( y = \gamma_{n, b_0}(\alpha) \)</li>
+		</ol>
+	</details>
+</div>
+
+<p>Note that the these tests do not depend on the value of \(b_1\). This fact, together with the monotonicity of the power function can be used to shows that the tests are uniformly most powerful for the usual one-sided tests.</p>
+
+<div class="unit" id="exp3">
+	<p class="math">Suppose that \( b_0 \in (0, \infty) \).</p>
+	<ol class="sub">
+		<li>The decision rule in part (a) above is uniformly most powerful for the test \(H_0: b \le b_0\) versus \(H_1: b \gt b_0\).</li>
+		<li>The decision rule in part (b) above is uniformly most powerful for the test \(H_0: b \ge b_0\) versus \(H_1: b \lt b_0\).</li>
+	</ol>
+</div>
+
+<h4 id="ber">Tests for the Bernoulli Model</h4>
+
+<p>Suppose that \(\bs{X} = (X_1, X_2, \ldots, X_n)\) is a random sample of size \(n \in \N_+\) from the <a href="../bernoulli/Introduction.html">Bernoulli distribution</a> with success parameter \(p\). The sample could represent the results of tossing a coin \(n\) times, where \(p\) is the probability of heads.</p>
+
+<div class="unit">
+	<p class="dfn">Consider the simple hypotheses \(H_0: p = p_0\) versus \(H_1: p = p_1\), where \(p_0, \, p_1 \in (0, 1)\) are distinct specified values.</p>
+</div>
+
+<p>In the coin tossing model, we know that the probability of heads is either \(p_0\) or \(p_1\), but we don't know which. Recall that the number of successes is a sufficient statistic for \(p\):
+\[ Y = \sum_{i=1}^n X_i \]
+Recall also that \(Y\) has the <a href="../bernoulli/Binomial.html">binomial distribution</a> with parameters \(n\) and \(p\). For \(\alpha \in (0, 1)\), we will denote the quantile of order \(\alpha\) for the this distribution by \(b_{n, p}(\alpha)\); although since the distribution is discrete, only certain values of \(\alpha\) are possible.</p>
+
+<div class="unit" id="ber1">
+	<p class="math">The likelihood ratio statistic is
+	\[ L = \left(\frac{1 - p_0}{1 - p_1}\right)^n  \left[\frac{p_0 (1 - p_1)}{p_1 (1 - p_0)}\right]^Y\]</p>
+	<details>
+		<summary>Details:</summary>
+		<p>Recall that the PDF \( g \) of the Bernoulli distribution with parameter \( p \in (0, 1) \) is given by \( g(x) = p^x (1 - p)^{1 - x} \) for \( x \in \{0, 1\} \). If \( g_j \) denotes the PDF when \( p = p_j \) for \( j \in \{0, 1\} \) then
+		\[ \frac{g_0(x)}{g_1(x)} = \frac{p_0^x (1 - p_0)^{1-x}}{p_1^x (1 - p_1^{1-x}} = \left(\frac{p_0}{p_1}\right)^x \left(\frac{1 - p_0}{1 - p_1}\right)^{1 - x} = \left(\frac{1 - p_0}{1 - p_1}\right) \left[\frac{p_0 (1 - p_1)}{p_1 (1 - p_0)}\right]^x, \quad x \in \{0, 1\} \]
+		Hence the likelihood ratio function is
+		\[ L(x_1, x_2, \ldots, x_n) = \prod_{i=1}^n \frac{g_0(x_i)}{g_1(x_i)} = \left(\frac{1 - p_0}{1 - p_1}\right)^n \left[\frac{p_0 (1 - p_1)}{p_1 (1 - p_0)}\right]^y, \quad (x_1, x_2, \ldots, x_n) \in \{0, 1\}^n \]
+		where \( y = \sum_{i=1}^n x_i \).</p>
+	</details>
+</div>
+
+<div class="unit" id="ber2">
+	<p class="math">The following tests are most powerful test at the \(\alpha\) level</p>
+	<ol class="sub">
+		<li> Suppose that \(p_1 \gt p_0\). Reject \(H_0: p = p_0\) versus \(H_1: p = p_1\) if and only if \(Y \ge b_{n, p_0}(1 - \alpha)\).</li>
+		<li> Suppose that \(p_1 \lt p_0\). Reject \(p = p_0\) versus \(p = p_1\) if and only if \(Y \le b_{n, p_0}(\alpha)\).</li>
+	</ol>
+	<details>
+		<summary>Details:</summary>
+		<p>Under \( H_0 \), \( Y \) has the binomial distribution with parameters \( n \) and \( p_0 \).</p>
+		<ol class="sub">
+			<li>If \( p_1 \gt p_0 \) then \( p_0(1 - p_1) / p_1(1 - p_0) \lt 1 \). From simple algebra, a rejection region of the form \( L(\bs X) \le l \) becomes a rejection region of the form \( Y \ge y \). The precise value of \( y \) in terms of \( l \) is not important. For the test to have significance level \( \alpha \) we must choose \( y = b_{n, p_0}(1 - \alpha) \)</li>
+			<li>If \( p_1 \lt p_0 \) then \( p_0 (1 - p_1) / p_1 (1 - p_0) \gt 1\). From simple algebra, a rejection region of the form \( L(\bs X) \le l \) becomes a rejection region of the form \( Y \le y \). Again, the precise value of \( y \) in terms of \( l \) is not important. For the test to have significance level \( \alpha \) we must choose \( y = b_{n, p_0}(\alpha) \)</li>
+		</ol>
+</details>
+
+</div>
+
+<p>Note that these tests do not depend on the value of \(p_1\). This fact, together with the monotonicity of the power function can be used to shows that the tests are uniformly most powerful for the usual one-sided tests.</p>
+
+<div class="unit">
+	<p class="math">Suppose that \( p_0 \in (0, 1) \).</p>
+	<ol class="sub">
+		<li>The decision rule in part (a) above is uniformly most powerful for the test \(H_0: p \le p_0\) versus \(H_1: p \gt p_0\).</li>
+		<li>The decision rule in part (b) above is uniformly most powerful for the test \(H_0: p \ge p_0\) versus \(H_1: p \lt p_0\).</li>
+	</ol>
+</div>
+
+<h4 id="nor">Tests in the Normal Model</h4>
+
+<p>The one-sided tests that we derived in the <a href="Normal.html">normal model</a>, for \(\mu\) with \(\sigma\) known, for \(\mu\) with \(\sigma\) unknown, and for \(\sigma\) with \(\mu\) unknown are all uniformly most powerful. On the other hand, none of the two-sided tests are uniformly most powerful.</p>
+
+<h4 id="non">A Nonparametric Example</h4>
+
+<p>Suppose that \(\bs{X} = (X_1, X_2, \ldots, X_n)\) is a random sample of size \( n \in \N_+ \), either from the <a href="../poisson/Poisson.html">Poisson distribution</a> with parameter 1 or from the <a href="../bernoulli/Geometric.html">geometric distribution</a> on \(\N\) with parameter \(p = \frac{1}{2}\). Note that both distributions have <a href="../expect/Properties.html">mean</a> 1 (although the Poisson distribution has <a href="../expect/Variance.html">variance</a> 1 while the geometric distribution has variance 2).</p>
+
+<div class="unit">
+	<p class="dfn">Consider the simple hypotheses</p>
+	<ol class="sub">
+		<li>\(H_0: X\) has probability density function \(g_0(x) = e^{-1} \frac{1}{x!}\) for \(x \in \N \).</li>
+		<li>\(H_1: X\) has probability density function \(g_1(x) = \left(\frac{1}{2}\right)^{x+1}\) for  \(x \in \N\).</li>
+	</ol>
+</div>
+
+<div class="unit" id="non1">
+	<p class="math">The likelihood ratio statistic is
+	\[ L = 2^n e^{-n} \frac{2^Y}{U} \text{ where } Y = \sum_{i=1}^n X_i \text{ and } U = \prod_{i=1}^n X_i! \]</p>
+	<details>
+		<summary>Details:</summary>
+		<p>Note that
+		\[ \frac{g_0(x)}{g_1(x)} = \frac{e^{-1} / x!}{(1/2)^{x+1}} = 2 e^{-1} \frac{2^x}{x!}, \quad x \in \N \]
+		Hence the likelihood ratio function is 
+		\[ L(x_1, x_2, \ldots, x_n) = \prod_{i=1}^n \frac{g_0(x_i)}{g_1(x_i)} = 2^n e^{-n} \frac{2^y}{u}, \quad (x_1, x_2, \ldots, x_n) \in \N^n \]
+		where \( y = \sum_{i=1}^n x_i \) and \( u = \prod_{i=1}^n x_i! \).</p>
+	</details>
+</div>
+
+<div class="unit" id="non2">
+	<p class="math">The most powerful tests have the following form, where \(d\) is a constant: reject \(H_0\) if and only if \(\ln(2) Y - \ln(U) \le d\).</p>
+	<details>
+		<summary>Details:</summary>
+		<p>A rejection region of the form \( L(\bs X) \le l \) is equivalent to 
+		\[\frac{2^Y}{U} \le \frac{l e^n}{2^n}\]
+		Taking the natural logarithm, this is equivalent to \( \ln(2) Y - \ln(U) \le d \) where \( d = n + \ln(l) - n \ln(2) \)</p>
+	</details>
+</div>
+
+<footer>
+	<ol class="map">
+		<li class="parent"><a href="../index.html">Random</a></li>
+		<li class="parent"><a href="index.html">8. Hypothesis Testing</a></li>
+		<li class="child"><a href="Introduction.html" title="Introduction">1</a></li>
+		<li class="child"><a href="Normal.html" title="Tests in the Normal Model">2</a></li>
+		<li class="child"><a href="Bernoulli.html" title="Tests in the Bernoulli Model">3</a></li>
+		<li class="child"><a href="BivariateNormal.html" title="Tests in the Two-Sample Normal Model">4</a></li>
+		<li class="current">5</li>
+		<li class="child"><a href="ChiSquare.html" title="Chi-Square Tests">6</a></li>
+		<li class="details"><button type="button" title="Expand Details" onclick="expandDetails(true);"><img src="../icons/Plus.svg" alt="Expand"></button></li>
+		<li class="details"><button type="button" title="Contract Details" onclick="expandDetails(false);"><img src="../icons/Minus.svg" alt="Contract"></button></li>
+	</ol>
+	<ul class="map">
+		<li class="sister"><a href="JavaScript:openAncillary('../apps/index.html')" class="ancillary">Apps</a></li>
+		<li class="sister"><a href="JavaScript:openAncillary('../data/index.html')" class="ancillary">Data Sets</a></li>
+		<li class="child"><a href="JavaScript:openAncillary('../biographies/index.html')" class="ancillary"> Biographies</a></li>
+	</ul>
+</footer>
+
+<script>getReferences();</script>
+
+</body>
+</html>

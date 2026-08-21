@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<title>Introduction</title>
+	<meta name="author" content="Kyle Siegrist">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="keywords" content="probability, statistics, random sample, statistical model, empirical distribution, continuous variable, discrete variable, levels of measurement">
+	<link rel="icon" href="../icons/Icon.svg" type="image/svg">
+	<link rel="stylesheet" href="../Screen.css" type="text/css" media="screen">
+	<script src="../Basic.js"></script>
+	<script src="../../MathJax/tex-svg.js" id="MathJax-script" async></script>
+</head>
+
+<body>
+
+<div class="latex">
+	\(\renewcommand{\P}{\mathbb{P}}\)
+	\(\newcommand{\R}{\mathbb{R}}\) 
+	\(\newcommand{\N}{\mathbb{N}}\)
+	\(\newcommand{\bs}{\boldsymbol}\)
+</div>
+
+<header>
+	<ol class="map">
+		<li class="parent"><a href="../index.html">Random</a></li>
+		<li class="parent"><a href="index.html">5. Random Samples</a></li>
+		<li class="current">1</li>
+		<li class="child"><a href="Mean.html" title="The Sample Mean">2</a></li>
+		<li class="child"><a href="LLN.html" title="The Law of Large Numbers">3</a></li>
+		<li class="child"><a href="CLT.html" title="The Central Limit Theorem">4</a></li>
+		<li class="child"><a href="Variance.html" title="The Sample Variance">5</a></li>
+		<li class="child"><a href="OrderStatistics.html" title="Order Statistics">6</a></li>
+		<li class="child"><a href="Covariance.html" title="Sample Correlation and Regression">7</a></li>
+		<li class="child"><a href="Normal.html" title="Special Properties of Normal Samples">8</a></li>
+		<li class="details"><button type="button" title="Expand Details" onclick="expandDetails(true);"><img src="../icons/Plus.svg" alt="Expand"></button></li>
+		<li class="details"><button type="button" title="Contract Details" onclick="expandDetails(false);"><img src="../icons/Minus.svg" alt="Contract"></button></li>
+	</ol>
+	<h2>1. Introduction</h2>
+</header>
+
+<h3>The Basic Statistical Model</h3>
+
+<p>In the basic statistical model, we have a <dfn>population</dfn> of objects of interest.  The objects could be persons, families, computer chips, acres of corn.  In addition, we have various measurements or <dfn>variables</dfn> defined on the objects. We select a sample from the population and record the variables of interest for each object in the sample. Here are a few examples based on the <a href="JavaScript:openAncillary('../data/index.html')" class="ancillary">data sets</a> in this project:</p>
+
+<div class="unit">
+	<p class="math">Examples</p>
+	<ol class="sub">
+		<li>In the <a href="JavaScript:openAncillary('../data/MM.html')" class="ancillary">M&amp;M data</a>, the objects are bags of M&amp;Ms of a specified size.  The variables recorded for a bag of M&amp;Ms are net weight and the counts for red, green, blue, orange, yellow, and brown candies.</li>
+		<li>In the <a href="JavaScript:openAncillary('../data/Cicada.html')" class="ancillary">cicada data</a>, the objects are cicadas from the middle Tennessee area.  The variables recorded for a cicada are body weight, wing length, wing width, body length, gender, and species.</li>
+		<li>In <a href="JavaScript:openAncillary('../data/Fisher.html')" class="ancillary">Fisher's iris data</a>, the objects are irises.  The variables recorded for an iris are petal length, petal width, sepal length, sepal width, and type.</li>
+		<li>In the <a href="JavaScript:openAncillary('../data/Polio.html')" class="ancillary">Polio data set</a>, the objects are children. Although many variables were probably recorded for a child, the two crucial variables, both binary, were whether or not the child was vaccinated, and whether or not the child contracted Polio within a certain time period.</li>
+		<li>In the <a href="JavaScript:openAncillary('../data/Challenger.html')" class="ancillary">Challenger data sets</a>, the objects are Space Shuttle launches.  The variables recorded are temperature at the time of launch and various measures of O-ring erosion of the solid rocket boosters. </li>
+		<li>In <a href="JavaScript:openAncillary('../data/Michelson.html')" class="ancillary">Michelson's data set</a>, the objects are beams of light and the variable recorded is speed.</li>
+		<li>In <a href="JavaScript:openAncillary('../data/Pearson.html')" class="ancillary">Pearson's data set</a>, the objects are father-son pairs.  The variables are the height of the father and the height of the son.</li>
+		<li>In <a href="JavaScript:openAncillary('../data/Snow.html')" class="ancillary">Snow's data set</a>, the objects are persons who died of cholera.  The variables record the address of the person.</li>
+		<li>In one of the <a href="JavaScript:openAncillary('../data/SAT.html')" class="ancillary">SAT data sets</a>, the objects are states and the variables are participation rate, average SAT Math score and average SAT Verbal score.</li>
+	</ol>
+</div>
+
+<p>So often the observed outcome of a statistical experiment (the data) has the form \(\bs x = (x_1, x_2, \ldots, x_n)\) where \(x_i\) is the vector of measurements for the \(i\)th object chosen from the population for each \( i \in \{1, 2, \ldots, n\} \). The set \(S\) of possible values of \(\bs x\) (before the experiment is conducted) is called the <dfn>sample set</dfn>. It is literally the set of samples. Thus, although the outcome of a statistical experiment can have quite a complicated structure (a vector of vectors), the hallmark of mathematical abstraction is the ability to <span style="color:gray">gray out</span> the features that are not relevant at any particular time, to treat a complex structure as a single object. This we do with the outcome \(\bs x\) of the experiment.</p>
+
+<p>The techniques of statistics have been enormously successful; these techniques are widely used in just about every subject that deals with quantification&mdash;the natural sciences, the social sciences, law, and medicine. On the other hand, statistics has a legalistic quality and a great deal of terminology and jargon that can make the subject a bit intimidating at first. In the rest of this section, we begin discussing some of this terminology.</p>
+
+<h4>The Empirical Distribution</h4>
+
+<div class="unit">
+	<p class="dfn">Suppose that a statistical experiment results in the data \(\bs x = (x_1, x_2, \ldots, x_n)\) for some \( n \in \N_+ \). The <dfn>empirical distribution</dfn> associated with \(\bs x\) is the probability distribution that places probability \(1/n\) at \(x_i\) for each \( i \in \{1, 2, \ldots, n\} \).</p>
+</div>
+
+<p>So if the values are distinct, the empirical distribution is the <a href="../dist/discrete.html">discrete uniform distribution</a> on \(\{x_1, x_2, \ldots, x_n\}\). More generally, if \(x\) occurs \(k\) times in the data for some \( k \in \{1, 2, \ldots, n\} \), then the empirical distribution assigns probability \(k / n\) to \(x\). Thus, every finite data set defines a probability distribution. The empirical distribution is very important, not just practically but also theoretically. Modern <dfn>resampling methods</dfn> are based on the empirical distribution.</p>
+
+<h4>Statistics</h4>
+
+<p>Suppose again that a statistical experiment results in the data \(\bs x = (x_1, x_2, \ldots, x_n)\) for some \( n \in \N_+ \).</p>
+
+<div class="unit">
+	<p class="dfn">Technically, a <dfn>statistic</dfn> \(w = w(\bs x)\) is an observable function of the outcome \(\bs x\) of the experiment.</p>
+</div>
+
+<p>That is, a statistic is a computable function defined on the sample set \(S\). The term <dfn>observable</dfn> means that the function should not contain any unknown quantities, because we need to be able to compute the value \(w\) of the statistic from the observed data \(\bs x\). As with the data \(\bs x\), a statistic \(w\) may have a complicated structure; typically, \(w\) is vector valued. Indeed, the outcome \(\bs x\) of the experiment is itself is a statistic; all other statistics are derived from \(\bs x\).</p>
+
+<div class="unit">
+	<p class="dfn">Statistics \(u\) and \(v\) are <dfn>equivalent</dfn> if there exists a one-to-one function \(r\) from the range of \(u\) onto the range of \(v\) such that \(v = r(u)\). Equivalent statistics give equivalent information about \(\bs x\).</p>
+</div>
+
+<div class="unit">
+	<p class="math">Statistics \(u\) and \(v\) are equivalent if and only if the following condition holds: for any \(\bs x \in S\) and \(\bs{y} \in S\), \(u(\bs x) = u(\bs{y})\) if and only if \(v(\bs x) = v(\bs{y})\).</p>
+</div>
+
+<div class="unit">
+	<p class="math">Equivalence really is an <a href="../foundations/Equivalence.html">equivalence relation</a> on the collection of statistics for a given statistical experiment. That is, if \(u\), \(v\), and \(w\) are arbitrary statistics then </p>
+	<ol class="sub">
+		<li>\(u\) is equivalent to \(u\) (the <dfn>reflexive property</dfn>).</li>
+		<li>If \(u\) is equivalent to \(v\) then \(v\) is equivalent to \(u\) (the <dfn>symmetric property</dfn>).</li>
+		<li>If \(u\) is equivalent to \(v\) and \(v\) is equivalent to \(w\) then \(u\) is equivalent to \(w\) (the <dfn>transitive property</dfn>).</li>
+	</ol>
+</div>
+
+<h4>Descriptive and Inferential Statistics</h4>
+
+<p>There are two broad branches of statistics. The term <dfn>descriptive statistics</dfn> refers to methods for summarizing and displaying the observed data \(\bs x\).  As the name suggests, the methods of descriptive statistics usually involve computing various statistics (in the technical sense) that give useful information about the data:  measures of center and spread, measures of association, and so forth. In the context of descriptive statistics, the term <dfn>parameter</dfn> refers to a characteristic of the entire population.</p>
+
+<p>The deeper and more useful branch of statistics is known as <dfn>inferential statistics</dfn>.  Our point of view in this branch is that the statistical experiment (before it is conducted) is a <a href="../prob/Experiments.html">random experiment</a> with a <a href="../prob/Probability.html">probability measure</a> \(\P\) on an underlying <a href="../prob/Events.html">sample space</a>. Thus, the outcome \(\bs x\) of the experiment is an observed value of a <a href="../prob/Probability.html">random variable</a> \(\bs{X}\) defined on this probability space, with the distribution of \(\bs{X}\) not completely known to us.  Our goal is to draw inferences about the distribution of \(\bs{X}\) from the observed value \(\bs x\). Thus, in a sense, inferential statistics is the dual of probability. In probability, we try to <em>predict</em> the value of \(\bs{X}\) <em>assuming</em> complete knowledge of the distribution. In statistics, by contrast, we <em>observe</em> the value of \(\bs x\) of the random variable \(\bs{X}\) and try to <em>infer</em> information about the underlying distribution of \(\bs{X}\). In inferential statistics, a <em>statistic</em> (a function of \(\bs{X}\)) is itself a random variable with a distribution of its own. On the other hand, the term <dfn>parameter</dfn> refers to a characteristic of the distribution of \(\bs{X}\).  Often the inferential problem is to use various statistics to <dfn>estimate</dfn> or <dfn>test hypotheses</dfn> about a parameter. Another way to think of inferential statistics is that we are trying to infer from the <em>empirical</em> distribution associated with the observed data \(\bs x\) to the <em>true</em> distribution associated with \(\bs{X}\).</p>
+
+<p>There are two basic types of random experiments in the general area of inferential statistics.  A <dfn>designed experiment</dfn>, as the name suggests, is carefully designed to study a particular inferential question.  The experimenter has considerable control over how the objects are selected, what variables are to be recorded for these objects, and the values of certain of the variables. In an <dfn>observational study</dfn>, by contrast, the researcher has little control over these factors. Often the researcher is simply given the data set and asked to make sense out of it.  For example, the <a href="JavaScript:openAncillary('../data/Polio.html')" class="ancillary">Polio field trials</a> were designed experiments to study the effectiveness of the Salk vaccine.  The researchers had considerable control over how the children were selected, and how the children were assigned to the treatment and control groups. By contrast, the <a href="JavaScript:openAncillary('../data/Challenger.html')" class="ancillary">Challenger data sets</a> used to explore the relationship between temperature and O-ring erosion are observational studies.  Of course, just because an experiment is designed does not mean that it is <em>well</em> designed.</p>
+
+<h4>Difficulties</h4>
+
+<p>A number of difficulties can arise when trying to explore an inferential question.  Often, problems arise because of <dfn>confounding variables</dfn>, which are variables that (as the name suggests) interfere with our understanding of the inferential question. In the first <a href="JavaScript:openAncillary('../data/Polio.html')" class="ancillary">Polio field trial</a> design, for example, <var>age</var> and <var>parental consent</var> are two confounding variables that interfere with the determination of the effectiveness of the vaccine. The entire point of the <a href="JavaScript:openAncillary('../data/Berkeley.html')" class="ancillary">Berkeley admissions data</a>, to give another example, is to illustrate how a confounding variable (<var>department</var>) can create a spurious correlation between two other variables (<var>gender</var> and <var>admissions status</var>). When we correct for the interference caused by a confounding variable, we say that we have <dfn>controlled</dfn> for the variable.</p>
+
+<p>Problems also frequently arise because of <dfn>measurement errors</dfn>. Some variables are inherently difficult to measure, and systematic bias in the measurements can interfere with our understanding of the inferential question.  The first <a href="JavaScript:openAncillary('../data/Polio.html')" class="ancillary">Polio field trial</a> design again provides a good example.  Knowledge of the vaccination status of the children led to systematic bias by doctors attempting to diagnose polio in these children. Measurement errors are sometimes caused by hidden confounding variables.</p>
+
+<p>Confounding variables and measurement errors abound in political polling, where the inferential question is who will win an election. How do confounding variables such as race, income, age, and gender (to name just a few) influence how a person will vote?  How do we know that a person will vote for whom she says she will, or if she will vote at all (measurement errors)? The <a href="JavaScript:openAncillary('../data/LiteraryDigest.html')" class="ancillary">Literary Digest poll</a> in the 1936 presidential election and the <a href="JavaScript:openAncillary('../data/1948Election.html')" class="ancillary">professional polls</a> in the 1948 presidential election illustrate these problems.</p>
+
+<p>Confouding variables, measurement errors and other causes often lead to <dfn>selection bias</dfn>, which means that the sample does not represent the population with respect to the inferential question at hand. Often randomization is used to overcome the effects of confounding variables and measurement errors.</p>
+
+<h4 id="Samples">Random Samples</h4>
+
+<p>The most common and important special case of the inferential statistical model occurs when the observation variable
+\[ \bs{X} = (X_1, X_2, \ldots, X_n) \]
+is a sequence of independent and identically distributed random variables. Again, in the standard sampling model, \(X_i\) is itself a vector of measurements for the \(i\)th object in the sample, and thus, we think of \((X_1, X_2, \ldots, X_n)\) as independent copies of an underlying measurement vector \(X\). In this case, \((X_1, X_2, \ldots, X_n)\) is said to be a <dfn>random sample</dfn> of size \(n\) from the distribution of \(X\).</p>
+
+<h3 id="Variables">Variables</h3>
+
+<p>The mathematical operations that make sense for variable in a statistical experiment depend on the <em>type</em> and <em>level of measurement</em> of the variable.</p>
+
+<h4>Type</h4>
+
+<p>Recall that a real variable \(x\) is <dfn>continuous</dfn> if the possible values form an interval of real numbers. For example, the weight variable in the M&amp;M data set, and the length and width variables in Fisher's iris data are continuous. In contrast, a <dfn>discrete variable</dfn> is one whose set of possible values forms a discrete set. For example, the counting variables in the M&amp;M data set, the type variable in Fisher's iris data, and the denomination and suit variables in the card experiment are discrete. Continuous variables represent quantities that can, in theory, be measured to any degree of accuracy. In practice, of course, measuring devices have limited accuracy so data collected from a continuous variable are necessarily discrete. That is, there is only a finite (but perhaps very large) set of possible values that can actually be measured. So, the distinction between a discrete and continuous variable is based on what is theoretically possible, not what is actually measured. Some additional examples may help: </p>
+
+<ul>
+	<li>A person's <em>age</em> is usually given in years.  However, one can imagine age being given in months, or weeks, or even (if the time of birth is known to a sufficient accuracy) in seconds. Age, whether of devices or persons, is usually considered to be a continuous variable.</li>
+	<li>The <em>price</em> of an item is usually given (in the US) in dollars and cents, and of course, the smallest monetary object in circulation is the penny ($0.01).  However, taxes are sometimes given in mills ($0.001), and one can imagine smaller divisions of a dollar, even if there are no coins to represent these divisions. Measures of wealth are usually thought of as continuous variables. </li>
+	<li>On the other hand, the number of persons in a car at the time of an accident is a fundamentally discrete variable.</li>
+</ul>
+
+<h4>Levels of Measurement</h4>
+
+<p>A real variable \(x\) is also distinguished by its <dfn>level of measurement</dfn>.</p>
+
+<p><dfn>Qualitative variables</dfn> simply encode <em>types</em> or <em>names</em>, and thus few mathematical operations make sense, even if numbers are used for the encoding. Such variables have the <dfn>nominal level of measurement</dfn>. For example, the type variable in Fisher's iris data is qualitative. Gender, a common variable in many studies of persons and animals, is also qualitative.  Qualitative variables are almost always discrete; it's hard to imagine a continuous infinity of names.</p>
+
+<p>A variable for which only <em>order</em> is meaningful is said to have the <dfn>ordinal </dfn>level of measurement; differences are not meaningful even if numbers are used for the encoding. For example, in many card games, the suits are ranked, so the suit variable has the ordinal level of measurement. For another example, consider the standard 5-point scale (terrible, bad, average, good, excellent) used to rank teachers, movies, restaurants etc.</p>
+
+<p>A quantitative variable for which <em>difference</em>, but not <em>ratios</em> are meaningful is said to have the <dfn>interval</dfn> level of measurement. Equivalently, a variable at this level has a relative, rather than absolute, zero value. Typical examples are temperature (in Fahrenheit or Celsius) or time (clock or calendar).</p>
+
+<p>Finally, a quantitative variable for which ratios are meaningful is said to have the <dfn>ratio</dfn> level of measurement. A variable at this level has an absolute zero value. The count and weight variables in the M&amp;M data set, and the length and width variables in Fisher's iris data are examples.</p>
+
+<h4>Subsamples</h4>
+
+<p>In the basic statistical model, subsamples corresponding to some of the variables can be constructed by <dfn>filtering</dfn> with respect to other variables.  This is particularly common when the filtering variables are qualitative.  Consider the <a href="JavaScript:openAncillary('../data/Cicada.html')" class="ancillary">cicada data</a> for example. We might be interested in the quantitative variables body weight, body length, wing width, and wing length <em>by species</em>, that is, separately for species 0, 1, and 2. Or, we might be interested in these quantitative variables <em>by gender</em>, that is separately for males and females.</p>
+
+<h3>Exercises</h3>
+
+<div class="unit">
+	<p class="stat">Study <a href="JavaScript:openAncillary('../data/Michelson.html')" class="ancillary">Michelson's experiment</a> to measure the velocity of light.</p>
+	<ol class="sub">
+		<li>Is this a designed experiment or an observational study?</li>
+		<li>Classify the velocity of light variable in terms of type and level of measurement.</li>
+		<li>Discuss possible confounding variables and problems with measurement errors.</li>
+	</ol>
+	<details>
+		<summary>Details:</summary>
+		<ol class="sub">
+			<li>Designed experiment</li>
+			<li>Continuous, interval. The level of measurement is only interval because the recorded variable is the speed of light in \(\text{km} / \text{hr}\) minus \(299\,000\) (to make the numbers simpler). The actual speed in \(\text{km} / \text{hr}\) is a continuous, ratio variable.</li>
+		</ol>
+	</details>
+</div>
+
+<div class="unit">
+	<p class="stat">Study <a href="JavaScript:openAncillary('../data/Cavendish.html')" class="ancillary">Cavendish's experiment</a> to measure the density of the earth.</p>
+	<ol class="sub">
+		<li>Is this a designed experiment or an observational study?</li>
+		<li>Classify the density of earth variable in terms of type and level of measurement.</li>
+		<li>Discuss possible confounding variables and problems with measurement errors.</li>
+	</ol>
+	<details>
+		<summary>Details:</summary>
+		<ol class="sub">
+			<li>Designed experiment</li>
+			<li>Continuous, ratio.</li>
+		</ol>
+	</details>
+</div>
+
+<div class="unit">
+	<p class="stat">Study <a href="JavaScript:openAncillary('../data/Short.html')" class="ancillary">Short's experiment</a> to measure the parallax of the sun.</p>
+
+	<ol class="sub">
+		<li>Is this a designed experiment or an observational study?</li>
+		<li>Classify the parallax of the sun variable in terms of type and level of measurement.</li>
+		<li>Discuss possible confounding variables and problems with measurement errors.</li>
+	</ol>
+	<details>
+		<summary>Details:</summary>
+		<ol class="sub">
+			<li>Observational study</li>
+			<li>Continuous, ratio.</li>
+		</ol>
+	</details>
+</div>
+
+<div class="unit">
+	<p class="stat">In the <a href="JavaScript:openAncillary('../data/MM.html')" class="ancillary">M&amp;M data</a>, classify each variable in terms of type and level of measurement.</p>
+	<details>
+		<summary>Details:</summary>
+		<p>Each color count variable: discrete, ratio; Net weight: continuous, ratio</p>
+	</details>
+</div>
+
+<div class="unit">
+	<p class="stat">In the <a href="JavaScript:openAncillary('../data/Cicada.html')" class="ancillary">Cicada data</a>, classify each variable in terms of type and level of measurement.</p>
+	<details>
+		<summary>Details:</summary>
+		<p>Body weight, wing length, wing width, body length: continuous, ratio. Gender, type: discrete, nominal</p>
+	</details>
+</div>
+
+<div class="unit">
+	<p class="stat">In <a href="JavaScript:openAncillary('../data/Fisher.html')" class="ancillary">Fisher's iris data</a>, classify each variable in terms of type and level of measurement.</p>
+	<details>
+		<summary>Details:</summary>
+		<p>Petal width, petal length, sepal width, sepal length: continuous, ratio. Type: discrete, nominal</p>
+	</details>
+</div>
+
+<div class="unit">
+	<p class="stat">Study the <a href="JavaScript:openAncillary('../data/Challenger.html')" class="ancillary">Challenger experiment</a> to explore the relationship between temperature and O-ring erosion.</p>
+	<ol class="sub">
+		<li>Is this a designed experiment or an observational study?</li>
+		<li>Classify each variable in terms of type and level of measurement.</li>
+		<li>Discuss possible confounding variables and problems with measurement errors.</li>
+	</ol>
+	<details>
+	<summary>Details:</summary>
+		<ol class="sub">
+			<li>Observational study</li>
+			<li>Temperature: continuous, interval; Erosion: continuous, ratio; Damage index: discrete, ordinal</li>
+		</ol>
+	</details>
+</div>
+
+<div class="unit">
+	<p class="stat">In the <a href="JavaScript:openAncillary('../data/Draft.html')" class="ancillary">Vietnam draft data</a>, classify each variable in terms of type and level of measurement.</p>
+	<details>
+		<summary>Details:</summary>
+		<p>Birth month: discrete, interval; Birth day: discrete, interval</p>
+	</details>
+</div>
+
+<div class="unit">
+	<p class="stat">In the two <a href="JavaScript:openAncillary('../data/SAT.html')" class="ancillary">SAT data sets</a>, classify each variable in terms of type and level of measurement.</p>
+	<details>
+		<summary>Details:</summary>
+		<p>SAT math and verbal scores: probably continuous, ratio; State: discrete, nominal; Year: discrete, interval</p>
+	</details>
+</div>
+
+<div class="unit">
+	<p class="stat">Study the <a href="JavaScript:openAncillary('../data/LiteraryDigest.html')" class="ancillary">Literary Digest experiment</a> to to predict the outcome of the 1936 presidential election.</p>
+	<ol class="sub">
+		<li>Is this a designed experiment or an observational study?</li>
+		<li>Classify each variable in terms of type and level of measurement.</li>
+		<li>Discuss possible confounding variables and problems with measurement errors.</li>
+	</ol>
+	<details>
+		<summary>Details:</summary>
+		<ol class="sub">
+			<li>designed experiment, although poorly designed</li>
+			<li>State: discrete, nominal; Electoral votes: discrete, ratio; Landon count: discrete, ratio; Roosevelt count: discrete, ratio</li>
+		</ol>
+	</details>
+</div>
+
+<div class="unit">
+	<p class="stat">Study the <a href="JavaScript:openAncillary('../data/1948Election.html')" class="ancillary">1948 polls</a> to predict the outcome of the presidential election between Truman and Dewey.  Are these designed experiments or an observational studies?</p>
+	<details>
+		<summary>Details:</summary>
+		<p>Designed experiments, but poorly designed</p>
+	</details>
+</div>
+
+<div class="unit">
+	<p class="stat">Study <a href="JavaScript:openAncillary('../data/Pearson.html')" class="ancillary">Pearson's experiment</a> to explore the relationship between heights of fathers and heights of sons.</p>
+	<ol class="sub">
+		<li>Is this a designed experiment or an observational study?</li>
+		<li>Classify each variable in terms of type and level of measurement.</li>
+		<li>Discuss possible confounding variables.</li>
+	</ol>
+	<details>
+		<summary>Details:</summary>
+		<ol class="sub">
+			<li>Observational study</li>
+			<li>height of the father: continuous ratio; height of the son: continuous ratio</li>
+		</ol>
+	</details>
+</div>
+
+<div class="unit">
+	<p class="stat">Study the <a href="JavaScript:openAncillary('../data/Polio.html')" class="ancillary">Polio field trials</a>.</p>
+	<ol class="sub">
+		<li>Are these designed experiments or observational studies?</li>
+		<li>Identify the essential variables and classify each in terms of type and level of measurement.</li>
+		<li>Discuss possible confounding variables and problems with measurement errors.</li>
+	</ol>
+	<details>
+		<summary>Details:</summary>
+		<ol class="sub">
+			<li>designed experiments</li>
+			<li>vacination status: discrete, nominal; Polio status: discrete, nominal</li>
+		</ol>
+	</details>
+</div>
+
+<div class="unit">
+	<p class="math">Identify the parameters in each of the following:</p>
+	<ol class="sub">
+		<li><a href="../buffon/Buffon.html">Buffon's Coin Experiment</a></li>
+		<li><a href="../buffon/Buffon.html">Buffon's Needle Experiment</a></li>
+		<li><a href="../bernoulli/Introduction.html">the Bernoulli trials model</a></li>
+		<li><a href="../poisson/Introduction.html">the Poisson model</a></li>
+	</ol>
+	<details>
+		<summary>Details:</summary>
+		<ol class="sub">
+			<li>radius of the coin</li>
+			<li>length of the needle</li>
+			<li>probability of success</li>
+			<li>rate of arrivals</li>
+		</ol>
+	</details>
+</div>
+
+<div class="unit">
+	<p class="math">Note the parameters for each of the following families of <a href="../special/index.html">special distributions</a>:</p>
+	<ol class="sub">
+		<li><a href="../special/Normal.html">the normal distribution</a></li>
+		<li><a href="../special/Gamma.html">the gamma distribution</a></li>
+		<li><a href="../special/Beta.html">the beta distribution</a></li>
+		<li><a href="../special/Pareto.html">the Pareto distribution</a></li>
+		<li><a href="../special/Weibull.html">the Weibull distribution</a></li>
+	</ol>
+	<details>
+		<summary>Details:</summary>
+		<ol class="sub">
+			<li>mean \(\mu\) and standard deviation \(\sigma\)</li>
+			<li>shape parameter \(k\) and scale parameter \(b\)</li>
+			<li>left parameter \(a\) and right parameter \(b\)</li>
+			<li>shape parameter \(a\) and scale parameter \(b\)</li>
+			<li>shape parameter \(k\) and scale parameter \(b\)</li>
+		</ol>
+	</details>
+</div>
+
+<div class="unit">
+	<p class="stat">During World War II, the Allies recorded the serial numbers of captured German tanks.  Classify the underlying <em>serial number</em> variable by type and level of measurement.</p>
+	<details>
+		<summary>Details:</summary>
+		<p>discrete, ordinal.</p>
+	</details>
+</div>
+
+<p>For a discussion of how the serial numbers were used to estimate the total number of tanks, see the section on <a href="../urn/OrderStatistics.html">Order Statistics</a> in <a href="../urn/index.html">Chapter 11</a> on finite sampling models.</p>
+
+<footer>
+	<ol class="map">
+		<li class="parent"><a href="../index.html">Random</a></li>
+		<li class="parent"><a href="index.html">5. Random Samples</a></li>
+		<li class="current">1</li>
+		<li class="child"><a href="Mean.html" title="The Sample Mean">2</a></li>
+		<li class="child"><a href="LLN.html" title="The Law of Large Numbers">3</a></li>
+		<li class="child"><a href="CLT.html" title="The Central Limit Theorem">4</a></li>
+		<li class="child"><a href="Variance.html" title="The Sample Variance">5</a></li>
+		<li class="child"><a href="OrderStatistics.html" title="Order Statistics">6</a></li>
+		<li class="child"><a href="Covariance.html" title="Sample Correlation and Regression">7</a></li>
+		<li class="child"><a href="Normal.html" title="Special Properties of Normal Samples">8</a></li>
+		<li class="details"><button type="button" title="Expand Details" onclick="expandDetails(true);"><img src="../icons/Plus.svg" alt="Expand"></button></li>
+		<li class="details"><button type="button" title="Contract Details" onclick="expandDetails(false);"><img src="../icons/Minus.svg" alt="Contract"></button></li>
+	</ol>
+	<ul class="map">
+		<li class="sister"><a href="JavaScript:openAncillary('../apps/index.html')" class="ancillary">Apps</a></li>
+		<li class="sister"><a href="JavaScript:openAncillary('../data/index.html')" class="ancillary">Data Sets</a></li>
+		<li class="child"><a href="JavaScript:openAncillary('../biographies/index.html')" class="ancillary"> Biographies</a></li>
+	</ul>
+</footer>
+
+<script>getReferences();</script>
+
+</body>
+</html>

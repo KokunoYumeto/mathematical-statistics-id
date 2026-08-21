@@ -1,0 +1,15 @@
+# Reproducibility evidence and reader artifacts are byte-addressed.  Never let
+# checkout-platform newline conversion alter those blobs.
+authority/** -text
+source/** -text
+backend/** -text
+build/** -text
+
+# Repository prose, control files, scripts, and workflows are canonical LF.
+*.md text eol=lf
+*.py text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf
+requirements.txt text eol=lf
+.gitignore text eol=lf
+.gitattributes text eol=lf

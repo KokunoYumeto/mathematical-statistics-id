@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<title>Chi-Square Tests</title>
+	<meta name="author" content="Kyle Siegrist">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="keywords" content="probability, statistics, hypothesis test, goodness of fit test, chi-square test, chi-square distribution, Bernoulli trials, multinomial trials, test of independence">
+	<link rel="icon" href="../icons/Icon.svg" type="image/svg">
+	<link rel="stylesheet" href="../Screen.css" type="text/css" media="screen">
+	<link rel="next" href="../buffon/index.html">
+	<script src="../Basic.js"></script>
+	<script src="../../MathJax/tex-svg.js" id="MathJax-script" async></script>
+</head>
+
+<body>
+
+<div class="latex">
+	\(\newcommand{\R}{\mathbb{R}}\) 
+	\(\newcommand{\N}{\mathbb{N}}\)
+	\(\newcommand{\Z}{\mathbb{Z}}\)
+	\(\newcommand{\P}{\mathbb{P}}\)
+	\(\newcommand{\E}{\mathbb{E}}\)
+	\(\newcommand{\var}{\text{var}}\)
+	\(\newcommand{\sd}{\text{sd}}\)
+	\(\newcommand{\bs}{\boldsymbol}\)
+</div>
+
+<header>
+	<ol class="map">
+		<li class="parent"><a href="../index.html">Random</a></li>
+		<li class="parent"><a href="index.html">8. Hypothesis Testing</a></li>
+		<li class="child"><a href="Introduction.html" title="Introduction">1</a></li>
+		<li class="child"><a href="Normal.html" title="Tests in the Normal Model">2</a></li>
+		<li class="child"><a href="Bernoulli.html" title="Tests in the Bernoulli Model">3</a></li>
+		<li class="child"><a href="BivariateNormal.html" title="Tests in the Two-Sample Normal Model">4</a></li>
+		<li class="child"><a href="Likelihood.html" title="Likelihood Ratio Tests">5</a></li>
+		<li class="current">6</li>
+		<li class="details"><button type="button" title="Expand Details" onclick="expandDetails(true);"><img src="../icons/Plus.svg" alt="Expand"></button></li>
+		<li class="details"><button type="button" title="Contract Details" onclick="expandDetails(false);"><img src="../icons/Minus.svg" alt="Contract"></button></li>
+	</ol>
+	<h2>6. Chi-Square Tests</h2>
+</header>
+
+<p>In this section, we will study a number of important <a href="Introduction.html">hypothesis tests</a> that fall under the general term <dfn>chi-square tests</dfn>. These are named, as you might guess, because in each case the test statistics has (in the limit) a <a href="../special/ChiSquare.html">chi-square distribution</a>. Although there are several different tests in this general category, they all share some common themes:</p>
+
+<ul>
+	<li>In each test, there are one or more underlying <a href="../bernoulli/Multinomial.html">multinomial samples</a>, Of course, the multinomial model includes the <a href="../bernoulli/Introduction.html">Bernoulli model</a> as a special case.</li>
+	<li>Each test works by comparing the <dfn>observed frequencies</dfn> of the various outcomes with <dfn>expected frequencies</dfn> under the null hypothesis.</li>
+	<li>If the model is <dfn>incompletely specified</dfn>, some of the expected frequencies must be estimated; this reduces the degrees of freedom in the limiting chi-square distribution.</li>
+</ul>
+
+<p>We will start with the simplest case, where the derivation is the most straightforward; in fact this test is equivalent to a test we have already studied. We then move to successively more complicated models.</p>
+
+<h4>Topics</h4>
+
+<ul>
+	<li><a href="#osb">One Sample Bernoulli Model</a></li>
+	<li><a href="#msb">Multi-Sample Bernoulli Model</a></li>
+	<li><a href="#osm">One Sample Multinomial Model</a></li>
+	<li><a href="#msm">Multi-Sample Multinomial Model</a></li>
+	<li><a href="#fit">Goodness of Fit Tests</a></li>
+	<li><a href="#ind">Tests of Independence</a></li>
+	<li><a href="#exe">Computational and Simulation Exercises</a></li>
+</ul>
+
+<h3 id="osb">The One-Sample Bernoulli Model</h3>
+
+<p>Suppose that \(\bs{X} = (X_1, X_2, \ldots, X_n)\) is a random sample from the <a href="../bernoulli/Introduction.html">Bernoulli distribution</a> with unknown success parameter \(p \in (0, 1)\). Thus, these are <a href="../prob/Independence.html">independent </a> <a href="../prob/Events.html">random variables</a> taking the values 1 and 0 with probabilities \(p\) and \(1 - p\) respectively. We want to test \(H_0: p = p_0\) versus \(H_1: p \ne p_0\), where \(p_0 \in (0, 1)\) is specified. Of course, we have already studied such <a href="Bernoulli.html">tests in the Bernoulli model</a>.  But keep in mind that our methods in this section will generalize to a variety of new models that we have not yet studied.</p>
+
+<p>Let \(O_1 = \sum_{j=1}^n X_j\) and \(O_0 = n - O_1 = \sum_{j=1}^n (1 - X_j)\). These statistics give the number of times (frequency) that outcomes 1 and 0 occur, respectively. Moreover, we know that each has a <a href="../bernoulli/Binomial.html">binomial distribution</a>; \(O_1\) has parameters \(n\) and \(p\), while \(O_0\) has parameters \(n\) and \(1 - p\). In particular, \(\E(O_1) = n p\), \(\E(O_0) = n (1 - p)\), and \(\var(O_1) = \var(O_0) = n p (1 - p)\). Moreover, recall that \(O_1\) is <a href="../point/Sufficient.html#ber">sufficient</a> for \(p\). Thus, any good test statistic should be a function of \(O_1\). Next, recall that when \(n\) is large, the distribution of \(O_1\) is <a href="../bernoulli/Binomial.html#nor">approximately normal</a>, by the <a href="../sample/CLT.html">central limit theorem</a>. Let
+\[ Z = \frac{O_1 - n p_0}{\sqrt{n p_0 (1 - p_0)}} \]
+Note that \(Z\) is the standard score of \(O_1\) under \(H_0\). Hence if \(n\) is large, \(Z\) has approximately the standard normal distribution under \(H_0\), and therefore \(V = Z^2\) has approximately the chi-square distribution with 1 degree of freedom under \(H_0\). As usual, let \(\chi_k^2\) denote the <a href="../dist/CDF.html#qnt">quantile function</a> of the chi-square distribution with \(k\) degrees of freedom.</p>
+
+<div class="unit" id="osb1">
+	<p class="math">An approximate test of \(H_0\) versus \(H_1\) at the \(\alpha\) level of significance is to reject \(H_0\) if and only if \(V \gt \chi_1^2(1 - \alpha)\).</p>
+</div>
+
+<div class="unit" id="osb2">
+	<p class="math">The test <a href="#osb1" class="ref"></a> is equivalent to the unbiased test with test statistic \(Z\) (the <a href="Bernoulli.html#nor">approximate normal test</a>) derived in the section on <a href="Bernoulli.html">tests in the Bernoulli model</a>.  </p>
+</div>
+
+<p>For purposes of generalization, the critical result in the next exercise is a special representation of \(V\). Let \(e_0 = n (1 - p_0)\) and \(e_1 = n p_0\). Note that these are the expected frequencies of the outcomes 0 and 1, respectively, under \(H_0\).</p>
+
+<div class="unit" id="osb3">
+	<p class="math">\(V\) can be written in terms of the observed and expected frequencies as follows:
+	\[ V = \frac{(O_0 - e_0)^2}{e_0} + \frac{(O_1 - e_1)^2}{e_1} \]</p>
+</div>
+
+<p>This representation shows that our test statistic \(V\) measures the discrepancy between the expected frequencies, under \(H_0\), and the observed frequencies.  Of course, large values of \(V\) are evidence in favor of \(H_1\). Finally, note that although there are two terms in the expansion of \(V\) in Exercise 3, there is only one degree of freedom since \(O_0 + O_1 = n\). The observed  and expected frequencies could be stored in a \(1 \times 2\) table.</p>
+
+<h3 id="msb">The Multi-Sample Bernoulli Model</h3>
+
+<p>Suppose now that we have samples from several (possibly) different, independent Bernoulli trials processes.  Specifically, suppose that \(\bs{X}_i = (X_{i,1}, X_{i,2}, \ldots, X_{i,n_i})\) is a random sample of size \(n_i\) from the <a href="../bernoulli/Introduction.html">Bernoulli distribution</a> with unknown success parameter \(p_i \in (0, 1)\) for each \(i \in \{1, 2, \ldots, m\}\). Moreover, the samples \((\bs{X}_1, \bs{X}_2, \ldots, \bs{X}_m)\) are independent. We want to test hypotheses about the unknown parameter vector \(\bs{p} = (p_1, p_2, \ldots, p_m)\). There are two common cases that we consider below, but first let's set up the essential notation that we will need for both cases. For \(i \in \{1, 2, \ldots, m\}\) and \(j \in \{0, 1\}\), let \(O_{i,j}\) denote the number of times that outcome \(j\) occurs in sample \(\bs{X}_i\). The observed frequency \(O_{i,j}\) has a binomial distribution; \(O_{i,1}\) has parameters \(n_i\) and \(p_i\) while \(O_{i,0}\) has parameters \(n_i\) and \(1 - p_i\).</p>
+
+<h4 id="msbc">The Completely Specified Case</h4>
+
+<p>Consider a specified parameter vector \(\bs{p}_0 = (p_{0,1}, p_{0,2}, \ldots, p_{0,m}) \in (0, 1)^m\). We want to test the null hypothesis \(H_0: \bs{p} = \bs{p}_0\), versus \(H_1: \bs{p} \ne \bs{p}_0\). Since the null hypothesis specifies the value of \(p_i\) for each \(i\), this is called the <dfn>completely specified case</dfn>. Now let \(e_{i,0} = n_i (1 - p_{i,0})\) and let \(e_{i,1} = n_i p_{i,0}\). These are the expected frequencies of the outcomes 0 and 1, respectively, from sample \(\bs{X}_i\) under \(H_0\).</p>
+
+<div class="unit" id="msbc1">
+	<p class="math">If \(n_i\) is large for each \(i\), then under \(H_0\) the following test statistic has approximately the chi-square distribution with \(m\) degrees of freedom:
+	\[ V = \sum_{i=1}^m \sum_{j=0}^1 \frac{(O_{i,j} - e_{i,j})^2}{e_{i,j}} \]</p>
+	<details>
+		<summary>Details:</summary>
+		<p>This follows from <a href="#osb3" class="ref"></a> and independence.</p>
+	</details>
+</div>
+
+<p>As a rule of thumb, <q>large</q> means that we need \(e_{i,j} \ge 5\) for each \(i \in \{1, 2, \ldots, m\}\) and \(j \in \{0, 1\}\). But of course, the larger these expected frequencies the better.</p>
+
+<div class="unit" id="msbc2">
+	<p class="math">Under the large sample assumption, an approximate test of \(H_0\) versus \(H_1\) at the \(\alpha\) level of significance is to reject \(H_0\) if and only if \(V \gt \chi_m^2(1 - \alpha)\).</p>
+</div>
+
+<p>Once again, note that the test statistic \(V\) measures the discrepancy between the expected and observed frequencies, over all outcomes and all samples. There are \(2 \, m\) terms in the expansion of \(V\) in Exercise 4, but only \(m\) degrees of freedom, since \(O_{i,0} + O_{i,1} = n_i\) for each \(i \in \{1, 2, \ldots, m\}\).  The observed and expected frequencies could be stored in an \(m \times 2\) table.</p>
+
+<h4 id="msbe">The Equal Probability Case</h4>
+
+<p>Suppose now that we want to test the null hypothesis \(H_0: p_1 = p_2 = \cdots = p_m\) that all of the success probabilities are the same, versus the complementary alternative hypothesis \(H_1\) that the probabilities are not all the same. Note, in contrast to the previous model, that the null hypothesis does not specify the value of the common success probability \(p\).  But note also that under the null hypothesis, the \(m\) samples can be combined to form one large sample of Bernoulli trials with success probability \(p\). Thus, a natural approach is to estimate \(p\) and then define the test statistic that measures the discrepancy between the expected and observed frequencies, just as before. The challenge will be to find the distribution of the test statistic.</p>
+
+<p>Let \(n = \sum_{i=1}^m n_i\) denote the total sample size when the samples are combined.  Then the overall sample mean, which in this context is the overall sample proportion of successes, is
+\[ P = \frac{1}{n} \sum_{i=1}^m \sum_{j=1}^{n_i} X_{i,j} = \frac{1}{n} \sum_{i=1}^m O_{i,1} \]
+The sample proportion \(P\) is the best estimate of \(p\), in just about any sense of the word. Next, let \(E_{i,0} = n_i \, (1 - P)\) and \(E_{i,1} = n_i \, P\). These are the <em>estimated</em> expected frequencies of 0 and 1, respectively, from sample \(\bs{X}_i\) under \(H_0\). Of course these estimated frequencies are now <em>statistics</em> (and hence random) rather than parameters. Just as before, we define our test statistic
+\[ V = \sum_{i=1}^m \sum_{j=0}^1 \frac{(O_{i,j} - E_{i,j})^2}{E_{i,j}} \]
+It turns out that under \(H_0\), the distribution of \(V\) converges to the chi-square distribution with \(m - 1\) degrees of freedom as \(n \to \infty\).</p>
+
+<div class="unit" id="msbe1">
+	<p class="math">An approximate test of \(H_0\) versus \(H_1\) at the \(\alpha\) level of significance is to reject \(H_0\) if and only if \(V \gt \chi_{m-1}^2(1 - \alpha)\).</p>
+</div>
+
+<p>Intuitively, we lost a degree of freedom over the completely specified case in <a href="#msbc" class="ref"></a> because we had to estimate the unknown common success probability \(p\). Again, the observed and expected frequencies could be stored in an \(m \times 2\) table.</p>
+
+<h3 id="osm">The One-Sample Multinomial Model</h3>
+
+<p>Our next model generalizes the <a href="#osb">one-sample Bernoulli model</a> in a different direction.  Suppose that \(\bs{X} = (X_1, X_2, \ldots, X_n)\) is a sequence of <a href="../bernoulli/Multinomial.html">multinomial trials</a>. Thus, these are independent, identically distributed random variables, each taking values in a set \(S\) with \(k\) elements. If we want, we can assume that \(S = \{0, 1, \ldots, k - 1\}\); the one-sample Bernoulli model then corresponds to \(k = 2\). Let \(f\) denote the common probability density function of the sample variables on \(S\), so that \(f(j) = \P(X_i = j)\) for \(i \in \{1, 2, \ldots, n\}\) and \(j \in S\). The values of \(f\) are assumed unknown, but of course we must have \(\sum_{j \in S} f(j) = 1\), so there are really only \(k - 1\) unknown parameters. For a given probability density function \(f_0\) on \(S\) we want to test \(H_0: f = f_0\) versus \(H_1: f \ne f_0\).</p>
+
+<p>By this time, our general approach should be clear.  We let \(O_j\) denote the number of times that outcome \(j \in S\)  occurs in sample \(\bs{X}\):
+\[ O_j = \sum_{i=1}^n \bs{1}(X_i = j) \]
+Note that \(O_j\) has the binomial distribution with parameters \(n\) and \(f(j)\). Thus, \(e_j = n \, f_0(j)\) is the expected number of times that outcome \(j\) occurs, under \(H_0\). Out test statistic, of course, is
+\[ V = \sum_{j \in S} \frac{(O_j - e_j)^2}{e^j} \]
+It turns out that under \(H_0\), the distribution of \(V\) converges to the chi-square distribution with \(k - 1\) degrees of freedom as \(n \to \infty\). Note that there are \(k\) terms in the expansion of \(V\), but only \(k - 1\) degrees of freedom since \(\sum_{j \in S} O_j = n\).</p>
+
+<div class="unit" id="osm1">
+	<p class="math">An approximate test of \(H_0\) versus \(H_1\) at the \(\alpha\) level of significance is to reject \(H_0\) if  and only if \(V \gt \chi_{k-1}^2(1 - \alpha)\).</p>
+</div>
+
+<p>Again, as a rule of thumb, we need \(e_j \ge 5\) for each \(j \in S\), but the larger the expected frequencies the better.</p>
+
+<h3 id="msm">The Multi-Sample Multinomial Model</h3>
+
+<p>As you might guess, our final generalization is to the multi-sample multinomial model. Specifically, suppose that \(\bs{X}_i = (X_{i,1}, X_{i,2}, \ldots, X_{i,n_i})\) is a random sample of size \(n_i\) from a distribution on a set \(S\) with \(k\) elements, for each \(i \in \{1, 2, \ldots, m\}\). Moreover, we assume that the samples \((\bs{X}_1, \bs{X}_2, \ldots, \bs{X}_m)\) are independent.  Again there is no loss in generality if we take \(S = \{0, 1, \ldots, k - 1\}\). Then \(k = 2\) reduces to the <a href="#msb">multi-sample Bernoulli model</a>, and \(m = 1\) corresponds to the <a href="#osm">one-sample multinomial model</a>.</p>
+
+<p>Let \(f_i\) denote the common probability density function of the variables in sample \(\bs{X}_i\), so that \(f_i(j) = \P(X_{i,l} = j)\) for \(i \in \{1, 2, \ldots, m\}\), \(l \in \{1, 2, \ldots, n_i\}\), and \(j \in S\). These are generally unknown, so that our vector of parameters is the vector of probability density functions: \(\bs{f} = (f_1, f_2, \ldots, f_m)\). Of course, \(\sum_{j \in S} f_i(j) = 1\) for \(i \in \{1, 2, \ldots, m\}\), so there are actually \(m \, (k - 1)\) unknown parameters. We are interested in testing hypotheses about \(\bs{f}\). As in the multi-sample Bernoulli model, there are two common cases that we consider below, but first let's set up the essential notation that we will need for both cases. For \(i \in \{1, 2, \ldots, m\}\) and \(j \in S\), let \(O_{i,j}\) denote the number of times that outcome \(j\) occurs in sample \(\bs{X}_i\). The observed frequency \(O_{i,j}\) has a binomial distribution with parameters \(n_i\) and \(f_i(j)\).</p>
+
+<h4 id="msmc">The Completely Specified Case</h4>
+
+<p>Consider a given vector of probability density functions on \(S\), denoted \(\bs{f}_0 = (f_{0,1}, f_{0,2}, \ldots, f_{0,m})\). We want to test the null hypothesis \(H_0: \bs{f} = \bs{f}_0\), versus \(H_1: \bs{f} \ne \bs{f}_0\). Since the null hypothesis specifies the value of \(f_i(j)\) for each \(i\) and \(j\), this is called the <dfn>completely specified case</dfn>. Let \(e_{i,j} = n_i \, f_{0,i}(j)\). This is the expected frequency of outcome \(j\) in sample \(\bs{X}_i\) under \(H_0\).</p>
+
+<div class="unit" id="msmc1">
+	<p class="math">If \(n_i\) is large for each \(i\), then under \(H_0\), the test statistic \(V\) below has approximately the chi-square distribution with \(m \, (k - 1)\) degrees of freedom:
+	\[ V = \sum_{i=1}^m \sum_{j \in S} \frac{(O_{i,j} - e_{i,j})^2}{e_{i,j}} \]</p>
+	<details>
+		<summary>Details:</summary>
+		<p>This follows from the <a href="#osm">one-sample multinomial case</a> and independence.</p>
+	</details>
+</div>
+
+<p>As usual, our rule of thumb is that we need \(e_{i,j} \ge 5\) for each \(i \in \{1, 2, \ldots, m\}\) and \(j \in S\). But of course, the larger these expected frequencies the better.</p>
+
+<div class="unit" id="msmc2">
+	<p class="math">Under the large sample assumption, an approximate test of \(H_0\) versus \(H_1\) at the \(\alpha\) level of significance is to reject \(H_0\) if and only if \(V \gt \chi_{m \, (k - 1)}^2(1 - \alpha)\).</p>
+</div>
+
+<p>As always, the test statistic \(V\) measures the discrepancy between the expected and observed frequencies, over all outcomes and all samples. There are \(m k\) terms in the expansion of \(V\) in Exercise 8, but we lose \(m\) degrees of freedom, since \(\sum_{j \in S} O_{i,j} = n_i\) for each \(i \in \{1, 2, \ldots, m\}\).</p>
+
+<h4 id="msme">The Equal PDF Case</h4>
+
+<p>Suppose now that we want to test the null hypothesis \(H_0: f_1 = f_2 = \cdots = f_m\) that all of the probability density functions are the same, versus the complementary alternative hypothesis \(H_1\) that the probability density functions are not all the same. Note, in contrast to the previous model, that the null hypothesis does not specify the value of the common success probability density function \(f\).  But note also that under the null hypothesis, the \(m\) samples can be combined to form  one large sample of multinomial trials with probability density function \(f\). Thus, a natural approach is to estimate the values of \(f\) and then define the test statistic that measures the discrepancy between the expected and observed frequencies, just as before.</p>
+
+<p>Let \(n = \sum_{i=1}^m n_i\) denote the total sample size when the samples are combined.  Under \(H_0\), our best estimate of \(f(j)\) is
+\[ P_j = \frac{1}{n} \sum_{i=1}^m O_{i,j} \]
+Hence our estimate of the expected frequency of outcome \(j\) in sample \(\bs{X}_i\) under \(H_0\) is \(E_{i,j} = n_i P_j\). Again, this estimated frequency is now  a <em>statistic</em> (and hence random) rather than a parameter. Just as before, we define our test statistic
+\[ V = \sum_{i=1}^m \sum_{j \in S} \frac{(O_{i,j} - E_{i,j})^2}{E_{i,j}} \]
+As you no doubt expect by now, it turns out that under \(H_0\), the distribution of \(V\) converges to a chi-square distribution as \(n \to \infty\). But let's see if we can determine the degrees of freedom heuristically.</p>
+
+<div class="unit" id="msme1">
+	<p class="math">The limiting distribution of \(V\) has \((k - 1) (m - 1)\) degrees of freedom.</p>
+	<details>
+		<summary>Details:</summary>
+		<p>There are \(k \, m\) terms in the expansion of \(V\). We lose \(m\) degrees of freedom since \(\sum_{j \in S} O_{i,j} = n_i\) for each \(i \in \{1, 2, \ldots, m\}\). We must estimate all but one of the probabilities \(f(j)\) for \(j \in S\), thus losing \(k - 1\) degrees of freedom.</p>
+	</details>
+</div>
+
+<div class="unit" id="msme2">
+	<p class="math">An approximate test of \(H_0\) versus \(H_1\) at the \(\alpha\) level of significance is to reject \(H_0\) if and only if \(V \gt \chi_{(k - 1) \, (m - 1)}^2(1 -\alpha)\).</p>
+</div>
+
+<h3 id="fit">A Goodness of Fit Test</h3>
+
+<p>A <dfn>goodness of fit test</dfn> is an hypothesis test that an unknown sampling distribution is a particular, specified distribution or belongs to a parametric family of distributions.  Such tests are clearly fundamental and important.  The <a href="#osm">one-sample multinomial model</a> leads to a quite general goodness of fit test.</p>
+
+<p>To set the stage, suppose that we have an observable random variable \(X\) for an experiment, taking values in a general  set \(S\). Random variable \(X\) might have a continuous or discrete distribution, and might be single-variable or multi-variable. We want to test the null hypothesis that \(X\) has a given, completely specified distribution, or that the distribution of \(X\) belongs to a particular parametric family.</p>
+
+<p>Our first step, in either case, is to sample from the distribution of \(X\) to obtain a sequence of independent, identically distributed variables \(\bs{X} = (X_1, X_2, \ldots, X_n)\). Next, we select \(k \in \N_+\) and <a href="../foundations/Sets.html#par">partition</a> \(S\) into \(k\) (disjoint) subsets. We will denote the partition by \(\{A_j: j \in J\}\) where \(\#(J) = k\). Next, we define the sequence of random variables \(\bs{Y} = (Y_1, Y_2, \ldots, Y_n)\) by \(Y_i = j\) if and only if \(X_i \in A_j\) for \(i \in \{1, 2, \ldots, n\}\) and \(j \in J\).</p>
+
+<div class="unit" id="fit1">
+	<p class="math">\(\bs{Y}\) is a multinomial trials sequence with parameters \(n\) and \(f\), where \(f(j) = \P(X \in A_j)\) for \(j \in J\).</p>
+</div>
+
+<h4 id="fitc">The Completely Specified Case</h4>
+
+<p>Let \(H\) denote the statement that \(X\) has a given, completely specified distribution. Let \(f_0\) denote the probability density function on \(J\) defined by \(f_0(j) = \P(X \in A_j \mid H)\) for \(j \in J\). To test hypothesis \(H\), we can formally test \(H_0: f = f_0\) versus \(H_1: f \ne f_0\), which of course, is precisely the problem we solved in the <a href="#osm">one-sample multinomial model</a>.</p>
+
+<p>Generally, we would partition the space \(S\) into as many subsets as possible, subject to the restriction that the expected frequencies all be at least 5.</p>
+
+<h4 id="fitp">The Partially Specified Case</h4>
+
+<p>Often we don't really want to test whether \(X\) has a completely specified distribution (such as the normal distribution with mean 5 and variance 9), but rather whether the distribution of \(X\) belongs to a specified parametric family (such as the normal).  A natural course of action in this case would be to estimate the unknown parameters and then proceed just as above. As we have seen before, the expected frequencies would be statistics \(E_j\) because they would be based on the estimated parameters.  As a rule of thumb, we lose a degree of freedom in the chi-square statistic \(V\) for each parameter that we estimate, although the precise mathematics can be complicated.</p>
+
+<h3 id="ind">A Test of Independence</h3>
+
+<p>Suppose that we have observable random variables \(X\) and \(Y\) for an experiment, where \(X\) takes values in a set \(S\) with \(k\) elements, and \(Y\) takes values in a set \(T\) with \(m\) elements. Let \(f\) denote the <a href="../dist/Joint.html">joint probability density function</a> of \((X, Y)\), so that \(f(i, j) = \P(X = i, Y = j)\) for \(i \in S\) and \(j \in T\). Recall that the marginal probability density functions of \(X\) and \(Y\) are the functions \(g\) and \(h\) respectively, where
+\begin{align}
+	g(i) = &amp; \sum_{j \in T} f(i, j), \quad i \in S \\
+	h(j) = &amp; \sum_{i \in S} f(i, j), \quad j \in T
+\end{align}
+Usually, of course, \(f\), \(g\), and \(h\) are unknown. In this section, we are interested in testing whether \(X\) and \(Y\) are independent, a basic and important test.  Formally then we want to test the null hypothesis
+\[ H_0: f(i, j) = g(i) \, h(j), \quad (i, j) \in S \times T \]
+versus the complementary alternative \(H_1\).</p>
+
+<p>Our first step, of course, is to draw a random sample \((\bs{X}, \bs{Y}) = ((X_1, Y_1), (X_2, Y_2), \ldots, (X_n, Y_n))\) from the distribution of \((X, Y)\). Since the state spaces are finite, this sample forms a sequence of multinomial trials.  Thus, with our usual notation, let \(O_{i,j}\) denote the number of times that \((i, j)\) occurs in the sample, for each \((i, j) \in S \times T\). This statistic has the binomial distribution with trial parameter \(n\) and success parameter \(f(i, j)\). Under \(H_0\), the success parameter is \(g(i) \, h(j)\). However, since we don't know the success parameters, we must estimate them in order to compute the expected frequencies. Our best estimate of \(f(i, j)\) is the sample proportion \(\frac{1}{n} O_{i,j}\). Thus, our best estimates of \(g(i)\) and \(h(j)\) are \(\frac{1}{n} N_i\) and \(\frac{1}{n} M_j\), respectively, where \(N_i\) is the number of times that \(i\) occurs in sample \(\bs{X}\) and \(M_j\) is the number of times that \(j\) occurs in sample \(\bs{Y}\):
+\begin{align}
+	N_i &amp; = \sum_{j \in T} O_{i,j} \\
+	M_j &amp; = \sum_{i \in S} O_{i,j}
+\end{align}
+Thus, our estimate of the expected frequency of \((i, j)\) under \(H_0\) is
+\[ E_{i,j} = n \, \frac{1}{n} \, N_i \frac{1}{n} \, M_j = \frac{1}{n} \, N_i \, M_j \]
+Of course, we define our test statistic by
+\[ V = \sum_{i \in J} \sum_{j \in T} \frac{(O_{i,j} - E_{i,j})^2}{E_{i,j}} \]
+As you now expect, the distribution of \(V\) converges to a chi-square distribution as \(n \to \infty\). But let's see if we can determine the appropriate degrees of freedom on heuristic grounds.</p>
+
+<div class="unit" id="ind1">
+	<p class="math">The limiting distribution of \(V\) has \((k - 1) \, (m - 1)\) degrees of freedom.</p>
+	<details>
+		<summary>Details:</summary>
+		<p>There are \(k m\) terms in the expansion of \(V\). We lose one degree of freedom since \(\sum_{i \in S} \sum_{j \in T} O_{i,j} = n\). We must estimate all but one of the probabilities \(g(i)\) for \(i \in S\), thus losing \(k - 1\) degrees of freedom. We must estimate all but one of the probabilities \(h(j)\) for \(j \in T\), thus losing \(m - 1\) degrees of freedom.</p>
+	</details>
+</div>
+
+<div class="unit" id="ind2">
+	<p class="math">An approximate test of \(H_0\) versus \(H_1\) at the \(\alpha\) level of significance is to reject \(H_0\) if and only if \(V \gt \chi_{(k-1) (m-1)}^2(1 - \alpha)\).</p>
+</div>
+
+<p>The observed frequencies are often recorded in a \(k \times m\) table, known as a <dfn>contingency table</dfn>, so that \(O_{i,j}\) is the number in row \(i\) and column \(j\). In this setting, note that \(N_i\) is the sum of the frequencies in the \(i\)th row and \(M_j\) is the sum of the frequencies in the \(j\)th column.  Also, for historical reasons, the random variables \(X\) and \(Y\) are sometimes called <dfn>factors</dfn> and the possible values of the variables <dfn>categories</dfn>.</p>
+
+<h3 id="exe">Computational and Simulation Exercises</h3>
+
+<h4 id="cmp">Computational Exercises</h4>
+
+<p>In each of the following exercises, specify the number of degrees of freedom of the chi-square statistic, give the value of the statistic and compute the \(P\)-value of the test.</p>
+
+<div class="unit" id="cmp1">
+	<p class="math">A coin is tossed 100 times, resulting in 55 heads. Test the null hypothesis that the coin is fair.</p>
+	<details>
+		<summary>Details:</summary>
+		<p>1 degree of freedom, \(V = 1\), \(P = 0.3173\).</p>
+	</details>
+</div>
+
+<div class="unit" id="cmp2">
+	<p class="math">Suppose that we have 3 coins.  The coins are tossed, yielding the data in the following table:</p>
+	<table>
+		<tbody>
+			<tr>
+				<th></th>
+				<th>Heads</th>
+				<th>Tails</th>
+			</tr>
+			<tr>
+				<th>Coin 1</th>
+				<td>29</td>
+				<td>21</td>
+			</tr>
+			<tr>
+				<th>Coin 2</th>
+				<td>23</td>
+				<td>17</td>
+			</tr>
+			<tr>
+				<th>Coin 3</th>
+				<td>42</td>
+				<td>18</td>
+			</tr>
+		</tbody>
+	</table>
+	<ol class="sub">
+		<li>Test the null hypothesis that all 3 coin are fair.</li>
+		<li>Test the null hypothesis that coin 1 has probability of heads \(\frac{3}{5}\); coin 2 is fair; and coin 3 has probability of heads \(\frac{2}{3}\).</li>
+		<li>Test the null hypothesis that the 3 coins have the same probability of heads.</li>
+	</ol>
+	<details>
+		<summary>Details:</summary>
+		<ol class="sub">
+			<li>3 degree of freedom, \(V = 11.78\), \(P = 0.008\).</li>
+			<li>3 degree of freedom, \(V = 1.283\), \(P = 0.733\).</li>	<li>2 degree of freedom, \(V = 2.301\), \(P = 0.316\).</li>
+		</ol>
+	</details>
+</div>
+
+<div class="unit" id="cmp3">
+	<p class="math">A die is thrown 240 times, yielding the data in the following table:</p>
+	<table>
+		<tbody>
+			<tr>
+				<th>Score</th>
+				<th>1</th>
+				<th>2</th>
+				<th>3</th>
+				<th>4</th>
+				<th>5</th>
+				<th>6</th>
+			</tr>
+			<tr>
+				<th>Frequency</th>
+				<td>57</td>
+				<td>39</td>
+				<td>28</td>
+				<td>28</td>
+				<td>36</td>
+				<td>52</td>
+			</tr>
+		</tbody>
+	</table>
+	<ol class="sub">
+		<li>Test the null hypothesis that the die is fair.</li>
+		<li>Test the null hypothesis that the die is an ace-six flat die (faces 1 and 6 have probability \(\frac{1}{4}\) each while faces 2, 3, 4, and 5 have probability \(\frac{1}{8}\) each).</li>
+	</ol>
+	<details>
+		<summary>Details:</summary>
+		<ol class="sub">
+			<li>5 degree of freedom, \(V = 18.45\), \(P = 0.0024\).</li>
+			<li>5 degree of freedom, \(V = 5.383\), \(P = 0.3709\).</li>
+		</ol>
+	</details>
+</div>
+
+<div class="unit" id="cmp4">
+	<p class="math">Two dice are thrown, yielding the data in the following table:</p>
+	<table>
+		<tbody>
+			<tr>
+				<th>Score</th>
+				<th>1</th>
+				<th>2</th>
+				<th>3</th>
+				<th>4</th>
+				<th>5</th>
+				<th>6</th>
+			</tr>
+			<tr>
+				<th>Die 1</th>
+				<td>22</td>
+				<td>17</td>
+				<td>22</td>
+				<td>13</td>
+				<td>22</td>
+				<td>24</td>
+			</tr>
+			<tr>
+				<th>Die 2</th>
+				<td>44</td>
+				<td>24</td>
+				<td>19</td>
+				<td>19</td>
+				<td>18</td>
+				<td>36</td>
+			</tr>
+		</tbody>
+	</table>
+	<ol class="sub">
+		<li>Test the null hypothesis that die 1 is fair and die 2 is an ace-six flat.</li>
+		<li>Test the null  hypothesis that all the dice have have the same probability distribution.</li>
+	</ol>
+	<details>
+		<summary>Details:</summary>
+		<ol class="sub">
+			<li>10 degree of freedom, \(V = 6.2\), \(P = 0.798\).</li>
+			<li>5 degree of freedom, \(V = 7.103\), \(P = 0.213\).</li>
+		</ol>
+	</details>
+</div>
+
+<div class="unit" id="cmp5">
+	<p class="math">A university classifies faculty by rank as <em>instructors</em>, <em>assistant professors</em>, <em>associate professors</em>, and <em>full professors</em>.  The data, by faculty rank and gender, are given in the following contingency table. Test to see if faculty rank and gender are independent. </p>
+	<table>
+		<tbody>
+			<tr>
+				<th>Faculty</th>
+				<th>Instructor</th>
+				<th>Assistant Professor</th>
+				<th>Associate Professor</th>
+				<th>Full Professor</th>
+			</tr>
+			<tr>
+				<th>Male</th>
+				<td>62</td>
+				<td>238</td>
+				<td>185</td>
+				<td>115</td>
+			</tr>
+			<tr>
+				<th>Female</th>
+				<td>118</td>
+				<td>122</td>
+				<td>123</td>
+				<td>37</td>
+			</tr>
+		</tbody>
+	</table>
+	<details>
+		<summary>Details:</summary>
+		<p>3 degrees of freedom, \(V = 70.111\), \(P \approx 0\).</p>
+	</details>
+</div>
+
+<h4 id="dat">Data Analysis Exercises</h4>
+
+<div class="unit" id="dat1">
+	<p class="stat">The <a href="JavaScript:openAncillary('../data/Buffon.html')" class="ancillary">Buffon trial data set</a> gives the results of 104 repetitions of Buffon's needle experiment.  The number of crack crossings is 56. In theory, this data set should correspond to 104 Bernoulli trials with success probability \(p = \frac{2}{\pi}\). Test to see if this is reasonable.</p>
+	<details>
+		<summary>Details:</summary>
+		<p>1 degree of freedom, \(V = 4.332\), \(P = 0.037\).</p>
+	</details>
+</div>
+
+<div class="unit" id="dat2">
+	<p class="stat">Test to see if the <a href="JavaScript:openAncillary('../data/Alpha.html')" class="ancillary">alpha emissions data</a> come from a Poisson distribution.</p>
+	<details>
+		<summary>Details:</summary>
+		<p>We partition of \(\N\) into 17 subsets: \(\{0, 1\}\), \(\{x\}\) for \(x \in \{2, 3, \ldots, 16\}\), and \(\{17, 18, \ldots \}\). There are 15 degrees of freedom. The estimated Poisson parameter is 8.367, \(V = 9.644\), \(P = 0.842\).</p>
+	</details>
+</div>
+
+<div class="unit" id="dat3">
+	<p class="stat">Test to see if <a href="JavaScript:openAncillary('../data/Michelson.html')" class="ancillary">Michelson's velocity of light data</a> come from a normal distribution.</p>
+	<details>
+		<summary>Details:</summary>
+		<p>Using the following partition of \(\R\): \(\{(-\infty, 750), [750, 775), [775, 800), [800, 825), [825, 850), [850, 875), [875, 900), [900, 925), [925, 950), [950, 975), [975, \infty)\}\). We have 8 degrees of freedom, \(V = 11.443\), \(P = 0.178\).</p>
+	</details>
+</div>
+
+<h4 id="sim">Simulation Exercises</h4>
+
+<p>In the simulation exercises below, you will be able to explore the goodness of fit test empirically.</p>
+
+<div class="unit" id="sim1">
+	<p class="app">In the <a href="JavaScript:openAncillary('../apps/DiceFit.html')" class="ancillary">dice goodness of fit experiment</a>, set the sampling distribution to fair, the sample size to 50, and the significance level to 0.1. Set the test distribution as indicated below and in each case, run the simulation 1000 times. In case (a), give the empirical estimate of the significance level of the test and compare with 0.1. In the other cases, give the empirical estimate of the power of the test. Rank the distributions in (b)-(d) in increasing order of apparent power. Do your results seem reasonable?</p>
+	<ol class="sub">
+		<li>fair</li>
+		<li>ace-six flats</li>
+		<li>the symmetric, unimodal distribution</li>
+		<li>the distribution skewed right</li>
+	</ol>
+</div>
+
+<div class="unit" id="sim2">
+	<p class="app">In the <a href="JavaScript:openAncillary('../apps/DiceFit.html')" class="ancillary">dice goodness of fit experiment</a>, set the sampling distribution to ace-six flats, the sample size to 50, and the significance level to 0.1. Set the test distribution as indicated below and in each case, run the simulation 1000 times. In case (a), give the empirical estimate of the significance level of the test and compare with 0.1. In the other cases, give the empirical estimate of the power of the test. Rank the distributions in (b)-(d) in increasing order of apparent power. Do your results seem reasonable?</p>
+	<ol class="sub">
+		<li>fair</li>
+		<li>ace-six flats</li>
+		<li>the symmetric, unimodal distribution</li>
+		<li>the distribution skewed right</li>
+	</ol>
+</div>
+
+<div class="unit" id="sim3">
+	<p class="app">In the <a href="JavaScript:openAncillary('../apps/DiceFit.html')" class="ancillary">dice goodness of fit experiment</a>, set the sampling distribution to the symmetric, unimodal distribution, the sample size to 50, and the significance level to 0.1. Set the test distribution as indicated below and in each case, run the simulation 1000 times. In case (a), give the empirical estimate of the significance level of the test and compare with 0.1. In the other cases, give the empirical estimate of the power of the test. Rank the distributions in (b)-(d) in increasing order of apparent power. Do your results seem reasonable?</p>
+	<ol class="sub">
+		<li>the symmetric, unimodal distribution</li>
+		<li>fair</li>
+		<li>ace-six flats</li>
+		<li>the distribution skewed right</li>
+	</ol>
+</div>
+
+<div class="unit" id="sim4">
+	<p class="app">In the <a href="JavaScript:openAncillary('../apps/DiceFit.html')" class="ancillary">dice goodness of fit experiment</a>, set the sampling distribution to the distribution skewed right, the sample size to 50, and the significance level to 0.1. Set the test distribution as indicated below and in each case, run the simulation 1000 times. In case (a), give the empirical estimate of the significance level of the test and compare with 0.1. In the other cases, give the empirical estimate of the power of the test. Rank the distributions in (b)-(d) in increasing order of apparent power. Do your results seem reasonable?</p>
+	<ol class="sub">
+		<li>the distribution skewed right</li>
+		<li>fair</li>
+		<li>ace-six flats</li>
+		<li>the symmetric, unimodal distribution</li>
+	</ol>
+</div>
+
+<div class="unit" id="sim5">
+	<p class="math">Suppose that \(D_1\) and \(D_2\) are different distributions. Is the power of the test with sampling distribution \(D_1\) and test distribution \(D_2\) the same as the power of the test with sampling distribution \(D_2\) and test distribution \(D_1\)? Make a conjecture based on your results in the previous three exercises.</p>
+</div>
+
+<div class="unit" id="sim6">
+	<p class="app">In the <a href="JavaScript:openAncillary('../apps/DiceFit.html')" class="ancillary">dice goodness of fit experiment</a>, set the sampling and test distributions to fair and the significance level to 0.05. Run the experiment 1000 times for each of the following sample sizes. In each case, give the empirical estimate of the significance level and compare with 0.05.</p>
+	<ol class="sub">
+		<li>\(n = 10\)</li>
+		<li>\(n = 20\)</li>
+		<li>\(n = 40\)</li>
+		<li>\(n = 100\)</li>
+	</ol>
+</div>
+
+<div class="unit">
+	<p class="app">In the <a href="JavaScript:openAncillary('../apps/DiceFit.html')" class="ancillary">dice goodness of fit experiment</a>, set the sampling distribution to fair, the test distributions to ace-six flats, and the significance level to 0.05. Run the experiment 1000 times for each of the following sample sizes. In each case, give the empirical estimate of the power of the test. Do the powers seem to be converging?</p>
+	<ol class="sub">
+		<li>\(n = 10\)</li>
+		<li>\(n = 20\)</li>
+		<li>\(n = 40\)</li>
+		<li>\(n = 100\)</li>
+	</ol>
+</div>
+
+<footer>
+	<ol class="map">
+		<li class="parent"><a href="../index.html">Random</a></li>
+		<li class="parent"><a href="index.html">8. Hypothesis Testing</a></li>
+		<li class="child"><a href="Introduction.html" title="Introduction">1</a></li>
+		<li class="child"><a href="Normal.html" title="Tests in the Normal Model">2</a></li>
+		<li class="child"><a href="Bernoulli.html" title="Tests in the Bernoulli Model">3</a></li>
+		<li class="child"><a href="BivariateNormal.html" title="Tests in the Two-Sample Normal Model">4</a></li>
+		<li class="child"><a href="Likelihood.html" title="Likelihood Ratio Tests">5</a></li>
+		<li class="current">6</li>
+		<li class="details"><button type="button" title="Expand Details" onclick="expandDetails(true);"><img src="../icons/Plus.svg" alt="Expand"></button></li>
+		<li class="details"><button type="button" title="Contract Details" onclick="expandDetails(false);"><img src="../icons/Minus.svg" alt="Contract"></button></li>
+	</ol>
+	<ul class="map">
+		<li class="sister"><a href="JavaScript:openAncillary('../apps/index.html')" class="ancillary">Apps</a></li>
+		<li class="sister"><a href="JavaScript:openAncillary('../data/index.html')" class="ancillary">Data Sets</a></li>
+		<li class="child"><a href="JavaScript:openAncillary('../biographies/index.html')" class="ancillary"> Biographies</a></li>
+	</ul>
+</footer>
+
+<script>getReferences();</script>
+
+</body>
+</html>

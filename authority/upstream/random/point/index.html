@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<title>Point Estimation</title>
+	<meta name="author" content="Kyle Siegrist">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="keywords" content="probability, statistics, point estimation, method of moments, maximum likelihood method, unbiased estimator, sufficient statistic, Bayes estimators, unbiased estimator, sufficient statistic, complete statistic, ancillary statistic">
+	<link rel="icon" href="../icons/Icon.svg" type="image/svg">
+	<link rel="stylesheet" href="../Screen.css" type="text/css" media="screen">
+	<link rel="contents" href="../index.html">
+	<link rel="previous" href="../sample/index.html">
+	<link rel="next" href="../interval/index.html">
+	<script src="../Basic.js"></script>
+</head>
+
+<body>
+
+<header>
+	<ol class="map">
+		<li class="parent"><a href="../index.html">Random</a></li>
+		<li class="child"><a href="../foundations/index.html" title="Foundations">0</a></li>
+		<li class="child"><a href="../prob/index.html" title="Probability Spaces">1</a></li>
+		<li class="child"><a href="../dist/index.html" title="Distributions">2</a></li>
+		<li class="child"><a href="../expect/index.html" title="Expected Value">3</a></li>
+		<li class="child"><a href="../special/index.html" title="Special Distributions">4</a></li>
+		<li class="child"><a href="../sample/index.html" title="Random Samples">5</a></li>
+		<li class="current">6</li>
+		<li class="child"><a href="../interval/index.html" title="Set Estimation">7</a></li>
+		<li class="child"><a href="../hypothesis/index.html" title="Hypothesis Testing">8</a></li>
+		<li class="child"><a href="../buffon/index.html" title="Geometric Models">9</a></li>
+		<li class="child"><a href="../bernoulli/index.html" title="Bernoulli Trials">10</a></li>
+		<li class="child"><a href="../urn/index.html" title="Finite Sampling Models">11</a></li>
+		<li class="child"><a href="../games/index.html" title="Games of Chance">12</a></li>
+		<li class="child"><a href="../poisson/index.html" title="The Poisson Process">13</a></li>
+		<li class="child"><a href="../renewal/index.html" title="Renewal Processes">14</a></li>
+		<li class="child"><a href="../markov/index.html" title="Markov Processes">15</a></li>
+		<li class="child"><a href="../martingales/index.html" title="Martingales">16</a></li>
+		<li class="child"><a href="../brown/index.html" title="Brownian Motion">17</a></li>
+	</ol>
+	<h1>6. Point Estimation</h1>
+</header>
+
+<h4>Summary</h4>
+
+<p>Point estimation refers to the process of estimating a parameter from a probability distribution, based on observed data from the distribution.  It is one of the core topics in mathematical statistics.  In this chapter, we will explore the most common methods of point estimation:  the method of moments, the method of maximum likelihood, and Bayes' estimators.  We also study important properties of estimators, including sufficiency and completeness, and the basic question of whether an estimator is the best possible one.</p>
+
+<h4>Topics</h4>
+
+<ol>
+	<li><a href="Estimators.html">Estimators</a></li>
+	<li><a href="Moments.html">The Method of Moments</a></li>
+	<li><a href="Likelihood.html">Maximum Likelihood</a></li>
+	<li><a href="Bayes.html">Bayesian Estimation</a></li>
+	<li><a href="Unbiased.html">Best Unbiased Estimators</a></li>
+	<li><a href="Sufficient.html">Sufficient, Complete and Ancillary Statistics</a></li>
+</ol>
+
+<h4>Apps</h4>
+
+<ul class="ancillary">
+	<li><a href="JavaScript:openAncillary('../apps/NormalEstimate.html')" class="ancillary">Normal Estimation Experiment</a></li>
+	<li><a href="JavaScript:openAncillary('../apps/UniformEstimate.html')" class="ancillary">Uniform Estimation Experiment</a></li>
+	<li><a href="JavaScript:openAncillary('../apps/GammaEstimate.html')" class="ancillary">Gamma Estimation Experiment</a></li>
+	<li><a href="JavaScript:openAncillary('../apps/BetaEstimate.html')" class="ancillary">Beta Estimation Experiment</a></li>
+	<li><a href="JavaScript:openAncillary('../apps/ParetoEstimate.html')" class="ancillary">Pareto Estimation Experiment</a></li>
+	<li><a href="JavaScript:openAncillary('../apps/BetaCoin.html')" class="ancillary">Beta Coin Experiment</a></li>
+</ul>
+
+<h4>Sources and Resources</h4>
+
+<ul>
+	<li><a href="http://www.google.com/search?q=Introduction+to+Probability+and+Mathematical+Statistics,+Bain,+Engelhardt" target="external" class="external">Introduction to Probability and Mathematical Statistics</a>. Lee J Bain and Max Engelhardt</li>
+	<li><a href="http://www.google.com/search?q=Statistical+Inference+Casella+Berger" target="external" class="external">Statistical Inference</a>. George Casella and Rober L Berger</li>
+	<li><a href="http://www.google.com/search?q=Statistics,Freedman,Pisani,Purves" target="external" class="external">Statistics</a>. David Freedman, Robert Pisani and Robert Purves</li>
+	<li><a href="http://www.google.com/search?q=An+Introduction+to+Mathematical+Statistics,Larsen,Marx" target="external" class="external">An Introduction to Mathematical Statistics and Its Applications</a>. Richard J Larsen and Morris L Marx</li>
+	<li><a href="http://www.google.com/search?q=Elementary+Statistics,Triola" target="external" class="external">Elementary Statistics</a>. Mario Triola</li>
+	<li><a href="http://www.google.com/search?q=Introductory+Statistics,Weiss" target="external" class="external">Introductory Statistics</a>. Neil A Weiss</li>
+	<li><a href="https://en.wikipedia.org/wiki/Portal:Statistics" class="external" target="external">Wikipedia statistics portal</a></li>
+	<li><a href="http://mathworld.wolfram.com/topics/ProbabilityandStatistics.html" class="external" target="external">Wolfram MathWorld articles on probability and statistics</a></li>
+</ul>
+
+<h4>Quote</h4>
+
+<ul class="quote" title="Quote">
+	<li><q>Far better an approximate answer to the right question, which is often vague, than an exact answer to the wrong question, which can always be made precise.</q>&mdash;<a href="JavaScript:openAncillary('../biographies/Tukey.html')" class="ancillary">John Tukey</a>, <cite>Annals of Mathematical Statistics</cite>, <strong>33</strong> (1962).</li>
+</ul>
+
+<footer>
+	<ol class="map">
+		<li class="parent"><a href="../index.html">Random</a></li>
+		<li class="child"><a href="../foundations/index.html" title="Foundations">0</a></li>
+		<li class="child"><a href="../prob/index.html" title="Probability Spaces">1</a></li>
+		<li class="child"><a href="../dist/index.html" title="Distributions">2</a></li>
+		<li class="child"><a href="../expect/index.html" title="Expected Value">3</a></li>
+		<li class="child"><a href="../special/index.html" title="Special Distributions">4</a></li>
+		<li class="child"><a href="../sample/index.html" title="Random Samples">5</a></li>
+		<li class="current">6</li>
+		<li class="child"><a href="../interval/index.html" title="Set Estimation">7</a></li>
+		<li class="child"><a href="../hypothesis/index.html" title="Hypothesis Testing">8</a></li>
+		<li class="child"><a href="../buffon/index.html" title="Geometric Models">9</a></li>
+		<li class="child"><a href="../bernoulli/index.html" title="Bernoulli Trials">10</a></li>
+		<li class="child"><a href="../urn/index.html" title="Finite Sampling Models">11</a></li>
+		<li class="child"><a href="../games/index.html" title="Games of Chance">12</a></li>
+		<li class="child"><a href="../poisson/index.html" title="The Poisson Process">13</a></li>
+		<li class="child"><a href="../renewal/index.html" title="Renewal Processes">14</a></li>
+		<li class="child"><a href="../markov/index.html" title="Markov Processes">15</a></li>
+		<li class="child"><a href="../martingales/index.html" title="Martingales">16</a></li>
+		<li class="child"><a href="../brown/index.html" title="Brownian Motion">17</a></li>
+	</ol>
+	<ul class="map">
+		<li class="sister"><a href="JavaScript:openAncillary('../apps/index.html')" class="ancillary">Apps</a></li>
+		<li class="sister"><a href="JavaScript:openAncillary('../data/index.html')" class="ancillary">Data Sets</a></li>
+		<li class="child"><a href="JavaScript:openAncillary('../biographies/index.html')" class="ancillary"> Biographies</a></li>
+	</ul>
+</footer>
+
+</body>
+</html>

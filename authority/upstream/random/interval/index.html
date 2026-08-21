@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="utf-8">
+	<title>Interval Estimation</title>
+	<meta name="author" content="Kyle Siegrist">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="keywords" content="probability, statistics, set estimation, interval estimation, one-sample normal model, two-sample normal model, Bernoulli model, Bayes estimation">
+	<link rel="icon" href="../icons/Icon.svg" type="image/svg">
+	<link rel="stylesheet" href="../Screen.css" type="text/css" media="screen">
+	<link rel="contents" href="../index.html">
+	<link rel="previous" href="../point/index.html">
+	<link rel="next" href="../hypothesis/index.html">
+	<script src="../Basic.js"></script>
+</head>
+
+<body>
+
+<header>
+	<ol class="map">
+		<li class="parent"><a href="../index.html">Random</a></li>
+		<li class="child"><a href="../foundations/index.html" title="Foundations">0</a></li>
+		<li class="child"><a href="../prob/index.html" title="Probability Spaces">1</a></li>
+		<li class="child"><a href="../dist/index.html" title="Distributions">2</a></li>
+		<li class="child"><a href="../expect/index.html" title="Expected Value">3</a></li>
+		<li class="child"><a href="../special/index.html" title="Special Distributions">4</a></li>
+		<li class="child"><a href="../sample/index.html" title="Random Samples">5</a></li>
+		<li class="child"><a href="../point/index.html" title="Point Estimation">6</a></li>
+		<li class="current">7</li>
+		<li class="child"><a href="../hypothesis/index.html" title="Hypothesis Testing">8</a></li>
+		<li class="child"><a href="../buffon/index.html" title="Geometric Models">9</a></li>
+		<li class="child"><a href="../bernoulli/index.html" title="Bernoulli Trials">10</a></li>
+		<li class="child"><a href="../urn/index.html" title="Finite Sampling Models">11</a></li>
+		<li class="child"><a href="../games/index.html" title="Games of Chance">12</a></li>
+		<li class="child"><a href="../poisson/index.html" title="The Poisson Process">13</a></li>
+		<li class="child"><a href="../renewal/index.html" title="Renewal Processes">14</a></li>
+		<li class="child"><a href="../markov/index.html" title="Markov Processes">15</a></li>
+		<li class="child"><a href="../martingales/index.html" title="Martingales">16</a></li>
+		<li class="child"><a href="../brown/index.html" title="Brownian Motion">17</a></li>
+	</ol>
+	<h1>7. Set Estimation</h1>
+</header>
+
+<h4>Summary</h4>
+
+<p>Set estimation refers to the process of constructing a subset of the parameter space, based on observed data from a probability distribution.  The subset will contain the true value of the parameter with a specified <dfn>confidence level</dfn>.  In this chapter, we explore the basic method of set estimation using pivot variables.  We study set estimation in some of the most important models:  the single variable normal model, the two-variable normal model, and the Bernoulli model.</p>
+
+<h4>Topics</h4>
+
+<ol>
+	<li><a href="Introduction.html">Introduction</a></li>
+	<li><a href="Normal.html">Estimation the Normal Model</a></li>
+	<li><a href="Bernoulli.html">Estimation in the Bernoulli Model</a></li>
+	<li><a href="BivariateNormal.html">Estimation in the Two-Sample Normal Model</a></li>
+	<li><a href="Bayes.html">Bayesian Set Estimation</a></li>
+</ol>
+
+<h4>Apps</h4>
+
+<ul class="ancillary">
+	<li><a href="JavaScript:openAncillary('../apps/MeanEstimate.html')" class="ancillary">Mean Estimate Experiment</a></li>
+	<li><a href="JavaScript:openAncillary('../apps/ProportionEstimate.html')" class="ancillary">Proportion Estimate Experiment</a></li>
+	<li><a href="JavaScript:openAncillary('../apps/VarianceEstimate.html')" class="ancillary">Variance Estimate Experiment</a></li>
+	<li><a href="JavaScript:openAncillary('../apps/QuantileApp.html')" class="ancillary">quantile app</a></li>
+</ul>
+
+<h4>Sources and Resources</h4>
+
+<ul>
+	<li><a href="http://www.google.com/search?q=Introduction+to+Probability+and+Mathematical+Statistics,+Bain,+Engelhardt" target="external" class="external">Introduction to Probability and Mathematical Statistics</a>. Lee J Bain and Max Engelhardt</li>
+	<li><a href="http://www.google.com/search?q=Statistical+Inference+Casella+Berger" target="external" class="external">Statistical Inference</a>. George Casella and Rober L Berger</li>
+	<li><a href="http://www.google.com/search?q=Statistics,Freedman,Pisani,Purves" target="external" class="external">Statistics</a>. David Freedman, Robert Pisani and Robert Purves</li>
+	<li><a href="http://www.google.com/search?q=An+Introduction+to+Mathematical+Statistics,Larsen,Marx" target="external" class="external">An Introduction to Mathematical Statistics and Its Applications</a>. Richard J Larsen and Morris L Marx</li>
+	<li><a href="http://www.google.com/search?q=Elementary+Statistics,Triola" target="external" class="external">Elementary Statistics</a>. Mario Triola</li>
+	<li><a href="http://www.google.com/search?q=Introductory+Statistics,Weiss" target="external" class="external">Introductory Statistics</a>. Neil A Weiss</li>
+	<li><a href="https://en.wikipedia.org/wiki/Portal:Statistics" class="external" target="external">Wikipedia statistics portal</a></li>
+	<li><a href="http://mathworld.wolfram.com/topics/ProbabilityandStatistics.html" class="external" target="external">Wolfram MathWorld articles on probability and statistics</a></li>
+</ul>
+
+<h4>Quote</h4>
+
+<ul class="quote">
+	<li><q>A great discovery solves a great problem but there is a grain of discovery in the solution of any problem.</q>&mdash;<a href="JavaScript:openAncillary('../biographies/Polya.html')" class="ancillary" title="Open biographical sketch">George Polya</a></li>
+</ul>
+
+<footer>
+	<ol class="map">
+		<li class="parent"><a href="../index.html">Random</a></li>
+		<li class="child"><a href="../foundations/index.html" title="Foundations">0</a></li>
+		<li class="child"><a href="../prob/index.html" title="Probability Spaces">1</a></li>
+		<li class="child"><a href="../dist/index.html" title="Distributions">2</a></li>
+		<li class="child"><a href="../expect/index.html" title="Expected Value">3</a></li>
+		<li class="child"><a href="../special/index.html" title="Special Distributions">4</a></li>
+		<li class="child"><a href="../sample/index.html" title="Random Samples">5</a></li>
+		<li class="child"><a href="../point/index.html" title="Point Estimation">6</a></li>
+		<li class="current">7</li>
+		<li class="child"><a href="../hypothesis/index.html" title="Hypothesis Testing">8</a></li>
+		<li class="child"><a href="../buffon/index.html" title="Geometric Models">9</a></li>
+		<li class="child"><a href="../bernoulli/index.html" title="Bernoulli Trials">10</a></li>
+		<li class="child"><a href="../urn/index.html" title="Finite Sampling Models">11</a></li>
+		<li class="child"><a href="../games/index.html" title="Games of Chance">12</a></li>
+		<li class="child"><a href="../poisson/index.html" title="The Poisson Process">13</a></li>
+		<li class="child"><a href="../renewal/index.html" title="Renewal Processes">14</a></li>
+		<li class="child"><a href="../markov/index.html" title="Markov Processes">15</a></li>
+		<li class="child"><a href="../martingales/index.html" title="Martingales">16</a></li>
+		<li class="child"><a href="../brown/index.html" title="Brownian Motion">17</a></li>
+	</ol>
+	<ul class="map">
+		<li class="sister"><a href="JavaScript:openAncillary('../apps/index.html')" class="ancillary">Apps</a></li>
+		<li class="sister"><a href="JavaScript:openAncillary('../data/index.html')" class="ancillary">Data Sets</a></li>
+		<li class="child"><a href="JavaScript:openAncillary('../biographies/index.html')" class="ancillary"> Biographies</a></li>
+	</ul>
+</footer>
+
+</body>
+</html>

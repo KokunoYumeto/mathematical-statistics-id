@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="utf-8">
+	<title>Estimation in the Two-Sample Normal Model</title>
+	<meta name="author" content="Kyle Siegrist">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="keywords" content="probability, statistics, set estimation, interval estimation, two-sample normal model, difference of means, ratio of variances, bivariate normal model, confidence level">
+	<link rel="icon" href="../icons/Icon.svg" type="image/svg">
+	<link rel="stylesheet" href="../Screen.css" type="text/css" media="screen">
+	<script src="../Basic.js"></script>
+	<script src="../../MathJax/tex-svg.js" id="MathJax-script" async></script>
+</head>
+
+<body>
+
+<div class="latex">
+	\(\newcommand{\R}{\mathbb{R}}\) 
+	\(\newcommand{\N}{\mathbb{N}}\)
+	\(\newcommand{\Z}{\mathbb{Z}}\)
+	\(\newcommand{\P}{\mathbb{P}}\)
+	\(\newcommand{\E}{\mathbb{E}}\)
+	\(\newcommand{\var}{\text{var}}\)
+	\(\newcommand{\sd}{\text{sd}}\)
+	\(\newcommand{\cov}{\text{cov}}\)
+	\(\newcommand{\bs}{\boldsymbol}\)
+</div>
+
+<header>
+	<ol class="map">
+		<li class="parent"><a href="../index.html">Random</a></li>
+		<li class="parent"><a href="index.html">7. Set Estimation</a></li>
+		<li class="child"><a href="Introduction.html" title="Introduction">1</a></li>
+		<li class="child"><a href="Normal.html" title="Estimation in the Normal Model">2</a></li>
+		<li class="child"><a href="Bernoulli.html" title="Estimation in the Bernoulli Model">3</a></li>
+		<li class="current">4</li>
+		<li class="child"><a href="Bayes.html" title="Bayesian Interval Estimation">5</a></li>
+		<li class="details"><button type="button" title="Expand Details" onclick="expandDetails(true);"><img src="../icons/Plus.svg" alt="Expand"></button></li>
+		<li class="details"><button type="button" title="Contract Details" onclick="expandDetails(false);"><img src="../icons/Minus.svg" alt="Contract"></button></li>
+	</ol>
+	<h2>4. Estimation in the Two-Sample Normal Model</h2>
+</header>
+
+<p>As we have noted before, the <a href="../special/Normal.html">normal distribution</a> is perhaps the most important distribution in the study of mathematical statistics, in part because of the <a href="../sample/CLT.html">central limit theorem</a>. As a consequence of this theorem, measured quantities that are subject to numerous small, random errors will have, at least approximately, normal distributions. Such variables are ubiquitous in statistical experiments, in subjects varying from the physical and biological sciences to the social sciences.</p>
+
+<p>In this section, we will study estimation problems in the two-sample normal model and in the bivariate normal model. This section parallels the section on <a href="../hypothesis/BivariateNormal.html">tests in the two-sample normal model</a> in the chapter on <a href="../hypothesis/Introduction.html">hypothesis testing</a>.</p>
+
+<h3 id="two">The Two-Sample Normal Model</h3>
+
+<h4 id="pre">Preliminaries</h4>
+
+<p>Suppose that \(\bs{X} = (X_1, X_2, \ldots, X_m)\) is a random sample of size \(m\) from the  <a href="../special/Normal.html">normal distribution</a> with <a href="../expect/Properties.html">mean</a> \(\mu\) and <a href="../expect/Variance.html">standard deviation</a> \(\sigma\), and that \(\bs{Y} = (Y_1, Y_2, \ldots, Y_n)\) is a random sample of size \(n\) from the normal distribution with mean \(\nu\) and standard deviation \(\tau\). Moreover, suppose that the samples \(\bs{X}\) and \(\bs{Y}\) are <a href="../prob/Independence.html">independent</a>. Usually, the parameters are unknown, so the parameter set for our vector of parameters \((\mu, \nu, \sigma, \tau)\) is \(\R^2 \times (0, \infty)^2\).</p>
+
+<p>This type of situation arises frequently when the random variables represent a measurement of interest for the objects of the population, and the samples correspond to two different treatments. For example, we might be interested in the blood pressure of a certain population of patients. The \(\bs{X}\) vector records the blood pressures of a control sample, while the \(\bs{Y}\) vector records the blood pressures of the sample receiving a new drug. Similarly, we might be interested in the yield of an acre of corn. The \(\bs{X}\) vector records the yields of a sample receiving one type of fertilizer, while the \(\bs{Y}\) vector records the yields of a sample receiving a different type of fertilizer.</p>
+
+<p>Usually our interest is in a comparison of the parameters (either the means or standard deviations) for the two sampling distributions. In this section we will construct confidence intervals for the difference of the distribution means \( \nu - \mu \) and for the ratio of the distribution variances \( \tau^2 / \sigma^2 \). As with previous estimation problems, the construction depends on finding appropriate <a href="Introduction.html">pivot variables</a>.</p>
+
+<div class="unit" id="stats">
+	<p class="dfn">For a generic sample \(\bs{U} = (U_1, U_2, \ldots, U_k)\) from a distribution with mean \(a\), we will use our standard notation  for the <a href="../sample/Mean.html">sample mean</a> and for the <a href="../sample/Variance.html">sample variance</a>.
+	\begin{align}
+		M(\bs{U}) &amp; = \frac{1}{k} \sum_{i=1}^k U_i \\
+		S^2(\bs{U}) &amp; = \frac{1}{k - 1} \sum_{i=1}^k [U_i - M(\bs{U})]^2
+	\end{align}</p>
+</div>
+
+We will need to also recall the <a href="../sample/Normal.html">special properties</a> of these statistics when the sampling distribution is normal. The special pivot distributions that will play a fundamental role in this section are the <a href="../special/Normal.html">standard normal</a>, the <a href="../special/Student.html">student \( t \)</a>, and the <a href="../special/Fisher.html">Fisher \( F \)</a> distributions. To construct our interval estimates we will need the <a href="../dist/CDF.html">quantiles</a> of these distributions. The quantiles can be computed using the <a href="JavaScript:openAncillary('../apps/QuantileApp.html')" class="ancillary"> quantile app</a> or from most mathematical and statistical software packages. Here is the notation we will use:</p>
+
+<div class="unit" id="qnt">
+	<p class="dfn">Let \( p \in (0, 1) \) and let \(j, \, k \in \N_+ \).</p>
+	<ol class="sub">
+		<li>\( z(p) \) denotes the quantile of order \( p \) for the standard normal distribution.</li>
+		<li>\( t_k(p) \) denotes the quantile of order \( p \) for the student \( t \) distribution with \( k \) degrees of freedom.</li>
+		<li>\(f_{j,k}(p)\) denotes the quantile of order \( p \) for the student \( f \) distribution with \( j \) degrees of freedom in the numerator and \( k \) degrees of freedom in the denominator.</li>
+	</ol>
+</div>
+
+<p>Recall that by symmetry, \(z(p) = -z(1 - p)\) and \( t_k(p) = -t_k(1 - p) \) for \( p \in (0, 1) \) and \( k \in \N_+ \). On the other hand, there is no simple relationship between the left and right tail probabilities of the \( F \) distribution.</p>
+
+<h4 id="knw">Confidence Intervals for the Difference of the Means with Known Variances</h4>
+
+<p>First we will construct confidence intervals for \( \nu - \mu \) under the assumption that the distribution variances \( \sigma^2 \) and \( \tau^2 \) are known. This is not always an artificial assumption. As in the <a href="Normal.html">one sample normal model</a>, the variances are sometime stable, and hence are at least approximately known, while the means change under different treatments. First recall the following basic facts:</p>
+
+<div class="unit" id="knw1">
+	<p class="math">The difference of the sample means \(M(\bs{Y}) - M(\bs{X})\) has the normal distribution with mean \(\nu - \mu\) and variance \(\sigma^2 / m + \tau^2 / n\). Hence the standard score of the difference of the sample means
+	\[ Z = \frac{[M(\bs{Y}) - M(\bs{X})] - (\nu - \mu)}{\sqrt{\sigma^2 / m + \tau^2 / n}} \]
+	has the standard normal distribution. Thus, this variable is a pivotal variable for \( \nu - \mu \) when \( \sigma, \tau\) are known.</p>
+</div>
+
+<p>The basic confidence interval and upper and lower bound are now easy to construct.</p>
+
+<div class="unit" id="knw2">
+	<p class="math">For \( \alpha \in (0, 1) \),</p>
+	<ol class="sub">
+		<li>\( \left[M(\bs{Y}) - M(\bs{X}) - z\left(1 - \frac{\alpha}{2}\right) \sqrt{\frac{\sigma^2}{m} + \frac{\tau^2}{n}}, M(\bs{Y}) - M(\bs{X}) + z\left(1 - \frac{\alpha}{2}\right) \sqrt{\frac{\sigma^2}{m} + \frac{\tau^2}{n}}\right] \) is a \( 1 - \alpha \) confidence interval for \( \nu - \mu \).</li>
+		<li>\( M(\bs{Y}) - M(\bs{X}) - z(1 - \alpha) \sqrt{\frac{\sigma^2}{m} + \frac{\tau^2}{n}} \) is a \( 1 - \alpha \) confidence lower bound for \( \nu - \mu \).</li>
+		<li>\( M(\bs{Y}) - M(\bs{X}) + z(1 - \alpha) \sqrt{\frac{\sigma^2}{m} + \frac{\tau^2}{n}} \) is a \( 1 - \alpha \) confidence upper bound for \( \nu - \mu \).</li>
+	</ol>
+	<details>
+		<summary>Details:</summary>
+		<p>The variable \( T \) given in <a href="#knw1" class="ref"></a> has the standard normal distribution. Hence each of the following events has probability \( 1 - \alpha \) by definition of the quantiles:</p>
+		<ol class="sub">
+			<li>\( \left\{-z\left(1 - \frac{\alpha}{2}\right) \le Z \le z\left(1 - \frac{\alpha}{2}\right)\right\} \)</li>
+			<li>\( \left\{Z \ge z(1 - \alpha)\right\} \)</li>
+			<li>\( \left\{Z \le -z(1 - \alpha)\right\} \)</li>
+		</ol>
+		<p>In each case, solving the inequality for \( \nu - \mu \) gives the result.</p>
+	</details>
+</div>
+
+<p>The two-sided interval in part (a) is the <dfn>symmetric interval</dfn> corresponding to \( \alpha / 2 \) in both tails of the standard normal distribution. As usual, we can construct more general two-sided intervals by partitioning \( \alpha \) between the left and right tails in anyway that we please.</p>
+
+
+<div class="unit" id="knw3">
+	<p class="math">For every \(\alpha, \, p \in (0, 1)\), a \(1 - \alpha\) confidence interval for \(\nu - \mu\) is
+	\[ \left[M(\bs{Y}) - M(\bs{X}) - z(1 - \alpha p) \sqrt{\frac{\sigma^2}{m} + \frac{\tau^2}{n}},  M(\bs{Y}) - M(\bs{X}) - z(\alpha - p \alpha) \sqrt{\frac{\sigma^2}{m} + \frac{\tau^2}{n}} \right]\]</p>
+	<ol class="sub">
+		<li>\( p = \frac{1}{2} \) gives the symmetric two-sided interval.</li>
+		<li>\( p \to 1 \) gives the interval with the confidence lower bound.</li>
+		<li>\( p \to 0 \) gives the interval with confidence upper bound.</li>
+	</ol>
+	<details>
+		<summary>Details:</summary>
+		<p>From the distribution of the pivot variable and the definition of the quantile function,
+		\[ \P \left[ z(\alpha - p \alpha) \lt \frac{[M(\bs{Y}) - M(\bs{X})] - (\nu - \mu)}{\sqrt{\sigma^2 / m + \tau^2 / n}} \lt z(1 - p \alpha) \right] = 1 - \alpha \]
+		Solving for \(\nu - \mu\) in the inequality gives the confidence interval.</p>
+	</details>
+</div>
+
+<p>The following theorem gives some basic properties of the length of this interval.</p>
+
+<div class="unit" id="knw4">
+	<p class="math">The (deterministic) length of the general two-sided confidence interval is
+	\[ L = [z(1 - \alpha p) - z(\alpha - \alpha p)] \sqrt{\frac{\sigma^2}{m} + \frac{\tau^2}{n}}  \]</p>
+	<ol class="sub">
+		<li>\( L \) is a decreasing function of \( m \) and a decreasing function of \( n \).</li>
+		<li>\( L \) is an increasing function of \( \sigma \) and an increasing function of \( \tau \)</li>
+		<li>\( L \) is an decreasing function of \( \alpha \) and hence an increasing function of the confidence level. </li>
+		<li>As a function of \( p \), \( L \) decreases and then increases, with minimum value at \( p = \frac{1}{2} \).</li>
+	</ol>
+</div>
+
+<p>Part (a) means that we can make the estimate more precise by increasing either or both sample sizes. Part (b) means that the estimate becomes less precise as the variance in either distribution increases. Part (c) we have seen before. All other things being equal, we can increase the confidence level only at the expense of making the estimate less precise. Part (d) means that the symmetric, equal-tail confidence interval is the best of the two-sided intervals.</p>
+
+<h4 id="unk">Confidence Intervals for the Difference of the Means with Unknown Variances</h4>
+
+<p>Our next method is a construction of confidence intervals for the difference of the means \(\nu - \mu\) without needing to know the standard deviations \(\sigma\) and \(\tau\). However, there is a cost; we will assume that the standard deviations are the same, \(\sigma = \tau\), but the common value is unknown. This assumption is reasonable if there is an inherent variability in the measurement variables that does not change even when different treatments are applied to the objects in the population. We need to recall some basic facts from our study of <a href="../sample/Normal.html">special properties of normal samples</a>.</p>
+
+<div class="unit" id="unk1">
+	<p class="math">The <dfn>pooled estimate</dfn> of the common variance \(\sigma^2 = \tau^2\) is 
+	\[ S^2(\bs{X}, \bs{Y}) = \frac{(m - 1) S^2(\bs{X}) + (n - 1) S^2(\bs{Y})}{m + n - 2} \]
+	The random variable 
+	\[ T = \frac{\left[M(\bs{Y}) - M(\bs{X})\right] - (\nu - \mu)}{S(\bs{X}, \bs{Y}) \sqrt{1 / m + 1 / n}} \]
+	has the <a href="../special/Student.html">student \( t \) distribution</a> with \( m + n - 2 \) degrees of freedom</p>
+</div>
+
+<p>Note that \( S^2(\bs{X}, \bs{Y}) \) is a weighted average of the sample variances, with the degrees of freedom as the weight factors. Note also that \( T \) is a pivot variable for \( \nu - \mu \) and so we can construct confidence intervals for \( \nu - \mu \) in the usual way.</p>
+
+<div class="unit" id="unk2">
+	<p class="math">For \( \alpha \in (0, 1) \),</p>
+	<ol class="sub">
+		<li>\( \left[M(\bs{Y}) - M(\bs{X}) - t_{m + n - 2}\left(1 - \frac{\alpha}{2}\right) S(\bs{X},\bs{Y})\sqrt{\frac{1}{m} + \frac{1}{n}}, M(\bs{Y}) - M(\bs{X}) + t_{m + n - 2}\left(1 - \frac{\alpha}{2}\right) S(\bs{X},\bs{Y})\sqrt{\frac{1}{m} + \frac{1}{n}}\right] \) is a \( 1 - \alpha \) confidence interval for \( \nu - \mu \).</li>
+		<li>\( M(\bs{Y}) - M(\bs{X}) - t_{m + n - 2}(1 - \alpha) S(\bs{X},\bs{Y})\sqrt{\frac{1}{m} + \frac{1}{n}} \) is a \( 1 - \alpha \) confidence lower bound for \( \nu - \mu \).</li>
+		<li>\( M(\bs{Y}) - M(\bs{X}) + t_{m + n - 2}(1 - \alpha) S(\bs{X},\bs{Y})\sqrt{\frac{1}{m} + \frac{1}{n}} \) is a \( 1 - \alpha \) confidence upper bound for \( \nu - \mu \).</li>
+	</ol>
+	<details>
+		<summary>Details:</summary>
+		<p>The variable \( T \) given in <a href="#unk1" class="ref"></a> has the standard normal distribution. Hence each of the following events has probability \( 1 - \alpha \) by definition of the quantiles:</p>
+		<ol class="sub">
+			<li>\( \left\{-t_{m+n-2}\left(1 - \frac{\alpha}{2}\right) \le T \le t_{m+n-2}\left(1 - \frac{\alpha}{2}\right)\right\} \)</li>
+			<li>\( \left\{T \ge t_{m+n-2}(1 - \alpha)\right\} \)</li>
+			<li>\( \left\{T \le -t_{m+n-2}(1 - \alpha)\right\} \)</li>
+		</ol>
+		<p>In each case, solving the inequality for \( \nu - \mu \) gives the result.</p>
+	</details>
+</div>
+
+<p>The two-sided interval in part (a) is the <dfn>symmetric interval</dfn> corresponding to \( \alpha / 2 \) in both tails of the student \( t \) distribution. As usual, we can construct more general two-sided intervals by partitioning \( \alpha \) between the left and right tails in anyway that we please.</p>
+
+<div class="unit" id="unk3">
+	<p class="math">For every \(\alpha, \, p \in (0, 1)\), a \(1 - \alpha\) confidence interval for \(\nu - \mu\) is
+	\[ \left[M(\bs{Y}) - M(\bs{X}) - t_{m+n-2}(1 - \alpha p) S(\bs{X}, \bs{Y})\sqrt{\frac{1}{m} + \frac{1}{n}},  M(\bs{Y}) - M(\bs{X}) - t_{m+n-2}(\alpha - p \alpha) S(\bs{X}, \bs{Y}) \sqrt{\frac{1}{m} + \frac{1}{n}} \right]\]</p>
+	<ol class="sub">
+		<li>\( p = \frac{1}{2} \) gives the symmetric two-sided interval.</li>
+		<li>\( p \to 1 \) gives the interval with the confidence lower bound.</li>
+		<li>\( p \to 0 \) gives the inteval with confidence upper bound.</li>
+	</ol>
+	<details>
+		<summary>Details:</summary>
+		<p>From the distribution of the pivot variable and the definition of the quantile function,
+		\[ \P \left[ t_{m+n-2}(\alpha - p \alpha) \lt \frac{[M(\bs{Y}) - M(\bs{X})] - (\nu - \mu)}{S(\bs{X}, \bs{Y})\sqrt{1 / m + 1 / n}} \lt t_{m+n-2}(1 - p \alpha) \right] = 1 - \alpha \]
+		Solving for \(\nu - \mu\) in the inequality gives the confidence interval.</p>
+	</details>
+</div>
+
+<p>The next result considers the length of the general two-sided interval.</p>
+
+<div class="unit">
+	<p class="math">The (random) length of the two-sided interval above is
+	\[ L = [t_{m+n-2}(1 - p \alpha) - t_{m+n-2}(\alpha - p \alpha)] S(\bs{X}, \bs{Y}) \sqrt{\frac{1}{m} + \frac{1}{n}} \]</p>
+	<ol class="sub">
+		<li>\( L \) is an decreasing function of \( \alpha \) and hence an increasing function of the confidence level. </li>
+		<li>As a function of \( p \), \( L \) decreases and then increases, with minimum value at \( p = \frac{1}{2} \).</li>
+	</ol>
+</div>
+
+<p>As in the case of known variances, part (c) means that all other things being equal, we can increase the confidence level only at the expense of making the estimate less precise. Part (b) means that the symmetric, equal-tail confidence interval is the best of the two-sided intervals.</p>
+
+<h4 id="rat">Confidence Intervals for the Ratio of the Variances</h4>
+
+<p>Our next construction will produce interval estimates for the ratio of the variances \( \tau^2 / \sigma^2 \) (or by taking square roots, for the ratio of the standard deviations \( \tau / \sigma \)). Once again, we need to recall some basic facts from our study of <a href="../sample/Normal.html">special properties</a> of random samples from the normal distribution.</p>
+
+<div class="unit" id="rat1">
+	<p class="math">The ratio 
+	\[ U = \frac{S^2(\bs{X}) \tau^2}{S^2(\bs{Y}) \sigma^2} \]
+	has the <a href="../special/Fisher.html">\(F\) distribution</a> with \(m - 1\) degrees of freedom in the numerator and \(n - 1\) degrees of freedom in the denominator, and hence this variable is a pivot variable for \(\tau^2 / \sigma^2\).</p>
+</div>
+
+<p>The pivot variable \( U \) can be used to construct confidence intervals for \( \tau^2 / \sigma^2 \) in the usual way.</p>
+
+<div class="unit" id="rat2">
+	<p class="math">For \( \alpha \in (0, 1) \),</p>
+	<ol class="sub">
+		<li>\( \left[f_{m-1, n-1}\left(\frac{\alpha}{2}\right) \frac{S^2(\bs{Y})}{S^2(\bs{X})}, f_{m-1, n-1}\left(1 - \frac{\alpha}{2}\right) \frac{S^2(\bs{Y})}{S^2(\bs{X})} \right] \) is a \( 1 - \alpha \) confidence interval for \( \tau^2 / \sigma^2 \).</li>
+		<li>\( f_{m-1, n-1}(1 - \alpha) \frac{S^2(\bs{Y})}{S^2(\bs{X})} \) is a \( 1 - \alpha \) confidence lower bound for \( \tau^2 / \sigma^2 \).</li>
+		<li>\(f_{m-1, n-1}(\alpha) \frac{S^2(\bs{Y})}{S^2(\bs{X})} \) is a \( 1 - \alpha \) confidence upper bound for \( \nu - \mu \).</li>
+	</ol>
+	<details>
+		<summary>Details:</summary>
+		<p>The variable \( U \) given in <a href="#rat1" class="ref"></a> has the \( F \) distribution with \( m - 1 \) degrees of freedom in the numerator and \( n - 1 \) degrees of freedom in the denominator. Hence each of the following events has probability \( 1 - \alpha \) by definition of the quantiles:</p>
+		<ol class="sub">
+			<li>\( \left\{f_{m-1,n-1}\left(\frac{\alpha}{2}\right) \le U \le f_{m-1,n-1}\left(1 - \frac{\alpha}{2}\right)\right\} \)</li>
+			<li>\( \left\{U \ge f_{m-1,n-1}(1 - \alpha)\right\} \)</li>
+			<li>\( \left\{U \le f{m-1,n-1}(\alpha)\right\} \)</li>
+		</ol>
+		<p>In each case, solving the inequality for \( \tau^2 / \sigma^2 \) gives the result.</p>
+	</details>
+</div>
+
+<p>The two-sided confidence interval in part (a) is the <dfn>equal-tail</dfn> confidence interval, and is the one commonly used. But as usual, we can partition \( \alpha \) between the left and right tails of the distribution of the pivot variable in any way that we please.</p>
+
+<div class="unit" id="rat3">
+	<p class="math">For every \(\alpha, \, p \in (0, 1)\), a \(1 - \alpha\) confidence set for \(\tau^2 / \sigma^2 \) is
+	\[ \left[f_{m-1, n-1}(\alpha - p \alpha) \frac{S^2(\bs{Y})}{S^2(\bs{X})}, f_{m-1, n-1}(1 - p \alpha) \frac{S^2(\bs{Y})}{S^2(\bs{X})} \right] \]</p>
+	<ol class="sub">
+		<li>\( p = \frac{1}{2} \) gives the equal-tail, two-sided interval.</li>
+		<li>\( p \to 1 \) gives the interval with the confidence lower bound.</li>
+		<li>\( p \to 0 \) gives the inteval with confidence upper bound.</li>
+	</ol>
+	<details>
+		<summary>Details:</summary>
+		<p>From the \( F \) pivot variable and the definition of the quantile function,
+		\[ \P \left[ f_{m-1,n-1}(\alpha - p \, \alpha) \lt \frac{S^2(\bs{X}, \mu) \tau^2}{S^2(\bs{Y}, \nu) \sigma^2} \lt f_{m-1,n-1}(1 - p \,\alpha) \right] = 1 - \alpha \]
+		Solving for \(\tau^2 / \sigma^2\) in the inequality.</p>
+	</details>
+</div>
+
+<p>The length of the general confidence interval is considered next.</p>
+
+<div class="unit" id="rat4">
+	<p class="math">The (random) length of the general two-sided confidence interval above is
+	\[ L = \left[f_{m-1,n-1}(1 - p \alpha) - f_{m-1,n-1}(\alpha - p \alpha) \right] \frac{S^2(\bs{Y})}{S^2(\bs{X})}\]
+	Assuming that \( m \gt 5 \) and \( n \gt 1 \),</p>
+	<ol class="sub">
+		<li>\( L \) is an decreasing function of \( \alpha \) and hence an increasing function of the confidence level. </li>
+		<li>\( \E(L) = \frac{\tau^2}{\sigma^2} \frac{m - 1}{m - 3} \)</li>
+		<li>\( \var(L) = 2 \frac{\tau^4}{\sigma^4} \left(\frac{m - 1}{m - 3}\right)^2 \frac{m + n - 4}{(n - 1) (m - 5)} \)</li>
+	</ol>
+	<details>
+		<summary>Details:</summary>
+		<p>Parts (b) and (c) follow since \( \frac{\sigma^2}{\tau^2} \frac{S^2(\bs{Y})}{S^2(\bs{X})^2} \) as the \( F \) distribution with \( n - 1 \) degrees of freedom in the numerator and \( m - 1 \) degrees of freedom in the denominator.</p>
+	</details>
+</div>
+
+<p>Optimally, we might want to choose \( p \) so that \( \E(L) \) is minimized. However, this is difficult computationally, and fortunately the equal-tail interval with \( p = \frac{1}{2} \) is not too far from optimal when the sample sizes \( m \) and \( n \) are large.</p>
+
+<h3 id="biv">Estimation in the Bivariate Normal Model</h3>
+
+<p>In this subsection, we consider a model that is superficially similar to the two-sample normal model, but is actually much simpler. Suppose that
+\[ \left((X_1, Y_1), (X_2, Y_2), \ldots, (X_n, Y_n)\right) \]
+is a random sample of size \(n\) from the <a href="../special/MultiNormal.html">bivariate normal distribution</a> of a random vector \((X, Y)\), with \(\E(X) = \mu\), \(\E(Y) = \nu\), \(\var(X) = \sigma^2\), \(\var(Y) = \tau^2\), and \(\cov(X, Y) = \delta\).</p>
+
+<p>Thus, instead of a <em>pair of samples</em>, we have a <em>sample of pairs</em>. This type of model frequently arises in <dfn>before and after experiments</dfn>, in which a measurement of interest is recorded for a sample of \(n\) objects from the population, both before and after a treatment. For example, we could record the blood pressure of a sample of \(n\) patients, before and after the administration of a certain drug. The critical point is that in this model, \( X_i \) and \( Y_i \) are measurements made on the same underlying object in the sample. As with the two-sample normal model, the interest is usually in estimating the difference of the means.</p>
+
+<p>We will use our usual notation in definition <a href="#stats" class="ref"></a> for the sample means and variances of \(\bs{X} = (X_1, X_2, \ldots, X_n)\) and \(\bs{Y} = (Y_1, Y_2, \ldots, Y_n)\). Recall also that the <a href="../sample/Covariance.html">sample covariance</a> of \((\bs{X}, \bs{Y})\), is
+\[ S(\bs{X}, \bs{Y}) = \frac{1}{n - 1} \sum_{i=1}^n [X_i - M(\bs{X})][Y_i - M(\bs{Y})] \]
+(not to be confused with the pooled estimate of the standard deviation in the two sample model).</p>
+
+<div class="unit" id="biv1">
+	<p class="math">The vector of differences \(\bs{Y} - \bs{X} = (Y_1 - X_1, Y_2 - X_2, \ldots, Y_n - X_n)\) is a random sample of size \(n\) from the distribution of \(Y - X\), which is normal with</p>
+	<ol class="sub">
+		<li>\(\E(Y - X) = \nu - \mu\)</li>
+		<li>\(\var(Y - X) = \sigma^2 + \tau^2 - 2 \, \delta\)</li>
+	</ol>
+</div>
+
+<div class="unit" id="biv2">
+	<p class="math">The sample mean and variance of the sample of differences are given by</p>
+	<ol class="sub">
+		<li>\(M(\bs{Y} - \bs{X}) = M(\bs{Y}) - M(\bs{X})\)</li>
+		<li>\(S^2(\bs{Y} - \bs{X}) = S^2(\bs{X}) + S^2(\bs{Y}) - 2 \, S(\bs{X}, \bs{Y})\)</li>
+	</ol>
+</div>
+
+<p>Thus, the sample of differences \(\bs{Y} - \bs{X}\) fits the normal model for a single variable. The section on <a href="Normal.html">estimation in the normal model</a> could be used to obtain confidence sets and intervals for the parameters \((\nu - \mu, \sigma^2 + \tau^2 - 2 \, \delta)\).</p>
+
+<div class="unit" id="biv3">
+	<p class="math">In the setting of this subsection, suppose that \(\bs{X} = (X_1, X_2, \ldots, X_n)\) and \(\bs{Y} = (Y_1, Y_2, \ldots, Y_n)\) are independent. Mathematically this fits both models&mdash;the two-sample normal model and the bivariate normal model. Which procedure would work better for estimating the difference of means \(\nu - \mu\)?</p>
+	<ol class="sub">
+		<li>If the standard deviations \(\sigma\) and \(\tau\) are known.</li>
+		<li>If the standard deviations \(\sigma\) and \(\tau\) are unknown.</li>
+	</ol>
+	<details>
+		<summary>Details:</summary>
+		<ol class="sub">
+			<li>The two methods are equivalent.</li>
+			<li>The bivariate normal model works better.</li>
+		</ol>
+	</details>
+</div>
+
+<p>Although the setting in <a href="#biv3" class="ref"></a> fits both models <em>mathematically</em>, only one model would make sense in a real problem. Again, the critical point is whether \( (X_i, Y_i) \) makes sense as a pair of random variables (measurements) corresponding to a given object in the sample.</p>
+
+<h3 id="exe">Computational Exercises</h3>
+
+<div class="unit" id="exe1">
+	<p class="math">A new drug is being developed to reduce a certain blood chemical. A sample of 36 patients are given a placebo while a sample of 49 patients are given the drug. Let \(X\) denote the measurement for a patient given the placebo and \(Y\) the measurement for a patient given the drug (in mg). The statistics are \(m(\bs{x}) = 87\), \(s(\bs{x}) = 4\), \(m(\bs{y}) = 63\), \(s(\bs{y}) = 6\).</p>
+	<ol class="sub">
+		<li>Compute the 90% confidence interval for \(\tau / \sigma\).</li>
+		<li>Assuming that \(\sigma = \tau\), compute the 90% confidence interval for \(\nu - \mu\).</li>
+		<li>Based on (a), is the assumption that \(\sigma = \tau\) reasonable?</li>
+		<li>Based on (b), is the drug effective?</li>
+	</ol>
+	<details>
+		<summary>Details:</summary>
+		<ol class="sub">
+			<li>\((1.149, 1.936)\)</li>
+			<li>\((-24.834, -23.166)\)</li>
+			<li>Perhaps not.</li>
+			<li>Yes</li>
+		</ol>
+	</details>
+</div>
+
+<div class="unit" id="exe2">
+	<p class="math">A company claims that an herbal supplement improves intelligence.  A sample of 25 persons are given a  standard IQ test before and after taking the supplement. Let \(X\) denote the IQ of a subject before taking the supplement and \(Y\) the IQ of the subject after the supplement. The before and after statistics are \(m(\bs{x}) = 105\), \(s(\bs{x}) = 13\), \(m(\bs{y}) = 110\), \(s(\bs{y}) = 17\), \(s(\bs{x}, \bs{y}) = 190\). Do you believe the company's claim? </p>
+	<details>
+		<summary>Details:</summary>
+		<p> A 90% confidence lower bound for the difference in IQ is 2.675. There may be a vary small increase.</p>
+	</details>
+</div>
+
+<div class="unit" id="exe3">
+	<p class="stat">In <a href="JavaScript:openAncillary('../data/Fisher.html')" class="ancillary">Fisher's iris data</a>, let \(X\) denote consider the petal length of a Versicolor iris and \(Y\) the petal length of a Virginica iris. </p>
+	<ol class="sub">
+		<li>Compute the 90% confidence interval for \(\tau / \sigma\).</li>
+		<li>Assuming that \(\sigma = \tau\), compute the 90% confidence interval for \(\nu - \mu\).</li>
+		<li>Based on (a), is the assumption that \(\sigma = \tau\) reasonable?</li>
+	</ol>
+	<details>
+		<summary>Details:</summary>
+		<ol class="sub">
+			<li>\((0.8, 1.3)\)</li>
+			<li>\((10.5, 14.1)\)</li>
+			<li>Yes</li>
+		</ol>
+	</details>
+</div>
+
+<div class="unit" id="exe4">
+	<p class="math">A plant has two machines that produce a circular rod whose diameter (in cm) is critical. Let \(X\) denote the diameter of a rod from the first machine and \(Y\) the diameter of a rod from the second machine. A sample of 100 rods from the first machine as mean 10.3 and standard deviation 1.2. A sample of 100 rods from the second machine has mean 9.8 and standard deviation 1.6. </p>
+	<ol class="sub">
+		<li>Compute the 90% confidence interval for \(\tau / \sigma\).</li>
+		<li>Assuming that \(\sigma = \tau\), compute the 90% confidence interval for \(\nu - \mu\).</li>
+		<li>Based on (a), is the assumption that \(\sigma = \tau\) reasonable?</li>
+	</ol>
+	<details>
+		<summary>Details:</summary>
+		<ol class="sub">
+			<li>\((1.127, 1.578)\)</li>
+			<li>\((0.832, 0.168)\)</li>
+			<li>Perhaps not.</li>
+		</ol>
+	</details>
+</div>
+
+<footer>
+	<ol class="map">
+		<li class="parent"><a href="../index.html">Random</a></li>
+		<li class="parent"><a href="index.html">7. Set Estimation</a></li>
+		<li class="child"><a href="Introduction.html" title="Introduction">1</a></li>
+		<li class="child"><a href="Normal.html" title="Estimation in the Normal Model">2</a></li>
+		<li class="child"><a href="Bernoulli.html" title="Estimation in the Bernoulli Model">3</a></li>
+		<li class="current">4</li>
+		<li class="child"><a href="Bayes.html" title="Bayesian Interval Estimation">5</a></li>
+		<li class="details"><button type="button" title="Expand Details" onclick="expandDetails(true);"><img src="../icons/Plus.svg" alt="Expand"></button></li>
+		<li class="details"><button type="button" title="Contract Details" onclick="expandDetails(false);"><img src="../icons/Minus.svg" alt="Contract"></button></li>
+	</ol>
+	<ul class="map">
+		<li class="sister"><a href="JavaScript:openAncillary('../apps/index.html')" class="ancillary">Apps</a></li>
+		<li class="sister"><a href="JavaScript:openAncillary('../data/index.html')" class="ancillary">Data Sets</a></li>
+		<li class="child"><a href="JavaScript:openAncillary('../biographies/index.html')" class="ancillary"> Biographies</a></li>
+	</ul>
+</footer>
+
+<script>getReferences();</script>
+
+</body>
+</html>

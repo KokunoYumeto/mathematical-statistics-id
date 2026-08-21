@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="utf-8">
+	<title>Bayesian Interval Estimation</title>
+	<meta name="author" content="Kyle Siegrist">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="keywords" content="probability, statistics, set estimation, interval estimation, Bayesian estimation, Bayes' theorem, Bernoulli distribution, Poisson distribution, normal distribution, beta distribution, Pareto distribution">
+	<link rel="icon" href="../icons/Icon.svg" type="image/svg">
+	<link rel="stylesheet" href="../Screen.css" type="text/css" media="screen">
+	<link rel="next" href="../hypothesis/index.html">
+	<script src="../Basic.js"></script>
+	<script src="../../MathJax/tex-svg.js" id="MathJax-script" async></script>
+</head>
+
+<body>
+
+<div class="latex">
+	\(\newcommand{\R}{\mathbb{R}}\) 
+	\(\newcommand{\N}{\mathbb{N}}\)
+	\(\newcommand{\Z}{\mathbb{Z}}\)
+	\(\newcommand{\P}{\mathbb{P}}\)
+	\(\newcommand{\E}{\mathbb{E}}\)
+	\(\newcommand{\var}{\text{var}}\)
+	\(\newcommand{\sd}{\text{sd}}\)
+	\(\newcommand{\cov}{\text{cov}}\)
+	\(\newcommand{\bs}{\boldsymbol}\)
+</div>
+
+<header>
+	<ol class="map">
+		<li class="parent"><a href="../index.html">Random</a></li>
+		<li class="parent"><a href="index.html">7. Set Estimation</a></li>
+		<li class="child"><a href="Introduction.html" title="Introduction">1</a></li>
+		<li class="child"><a href="Normal.html" title="Estimation in the Normal Model">2</a></li>
+		<li class="child"><a href="Bernoulli.html" title="Estimation in the Bernoulli Model">3</a></li>
+		<li class="child"><a href="BivariateNormal.html" title="Estimation in the Two-Sample Normal Model">4</a></li>
+		<li class="current">5</li>
+		<li class="details"><button type="button" title="Expand Details" onclick="expandDetails(true);"><img src="../icons/Plus.svg" alt="Expand"></button></li>
+		<li class="details"><button type="button" title="Contract Details" onclick="expandDetails(false);"><img src="../icons/Minus.svg" alt="Contract"></button></li>
+	</ol>
+	<h2>5. Bayesian Set Estimation</h2>
+</header>
+
+<h3 id="the">Basic Theory</h3>
+
+<p>As usual, our starting point is a <a href="../prob/Experiments.html">random experiment</a> with an underlying <a href="../prob/Events.html">sample space</a> and a <a href="../prob/Probability.html">probability measure</a> \(\P\). In the basic statistical model, we have an observable <a href="../prob/Probability.html">random variable</a> \(\bs{X}\) taking values in a set \(S\). In general, \(\bs{X}\) can have quite a complicated structure. For example, if the experiment is to sample \(n\) objects from a population and record various measurements of interest, then
+\[ \bs{X} = (X_1, X_2, \ldots, X_n) \]
+where \(X_i\) is the vector of measurements for the \(i\)th object.</p>
+
+<p>Suppose also that the distribution of \(\bs{X}\) depends on a parameter \(\theta\) with values in a set \(T\). The parameter may also be vector valued, in which case \(T \subseteq \R^k\) for some \(k \in \N_+\) and the parameter has the form \(\bs{\theta} = (\theta_1, \theta_2, \ldots, \theta_k)\).</p>
+
+<h4 id="bay">The Bayesian Formulation</h4>
+
+<p>Recall that in <a href="../point/Bayes.html">Bayesian analysis</a>, named for the infamous <a href="JavaScript:openAncillary('../biographies/Bayes.html')" class="ancillary">Thomas Bayes</a>, the unknown parameter \(\theta\) is treated as the observed value of a random variable \(\Theta\) with values in \(T\). Here is a brief review:</p>
+
+<div class="unit">
+	<p class="math">The Bayesian formulation</p>
+	<ol class="sub">
+		<li>The conditional probability density function of the data vector \(\bs{X}\) given \(\Theta = \theta\ \in T\) is denoted \( f(\bs{x} \mid \theta) \) for \( \bs{x} \in S \).</li>
+		<li>The random parameter \(\Theta\) is given a <dfn>prior distribution</dfn> with probability density function \(h\) on \(T\).</li>
+		<li>The joint probability density function of \((\bs X, \Theta)\) is \((\bs{x}, \theta) \mapsto h(\theta) f(\bs{x} \mid \theta)\) for \((\bs{x}, \theta) \in S \times T \).</li>
+		<li>The (unconditional) probability density function of \(\bs{X}\) is the function \(f\) given by \(f(\bs{x}) = \sum_{\theta \in T} h(\theta) f(\bs{x} \mid \theta)\) for \(\bs{x} \in S\) if \(\Theta\) has a <a href="../dist/Discrete.html">discrete distribution</a>, or by \(f(\bs{x}) = \int_T h(\theta) f(\bs{x} \mid \theta) \, d\theta,\) for \(\bs{x} \in S\) if \(\Theta\) has a <a href="../dist/Continuous.html">continuous distribution</a>.</li>
+		<li>By <a href="../dist/Conditional.html">Bayes' theorem</a>, the <dfn>posterior probability density function</dfn> of \(\Theta\) given \(\bs{X} = \bs{x} \in S\) is
+		\[ h(\theta \mid \bs{x}) = \frac{h(\theta) f(\bs{x} \mid \theta)}{f(\bs{x})}, \quad \theta \in T \]</li>
+	</ol>
+</div>
+
+<p>The prior distribution is often subjective, and is chosen to reflect our knowledge, if any, of the parameter. In some cases, we can recognize the posterior distribution from the functional form of \(\theta \mapsto h(\theta) f(\bs{x} \mid \theta)\) without having to actually compute the normalizing constant \(f(\bs{x})\), and thus reducing the computational burden significantly. In particular, this is often the case when we have a <dfn>conjugate parametric family</dfn> of distributions of \(\Theta\). Recall that this means that when the prior distribution of \(\Theta\) belongs to the family, so does the posterior distribution of \(\Theta\) given \(\bs{X} = \bs{x} \in S\).</p>
+
+<p>The most important special case arises when we have a basic variable \(X\) with values in a set \(R\), and given \(\Theta = \theta \in T\), the data vector \(\bs{X} = (X_1, X_2, \ldots, X_n)\) is a random sample of size \(n\) from \(X\). That is, given \(\Theta = \theta \in T\), \(\bs{X}\) is a sequence of independent, identically distributed variables, each with the same distribution as \(X\) given \(\Theta = \theta\). Thus \(S = R^n\) and if \(X\) has conditional probability density function \(g(x \mid \theta)\), then
+\[f(\bs{x} \mid \theta) = g(x_1 \mid \theta) g(x_2 \mid \theta) \cdots g(x_n \mid \theta), \quad \bs{x} = (x_1, x_2, \ldots, x_n) \in S\]</p>
+
+<h4 id="con">Confidence Sets</h4>
+
+<p>Now let \(C(\bs{X})\) be a confidence set (that is, a subset of the parameter set \(T\) that depends on the data variable \(\bs{X}\) but no unknown parameters).</p>
+
+<div class="unit" id="dfn1">
+	<p class="dfn">One possible definition of a \(1 - \alpha\) level <dfn>Bayesian confidence set</dfn> requires that
+	\[ \P\left[\Theta \in C(\bs{x}) \mid \bs{X} = \bs{x}\right] = 1 - \alpha \]</p>
+</div>
+
+<p>In defintion <a href="#dfn1" class="ref"></a>, only \(\Theta\) is random and thus the probability above is computed using the posterior probability density function \(\theta \mapsto h(\theta \mid \bs{x})\).</p>
+
+<div class="unit" id="dfn2">
+	<p class="dfn">Another possible definition requires that
+	\[ \P\left[\Theta \in C(\bs{X})\right] = 1 - \alpha \]</p>
+</div>
+
+<p>In definition <a href="#dfn2" class="ref"></a>, \(\bs{X}\) and \(\Theta\) are both random, and so the probability above would be computed using the joint probability density function \((\bs{x}, \theta) \mapsto h(\theta) f(\bs{x} \mid \theta)\). Whatever the philosophical arguments may be, definition <a href="#dfn1" class="ref"></a> is certainly the easier one from a computational viewpoint, and hence is the one most commonly used.</p>
+
+<p>Let us compare the classical and Bayesian approaches. In the classical approach, the parameter \(\theta\) is deterministic, but unknown. <em>Before</em> the data are collected, the confidence set \(C(\bs{X})\) (which is random by virtue of \(\bs{X}\)) will contain the parameter with probability \(1 - \alpha\). <em>After</em> the data are collected, the computed confidence set \(C(\bs{x})\)  either contains \(\theta\) or does not, and we will usually never know which. By contrast in a Bayesian confidence set, the random parameter \(\Theta\) falls in the computed, deterministic confidence set  \(C(\bs{x})\) with probability \(1 - \alpha\).</p>
+
+<div class="unit">
+	<p class="math">Suppose that \(\Theta\) is real valued, so that \(T \subseteq \R\). For \(r \in (0, 1)\), a \(1 - \alpha\) level Bayesian confidence <em>interval</em> is \(\left[U_{(1 - r) \alpha}(\bs{x}), U_{1 - r \alpha}(\bs{x})\right]\) where \(U_p(\bs{x})\) is the quantile of order \(p\) for the posterior distribution of \(\Theta\) given \(\bs{X} = \bs{x}\).</p>
+</div>
+
+<p>As in past sections, \(r\) is the fraction of \(\alpha\) in the right tail of the posterior distribution and \(1 - r\) is the fraction of \(\alpha\) in the left tail of the posterior distribution. As usual, \(r = \frac{1}{2}\) gives the symmetric, two-sided confidence interval; letting \(r \to 0\) gives the confidence lower bound; and letting \(r \to 1\) gives the confidence upper bound.</p>
+
+<h3 id="app">Applications</h3>
+
+<h4 id="ber">The Bernoulli Distribution</h4>
+
+<p>Suppose that \(\bs{X} = (X_1, X_2, \ldots, X_n)\) is a random sample of size \(n\) from the <a href="../bernoulli/Introduction.html">Bernoulli distribution</a> with unknown success parameter \(p \in (0, 1)\). In the usual language of reliability, \(X_i = 1\) means success on trial \(i\) and \(X_i = 0\) means failure on trial \(i\). The distribution is named for <a href="JavaScript:openAncillary('../biographies/Bernoulli.html')" class="ancillary">Jacob Bernoulli</a>. Recall that the Bernoulli distribution has probability density function (given \(p\))
+\[ g(x \mid p) = p^x (1 - p)^{1-x}, \quad x \in \{0, 1\} \]
+Note that the number of successes in the \(n\) trials is \(Y = \sum_{i=1}^n X_i\). Given \(p\), random variable \(Y\) has the <a href="../bernoulli/Binomial.html">binomial distribution</a> with parameters \(n\) and \(p\).</p>
+
+<p>In our previous discussion of <a href="../point/Bayes.html#ber">Bayesian estimation</a>, we modeled the parameter \(p\) with a random variable \(P\) that has a <a href="../special/Beta.html">beta distribution</a>. This family of disstributions is conjugate for \(P\). Specifically, if the prior distribution of \(P\) is beta with left parameter \(a \gt 0\) and right parameter \(b \gt 0\), then the posterior distribution of \(P\) given \(\bs{X}\) is beta with left parameter \(a + Y\) and right parameter \(b + (n - Y)\); the left parameter is increased by the number of successes and the right parameter by the number of failure. It follows that a \(1 - \alpha\) level Bayesian confidence interval for \(p\) is \(\left[U_{\alpha/2}(y), U_{1-\alpha/2}(y)\right]\) where \(U_r(y)\) is the quantile of order \(r\) for the posterior beta distribution. In the special case \(a = b = 1\) the prior distribution is uniform on \((0, 1)\) and reflects a lack of previous knowledge about \(p\).</p>
+
+<div class="unit" id="ber1">
+	<p class="math">Suppose that we have a coin with an unknown probability \(p\) of heads, and that we give \(p\) the uniform prior, reflecting our lack of knowledge about \(p\). We then toss the coin 50 times, observing 30 heads.</p>
+	<ol class="sub">
+		<li>Find the posterior distribution of \(p\) given the data.</li>
+		<li>Construct the 95% Bayesian confidence interval.</li>
+		<li>Construct the classical Wald confidence interval at the 95% level.</li>
+	</ol>
+	<details>
+		<summary>Details:</summary>
+		<ol class="sub">
+			<li>Beta with left parameter 31 and right parameter 21.</li>
+			<li>\([0.461, 0.724\)</li>
+			<li>\([0.464, 0.736]\)</li>
+		</ol>
+	</details>
+</div>
+
+<h4 id="poi">The Poisson Distribution</h4>
+
+<p>Suppose that \(\bs{X} = (X_1, X_2, \ldots, X_n)\) is a random sample of size \(n\) from the <a href="../poisson/Poisson.html">Poisson distribution</a> with parameter \(\lambda \in (0, \infty)\). Recall that the Poisson distribution is often used to model the number of <q>random points</q> in a region of time or space, particularly in the contest of the <a href="../poisson/index.html">Poisson process</a>. The distribution is named for the inimitable <a href="JavaScript:openAncillary('../biographies/Poisson.html')" class="ancillary">Simeon Poisson</a> and given \(\lambda\), has probability density function
+\[ g(x \mid \theta) = e^{-\lambda} \frac{\lambda^x}{x!}, \quad x \in \N \]
+As usual, we will denote the sum of the sample values by \(Y = \sum_{i=1}^n X_i\). Given \(\lambda\), random variable \(Y\) also has a Poisson distribution, but with parameter \(n \lambda\).</p>
+
+<p>In our previous discussion of <a href="../point/Bayes.html#poi">Bayesian estimation</a>, we showed modeled \(\lambda\) with a random variable \(\Lambda\) that has a <a href="../special/Gamma.html">gamma distribution</a>. This family of distributions is conjugate for \(\Lambda\). Specifically, if the prior distribution of \(\Lambda\) is gamma with shape parameter \(k \gt 0\) and rate parameter \(r \gt 0\) (so that the scale parameter is \(1 / r\)), then the posterior distribution of \(\Lambda\) given \(\bs{X}\) is gamma with shape parameter \(k + Y\) and rate parameter \(r + n\). It follows that a \(1 - \alpha\) level Bayesian confidence interval for \(\lambda\) is \(\left[U_{\alpha/2}(y), U_{1-\alpha/2}(y)\right]\) where \(U_p(y)\) is the quantile of order \(p\) for the posterior gamma distribution.</p>
+
+<div class="unit" id="poi1">
+	<p class="stat">Consider the <a href="JavaScript:openAncillary('../data/Alpha.html')" class="ancillary">alpha emissions data</a>, which we believe come from a Poisson distribution with unknown parameter \(\lambda\). Suppose that <em>a priori</em>, we believe that \(\lambda\) is about 5, so we give \(\lambda\) a prior gamma distribution with shape parameter \(5\) and rate parameter 1. (Thus the mean is 5 and the standard deviation \(\sqrt{5} = 2.236\).)</p>
+	<ol class="sub">
+		<li>Find the posterior distribution of \(\lambda\) given the data.</li>
+		<li>Construct the 95% Bayesian confidence interval.</li>
+		<li>Construct the classical \(t\) confidence interval at the 95% level.</li>
+	</ol>
+	<details>
+		<summary>Details:</summary>
+		<ol class="sub">
+			<li>Gamma with shape parameter 10104 and rate parameter 1208.</li>
+			<li>\((8.202, 8.528)\)</li>
+			<li>\((8.324, 8.410)\)</li>
+		</ol>
+	</details>
+</div>
+
+<h4 id="nor">The Normal Distribution</h4>
+
+<p>Suppose that \(\bs{x} = (X_1, X_2, \ldots, X_n)\) is a random sample of size \(n\) from the <a href="../special/Normal.html">normal distribution</a> with unknown mean \(\mu \in \R\) and known variance \(\sigma^2 \in (0, \infty)\). Of course, the normal distribution plays an especially important role in statistics, in part because of the <a href="../sample/CLT.html">central limit theorem</a>. The normal distribution is widely used to model physical quantities subject to numerous small, random errors. Recall that the normal probability density function (given \(\mu\)) is
+\[ g(x \mid \mu) = \frac{1}{\sqrt{2 \pi} \sigma} \exp\left[-\left(\frac{x - \mu}{\sigma}\right)^2 \right], \quad x \in \R \]
+We denote the sum of the sample values by \(Y = \sum_{i=1}^n X_i\). Recall that \(Y\) also has a normal distribution (given \(\mu\)), but with mean \(n \mu\) and variance \(n \sigma^2\).</p>
+
+<p>In our previous discussion of <a href="../point/Bayes.html#nor">Bayesian estimation</a>, we modeled \(\mu\) with a random variable \(\Psi\) that also has a normal distribution. This family is conjugate for \(\Psi\) (with \(\sigma\) known). Specifically, if the prior distribution of \(\Psi\) is normal with mean \(a \in \R\) and standard deviation \(b \in (0, \infty)\), then the posterior distribution of \(\Psi\) given \(\bs{X}\) is also normal, with
+\[\E(\mu \mid \bs{X}) = \frac{Y b^2 + a \sigma^2}{\sigma^2 + n b^2}, \quad \var(\mu \mid \bs{X}) = \frac{\sigma^2 b^2}{\sigma^2 + n b^2}\]
+It follows that a \(1 - \alpha\) level Bayesian confidence interval for \(\mu\) is \(\left[U_{\alpha/2}(y), U_{1-\alpha/2}(y)\right]\) where \(U_p(y)\) is the quantile of order \(p\) for the posterior normal distribution. An interesting special case is when \(b = \sigma\), so that the standard deviation of the prior distribution of \(\mu\) is the same as the standard deviation of the sampling distribution. In this case, the posterior mean is \((Y + a) \big/ (n + 1)\) and the posterior variance is \(\sigma^2 \big/ (n + 1)\)</p>
+
+<div class="unit" id="nor1">
+	<p class="math">The length of a certain machined part is supposed to be 10 centimeters but due to imperfections in the manufacturing process, the actual length is a normally distributed with mean \(\mu\) and variance \(\sigma^2\). The variance is due to inherent factors in the process, which remain fairly stable over time. From historical data, it is known that \(\sigma = 0.3\). On the other hand, \(\mu\) may be set by adjusting various parameters in the process and hence may change to an unknown value fairly frequently. Thus, suppose that we give \(\mu\) with a prior normal distribution with mean 10 and standard deviation 0.03 A sample of 100 parts has mean 10.2. </p>
+	<ol class="sub">
+		<li>Find the posterior distribution of \(\mu\) given the data.</li>
+		<li>Construct the 95% Bayesian confidence interval.</li>
+		<li>Construct the classical \(z\) confidence interval at the 95% level.</li>
+	</ol>
+	<details>
+		<summary>Details:</summary>
+		<ol class="sub">
+			<li>Normal with mean 10.198 and standard deviation 0.0299.</li>
+			<li>\((10.14, 10.26)\)</li>
+			<li>\((10.14, 10.26)\)</li>
+		</ol>
+	</details>
+</div>
+
+<h4 id="bet">The Beta Distribution</h4>
+
+<p>Suppose that \(\bs{X} = (X_1, X_2, \ldots, X_n)\) is a random sample of size \(n\) from the  <a href="../special/Beta.html">beta distribution </a> with unknown left shape parameter \(a \in (0, \infty)\) and right shape parameter \(b = 1\).  The beta distribution is widely used to model random proportions and probabilities and other variables that take values in bounded intervals. Recall that the probability density function (given \(a\)) is
+\[ g(x \mid a) = a x^{a-1}, \quad x \in (0, 1) \]
+We denote the product of the sample values by \(W = X_1 X_2 \cdots X_n\).</p>
+
+<p>In our previous discussion of <a href="../point/Bayes.html#bet">Bayesian estimation</a>, we modeled \(a\) with a random variable \(A\) that has a <a href="../special/Gamma.html">gamma distribution</a>. This family of distributions is conjugate for \(a\). Specifically, if the prior distribution of \(A\) is gamma with shape parameter \(k \gt 0\) and rate parameter \(r \gt 0\), then the posterior distribution of \(A\) given \(\bs{X}\) is also gamma, with shape parameter \(k + n\) and rate parameter \(r - \ln(W)\). It follows that a \(1 - \alpha\) level Bayesian confidence interval for \(A\) is \(\left[U_{\alpha/2}(w), U_{1-\alpha/2}(w)\right]\) where \(U_p(w)\) is the quantile of order \(p\) for the posterior gamma distribution. In the special case that \(k = 1\), the prior distribution of \(a\) is exponential with rate parameter \(r\).</p>
+
+<div class="unit" id="bet1">
+	<p class="math">Suppose that the resistance of an electrical component (in Ohms) has the beta distribution with unknown left parameter \(a\) and right parameter \(b = 1\). We believe that \(a\) may be about 10, so we give \(a\) the prior gamma distribution with shape parameter 10 and rate parameter 1. We sample 20 components and observe the data 
+	\[0.98, 0.93, 0.99, 0.89, 0.79, 0.99, 0.92, 0.97, 0.88, 0.97, 0.86, 0.84, 0.96, 0.97, 0.92, 0.90, 0.98, 0.96, 0.96, 1.00\]</p>
+	<ol class="sub">
+		<li>Find the posterior distribution of \(a\).</li>
+		<li>Construct the 95% Bayesian confidence interval for \(a\).</li>
+	</ol>
+	<details>
+		<summary>Details:</summary>
+		<ol class="sub">
+			<li>Gamma with shape parameter 30 and rate parameter 2.424.</li>
+			<li>\((8.349, 17.180)\)</li>
+		</ol>
+	</details>
+</div>
+
+<h4 id="par">The Pareto Distribution</h4>
+
+<p>Suppose that \(\bs{X} = (X_1, X_2, \ldots, X_n)\) is a random sample of size \(n\) from the  <a href="../special/Pareto.html">Pareto distribution</a> with shape parameter \(a \in (0, \infty)\) and scale parameter \(b = 1\).  The Pareto distribution is used to model certain financial variables and other variables with heavy-tailed distributions, and is named for <a href="JavaScript:openAncillary('../biographies/Pareto.html')" class="ancillary">Vilfredo Pareto</a>. Recall that the probability density function (given \(a\)) is
+\[ g(x \mid a) = \frac{a}{x^{a+1}}, \quad x \in [1, \infty) \]
+We denote the product of the sample values by \(W = X_1 X_2 \cdots X_n\).</p>
+
+<p>In our previous discussion of <a href="../point/Bayes.html#par">Bayesian estimation</a>, we showed modeled \(a\) with a random variable \(A\) that has a <a href="../special/Gamma.html">gamma distribution</a>. This family of distributions is conjugate for \(A\). Specifically, if the prior distribution of \(A\) is gamma with shape parameter \(k \gt 0\) and rate parameter \(r \gt 0\), then the posterior distribution of \(A\) given \(\bs{X}\) is also gamma, with shape parameter \(k + n\) and rate parameter \(r + \ln(W)\). It follows that a \(1 - \alpha\) level Bayesian confidence interval for \(a\) is \(\left[U_{\alpha/2}(w), U_{1-\alpha/2}(w)\right]\) where \(U_p(w)\) is the quantile of order \(p\) for the posterior gamma distribution. In the special case that \(k = 1\), the prior distribution of \(a\) is exponential with rate parameter \(r\).</p>
+
+<div class="unit" id="par1">
+	<p class="math">Suppose that a financial variable has the Pareto distribution with unknown shape parameter \(a\) and scale parameter \(b = 1\). We believe that \(a\) may be about 4, so we give \(a\) the prior gamma distribution with shape parameter 4 and rate parameter 1. A random sample of size 20 from the variable gives the data 
+	\[1.09, 1.13, 2.00, 1.43, 1.26, 1.00, 1.36, 1.03, 1.46, 1.18, 2.16, 1.16, 1.22, 1.06, 1.28, 1.23, 1.11, 1.03, 1.04, 1.05\]</p>
+	<ol class="sub">
+		<li>Find the posterior distribution of \(a\).</li>
+		<li>Construct the 95% Bayesian confidence interval for \(a\).</li>
+	</ol>
+	<details>
+		<summary>Details:</summary>
+		<ol class="sub">
+			<li>Gamma with shape parameter 24 and rate parameter 5.223.</li>
+			<li>\((2.944, 6.608)\)</li>
+		</ol>
+	</details>
+</div>
+
+<footer>
+	<ol class="map">
+		<li class="parent"><a href="../index.html">Random</a></li>
+		<li class="parent"><a href="index.html">7. Set Estimation</a></li>
+		<li class="child"><a href="Introduction.html" title="Introduction">1</a></li>
+		<li class="child"><a href="Normal.html" title="Estimation in the Normal Model">2</a></li>
+		<li class="child"><a href="Bernoulli.html" title="Estimation in the Bernoulli Model">3</a></li>
+		<li class="child"><a href="BivariateNormal.html" title="Estimation in the Two-Sample Normal Model">4</a></li>
+		<li class="current">5</li>
+		<li class="details"><button type="button" title="Expand Details" onclick="expandDetails(true);"><img src="../icons/Plus.svg" alt="Expand"></button></li>
+		<li class="details"><button type="button" title="Contract Details" onclick="expandDetails(false);"><img src="../icons/Minus.svg" alt="Contract"></button></li>
+	</ol>
+	<ul class="map">
+		<li class="sister"><a href="JavaScript:openAncillary('../apps/index.html')" class="ancillary">Apps</a></li>
+		<li class="sister"><a href="JavaScript:openAncillary('../data/index.html')" class="ancillary">Data Sets</a></li>
+		<li class="child"><a href="JavaScript:openAncillary('../biographies/index.html')" class="ancillary"> Biographies</a></li>
+	</ul>
+</footer>
+
+<script>getReferences();</script>
+
+</body>
+</html>

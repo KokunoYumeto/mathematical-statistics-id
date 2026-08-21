@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="utf-8">
+	<title>Random Samples</title>
+	<meta name="author" content="Kyle Siegrist">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="keywords" content="probability, statistics, random sample, sample mean, law of large numbers, central limit theorem, sample variance, sample covariance, order statistics">
+	<link rel="icon" href="../icons/Icon.svg" type="image/svg">
+	<link rel="stylesheet" href="../Screen.css" type="text/css" media="screen">
+	<link rel="contents" href="../index.html">
+	<link rel="previous" href="../special/index.html">
+	<link rel="next" href="../point/index.html">
+	<script src="../Basic.js"></script>
+</head>
+
+<body>
+
+<header>
+	<ol class="map">
+		<li class="parent"><a href="../index.html">Random</a></li>
+		<li class="child"><a href="../foundations/index.html" title="Foundations">0</a></li>
+		<li class="child"><a href="../prob/index.html" title="Probability Spaces">1</a></li>
+		<li class="child"><a href="../dist/index.html" title="Distributions">2</a></li>
+		<li class="child"><a href="../expect/index.html" title="Expected Value">3</a></li>
+		<li class="child"><a href="../special/index.html" title="Special Distributions">4</a></li>
+		<li class="current">5</li>
+		<li class="child"><a href="../point/index.html" title="Point Estimation">6</a></li>
+		<li class="child"><a href="../interval/index.html" title="Set Estimation">7</a></li>
+		<li class="child"><a href="../hypothesis/index.html" title="Hypothesis Testing">8</a></li>
+		<li class="child"><a href="../buffon/index.html" title="Geometric Models">9</a></li>
+		<li class="child"><a href="../bernoulli/index.html" title="Bernoulli Trials">10</a></li>
+		<li class="child"><a href="../urn/index.html" title="Finite Sampling Models">11</a></li>
+		<li class="child"><a href="../games/index.html" title="Games of Chance">12</a></li>
+		<li class="child"><a href="../poisson/index.html" title="The Poisson Process">13</a></li>
+		<li class="child"><a href="../renewal/index.html" title="Renewal Processes">14</a></li>
+		<li class="child"><a href="../markov/index.html" title="Markov Processes">15</a></li>
+		<li class="child"><a href="../martingales/index.html" title="Martingales">16</a></li>
+		<li class="child"><a href="../brown/index.html" title="Brownian Motion">17</a></li>
+	</ol>
+	<h1>5. Random Samples</h1>
+</header>
+
+<h4>Summary</h4>
+
+<p>A random sample is a sequence of independent, identically distributed (IID) random variables. The term <dfn>random sample</dfn> is ubiquitous in mathematical statistics while the abbreviation <dfn>IID</dfn> is just as common in basic probability, and thus this chapter can be viewed as a bridge between the two subjects. Much of basic probability and mathematical statistics deals with random variables constructed from random samples&mdash;the sample mean, sample variance, sample covariance, and order statistics are particularly important examples.  Moreover, the two fundamental theorems of probability, the law of large numbers and the central limit theorem, concern the convergence of the sample mean.</p>
+
+<p>Several topics in this chapter are explored from two points of view&mdash;first from a descriptive point of view (without the assumption that the data are generated from an underlying probability distribution) and the second from a probabilistic point of view (in which the variables are random variables). These topics include the sample mean, the sample variance, order statistics, and sample covariance, correlation and regression.</p>
+
+<h4>Topics</h4>
+
+<ol>
+	<li><a href="Introduction.html">Introduction</a></li>
+	<li><a href="Mean.html">The Sample Mean</a></li>
+	<li><a href="LLN.html">The Law of Large Numbers</a></li>
+	<li><a href="CLT.html">The Central Limit Theorem</a></li>
+	<li><a href="Variance.html">The Sample Variance</a></li>
+	<li><a href="OrderStatistics.html">Order Statistics</a></li>
+	<li><a href="Covariance.html">Sample Correlation and Regression</a></li>
+	<li><a href="Normal.html">Special Properties of Normal Samples</a></li>
+</ol>
+
+<h4>Apps</h4>
+
+<ul class="ancillary">
+	<li><a href="JavaScript:openAncillary('../apps/Histogram.html')" class="ancillary">Histogram App</a></li>
+	<li><a href="JavaScript:openAncillary('../apps/ErrorFunction.html')" class="ancillary">Error Function App</a></li>
+	<li><a href="JavaScript:openAncillary('../apps/Dice.html')" class="ancillary">Dice Experiment</a></li>
+	<li><a href="JavaScript:openAncillary('../apps/SampleMean.html')" class="ancillary">Sample Mean Experiment</a></li>
+	<li><a href="JavaScript:openAncillary('../apps/OrderStatistic.html')" class="ancillary">Order Statistic Experiment</a></li>
+	<li><a href="JavaScript:openAncillary('../apps/ProbabilityPlot.html')" class="ancillary">Probability Plot Experiment</a></li>
+	<li><a href="JavaScript:openAncillary('../apps/Scatterplot.html')" class="ancillary">Interactive Scatterplot</a></li>
+</ul>
+
+<h4>Sources and Resources</h4>
+
+<ul>
+	<li><a href="http://www.google.com/search?q=Introduction+to+Probability+and+Mathematical+Statistics,+Bain,+Engelhardt" target="external" class="external">Introduction to Probability and Mathematical Statistics</a>. Lee J Bain and Max Engelhardt</li>
+	<li><a href="http://www.google.com/search?q=Statistical+Inference+Casella+Berger" target="external" class="external">Statistical Inference</a>. George Casella and Rober L Berger</li>
+	<li><a href="http://www.google.com/search?q=Statistics,Freedman,Pisani,Purves" target="external" class="external">Statistics</a>. David Freedman, Robert Pisani and Robert Purves</li>
+	<li><a href="http://www.google.com/search?q=An+Introduction+to+Mathematical+Statistics,Larsen,Marx" target="external" class="external">An Introduction to Mathematical Statistics and Its Applications</a>. Richard J Larsen and Morris L Marx</li>
+	<li><a href="http://www.google.com/search?q=Elementary+Statistics,Triola" target="external" class="external">Elementary Statistics</a>. Mario Triola</li>
+	<li><a href="http://www.google.com/search?q=Introductory+Statistics,Weiss" target="external" class="external">Introductory Statistics</a>. Neil A Weiss</li>
+	<li><a href="https://en.wikipedia.org/wiki/Portal:Statistics" class="external" target="external">Wikipedia statistics portal</a></li>
+	<li><a href="http://mathworld.wolfram.com/topics/ProbabilityandStatistics.html" class="external" target="external">Wolfram MathWorld articles on probability and statistics</a></li>
+</ul>
+
+<h4>Quote</h4>
+
+<ul class="quote">
+	<li><q>There are three kinds of lies: lies, damned lies, and statistics.</q>&mdash;Attributed to Benjamin Disraeli in <cite>The Autobiography of Mark Twain</cite> by <a href="JavaScript:openAncillary('../biographies/Clemens.html')" class="ancillary">Samuel Clemens</a>.</li>
+</ul>
+
+<footer>
+	<ol class="map">
+		<li class="parent"><a href="../index.html">Random</a></li>
+		<li class="child"><a href="../foundations/index.html" title="Foundations">0</a></li>
+		<li class="child"><a href="../prob/index.html" title="Probability Spaces">1</a></li>
+		<li class="child"><a href="../dist/index.html" title="Distributions">2</a></li>
+		<li class="child"><a href="../expect/index.html" title="Expected Value">3</a></li>
+		<li class="child"><a href="../special/index.html" title="Special Distributions">4</a></li>
+		<li class="current">5</li>
+		<li class="child"><a href="../point/index.html" title="Point Estimation">6</a></li>
+		<li class="child"><a href="../interval/index.html" title="Set Estimation">7</a></li>
+		<li class="child"><a href="../hypothesis/index.html" title="Hypothesis Testing">8</a></li>
+		<li class="child"><a href="../buffon/index.html" title="Geometric Models">9</a></li>
+		<li class="child"><a href="../bernoulli/index.html" title="Bernoulli Trials">10</a></li>
+		<li class="child"><a href="../urn/index.html" title="Finite Sampling Models">11</a></li>
+		<li class="child"><a href="../games/index.html" title="Games of Chance">12</a></li>
+		<li class="child"><a href="../poisson/index.html" title="The Poisson Process">13</a></li>
+		<li class="child"><a href="../renewal/index.html" title="Renewal Processes">14</a></li>
+		<li class="child"><a href="../markov/index.html" title="Markov Processes">15</a></li>
+		<li class="child"><a href="../martingales/index.html" title="Martingales">16</a></li>
+		<li class="child"><a href="../brown/index.html" title="Brownian Motion">17</a></li>
+	</ol>
+	<ul class="map">
+		<li class="sister"><a href="JavaScript:openAncillary('../apps/index.html')" class="ancillary">Apps</a></li>
+		<li class="sister"><a href="JavaScript:openAncillary('../data/index.html')" class="ancillary">Data Sets</a></li>
+		<li class="child"><a href="JavaScript:openAncillary('../biographies/index.html')" class="ancillary"> Biographies</a></li>
+	</ul>
+</footer>
+
+</body>
+</html>

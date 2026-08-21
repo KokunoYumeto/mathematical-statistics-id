@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="utf-8">
+	<title>Tests in the Two-Sample Normal Model</title>
+	<meta name="author" content="Kyle Siegrist">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="keywords" content="probability, statistics, hypothesis test, two-sample normal model, bivariate normal model, difference of means, ratio of variances, student t distribution, chi-square distribution, F distribution">
+	<link rel="icon" href="../icons/Icon.svg" type="image/svg">
+	<link rel="stylesheet" href="../Screen.css" type="text/css" media="screen">
+	<script src="../Basic.js"></script>
+	<script src="../../MathJax/tex-svg.js" id="MathJax-script" async></script>
+</head>
+
+<body>
+
+<div class="latex">
+	\(\newcommand{\R}{\mathbb{R}}\) 
+	\(\newcommand{\N}{\mathbb{N}}\)
+	\(\newcommand{\Z}{\mathbb{Z}}\)
+	\(\newcommand{\P}{\mathbb{P}}\)
+	\(\newcommand{\E}{\mathbb{E}}\)
+	\(\newcommand{\var}{\text{var}}\)
+	\(\newcommand{\sd}{\text{sd}}\)
+	\(\newcommand{\bs}{\boldsymbol}\)
+	\(\newcommand{\cov}{\text{cov}}\)
+</div>
+
+<header>
+	<ol class="map">
+		<li class="parent"><a href="../index.html">Random</a></li>
+		<li class="parent"><a href="index.html">8. Hypothesis Testing</a></li>
+		<li class="child"><a href="Introduction.html" title="Introduction">1</a></li>
+		<li class="child"><a href="Normal.html" title="Tests in the Normal Model">2</a></li>
+		<li class="child"><a href="Bernoulli.html" title="Tests in the Bernoulli Model">3</a></li>
+		<li class="current">4</li>
+		<li class="child"><a href="Likelihood.html" title="Likelihood Ratio Tests">5</a></li>
+		<li class="child"><a href="ChiSquare.html" title="Chi-Square Tests">6</a></li>
+		<li class="details"><button type="button" title="Expand Details" onclick="expandDetails(true);"><img src="../icons/Plus.svg" alt="Expand"></button></li>
+		<li class="details"><button type="button" title="Contract Details" onclick="expandDetails(false);"><img src="../icons/Minus.svg" alt="Contract"></button></li>
+	</ol>
+	<h2>4. Tests in the Two-Sample Normal Model</h2>
+</header>
+
+<p>In this section, we will study hypothesis tests in the two-sample normal model and in the bivariate normal model. This section parallels the section on <a href="../interval/BivariateNormal.html">Estimation in the Two Sample Normal Model</a> in the chapter on <a href="../interval/index.html">Interval Estimation</a>.</p>
+
+<h3 id="two">The Two-Sample Normal Model</h3>
+
+<p>Suppose that \(\bs{X} = (X_1, X_2, \ldots, X_n)\) is a random sample of size \(m\) from the <a href="../special/Normal.html">normal distribution</a> with <a href="../expect/Properties.html">mean</a> \(\mu\) and standard deviation \(\sigma\), and that \(\bs{Y} = (Y_1, Y_2, \ldots, Y_n)\) is a random sample of size \(n\) from the normal distribution with mean \(\nu\) and standard deviation \(\tau\). Moreover, suppose that the samples \(\bs{X}\) and \(\bs{Y}\) are <a href="../prob/Independence.html">independent</a>.</p>
+
+<p>This type of situation arises frequently when the random variables represent a measurement of interest for the objects of the population, and the samples correspond to two different treatments. For example, we might be interested in the blood pressure of a certain population of patients. The \(\bs{X}\) vector records the blood pressures of a control sample, while the \(\bs{Y}\) vector records the blood pressures of the sample receiving a new drug. Similarly, we might be interested in the yield of an acre of corn. The \(\bs{X}\) vector records the yields of a sample receiving one type of fertilizer, while the \(\bs{Y}\) vector records the yields of a sample receiving a different type of fertilizer.</p>
+
+<p>Usually our interest is in a comparison of the parameters (either the mean or variance) for the two sampling distributions. In this section we will construct tests for the for the difference of the means and the ratio of the variances. As with previous estimation problems we have studied, the procedures vary depending on what parameters are known or unknown. Also as before, key elements in the construction of the tests are the <a href="../sample/Mean.html">sample means</a> and <a href="../sample/Variance.html">sample variances</a> and the <a href="../sample/Normal.html">special properties</a> of these statistics when the sampling distribution is normal.</p>
+
+<div class="unit" id="dfn1">
+	<p class="dfn">We will use the following notation for the sample mean and sample variance of a generic sample \(\bs{U} = (U_1, U_2, \ldots, U_k)\):
+	\[ M(\bs{U}) = \frac{1}{k} \sum_{i=1}^k U_i, \quad S^2(\bs{U}) = \frac{1}{k - 1} \sum_{i=1}^k [U_i - M(\bs{U})]^2 \]</p>
+</div>
+
+<h4 id="nor">Tests of the Difference in the Means with Known Standard Deviations</h4>
+
+<p>Our first discussion concerns tests for the difference in the means \(\nu - \mu\) under the assumption that the standard deviations \(\sigma\) and \(\tau\) are known. This is often, but not always, an unrealistic assumption. In some statistical problems, the variances are stable, and are at least approximately known, while the means may be different because of different treatments. Also this is a good place to start because the analysis is fairly easy.</p>
+
+<div class="unit" id="nor1">
+	<p class="math">For a conjectured difference of the means \( \delta \in \R \), define the test statistic
+	\[ Z = \frac{[M(\bs{Y}) - M(\bs{X})] - \delta}{\sqrt{\sigma^2 / m + \tau^2 / n}} \]</p>
+	<ol class="sub">
+		<li>If \( \nu - \mu = \delta \) then \( Z \) has the standard normal distribution.</li>
+		<li>If \( \nu - \mu \ne \delta \) then \(Z\) has the normal distribution with mean \([(\nu - \mu) - \delta] \big/ {\sqrt{\sigma^2 / m + \tau^2 / n}}\) and variance 1.</li>
+	</ol>
+	<details>
+		<summary>Details:</summary>
+		<p>From properties of normal samples, \( M(\bs{X}) \) has a normal distribution with mean \( \mu \) and variance \( \sigma^2 / m \) and similarly \( M(\bs{Y}) \) has a normal distribution with mean \( \nu \) and variance \( \tau^2 / n \). Since the samples are independent, \( M(\bs{X}) \) and \( M(\bs{Y}) \) are independent, so \( M(\bs{Y}) - M(\bs{X}) \) has a normal distribution with mean \( \nu - \mu \) and variance \( \sigma^2 / m + \sigma^2 / n \). The final result then follows since \( Z \) is a linear function of \( M(\bs{Y}) - M(\bs{X}) \).</p>
+	</details>
+</div>
+
+<p>Of course (b) actually subsumes (a), but we separate them because the two cases play an impotrant role in the hypothesis tests. In part (b), the non-zero mean can be viewed as a <dfn>non-centrality parameter</dfn>.</p>
+
+<p>As usual, for \(p \in (0, 1)\), let \(z(p)\) denote the <a href="../dist/CDF.html#qnt">quantile</a> of order \(p\) for the standard normal distribution. For selected values of \(p\), \(z(p)\) can be obtained from the <a href="JavaScript:openAncillary('../apps/QuantileApp.html')" class="ancillary">quantile app</a> or from most statistical software packages. Recall also by symmetry that \(z(1 - p) = -z(p)\).</p>
+
+<div class="unit" id="nor2">
+	<p class="math">For every \( \alpha \in (0, 1) \), the following tests have significance level \(\alpha\):</p>
+	<ol class="sub">
+		<li>Reject \(H_0: \nu - \mu = \delta\) versus \(H_1: \nu - \mu \ne \delta\) if and only if \(Z \lt -z(1 - \alpha / 2)\) or \(Z \gt z(1 - \alpha / 2)\) if and only if \( M(\bs{Y}) - M(\bs{X}) \gt \delta + z(1 - \alpha / 2) \sqrt{\sigma^2 / m + \tau^2 / n} \) or \( M(\bs{Y}) - M(\bs{X}) \lt \delta - z(1 - \alpha / 2) \sqrt{\sigma^2 / m + \tau^2 / n} \).</li>
+		<li>Reject \(H_0: \nu - \mu \ge \delta\) versus \(H_1: \nu - \mu \lt \delta\) if and only if \(Z \lt -z(1 - \alpha)\) if and only if \( M(\bs{Y}) - M(\bs{X}) \lt \delta - z(1 - \alpha) \sqrt{\sigma^2 / m + \tau^2 / n} \).</li>
+		<li>Reject \(H_0: \nu - \mu \le \delta\) versus \(H_1: \nu - \mu \gt \delta\) if and only if \(Z \gt z( 1 - \alpha)\) if and only if \( M(\bs{Y}) - M(\bs{X}) \gt \delta + z(1 - \alpha) \sqrt{\sigma^2 / m + \tau^2 / n} \).</li>
+	</ol>
+	<details>
+		<summary>Details:</summary>
+		<p>This follows the same logic that we have seen before. In part (a), \( H_0 \) is a simple hypothesis, and under this hypothesis \( Z \) has the standard normal distribution. Thus, if \( H_0 \) is true then the probability of falsely rejecting \( H_0 \) is \( \alpha \) by definition of the quantiles. In parts (b) and (c), \( H_0 \) specifies a range of values of \( \nu - \mu \), and under \( H_0 \), \( Z \) has a nonstandard normal distribution, by <a href="#nor1" class="ref"></a>. But the largest type 1 error probability is \( \alpha \) and occurs when \( \nu - \mu = \delta \). The decision rules in terms of \( M(\bs{Y}) - M(\bs{X}) \) are equivalent to those in terms of \( Z \) by simple algebra.</p>
+	</details>
+</div>
+
+<div class="unit" id="nor3">
+	<p class="math">For each of the tests above, we <em>fail</em> to reject \(H_0\) at significance level \(\alpha\) if and only if \(\delta\) is in the corresponding \(1 - \alpha\) level confidence interval.</p>
+	<ol class="sub">
+		<li>\( [M(\bs{Y}) - M(\bs{X})] - z(1 - \alpha / 2) \sqrt{\sigma^2 / m + \tau^2 / n} \le \delta \le [M(\bs{Y}) - M(\bs{X})] + z(1 - \alpha / 2) \sqrt{\sigma^2 / m + \tau^2 / n} \)</li>
+		<li>\( \delta \le [M(\bs{Y}) - M(\bs{X})] + z(1 - \alpha) \sqrt{\sigma^2 / m + \tau^2 / n} \)</li>
+		<li>\( \delta \ge [M(\bs{Y}) - M(\bs{X})] - z(1 - \alpha) \sqrt{\sigma^2 / m + \tau^2 / n} \)</li>
+	</ol>
+	<details>
+		<summary>Details:</summary>
+		<p>These results follow from <a href="#nor2" class="ref"></a>. In each case, we start with the inequality that corresponds to <em>not</em> rejecting the null hypothesis and solve for \( \delta \).</p>
+	</details>
+</div>
+
+<h4 id="stu">Tests of the Difference of the Means with Unknown Standard Deviations</h4>
+
+<p>Next we will construct tests for the difference in the means \(\nu - \mu\) under the more realistic assumption that the standard deviations \(\sigma\) and \(\tau\) are unknown. In this case, it is more difficult to find a suitable test statistic, but we can do the analysis in the special case that the standard deviations are the same. Thus, we will assume that \(\sigma = \tau\), and the common value \(\sigma\) is unknown. This assumption is reasonable if there is an inherent variability in the measurement variables that does not change even when different treatments are applied to the objects in the population.</p>  
+
+<div class="unit" id="stu0">
+	<p class="dfn">Recall that the <dfn>pooled estimate</dfn> of the common variance \(\sigma^2\) is the weighted average of the sample variances, with the degrees of freedom as the weight factors:
+	\[ S^2(\bs{X}, \bs{Y}) = \frac{(m - 1) S^2(\bs{X}) + (n - 1) S^2(\bs{Y})}{m + n - 2} \]
+	The statistic \( S^2(\bs{X}, \bs{Y}) \) is an unbiased and consistent estimator of the common variance \( \sigma^2 \).</p>
+</div>
+
+<div class="unit" id="stu1">
+	<p class="math">For a conjectured \( \delta \in \R \) define the test statistc
+	\[ T = \frac{[M(\bs{Y}) - M(\bs{X})] - \delta}{S(\bs{X}, \bs{Y}) \sqrt{1 / m + 1 / n}} \]</p>
+	<ol class="sub">
+		<li>If \( \nu - \mu = \delta \) then \( T \) has the <a href="../special/Student.html">\(t\) distribution</a> with \(m + n - 2\) degrees of freedom,</li>
+		<li>If \( \nu - \mu \ne \delta \) then \( T \) has a <a href="../special/Student.html#non">non-central \( t \) distribution</a> with \( m + n - 2 \) degrees of freedom and non-centrality parameter
+		\[ \frac{(\nu - \mu) - \delta}{\sigma \sqrt{1/m + 1 /n}} \]</li>
+	</ol>
+	<details>
+		<summary>Details:</summary>
+		<p>Part (b) actually subsumes part (a), since the ordinary \( t \) distribution is a special case of the non-central \( t \) distribution, with non-centrality parameter 0. With some basic algebra, we can write \( T \) in the form
+		\[ T = \frac{Z + a}{\sqrt{V \big/ (m + n - 2)}}\]
+		where \( Z \) is the standard score of \( M(\bs{Y}) - M(\bs{X}) \), \( a \) is the non-centrality parameter given in the theorem, and \( V = \frac{m + n - 2}{\sigma^2} S^2(\bs{X}, \bs{Y}) \). So \( Z \) has the standard normal distribution, \( V \) has the chi-square distribution with \( m + n - 2 \) degrees of freedom, and \( Z \) and \( V \) are independent. Thus by definition, \( T \) has the non-central \( t \) distribution with \( m + n - 2 \) degrees of freedom and non-centrality parameter \( a \).</p>
+	</details>
+</div>
+
+<p>As usual, for \(k \gt 0\) and \(p \in (0, 1)\), let \(t_k(p)\) denote the <a href="../dist/CDF.html#qnt">quantile</a> of order \(p\) for the \(t\) distribution with \(k\) degrees of freedom. For selected values of \(k\) and \(p\), values of \(t_k(p)\) can be computed from the <a href="JavaScript:openAncillary('../apps/QuantileApp.html')" class="ancillary">quantile app</a>, or from most statistical software packages. Recall also that, by symmetry, \(t_k(1 - p) = -t_k(p)\).</p>
+
+<div class="unit" id="stu2">
+	<p class="math">The following tests have significance level \(\alpha\):</p>
+	<ol class="sub">
+		<li>Reject \(H_0: \nu - \mu = \delta\) versus \(H_1: \nu - \mu \ne \delta\) if and only if \(T \lt -t_{m + n - 2}(1 - \alpha / 2)\) or \(T \gt t_{m + n - 2}(1 - \alpha / 2)\) if and only if \( M(\bs{Y}) - M(\bs{X}) \gt \delta + t_{m+n-2}(1 - \alpha / 2) \sqrt{\sigma^2 / m + \tau^2 / n} \) or \( M(\bs{Y}) - M(\bs{X}) \lt \delta - t_{m+n-2}(1 - \alpha / 2) \sqrt{\sigma^2 / m + \tau^2 / n} \)</li>
+		<li>Reject \(H_0: \nu - \mu \ge \delta\) versus \(H_1: \nu - \mu \lt \delta\) if and only if \(T \le -t_{m-n+2}(1 - \alpha)\) if and only if \( M(\bs{Y}) - M(\bs{X}) \lt \delta - t_{m+n-2}(1 - \alpha) \sqrt{\sigma^2 / m + \tau^2 / n} \)</li>
+		<li>Reject \(H_0: \nu - \mu \le \delta\) versus \(H_1: \nu - \mu \gt \delta\) if and only if \(T \ge t_{m-n+2}(1 - \alpha)\) if and only if \( M(\bs{Y}) - M(\bs{X}) \gt \delta + t_{m+n-2}(1 - \alpha) \sqrt{\sigma^2 / m + \tau^2 / n} \)</li>
+	</ol>
+	<details>
+		<summary>Details:</summary>
+		<p>This follows the same logic that we have seen before. In part (a), \( H_0 \) is a simple hypothesis, and under this hypothesis \( T \) has the \( t \) distribution with \( m + n - 2 \) degrees of freedom. Thus, if \( H_0 \) is true then the probability of falsely rejecting \( H_0 \) is \( \alpha \) by definition of the quantiles. In parts (b) and (c), \( H_0 \) specifies a range of values of \( \nu - \mu \), and under \( H_0 \), \( T \) has a non-central \( t \) distribution by <a href="#stu1" class="ref"></a>. But the largest type 1 error probability is \( \alpha \) and occurs when \( \nu - \mu = \delta \). The decision rules in terms of \( M(\bs{Y}) - M(\bs{X}) \) are equivalent to those in terms of \( T \) by simple algebra.</p>
+	</details>
+</div>
+
+<div class="unit" id="stu3">
+	<p class="math">For each of the tests above, we fail to reject \(H_0\) at significance level \(\alpha\) if and only if \(\delta\) is in the corresponding \(1 - \alpha\) level confidence interval.</p>
+	<ol class="sub">
+		<li>\( [M(\bs{Y}) - M(\bs{X})] - t_{m+n-2}(1 - \alpha / 2) \sqrt{\sigma^2 / m + \tau^2 / n} \le \delta \le [M(\bs{Y}) - M(\bs{X})] + t_{m+n-2}(1 - \alpha / 2) \sqrt{\sigma^2 / m + \tau^2 / n} \)</li>
+		<li>\( \delta \le [M(\bs{Y}) - M(\bs{X})] + t_{m+n-2}(1 - \alpha) \sqrt{\sigma^2 / m + \tau^2 / n} \)</li>
+		<li>\( \delta \ge [M(\bs{Y}) - M(\bs{X})] - t_{m+n-2}(1 - \alpha) \sqrt{\sigma^2 / m + \tau^2 / n} \)</li>
+	</ol>
+	<details>
+		<summary>Details:</summary>
+		<p>These results follow from <a href="#stu2" class="ref"></a>. In each case, we start with the inequality that corresponds to <em>not</em> rejecting the null hypothesis and solve for \( \delta \).</p>
+	</details>
+</div>
+
+<h4 id="fsh">Tests of the Ratio of the Variances</h4>
+
+<p>Next we will construct tests for the ratio of the distribution variances \(\tau^2 / \sigma^2\). So the basic assumption is that the variances, and of course the means  \(\mu\) and \(\nu\) are unknown.</p>
+
+<div class="unit" id="fsh1">
+	<p class="math">For a conjectured \( \rho \in (0, \infty) \), define the test statistics
+	\[ F = \frac{S^2(\bs{X})}{S^2(\bs{Y})} \rho \]</p>
+	<ol class="sub">
+		<li>If \( \tau^2 / \sigma^2 = \rho \) then \( F \) has the <a href="../special/Fisher.html">\(F\) distribution</a> with \(m - 1\) degrees of freedom in the numerator and \(n - 1\) degrees of freedom in the denominator.</li>
+		<li>If \( \tau^2 / \sigma^2 \ne \rho \) then \( F \) has a scaled \( F \) distribution with \( m - 1 \) degrees of freedom in the numerator, \( n - 1 \) degrees of freedom in the denominator, and scale factor \( \rho \frac{\sigma^2}{\tau^2} \).</li>
+	</ol>
+	<details>
+		<summary>Details:</summary>
+		<p>Part (b) actually subsumes part (a) when \( \rho = \tau^2 / \rho^2 \), so we will just prove (b). Note that 
+		\[ F = \left(\frac{S^2(\bs{X}) \big/ \sigma^2}{S^2(\bs{Y}) \big/ \tau^2}\right) \rho \frac{\sigma^2}{\tau^2} \]
+		But \( S^2(\bs{X}) \big/ \sigma^2 \) has the chi-square distribution with \( m - 1 \) degrees of freedom, \( S^2(\bs{Y}) \big/ \tau^2 \) has the chi-square distribution with \( n - 1 \) degrees of freedom, and the variables are independent. Hence the ratio has the \( F \) distribution with \( m - 1 \) degrees of freedom in the numerator and \( n - 1 \) degrees of freedom in the denominator</p>
+	</details>
+</div>
+
+<div class="unit" id="fsh2">
+	<p class="math">The following tests have significance level \( \alpha \):</p>
+	<ol class="sub">
+		<li>Reject \(H_0: \tau^2 / \sigma^2 = \rho\) versus \(H_1: \tau^2 / \sigma^2 \ne \rho\) if and only if \(F \gt f_{m-1, n-1}(1 - \alpha / 2)\) or \(F \lt f_{m-1, n-1}(\alpha / 2 )\).</li>
+		<li>Reject \(H_0: \tau^2 / \sigma^2 \le \rho\) versus \(H_1: \tau^2 / \sigma^2 \gt \rho\) if and only if \(F \lt f_{m-1, n-1}(\alpha)\).</li>
+		<li>Reject \(H_0: \tau^2 / \sigma^2 \ge \rho\) versus \(H_1: \tau^2 / \sigma^2 \lt \rho\) if and only if \(F \gt f_{m-1, n-1}(1 - \alpha)\).</li>
+	</ol>
+	<details>
+		<summary>Details:</summary>
+		<p>The proof is the usual argument. In part (a), \( H_0 \) is a simple hypothesis, and under this hypothesis \( F \) has the \( f \) distribution with \( m - 1 \) degrees of freedom in the numerator \( n - 1 \) degrees of freedom in the denominator. Thus, if \( H_0 \) is true then the probability of falsely rejecting \( H_0 \) is \( \alpha \) by definition of the quantiles. In parts (b) and (c), \( H_0 \) specifies a range of values of \( \tau^2 / \sigma^2 \), and under \( H_0 \), \( F \) has a scaled \( F \) distribution by thoerem <a href="#fsh1" class="ref"></a>. But the largest type 1 error probability is \( \alpha \) and occurs when \( \tau^2 / \sigma^2 = \rho \). </p>
+	</details>
+</div>
+
+<div class="unit" id="fsh3">
+	<p class="math">For each of the tests above, we <em>fail</em> to reject \(H_0\) at significance level \(\alpha\) if and only if \(\rho_0\) is in the corresponding \(1 - \alpha\) level confidence interval.</p>
+	<ol class="sub">
+		<li>\( \frac{S^2(\bs{Y})}{S^2(\bs{X})} F_{m-1,n-1}(\alpha / 2) \le \rho \le \frac{S^2(\bs{Y})}{S^2(\bs{X})} F_{m-1,n-1}(1 - \alpha / 2) \)</li>
+		<li>\(\rho \le \frac{S^2(\bs{Y})}{S^2(\bs{X})} F_{m-1,n-1}(\alpha) \)</li>
+		<li>\( \rho \ge \frac{S^2(\bs{Y})}{S^2(\bs{X})} F_{m-1,n-1}(1 - \alpha) \)</li>
+	</ol>
+	<details>
+		<summary>Details:</summary>
+		<p>These results follow from <a href="#stu2" class="ref"></a>. In each case, we start with the inequality that corresponds to <em>not</em> rejecting the null hypothesis and solve for \( \rho \).</p>
+	</details>
+</div>
+
+<h3 id="biv">Tests in the Bivariate Normal Model</h3>
+
+<p>In this subsection, we consider a model that is superficially similar to the two-sample normal model, but is actually much simpler. Suppose that
+\[ ((X_1, Y_1), (X_2, Y_2), \ldots, (X_n, Y_n)) \]
+is a random sample of size \(n\) from the <a href="../special/MultiNormal.html">bivariate normal distribution</a> of \((X, Y)\) with \(\E(X) = \mu\), \(\E(Y) = \nu\), \(\var(X) = \sigma^2\), \(\var(Y) = \tau^2\), and \(\cov(X, Y) = \delta\).</p>
+
+<p>Thus, instead of a <em>pair of samples</em>, we have a <em>sample of pairs</em>. The fundamental difference is that in this model, variables \( X \) and \( Y \) are measured on the <em>same</em> objects in a sample drawn from the population, while in the previous model, variables \( X \) and \( Y \) are measured on two distinct samples drawn from the population. The bivariate model arises, for example, in <dfn>before and after experiments</dfn>, in which a measurement of interest is recorded for a sample of \(n\) objects from the population, both before and after a treatment. For example, we could record the blood pressure of a sample of \(n\) patients, before and after the administration of a certain drug.</p>
+
+<p>We will use our usual notation for the sample means and variances of \(\bs{X} = (X_1, X_2, \ldots, X_n)\) and \(\bs{Y} = (Y_1, Y_2, \ldots, Y_n)\) in definition <a href="#dfn1" class="ref"></a>. Recall also that the <a href="../sample/Covariance.html">sample covariance</a> of \( (\bs{X}, \bs{Y}) \) is
+\[ S(\bs{X}, \bs{Y}) = \frac{1}{n - 1} \sum_{i=1}^n [X_i - M(\bs{X})][Y_i - M(\bs{Y})] \]
+(not to be confused with the pooled estimate of the standard deviation in definition <a href="#stu0" class="ref"></a> ).</p>
+
+<div class="unit" id="biv1">
+	<p class="math">The sequence of differences \(\bs{Y} - \bs{X} = (Y_1 - X_1, Y_2 - X_2, \ldots, Y_n - X_n)\) is a random sample of size \(n\) from the distribution of \(Y - X\). The sampling distribution is normal with</p>
+	<ol class="sub">
+		<li> \(\E(Y - X) = \nu - \mu\)</li>
+		<li>\(\var(Y - X) = \sigma^2 + \tau^2 - 2 \, \delta\)</li>
+	</ol>
+</div>
+
+<div class="unit" id="biv2">
+	<p class="math">The sample mean and variance of the sample of differences are</p>
+	<ol class="sub">
+		<li>\(M(\bs{Y} - \bs{X}) = M(\bs{Y}) - M(\bs{X})\)</li>
+		<li>\(S^2(\bs{Y} - \bs{X}) = S^2(\bs{X}) + S^2(\bs{Y}) - 2 \, S(\bs{X}, \bs{Y})\)</li>
+	</ol>
+</div>
+
+<p>The sample of differences \(\bs{Y} - \bs{X}\) fits the normal model for a single variable. The section on <a href="Normal.html">tests in the mormal ,odel</a> could be used to perform tests for the distribution mean \(\nu - \mu \) and the distribution variance \(\sigma^2 + \tau^2 - 2  \delta\).</p>
+
+<h3 id="exe">Computational Exercises</h3>
+
+<div class="unit" id="exe1">
+	<p class="math">A new drug is being developed to reduce a certain blood chemical. A sample of 36 patients are given a placebo while a sample of 49 patients are given the drug. The statistics (in mg) are \(m_1 = 87\), \(s_1\ = 4\), \(m_2 = 63\), \(s_2 = 6\). Test the following at the 10% significance level: </p>
+	<ol class="sub">
+		<li>\(H_0: \sigma_1 = \sigma_2\) versus \(H_1: \sigma_1 \ne \sigma_2\).</li>
+		<li>\(H_0: \mu_1 \le \mu_2\) versus \(H_1: \mu_1 \gt \mu_2\) (assuming that \(\sigma_1 = \sigma_2\)).</li>
+		<li>Based on (b), is the drug effective?</li>
+	</ol>
+	<details>
+		<summary>Details:</summary>
+		<ol class="sub">
+			<li>Test statistic 0.4, critical values 0.585, 1.667. Reject \(H_0\).</li>
+			<li>Test statistic 1.0, critical values \(\pm 1.6625\). Fail to reject \(H_0\).</li>
+			<li>Probably not</li>
+		</ol>
+	</details>
+</div>
+
+<div class="unit" id="exe2">
+	<p class="math">A company claims that an herbal supplement improves intelligence. A sample of 25 persons are given a standard IQ test before and after taking the supplement. The before and after statistics are \(m_1 = 105\), \(s_1 = 13\), \(m_2 = 110\), \(s_2 = 17\), \(s_{1, \, 2} = 190\). At the 10% significance level, do you believe the company's claim? </p>
+	<details>
+		<summary>Details:</summary>
+		<p>Test statistic 2.8, critical value 1.3184. Reject \(H_0\).</p>
+	</details>
+</div>
+
+<div class="unit" id="exe3">
+	<p class="stat">In <a href="JavaScript:openAncillary('../data/Fisher.html')" class="ancillary">Fisher's iris data</a>, consider the petal length variable for the samples of Versicolor and Virginica irises. Test the following at the 10% significance level: </p>
+	<ol class="sub">
+		<li>\(H_0: \sigma_1 = \sigma_2\) versus \(H_1: \sigma_1 \ne \sigma_2\).</li>
+		<li>\(H_0: \mu_1 \le \mu_2\) versus \(\mu_1 \gt \mu_2\) (assuming that \(\sigma_1 = \sigma_2\)).</li>
+	</ol>
+	<details>
+		<summary>Details:</summary>
+		<ol class="sub">
+			<li>Test statistic 1.1, critical values 0.6227, 1.6072.  Fail to reject \(H_0\).</li>
+			<li>Test statistic \(-11.4\), critical value \(-1.6602\). Reject \(H_0\).</li>
+		</ol>
+	</details>
+</div>
+
+<div class="unit" id="exe4">
+	<p class="math">A plant has two machines that produce a circular rod whose diameter (in cm) is critical. A sample of 100 rods from the first machine as mean 10.3 and standard deviation 1.2. A sample of 100 rods from the second machine has mean 9.8 and standard deviation 1.6. Test the following hypotheses at the 10% level. </p>
+	<ol class="sub">
+		<li>\(H_0: \sigma_1 = \sigma_2\) versus \(H_1: \sigma_1 \ne \sigma_2\).</li>
+		<li>\(H_0: \mu_1 = \mu_2\) versus \(H_1: \mu_1 \ne \mu_2\) (assuming that \(\sigma_1 = \sigma_2\)).</li>
+	</ol>
+	<details>
+		<summary>Details:</summary>
+		<ol class="sub">
+			<li>Test statistic 0.56, critical values 0.7175, 1.3942. Reject \(H_0\).</li>
+			<li>Test statistic \(-4.97\), critical values \(\pm 1.645\). Reject \(H_0\).</li>
+		</ol>
+	</details>
+</div>
+
+<footer>
+	<ol class="map">
+		<li class="parent"><a href="../index.html">Random</a></li>
+		<li class="parent"><a href="index.html">8. Hypothesis Testing</a></li>
+		<li class="child"><a href="Introduction.html" title="Introduction">1</a></li>
+		<li class="child"><a href="Normal.html" title="Tests in the Normal Model">2</a></li>
+		<li class="child"><a href="Bernoulli.html" title="Tests in the Bernoulli Model">3</a></li>
+		<li class="current">4</li>
+		<li class="child"><a href="Likelihood.html" title="Likelihood Ratio Tests">5</a></li>
+		<li class="child"><a href="ChiSquare.html" title="Chi-Square Tests">6</a></li>
+		<li class="details"><button type="button" title="Expand Details" onclick="expandDetails(true);"><img src="../icons/Plus.svg" alt="Expand"></button></li>
+		<li class="details"><button type="button" title="Contract Details" onclick="expandDetails(false);"><img src="../icons/Minus.svg" alt="Contract"></button></li>
+	</ol>
+	<ul class="map">
+		<li class="sister"><a href="JavaScript:openAncillary('../apps/index.html')" class="ancillary">Apps</a></li>
+		<li class="sister"><a href="JavaScript:openAncillary('../data/index.html')" class="ancillary">Data Sets</a></li>
+		<li class="child"><a href="JavaScript:openAncillary('../biographies/index.html')" class="ancillary"> Biographies</a></li>
+	</ul>
+</footer>
+
+<script>getReferences();</script>
+
+</body>
+</html>

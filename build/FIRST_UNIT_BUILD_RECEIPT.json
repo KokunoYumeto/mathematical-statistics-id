@@ -1,0 +1,620 @@
+{
+  "bounded_text_corrections": [
+    {
+      "new": "Secara teknis, suatu <dfn>statistik</dfn> \\(w = w(\\bs x)\\) adalah fungsi teramati dari hasil eksperimen \\(\\bs x\\).",
+      "old": "Secara teknis, suatu <dfn>statistik</dfn> \\(w = w(\\bs x)\\) adalah fungsi yang dapat diamati dari hasil \\(\\bs x\\) eksperimen tersebut.",
+      "page": "random/sample/Introduction.html",
+      "replacements": 1
+    },
+    {
+      "new": "Bagaimana kita mengetahui bahwa seseorang benar-benar akan memilih kandidat yang menurut pengakuannya akan ia pilih, atau bahkan akan memberikan suara (galat pengukuran)?",
+      "old": "Bagaimana kita mengetahui bahwa seseorang akan memilih kandidat yang dikatakannya, atau bahwa ia akan memberikan suara sama sekali (galat pengukuran)?",
+      "page": "random/sample/Introduction.html",
+      "replacements": 1
+    },
+    {
+      "new": "dinyatakan dalam satuan seperseribu dolar ($0.001)",
+      "old": "dinyatakan dalam mil ($0.001)",
+      "page": "random/sample/Introduction.html",
+      "replacements": 1
+    },
+    {
+      "new": "data undian wajib militer era Perang Vietnam",
+      "old": "data wajib militer Vietnam",
+      "page": "random/sample/Introduction.html",
+      "replacements": 1
+    },
+    {
+      "new": "Skor SAT Matematika dan Verbal: mungkin kontinu, rasio",
+      "old": "Skor SAT Matematika dan Verbal: kemungkinan kontinu, rasio",
+      "page": "random/sample/Introduction.html",
+      "replacements": 1
+    },
+    {
+      "new": "pengambilan sampel berhingga",
+      "old": "pengambilan sampel hingga",
+      "page": "random/sample/Introduction.html",
+      "replacements": 1
+    },
+    {
+      "new": "linearitas rata-rata sampel",
+      "old": "linearitas nilai harapan",
+      "page": "random/sample/Mean.html",
+      "reason": "the proof invokes linearity of the sample-mean functional, not expectation",
+      "replacements": 2
+    },
+    {
+      "new": "konstanta tersebut.",
+      "old": "konstanta tersebut. .",
+      "page": "random/sample/Mean.html",
+      "reason": "remove duplicated terminal punctuation inherited from the authority",
+      "replacements": 1
+    }
+  ],
+  "frozen_manifests": {
+    "component_licenses": {
+      "freeze_receipt_bytes": 753,
+      "freeze_receipt_path": "authority/component-licenses/FREEZE_RECEIPT.json",
+      "freeze_receipt_schema": "o006.random.component-licenses.v1",
+      "freeze_receipt_sha256": "55460a73c59f38992c38cfd0e54407cbcb57713c070104b248d040edcab220f6",
+      "manifest_bytes": 1330,
+      "manifest_path": "authority/component-licenses/URL_MANIFEST.csv",
+      "manifest_sha256": "8a06fecb45a9696c8308e268cbbdacb5d3685ab48a2e10f9d2b4d534395cb777"
+    },
+    "source": {
+      "freeze_receipt_bytes": 2020,
+      "freeze_receipt_path": "authority/SOURCE_FREEZE_RECEIPT.json",
+      "freeze_receipt_schema": "o006.random.source-freeze.v1",
+      "freeze_receipt_sha256": "a2acff91b787c87bb7e14925ef854521c582a2ef5735777f967ac2e44b64f232",
+      "manifest_bytes": 50913,
+      "manifest_path": "authority/SOURCE_URL_MANIFEST.csv",
+      "manifest_sha256": "d36e0f8bf9fa44a38a7504f9688a08af6787d88ede99298316a3e022b6f799f5"
+    }
+  },
+  "inputs": {
+    "authority": [
+      {
+        "bytes": 1704911,
+        "content_type": "application/x-javascript",
+        "etag": "\"1a03cf-69b44095-d1c9dbbc04e43965;;;\"",
+        "last_modified": "Fri, 13 Mar 2026 16:51:33 GMT",
+        "purpose": "reader_support",
+        "relative_path": "MathJax/tex-svg.js",
+        "role": "asset",
+        "sha256": "dba9c7e8646389650c445e0547023942bed229b3fdb9513b1c6c01237af0b81a",
+        "url": "https://www.randomservices.org/MathJax/tex-svg.js"
+      },
+      {
+        "bytes": 935,
+        "content_type": "application/x-javascript",
+        "etag": "\"3a7-69b43ae8-72b07f6b8ff60c95;;;\"",
+        "last_modified": "Fri, 13 Mar 2026 16:27:20 GMT",
+        "purpose": "reader_support",
+        "relative_path": "random/Basic.js",
+        "role": "asset",
+        "sha256": "006372877a2b384e20c3e1a364ddde4791890ad02020f654c22372206891b00b",
+        "url": "https://www.randomservices.org/random/Basic.js"
+      },
+      {
+        "bytes": 396,
+        "content_type": "image/svg+xml",
+        "etag": "\"18c-69b43d0b-8e7d5ed98054a28e;;;\"",
+        "last_modified": "Fri, 13 Mar 2026 16:36:27 GMT",
+        "purpose": "reader_support",
+        "relative_path": "random/icons/DieBlue5.svg",
+        "role": "asset",
+        "sha256": "10a43a1d654a084d696913ead5d746d85bd6fec19e5f9e61db0b44a72ad4d27e",
+        "url": "https://www.randomservices.org/random/icons/DieBlue5.svg"
+      },
+      {
+        "bytes": 375,
+        "content_type": "image/svg+xml",
+        "etag": "\"177-69b43d0b-c31e2f8893038dfa;;;\"",
+        "last_modified": "Fri, 13 Mar 2026 16:36:27 GMT",
+        "purpose": "reader_support",
+        "relative_path": "random/icons/DieGreen5.svg",
+        "role": "asset",
+        "sha256": "a7b7c27d57699c441ffbfd1748ef3feb946418b7e8fd862a5f6e151f0981a374",
+        "url": "https://www.randomservices.org/random/icons/DieGreen5.svg"
+      },
+      {
+        "bytes": 395,
+        "content_type": "image/svg+xml",
+        "etag": "\"18b-69b43d0b-9d941cc9b1dd787a;;;\"",
+        "last_modified": "Fri, 13 Mar 2026 16:36:27 GMT",
+        "purpose": "reader_support",
+        "relative_path": "random/icons/DieRed5.svg",
+        "role": "asset",
+        "sha256": "f2c0603e9ebc5e0c971811cdfccb790c6e8bb9742757929024fd078031587358",
+        "url": "https://www.randomservices.org/random/icons/DieRed5.svg"
+      },
+      {
+        "bytes": 373,
+        "content_type": "image/svg+xml",
+        "etag": "\"175-69b43d0b-ef7e72258da55a39;;;\"",
+        "last_modified": "Fri, 13 Mar 2026 16:36:27 GMT",
+        "purpose": "reader_support",
+        "relative_path": "random/icons/Icon.svg",
+        "role": "asset",
+        "sha256": "09ccb2c9f9c50cd4d7a1c867fa112534afa56a12ef0f8a96a0d682ec6b8a9d8b",
+        "url": "https://www.randomservices.org/random/icons/Icon.svg"
+      },
+      {
+        "bytes": 223,
+        "content_type": "image/svg+xml",
+        "etag": "\"df-69b43d0b-4ed37e25e0370a27;;;\"",
+        "last_modified": "Fri, 13 Mar 2026 16:36:27 GMT",
+        "purpose": "reader_support",
+        "relative_path": "random/icons/Minus.svg",
+        "role": "asset",
+        "sha256": "a55a72ce346d0fe73318fecfa994c7fda8766694a448c3b968122df7a916d7fc",
+        "url": "https://www.randomservices.org/random/icons/Minus.svg"
+      },
+      {
+        "bytes": 291,
+        "content_type": "image/svg+xml",
+        "etag": "\"123-69b43d0b-847e4398f23a9eee;;;\"",
+        "last_modified": "Fri, 13 Mar 2026 16:36:27 GMT",
+        "purpose": "reader_support",
+        "relative_path": "random/icons/Plus.svg",
+        "role": "asset",
+        "sha256": "1bd78cdc7997d6237bc809cef5f36e074c551ec3224b226c38735be898bc439a",
+        "url": "https://www.randomservices.org/random/icons/Plus.svg"
+      },
+      {
+        "bytes": 297,
+        "content_type": "image/svg+xml",
+        "etag": "\"129-69b43d0b-2c4b40bf50b4c2cf;;;\"",
+        "last_modified": "Fri, 13 Mar 2026 16:36:27 GMT",
+        "purpose": "reader_support",
+        "relative_path": "random/icons/Reset.svg",
+        "role": "asset",
+        "sha256": "1aad695720b25d02c03cc76f686e8d58ccbcaf424b19dfc57b58008802583292",
+        "url": "https://www.randomservices.org/random/icons/Reset.svg"
+      },
+      {
+        "bytes": 177,
+        "content_type": "image/svg+xml",
+        "etag": "\"b1-69b43d0b-fe3105b74b572a76;;;\"",
+        "last_modified": "Fri, 13 Mar 2026 16:36:27 GMT",
+        "purpose": "reader_support",
+        "relative_path": "random/icons/Run.svg",
+        "role": "asset",
+        "sha256": "75d0cdf139f0d01390440c9f655a8183c95d2da709ec67e39e9fc8863192795d",
+        "url": "https://www.randomservices.org/random/icons/Run.svg"
+      },
+      {
+        "bytes": 123,
+        "content_type": "image/svg+xml",
+        "etag": "\"7b-69b43d0b-42fe3ab6784537b8;;;\"",
+        "last_modified": "Fri, 13 Mar 2026 16:36:27 GMT",
+        "purpose": "reader_support",
+        "relative_path": "random/icons/Step.svg",
+        "role": "asset",
+        "sha256": "2fd15de2c1c6c7344adb513b3f1a47319749c7b3bda3251da0f49aa334bf7c05",
+        "url": "https://www.randomservices.org/random/icons/Step.svg"
+      },
+      {
+        "bytes": 131,
+        "content_type": "image/svg+xml",
+        "etag": "\"83-69b43d0b-c3a5762ce5721292;;;\"",
+        "last_modified": "Fri, 13 Mar 2026 16:36:27 GMT",
+        "purpose": "reader_support",
+        "relative_path": "random/icons/Stop.svg",
+        "role": "asset",
+        "sha256": "54bf3c5fd23ccf5dd602750aaf09c42ca6d4b1b10b8333e54bc580580f06686e",
+        "url": "https://www.randomservices.org/random/icons/Stop.svg"
+      },
+      {
+        "bytes": 1272,
+        "content_type": "image/png",
+        "etag": "\"4f8-69b43de5-b1c6ed060e21fa3e;;;\"",
+        "last_modified": "Fri, 13 Mar 2026 16:40:05 GMT",
+        "purpose": "reader_support",
+        "relative_path": "random/sample/ContinuousDistribution.png",
+        "role": "asset",
+        "sha256": "273418cb67c56115e2573f47fbd59cbd22aa64cc6768952d6f518edd9d6d3da5",
+        "url": "https://www.randomservices.org/random/sample/ContinuousDistribution.png"
+      },
+      {
+        "bytes": 1323,
+        "content_type": "image/png",
+        "etag": "\"52b-69b43de5-157d8d6a8c559c7c;;;\"",
+        "last_modified": "Fri, 13 Mar 2026 16:40:05 GMT",
+        "purpose": "reader_support",
+        "relative_path": "random/sample/DiscreteDistribution.png",
+        "role": "asset",
+        "sha256": "2d9495bbb2a610ea534e31549679dd76375a3c55fb52c057a27f4c4dcdf4a620",
+        "url": "https://www.randomservices.org/random/sample/DiscreteDistribution.png"
+      },
+      {
+        "bytes": 2964,
+        "content_type": "image/png",
+        "etag": "\"b94-69b43de5-d57138b15120fad;;;\"",
+        "last_modified": "Fri, 13 Mar 2026 16:40:05 GMT",
+        "purpose": "reader_support",
+        "relative_path": "random/sample/DotPlot.png",
+        "role": "asset",
+        "sha256": "837553335dfca3d70cf094db1850ca31cfbe5a290fc4fc0f7506627baba9153b",
+        "url": "https://www.randomservices.org/random/sample/DotPlot.png"
+      },
+      {
+        "bytes": 1526,
+        "content_type": "image/png",
+        "etag": "\"5f6-69b43de5-a39fa1c4435ace39;;;\"",
+        "last_modified": "Fri, 13 Mar 2026 16:40:05 GMT",
+        "purpose": "reader_support",
+        "relative_path": "random/sample/EmpiricalPDF.png",
+        "role": "asset",
+        "sha256": "c866a068848217ecd427afbe710ce62487950369316d6e071164d86fdb917898",
+        "url": "https://www.randomservices.org/random/sample/EmpiricalPDF.png"
+      },
+      {
+        "bytes": 4239,
+        "content_type": "image/png",
+        "etag": "\"108f-69b43de5-d4cf309af1fd920d;;;\"",
+        "last_modified": "Fri, 13 Mar 2026 16:40:05 GMT",
+        "purpose": "reader_support",
+        "relative_path": "random/sample/Histogram.png",
+        "role": "asset",
+        "sha256": "17bbf2b59e4b0902a84e8ea66f1b40a0343ddff578359ce842c60f109ea047ae",
+        "url": "https://www.randomservices.org/random/sample/Histogram.png"
+      },
+      {
+        "bytes": 8952,
+        "content_type": "text/html",
+        "etag": "\"22f8-69b43de5-568d4ab1862be89f;;;\"",
+        "last_modified": "Fri, 13 Mar 2026 16:40:05 GMT",
+        "purpose": "translation_authority",
+        "relative_path": "random/sample/index.html",
+        "role": "core",
+        "sha256": "9f7b9a075c430efbae92192e131152c6728f7827dc3dde987ce871ec9d6ae35c",
+        "url": "https://www.randomservices.org/random/sample/index.html"
+      },
+      {
+        "bytes": 31343,
+        "content_type": "text/html",
+        "etag": "\"7a6f-69b43de5-64d2e034a5c6518a;;;\"",
+        "last_modified": "Fri, 13 Mar 2026 16:40:05 GMT",
+        "purpose": "translation_authority",
+        "relative_path": "random/sample/Introduction.html",
+        "role": "core",
+        "sha256": "0af72fbf0202413525cae99e696cfa70014a803d6c5ac7a7dcafd1577742414f",
+        "url": "https://www.randomservices.org/random/sample/Introduction.html"
+      },
+      {
+        "bytes": 42746,
+        "content_type": "text/html",
+        "etag": "\"a6fa-69b43de5-e966185a7363ee57;;;\"",
+        "last_modified": "Fri, 13 Mar 2026 16:40:05 GMT",
+        "purpose": "translation_authority",
+        "relative_path": "random/sample/Mean.html",
+        "role": "core",
+        "sha256": "e21a3da7773a6f7f925b4cb0c583d5331abb1656fe01ed952c8d42b26f238cab",
+        "url": "https://www.randomservices.org/random/sample/Mean.html"
+      },
+      {
+        "bytes": 5433,
+        "content_type": "text/css",
+        "etag": "\"1539-69b43ae8-f959d9a730bcc355;;;\"",
+        "last_modified": "Fri, 13 Mar 2026 16:27:20 GMT",
+        "purpose": "reader_support",
+        "relative_path": "random/Screen.css",
+        "role": "asset",
+        "sha256": "589035811781debb33e3aa90ca0f376532b8ade30d54fad5c56838bec5c8d707",
+        "url": "https://www.randomservices.org/random/Screen.css"
+      }
+    ],
+    "generated": [
+      {
+        "bytes": 533,
+        "reader_relative_path": "index.html",
+        "sha256": "4c3ebe50dcba83834c290440a8abbaa43ab646152006114498b83bf85e35a186"
+      },
+      {
+        "bytes": 930,
+        "reader_relative_path": "licenses/index.html",
+        "sha256": "d56c188e6c54122847d24f29e6d0e6dfd69e7e5c9dcbf67530c701388deb8d80"
+      }
+    ],
+    "licenses": [
+      {
+        "bytes": 7048,
+        "component": "CC0 1.0 Universal legal code",
+        "content_type": "text/plain; charset=utf-8",
+        "etag": "W/\"1b88-6051c4dbae076-gzip\"",
+        "final_url": "https://creativecommons.org/publicdomain/zero/1.0/legalcode.txt",
+        "last_modified": "Mon, 11 Sep 2023 21:49:41 GMT",
+        "license": "CC0-1.0",
+        "purpose": "reader_license",
+        "reader_relative_path": "licenses/CC0-1.0-legalcode.txt",
+        "relative_path": "cc0-1.0/legalcode.txt",
+        "sha256": "a2010f343487d3f7618affe54f789f5487602331c0a8d03f49e9a7c547cf0499",
+        "url": "https://creativecommons.org/publicdomain/zero/1.0/legalcode.txt"
+      },
+      {
+        "bytes": 11358,
+        "component": "MathJax 3.1.2",
+        "content_type": "text/plain; charset=utf-8",
+        "etag": "\"ea7695ebe191574f243f2d0da593df55f90669d28366f85d2d8070743095da31\"",
+        "final_url": "https://raw.githubusercontent.com/mathjax/MathJax/3.1.2/LICENSE",
+        "last_modified": "",
+        "license": "Apache-2.0",
+        "purpose": "reader_license",
+        "reader_relative_path": "licenses/MathJax-3.1.2-LICENSE.txt",
+        "relative_path": "mathjax-3.1.2/LICENSE.txt",
+        "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+        "url": "https://raw.githubusercontent.com/mathjax/MathJax/3.1.2/LICENSE"
+      }
+    ],
+    "targets": [
+      {
+        "bytes": 11759,
+        "relative_path": "random/sample/index.html",
+        "sha256": "5673cb96ddccad719ed00e84ed5817cd4d378419ee0b1aaf7e226f6bfb3c02ed"
+      },
+      {
+        "bytes": 36788,
+        "relative_path": "random/sample/Introduction.html",
+        "sha256": "ab861c521bf9d078bf35db60b45bde1f6e6f7749dd3b77c712397bb6bc3f1c4e"
+      },
+      {
+        "bytes": 46411,
+        "relative_path": "random/sample/Mean.html",
+        "sha256": "2df29d408c4e8194ac81d68a4abf623b908660adc098deccbb1d15c09c7e0fa9"
+      }
+    ]
+  },
+  "protected_math_corrections": [
+    {
+      "new": "p\\left(\\bigcup_{j \\in J} A_j\\right)",
+      "old": "p\\left(\\bigcup_{i \\in I} A_i\\right)",
+      "page": "random/sample/Mean.html",
+      "reason": "the partition is indexed by j in J; i in I is undefined here",
+      "replacements": 1,
+      "surface": "raw_tex"
+    },
+    {
+      "new": "\\quad x \\in A_j \\]</p>",
+      "old": "\\quad x \\in A_j \\</p>",
+      "page": "random/sample/Mean.html",
+      "reason": "close the displayed expression with \\] before the paragraph ends",
+      "replacements": 1,
+      "span_new": "\\quad x \\in A_j \\]",
+      "span_old": "\\quad x \\in A_j \\",
+      "surface": "math_span"
+    },
+    {
+      "new": "\\lambda_d(A_j)",
+      "old": "\\lambda_k(A_j)",
+      "page": "random/sample/Mean.html",
+      "reason": "the ambient dimension is d and k is undefined",
+      "replacements": 2,
+      "surface": "math_span"
+    },
+    {
+      "new": "\\([50.315, 50.325)\\)",
+      "old": "\\([50.315, 50.324)\\)",
+      "page": "random/sample/Mean.html",
+      "reason": "rounding to 0.01 gives the upper half-step endpoint 50.325",
+      "replacements": 1,
+      "surface": "math_span"
+    },
+    {
+      "new": "\\((10, 20]\\)",
+      "old": "\\((10, 20])\\)",
+      "page": "random/sample/Mean.html",
+      "reason": "remove the unmatched literal parenthesis after the interval",
+      "replacements": 1,
+      "surface": "math_span"
+    }
+  ],
+  "reader": {
+    "directory": "build/html-id",
+    "file_count": 25,
+    "files": [
+      {
+        "bytes": 533,
+        "relative_path": "index.html",
+        "sha256": "4c3ebe50dcba83834c290440a8abbaa43ab646152006114498b83bf85e35a186"
+      },
+      {
+        "bytes": 7048,
+        "relative_path": "licenses/CC0-1.0-legalcode.txt",
+        "sha256": "a2010f343487d3f7618affe54f789f5487602331c0a8d03f49e9a7c547cf0499"
+      },
+      {
+        "bytes": 930,
+        "relative_path": "licenses/index.html",
+        "sha256": "d56c188e6c54122847d24f29e6d0e6dfd69e7e5c9dcbf67530c701388deb8d80"
+      },
+      {
+        "bytes": 11358,
+        "relative_path": "licenses/MathJax-3.1.2-LICENSE.txt",
+        "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+      },
+      {
+        "bytes": 1704911,
+        "relative_path": "MathJax/tex-svg.js",
+        "sha256": "dba9c7e8646389650c445e0547023942bed229b3fdb9513b1c6c01237af0b81a"
+      },
+      {
+        "bytes": 935,
+        "relative_path": "random/Basic.js",
+        "sha256": "006372877a2b384e20c3e1a364ddde4791890ad02020f654c22372206891b00b"
+      },
+      {
+        "bytes": 396,
+        "relative_path": "random/icons/DieBlue5.svg",
+        "sha256": "10a43a1d654a084d696913ead5d746d85bd6fec19e5f9e61db0b44a72ad4d27e"
+      },
+      {
+        "bytes": 375,
+        "relative_path": "random/icons/DieGreen5.svg",
+        "sha256": "a7b7c27d57699c441ffbfd1748ef3feb946418b7e8fd862a5f6e151f0981a374"
+      },
+      {
+        "bytes": 395,
+        "relative_path": "random/icons/DieRed5.svg",
+        "sha256": "f2c0603e9ebc5e0c971811cdfccb790c6e8bb9742757929024fd078031587358"
+      },
+      {
+        "bytes": 373,
+        "relative_path": "random/icons/Icon.svg",
+        "sha256": "09ccb2c9f9c50cd4d7a1c867fa112534afa56a12ef0f8a96a0d682ec6b8a9d8b"
+      },
+      {
+        "bytes": 223,
+        "relative_path": "random/icons/Minus.svg",
+        "sha256": "a55a72ce346d0fe73318fecfa994c7fda8766694a448c3b968122df7a916d7fc"
+      },
+      {
+        "bytes": 291,
+        "relative_path": "random/icons/Plus.svg",
+        "sha256": "1bd78cdc7997d6237bc809cef5f36e074c551ec3224b226c38735be898bc439a"
+      },
+      {
+        "bytes": 297,
+        "relative_path": "random/icons/Reset.svg",
+        "sha256": "1aad695720b25d02c03cc76f686e8d58ccbcaf424b19dfc57b58008802583292"
+      },
+      {
+        "bytes": 177,
+        "relative_path": "random/icons/Run.svg",
+        "sha256": "75d0cdf139f0d01390440c9f655a8183c95d2da709ec67e39e9fc8863192795d"
+      },
+      {
+        "bytes": 123,
+        "relative_path": "random/icons/Step.svg",
+        "sha256": "2fd15de2c1c6c7344adb513b3f1a47319749c7b3bda3251da0f49aa334bf7c05"
+      },
+      {
+        "bytes": 131,
+        "relative_path": "random/icons/Stop.svg",
+        "sha256": "54bf3c5fd23ccf5dd602750aaf09c42ca6d4b1b10b8333e54bc580580f06686e"
+      },
+      {
+        "bytes": 1272,
+        "relative_path": "random/sample/ContinuousDistribution.png",
+        "sha256": "273418cb67c56115e2573f47fbd59cbd22aa64cc6768952d6f518edd9d6d3da5"
+      },
+      {
+        "bytes": 1323,
+        "relative_path": "random/sample/DiscreteDistribution.png",
+        "sha256": "2d9495bbb2a610ea534e31549679dd76375a3c55fb52c057a27f4c4dcdf4a620"
+      },
+      {
+        "bytes": 2964,
+        "relative_path": "random/sample/DotPlot.png",
+        "sha256": "837553335dfca3d70cf094db1850ca31cfbe5a290fc4fc0f7506627baba9153b"
+      },
+      {
+        "bytes": 1526,
+        "relative_path": "random/sample/EmpiricalPDF.png",
+        "sha256": "c866a068848217ecd427afbe710ce62487950369316d6e071164d86fdb917898"
+      },
+      {
+        "bytes": 4239,
+        "relative_path": "random/sample/Histogram.png",
+        "sha256": "17bbf2b59e4b0902a84e8ea66f1b40a0343ddff578359ce842c60f109ea047ae"
+      },
+      {
+        "bytes": 11759,
+        "relative_path": "random/sample/index.html",
+        "sha256": "5673cb96ddccad719ed00e84ed5817cd4d378419ee0b1aaf7e226f6bfb3c02ed"
+      },
+      {
+        "bytes": 36788,
+        "relative_path": "random/sample/Introduction.html",
+        "sha256": "ab861c521bf9d078bf35db60b45bde1f6e6f7749dd3b77c712397bb6bc3f1c4e"
+      },
+      {
+        "bytes": 46411,
+        "relative_path": "random/sample/Mean.html",
+        "sha256": "2df29d408c4e8194ac81d68a4abf623b908660adc098deccbb1d15c09c7e0fa9"
+      },
+      {
+        "bytes": 5922,
+        "relative_path": "random/Screen.css",
+        "sha256": "3f676d2cf6a4e111bff4fc2dbbd082e5305250e40a2c91b67b532dc72f13a78f"
+      }
+    ],
+    "manifest_bytes": 2400,
+    "manifest_path": "build/FIRST_UNIT_MANIFEST.csv",
+    "manifest_sha256": "5c3d51affcc8df38ea2c5067c8eec42b3f6f8e6fe79ad37bcf170e88309b06b5",
+    "total_bytes": 1840700
+  },
+  "reader_customizations": [
+    {
+      "append_bytes": 489,
+      "append_sha256": "3fb9928a3bb09eff1e33a0a94ef25c332a8475abe4a47c1f85aad11695f563a6",
+      "authority_bytes": 5433,
+      "authority_sha256": "589035811781debb33e3aa90ca0f376532b8ade30d54fad5c56838bec5c8d707",
+      "desktop_max_width_rem": 72,
+      "desktop_min_width_px": 801,
+      "kind": "readable-layout-css-append",
+      "mobile_max_width_px": 800,
+      "reader_bytes": 5922,
+      "reader_relative_path": "random/Screen.css",
+      "reader_sha256": "3f676d2cf6a4e111bff4fc2dbbd082e5305250e40a2c91b67b532dc72f13a78f",
+      "version": "o006-id-readable-layout-v1"
+    }
+  ],
+  "schema": "o006.random.first-unit-build.v1",
+  "scripts": {
+    "build": {
+      "bytes": 33959,
+      "path": "scripts/build_first_unit.py",
+      "sha256": "017e701932a3e57b29d198dbbce252cbb8c59d4ca82a70cfe35c347f00c033e2"
+    },
+    "qa": {
+      "bytes": 43706,
+      "path": "scripts/qa_first_unit.py",
+      "sha256": "ca2e9c3524afde4bff69652bd515ae7a474d0f299b8b1d12e01b898eebdaa97b"
+    }
+  },
+  "transport_hardening": [
+    {
+      "original_href": "http://www.google.com/search?q=Introduction+to+Probability+and+Mathematical+Statistics,+Bain,+Engelhardt",
+      "page": "random/sample/index.html",
+      "reason": "transport-only HTTP-to-HTTPS hardening",
+      "target_href": "https://www.google.com/search?q=Introduction+to+Probability+and+Mathematical+Statistics,+Bain,+Engelhardt"
+    },
+    {
+      "original_href": "http://www.google.com/search?q=Statistical+Inference+Casella+Berger",
+      "page": "random/sample/index.html",
+      "reason": "transport-only HTTP-to-HTTPS hardening",
+      "target_href": "https://www.google.com/search?q=Statistical+Inference+Casella+Berger"
+    },
+    {
+      "original_href": "http://www.google.com/search?q=Statistics,Freedman,Pisani,Purves",
+      "page": "random/sample/index.html",
+      "reason": "transport-only HTTP-to-HTTPS hardening",
+      "target_href": "https://www.google.com/search?q=Statistics,Freedman,Pisani,Purves"
+    },
+    {
+      "original_href": "http://www.google.com/search?q=An+Introduction+to+Mathematical+Statistics,Larsen,Marx",
+      "page": "random/sample/index.html",
+      "reason": "transport-only HTTP-to-HTTPS hardening",
+      "target_href": "https://www.google.com/search?q=An+Introduction+to+Mathematical+Statistics,Larsen,Marx"
+    },
+    {
+      "original_href": "http://www.google.com/search?q=Elementary+Statistics,Triola",
+      "page": "random/sample/index.html",
+      "reason": "transport-only HTTP-to-HTTPS hardening",
+      "target_href": "https://www.google.com/search?q=Elementary+Statistics,Triola"
+    },
+    {
+      "original_href": "http://www.google.com/search?q=Introductory+Statistics,Weiss",
+      "page": "random/sample/index.html",
+      "reason": "transport-only HTTP-to-HTTPS hardening",
+      "target_href": "https://www.google.com/search?q=Introductory+Statistics,Weiss"
+    },
+    {
+      "original_href": "http://mathworld.wolfram.com/topics/ProbabilityandStatistics.html",
+      "page": "random/sample/index.html",
+      "reason": "transport-only HTTP-to-HTTPS hardening",
+      "target_href": "https://mathworld.wolfram.com/topics/ProbabilityandStatistics.html"
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "schema": "o006.random.component-licenses.v1",
+  "retrieved_at": "2026-08-21T10:09:23.050773Z",
+  "file_count": 4,
+  "payload_bytes": 55064,
+  "url_manifest": "URL_MANIFEST.csv",
+  "url_manifest_bytes": 1330,
+  "url_manifest_sha256": "8a06fecb45a9696c8308e268cbbdacb5d3685ab48a2e10f9d2b4d534395cb777",
+  "user_agent": "O006-id-ID-component-freezer/1.0 (+local scholarly edition)",
+  "coverage": {
+    "MathJax 3.1.2": "Apache-2.0",
+    "Random playing-card images": "CC0-1.0",
+    "Random Monty Hall car/goat source": "CC0-1.0"
+  },
+  "mathjax_version": "3.1.2",
+  "mathjax_distribution_component": "tex-svg.js",
+  "scope_note": "Authority/license receipts only; no unclear biography/data photographs or data sets are included."
+}

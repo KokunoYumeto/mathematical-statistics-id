@@ -1,0 +1,278 @@
+{
+  "bounded_text_corrections": [
+    {
+      "new": "Secara teknis, suatu <dfn>statistik</dfn> \\(w = w(\\bs x)\\) adalah fungsi teramati dari hasil eksperimen \\(\\bs x\\).",
+      "old": "Secara teknis, suatu <dfn>statistik</dfn> \\(w = w(\\bs x)\\) adalah fungsi yang dapat diamati dari hasil \\(\\bs x\\) eksperimen tersebut.",
+      "page": "random/sample/Introduction.html",
+      "replacements": 1
+    },
+    {
+      "new": "Bagaimana kita mengetahui bahwa seseorang benar-benar akan memilih kandidat yang menurut pengakuannya akan ia pilih, atau bahkan akan memberikan suara (galat pengukuran)?",
+      "old": "Bagaimana kita mengetahui bahwa seseorang akan memilih kandidat yang dikatakannya, atau bahwa ia akan memberikan suara sama sekali (galat pengukuran)?",
+      "page": "random/sample/Introduction.html",
+      "replacements": 1
+    },
+    {
+      "new": "dinyatakan dalam satuan seperseribu dolar ($0.001)",
+      "old": "dinyatakan dalam mil ($0.001)",
+      "page": "random/sample/Introduction.html",
+      "replacements": 1
+    },
+    {
+      "new": "data undian wajib militer era Perang Vietnam",
+      "old": "data wajib militer Vietnam",
+      "page": "random/sample/Introduction.html",
+      "replacements": 1
+    },
+    {
+      "new": "Skor SAT Matematika dan Verbal: mungkin kontinu, rasio",
+      "old": "Skor SAT Matematika dan Verbal: kemungkinan kontinu, rasio",
+      "page": "random/sample/Introduction.html",
+      "replacements": 1
+    },
+    {
+      "new": "pengambilan sampel berhingga",
+      "old": "pengambilan sampel hingga",
+      "page": "random/sample/Introduction.html",
+      "replacements": 1
+    },
+    {
+      "new": "linearitas rata-rata sampel",
+      "old": "linearitas nilai harapan",
+      "page": "random/sample/Mean.html",
+      "reason": "the proof invokes linearity of the sample-mean functional, not expectation",
+      "replacements": 2
+    },
+    {
+      "new": "konstanta tersebut.",
+      "old": "konstanta tersebut. .",
+      "page": "random/sample/Mean.html",
+      "reason": "remove duplicated terminal punctuation inherited from the authority",
+      "replacements": 1
+    }
+  ],
+  "build": {
+    "reader_file_count": 25,
+    "reader_manifest_sha256": "5c3d51affcc8df38ea2c5067c8eec42b3f6f8e6fe79ad37bcf170e88309b06b5",
+    "reader_total_bytes": 1840700,
+    "receipt_bytes": 24863,
+    "receipt_path": "build/FIRST_UNIT_BUILD_RECEIPT.json",
+    "receipt_sha256": "bbc22b59996e94b267a2d3d8ed1eb448b0a78feb477b20e8a3311d63f2275fbe"
+  },
+  "pass_counts": {
+    "bounded_text_correction_categories": 8,
+    "controlled_filename_case_corrections": 4,
+    "css_files": 1,
+    "css_refs": 11,
+    "details": 39,
+    "external_https_anchors": 177,
+    "external_https_metadata_links": 3,
+    "fragments": 8,
+    "href_delta_entries": 108,
+    "href_delta_occurrences": 162,
+    "html_pages": 5,
+    "ids": 84,
+    "local_refs": 56,
+    "math_spans": 466,
+    "protected_math_correction_categories": 5,
+    "protected_math_replacements": 5,
+    "raw_script_style_blocks": 7,
+    "readable_layout_css_appends": 1,
+    "reader_bytes": 1840700,
+    "reader_files": 25,
+    "source_elements": 1138,
+    "svg_files": 10,
+    "translated_pages": 3,
+    "transport_hardening_deltas": 7,
+    "units": 48
+  },
+  "protected_math_corrections": [
+    {
+      "new": "p\\left(\\bigcup_{j \\in J} A_j\\right)",
+      "old": "p\\left(\\bigcup_{i \\in I} A_i\\right)",
+      "page": "random/sample/Mean.html",
+      "reason": "the partition is indexed by j in J; i in I is undefined here",
+      "replacements": 1,
+      "surface": "raw_tex"
+    },
+    {
+      "new": "\\quad x \\in A_j \\]</p>",
+      "old": "\\quad x \\in A_j \\</p>",
+      "page": "random/sample/Mean.html",
+      "reason": "close the displayed expression with \\] before the paragraph ends",
+      "replacements": 1,
+      "span_new": "\\quad x \\in A_j \\]",
+      "span_old": "\\quad x \\in A_j \\",
+      "surface": "math_span"
+    },
+    {
+      "new": "\\lambda_d(A_j)",
+      "old": "\\lambda_k(A_j)",
+      "page": "random/sample/Mean.html",
+      "reason": "the ambient dimension is d and k is undefined",
+      "replacements": 2,
+      "surface": "math_span"
+    },
+    {
+      "new": "\\([50.315, 50.325)\\)",
+      "old": "\\([50.315, 50.324)\\)",
+      "page": "random/sample/Mean.html",
+      "reason": "rounding to 0.01 gives the upper half-step endpoint 50.325",
+      "replacements": 1,
+      "surface": "math_span"
+    },
+    {
+      "new": "\\((10, 20]\\)",
+      "old": "\\((10, 20])\\)",
+      "page": "random/sample/Mean.html",
+      "reason": "remove the unmatched literal parenthesis after the interval",
+      "replacements": 1,
+      "surface": "math_span"
+    }
+  ],
+  "readable_reflow": {
+    "append_bytes": 489,
+    "append_sha256": "3fb9928a3bb09eff1e33a0a94ef25c332a8475abe4a47c1f85aad11695f563a6",
+    "authority_bytes": 5433,
+    "authority_sha256": "589035811781debb33e3aa90ca0f376532b8ade30d54fad5c56838bec5c8d707",
+    "desktop_max_width_rem": 72,
+    "desktop_min_width_px": 801,
+    "mobile_fluid": true,
+    "mobile_max_width_px": 800,
+    "reader_bytes": 5922,
+    "reader_relative_path": "random/Screen.css",
+    "reader_sha256": "3f676d2cf6a4e111bff4fc2dbbd082e5305250e40a2c91b67b532dc72f13a78f",
+    "version": "o006-id-readable-layout-v1"
+  },
+  "results": {
+    "random/sample/Introduction.html": {
+      "details": 16,
+      "edition_notice": {
+        "bytes": 1044,
+        "links": 4,
+        "sha256": "64ad3ed4c57ffe8c0c91fae7047ba7d57399538bef9f7beae730e1fa4f4fa931"
+      },
+      "elements": 390,
+      "hierarchy_sha256": "bd051917296943b992b386456e522e94e16d29bdbb6dcb7a407b1975fcbc3c37",
+      "href_delta_entries": 41,
+      "href_delta_occurrences": 66,
+      "ids": 35,
+      "math_spans": 101,
+      "protected_math_replacements": 0,
+      "raw_script_style_blocks": 3,
+      "reader_bytes": 36788,
+      "reader_sha256": "ab861c521bf9d078bf35db60b45bde1f6e6f7749dd3b77c712397bb6bc3f1c4e",
+      "reader_target_byte_identical": true,
+      "source_bytes": 31343,
+      "source_sha256": "0af72fbf0202413525cae99e696cfa70014a803d6c5ac7a7dcafd1577742414f",
+      "target_bytes": 36788,
+      "target_sha256": "ab861c521bf9d078bf35db60b45bde1f6e6f7749dd3b77c712397bb6bc3f1c4e",
+      "units": 22
+    },
+    "random/sample/Mean.html": {
+      "details": 23,
+      "edition_notice": {
+        "bytes": 1045,
+        "links": 4,
+        "sha256": "b5dbee259ec1dd62c84f5d776320e15142359cc401afa413f9a2524f906fb275"
+      },
+      "elements": 585,
+      "hierarchy_sha256": "7ce39c793fb28a3924a045db4c7e38d57530c52fb0501dc34642de3325029f92",
+      "href_delta_entries": 25,
+      "href_delta_occurrences": 33,
+      "ids": 43,
+      "math_spans": 365,
+      "protected_math_replacements": 5,
+      "raw_script_style_blocks": 3,
+      "reader_bytes": 46411,
+      "reader_sha256": "2df29d408c4e8194ac81d68a4abf623b908660adc098deccbb1d15c09c7e0fa9",
+      "reader_target_byte_identical": true,
+      "source_bytes": 42746,
+      "source_sha256": "e21a3da7773a6f7f925b4cb0c583d5331abb1656fe01ed952c8d42b26f238cab",
+      "target_bytes": 46411,
+      "target_sha256": "2df29d408c4e8194ac81d68a4abf623b908660adc098deccbb1d15c09c7e0fa9",
+      "units": 26
+    },
+    "random/sample/index.html": {
+      "details": 0,
+      "edition_notice": {
+        "bytes": 998,
+        "links": 4,
+        "sha256": "d56c45b9741ffdb1adbc27999f42e6a6ea2865a5271b413222d4a8c1a40044c6"
+      },
+      "elements": 163,
+      "hierarchy_sha256": "6a96ead836c5ac42b781f0ade81b07aa852dac73946f60028b3ba8b43d4829ba",
+      "href_delta_entries": 42,
+      "href_delta_occurrences": 63,
+      "ids": 6,
+      "math_spans": 0,
+      "protected_math_replacements": 0,
+      "raw_script_style_blocks": 1,
+      "reader_bytes": 11759,
+      "reader_sha256": "5673cb96ddccad719ed00e84ed5817cd4d378419ee0b1aaf7e226f6bfb3c02ed",
+      "reader_target_byte_identical": true,
+      "source_bytes": 8952,
+      "source_sha256": "9f7b9a075c430efbae92192e131152c6728f7827dc3dde987ce871ec9d6ae35c",
+      "target_bytes": 11759,
+      "target_sha256": "5673cb96ddccad719ed00e84ed5817cd4d378419ee0b1aaf7e226f6bfb3c02ed",
+      "units": 0
+    }
+  },
+  "schema": "o006.random.first-unit-qa.v1",
+  "scripts": {
+    "build": {
+      "bytes": 33959,
+      "path": "scripts/build_first_unit.py",
+      "sha256": "017e701932a3e57b29d198dbbce252cbb8c59d4ca82a70cfe35c347f00c033e2"
+    },
+    "qa": {
+      "bytes": 43706,
+      "path": "scripts/qa_first_unit.py",
+      "sha256": "ca2e9c3524afde4bff69652bd515ae7a474d0f299b8b1d12e01b898eebdaa97b"
+    }
+  },
+  "transport_hardening": [
+    {
+      "original_href": "http://www.google.com/search?q=Introduction+to+Probability+and+Mathematical+Statistics,+Bain,+Engelhardt",
+      "page": "random/sample/index.html",
+      "reason": "transport-only HTTP-to-HTTPS hardening",
+      "target_href": "https://www.google.com/search?q=Introduction+to+Probability+and+Mathematical+Statistics,+Bain,+Engelhardt"
+    },
+    {
+      "original_href": "http://www.google.com/search?q=Statistical+Inference+Casella+Berger",
+      "page": "random/sample/index.html",
+      "reason": "transport-only HTTP-to-HTTPS hardening",
+      "target_href": "https://www.google.com/search?q=Statistical+Inference+Casella+Berger"
+    },
+    {
+      "original_href": "http://www.google.com/search?q=Statistics,Freedman,Pisani,Purves",
+      "page": "random/sample/index.html",
+      "reason": "transport-only HTTP-to-HTTPS hardening",
+      "target_href": "https://www.google.com/search?q=Statistics,Freedman,Pisani,Purves"
+    },
+    {
+      "original_href": "http://www.google.com/search?q=An+Introduction+to+Mathematical+Statistics,Larsen,Marx",
+      "page": "random/sample/index.html",
+      "reason": "transport-only HTTP-to-HTTPS hardening",
+      "target_href": "https://www.google.com/search?q=An+Introduction+to+Mathematical+Statistics,Larsen,Marx"
+    },
+    {
+      "original_href": "http://www.google.com/search?q=Elementary+Statistics,Triola",
+      "page": "random/sample/index.html",
+      "reason": "transport-only HTTP-to-HTTPS hardening",
+      "target_href": "https://www.google.com/search?q=Elementary+Statistics,Triola"
+    },
+    {
+      "original_href": "http://www.google.com/search?q=Introductory+Statistics,Weiss",
+      "page": "random/sample/index.html",
+      "reason": "transport-only HTTP-to-HTTPS hardening",
+      "target_href": "https://www.google.com/search?q=Introductory+Statistics,Weiss"
+    },
+    {
+      "original_href": "http://mathworld.wolfram.com/topics/ProbabilityandStatistics.html",
+      "page": "random/sample/index.html",
+      "reason": "transport-only HTTP-to-HTTPS hardening",
+      "target_href": "https://mathworld.wolfram.com/topics/ProbabilityandStatistics.html"
+    }
+  ]
+}

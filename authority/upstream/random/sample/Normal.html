@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="utf-8">
+	<title>Special Properties of Normal Samples</title>
+	<meta name="author" content="Kyle Siegrist">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="keywords" content="probability, statistics, random sample, normal distribution, sample mean, sample variance, student distribution, chi-square distribution, two-sample model, bivariate model">
+	<link rel="icon" href="../icons/Icon.svg" type="image/svg">
+	<link rel="stylesheet" href="../Screen.css" type="text/css" media="screen">
+	<link rel="next" href="../point/index.html">
+	<script src="../Basic.js"></script>
+	<script src="../../MathJax/tex-svg.js" id="MathJax-script" async></script>
+</head>
+
+<body>
+
+<div class="latex">
+	\(\newcommand{\R}{\mathbb{R}}\)
+	\(\newcommand{\N}{\mathbb{N}}\)
+	\(\newcommand{\Z}{\mathbb{Z}}\)
+	\(\newcommand{\E}{\mathbb{E}}\)
+	\(\newcommand{\P}{\mathbb{P}}\)
+	\(\newcommand{\var}{\text{var}}\)
+	\(\newcommand{\sd}{\text{sd}}\)
+	\(\newcommand{\cov}{\text{cov}}\)
+	\(\newcommand{\cor}{\text{cor}}\)
+	\(\newcommand{\bs}{\boldsymbol}\)
+</div>
+
+<header>
+	<ol class="map">
+		<li class="parent"><a href="../index.html">Random</a></li>
+		<li class="parent"><a href="index.html">5. Random Samples</a></li>
+		<li class="child"><a href="Introduction.html" title="Introduction">1</a></li>
+		<li class="child"><a href="Mean.html" title="The Sample Mean">2</a></li>
+		<li class="child"><a href="LLN.html" title="The Law of Large Numbers">3</a></li>
+		<li class="child"><a href="CLT.html" title="The Central Limit Theorem">4</a></li>
+		<li class="child"><a href="Variance.html" title="The Sample Variance">5</a></li>
+		<li class="child"><a href="OrderStatistics.html" title="Order Statistics">6</a></li>
+		<li class="child"><a href="Covariance.html" title="Sample Correlation and Regression">7</a></li>
+		<li class="current">8</li>
+		<li class="details"><button type="button" title="Expand Details" onclick="expandDetails(true);"><img src="../icons/Plus.svg" alt="Expand"></button></li>
+		<li class="details"><button type="button" title="Contract Details" onclick="expandDetails(false);"><img src="../icons/Minus.svg" alt="Contract"></button></li>
+	</ol>
+	<h2>8. Special Properties of Normal Samples</h2>
+</header>
+
+<p>Random samples from normal distributions are the most important special cases of the topics in this chapter. As we will see, many of the results simplify significantly when the underlying sampling distribution is normal. In addition we will derive the distributions of a number of random variables constructed from normal samples that are of fundamental important in inferential statistics.</p>
+
+<h3 id="one">The One Sample Model</h3>
+
+<p>Suppose that \(\bs{X} = (X_1, X_2, \ldots, X_n)\) is a <a href="Introduction.html">random sample</a> from the <a href="../special/Normal.html">normal distribution</a> with <a href="../expect/Properties.html">mean</a> \(\mu \in \R\) and <a href="../expect/Variance.html">standard deviation</a> \(\sigma \in (0, \infty)\). Recall that the term <dfn>random sample</dfn> means that \(\bs{X}\) is a sequence of independent, identically distributed random variables.  Recall also that the normal distribution has probability density function
+\[ f(x) = \frac{1}{\sqrt{2 \, \pi} \sigma} \exp \left[ -\frac{1}{2} \left( \frac{x - \mu}{\sigma} \right)^2 \right], \quad x \in \R \]
+In the notation that we have used elsewhere in this chapter, \(\sigma_3 = \E\left[(X - \mu)^3\right] = 0\) (equivalently, the skewness of the normal distribution is 0) and \(\sigma_4 = \E\left[(X - \mu)^4\right] = 3 \sigma^4\) (equivalently, the kurtosis of the normal distribution is 3). Since the sample (and in particular the sample size \(n\)) is fixed is this subsection, it will be suppressed in the notation.</p>
+
+<h4 id="mea">The Sample Mean</h4>
+
+<p>First recall that the <a href="Mean.html">sample mean</a> is
+\[ M = \frac{1}{n} \sum_{i=1}^n X_i \]</p>
+
+<div class="unit" id="mea1">
+	<p class="math">\(M\) is normally distributed with mean and variance given by</p>
+	<ol class="sub">
+		<li>\(\E(M) = \mu\)</li>
+		<li>\(\var(M) = \sigma^2 / n\)</li>
+	</ol>
+	<details>
+		<summary>Details:</summary>
+		<p>This follows from basic properties of the normal distribution. Recall that the sum of independent normally distributed variables also has a normal distribution, and a linear transformation of a normally distributed variable is also normally distributed.  The mean and variance of \(M\) hold in general, and were derived in the section on the <a href="LLN.html">Law of Large Numbers.</a></p>
+	</details>
+</div>
+
+<p>Of course, by the <a href="CLT.html">central limit theorem</a>, the distribution of \(M\) is approximately normal, if \(n\) is large, even if the underlying sampling distribution is not normal.</p>
+
+<div class="unit" id="mea2">
+	<p class="math">The <dfn>standard score</dfn> of \(M\) is
+	\[ Z = \frac{M - \mu}{\sigma / \sqrt{n}} \]
+	\(Z\) has the standard normal distribution.</p>
+</div>
+
+<p>The standard score \(Z\) in <a href="#mea2" class="ref"></a> plays a critical role in constructing <a href="../interval/Normal.html">interval estimates</a> and <a href="../hypothesis/Normal.html">hypothesis tests</a> for the distribution mean \(\mu\) when the distribution standard deviation \(\sigma\) is known. The random variable \(Z\) will also appear in several derivations in this section.</p>
+
+<h4 id="var">The Sample Variance</h4>
+
+<p>The main goal of this subsection is to show that certain multiples of the two versions of the <a href="Variance.html">sample variance</a> that we have studied have <dfn>chi-square</dfn> distributions. Recall that the <a href="../special/ChiSquare.html">chi-square distribution</a> with \(k \in \N_+\) degrees of freedom has probability density function
+\[ f(x) = \frac{1}{\Gamma(k / 2) 2^{k/2}} x^{k / 2 - 1} e^{-x / 2}, \quad 0 \lt x \lt \infty \]
+and has mean \(k\) and variance \(2k\). The moment generating function is
+\[ G(t) = \frac{1}{(1 - 2t)^{k / 2}}, \quad -\infty \lt t \lt \frac{1}{2} \]
+The most important result to remember is that the chi-square distribution with \(k\) degrees of freedom governs \(\sum_{i = 1}^k Z_i^2\), where \((Z_1, Z_2, \ldots, Z_k)\) is a sequence of independent, standard normal random variables.</p>
+
+<p>Recall that if \(\mu\) is known, a natural estimator of the variance \(\sigma^2\) is the statistic
+\[ W^2 = \frac{1}{n} \sum_{i=1}^n (X_i - \mu)^2 \]
+Although the assumption that \(\mu\) is known is almost always artificial, \(W^2\) is very easy to analyze and it will be used in some of the derivations below. Our first result is the distribution of a simple multiple of \(W^2\).</p>
+
+<div class="unit" id="var1">
+	<p class="math">The random variable
+	\[ U = \frac{n}{\sigma^2} W^2 \]
+	has the chi-square distribution with \(n\) degrees of freedom.</p>
+	<details>
+		<summary>Details:</summary>
+		<p>Note that
+		\[ \frac{n}{\sigma^2} W^2 = \sum_{i=1}^n \left(\frac{X_i - \mu}{\sigma}\right)^2 \]
+		and the terms in the sum are independent standard normal variables.</p>
+	</details>
+</div>
+
+<p>The variable \(U\) in <a href="#var1" class="ref"></a> plays a critical role in constructing <a href="../interval/Normal.html">interval estimates</a> and <a href="../hypothesis/Normal.html">hypothesis tests</a> for the distribution standard deviation \(\sigma\) when the distribution mean \(\mu\) is known (although again, this assumption is usually not realistic).</p>
+
+<div class="unit" id="var2">
+	<p class="math">The mean and variance of \(W^2\) are</p>
+	<ol class="sub">
+		<li>\(\E(W^2) = \sigma^2\)</li>
+		<li>\(\var(W^2) = 2 \sigma^4 / n\)</li>
+	</ol>
+	<details>
+		<summary>Details:</summary>
+		<p>These results follow from the chi-square distribution of \(U\) and standard properties of expected value and variance.</p>
+	</details>
+</div>
+
+<p>As an estimator of \(\sigma^2\), part (a) means that \(W^2\) is <dfn>unbiased</dfn> and part (b) means that \(W^2\) is <dfn>consistent</dfn>. Of course, these moment results are special cases of the general results obtained in the section on <a href="Variance.html#spe">Sample Variance</a>. In that section, we also showed that \(M\) and \(W^2\) are uncorrelated if the underlying sampling distribution has <a href="../expect/Skew.html#skw">skewness</a> 0 (\(\sigma_3 = 0\)), as is the case here. </p>
+
+<p>Recall now that the standard version of the sample variance is the statistic
+\[ S^2 = \frac{1}{n - 1} \sum_{i=1}^n (X_i - M)^2 \]
+The sample variance \(S^2\) is the usual estimator of \(\sigma^2\) when \(\mu\) is unknown (which is usually the case). We showed <a href="Variance.html">earlier</a> that in general, the sample mean \(M\) and the sample variance \(S^2\) are uncorrelated if the underlying sampling distribution has skewness 0 (\(\sigma_3 = 0\)). It turns out that if the sampling distribution is normal, these variables are in fact <a href="../prob/Independence.html">independent</a>, a very important and useful property, and at first blush, a very surprising result since \(S^2\) appears to depend explicitly on \(M\).</p>
+
+<div class="unit" id="var3">
+	<p class="math">The sample mean \(M\) and the sample variance \(S^2\) are independent.</p>
+	<details>
+		<summary>Details:</summary>
+		<p>The proof is based on the vector of deviations from the sample mean. Let
+		\[ \bs{D} = (X_1 - M, X_2 - M, \ldots, X_{n-1} - M) \]
+		Note that \(S^2\) can be written as a function of \(\bs{D}\) since \(\sum_{i=1}^n (X_i - M) = 0\). Next, \(M\) and the vector \(\bs{D}\) have a joint <a href="../special/MultiNormal.html">multivariate normal distribution</a>. We showed <a href="LLN.html">earlier</a> that \(M\) and \(X_i - M\) are uncorrelated for each \(i\), and hence it follows that \(M\) and \(\bs{D}\) are independent. Finally, since \(S^2\) is a function of \(\bs{D}\), it follows that \(M\) and \(S^2\) are independent.</p>
+	</details>
+</div>
+
+<p>We can now determine the distribution of a simple multiple of the sample variance \(S^2\).</p>
+
+<div class="unit" id="var4">
+	<p class="math">The random variable 
+	\[ V = \frac{n-1}{\sigma^2} S^2 \]	
+	has the chi-square distribution with \(n - 1\) degrees of freedom.</p>
+	<details>
+		<summary>Details:</summary>
+		<p>We first show that \(U = V + Z^2\) where \(U\) is the chi-square variable associated with \(W^2\) and where \(Z\) is the standard score associated with \(M\). To see this, note that
+		\begin{align}
+			U &amp; = \frac{1}{\sigma^2} \sum_{i=1}^n (X_i - \mu)^2 = \frac{1}{\sigma^2} \sum_{i=1}^n (X_i - M + M - \mu)^2 \\
+			&amp; = \frac{1}{\sigma^2} \sum_{i=1}^n (X_i - M)^2 + \frac{2}{\sigma^2} \sum_{i=1}^n (X_i - M)(M - \mu) + \frac{1}{\sigma^2} \sum_{i=1}^n (M - \mu)^2
+		\end{align}
+		In the right side of the last equation, the first term is \(V\). The second term is 0 because \(\sum_{i=1}^n (X_i - M) = 0\). The last term is \(\frac{n}{\sigma^2}(M - \mu)^2 = Z^2\). Now, from <a href="#var1" class="ref"></a>, \(U\) has the chi-square distribution with \(n\) degrees of freedom. and of course \(Z^2\) has the chi-square distribution with 1 degree of freedom. From <a href="#var3" class="ref"></a>, \(V\) and \(Z^2\) are independent. Recall that the moment generating function of a sum of independent variables is the product of the MGFs. Thus, taking moment generating functions in the equation \(U = V + Z^2\) gives
+		\[ \frac{1}{(1 - 2t)^{n/2}} = \E(e^{t V}) \frac{1}{(1 - 2 t)^{1/2}}, \quad t \lt \frac{1}{2} \]
+		Solving we have \(\E(e^{t V}) = 1 \big/ (1 - 2 t)^{(n-1)/2}\) for \(t \lt 1/2\) and therefore \(V\) has the chi-square distribution with \(n - 1\) degrees of freedom.</p>
+	</details>
+</div>
+
+<p>The variable \(V\) in <a href="#var4" class="ref"></a> plays a critical role in constructing <a href="../interval/Normal.html">interval estimates</a> and <a href="../hypothesis/Normal.html">hypothesis tests</a> for the distribution standard deviation \(\sigma\) when the distribution mean \(\mu\) is unknown (almost always the case).</p>
+
+<div class="unit" id="var5">
+	<p class="math">The mean and variance of \(S^2\) are</p>
+	<ol class="sub">
+		<li>\(\E(S^2) = \sigma^2\)</li>
+		<li>\(\var(S^2) = 2 \sigma^4 \big/ (n - 1)\)	</li>
+	</ol>
+	<details>
+		<summary>Details:</summary>
+		<p>These results follow from the chi-square distribution of \(V\) and standard properties of expected value and variance.</p>
+	</details>
+</div>
+
+<p>As before, these moment results are special cases of the general results obtained in the section on <a href="Variance.html">Sample Variance</a>. Again, as an estimator of \(\sigma^2\), part (a) means that \(S^2\) is unbiased, and part (b) means that \(S^2\) is consistent. Note also that \(\var(S^2)\) is larger than \(\var(W^2)\) (not surprising), by a factor of \(\frac{n}{n - 1}\).</p>
+
+<div class="unit" id="var6">
+	<p class="app">In the <a href="JavaScript:openAncillary('../apps/SpecialSimulator.html')" class="ancillary">special distribution simulator</a>, select the chi-square distribution. Vary the degree of freedom parameter and note the shape and location of the probability density function and the mean, standard deviation bar.  For selected values of the parameter, run the experiment 1000 times and compare the empirical density function and moments to the true probability density function and moments.</p>
+</div>
+
+<div class="unit" id="var7">
+	<p class="math">The covariance and correlation between the special sample variance and the standard sample variance are</p>
+	<ol class="sub">
+		<li>\(\cov(W^2, S^2) = 2 \sigma^4 / n\)</li>
+		<li>\(\cor(W^2, S^2) = \sqrt{(n - 1) / n}\)</li>
+	</ol>
+	<details>
+		<summary>Details:</summary>
+		<p>These results follows from general results obtained in the section on <a href="Variance.html">sample variance</a> and the fact that \(\sigma_4 = 3 \sigma^4\).</p>
+	</details>
+</div>
+
+<p>Note that the correlation does not depend on the parameters \(\mu\) and \(\sigma\), and converges to 1 as \(n \to \infty\),</p>
+
+<h4 id="stu">The \(T\) Variable</h4>
+
+<p>Recall that the <a href="../special/Student.html">Student \(t\) distribution</a> with \(k \in \N_+\) degrees of freedom has probability density function
+\[ f(t) = C_k \left( 1 + \frac{t^2}{k} \right)^{-(k + 1) / 2}, \quad t \in \R \]
+where \(C_k\) is the appropriate normalizing constant. The distribution has mean 0 if \(k \gt 1\) and variance \(k / (k - 2)\) if \(k \gt 2\).  In this subsection, the main point to remember is that the \(t\) distribution with \(k\) degrees of freedom is the distribution of
+\[ \frac{Z}{\sqrt{V / k}} \] 
+where \(Z\) has the standard normal distribution; \(V\) has the chi-square distribution with \(k\) degrees of freedom; and \(Z\) and \(V\) are independent.</p>
+
+<div class="unit" id="stu0">
+	<p class="dfn">Let
+	\[ T = \frac{M - \mu}{S / \sqrt{n}} \]</p>
+</div>
+
+Note that \(T\) is similar to the standard score \(Z\) associated with \(M\), but with the sample standard deviation \(S\) replacing the distribution standard deviation \(\sigma\). The variable \(T\) plays a critical role in constructing <a href="../interval/Normal.html">interval estimates</a> and <a href="../hypothesis/Normal.html">hypothesis tests</a> for the distribution mean \(\mu\) when the distribution standard deviation \(\sigma\) is unknown.</p>
+
+<div class="unit" id="stu1">
+	<p class="math">Let \(Z\) denote the standard score in <a href="#mea2" class="ref"></a>, and let \(V\) denote the chi-square variable in <a href="#var4" class="ref"></a>. Then
+	\[ T = \frac{Z}{\sqrt{V / (n - 1)}} \]
+	and hence \(T\) has the student \(t\) distribution with \(n - 1\) degrees of freedom.</p>
+	<details>
+		<summary>Details:</summary>
+		<p>In the definition of \(T\), divide the numerator and denominator by \(\sigma / \sqrt{n}\). The numerator is then \((M - \mu) \big/ (\sigma / \sqrt{n}) = Z\) and the denominator is \(S / \sigma = \sqrt{V / (n - 1)}\). Since \(Z\) and \(V\) are independent, \(Z\) has the standard normal distribution, and \(V\) has the chi-squre distribution with \(n - 1\) degrees of freedom, it follows that \(T\) has the student \(t\) distribution with \(n - 1\) degrees of freedom.</p>
+	</details>
+</div>
+
+<div class="unit" id="stu2">
+	<p class="app">In the <a href="JavaScript:openAncillary('../apps/SpecialSimulator.html')" class="ancillary">special distribution simulator</a>, select the \(t\) distribution. Vary the degree of freedom parameter and note the shape and location of the probability density function and the mean\( \pm \)standard deviation bar.  For selected values of the parameters, run the experiment 1000 times and compare the empirical density function and moments to the  distribution density function and moments.</p>
+</div>
+
+<h3 id="two">The Two Sample Model</h3>
+
+<p>Suppose that \(\bs{X} = (X_1, X_2, \ldots, X_m)\) is a random sample of size \(m\) from the normal distribution with mean \(\mu \in \R\) and standard deviation \(\sigma \in (0, \infty)\), and that \(\bs{Y} = (Y_1, Y_2, \ldots, Y_n)\) is a random sample of size \(n\) from the normal distribution with mean \(\nu \in \R\) and standard deviation \(\tau \in (0, \infty)\). Finally, suppose that \(\bs{X}\) and \(\bs{Y}\) are independent. Of course, all of the results above in the one sample model in <a href="#one" class="ref"></a> apply to \(\bs{X}\) and \(\bs{Y}\) separately, but now we are interested in statistics that are helpful in inferential procedures that compare the two normal distributions. We will use the basic notation established above, but we will indicate the dependence on the sample.</p>
+
+<p>The two-sample (or more generally the multi-sample model) occurs naturally when a basic variable in the statistical experiment is <dfn>filtered</dfn> according to one or more other variable (often nominal variables). For example, in the <a href="JavaScript:openAncillary('../data/Cicada.html')" class="ancillary">cicada data</a>, the weights of the male cicadas and the weights of the female cicadas may fit observations from the two-sample normal model. The basic variable <var>weight</var> is filtered by the variable <var>gender</var>. If weight is filtered by gender and species, we might have observations from the 6-sample normal model.</p>
+
+<h4 id="dif">The Difference in the Sample Means</h4>
+
+<p>We know from <a href="#mea1" class="ref"></a> that \(M(\bs{X})\) and \(M(\bs{Y})\) have normal distributions.  Moreover, these sample means are independent because the underlying samples \(\bs{X}\) and \(\bs{Y}\) are independent. Hence, it follows from a basic property of the normal distribution that any linear combination of \(M(\bs{X})\) and \(M(\bs{Y})\)  will be normally distributed as well. For inferential procedures that compare the distribution means \(\mu\) and \(\nu\), the linear combination that is most important is the difference.</p>
+
+<div class="unit" id="dfi1">
+	<p class="math">\(M(\bs{X}) - M(\bs{Y})\) has a normal distribution with mean and variance given by</p>
+	<ol class="sub">
+		<li>\(\E\left[(M(\bs{X}) - M(\bs{Y})\right] = \mu - \nu\)</li>
+		<li>\(\var\left[(M(\bs{X}) - M(\bs{Y})\right] = \sigma^2 / m + \tau^2 / n\)</li>
+	</ol>
+</div>
+
+<p>Hence the standard score
+\[ Z = \frac{\left[(M(\bs{X}) - M(\bs{Y})\right] - (\mu - \nu)}{\sqrt{\sigma^2 / m + \tau^2 / n}} \]
+has the standard normal distribution. This standard score plays a fundamental role in constructing <a href="../interval/BivariateNormal.html">interval estimates</a> and <a href="../hypothesis/BivariateNormal.html">hypothesis test</a> for the difference \(\mu - \nu\) when the distribution standard deviations \(\sigma\) and \(\tau\) are known.</p>
+
+<h4 id="rat">Ratios of Sample Variances</h4>
+
+<p>Next we will show that the ratios of certain multiples of the sample variances (both versions) of \(\bs{X}\) and \(\bs{Y}\)  have <dfn>\(F\) distributions</dfn>.  Recall that the <a href="../special/Fisher.html">\(F\) distribution</a> with \(j \in \N_+\) degrees of freedom in the numerator and \(k \in \N_+\) degrees of freedom in the denominator is the distribution of
+\[\frac{U / j}{V / k}\]
+where \(U\) has the chi-square distribution with \(j\) degrees of freedom; \(V\) has the chi-square distribution with \(k\) degrees of freedom; and \(U\) and \(V\) are independent. The \(F\) distribution is named in honor of <a href="JavaScript:openAncillary('../biographies/Fisher.html')" class="ancillary">Ronald Fisher</a> and has probability density function
+\[ f(x) = C_{j,k} \frac{x^{(j-2) / 2}}{\left[1 + (j / k) x\right]^{(j + k) / 2}}, \quad 0 \lt x \lt \infty \]
+where \(C_{j,k}\) is the appropriate normalizing constant. The mean is \(\frac{k}{k - 2}\) if \(k \gt 2\), and the variance is \(2 \left(\frac{k}{k - 2}\right)^2 \frac{j + k  - 2}{j (k - 4)}\) if \(k \gt 4\).</p>
+
+<div class="unit" id="rat1">
+	<p class="math">The random variable given below has the \(F\) distribution with \(m\) degrees of freedom in the numerator and \(n\) degrees of freedom in the denominator:
+	\[ \frac{W^2(\bs{X}) / \sigma^2}{W^2(\bs{Y}) / \tau^2} \]</p>
+	<details>
+		<summary>Details:</summary>
+		<p>Using the notation in <a href="#var1" class="ref"></a>, note that \(W^2(\bs{X}) / \sigma^2 = U(\bs{X}) / m\) and \(W^2(\bs{Y}) / \tau^2 = U(\bs{Y}) / n\). The result then follows immediately since \(U(\bs{X})\) and \(U(\bs{Y})\) are independent chi-square variables with \(m\) and \(n\) degrees of freedom, respectivley.</p>
+	</details>
+</div>
+
+<div class="unit" id="rat2">
+	<p class="math">The random variable given below has the \(F\) distribution with \(m - 1\) degrees of freedom in the numerator and \(n - 1\) degrees of freedom in the denominator:
+	\[ \frac{S^2(\bs{X}) / \sigma^2}{S^2(\bs{Y}) / \tau^2} \]</p>
+	<details>
+		<summary>Details:</summary>
+		<p>Using the notation in <a href="#var4" class="ref"></a>, note that \(S^2(\bs{X}) / \sigma^2 = V(\bs{X}) \big/ (m - 1)\) and \(S^2(\bs{Y}) / \tau^2 = V(\bs{Y}) \big/ (n - 1)\). The result then follows immediately since \(V(\bs{X})\) and \(V(\bs{Y})\) are independent chi-square variables with \(m - 1\) and \(n - 1\) degrees of freedom, respectively.</p>
+	</details>
+</div>
+
+<p>These variables are useful for constructing <a href="../interval/BivariateNormal.html">interval estimates</a> and <a href="../hypothesis/BivariateNormal.html">hypothesis tests</a> of the ratio of the standard deviations \(\sigma / \tau\). The choice of the \(F\) variable depends on whether the means \(\mu\) and \(\nu\) are known or unknown.  Usually, of course, the means are unknown and so the statistic in in <a href="#rat2" class="ref"></a> is used.</p>
+
+<div class="unit">
+	<p class="app">In the <a href="JavaScript:openAncillary('../apps/SpecialSimulator.html')" class="ancillary">special distribution simulator</a>, select the \(F\) distribution. Vary the degrees of freedom parameters and note the shape and location of the probability density function and the mean\( \pm \)standard deviation bar.  For selected values of the parameters, run the experiment 1000 times and compare the empirical density function and moments to the true distribution density function and moments.</p>
+</div>
+
+<h4 id="tst">The \( T \) Variable</h4>
+
+<p>Our final construction in the two sample normal model will result in a variable that has the student \( t \) distribution. This variable plays a fundamental role in constructing <a href="../interval/BivariateNormal.html">interval estimates</a> and <a href="../hypothesis/BivariateNormal.html">hypothesis test</a> for the difference \(\mu - \nu\) when the distribution standard deviations \(\sigma\) and \(\tau\) are unknown. The construction requires the additional assumption that the distribution standard deviations are the same: \( \sigma = \tau \). This assumption is reasonable if there is an inherent variability in the measurement variables that does not change even when different treatments are applied to the objects in the population.</p>
+
+<div class="unit" id="std">
+	<p class="math">The standard score associated with the difference in the sample means is
+	\[ Z = \frac{[M(\bs{Y}) - M(\bs{X})] - (\nu - \mu)}{\sigma \sqrt{1 / m + 1 / n}} \]</p>
+</div>
+
+<p>To construct our desired variable, we first need an estimate of \(\sigma^2\). A natural approach is to consider a weighted average of the sample variances \(S^2(\bs{X})\) and \(S^2(\bs{Y})\), with the degrees of freedom as the weight factors.</p>
+
+<div class="unit" id="pool">
+	<p class="dfn">The <dfn>pooled estimate</dfn> of \(\sigma^2\) is
+	\[ S^2(\bs{X}, \bs{Y}) = \frac{(m - 1) S^2(\bs{X}) + (n - 1) S^2(\bs{Y})}{m + n - 2} \]</p>
+</div>
+
+<div class="unit" id="tst1">
+	<p class="math">The random variable \( V \) given below has the <a href="../special/ChiSquare.html">chi-square distribution</a> with \(m + n - 2\) degrees of freedom:
+	\[ V = \frac{(m - 1)S^2(\bs{X}) + (n - 1) S^2(\bs{Y})}{\sigma^2} \]</p>
+	<details>
+		<summary>Details:</summary>
+		<p>The variable can be expressed as the sum of independent chi-square variables.</p>
+	</details>
+</div>
+
+<div class="unit" id="tst2">
+	<p class="math">The variables \(M(\bs{Y}) - M(\bs{X})\) and \(S^2(\bs{X}, \bs{Y})\) are independent.</p>
+	<details>
+		<summary>Details:</summary>
+		<p>The following pairs of variables are independent: \((M(\bs{X}), S(\bs{X}))\) and \((M(\bs{Y}, S(\bs{Y}))\); \(M(\bs{X})\) and \(S(\bs{X})\); \(M(\bs{Y})\) and \(S(\bs{Y})\)</p>
+	</details>
+</div>
+
+<div class="unit" id="tst3">
+	<p class="math">The random variable \( T \) given below has the <a href="../special/Student.html">student \(t\) distribution</a> with \(m + n - 2\) degrees of freedom.
+	\[ T = \frac{[M(\bs{Y}) - M(\bs{X})] - (\nu - \mu)}{S(\bs{X}, \bs{Y}) \sqrt{1 / m + 1 / n}} \]</p>
+	<details>
+		<summary>Details:</summary>
+		<p>The random variable can be written as \(Z / \sqrt{V / (m + n - 2}\) where \(Z\) is the the standard normal variable given in <a href="#std" class="ref"></a> amd \( V \) is the chi-square variable given in <a href="#tst1" class="ref"></a>. Moreover, \( Z \) and \( V \) are independent by theorem  <a href="#tst2" class="ref"></a>.</p>
+	</details>
+</div>
+
+<h3 id="biv">The Bivariate Sample Model</h3>
+
+<p>Suppose now that \(\left((X_1, Y_1), (X_2, Y_2), \ldots, (X_n, Y_n)\right)\) is a random sample of size \(n\) from the <a href="../special/MultiNormal.html">bivariate normal distribution</a> with means \(\mu \in \R\) and \(\nu \in \R\), standard deviations \(\sigma \in (0, \infty)\) and \(\tau \in (0, \infty)\), and correlation \(\rho \in [0, 1]\). Of course, \(\bs{X} = (X_1, X_2, \ldots, X_n)\) is a random sample of size \(n\) from the normal distribution with mean \(\mu\) and standard deviation \(\sigma\), and \(\bs{Y} = (Y_1, Y_2, \ldots, Y_n)\) is a random sample of size \(n\) from the normal distribution with mean \(\nu\) and standard deviation \(\tau\), so the results above in the one sample model in <a href="#one" class="ref"></a> apply to \(\bs{X}\) and \(\bs{Y}\) individually. Thus our interest in this section is in the relation between various \(\bs{X}\) and \(\bs{Y}\) statistics and properties of <a href="Covariance.html">sample covariance</a>.</p>
+
+<p>The bivariate (or more generally multivariate) model occurs naturally when considering two (or more) variables in the statistical experiment. For example, the heights of the fathers and the heights of the sons in <a href="JavaScript:openAncillary('../data/Pearson.html')" class="ancillary">Pearson's height data</a> may well fit observations from the bivariate normal model.</p>
+
+<p>In the notation that we have used previously, recall that \(\sigma^3 = \E\left[(X - \mu)^3\right] = 0\), \(\sigma_4 = \E\left[(X - \mu)^4\right] = 3 \sigma^4\), \(\tau_3 = \E\left[(Y - \nu)^3\right] = 0\), \(\tau_4 = \E\left[(Y - \nu)^4\right] = 3 \tau^4\), \( \delta = \cov(X, Y) = \sigma \tau \rho\). and \(\delta_2 = \E[(X - \mu)^2 (Y - \nu)^2] = \sigma^2 \tau^2 (1 + 2 \rho^2)\). </p>
+
+<div class="unit" id="biv1">
+	<p class="math">The data vector \(((X_1, Y_1), (X_2, Y_2), \ldots (X_n, Y_n))\) has a multivariate normal distribution.</p>
+	<ol class="sub">
+		<li>The mean vector has a block form, with each block being \((\mu, \nu)\).</li>
+		<li>The variance-covariance matrix has a block-diagonal form, with each block being \(\left[\begin{matrix} \sigma^2 &amp; \sigma \tau \rho \\ \sigma \tau \rho &amp; \tau^2 \end{matrix} \right]\). </li>
+	</ol>
+	<details>
+		<summary>Details:</summary>
+		<p>This follows from standard results for the multivariate normal distribution. Of course the blocks in parts (a) and (b) are simply the mean and variance-covariance matrix of a single observation \((X, Y)\).</p>
+	</details>
+</div>
+
+<h4 id="mes">Sample Means</h4>
+
+<div class="unit" id="mes1">
+	<p class="math">\(\left(M(\bs{X}), M(\bs{Y})\right)\) has a bivariate normal distribution. The covariance and correlation are</p>
+	<ol class="sub">
+		<li>\(\cov\left[M(\bs{X}), M(\bs{Y})\right] = \sigma \tau \rho / n\)</li>
+		<li>\(\cor\left[M(\bs{X}), M(\bs{Y})\right] = \rho\)</li>
+	</ol>
+	<details>
+		<summary>Details:</summary>
+		<p>The bivariate normal distribution follows from <a href="#biv1" class="ref"></a> since \((M(\bs{X}), M(\bs{Y}))\) can be obtained from the data vector by a linear transformation. Parts (a) and (b) follow from the section on <a href="Covariance.html">sample correlation</a>.</p>
+	</details>
+</div>
+
+<p>Of course, we know the individual means and variances of \(M(\bs{X})\) and \(M(\bs{Y})\) from the <a href="#one">one-sample model</a> above. Hence we know the complete distribution of \((M(\bs{X}), M(\bs{Y}))\).</p>
+
+<h4 id="vas">Sample Variances</h4>
+
+<div class="unit" id="vas1">
+	<p class="math">The covariance and correlation between the special sample variances are:</p>
+	<ol class="sub">
+		<li>\(\cov\left[W^2(\bs{X}), W^2(\bs{Y})\right] = 2 \sigma^2 \tau^2 \rho^2 / n\)</li>
+		<li>\(\cor\left[W^2(\bs{X}), W^2(\bs{Y})\right] = \rho^2\)</li>
+	</ol>
+	<details>
+	<summary>Details:</summary>
+		<p>These results follow from the section on <a href="Covariance.html">sample correlation</a> and the special form of \(\delta_2\), \(\sigma_4\), and \(\tau_4\).</p>
+	</details>
+</div>
+
+<div class="unit" id="vas2">
+	<p class="math">The covariance and correlation between the standard sample variances are</p>
+	<ol class="sub">
+		<li>\(\cov\left[S^2(\bs{X}), S^2(\bs{Y})\right] = 2 \sigma^2 \tau^2 \rho^2 / (n - 1)\)</li>
+		<li>\(\cor\left[S^2(\bs{X}), S^2(\bs{Y})\right] = \rho^2\)</li>
+	</ol>
+	<details>
+		<summary>Details:</summary>
+		<p>These results follow from the section on <a href="Covariance.html">sample correlation</a> and the special form of \(\delta\), \(\delta_2\), \(\sigma_4\), and \(\tau_4\).</p>
+	</details>
+</div>
+
+<h4 id="cov">Sample Covariance</h4>
+
+<p>If \(\mu\) and \(\nu\) are known (again usually an artificial assumption), a natural estimator of the distribution covariance \(\delta\) is the special version of the sample covariance
+\[ W(\bs{X}, \bs{Y}) = \frac{1}{n} \sum_{i=1}^n (X_i - \mu)(Y_i - \nu) \]</p>
+
+<div class="unit" id="cov1">
+	<p class="math">The mean and variance of \(W(\bs{X}, \bs{Y})\) are</p>
+	<ol class="sub">
+		<li>\(\E[W(\bs{X}, \bs{Y})] = \sigma \tau \rho\)</li>
+		<li>\(\var[W(\bs{X}, \bs{Y})] = \sigma^2 \tau^2 (1 + \rho^2) / n\)</li>
+	</ol>
+	<details>
+		<summary>Details:</summary>
+		<p>These results follow from the section on <a href="Covariance.html">sample correlation</a> and the special form of \(\delta\) and \(\delta_2\).</p>
+</details>
+</div>
+
+<p>If \(\mu\) and \(\nu\) are unknown (again usually the case), then a natural estimator of the distribution covariance \(\delta\) is the standard sample covariance
+\[ S(\bs{X}, \bs{Y}) = \frac{1}{n - 1} \sum_{i=1}^n [X_i - M(\bs{X})][Y_i - M(\bs{Y})] \]</p>
+
+<div class="unit" id="cov2">
+	<p class="math">The mean and variance of the sample variance are</p>
+	<ol class="sub">
+		<li>\(\E[S(\bs{X}, \bs{Y})] = \sigma \tau \rho\)</li>
+		<li>\(\var[S(\bs{X}, \bs{Y})] = \sigma^2 \tau^2 (1 + \rho^2) \big/ (n - 1)\)</li>
+	</ol>
+	<details>
+		<summary>Details:</summary>
+		<p>These results follow from our previous <a href="Covariance.html">general results</a> and the special form of \(\delta\) and \(\delta_2\).</p>
+	</details>
+</div>
+
+<h3 id="exe">Computational Exercises</h3>
+
+<p>We use the basic notation established above for samples \(\bs{X}\) and \(\bs{Y}\), and for the statistics \(M\), \(W^2\), \(S^2\), \(T\) , and so forth.</p>
+
+<div class="unit" id="exe1">
+	<p class="math">Suppose that the net weights (in grams) of 25 bags of M&amp;Ms form a random sample \(\bs{X}\) from the normal distribution with mean 50 and standard deviation 4. Find each of the following:</p>
+	<ol class="sub">
+		<li>The mean and standard deviation of \(M\).</li>
+		<li>The mean and standard deviation of \(W^2\).</li>
+		<li>The mean and standard deviation of \(S^2\).</li>
+		<li>The mean and standard deviation of \(T\).</li>
+		<li>\(\P(M \gt 49, S^2 \lt 20))\).</li>
+		<li>\(\P(-1 \lt T \lt 1)\).</li>
+	</ol>
+	<details>
+		<summary>Details:</summary>
+		<ol class="sub">
+			<li>\(50, \; 4 / 5\)</li>
+			<li>\(16, \; 16 \sqrt{2} / 5\)</li>
+			<li>\(16, \; 8 / \sqrt{3}\)</li>
+			<li>\(0, \; 2 \sqrt{3 / 11}\)</li>
+			<li>\(0.7291\)</li>
+			<li>\(0.6727\)</li>
+		</ol>
+	</details>
+</div>
+
+<div class="unit" id="exe2">
+	<p class="math">Suppose that the SAT math scores from 16 Alabama students form a random sample \(\bs{X}\) from the normal distribution with mean 550 and standard deviation 20, while the SAT math scores from 25 Georgia students form a random sample \(\bs{Y}\) from the normal distribution with mean 540 and standard deviation 15. The two samples are independent. Find each of the following:</p>
+	<ol class="sub">
+		<li>The mean and standard deviation of \(M(\bs{X})\).</li>
+		<li>The mean and standard deviation of \(M(\bs{Y})\).</li>
+		<li>The mean and standard deviation of \(M(\bs{X}) - M(\bs{Y})\).</li>
+		<li>\(\P[M(\bs{X}) \gt M(\bs{Y})]\).</li>
+		<li>The mean and standard deviation of \(S^2(\bs{X})\).	</li>
+		<li>The mean and standard deviation of \(S^2(\bs{Y})\).</li>
+		<li>The mean and standard deviation of \(S^2(\bs{X}) / S^2(\bs{Y})\)</li>
+		<li>\(\P[S(\bs{X}) \gt S(\bs{Y})]\).	</li>
+	</ol>
+	<details>
+		<summary>Details:</summary>
+		<ol class="sub">
+			<li>\(550, \; 5\)</li>
+			<li>\(540, \; 3\)</li>
+			<li>\(10, \; \sqrt{34}\)</li>
+			<li>\(0.9568\)</li>
+			<li>\(400, \; 80 \sqrt{10 / 3}\)</li>
+			<li>\(225, \; 75 \sqrt{3} / 2\)</li>
+			<li>\(64 / 33, \; \frac{32}{165} \sqrt{74 / 3}\)</li>
+			<li>\(0.8750\)</li>
+		</ol>
+	</details>
+</div>
+
+<footer>
+	<ol class="map">
+		<li class="parent"><a href="../index.html">Random</a></li>
+		<li class="parent"><a href="index.html">5. Random Samples</a></li>
+		<li class="child"><a href="Introduction.html" title="Introduction">1</a></li>
+		<li class="child"><a href="Mean.html" title="The Sample Mean">2</a></li>
+		<li class="child"><a href="LLN.html" title="The Law of Large Numbers">3</a></li>
+		<li class="child"><a href="CLT.html" title="The Central Limit Theorem">4</a></li>
+		<li class="child"><a href="Variance.html" title="The Sample Variance">5</a></li>
+		<li class="child"><a href="OrderStatistics.html" title="Order Statistics">6</a></li>
+		<li class="child"><a href="Covariance.html" title="Sample Correlation and Regression">7</a></li>
+		<li class="current">8</li>
+		<li class="details"><button type="button" title="Expand Details" onclick="expandDetails(true);"><img src="../icons/Plus.svg" alt="Expand"></button></li>
+		<li class="details"><button type="button" title="Contract Details" onclick="expandDetails(false);"><img src="../icons/Minus.svg" alt="Contract"></button></li>
+	</ol>
+	<ul class="map">
+		<li class="sister"><a href="JavaScript:openAncillary('../apps/index.html')" class="ancillary">Apps</a></li>
+		<li class="sister"><a href="JavaScript:openAncillary('../data/index.html')" class="ancillary">Data Sets</a></li>
+		<li class="child"><a href="JavaScript:openAncillary('../biographies/index.html')" class="ancillary"> Biographies</a></li>
+	</ul>
+</footer>
+
+<script>getReferences();</script>
+
+</body>
+</html>

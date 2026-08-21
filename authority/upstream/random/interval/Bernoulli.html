@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="utf-8">
+  <title>Estimation in the Bernoulli Model</title>
+  <meta name="author" content="Kyle Siegrist">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="probability, statistics, interval estimation, Bernoulli distribution, confidence level, Wilson interval, Wald interval, conservative interval">
+  <link rel="icon" href="../icons/Icon.svg" type="image/svg">
+  <link rel="stylesheet" href="../Screen.css" type="text/css" media="screen">
+  <script src="../Basic.js"></script>
+  <script src="../../MathJax/tex-svg.js" id="MathJax-script" async></script>
+</head>
+
+<body>
+
+<div class="latex">
+  \(\newcommand{\R}{\mathbb{R}}\)
+  \(\newcommand{\N}{\mathbb{N}}\)
+  \(\newcommand{\Z}{\mathbb{Z}}\)
+  \(\newcommand{\P}{\mathbb{P}}\)
+  \(\newcommand{\E}{\mathbb{E}}\)
+  \(\newcommand{\var}{\text{var}}\)
+  \(\newcommand{\sd}{\text{sd}}\)
+  \(\newcommand{\bs}{\boldsymbol}\)
+</div>
+
+<header>
+  <ol class="map">
+    <li class="parent"><a href="../index.html">Random</a></li>
+    <li class="parent"><a href="index.html">7. Set Estimation</a></li>
+    <li class="child"><a href="Introduction.html" title="Introduction">1</a></li>
+    <li class="child"><a href="Normal.html" title="Estimation in the Normal Model">2</a></li>
+    <li class="current">3</li>
+    <li class="child"><a href="BivariateNormal.html" title="Estimation in the Two-Sample Normal Model">4</a></li>
+    <li class="child"><a href="Bayes.html" title="Bayesian Interval Estimation">5</a></li>
+    <li class="details"><button type="button" title="Expand Details" onclick="expandDetails(true);"><img src="../icons/Plus.svg" alt="Expand"></button></li>
+    <li class="details"><button type="button" title="Contract Details" onclick="expandDetails(false);"><img src="../icons/Minus.svg" alt="Contract"></button></li>
+  </ol>
+  <h2>3. Estimation in the Bernoulli Model</h2>
+</header>
+
+<h3>Introduction</h3>
+
+<p>Recall that an <dfn>indicator variable</dfn> is a <a href="../prob/Events.html">random variable</a> that just takes the values 0 and 1. In applications, an indicator variable indicates which of two complementary events in a random experiment has occurred.</p>
+
+<div class="unit" id="exm">
+  <p class="math">Typical examples include</p>
+  <ol class="sub">
+    <li>A manufactured item subject to unavoidable random factors is either defective or acceptable.</li>
+    <li>A voter selected from a population either supports a particular candidate or does not.</li>
+    <li>A person selected from a population either does or does not have a particular medical condition.</li>
+    <li>A student in a class either passes or fails a standardized test.</li>
+    <li>A sample of radioactive material either does or does not emit an alpha particle in a specified ten-second period.</li>
+  </ol>
+</div>
+
+<p>Recall also that the distribution of an indicator variable is known as the <dfn>Bernoulli distribution</dfn>, named for <a href="JavaScript:openAncillary('../biographies/Bernoulli.html')" class="ancillary">Jacob Bernoulli</a>, and has probability density function given by \(\P(X = 1) = p\), \(\P(X = 0) = 1 - p\), where \(p \in (0, 1)\) is the basic parameter.</p>
+
+<div class="unit">
+  <p class="math">In the context of the examples <a href="#exm" class="ref"></a>,</p>
+  <ol class="sub">
+    <li>\(p\) is the probability that the manufactured item is defective.</li>
+    <li>\(p\) is the proportion of voters in the population who favor the candidate.</li>
+    <li>\(p\) is the poportion of persons in the population that have the medical condition.</li>
+    <li>\(p\) is the probability that a student in the class will pass the exam.</li>
+    <li>\(p\) is the probability that the material will emit an alpha particle in the specified period.</li>
+  </ol>
+</div>
+
+<p>Recall that the mean and variance of the Bernoulli distribution are \(\E(X) = p\) and \(\var(X) = p (1 - p)\). Often in statistical applications, \(p\) is unknown and must be estimated from sample data. In this section, we will see how to construct interval estimates for the parameter from sample data. A parallel section on <a href="../hypothesis/BivariateNormal.html">tests in the Bernoulli model</a> is in the chpater n <a href="../hypothesis/index.html">hypothesis testing</a>.</p>
+
+<h3>The One-Sample Model</h3>
+
+<h4>Preliminaries</h4>
+
+<p>Suppose that \(\bs{X} = (X_1, X_2, \ldots, X_n)\) is a random sample from the Bernoulli distribution with unknown parameter \(p \in [0, 1]\). That is, \(\bs X\) is a squence of <a href="../bernoulli/Introduction.html">Bernoulli trials</a>. From the examples in the introduction above, note that often the underlying experiment is to sample at random from a dichotomous population. When the sampling is <em>with</em> replacement, \(\bs X\) really is a sequence of Bernoulli trials. When the sampling is <em>without</em> replacement, the variables are dependent, but the Bernoulli model is still approximately valid if the population size is large compared to the sample size \( n \). For more on these points, see the <a href="../urn/Introduction.html">introduction</a> in the chapter on <a href="../urn/index.html">finite sampling models</a>.</p>
+
+<p>Note that the sample mean of our data vector \(\bs X\), namely
+\[ M = \frac{1}{n} \sum_{i=1}^n X_i \]
+is the sample proportion of objects of the type of interest. By the <a href="../sample/CLT.html">central limit theorem</a>, the standard score
+\[ Z = \frac{M - p}{\sqrt{p (1 - p) / n}} \]
+has approximately a standard <a href="../special/Normal.html">normal distribution</a> and hence is (approximately) a pivot variable for \(p\). For a given sample size \(n\), the distribution of \(Z\) is closest to normal when \(p\) is near \(\frac{1}{2}\) and farthest from normal when \(p\) is near 0 or 1 (extreme). Because the pivot variable is (approximately) normally distributed, the construction of confidence intervals for \(p\) in this model is similar to the construction of <a href="Normal.html">confidence intervals</a> for the distribution mean \(\mu\) in the normal model. But of course all of the confidence intervals so constructed are approximate.</p>
+
+<p>As usual, for \(r \in (0, 1)\), let \(z(r)\) denote the <a href="../dist/CDF.html#qnt">quantile</a> of order \(r\) for the standard normal distribution. Values of \(z(r)\) can be obtained from the <a href="JavaScript:openAncillary('../apps/QuantileApp.html')" class="ancillary">quantile app</a>, or from most statistical software packages.</p>
+
+<h4>Wilson Confidence Intervals</h4>
+
+<div class="unit" id="wil1">
+  <p class="math">For \(\alpha \in (0, 1)\), the following are approximate \(1 - \alpha\) confidence sets for \(p\):</p>
+  <ol class="sub">
+    <li>\(\left\{ p \in [0, 1]: M - z(1 - \alpha / 2) \sqrt{p (1 - p) / n} \le p \le M + z(1 - \alpha / 2) \sqrt{p (1 - p) / n} \right\}\)</li>
+    <li>\(\left\{ p \in [0, 1]: p \le M + z(1 - \alpha) \sqrt{p (1 - p) / n} \right\}\)</li>
+    <li>\(\left\{ p \in [0, 1]: M - z(1 - \alpha) \sqrt{p (1 - p) / n} \le p \right\}\)</li>
+  </ol>
+  <details>
+    <summary>Details:</summary>
+    <p>From our discussion above, \((M - p) / \sqrt{p (1 - p) / n}\) has approximately a standard normal distribution. Hence by definition of the quantiles,</p>
+    <ol class="sub">
+      <li>\(\P[-z(1 - \alpha / 2) \le (M - p) / \sqrt{p (1 - p) / n} \le z(1 - \alpha / 2)] \approx 1 - \alpha\)</li>
+      <li>\(\P[-z(1 - \alpha) \le (M - p) / \sqrt{p (1 - p) / n}] \approx 1 - \alpha\)</li>
+      <li>\(\P[(M - p) / \sqrt{p (1 - p) / n} \le z(1 - \alpha)] \approx 1 - \alpha\)</li>
+    </ol>
+    <p>Solving the inequalities for \(p\) in the numerator of \((M - p) / \sqrt{p (1 - p) / n}\) for each event gives the corresponding confidence set.</p>
+  </details>
+</div>
+
+<p>These confidence sets are actually intervals, known as the <dfn>Wilson intervals</dfn>, in honor of Edwin Wilson.</p>
+
+<div class="unit" id="wil2">
+  <p class="math">The confidence sets for \( p \) in <a href="#wil1" class="ref"></a> are intervals. Let
+  \[ U(z) = \frac{n}{n + z^2} \left(M + \frac{z^2}{2 n} + z \sqrt{\frac{M (1 - M)}{n} + \frac{z^2}{4 n^2}}\right)\] Then the following have approximate confidecne level \(1 - \alpha\) for \(p\).</p>
+  <ol class="sub">
+    <li>The two-sided interval \(\left[U[-z(1 - \alpha / 2)], U[z(1 - \alpha / 2)]\right]\).</li>
+    <li>The upper bound \(U[z(1 - \alpha)]\).</li>
+    <li>The lower bound \(U[-z(1 - \alpha)]\).</li>
+  </ol>
+  <details>
+    <summary>Details:</summary>
+    <p>This follows by solving the inequalities in <a href="#wil1" class="ref"></a> for \(p\). For each inequality, we can isolate the square root term, and then square both sides. This gives quadratic inequalities, which can be solved using the quadratic formula.</p>
+  </details>
+</div>
+
+<p>As usual, the <dfn>equal-tailed</dfn> confidence interval in (a) is not the only two-sided \(1 - \alpha\) confidence interval for \(p\). We can divide the \(\alpha\) probability between the left and right tails of the standard normal distribution in any way that we please.</p>
+
+<div class="unit" id="wil3">
+  <p class="math">For \(\alpha, \, r \in (0, 1)\), an approximate two-sided \(1 - \alpha\) confidence interval for \(p\) is \(\left[U[z(\alpha - r \alpha)], U[z(1 - r \alpha)]\right]\) where \(U\) is the function in <a href="#wil2" class="ref"></a>.</p>
+  <details>
+    <summary>Details:</summary>
+    <p>As in the proof of <a href="#wil1" class="ref"></a>,
+    \[\P\left[z(\alpha - r \alpha) \le \frac{M - p}{\sqrt{p (1 - p) / n}} \le z(1 - r \alpha)\right] \approx 1 - \alpha\]
+    Solving for \(p\) with the help of the quadratic formula gives the result.</p>
+  </details>
+</div>
+
+<p>In practice, the equal-tailed \(1 - \alpha\) confidence interval in part (a) of <a href="#wil2" class="ref"></a>, obtained by setting \(r = \frac{1}{2}\) in <a href="#wil3" class="ref"></a>, is the one that is always used. As \(r \uparrow 1\), the right enpoint converges to the \(1 - \alpha\) confidence upper bound in part (b), and as \(r \downarrow 0\) the left endpoint converges to the \(1 - \alpha\) confidence lower bound in part (c).</p>
+
+<div class="unit">
+  <p class="app">Open the <a href="JavaScript:openAncillary('../apps/ProportionEstimate.html')" class="ancillary">proportion estimation experiment</a> and select the Wilson estimation procedure. For various values of \(p\),  confidence levels, sample sizes, and interval types, run the experiment 1000 times and compare the proportion of successful intervals to the theoretical confidence level. You should note that if the sample size \(n\) is not large relative to \(p\) then the procedure will not work as advertized.</p>
+</div>
+
+<h4>Wald Confidence Intervals</h4>
+
+<p>Simplified approximate \(1 - \alpha\) confidence intervals for \(p\) can be obtained by replacing the distribution mean \(p\) by the sample mean \(M\) in the extreme parts of the inequalities in <a href="#wil1" class="ref"></a>.</p>
+
+<div class="unit" id="con4">
+  <p class="math">For \(\alpha \in (0, 1)\), the following have approximate confidence level \(1 - \alpha\) for \(p\):</p>
+  <ol class="sub">
+    <li>The two-sided interval with endpoints \(M \pm z(1 - \alpha / 2) \sqrt{M (1 - M) / n}\).</li>
+    <li>The upper bound \(M + z(1 - \alpha) \sqrt{M (1 - M) / n}\).</li>
+    <li>The lower bound \(M - z(1 - \alpha) \sqrt{M (1 - M) / n}\).</li>
+  </ol>
+  <details>
+    <summary>Details:</summary>
+    <p>As noted, these results follows from the confidence set in <a href="#wil1" class="ref"></a> by replacing \( p \) with \( M \) in the expression \( \sqrt{p (1 - p) / n} \).</p>
+  </details>
+</div>
+
+<p>These confidence intervals are known as <dfn>Wald intervals</dfn>, in honor of <a href="JavaScript:openAncillary('../biographies/Wald.html')" class="ancillary">Abraham Wald.</a>. Note that the Wald interval can also be obtained from the Wilson intervals in <a href="#wil2" class="ref"></a> by assuming that \(n\) is large compared to \(z\), so that \(n \big/ (n + z^2) \approx 1\), \(z^2 / 2 n \approx 0\), and \(z^2 / 4 n^2 \approx 0\). Note that this interval in (c) is symmetric about the sample proportion \(M\) but that the length of the interval, as well as the center is random. This is the two-sided interval that is normally used.</p>
+
+<div class="unit">
+  <p class="app">Open the <a href="JavaScript:openAncillary('../apps/ProportionEstimate.html')" class="ancillary">proportion estimation experiment</a> and select the Wald estimation procedure. For various values of \(p\),  confidence levels, sample sizes, and interval types, run the experiment 1000 times and compare the proportion of successful intervals to the theoretical confidence level. You should note that if the sample size \(n\) is not large relative to \(p\) then the procedure will not work as advertized.</p>
+</div>
+
+<p>As always, the equal-tailed interval in <a href="#con4" class="ref"></a> is not the only two-sided, \(1 - \alpha\) confidence interval. </p>
+
+<div class="unit">
+  <p class="math">For \(\alpha, \, r \in (0, 1)\), an approximate two-sided \(1 - \alpha\) confidence interval for \(p\) is
+  \[\left[M - z(1 - r \alpha) \sqrt{\frac{M (1 - M)}{n}}, M - z(\alpha - r \alpha) \sqrt{\frac{M (1 - M)}{ n}}\right]\]
+  The interval with smallest length is the equal-tail interval with \(r = \frac 1 2\).</p>
+</div>
+
+<h4>Conservative Confidence Intervals</h4>
+
+<p>Note that the function \(p \mapsto p(1 - p)\) on the interval \( [0, 1] \) is maximized when \(p = \frac 1 2\) and thus the maximum value is \(\frac{1}{4}\). We can obtain conservative confidence intervals for \( p \) from the basic confidence intervals by using this fact.</p>
+
+<div class="unit" id="wald1">
+  <p class="math">For \(\alpha \in (0, 1)\), the following have approximate confidence level at least \(1 - \alpha\) for \(p\):</p>
+  <ol class="sub">
+    <li>The two-sided interval with endpoints \(M \pm z(1 - \alpha / 2) \frac{1}{2 \sqrt{n}}\).</li>
+    <li>The upper bound \(M + z(1 - \alpha) \frac{1}{2 \sqrt{n}}\).</li>
+    <li>The lower bound \(M - z(1 - \alpha) \frac{1}{2 \sqrt{n}}\).</li>
+  </ol>
+  <details>
+    <summary>Details:</summary>
+    <p>As noted, these results follows from the confidence sets in <a href="#wil1" class="ref"></a> by replacing \( p \) with \( \frac 1 2 \) in the expression \( \sqrt{p (1 - p) / n} \).</p>
+  </details>
+</div>
+
+<div class="unit">
+  <p class="app">Open the <a href="JavaScript:openAncillary('../apps/ProportionEstimate.html')" class="ancillary">proportion estimation experiment</a> and select the conservative estimation procedure. For various values of \(p\),  confidence levels, sample sizes, and interval types, run the experiment 1000 times and compare the proportion of successful intervals to the theoretical confidence level. You should note that if the sample size \(n\) is not large relative to \(p\) then the procedure will not work as advertized. On the other hand, if \(n\) is reasonably large relative to \(p\) then you will notice that the empirical confidence level is often higher than advertized.</p>
+</div>
+
+<p>Note that the confidence interval in (a) is symmetric about the sample proportion \(M\) and that the length of the interval is deterministic. Of course, the conservative confidence intervals will be larger than the approximate Wald confidence intervals in <a href="#con4" class="ref"></a>. The conservative estimate can be used to design the experiment. Recall that the <dfn>margin of error</dfn> is the distance between the sample proportion \( M \) and an endpoint of the confidence interval.</p>
+
+<div class="unit">
+  <p class="math">A conservative estimate of the sample size \(n\) needed to estimate \(p\) with confidence \(1 - \alpha\) and margin of error \(d\) is
+  \[ n = \left\lceil \frac{z_\alpha^2}{4 d^2} \right\rceil \]
+  where \(z_\alpha = z(1 - \alpha / 2)\) for the two-sided interval and \(z_\alpha = z(1 - \alpha)\) for the confidence upper or lower bound.</p>
+  <details>
+    <summary>Details:</summary>
+    <p>With confidence level \( 1 - \alpha \), the margin of error is \( z_\alpha \frac{1}{2 \sqrt{n}} \). Setting this equal to the prescribed value \( d \) and solving gives the result.</p>
+  </details>
+</div>
+
+<p>As always, the equal-tailed interval in <a href="#wald1" class="ref"></a> is not the only two-sided, conservative, \(1 - \alpha\) confidence interval. </p>
+
+<div class="unit">
+  <p class="math">For \(\alpha, \, r \in (0, 1)\), an approximate two-sided, conservative \(1 - \alpha\) confidence interval for \(p\) is
+  \[\left[M - z(1 - r \alpha) \frac{1}{2 \sqrt{n}}, M - z(\alpha - r \alpha) \frac{1}{2 \sqrt{n}}\right]\]
+  The interval with smallest length is the equal-tail interval with \(r = \frac 1 2\).</p>
+</div>
+
+<h3 id="two">The Two-Sample Model</h3>
+
+<h4>Preliminaries</h4>
+
+<p>Often we have two underlying Bernoulli distributions, with parameters \( p_1, \, p_2 \in [0, 1] \) and we would like to estimate the difference \( p_1 - p_2 \). This problem could arise in the following typical examples:</p>
+
+<ul>
+	<li>In a quality control setting, suppose that \( p_1 \) is the proportion of defective items produced under one set of manufacturing conditions while \( p_2 \) is the proportion of defectives under a different set of conditions.</li>
+	<li>In an election, suppose that \( p_1 \) is the proportion of voters who favor a particular candidate at one point in the campaign, while \( p_2 \) is the proportion of voters who favor the candidate at a later point (perhaps after a scandal has erupted).</li>
+	<li>Suppose that \( p_1 \) is the proportion of students who pass a certain standardized test with the usual test preparation methods while \( p_2 \) is the proportion of students who pass the test with a new set of preparation methods.</li>
+	<li>Suppose that \( p_1 \) is the proportion of unvaccinated persons in a certain population who contract a certain disease, while \( p_2 \) is the proportion of vaccinated person who contract the disease.</li>
+</ul>
+
+<p>Note that several of these examples can be thought of as <dfn>treatment-control</dfn> problems. Of course, we could construct interval estimates \(I_1\) for \(p_1\) and \(I_2\) for \(p_2\) separately, as in the subsections above. But as we noted in the <a href="Introduction.html">introduction</a>, if these two intervals have confidence level \(1 - \alpha\), then the product set \(I_1 \times I_2\) has confidence level \((1 - \alpha)^2\) for \((p_1, p_2)\). So if \(p_1 - p_2\) is our parameter of interest, we will use a different approach.</p>
+
+<h4>Simplified Confidence Intervals</h4>
+
+<p>Suppose now that \( \bs X = (X_1, X_2, \ldots, X_{n_1}) \) is a random sample of size \( n_1 \) from the Bernoulli distribution with parameter \( p_1 \), and \( \bs Y = (Y_1, Y_2, \ldots, Y_{n_2}) \) is a random sample of size \( n_2 \) from the Bernoulli distribution with parameter \( p_2 \). We assume that the samples \( \bs X \) and \( \bs Y \) are independent. Let
+\[ M_1 = \frac{1}{n_1} \sum_{i=1}^{n_1} X_i, \quad M_2 = \frac{1}{n_2} \sum_{i=1}^{n_2} Y_i \]
+denote the sample means (sample proportions) for the samples \( \bs X \) and \( \bs Y \). A natural point estimate for \( p_1 - p_2 \), and the building block for our interval estimate, is \( M_1 - M_2 \). As noted in the one-sample model, if \( n_i \) is large, \( M_i \) has an approximate normal distribution with mean \( p_i \) and variance \( p_i (1 - p_i) / n_i \) for \( i \in \{1, 2\} \). Since the samples are independent, so are the sample means. Hence \( M_1 - M_2 \) has an approximate normal distribution with mean \( p_1 - p_2 \) and variance \( p_1 (1 - p_1) / n_1 + p_2 (1 - p_2) / n_2\). We now have all the tools we need for a simplified, approximate confidence interval for \( p_1 - p_2 \).</p>
+
+<div class="unit" id="two1">
+  <p class="math">For \(\alpha \in (0, 1)\), the following have approximate confidence level \(1 - \alpha\) for \(p_1 - p_2\):</p>
+  <ol class="sub">
+    <li>The two-sided interval with endpoints \((M_1 - M_2) \pm z\left(1 - \alpha / 2\right) \sqrt{M_1 (1 - M_1) / n_1 + M_2 (1 - M_2) / n_2} \).</li>
+    <li>The lower bound \( (M_1 - M_2) - z(1 - \alpha) \sqrt{M_1 (1 - M_1) / n_1 + M_2 (1 - M_2) / n_2} \).</li>
+    <li>The upper bound \( (M_1 - M_2) + z(1 - \alpha) \sqrt{M_1 (1 - M_1) / n_1 + M_2 (1 - M_2) / n_2} \).</li>
+  </ol>
+  <details>
+    <summary>Details:</summary>
+    <p>As noted above, if \(n_1\) and \(n_2\) are large,
+    \[\frac{(M_1 - M_2) - (p_1 - p_2)}{\sqrt{p_1(1 - p_1) / n_1 + p_2(1 - p_2)/n_2}}\]
+    has approximatle a standard normal distribution, and hence so does
+    \[Z = \frac{(M_1 - M_2) - (p_1 - p_2)}{\sqrt{M_1(1 - M_1) / n_1 + M_2(1 - M_2)/n_2}}\]</p>
+    <ol class="sub">
+      <li>\(\P[-z(1 - \alpha / 2) \le Z \le z(1 - \alpha / 2)] \approx 1 - \alpha\). Solving for \(p_1 - p_2\) gives the two-sided confidence interval.</li>
+      <li>\(\P[-z(1 - \alpha) \le Z] \approx 1 - \alpha\). Solving for \(p_1 - p_2\) gives the confidence upper bound.</li>
+      <li>\(\P[Z \le z(1 - \alpha / 2)] \approx 1 - \alpha\). Solving for \(p_1 - p_2\) gives the confidence lower bound.</li>
+    </ol>
+  </details>
+</div>
+
+<p>As always, the equal-tailed interval in (a) is not the only approximate two-sided \(1 - \alpha\) confidence interval.</p>
+
+<div class="unit" id="two2">
+  <p class="math">For \(\alpha, \, r \in (0, 1)\), an approximate \(1 - \alpha\) confidence set for \(p_1 - p_2\) is
+  \[ \left[(M_1 - M_2) - z(1 - r \alpha) \sqrt{M_1 (1 - M_1) / n_1 + M_2 (1 - M_2) / n_2}, (M_1 - M_2) - z(\alpha - r \alpha) \sqrt{M_1 (1 - M_1) / n_1 + M_2 (1 - M_2) / n_2} \right]\]</p>
+  <details>
+    <summary>Details:</summary>
+    <p>As noted in the details of <a href="#two1" class="ref"></a>,
+    \[Z = \frac{(M_1 - M_2) - (p_1 - p_2)}{\sqrt{M_1(1 - M_1) / n_1 + M_2(1 - M_2)/n_2}}\]
+    has approximately a standard normal distribution if \(n_1\) and \(n_2\) are large. Hence \(\P[-z(\alpha - r \alpha) \le Z \le z(1 - r \alpha)] \approx 1 - \alpha\). Solving for \(p_1 - p_2\) gives the two-sided confidence interval.</p>
+  </details>
+</div>
+
+<h4>Conservative Confidence Intervals</h4>
+
+<p>Once again, \(p \mapsto p (1 - p)\) is maximized when \(p = \frac 1 2 \) with maximum value \(\frac 1 4\). We can use this to construct approximate conservative confidence intervals for \(p_1 - p_2\).</p>
+
+<div class="unit" id="two3">
+  <p class="math">For \(\alpha \in (0, 1)\), the following have approximate confidence level at least \(1 - \alpha\) for \(p_1 - p_2\):</p>
+  <ol class="sub">
+    <li>The two-sided interval with endpoints \((M_1 - M_2) \pm \frac{1}{2} z\left(1 - \alpha / 2\right) \sqrt{1 / n_1 + 1 / n_2} \).</li>
+    <li>The lower bound \( (M_1 - M_2) - \frac{1}{2} z(1 - \alpha) \sqrt{1 / n_1 + 1 / n_2} \).</li>
+    <li>The upper bound \( (M_1 - M_2) + \frac{1}{2} z(1 - \alpha) \sqrt{1 / n_1 + 1 / n_2} \).</li>
+  </ol>
+  <details>
+    <summary>Details:</summary>
+    <p>These results follow from theorem <a href="two2"></a> by replacing \(M_1 (1 - M_1)\) and \(M_2 (1 - M_2)\) each with \(\frac 1 4\).</p>
+  </details>
+</div>
+
+<h3>Computational Exercises</h3>
+
+<div class="unit">
+  <p class="math">In a poll of 1000 registered voters in a certain district, 427 prefer candidate X. Construct the 95% two-sided confidence interval for the proportion of all registered voters in the district that prefer X. </p>
+  <details>
+    <summary>Details:</summary>
+    <p> \((0.396, 0.458)\)</p>
+  </details>
+</div>
+
+<div class="unit">
+  <p class="math">A coin is tossed 500 times and results in 302 heads. Construct the 95% confidence lower bound for the probability of heads. Do you believe that the coin is fair? </p>
+  <details>
+    <summary>Details:</summary>
+    <p> 0.579. No, the coin is almost certainly not fair.</p>
+  </details>
+</div>
+
+<div class="unit">
+  <p class="math">A sample of 400 memory chips from a production line are tested, and 30 are defective. Construct the conservative 90% two-sided confidence interval for the proportion of defective chips. </p>
+  <details>
+    <summary>Details:</summary>
+    <p>\((0.034, 0.116)\)</p>
+  </details>
+</div>
+
+<div class="unit">
+  <p class="math">A drug company wants to estimate the proportion of persons who will experience an adverse reaction to a certain new drug. The company wants a two-sided interval with margin of error 0.03 with 95% confidence. How large should the sample be?</p>
+  <details>
+    <summary>Details:</summary>
+    <p>1068</p>
+  </details>
+</div>
+
+<div class="unit">
+  <p class="math">An advertising agency wants to construct a 99% confidence lower bound for the proportion of dentists who recommend a certain brand of toothpaste. The margin of error is to be 0.02. How large should the sample be? </p>
+  <details>
+    <summary>Details:</summary>
+    <p>3382</p>
+  </details>
+</div>
+
+<div class="unit">
+  <p class="stat">The <a href="JavaScript:openAncillary('../data/Buffon.html')" class="ancillary">Buffon trial data</a> set gives the results of 104 repetitions of <a href="../buffon/Buffon.html#npr">Buffon's needle experiment</a>.  Theoretically, the data should correspond to Bernoulli trials with \(p = 2 / \pi\), but because real students dropped the needle, the true value of \(p\) is unknown.  Construct a 95% confidence interval for \(p\). Do you believe that \(p\) is the theoretical value?</p>
+  <details>
+    <summary>Details:</summary>
+    <p>\((0.433, 0.634)\). The theoretical value is approximately 0.637, which is not in the confidence interval.</p>
+  </details>
+</div>
+
+<div class="unit">
+  <p class="math">A manufacturing facility has two production lines for a certain item. In a sample of 150 items from line 1, 12 are defective. From a sample of 130 items from line 2, 10 are defective. Construct the two-sided 95% confidence interval for \( p_1 - p_2 \),  where \( p_i \) is the proportion of defective items from line \( i \), for \( i \in \{1, 2\} \)</p>
+  <details>
+    <summary>Details:</summary>
+    <p>\( [-0.050, 0.056] \)</p>
+  </details>
+</div>
+
+<div class="unit">
+  <p class="math">The vaccine for influenza is tailored each year to match the predicted dominant strain of influenza. Suppose that of 500 unvaccinated persons, 45 contracted the flu in a certain time period. Of 300 vaccinated persons, 20 contracted the flu in the same time period. Construct the two-sided 99% confidence interval for \( p_1 - p_2 \), where \( p_1 \) is the incidence of flu in the unvaccinated population and \( p_2 \) the incidence of flu in the vaccinated population.</p>
+</div>
+
+<footer>
+  <ol class="map">
+    <li class="parent"><a href="../index.html">Random</a></li>
+    <li class="parent"><a href="index.html">7. Set Estimation</a></li>
+    <li class="child"><a href="Introduction.html" title="Introduction">1</a></li>
+    <li class="child"><a href="Normal.html" title="Estimation in the Normal Model">2</a></li>
+    <li class="current">3</li>
+    <li class="child"><a href="BivariateNormal.html" title="Estimation in the Two-Sample Normal Model">4</a></li>
+    <li class="child"><a href="Bayes.html" title="Bayesian Interval Estimation">5</a></li>
+    <li class="details"><button type="button" title="Expand Details" onclick="expandDetails(true);"><img src="../icons/Plus.svg" alt="Expand"></button></li>
+    <li class="details"><button type="button" title="Contract Details" onclick="expandDetails(false);"><img src="../icons/Minus.svg" alt="Contract"></button></li>
+  </ol>
+	<ul class="map">
+		<li class="sister"><a href="JavaScript:openAncillary('../apps/index.html')" class="ancillary">Apps</a></li>
+		<li class="sister"><a href="JavaScript:openAncillary('../data/index.html')" class="ancillary">Data Sets</a></li>
+		<li class="child"><a href="JavaScript:openAncillary('../biographies/index.html')" class="ancillary"> Biographies</a></li>
+	</ul>
+</footer>
+
+<script>getReferences();</script>
+
+</body>
+</html>

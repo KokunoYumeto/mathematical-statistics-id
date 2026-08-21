@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="utf-8">
+	<title>Bayes' Estimators</title>
+	<meta name="author" content="Kyle Siegrist">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="keywords" content="probability, statistics, point estimation, Bayes estimator, Bayes' theorem, conjugate family, Bernoulli distribution, geometric distribution, Poisson distribution, normal distribution, beta distribution, Pareto distribution">
+	<link rel="icon" href="../icons/Icon.svg" type="image/svg">
+	<link rel="stylesheet" href="../Screen.css" type="text/css" media="screen">
+	<script src="../Basic.js"></script>
+	<script src="../../MathJax/tex-svg.js" id="MathJax-script" async></script>
+</head>
+
+<body>
+
+<div class="latex">
+	\(\newcommand{\R}{\mathbb{R}}\)
+	\(\newcommand{\N}{\mathbb{N}}\)
+	\(\newcommand{\Z}{\mathbb{Z}}\)
+	\(\newcommand{\E}{\mathbb{E}}\)
+	\(\newcommand{\P}{\mathbb{P}}\)
+	\(\newcommand{\var}{\text{var}}\)
+	\(\newcommand{\sd}{\text{sd}}\)
+	\(\newcommand{\cov}{\text{cov}}\)
+	\(\newcommand{\cor}{\text{cor}}\)
+	\(\newcommand{\bias}{\text{bias}}\)
+	\(\newcommand{\mse}{\text{mse}}\)
+	\(\newcommand{\bs}{\boldsymbol}\)
+</div>
+
+<header>
+	<ol class="map">
+		<li class="parent"><a href="../index.html">Random</a></li>
+		<li class="parent"><a href="index.html">6. Point Estimation</a></li>
+		<li class="child"><a href="Estimators.html" title="Estimators">1</a></li>
+		<li class="child"><a href="Moments.html" title="The Method of Moments">2</a></li>
+		<li class="child"><a href="Likelihood.html" title="Maximum Likelihood">3</a></li>
+		<li class="current">4</li>
+		<li class="child"><a href="Unbiased.html" title="Best Unbiased Estimators">5</a></li>
+		<li class="child"><a href="Sufficient.html" title="Complete, Sufficient, and Ancillary Statistics">6</a></li>
+		<li class="details"><button type="button" title="Expand Details" onclick="expandDetails(true);"><img src="../icons/Plus.svg" alt="Expand"></button></li>
+		<li class="details"><button type="button" title="Contract Details" onclick="expandDetails(false);"><img src="../icons/Minus.svg" alt="Contract"></button></li>
+	</ol>
+	<h2>4. Bayesian Estimation</h2>
+</header>
+
+<h3>Basic Theory</h3>
+
+<h4>The General Method</h4>
+
+<p>Suppose again that we have an observable <a href="../prob/Probability.html">random variable </a> \(\bs{X}\) for a <a href="../prob/Experiments.html">random experiment</a> with values in a set \(S\). Suppose also that distribution of \(\bs{X}\) depends on a parameter \(\theta\) with values in a set \(T\). Of course, our data variable \(\bs{X}\) is almost always vector-valued, so that typically \( S \subseteq \R^n \) for some \( n \in \N_+ \). Depending on the nature of the sample set \( S \), the distribution of \( \bs X \) may be <a href="../dist/Discrete.html">discrete</a> or <a href="../dist/Continuous.html">continuous</a>. The parameter \(\theta\) may also be vector-valued, so that typically \( T \subseteq \R^k \) for some \( k \in \N_+ \).</p>
+
+<p>In <dfn>Bayesian analysis</dfn>, named for the famous <a href="JavaScript:openAncillary('../biographies/Bayes.html')" class="ancillary">Thomas Bayes</a>, we model the deterministic, but unknown parameter \(\theta\) with a random variable \( \Theta \) that has a specified distribution on the parameter set \( T \). Depending on the nature of the set, this distribution may also be either discrete or continuous. It is called the <dfn>prior distribution</dfn> of \(\Theta\) and is intended to reflect our knowledge of the parameter \( \theta \), <em>before</em> we gather data. After observing \(\bs X = \bs x \in S\), we then use <a href="../dist/Conditional.html#bay">Bayes' theorem</a>, to compute the conditional distribution of \( \Theta \) given \( \bs X = \bs x \). This distribution is called the <dfn>posterior distribution</dfn> of \( \Theta \), and is an updated distribution, given the information in the data. Here is the mathematical description, stated in terms of probability density functions.</p>
+
+<div class="unit">
+	<p class="math">Suppose that the <dfn>prior distribution</dfn> of \( \Theta \) on \( T \) has probability density function \( h \), and that given \( \Theta = \theta \in T \), the conditional probability density function of \( \bs X \) on \( S \) is \( f(\cdot \mid \theta) \). Then the probability density function of the <dfn>posterior distribution</dfn> of \( \Theta \) given \( \bs X = \bs x \in S \) is
+	\[ h(\theta \mid \bs x) = \frac{h(\theta) f(\bs x \mid \theta)}{f(\bs x)}, \quad \theta \in T \]
+	where the function in the denominator is defined as follows, in the discrete and continuous cases, respectively:
+	\begin{align*}
+		f(\bs x) &amp; = \sum_{\theta \in T} h(\theta) f(\bs x | \theta), \quad \bs x \in S \\
+		f(\bs x) &amp; = \int_T h(\theta) f(\bs{x} \mid \theta) \, d\theta, \quad \bs x \in S
+	\end{align*}</p>
+	<details>
+		<summary>Details:</summary>
+		<p>This is just Bayes' theorem with new terminology. Recall that he <a href="../dist/Joint.html">joint probability density function</a> of \((\bs{X}, \Theta)\) is the mapping on \(S \times T\) given by
+		\[ (\bs{x}, \theta) \mapsto h(\theta) f(\bs{x} \mid \theta) \]
+		Then the function in the denominator is the marginal probability density function of \( \bs X \). So by definition, \( h(\theta \mid x) = h(\theta) f(\bs x \mid \theta) / f(\bs x) \) for \( \theta \in T \) is the conditional probability density function of \( \Theta \) given \( \bs X = \bs x \).</p>
+	</details>
+</div>
+
+<p>For \( \bs x \in S \), note that \(f(\bs{x})\) is simply the <em>normalizing constant</em> for the function \(\theta \mapsto h(\theta) f(\bs{x} \mid \theta)\). It may not be necessary to explicitly compute \(f(\bs{x})\), if one can recognize the functional form of \(\theta \mapsto h(\theta) f(\bs{x} \mid \theta)\) as that of a known distribution. This will indeed be the case in several of the examples explored below.</p>
+
+<p>If the parameter set \( T \) has finite measure \( c \) (counting measure in the discrete case or Lebesgue measure in the continuous case), then one possible prior distribution is the <a href="../special/Uniform.html">uniform distribution</a> on \( T \), with probability density function \( h(\theta) = 1 / c \) for \( \theta \in T \). This distribution reflects no prior knowledge about the parameter, and so is called the <dfn>non-informative</dfn> prior distributioon.</p>
+
+<h4>Random Samples</h4>
+
+<p>Of course, an important and essential special case occurs when \(\bs{X} = (X_1, X_2, \ldots, X_n)\) is a <a href="../sample/Introduction.html">random sample</a> of size \(n\) from the distribution of a basic variable \(X\). Specifically, suppose that \(X\) takes values in a set \(R\) and has probability density function \(g(\cdot \mid \theta)\) for a given \(\theta \in T\). In this case, \(S = R^n\) and the probability density function \( f(\cdot \mid \theta) \) of \(\bs{X}\) given \(\theta\) is 
+\[ f(x_1, x_2, \ldots, x_n \mid \theta) = g(x_1 \mid \theta) g(x_2 \mid \theta) \cdots g(x_n \mid \theta), \quad (x_1, x_2, \ldots, x_n) \in S \]</p>
+
+<h4>Real Parameters</h4>
+
+<p>Suppose that \( \theta \) is a real-valued parameter, so that \( T \subseteq \R \). Here is our main definition.</p>
+
+<div class="unit">
+	<p class="math">The  <a href="../expect/Conditional.html">conditional expected value</a> \(\E(\Theta \mid \bs{X})\) is the <dfn>Bayesian estimator</dfn> of \(\theta\).</p>
+	<ol class="sub">
+		<li>If \( \Theta \) has a discrete distribution on \( T \) then
+		\[\E(\Theta \mid \bs X = \bs x) = \sum_{\theta \in T} \theta h(\theta \mid \bs x), \quad \bs x \in S \]
+		</li>
+		<li>If \( \Theta \) has a continuous distribution on \( T \) then
+		\[\E(\Theta \mid \bs X = \bs x) = \int_T \theta h(\theta \mid \bs x) d\theta, \quad \bs x \in S\]
+		</li>
+	</ol>
+</div>
+
+<p>Recall that \(\E(\Theta \mid \bs{X})\) is a function of \(\bs{X}\) and, among all functions of \(\bs{X}\), is closest to \(\Theta\) in the mean square sense. Of course, once we collect the data and observe \(\bs{X} = \bs{x}\), the <dfn>Bayesian estimate</dfn> of \(\theta\) is \(\E(\Theta \mid \bs{X} = \bs{x})\). As always, the term <em>estimator</em> refers to a random variable, before the data are collected, and the term <em>estimate</em> refers to an observed value of the random variable after the data are collected. The definitions of <a href="Estimators.html">bias and mean square error</a> are as before, but now conditioned on \( \Theta = \theta \in T\).</p>
+
+<div class="unit">
+	<p class="math">Suppose that \( U \) is the Bayes estimator of \( \theta \).</p>
+	<ol class="sub">
+		<li>The <dfn>bias</dfn> of \( U \) is \(\bias(U \mid \theta) = \E(U - \theta \mid \Theta = \theta) \) for \( \theta \in T \).</li>
+		<li>The <dfn>mean square error</dfn> of \( U \) is \( \mse(U \mid \theta) = \E[(U - \theta)^2 \mid \Theta = \theta] \) for \( \theta \in T \).</li>
+	</ol>
+</div>
+
+<p>As before, \( \bias(U \mid \theta) = \E(U \mid \theta) - \theta \) and \( \mse(U \mid \theta) = \var(U \mid \theta) + \bias^2(U \mid \theta) \). Suppose now that we observe the random variables \( (X_1, X_2, X_3, \ldots) \) sequentially, and we compute the Bayes estimator \( U_n \) of \( \theta \) based on \( (X_1, X_2, \ldots, X_n) \) for each \( n \in \N_+ \). Again, the most common case is when we are sampling from a distribution, so that the sequence is independent and identically distributed (given \( \theta \)). We have the natural asymptotic properties that we have seen before.</p>
+
+<div class="unit">
+	<p class="math">Let \( \bs U = (U_n: n \in \N_+) \) be the sequence of Bayes estimators of \( \theta \) as above.</p>
+	<ol class="sub">
+		<li>\( \bs U \) is <dfn>asymptotically unbiased</dfn> if \( \bias(U_n \mid \theta) \to 0 \) as \( n \to \infty \) for each \( \theta \in T \).</li>
+		<li>\( \bs U \) is <dfn>mean-square consistent</dfn> if \( \mse(U_n \mid \theta) \to 0 \) as \( n \to \infty \) for each \( \theta \in T \).</li>
+	</ol>
+</div>
+
+<p>Often we cannot construct unbiased Bayesian estimators, but we do hope that our estimators are at least asymptotically unbiased and consistent. It turns out that the sequence of Bayesian estimators \( \bs U \) is a <a href="../martingales/index.html">martingale</a>. The theory of martingales provides some powerful tools for studying these estimators.</p>
+
+<p>From the Bayesian perspective, the posterior distribution of \( \Theta \) given the data \( \bs X = \bs x \) is of primary importance. Point estimates of \( \theta \) derived from this distribution are of secondary importance. In particular, the mean square error function \( u \mapsto \E[(\Theta - u)^2 \mid \bs X = \bs x) \), minimized as we have noted at \( \E(\Theta \mid \bs X = \bs x) \), is not the only <dfn>loss function</dfn> that can be used. (Although it's the only one that we consider.) Another possible loss function, among many, is the mean absolute error function \( u \mapsto \E(|\Theta - u| \mid \bs X = \bs x) \), which <a href="../expect/Spaces.html#cen">we know </a> is minimized at the median(s) of the posterior distribution.</p>
+
+<h4>Conjugate Families</h4>
+
+<p>Often, the prior distribution of \( \Theta \) is itself a member of a parametric family, with the parameters specified to reflect our prior knowledge of \( \theta \). In many important special cases, the parametric family can be chosen so that the posterior distribution of \(\Theta\) given \(\bs{X} = \bs{x}\) belongs to the same family for each \( \bs x \in S \). In such a case, the family of distributions of \( \Theta \) is said to be <dfn>conjugate</dfn> to the family of distributions of \(\bs{X}\). Conjugate families are nice from a computational point of view, since we can often compute the posterior distribution through a simple formula involving the parameters of the family, without having to use Bayes' theorem directly. Similarly, in the case that the parameter is real valued, we can often compute the Bayesian estimator through a simple formula involving the parameters of the conjugate family.</p>
+
+<h3>Special Distributions</h3>
+
+<h4 id="ber">The Bernoulli Distribution</h4>
+
+<p>Suppose that \(\bs X = (X_1, X_2, \ldots)\) is sequence of independent variables, each having the <a href="../bernoulli/Introduction.html">Bernoulli distribution</a> with unknown success parameter \(p \in (0, 1)\). In short, \( \bs X \) is a sequence of Bernoulli trials, given \( p \). In the usual language of reliability, \(X_i = 1\) means success on trial \(i\) and \(X_i = 0\) means failure on trial \(i\). Recall that given \( p \), the Bernoulli distribution has probability density function
+\[ g(x \mid p) = p^x (1 - p)^{1-x}, \quad x \in \{0, 1\} \]
+Note that the number of successes in the first \(n\) trials is \(Y_n = \sum_{i=1}^n X_i\). Given \(p\), random variable \(Y_n\) has the <a href="../bernoulli/Binomial.html">binomial distribution</a> with parameters \(n\) and \(p\).</p>
+
+<p>Suppose now that we model \(p\) with a random variable \( P \) that has a prior <a href="../special/Beta.html">beta distribution</a> with left parameter \(a \in (0, \infty)\) and right parameter \(b \in (0, \infty)\), where \(a\) and \(b\) are chosen to reflect our initial information about \(p\). So \( P \) has probability density function
+\[ h(p) = \frac{1}{B(a, b)} p^{a-1} (1 - p)^{b-1}, \quad p \in (0, 1) \]
+and has mean \( a / (a + b) \). For example, if we know nothing about \(p\), we might let \(a = b = 1\), so that the prior distribution is uniform on the parameter space \((0, 1)\) (the non-informative prior). On the other hand, if we believe that \(p\) is about \(\frac{2}{3}\), we might let \(a = 4\) and \(b = 2\), so that the prior distribution is unimodal, with mean \(\frac{2}{3}\). As a random process, the sequence \( \bs X \) with \( p \) randomized by \( P \), is known as the <a href="../bernoulli/BetaBernoulli.html">beta-Bernoulli process</a>, and is very interesting on its own, outside of the context of Bayesian estimation.</p>
+
+<div class="unit" id="ber1">
+	<p class="math">For \( n \in \N_+ \), the posterior distribution of \(P\) given \(\bs{X}_n = (X_1, X_2, \ldots, X_n)\) is beta with left parameter \(a + Y_n\) and right parameter \(b + (n - Y_n)\).</p>
+	<details>
+		<summary>Details:</summary>
+		<p>Fix \( n \in \N_+ \). Let \( \bs x = (x_1, x_2, \ldots, x_n) \in \{0, 1\}^n \), and let \( y = \sum_{i=1}^n x_i \). Then
+		\[ f(\bs x \mid p) = g(x_1 \mid p) g(x_2 \mid p) \cdots g(x_n \mid p) = p^y (1 - p)^{n-y}  \]
+		Hence
+		\[ h(p) f(\bs x \mid p) = \frac{1}{B(a, b)} p^{a-1} (1 - p)^{b-1} p^y (1 - p)^{n-y} = \frac{1}{B(a, b)}p^{a + y - 1} (1 - p)^{b + n - y - 1}, \quad p \in (0, 1) \]
+		As a function of \( p \) this expression is proportional to the beta PDF with parameters \( a + y \), \( b + n - y \). Note that it's not necessary to compute the normalizing factor \( f(\bs x) \).</p>
+	</details>
+</div>
+
+<p>Thus, the beta distribution is conjugate to the Bernoulli distribution. Note also that the posterior distribution depends on the data vector \(\bs{X}_n\) only through the number of successes \(Y_n\). This is true because \(Y_n\) is a <a href="Sufficient.html">sufficient statistic</a> for \(p\). In particular, note that the left beta parameter is increased by the number of successes \(Y_n\) and the right beta parameter is increased by the number of failures \(n - Y_n\).</p>
+
+<div class="unit" id="ber2">
+	<p class="math">The Bayesian estimator of \(p\) given \(\bs{X}_n\) is
+	\[ U_n = \frac{a + Y_n}{a + b + n} \]</p>
+	<details>
+		<summary>Details:</summary>
+		<p>Recall that the mean of the beta distribution is the left parameter divided by the sum of the parameters, so this result follows from the previous result.</p>
+	</details>
+</div>
+
+<div class="unit">
+	<p class="app">In the <a href="JavaScript:openAncillary('../apps/BetaCoin.html')" class="ancillary">beta coin experiment</a>, set \(n = 20\) and \(p = 0.3\), and set \(a = 4\) and \(b = 2\). Run the simulation 100 times and note the estimate of \(p\) and the shape and location of the posterior probability density function of \(p\) on each run.</p>
+</div>
+
+<p>Next let's compute the bias and mean-square error functions.</p>
+
+<div class="unit" id="ber3">
+	<p class="math">For \( n \in \N_+ \),
+	\[ \bias(U_n \mid p) = \frac{a(1 - p) - b p}{a + b + n}, \quad p \in (0, 1) \]
+	The sequence \( \bs U = (U_n: n \in \N_+) \) is asymptotically unbiased.</p>
+	<details>
+		<summary>Details:</summary>
+		<p>Given \( p \), \( Y_n \) has the binomial distribution with parameters \( n \) and \( p \) so \( E(Y_n \mid p) = n p \). Hence
+		\[ \bias(U_n \mid p) = \E(U_n \mid p) - p = \frac{a + n p}{a + b + n} - p\]
+		Simplifying gives the formula above. Clearly \( \bias(U_n \mid p) \to 0 \) as \( n \to \infty \).</p>
+	</details>
+</div>
+
+<p>Note also that we cannot choose \(a\) and \(b\) to make \(U_n\) unbiased, since such a choice would involve the true value of \(p\), which we do not know.</p>
+
+<div class="unit">
+	<p class="app">In the <a href="JavaScript:openAncillary('../apps/BetaCoin.html')" class="ancillary">beta coin experiment</a>, vary the parameters and note the change in the bias. Now set \(n = 20\) and \(p = 0.8\), and set \(a = 2\) and \(b = 6\). Run the simulation 1000 times. Note the estimate of \(p\) and the shape and location of the posterior probability density function of \(p\) on each update. Compare the empirical bias to the true bias.</p>
+</div>
+
+<div class="unit" id="ber4">
+	<p class="math">For \( n \in \N_+ \),
+	\[ \mse(U_n \mid p) = \frac{p [n - 2 \, a (a + b)] + p^2[(a + b)^2 - n] + a^2}{(a + b + n)^2}, \quad p \in (0, 1) \]
+	The sequence \( (U_n: n \in \N_+) \) is mean-square consistent.</p>
+	<details>
+		<summary>Details:</summary>
+		<p>Once again, given \( p \), \( Y_n \) has the binomail distribution with parameters \( n \) and \( p \) so 
+		\[ \var(U_n \mid p) = \frac{n p (1 - p)}{(a + b + n)^2} \]
+		Hence
+		\[ \mse(U_n \mid p) = \frac{n p (1 - p)}{(a + b + n)^2} + \left[\frac{a (1 - p) - b p}{a + b + n}\right]^2 \]
+		Simplifying gives the result. Clearly \( \mse(U_n \mid p) \to 0 \) as \( n \to \infty \).</p>
+	</details>
+</div>
+
+<div class="unit">
+	<p class="app">In the <a href="JavaScript:openAncillary('../apps/BetaCoin.html')" class="ancillary">beta coin experiment</a>, vary the parameters and note the change in the mean square error. Now set \(n = 10\) and \(p = 0.7\), and set \(a = b = 1\). Run the simulation 1000 times. Note the estimate of \(p\) and the shape and location of the posterior probability density function of \(p\) on each update. Compare the empirical mean square error to the true mean square error.</p>
+</div>
+
+<p>Interestingly, we can choose \(a\) and \(b\) so that \(U\) has mean square error that is independent of the unknown parameter \(p\):</p>
+
+<div class="unit" id="ber5">
+	<p class="math">Let \( n \in \N_+ \) and let \(a = b = \sqrt{n} / 2\). Then</p>
+	\[ \mse(U_n \mid p) = \frac{n}{4 \left(n + \sqrt{n}\right)^2}, \quad p \in (0, 1) \]
+</div>
+
+<div class="unit">
+	<p class="app">In the <a href="JavaScript:openAncillary('../apps/BetaCoin.html')" class="ancillary">beta coin experiment</a>, set \(n = 36\) and \(a = b = 3\). Vary \(p\) and note that the mean square error does not change. Now set \(p = 0.8\) and run the simulation 1000 times. Note the estimate of \(p\) and the shape and location of the posterior probability density function on each update. Compare the empirical bias and mean square error to the true values.</p>
+</div>
+
+<p>Recall that the method of moments estimator and the maximum likelihood estimator of \(p\) (on the interval \( (0, 1) \)) is the sample mean (the proportion of successes):
+\[ M_n = \frac{Y}{n} = \frac{1}{n} \sum_{i=1}^n X_i \]
+This estimator has mean square error \(\mse(M_n \mid p) = \frac{1}{n} p (1 - p)\). To see the connection between the estimators, note from <a href="#ber2" class="ref"></a> that
+\[ U_n = \frac{a + b}{a + b + n} \frac{a}{a + b} + \frac{n}{a + b + n} M_n \]
+So \( U_n \) is a weighted average of \( a / (a + b) \) (the mean of the prior distribution) and \( M_n \) (the maximum likelihood estimator).</p>
+
+<h4>Another Bernoulli Distribution</h4>
+
+<p>Bayesian estimation, like other forms of parametric estimation, depends critically on the parameter set. Suppose again that \( (X_1, X_2, \ldots) \) is a sequence of Bernoulli trials, given the unknown success parameter \( p \), but suppose now that the parameter set is \( \left\{\frac{1}{2}, 1\right\} \). This setup corresponds to the tossing of a coin that is either fair or two-headed, but we don't know which. We model \( p \) with a random variable \(P\) that has the prior probability density function \(h\) given by \(h(1) = a\), \(h\left(\frac{1}{2}\right) = 1 - a\), where \(a \in (0, 1)\) is chosen to reflect our prior knowledge of the probability that the coin is two-headed. If we are completely ignorant, we might let \( a = \frac{1}{2} \) (the non-informative prior). If with think the coin is more likely to be two-headed, we might let \( a = \frac{3}{4} \). Again let \( Y_n = \sum_{i=1}^n X_i \) for \( n \in \N_+ \).</p>
+
+<div class="unit">
+	<p class="math">The posterior distribution of \(P\) given \(\bs{X}_n = (X_1, X_2, \ldots, X_n)\) is </p>
+	<ol class="sub">
+		<li>\(h(1 \mid \bs{X}_n) = \frac{2^n a}{2^n a + (1 - a)}\) if \(Y_n = n\) and \(h(1 \mid \bs{X}_n) = 0\) if \(Y_n \lt n \)</li>
+		<li>\(h\left(\frac{1}{2} \mid \bs{X}_n\right) = \frac{1 - a}{2^n a + (1 - a)}\) if \(Y_n = n\) and \(h\left(\frac{1}{2} \mid \bs{X}_n\right) = 1\) if \(Y_n \lt n\)</li>
+	</ol>
+	<details>
+		<summary>Details:</summary>
+		<p>Fix \( n \in \N_+ \). Let \( \bs x = (x_1, x_2, \ldots, x_n) \in \{0, 1\}^n \), and let \( y = \sum_{i=1}^n x_i \). As before,
+		\[ f(\bs x \mid p) = p^y (1 - p)^{n-y} \]
+		We adopt the usual conventions (which gives the correct mathematics) that \( 0^k = 0 \) if \( k \in \N_+ \) but \( 0^0 = 1 \). So from Bayes' theorem,
+		\begin{align}
+			h(1 \mid \bs x) &amp; = \frac{h(1) f(\bs x \mid 1)}{h(1/2) f(\bs x \mid 1/2) + h(1) f(\bs x \mid 1)} \\
+			&amp; = \frac{a 1^y 0^{n-y}}{(1 - a)(1/2)^n + a 1^y 0^{n-y}}
+		\end{align}
+		So if \( y \lt n \) then \( h(1 \mid \bs x) = 0 \) while if \( y = n \)
+		\[ h(1 \mid \bs x) = \frac{a}{(1 - a)(1/2)^n + a} \]
+		Of course, \( h\left(\frac{1}{2} \mid \bs x\right) = 1 - h(1 \mid \bs x) \). The results now follow after a bit of algebra.</p>
+	</details>
+</div>
+
+<p>Now let
+\[ p_n = \frac{2^{n+1} a + (1 - a)}{2^{n+1} a + 2 (1 - a)} \]</p>
+
+<div class="unit">
+	<p class="math">The Bayes' estimator of \(p\) given \( \bs{X}_n \) the statistic \(U_n\) defined by</p>
+	<ol class="sub">
+		<li>\(U_n = p_n\) if \(Y_n = n\)</li>
+		<li>\(U_n = \frac{1}{2}\) if \(Y_n \lt n\)</li>
+	</ol>
+	<details>
+		<summary>Details:</summary>
+		<p>By definition, the Bayes' estimator is \( U_n = E(P \mid \bs{X}_n) \). From the previous result, if \( Y_n = n \) then
+		\[ U_n = 1 \cdot \frac{2^n a}{2^n a + (1 - a)} + \frac{1}{2} \cdot \frac{1 - a}{2^n a + (1 - a)} \]
+		which simplifies to \( p_n \). If \( Y_n \lt n \) then \( U = 1 \cdot 0 + \frac{1}{2} \cdot 1 = \frac{1}{2} \).</p>
+	</details>
+</div>
+
+<p>If we observe \( Y_n \lt n \) then \( U_n \) gives the correct answer \( \frac{1}{2} \). This certainly makes sense since we know that we do not have the two-headed coin. On the other hand, if we observe \( Y_n = n \) then we are not certain which coin we have, and the Bayesian estimate \( p_n \) is not even in the parameter space! But note that \( p_n \to 1 \) as \( n \to \infty \) exponentially fast. Next let's compute the bias and mean-square error for a given \( p \in \left\{\frac{1}{2}, 1\right\} \).</p>
+
+<div class="unit">
+	<p class="math">For \( n \in \N_+ \),</p>
+	<ol class="sub">
+		<li>\(\bias(U_n \mid 1) = p_n - 1\)</li>
+		<li>\(\bias\left(U_n \mid \frac{1}{2}\right) = \left(\frac{1}{2}\right)^n \left(p_n - \frac{1}{2}\right)\)</li>
+	</ol>
+	<p>The sequence of estimators \( (U_n: n \in \N_+) \) is asymptotically unbiased.</p>
+	<details>
+		<summary>Details:</summary>
+		<p>By definition, \( \bias(U_n \mid p) = E(U - p \mid p) \). Hence from the previous result,
+		\begin{align}
+			\bias(U \mid p) &amp; = (p_n - p) \P(Y = n \mid p) + \left(\frac{1}{2} - p\right) \P(Y \lt n \mid p) \\
+			&amp; = (p_n - p) p^n + \left(\frac{1}{2} - p\right) (1 - p^n)
+		\end{align}
+		Substituting \( p = 1 \) and \( p = \frac{1}{2} \) gives the results. In both cases, \( \bias(U_n \mid p) \to 0 \) as \( n \to \infty \) since \( p_n \to 1 \) and \( \left(\frac{1}{2}\right)^n \to 0 \) as \( n \to \infty \).</p>
+	</details>
+</div>
+
+<p>If \( p = 1 \), the estimator \( U_n \) is negatively biased; we noted this earlier. If \( p = \frac{1}{2} \), then \( U_n \) is positively biased for sufficiently large \( n \) (depending on \( a \)).</p>
+
+<div class="unit">
+	<p class="math">For \( n \in \N_+ \),</p>
+	<ol class="sub">
+		<li>\(\mse(U_n \mid 1) = (p_n - 1)^2\)</li>
+		<li>\(\mse\left(U_n \mid \frac{1}{2}\right) = \left(\frac{1}{2}\right)^n \left(p_n - \frac{1}{2}\right)^2\)</li>
+	</ol>
+	<p>The sequence of estimators \( \bs U = (U_n: n \in \N_+) \) is mean-square consistent.</p>
+	<details>
+		<summary>Details:</summary>
+		<p>By definition, \( \mse(U_n \mid p) = \E[(U_n - p)^2 \mid p] \). Hence
+		\begin{align}
+			\mse(U_n \mid p) &amp; = (p_n - p)^2 \P(Y_n = n \mid p) + \left(\frac{1}{2} - p\right)^2 \P(Y_n \lt n \mid p) \\
+			&amp; = (p_n - p)^2 p^n + \left(\frac{1}{2} - p\right)^2 (1 - p^n)
+		\end{align}
+		Substituting \( p = 1 \) and \( p = \frac{1}{2} \) gives the results. In both cases, \( \mse(U_n \mid p) \to 0 \) as \( n \to \infty \) since \( p_n \to 1 \) and \( \left(\frac{1}{2}\right)^n \to 0 \) as \( n \to \infty \).</p>
+	</details>
+</div>
+
+<h4 id="geo">The Geometric distribution</h4>
+
+<p>Suppose that \(\bs{X} = (X_1, X_2, \ldots)\) is a sequence of independent random variables, each having the <a href="../bernoulli/Geometric.html">geometric distribution</a> on \(\N_+\) with unknown success parameter \(p \in (0, 1)\). Recall that these variables can be interpreted as the number of trials between successive successes in a sequence of <a href="../bernoulli/index.html">Bernoulli Trials</a>. Given \(p\), the geometric distribution has probability density function
+\[ g(x \mid p) = p (1 - p)^{x-1}, \quad x \in \N_+ \]
+Once again for \( n \in \N_+ \), let \(Y_n = \sum_{i=1}^n X_i\). In this setting, \(Y_n\) is the trial number of the \(n\)th success, and given \(p\), has the <a href="../bernoulli/NegativeBinomial.html">negative binomial distribution</a> with parameters \(n\) and \(p\).</p>
+
+<p>Suppose now that we model \(p\) with a random variable \( P \) having a prior <a href="../special/Beta.html">beta distribution</a> with left parameter \(a \in (0, \infty)\) and right parameter \(b \in (0, \infty)\). As usual, \(a\) and \(b\) are chosen to reflect our prior knowledge of \(p\).</p>
+
+<div class="unit">
+	<p class="math">The posterior distribution of \(P\) given \(\bs{X}_n = (X_1, X_2, \ldots, X_n)\) is beta with left parameter \(a + n\) and right parameter \(b + (Y_n - n)\).</p>
+	<details>
+		<summary>Details:</summary>
+		<p>Fix \( n \in \N_+ \). Let \( \bs x = (x_1, x_2, \ldots, x_n) \in \N_+^n \) and let \( y = \sum_{i=1}^n x_i \). Then 
+		\[ f(\bs x \mid p) = g(x_1 \mid p) g(x_2 \mid p) \cdots g(x_n \mid p) = p^n (1 - p)^{y - n} \]
+		Hence 
+		\[ h(p) f( \bs x \mid p) = \frac{1}{B(a, b)} p^{a-1} (1 - p)^{b-1} p^n (1 - p)^{y - n} = \frac{1}{B(a, b)} p^{a + n - 1} (1 - p)^{b + y - n - 1}, \quad p \in (0, 1) \]
+		As a function of \( p \in (0, 1) \) this expression is proportional to the beta PDF with parameters \( a + n \) and \( b + y - n \). Note that it's not necessary to compute the normalizing constant \(f(\bs{x})\).</p>
+	</details>
+</div>
+
+<p>Thus, the beta distribution is conjugate to the geometric distribution. Moreover, note that in the posterior beta distribution, the left parameter is increased by the number of successes \(n\) while the right parameter is increased by the number of failures \(Y - n\), just as in the Bernoulli model in <a href="#ber1" class="ref"></a>. In particular, the posterior left parameter is deterministic and depends on the data only through the sample size \( n \).</p>
+
+<div class="unit" id="geo1">
+	<p class="math">The Bayesian estimator of \(p\) based on \( \bs{X}_n \)is
+	\[ V_n = \frac{a + n}{a + b + Y_n} \]</p>
+	<details>
+		<summary>Details:</summary>
+		<p>By definition, the Bayesian estimator is the mean of the posterior distribution. Recall again that the mean of the beta distribution is the left parameter divided by the sum of the parameters, so the result follows from our previous theorem.</p>
+	</details>
+</div>
+
+<p>Recall that the <a href="Moments.html#geo">method of moments estimator</a> of \( p \), and the <a href="Likelihood.html#geo">maximum likelihood estimator</a> of \(p\) on the interval \( (0, 1) \) are both \(W_n = 1 / M_n = n / Y_n\). To see the connection between the estimators, note from <a href="#geo1" class="ref"></a> that
+\[ \frac{1}{V_n} = \frac{a}{a + n} \frac{a + b}{a} + \frac{n}{a + n} \frac{1}{W_n} \]
+So \( 1 / V_n \) (the reciprocal of the Bayesian estimator) is a weighted average of \( (a + b) / a \) (the reciprocal of the mean of the prior distribution) and \( 1 / W_n \) (the reciprocal of the maximum likelihood estimator).</p>
+
+<h4 id="poi">The Poisson Distribution</h4>
+
+<p>Suppose that \(\bs{X} = (X_1, X_2, \ldots)\) is a sequence of random variable each having the <a href="../poisson/Poisson.html">Poisson distribution</a> with unknown parameter \(\lambda \in (0, \infty)\). Recall that the Poisson distribution is often used to model the number of <q>random points</q> in a region of time or space particulalry in the context of the  <a href="../poisson/index.html">Poisson process</a>. The distribution is named for the inimitable <a href="JavaScript:openAncillary('../biographies/Poisson.html')" class="ancillary">Simeon Poisson</a> and given \(\lambda\), has probability density function
+\[ g(x \mid \lambda) = e^{-\lambda} \frac{\lambda^x}{x!}, \quad x \in \N \]
+Once again, for \( n \in \N_+ \), let \(Y_n = \sum_{i=1}^n X_i\). Given \(\lambda\), random variable \(Y_n\) also has a Poisson distribution, but with parameter \(n \lambda\).</p>
+
+<p>Suppose now that we model \(\lambda\) with a random variable \( \Lambda \) having a prior <a href="../special/Gamma.html">gamma distribution</a> with shape parameter \(k \in (0, \infty)\) and rate parameter \(r \in (0, \infty)\). As usual \(k\) and \(r\) are chosen to reflect our prior knowledge of \(\lambda\). Thus the prior probability density function of \(\Lambda\) is
+\[ h(\lambda) = \frac{r^k}{\Gamma(k)} \lambda^{k-1} e^{-r \lambda}, \quad \lambda \in (0, \infty) \]
+and the mean is \( k / r \). The scale parameter of the gamma distribution is \(b = 1/r\), but the formulas will work out nicer if we use the rate parameter. </p>
+
+<div class="unit">
+	<p class="math">The posterior distribution of \(\Lambda\) given \(\bs{X}_n = (X_1, X_2, \ldots, X_n)\) is gamma with shape parameter \(k + Y_n\) and rate parameter \(r + n\).</p>
+	<details>
+		<summary>Details:</summary>
+		<p>Fix \( n \in \N_+ \). Let \( \bs x = (x_1, x_2, \ldots, x_n) \in \N^n \) and \( y = \sum_{i=1}^n x_i \). Then 
+		\[ f(\bs x \mid \lambda) = g(x_1 \mid \lambda) g(x_2 \mid \lambda) \cdots g(x_n \mid \lambda) = e^{-n \lambda} \frac{\lambda^y}{x_1! x_2! \cdots x_n!} \]
+		Hence 
+		\begin{align}
+			h(\lambda) f( \bs x \mid \lambda) &amp; = \frac{r^k}{\Gamma(k)} \lambda^{k-1} e^{-r \lambda} e^{-n \lambda} \frac{\lambda^y}{x_1! x_2! \cdots x_n!} \\
+			&amp; = \frac{r^k}{\Gamma(k) x_1! x_2! \cdots x_n!} e^{-(r + n) \lambda} \lambda^{k + y - 1}, \quad \lambda \in (0, \infty)
+		\end{align}
+		As a function of \( \lambda \in (0, \infty) \) the last expression is proportional to the gamma PDF with shape parameter \( k + y \) and rate parameter \( r + n \). Note again that it's not necessary to compute the normalizing constant \(f(\bs{x})\).</p>
+	</details>
+</div>
+
+<p>It follows that the gamma distribution is conjugate to the Poisson distribution. Note that the posterior rate parameter is deterministic and depends on the data only through the sample size \( n \).</p>
+
+<div class="unit" id="poi1">
+	<p class="math">The Bayesian estimator of \(\lambda\) based on \( \bs{X}_n = (X_1, X_2, \ldots, X_n) \) is
+	\[ V_n = \frac{k + Y_n}{r + n} \]</p>
+	<details>
+		<summary>Details:</summary>
+		<p>By definition, the Bayes estimator is the mean of the posterior distribution. Recall that mean of the gamma distribution is the shape parameter divided by the rate parameter.</p>
+	</details>
+</div>
+
+<p>Since \( V_n \) is a linear function of \( Y_n \), and we know the distribution of \( Y_n \) given \( \lambda \in (0, \infty) \), we can compute the bias and mean-square error functions.</p>
+
+<div class="unit">
+	<p class="math">For \( n \in \N_+ \),
+	\[ \bias(V_n \mid \lambda) = \frac{k - r \lambda}{r + n}, \quad \lambda \in (0, \infty) \]
+	The sequence of estimators \( \bs V = (V_n: n \in \N_+) \) is asymptotically unbiased.</p>
+	<details>
+		<summary>Details:</summary>
+		<p>The computation is simple, since the distribution of \( Y_n \) given \( \lambda \) is Poisson with parameter \( n \lambda \).
+		\[ \bias(V_n \mid \lambda) = \E(V_n \mid \lambda) - \lambda = \frac{k + n \lambda}{r + n} - \lambda = \frac{k - r \lambda}{r + n} \]
+		Clearly \( \bias(V_n \mid \lambda) \to 0 \) as \( n \to \infty \).</p>
+	</details>
+</div>
+
+<p>Note that, as before, we cannot choose \(k\) and \(r\) to make \(V_n\) unbiased, without knowledge of \(\lambda\).</p>
+
+<div class="unit">
+	<p class="math">For \( n \in \N_+ \),
+	\[ \mse(V_n \mid \lambda) = \frac{n \lambda + (k - r \lambda)^2}{(r + n)^2}, \quad \lambda \in (0, \infty) \]
+	The sequence of estimators \( \bs V = (V_n: n \in \N_+) \) is mean-square consistent.</p>
+	<details>
+		<summary>Details:</summary>
+		<p>Again, the computation is easy since the distribution of \( Y_n \) given \( \lambda \) is Poisson with parameter \( n \lambda \).
+		\[ \mse(V \mid \lambda) = \var(V_n \mid \lambda) + \bias^2(V_n \mid \lambda) = \frac{n \lambda}{(r + n)^2} + \left(\frac{k - r \lambda}{r + n}\right)^2 \]
+		Clearly \( \mse(V_n \mid \lambda) \to 0 \) as \( n \to \infty \).</p>
+	</details>
+</div>
+
+<p>Recall that the <a href="Moments.html#est">method of moments estimator</a> of \( \lambda \) and the <a href="Likelihood.html#poi">maximum likelihood estimator</a> of \(\lambda\) on the interval \( (0, \infty) \) are both \(M_n = Y_n / n\), the sample mean. This estimator is unbiased and has mean square error \(\lambda / n\). To see the connection between the estimators, note from <a href="#poi1" class="ref"></a> that
+\[ V_n = \frac{r}{r + n} \frac{k}{r} + \frac{n}{r + n} M_n \] 
+So \( V_n \) is a weighted average of \( k / r \) (the mean of the prior distribution) and \( M_n \) (the maximum likelihood estimator).</p>
+
+<h4 id="nor">The Normal Distribution</h4>
+
+<p>Suppose that \(\bs X = (X_1, X_2, \ldots)\) is a sequence of independent random variables, each having the <a href="../special/Normal.html">normal distribution</a> with unknown mean \(\mu \in \R\) but known variance \(\sigma^2 \in (0, \infty)\). Of course, the normal distribution plays an especially important role in statistics, in part because of the <a href="../sample/CLT.html">central limit theorem</a>. The normal distribution is widely used to model physical quantities subject to numerous small, random errors. In many statistical applications, the variance of the normal distribution is more stable than the mean, so the assumption that the variance is known is not entirely artificial. Recall that the normal probability density function (given \( \mu \)) is
+\[ g(x \mid \mu) = \frac{1}{\sqrt{2 \, \pi} \sigma} \exp\left[-\frac{1}{2}\left(\frac{x - \mu}{\sigma}\right)^2 \right], \quad x \in \R \]
+Again, for \( n \in \N_+ \) let \(Y_n = \sum_{i=1}^n X_i\). Recall that \(Y_n\) also has a normal distribution (given \(\mu\)) but with mean \(n \mu\) and variance \(n \sigma^2\).</p>
+
+<p>Suppose now that \(\mu\) is modeled by a random variable \( \Psi \) that has a prior normal distribution with mean \(a \in \R\) and variance \(b^2 \in (0, \infty)\). As usual, \(a\) and \(b\) are chosen to reflect our prior knowledge of \(\mu\). An interesting special case is when we take \(b = \sigma\), so the variance of the prior distribution of \(\Psi\) is the same as the variance of the underlying sampling distribution.</p>
+
+<div class="unit" id="nor1">
+	<p class="math">For \( n \in \N_+ \), the posterior distribution of \(\Psi\) given \(\bs{X}_n = (X_1, X_2, \ldots, X_n)\) is normal with mean and variance given by
+	\begin{align}
+		\E(\Psi \mid \bs{X}_n) &amp; = \frac{Y_n b^2 + a \sigma^2}{n b^2 + \sigma^2}\\
+		\var(\Psi \mid \bs{X}_n) &amp; = \frac{\sigma^2 b^2}{n b^2 + \sigma^2}
+	\end{align}</p>
+	<details>
+		<summary>Details:</summary>
+		<p>Fix \( n \in \N_+ \). Suppose \( \bs x = (x_1, x_2, \ldots, x_n) \in \R \) and let \( y = \sum_{i=1}^n x_i \) and \( w^2 = \sum_{i=1}^n x_i^2 \). Then
+		\begin{align} 
+			f(\bs x \mid \mu) &amp; = g(x_1 \mid \mu) g(x_2 \mid \mu) \cdots g(x_n \mid \mu) = \frac{1}{(2 \pi)^{n/2} \sigma^n} \exp\left[-\frac{1}{2} \sum_{i=1}^n \left(\frac{x_i - \mu}{\sigma}\right)^2\right] \\
+			&amp; = \frac{1}{(2 \pi)^{n/2} \sigma^n} \exp\left[-\frac{1}{2 \sigma^2}(w^2 - 2 \mu y + n \mu^2)\right]
+		\end{align}
+		On the other hand, of course
+		\[ h(\mu) = \frac{1}{\sqrt{2 \pi} b} \exp\left[-\frac{1}{2}\left(\frac{\mu - a}{b}\right)^2\right]  = \frac{1}{\sqrt{2 \pi}b} \exp\left[-\frac{1}{2 b^2}(\mu^2 - 2 a \mu + a^2)\right]\]
+		Therefore,
+		\[ h(\mu) f(\bs x \mid \mu) = C \exp\left\{-\frac{1}{2}\left[\left(\frac{1}{b^2} + \frac{n}{\sigma^2}\right) \mu^2 - 2 \left(\frac{a}{b^2} + \frac{y}{\sigma^2}\right) \mu\right]\right\} \]
+		where \( C \) depends on \( n \), \( \sigma \), \( a \), \( b \), \( \bs x \), but importantly <em>not</em> on \( \mu \). So we don't really care what \( C \) is. Completing the square in \( \mu \) in the expression above gives
+		\[ h(\mu) f(\bs x \mid \mu) = K \exp\left[-\frac{1}{2}\left(\frac{1}{b^2} + \frac{n}{\sigma^2}\right) \left(\mu - \frac{a / b^2 + y / \sigma^2}{1 / b^2 + n / \sigma^2}\right)^2\right] \]
+		where \( K \) is yet another factor that depends on lots of stuff, but not \( \mu \). As a function of \( \mu \), this expression is proportional to the normal distribution with mean and variance, respectively, given by
+		\begin{align} 
+			&amp;\frac{a / b^2 + y / \sigma^2}{1 / b^2 + n / \sigma^2} = \frac{y b^2 + a \sigma^2}{n b^2 + \sigma^2} \\
+			&amp; \frac{1}{1 / b^2 + n / \sigma^2} = \frac{\sigma^2 b^2}{\sigma^2 + n b^2}
+		\end{align}
+		Once again, it was not necessary to compute the normalizing constant \(f(\bs{x})\), which would have been yet another factor that we do not care about.</p>
+	</details>
+</div>
+
+<p>Therefore, the normal distribution is conjugate to the normal distribution with unknown mean and known variance. Note that the posterior variance is deterministic, and depends on the data only through the sample size \( n \). In the special case that \(b = \sigma\), the posterior distribution of \(\Psi\) given \(\bs{X}_n\) is normal with mean \((Y_n + a) / (n + 1)\) and variance \(\sigma^2 / (n + 1)\).</p>
+
+<div class="unit" id="nor2">
+	<p class="math">The Bayesian estimator of \(\mu\) is
+	\[ U_n = \frac{Y_n b^2 + a \sigma^2}{n b^2 + \sigma^2} \]</p>
+	<details>
+		<summary>Details:</summary>
+		<p>This follows immediately from <a href="#nor1" class="ref"></a>.</p>
+	</details>
+</div>
+
+<p>Note that \(U_n = (Y_n + a) / (n + 1)\) in the special case that \(b = \sigma\).</p>
+
+<div class="unit">
+	<p class="math">For \( n \in \N_+ \),
+	\[ \bias(U_n \mid \mu) = \frac{\sigma^2 (a - \mu)}{\sigma^2 + n \, b^2}, \quad \mu \in \R \]
+	The sequence of estimators \( \bs U = (U_n: n \in \N_+) \) is asymptotically unbiased.</p>
+	<details>
+		<summary>Details:</summary>
+		<p>Recall that \( Y_n \) has mean \( n \mu \) given \( \mu \). Hence
+		\[ \bias(U_n \mid \mu) = \E(U_n \mid \mu) - \mu = \frac{n b^2 \mu + a \sigma^2}{n b^2 + \sigma^2} - \mu = \frac{(a - \mu) \sigma^2}{n b^2 + \sigma^2} \]
+		Clearly \( \bias(U_n \mid \mu) \to 0 \) as \( n \to \infty \) for every \( \mu \in \R \).</p>
+	</details>
+</div>
+
+<p>When \(b = \sigma\), \(\bias(U_n \mid \mu) = (a - \mu) / (n + 1)\).</p>
+
+<div class="unit">
+	<p class="math">For \( n \in \N_+ \),
+	\[ \mse(U_n \mid \mu) = \frac{n \sigma^2 b^4 + \sigma^4 (a - \mu)^2}{(\sigma^2 + n \, b^2)^2}, \quad \mu \in \R \]
+	The sequence of estimators \( \bs U = (U_n: n \in \N_+) \) is mean-square consistent.</p>
+	<details>
+		<summary>Details:</summary>
+		<p>Recall that \( Y_n \) as variance \( n \sigma^2 \). Hence
+		\[ \mse(U_n \mid \mu) = \var(U_n \mid \mu) + \bias^2(U_n \mid \mu) = \left(\frac{b^2}{n b^2 + \sigma^2}\right)^2 n \sigma^2 + \left(\frac{(a - \mu) \sigma^2}{n b^2 + \sigma^2}\right)^2 \]
+		Clearly \( \mse(U_n \mid \mu) \to 0 \) as \( n \to \infty \) for every \( \mu \in \R \).</p>
+	</details>
+</div>
+
+<p>When \(b = \sigma\), \(\mse(U \mid \mu) = [n \sigma^2 + (a - \mu)^2] / (n + 1)^2\).
+Recall that the <a href="Moments.html#est">method of moments estimator</a> of \( \mu \) and the <a href="Likelihood.html#nor">maximum likelihood estimator</a> of \(\mu\) on \( \R \) are both \(M_n = Y_n / n\), the sample mean. This estimator is unbiased and has mean square error \(\var(M) = \sigma^2 / n\). To see the connection between the estimators, note from <a href="#nor2" class="ref"></a> that
+\[ U_n = \frac{\sigma^2}{n b^2 + \sigma^2} a + \frac{n b^2}{n b^2 + \sigma^2} M_n \]
+So \( U_n \) is a weighted average of \( a \) (the mean of the prior distribution) and \( M_n \) (the maximum likelihood estimator).</p>
+
+<h4 id="bet">The Beta Distribution</h4>
+
+<p>Suppose that \(\bs{X} = (X_1, X_2, \ldots)\) is a sequence of independent random variables each having the  <a href="../special/Beta.html">beta distribution </a> with unknown left shape parameter \(a \in (0, \infty)\) and right shape parameter \(b = 1\).  The beta distribution is widely used to model random proportions and probabilities and other variables that take values in bounded intervals (scaled to take values in \( (0, 1) \)). Recall that the probability density function (given \(a\)) is
+\[ g(x \mid a) = a \, x^{a-1}, \quad x \in (0, 1) \]
+Suppose now that \(a\) is modeled by a random variable \( A \) that has a prior gamma distribution with shape parameter \(k \in (0, \infty)\) and rate parameter \(r \in (0, \infty)\). As usual, \(k\) and \(r\) are chosen to reflect our prior knowledge of \(a\). Thus the prior probabiltiy density function of \(A\) is
+\[ h(a) = \frac{r^k}{\Gamma(k)} a^{k-1} e^{-r a}, \quad a \in (0, \infty) \]
+The mean of the prior distribution is \( k / r \).</p>
+
+<div class="unit" id="bet1">
+	<p class="math">The posterior distribution of \(A\) given \(\bs{X}_n = (X_1, X_2, \ldots, X_n)\) is gamma, with shape parameter \(k + n\) and rate parameter \(r - \ln(X_1 X_2 \cdots X_n)\).</p>
+	<details>
+		<summary>Details:</summary>
+		<p>Fix \( n \in \N_+ \). Let \( \bs x = (x_1, x_2, \ldots, x_n) \in (0, 1)^n \) and let \( z = x_1 x_2 \cdots x_n \) Then
+		\[ f(\bs x \mid a) = g(x_1 \mid a) g(x_2 \mid a) \cdots g(x_n \mid a) = a^n z^{a - 1} = \frac{a^n}{z} e^{a \ln z} \]
+		Hence
+		\[ h(a) f(\bs x \mid a) = \frac{r^k}{z \Gamma(k)} a^{n + k - 1} e^{-a (r - \ln z)}, \quad a \in (0, \infty) \]
+		As a function of \( a \in (0, \infty) \) this expression is proportional to the gamma PDF with shape parameter \( n + k \) and scale parameter \( r - \ln z \). Once again, it's not necessary to compute the normalizing constant \( f(\bs x) \).</p>
+	</details>
+</div>
+
+<p>Thus, the gamma distribution is conjugate to the beta distribution with unknown left parameter and right parameter 1. Note that the posterior shape parameter is deterministic and depends on the data only through the sample size \( n \).</p>
+
+<div class="unit" id="bet2">
+	<p class="math">The Bayesian estimator of \(a\) based on \( \bs{X}_n \) is
+	\[ U_n = \frac{k + n}{r - \ln(X_1 X_2 \cdots X_n)} \]</p>
+	<details>
+		<summary>Details:</summary>
+		<p>The mean of the gamma distribution is the shape parameter divided by the rate parameter, so this follows from <a href="#bet1" class="ref"></a>.</p>
+	</details>
+</div>
+
+<p>Given the complicated structure, the bias and mean square error of \(U_n\) given \(a \in (0, \infty)\) would be difficult to compute explicitly. Recall that the <a href="Likelihood.html#bet">maximum likelihood estimator</a> of \(a\) is \(W_n = -n / \ln(X_1 \, X_2 \cdots X_n)\). To see the connection between the estimators, note from <a href="#bet2" class="ref"></a> that 
+\[ \frac{1}{U_n} = \frac{k}{k + n} \frac{r}{k} + \frac{n}{k + n} \frac{1}{W_n}\]
+So \( 1 / U_n \) (the reciprocal of  the Bayesian estimator) is a weighted average of \( r / k \) (the reciprocal of the mean of the prior distribution) and \( 1 / W_n \) (the reciprocal of the maximum likelihood estimator).</p>
+
+<h4 id="par">The Pareto Distribution</h4>
+
+<p>Suppose that \(\bs{X} = (X_1, X_2, \ldots)\) is a sequence of independent random variables each having the  <a href="../special/Pareto.html">Pareto distribution</a> with unknown shape parameter \(a \in (0, \infty)\) and scale parameter \(b = 1\).  The Pareto distribution is used to model certain financial variables and other variables with heavy-tailed distributions, and is named for <a href="JavaScript:openAncillary('../biographies/Pareto.html')" class="ancillary">Vilfredo Pareto</a>. Recall that the probability density function (given \(a\)) is
+\[ g(x \mid a) = \frac{a}{x^{a+1}}, \quad x \in [1, \infty) \]
+Suppose now that \(a\) is modeled by a random variable \( A \) that has a prior gamma distribution with shape parameter \(k \in (0, \infty)\) and rate parameter \(r \in (0, \infty)\). As usual, \(k\) and \(r\) are chosen to reflect our prior knowledge of \(a\). Thus the prior probabiltiy density function of \(A\) is
+\[ h(a) = \frac{r^k}{\Gamma(k)} a^{k-1} e^{-r a}, \quad a \in (0, \infty) \]</p>
+
+<div class="unit" id="par1">
+	<p class="math">For \( n \in \N_+ \), the posterior distribution of \(A\) given \(\bs{X}_n = (X_1, X_2, \dots, X_n)\) is gamma, with shape parameter \(k + n\) and rate parameter \(r + \ln(X_1 X_2 \cdots X_n)\).</p>
+	<details>
+		<summary>Details:</summary>
+		<p>Fix \( n \in \N_+ \). Let \( \bs x = (x_1, x_2, \ldots, x_n) \in [1, \infty)^n \) and let \( z = x_1 x_2 \cdots x_n \) Then
+		\[ f(\bs x \mid a) = g(x_1 \mid a) g(x_2 \mid a) \cdots g(x_n \mid a) = \frac{a^n}{z^{a + 1}} = \frac{a^n}{z} e^{- a \ln z} \]
+		Hence
+		\[ h(a) f(\bs x \mid a) = \frac{r^k}{z \Gamma(k)} a^{n + k - 1} e^{-a (r + \ln z)}, \quad a \in (0, \infty) \]
+		As a function of \( a \in (0, \infty) \) this expression is proportional to the gamma PDF with shape parameter \( n + k \) and scale parameter \( r + \ln z \). Once again, it's not necessary to compute the normalizing constant \( f(\bs x) \).</p>
+	</details>
+</div>
+
+<p>Thus, the gamma distribution is conjugate to Pareto distribution with unknown shape parameter. Note that the posterior shape parameter is deterministic and depends on the data only through the sample size \( n \).</p>
+
+<div class="unit" id="par2">
+	<p class="math">The Bayesian estimator of \(a\) based on \( \bs{X}_n \) is
+	\[ U_n = \frac{k + n}{r + \ln(X_1 X_2 \cdots X_n)} \]</p>
+	<details>
+		<summary>Details:</summary>
+		<p>Once again, the mean of the gamma distribution is the shape parameter divided by the rate parameter, so this follows from <a href="#par1" class="ref"></a>.</p>
+	</details>
+</div>
+
+<p>Given the complicated structure, the bias and mean square error of \(U\) given \(a \in (0, \infty)\) would be difficult to compute explicitly. Recall that the <a href="Likelihood.html#par">maximum likelihood estimator</a> of \(a\) is \(W_n = n / \ln(X_1 \, X_2 \cdots X_n)\). To see the connection between the estimators, note from <a href="#par2" class="ref"></a> that
+\[ \frac{1}{U_n} = \frac{k}{k + n} \frac{r}{k} + \frac{n}{k + n} \frac{1}{W_n} \]
+So \( 1 / U_n \) (the reciprocal of the Bayesian estimator) is a weighted average of \( r / k \) (the reciprocal of the mean of the prior distribution) and \( 1 / W_n \) (the maximum likelihood estimator).</p>
+
+<footer>
+	<ol class="map">
+		<li class="parent"><a href="../index.html">Random</a></li>
+		<li class="parent"><a href="index.html">6. Point Estimation</a></li>
+		<li class="child"><a href="Estimators.html" title="Estimators">1</a></li>
+		<li class="child"><a href="Moments.html" title="The Method of Moments">2</a></li>
+		<li class="child"><a href="Likelihood.html" title="Maximum Likelihood">3</a></li>
+		<li class="current">4</li>
+		<li class="child"><a href="Unbiased.html" title="Best Unbiased Estimators">5</a></li>
+		<li class="child"><a href="Sufficient.html" title="Complete, Sufficient, and Ancillary Statistics">6</a></li>
+		<li class="details"><button type="button" title="Expand Details" onclick="expandDetails(true);"><img src="../icons/Plus.svg" alt="Expand"></button></li>
+		<li class="details"><button type="button" title="Contract Details" onclick="expandDetails(false);"><img src="../icons/Minus.svg" alt="Contract"></button></li>
+	</ol>
+	<ul class="map">
+		<li class="sister"><a href="JavaScript:openAncillary('../apps/index.html')" class="ancillary">Apps</a></li>
+		<li class="sister"><a href="JavaScript:openAncillary('../data/index.html')" class="ancillary">Data Sets</a></li>
+		<li class="child"><a href="JavaScript:openAncillary('../biographies/index.html')" class="ancillary"> Biographies</a></li>
+	</ul>
+</footer>
+
+<script>getReferences();</script>
+
+</body>
+</html>

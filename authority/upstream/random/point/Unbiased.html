@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<title>Best Unbiased Estimators</title>
+	<meta name="author" content="Kyle Siegrist">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="keywords" content="probability, statistics, point estimation, unbiased esimtator, mean square error, best unbiased estimator, Cramer-Rao lower bound, best linear unbiased estimator, Bernoulli distribution, Poisson distribution, normal distribution, gamma distribution, beta distribution, uniform distribution">
+	<link rel="icon" href="../icons/Icon.svg" type="image/svg">
+	<link rel="stylesheet" href="../Screen.css" type="text/css" media="screen">
+	<script src="../Basic.js"></script>
+	<script src="../../MathJax/tex-svg.js" id="MathJax-script" async></script>
+</head>
+
+<body>
+
+<div class="latex">
+	\(\newcommand{\R}{\mathbb{R}}\)
+	\(\newcommand{\N}{\mathbb{N}}\)
+	\(\newcommand{\Z}{\mathbb{Z}}\)
+	\(\newcommand{\E}{\mathbb{E}}\)
+	\(\newcommand{\P}{\mathbb{P}}\)
+	\(\newcommand{\var}{\text{var}}\)
+	\(\newcommand{\sd}{\text{sd}}\)
+	\(\newcommand{\cov}{\text{cov}}\)
+	\(\newcommand{\cor}{\text{cor}}\)
+	\(\newcommand{\bias}{\text{bias}}\)
+	\(\newcommand{\MSE}{\text{MSE}}\)
+	\(\newcommand{\bs}{\boldsymbol}\)
+</div>
+
+<header>
+	<ol class="map">
+		<li class="parent"><a href="../index.html">Random</a></li>
+		<li class="parent"><a href="index.html">6. Point Estimation</a></li>
+		<li class="child"><a href="Estimators.html" title="Estimators">1</a></li>
+		<li class="child"><a href="Moments.html" title="The Method of Moments">2</a></li>
+		<li class="child"><a href="Likelihood.html" title="Maximum Likelihood">3</a></li>
+		<li class="child"><a href="Bayes.html" title="Bayes' Estimators">4</a></li>
+		<li class="current">5</li>
+		<li class="child"><a href="Sufficient.html" title="Complete, Sufficient, and Ancillary Statistics">6</a></li>
+		<li class="details"><button type="button" title="Expand Details" onclick="expandDetails(true);"><img src="../icons/Plus.svg" alt="Expand"></button></li>
+		<li class="details"><button type="button" title="Contract Details" onclick="expandDetails(false);"><img src="../icons/Minus.svg" alt="Contract"></button></li>
+	</ol>
+	<h2>5. Best Unbiased Estimators</h2>
+</header>
+
+<h3 id="the">Basic Theory</h3>
+
+<p>Consider again the basic statistical model, in which we have a <a href="../prob/Experiments.html">random experiment</a> that results in an observable <a href="../prob/Probability.html">random variable</a> \(\bs{X}\) with values in a set \(S\). Once again, the experiment is typically to sample \(n\) objects from a population and record one or more measurements for each item. In this case, the observable random variable has the form
+\[ \bs{X} = (X_1, X_2, \ldots, X_n) \]
+where \(X_i\) is the vector of measurements for the \(i\)th item.</p>
+
+<p>Suppose that \(\theta\) is a real parameter of the distribution of \(\bs{X}\), with values in a parameter set \(T\). Let \(f_\theta\) denote the <a href="../dist/index.html">probability density function</a> of \(\bs{X}\) for \(\theta \in T\). Note that the <a href="../expect/Properties.html">expected value</a>), <a href="../expect/Variance.html">variance</a>, and <a href="../expect/Covariance.html">covariance</a> operators also depend on \(\theta\), although we will sometimes suppress this to keep the notation from becoming too unwieldy.</p>
+
+<h4 id="dfn">Definitions</h4>
+
+<p>Suppose now that \(\lambda = \lambda(\theta)\) is a parameter of interest that is derived from \(\theta\). (Of course, \(\lambda\) might be \(\theta\) itself, but more generally might be a function of \(\theta\).) In this section we will consider the general problem of finding the best <a href="Estimators.html">estimator</a> of \(\lambda\) among a given class of unbiased estimators. Recall that if \(U\) is an unbiased estimator of \(\lambda\), then \(\var_\theta(U)\) is the mean square error. Mean square error is our measure of the quality of unbiased estimators, so the following definitions are natural.</p>
+
+<div class="unit" id="dfn1">
+	<p class="dfn">Suppose that \(U\) and \(V\) are unbiased estimators of \(\lambda\).</p>
+	<ol class="sub">
+		<li>If \(\var_\theta(U) \le \var_\theta(V)\) for all \(\theta \in T \) then \(U\) is a <dfn>uniformly better</dfn> estimator than \(V\).</li>
+		<li>If \(U\) is uniformly better than every other unbiased estimator of \(\lambda\), then \(U\) is a <dfn>Uniformly Minimum Variance Unbiased Estimator</dfn> (<dfn>UMVUE</dfn>) of \(\lambda\).</li>
+	</ol>
+</div>
+
+<p>Given unbiased estimators \( U \) and \( V \) of \( \lambda \), it may be the case that \(U\) has smaller variance for some values of \(\theta\) while \(V\) has smaller variance for other values of \(\theta\), so that neither estimator is uniformly better than the other. Of course, a minimum variance unbiased estimator is the best we can hope for.</p>
+
+<h4 id="crb">The Cram&eacute;r-Rao Lower Bound</h4>
+
+<p>We will show that under mild conditions, there is a lower bound on the variance of any unbiased estimator of the parameter \(\lambda\). Thus, if we can find an estimator that achieves this lower bound for all \(\theta\), then the estimator must be an UMVUE of \(\lambda\). The derivative of the <a href="Likelihood.html">log likelihood function</a>, sometimes called the <dfn>score</dfn>, will play a critical role in our anaylsis.  A lesser, but still important role, is played by the negative of the second derivative of the log-likelihood function.  Life will be much easier if we give these functions names.</p>
+
+<div class="unit" id="crb1">
+	<p class="dfn">For \(\bs{x} \in S\) and \(\theta \in T\), define
+	\begin{align}
+		L_1(\bs{x}, \theta) &amp; = \frac{d}{d \theta} \ln\left[f_\theta(\bs{x})\right] \\
+		L_2(\bs{x}, \theta) &amp; = -\frac{d}{d \theta} L_1(\bs{x}, \theta) = -\frac{d^2}{d \theta^2} \ln\left[f_\theta(\bs{x})\right]
+	\end{align}</p>
+</div>
+
+<p>In the rest of this subsection, we consider statistics \(h(\bs{X})\) where \(h: S \to \R\) (and so in particular, \(h\) does not depend on \(\theta\)). We need a fundamental assumption:</p>
+
+<div class="unit" id="crb2">
+	<p class="dfn">We will consider only statistics \( h(\bs{X}) \) with \(\E_\theta\left[h^2(\bs{X})\right] \lt \infty\) for \(\theta \in T\). We also assume that
+	\[ \frac{d}{d \theta} \E_\theta\left[h(\bs{X})\right] = \E_\theta\left[h(\bs{X}) L_1(\bs{X}, \theta)\right] \]
+	This is equivalent to the assumption that the derivative operator \(d / d\theta\) can be interchanged with the expected value operator \(\E_\theta\).</p>
+	<details>
+		<summary>Details:</summary>
+		<p>Note first that
+		\[\frac{d}{d \theta} \E\left[h(\bs{X})\right]= \frac{d}{d \theta} \int_S h(\bs{x}) f_\theta(\bs{x}) \, d \bs{x}\]
+		On the other hand,
+		\begin{align}
+			\E_\theta\left[h(\bs{X}) L_1(\bs{X}, \theta)\right] &amp; = \E_\theta\left[h(\bs{X}) \frac{d}{d \theta} \ln\left[f_\theta(\bs{X})\right] \right] = \int_S h(\bs{x}) \frac{d}{d \theta} \ln\left[f_\theta(\bs{x})\right] f_\theta(\bs{x}) \, d \bs{x} \\
+			&amp; = \int_S h(\bs{x}) \frac{\frac{d}{d \theta} f_\theta(\bs{x})}{f_\theta(\bs{x})} f_\theta(\bs{x}) \, d \bs{x} = \int_S h(\bs{x}) \frac{d}{d \theta} f_\theta(\bs{x}) \, d \bs{x} = \int_S \frac{d}{d \theta} h(\bs{x}) f_\theta(\bs{x}) \, d \bs{x}
+		\end{align}
+		Thus the two expressions are the same if and only if we can interchange the derivative and integral operators.</p>
+	</details>
+</div>
+
+<p>Generally speaking, the fundamental assumption will be satisfied if \(f_\theta(\bs{x})\) is differentiable as a function of \(\theta\), with a derivative that is jointly continuous in \(\bs{x}\) and \(\theta\), and if the support set \(\left\{\bs{x} \in S: f_\theta(\bs{x}) \gt 0 \right\}\) does not depend on \(\theta\).</p>
+
+<div class="unit" id="crb3">
+	<p class="math">\(\E_\theta\left[L_1(\bs{X}, \theta)\right] = 0\) for \(\theta \in T\).</p>
+	<details>
+		<summary>Details:</summary>
+		<p>This follows from assumption <a href="#crb2" class="ref"></a> by letting \(h(\bs{x}) = 1\) for \(\bs{x} \in S\).</p>
+	</details>
+</div>
+
+<div class="unit" id="crb4">
+	<p class="math">If \(h(\bs{X})\) is a statistic then</p>
+	\[ \cov_\theta\left[h(\bs{X}), L_1(\bs{X}, \theta)\right] = \frac{d}{d \theta} \E_\theta\left[h(\bs{X})\right] \]
+	<details>
+		<summary>Details:</summary>
+		<p>First note that the covariance is simply the expected value of the product of the variables, since the second variable has mean 0 by <a href="#crb3" class="ref"></a>. The result then follows from assumption <a href="#crb2" class="ref"></a>.</p>
+	</details>
+</div>
+
+<div class="unit" id="crb5">
+	<p class="math">\(\var_\theta\left[L_1(\bs{X}, \theta)\right] = \E_\theta\left[L_1^2(\bs{X}, \theta)\right]\)</p>
+	<details>
+		<summary>Details:</summary>
+		<p>This follows since \(L_1(\bs{X}, \theta)\) has mean 0 by <a href="#crb3" class="ref"></a>.</p>
+	</details>
+</div>
+
+<p>The following theorem gives the general <dfn>Cram&eacute;r-Rao lower bound</dfn> on the variance of a statistic. The lower bound is named for <a href="JavaScript:openAncillary('../biographies/Cramer.html')" class="ancillary">Harold Cram&eacute;r</a> and <a href="JavaScript:openAncillary('../biographies/Rao.html')" class="ancillary">CR Rao</a>:</p>
+
+<div class="unit" id="crb6">
+	<p class="math">If \(h(\bs{X})\) is a statistic then
+	\[ \var_\theta\left[h(\bs{X})\right] \ge \frac{\left[\frac{d}{d \theta} \E_\theta\left[h(\bs{X})\right] \right]^2}{\E_\theta\left[L_1^2(\bs{X}, \theta)\right]} \]</p>
+	<details>
+		<summary>Details:</summary>
+		<p>From the <a href="../expect/Covariance.html#blp6">correlation inequality</a>,
+		\[\cov_\theta^2\left[h(\bs{X}), L_1(\bs{X}, \theta)\right] \le \var_\theta\left[h(\bs{X})\right] \var_\theta\left[L_1(\bs{X}, \theta)\right]\]
+		The result now follows from theorems <a href="#crb4" class="ref"></a> and <a href="#crb5" class="ref"></a>.</p>
+	</details>
+</div>
+
+<p>We can now give the first version of the Cram&eacute;r-Rao lower bound for unbiased estimators of a parameter.</p>
+
+<div class="unit" id="crb7">
+	<p class="math">Suppose now that \(\lambda(\theta)\) is a parameter of interest and \(h(\bs{X})\) is an unbiased estimator of \(\lambda\). Then
+	\[ \var_\theta\left[h(\bs{X})\right] \ge \frac{\left[d\lambda / d\theta\right]^2}{\E_\theta\left[L_1^2(\bs{X}, \theta)\right]} \]</p>
+	<details>
+		<summary>Details:</summary>
+		<p>This follows immediately from <a href="#crb6" class="ref"></a>, since \(\E_\theta\left[h(\bs{X})\right] = \lambda\) for \(\theta \in T\).</p>
+	</details>
+</div>
+
+<p>An estimator of \(\lambda\) that achieves the Cram&eacute;r-Rao lower bound must be a uniformly minimum variance unbiased estimator (UMVUE) of \(\lambda\).</p>
+
+	<div class="unit" id="crb8">
+	<p class="math">Equality holds in <a href="#crb7" class="ref"></a>, and hence \(h(\bs{X})\) is an UMVUE, if and only if there exists a function \(u(\theta)\) such that (with probability 1)
+	\[ h(\bs{X}) = \lambda(\theta) + u(\theta) L_1(\bs{X}, \theta) \]</p>
+	<details>
+		<summary>Details:</summary>
+		<p>Equality holds in the correlation inequality if and only if the random variables are linear transformations of each other. Recall also that \(L_1(\bs{X}, \theta)\) has mean 0.</p>
+	</details>
+</div>
+
+<p>The quantity \(\E_\theta\left[L^2(\bs{X}, \theta)\right]\) that occurs in the denominator of the lower bounds in theorems <a href="#crb7" class="ref"></a> and <a href="#crb8" class="ref"></a> is called the <dfn>Fisher information number</dfn> of \(\bs{X}\), named after <a href="JavaScript:openAncillary('../biographies/Fisher.html')" class="ancillary">Sir Ronald Fisher</a>. The following theorem gives an alternate version of the Fisher information number that is usually computationally better.</p>
+
+<div class="unit" id="crb9">
+	<p class="math">If the appropriate derivatives exist and if the appropriate interchanges are permissible then
+	\[ \E_\theta\left[L_1^2(\bs{X}, \theta)\right] = \E_\theta\left[L_2(\bs{X}, \theta)\right] \]</p>
+</div>
+
+<p>The following theorem gives the second version of the Cram&eacute;r-Rao lower bound for unbiased estimators of a parameter.</p>
+
+<div class="unit" id="crb10">
+	<p class="math">If \(\lambda(\theta)\) is a parameter of interest and \(h(\bs{X})\) is an unbiased estimator of \(\lambda\) then</p>
+	\[ \var_\theta\left[h(\bs{X})\right] \ge \frac{\left[d\lambda / d\theta\right]^2}{\E_\theta\left[L_2(\bs{X}, \theta)\right]} \]
+	<details>
+		<summary>Details:</summary>
+		<p>This follows from theorems <a href="#crb7" class="ref"></a> and <a href="#crb9" class="ref"></a>.</p>
+	</details>
+</div>
+
+<h4 id="sam">Random Samples</h4>
+
+<p>Suppose now that \(\bs{X} = (X_1, X_2, \ldots, X_n)\) is a <a href="../sample/Introduction.html">random sample</a> of size \(n\) from the distribution of a random variable \(X\) having probability density function \(g_\theta\) and taking values in a set \(R\). Thus \(S = R^n\).  We will use lower-case letters for the derivative of the log likelihood function of \(X\) and the negative of the second derivative of the log likelihood function of \(X\).</p>
+
+<div class="unit" id="sam1">
+	<p class="dfn">For \(x \in R\) and \(\theta \in T\) define
+	\begin{align}
+		l(x, \theta) &amp; = \frac{d}{d\theta} \ln\left[g_\theta(x)\right] \\
+		l_2(x, \theta) &amp; = -\frac{d^2}{d\theta^2} \ln\left[g_\theta(x)\right]
+	\end{align}</p>
+</div>
+
+<div class="unit" id="sam2">
+	<p class="math">\(L^2\) can be written in terms of \(l^2\) and \(L_2\) can be written in terms of \(l_2\):</p>
+	<ol class="sub">
+		<li>\(\E_\theta\left[L^2(\bs{X}, \theta)\right] = n \E_\theta\left[l^2(X, \theta)\right]\)</li>
+		<li>\(\E_\theta\left[L_2(\bs{X}, \theta)\right] = n \E_\theta\left[l_2(X, \theta)\right]\)</li>
+	</ol>
+</div>
+
+<p>The following theorem gives the second version of the general Cram&eacute;r-Rao lower bound on the variance of a statistic, specialized for random samples.</p>
+
+<div class="unit" id="sam3">
+	<p class="math">If \( h(\bs{X}) \) is a statistic then</p>
+	\[ \var_\theta\left[h(\bs{X})\right] \ge \frac{\left[\frac{d}{d\theta} \E_\theta\left[h(\bs{X})\right] \right]^2}{n \E_\theta\left[l^2(X, \theta)\right]} \]
+</div>
+
+<p>The following theorem give the third version of the Cram&eacute;r-Rao lower bound for unbiased estimators of a parameter, specialized for random samples.</p>
+
+<div class="unit" id="sam4">
+	<p class="math">Suppose now that \(\lambda(\theta)\) is a parameter of interest and \(h(\bs{X})\) is an unbiased estimator of \(\lambda\). Then
+	\[ \var_\theta\left[h(\bs{X})\right] \ge \frac{(d\lambda / d\theta)^2}{n \E_\theta\left[l^2(X, \theta)\right]} \]</p>
+</div>
+
+<p>Note that the Cram&eacute;r-Rao lower bound varies inversely with the sample size \(n\). The following version gives the fourth version of the Cram&eacute;r-Rao lower bound for unbiased estimators of a parameter, again specialized for random samples.</p>
+
+<div class="unit" id="sam5">
+	<p class="math">If the appropriate derivatives exist and the appropriate interchanges are permissible) then
+	\[ \var_\theta\left[h(\bs{X})\right] \ge \frac{\left[d\lambda / d\theta\right]^2}{n \E_\theta\left[l_2(X, \theta)\right]} \]</p>
+</div>
+
+<p>To summarize, we have four versions of the Cram&eacute;r-Rao lower bound for the variance of an unbiased estimate of \(\lambda\): <a href="#crb7" class="ref"></a> and <a href="#crb10" class="ref"></a> in the general case, and <a href="#sam4" class="ref"></a> and <a href="#sam5" class="ref"></a> in the special case that \(\bs{X}\) is a random sample from the distribution of \(X\). If an ubiased estimator of \(\lambda\) achieves the lower bound, then the estimator is an UMVUE.</p>
+
+<h3 id="exa">Examples and Special Cases</h3>
+
+<p>We will apply the results above to several parametric families of distributions. First we need to recall some standard notation.  Suppose that \(\bs{X} = (X_1, X_2, \ldots, X_n)\) is a random sample of size \(n\) from the distribution of a real-valued random variable \(X\) with mean \(\mu\) and variance \(\sigma^2\). The <a href="../sample/Mean.html">sample mean</a> is
+\[ M = \frac{1}{n} \sum_{i=1}^n X_i \]
+Recall that \(\E(M) = \mu\) and \(\var(M) = \sigma^2 / n\). The special version of the sample variance, when \(\mu\) is known, and standard version of the sample variance are, respectively,
+\begin{align}
+	W^2 &amp; = \frac{1}{n} \sum_{i=1}^n (X_i - \mu)^2 \\
+	S^2 &amp; = \frac{1}{n - 1} \sum_{i=1}^n (X_i - M)^2
+\end{align}</p>
+
+<h4 id="ber">The Bernoulli Distribution</h4>
+
+<p>Suppose that \(\bs{X} = (X_1, X_2, \ldots, X_n)\) is a random sample of size \(n\) from the <a href="../bernoulli/Introduction.html">Bernoulli distribution</a> with unknown success parameter \(p \in (0, 1)\). In the usual language of reliability, \(X_i = 1\) means success on trial \(i\) and \(X_i = 0\) means failure on trial \(i\); the distribution is named for <a href="JavaScript:openAncillary('../biographies/Bernoulli.html')" class="ancillary">Jacob Bernoulli</a>. Recall that the Bernoulli distribution has probability density function
+\[ g_p(x) = p^x (1 - p)^{1-x}, \quad x \in \{0, 1\} \]
+Assumption <a href="#crb3" class="ref"></a> is satisfied. Moreover, recall that the mean of the Bernoulli distribution is \(p\), while the variance is \(p (1 - p)\).</p>
+
+<div class="unit" id="ber1">
+	<p class="math">\(p (1 - p) / n\)  is the Cram&eacute;r-Rao lower bound <a href="#sam5" class="ref"></a> for the variance of unbiased estimators of \(p\).</p>
+</div>
+
+<div class="unit" id="ber2">
+	<p class="math">The sample mean \(M\) (which is the proportion of successes) attains the lower bound in <a href="#ber1" class="ref"></a> and hence is an UMVUE of \(p\).</p>
+</div>
+
+<h4 id="poi">The Poisson Distribution</h4>
+
+<p>Suppose that \(\bs{X} = (X_1, X_2, \ldots, X_n)\) is a random sample of size \(n\) from the <a href="../poisson/Poisson.html">Poisson distribution</a> with parameter \(\theta \in (0, \infty)\). Recall that this distribution is often used to model the number of <q>random points</q> in a region of time or space, particularly in the context of the <a href="../poisson/index.html">Poisson process</a>. The Poisson distribution is named for <a href="JavaScript:openAncillary('../biographies/Poisson.html')" class="ancillary">Simeon Poisson</a> and has probability density function
+\[ g_\theta(x) = e^{-\theta} \frac{\theta^x}{x!}, \quad x \in \N \]
+Assumption <a href="#crb3" class="ref"></a> is satisfied. Recall also that the mean and variance of the distribution are both \(\theta\).</p>
+
+<div class="unit" id="poi1">
+	<p class="math">\(\theta / n\) is the Cram&eacute;r-Rao lower bound <a href="#sam5" class="ref"></a> for the variance of unbiased estimators of \(\theta\).</p>
+</div>
+
+<div class="unit" id="poi2">
+	<p class="math">The sample mean \(M\) attains the lower bound in <a href="#poi1" class="ref"></a> and hence is an UMVUE of \(\theta\).</p>
+</div>
+
+<h4 id="nor">The Normal Distribution</h4>
+
+<p>Suppose that \(\bs{X} = (X_1, X_2, \ldots, X_n)\) is a random sample of size \(n\) from the <a href="../special/Normal.html">normal distribution</a> with mean \(\mu \in \R\) and variance \(\sigma^2 \in (0, \infty)\). Recall that the normal distribution plays an especially important role in statistics, in part because of the <a href="../sample/CLT.html">central limit theorem</a>. The normal distribution is widely used to model physical quantities subject to numerous small, random errors, and has probability density function
+\[ g_{\mu,\sigma^2}(x) = \frac{1}{\sqrt{2 \, \pi} \sigma} \exp\left[-\left[\frac{x - \mu}{\sigma}\right]^2 \right], \quad x \in \R\]</p>
+
+<p>Assumption <a href="#crb3" class="ref"></a> is satisfied with respect to both of these parameters. Recall also that the fourth central moment is \(\E\left[(X - \mu)^4\right] = 3 \, \sigma^4\).</p>
+
+<div class="unit" id="nor1">
+	<p class="math">\(\sigma^2 / n\) is the Cram&eacute;r-Rao lower bound <a href="#sam5" class="ref"></a> for the variance of unbiased estimators of \(\mu\).</p>
+</div>
+
+<div class="unit" id="nor2">
+	<p class="math">The sample mean \(M\) attains the lower bound in <a href="#nor1" class="ref"></a> and hence is an UMVUE of \(\mu\).</p>
+</div>
+
+<div class="unit" id="nor3">
+	<p class="math">\(\frac{2 \sigma^4}{n}\) is the Cram&eacute;r-Rao lower bound <a href="#sam5" class="ref"></a> for the variance of unbiased estimators of \(\sigma^2\).</p>
+</div>
+
+<div class="unit" id="nor4">
+	<p class="math">The <a href="../sample/Variance.html">sample variance</a> \(S^2\) has variance \(\frac{2 \sigma^4}{n-1}\) and hence does not attain the lower bound in <a href="#nor3" class="ref"></a>.</p>
+</div>
+
+<div class="unit" id="nor5">
+	<p class="math">If \(\mu\) is known, then the special sample variance \(W^2\) attains the lower bound in <a href="#nor3" class="ref"></a> and hence is an UMVUE of \(\sigma^2\).</p>
+</div>
+
+<div class="unit" id="nor6">
+	<p class="math">If \(\mu\) is unknown, no unbiased estimator of \(\sigma^2\) attains the Cram&eacute;r-Rao lower bound in <a href="#nor3" class="ref"></a>. </p>
+	<details>
+		<summary>Details:</summary>
+		<p>This follows from <a href="#crb8" class="ref"></a> on equality in the Cram&eacute;r-Rao inequality.</p>
+	</details>
+</div>
+
+<h4 id="gam">The Gamma Distribution</h4>
+
+<p>Suppose that \(\bs{X} = (X_1, X_2, \ldots, X_n)\) is a random sample of size \(n\) from the <a href="../special/Gamma.html">gamma distribution</a> with known shape parameter \(k \gt 0\) and unknown scale parameter \(b \gt 0\). The gamma distribution is often used to model random times and certain other types of positive random variables. The probability density function is
+\[ g_b(x) = \frac{1}{\Gamma(k) b^k} x^{k-1} e^{-x/b}, \quad x \in (0, \infty) \]
+Assumption in <a href="#crb3" class="ref"></a> is satisfied with respect to \(b\). Moreover, the mean and variance of the gamma distribution are \(k b\) and \(k b^2\), respectively.</p>
+
+<div class="unit" id="gam1">
+	<p class="math">\(\frac{b^2}{n k}\) is the Cram&eacute;r-Rao lower bound <a href="#sam5" class="ref"></a> for the variance of unbiased estimators of \(b\).</p>
+</div>
+
+<div class="unit" id="gam2">
+<p class="math">\(\frac{M}{k}\) attains the lower bound in <a href="#gam1" class="ref"></a> and hence is an UMVUE of \(b\).</p>
+</div>
+
+<h4 id="bet">The Beta Distribution</h4>
+
+<p>Suppose that \(\bs{X} = (X_1, X_2, \ldots, X_n)\) is a random sample of size \(n\) from the <a href="../special/Beta.html">beta distribution</a> with left parameter \(a \gt 0\) and right parameter \(b = 1\).  Beta distributions are widely used to model random proportions and other random variables that take values in bounded intervals. In our specialized case, the probability density function of the sampling distribution is
+\[ g_a(x) = a \, x^{a-1}, \quad x \in (0, 1) \]
+Assumption <a href="#crb3" class="ref"></a> is satisfied with respect to \(a\).</p>
+
+<div class="unit" id="bet1">
+	<p class="math">The mean and variance of the distribution are</p>
+	<ol class="sub">
+		<li>\(\mu = \frac{a}{a+1}\)</li>
+		<li>\(\sigma^2 = \frac{a}{(a + 1)^2 (a + 2)}\)</li>
+	</ol>
+</div>
+
+<div class="unit" id="bet2">
+	<p class="math">The Cram&eacute;r-Rao lower bound <a href="#sam5" class="ref"></a> for the variance of unbiased estimators of \(\mu\) is \(\frac{a^2}{n \, (a + 1)^4}\).</p>
+</div>
+
+<div class="unit" id="bet3">
+	<p class="math">The sample mean \(M\) does not achieve the Cram&eacute;r-Rao lower bound in <a href="#bet2" class="ref"></a>, and hence is not an UMVUE of \(\mu\).</p>
+</div>
+
+<h4 id="uni">The Uniform Distribution</h4>
+
+<p>Suppose that \(\bs{X} = (X_1, X_2, \ldots, X_n)\) is a random sample of size \(n\) from the <a href="../special/UniformContinuous.html">uniform distribution</a> on \([0, a]\) where \(a \gt 0\) is the unknown parameter. Thus, the probability density function of the sampling distribution is
+\[ g_a(x) = \frac{1}{a}, \quad x \in [0, a] \]</p>
+
+<div class="unit" id="uni1">
+	<p class="math">Assumption <a href="#crb3" class="ref"></a> is <em>not</em> satisfied.</p>
+</div>
+
+<div class="unit" id="uni2">
+	<p class="math">The Cram&eacute;r-Rao lower bound <a href="#sam5" class="ref"></a> for the variance of unbiased estimators of \(a\) is \(\frac{a^2}{n}\). Of course, the Cram&eacute;r-Rao theorem does not apply, by <a href="#uni1" class="ref"></a>.</p>
+</div>
+
+<div class="unit" id="uni3">
+	<p class="math">From the section on <a href="Likelihood.html#uni">maximum likelihood estimators</a>, recall that \(V = \frac{n+1}{n} \max\{X_1, X_2, \ldots, X_n\}\) is unbiased and has variance \(\frac{a^2}{n (n + 2)}\). This variance is smaller than the Cram&eacute;r-Rao bound in <a href="#uni2" class="ref"></a>.</p>
+</div>
+
+<p>The reason that assumption <a href="#crb3" class="ref"></a> is not satisfied is that the support set \(\left\{x \in \R: g_a(x) \gt 0\right\}\) depends on the parameter \(a\).</p>
+
+<h3 id="blu">Best Linear Unbiased Estimators</h3>
+
+<p>We now consider a somewhat specialized problem, but one that fits the general theme of this section. Suppose that \(\bs{X} = (X_1, X_2, \ldots, X_n)\) is a sequence of observable real-valued random variables that are uncorrelated and have the same unknown mean \(\mu \in \R\), but possibly different standard deviations. Let \(\bs{\sigma} = (\sigma_1, \sigma_2, \ldots, \sigma_n)\) where \(\sigma_i = \sd(X_i)\) for \(i \in \{1, 2, \ldots, n\}\).</p>
+
+<p>We will consider estimators of \(\mu\) that are linear functions of the outcome variables. Specifically, we will consider estimators of the following form, where the vector of coefficients \(\bs{c} = (c_1, c_2, \ldots, c_n)\) is to be determined:
+\[ Y = \sum_{i=1}^n c_i X_i \]</p>
+
+<div class="unit" id="blu1">
+	<p class="math">\(Y\) is unbiased if and only if \(\sum_{i=1}^n c_i = 1\).</p>
+</div>
+
+<div class="unit" id="blu2">
+	<p class="math">The variance of \(Y\) is
+	\[ \var(Y) = \sum_{i=1}^n c_i^2 \sigma_i^2 \]</p>
+</div>
+
+<div class="unit" id="blu3">
+	<p class="math">The variance is minimized, subject to the unbiased constraint, when
+	\[ c_j = \frac{1 / \sigma_j^2}{\sum_{i=1}^n 1 / \sigma_i^2}, \quad j \in \{1, 2, \ldots, n\} \]</p>
+	<details>
+		<summary>Details:</summary>
+		<p>Use the method of Lagrange multipliers (named after <a href="JavaScript:openAncillary('../biographies/Lagrange.html')" class="ancillary">Joseph-Louis Lagrange</a>).</p>
+	</details>
+</div>
+
+<p>Exercise <a href="#blu3" class="ref"></a> shows how to construct the <dfn>Best Linear Unbiased Estimator</dfn> (<dfn>BLUE</dfn>) of \(\mu\), assuming that the vector of standard deviations \(\bs{\sigma}\) is known.</p>
+
+<p>Suppose now that \(\sigma_i = \sigma\) for \(i \in \{1, 2, \ldots, n\}\) so that the outcome variables have the same standard deviation. In particular, this would be the case if the outcome variables form a random sample of size \(n\) from a distribution with mean \(\mu\) and standard deviation \(\sigma\).</p>
+
+<div class="unit" id="blu4">
+	<p class="math">In this case the variance is minimized when \(c_i = 1 / n\) for each \(i\) and hence \(Y = M\), the sample mean.</p>
+</div>
+
+<p>Exercise <a href="#blu4" class="ref"></a> shows that the sample mean \(M\) is the best linear unbiased estimator of \(\mu\) when the standard deviations are the same, and that moreover, we do not need to know the value of the standard deviation.</p>
+
+<footer>
+	<ol class="map">
+		<li class="parent"><a href="../index.html">Random</a></li>
+		<li class="parent"><a href="index.html">6. Point Estimation</a></li>
+		<li class="child"><a href="Estimators.html" title="Estimators">1</a></li>
+		<li class="child"><a href="Moments.html" title="The Method of Moments">2</a></li>
+		<li class="child"><a href="Likelihood.html" title="Maximum Likelihood">3</a></li>
+		<li class="child"><a href="Bayes.html" title="Bayes' Estimators">4</a></li>
+		<li class="current">5</li>
+		<li class="child"><a href="Sufficient.html" title="Complete, Sufficient, and Ancillary Statistics">6</a></li>
+		<li class="details"><button type="button" title="Expand Details" onclick="expandDetails(true);"><img src="../icons/Plus.svg" alt="Expand"></button></li>
+		<li class="details"><button type="button" title="Contract Details" onclick="expandDetails(false);"><img src="../icons/Minus.svg" alt="Contract"></button></li>
+	</ol>
+	<ul class="map">
+		<li class="sister"><a href="JavaScript:openAncillary('../apps/index.html')" class="ancillary">Apps</a></li>
+		<li class="sister"><a href="JavaScript:openAncillary('../data/index.html')" class="ancillary">Data Sets</a></li>
+		<li class="child"><a href="JavaScript:openAncillary('../biographies/index.html')" class="ancillary"> Biographies</a></li>
+	</ul>
+</footer>
+
+<script>getReferences();</script>
+
+</body>
+</html>

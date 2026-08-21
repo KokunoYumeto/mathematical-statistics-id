@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<title>Introduction</title>
+	<meta name="author" content="Kyle Siegrist">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="keywords" content="probability, statistics, random sample, hypothesis test, type 1 error, type 2 error, null hypothesis, alternative hypothesis, signficance level, parameter, test statistic, critical region">
+	<link rel="icon" href="../icons/Icon.svg" type="image/svg">
+	<link rel="stylesheet" href="../Screen.css" type="text/css" media="screen">
+	<script src="../Basic.js"></script>
+	<script src="../../MathJax/tex-svg.js" id="MathJax-script" async></script>
+</head>
+
+<body>
+
+<div class="latex">
+	\(\newcommand{\R}{\mathbb{R}}\) 
+	\(\newcommand{\N}{\mathbb{N}}\)
+	\(\newcommand{\Z}{\mathbb{Z}}\)
+	\(\newcommand{\P}{\mathbb{P}}\)
+	\(\newcommand{\E}{\mathbb{E}}\)
+	\(\newcommand{\var}{\text{var}}\)
+	\(\newcommand{\sd}{\text{sd}}\)
+	\(\newcommand{\bs}{\boldsymbol}\)
+	\(\newcommand{\ms}{\mathscr}\)
+</div>
+
+<header>
+	<ol class="map">
+		<li class="parent"><a href="../index.html">Random</a></li>
+		<li class="parent"><a href="index.html">8. Hypothesis Testing</a></li>
+		<li class="current">1</li>
+		<li class="child"><a href="Normal.html" title="Tests in the Normal Model">2</a></li>
+		<li class="child"><a href="Bernoulli.html" title="Tests in the Bernoulli Model">3</a></li>
+		<li class="child"><a href="BivariateNormal.html" title="Tests in the Two-Sample Normal Model">4</a></li>
+		<li class="child"><a href="Likelihood.html" title="Likelihood Ratio Tests">5</a></li>
+		<li class="child"><a href="ChiSquare.html" title="Chi-Square Tests">6</a></li>
+		<li class="details"><button type="button" title="Expand Details" onclick="expandDetails(true);"><img src="../icons/Plus.svg" alt="Expand"></button></li>
+		<li class="details"><button type="button" title="Contract Details" onclick="expandDetails(false);"><img src="../icons/Minus.svg" alt="Contract"></button></li>
+	</ol>
+	<h2>1. Introduction</h2>
+</header>
+
+<h3 id="the">Basic Theory</h3>
+
+<h4 id="pre">Preliminaries</h4>
+
+<p>As usual, our starting point is a <a href="../prob/Experiments.html">random experiment</a> modeled by a <a href="../prob/Probability2.html">probability space</a> \((\Omega, \ms F, \P)\). In the basic statistical model, we have an observable <a href="../prob/Events.html">random variable</a> \(\bs{X}\) with values in a set \(S\). In general, \(\bs{X}\) can have quite a complicated structure. For example, if the experiment is to sample \(n\) objects from a population and record various measurements of interest, then
+\[ \bs{X} = (X_1, X_2, \ldots, X_n) \]
+where \(X_i\) is the vector of measurements for the \(i\)th object. The most important special case occurs when \((X_1, X_2, \ldots, X_n)\) are independent and identically distributed. In this case, we have a <a href="../sample/Introduction.html">random sample</a> of size \(n\) from the common distribution.</p>
+
+<p>The purpose of this section is to define and discuss the basic concepts of statistical <dfn>hypothesis testing</dfn>. Collectively, these concepts are sometimes referred to as the <dfn>Neyman-Pearson</dfn> framework, in honor of <a href="JavaScript:openAncillary('../biographies/Neyman.html')" class="ancillary" title="Open biographical sketch">Jerzy Neyman</a> and <a href="JavaScript:openAncillary('../biographies/PearsonE.html')" class="ancillary" title="Open biographical sketch">Egon Pearson</a>, who first formalized them.</p>
+
+<h4 id="hyp">Hypotheses</h4>
+
+<div class="unit" id="hyp1">
+	<p class="dfn">A <dfn>statistical hypothesis</dfn> is a statement about the distribution of  \(\bs{X}\). Equivalently, a statistical hypothesis specifies a <em>set</em> of possible distributions of \(\bs{X}\): the set of distributions for which the statement is true.  A hypothesis that specifies a single distribution for \(\bs{X}\) is called <dfn>simple</dfn>; a hypothesis that specifies more than one distribution for \(\bs{X}\) is called <dfn>composite</dfn>.</p>
+</div>
+
+<p>In <dfn>hypothesis testing</dfn>, the goal is to see if there is sufficient statistical evidence to reject a presumed <dfn>null hypothesis</dfn> in favor of a conjectured <dfn>alternative hypothesis</dfn>. The null hypothesis is usually denoted \(H_0\) while the alternative hypothesis is usually denoted \(H_1\).</p>
+
+<p>An hypothesis test is a <em>statistical decision</em>; the conclusion will either be to <dfn>reject</dfn> the null hypothesis in favor of the alternative, or to <dfn>fail to reject</dfn> the null hypothesis. The decision that we make must, of course, be based on the observed value \(\bs{x}\) of the data vector \(\bs{X}\). Thus, we will find an appropriate subset \(R\) of the sample space \(S\) and reject \(H_0\) if and only if \(\bs{x} \in R\). The set \(R\) is known as the <dfn>rejection region</dfn> or the <dfn>critical region</dfn>. Note the asymmetry between the null and alternative hypotheses.  This asymmetry is due to the fact that we <em>assume</em> the null hypothesis, in a sense, and then see if there is sufficient evidence in \(\bs{x}\) to overturn this assumption in favor of the alternative.</p>
+
+<p>An hypothesis test is a statistical analogy to proof by contradiction, in a sense.  Suppose for a moment that \(H_1\) is a statement in a mathematical theory and that \(H_0\) is its negation. One way that we can prove \(H_1\) is to assume \(H_0\) and work our way logically to a contradiction.  In an hypothesis test, we don't <q>prove</q> anything of course, but there are similarities.  We assume \(H_0\) and then see if the data \(\bs{x}\) are sufficiently at odds with that assumption that we feel justified in rejecting \(H_0\) in favor of \(H_1\).</p>
+
+<p>Often, the critical region is defined in terms of a statistic \(w(\bs{X})\), known as a <dfn>test statistic</dfn>, where \(w\) is a function from \(S\) into another set \(T\). We find an appropriate rejection region \(R_T \subseteq T\) and reject \(H_0\) when the observed value \(w(\bs{x}) \in R_T\). Thus, the rejection region in \(S\) is then \(R = w^{-1}(R_T) = \left\{\bs{x} \in S: w(\bs{x}) \in R_T\right\}\). As usual, the use of a statistic often allows significant <dfn>data reduction</dfn> when the dimension of the test statistic is much smaller than the dimension of the data vector.</p>
+
+<h4 id="err">Errors</h4>
+
+<p>The ultimate decision may be correct or may be in error. There are two types of errors, depending on which of the hypotheses is actually true.</p>
+
+<div class="unit" id="err1">
+	<p class="dfn">Types of errors:</p>
+	<ol class="sub">
+		<li>A <dfn>type 1 error</dfn> is rejecting the null hypothesis \(H_0\) when \(H_0\) is true.</li>
+		<li>A <dfn>type 2 error</dfn> is failing to reject the null hypothesis \(H_0\) when the alternative hypothesis \(H_1\) is true.</li>
+	</ol>
+</div>
+
+<p>Similarly, there are two ways to make a <em>correct</em> decision: we could reject \(H_0\) when \(H_1\) is true or we could fail to reject \(H_0\) when \(H_0\) is true. The possibilities are summarized in the following table:</p>
+
+<table>
+	<caption class="displayed">Hypothesis Test</caption>
+	<tr>
+		<th>State | Decision</th>
+		<th>Fail to reject \(H_0\)</th>
+		<th>Reject \(H_0\)</th>
+	</tr>
+	<tr>
+	<th>\(H_0\) True</th>
+		<td>Correct</td>
+		<td>Type 1 error</td>
+	</tr>
+	<tr>
+		<th>\(H_1\) True</th>
+		<td>Type 2 error</td>
+		<td>Correct</td>
+	</tr>
+</table>
+
+<p>Of course, when we observe \(\bs{X} = \bs{x}\) and make our decision, either we will have made the correct decision or we will have committed an error, and usually we will never know which of these events has occurred. <em>Prior</em> to gathering the data, however, we can consider the probabilities of the various errors.</p>
+
+<p>If \(H_0\) is true (that is, the distribution of \(\bs{X}\) is specified by \(H_0\)), then \(\P(\bs{X} \in R)\) is the probability of a type 1 error for this distribution. If \(H_0\) is composite, then \(H_0\) specifies a variety of different distributions for \(\bs{X}\) and thus there is a <em>set</em> of type 1 error probabilities.
+
+<div class="unit" id="err2">
+	<p class="dfn">The maximum probability of a type 1 error, over the set of distributions specified by \( H_0 \), is the <dfn>significance level</dfn> of the test or the <dfn>size</dfn> of the critical region.</p>
+</div>
+
+<p>The significance level is often denoted by \(\alpha\). Usually, the rejection region is constructed so that the significance level is a prescribed, small value (typically 0.1, 0.05, 0.01).</p>
+
+<p>If \(H_1\) is true (that is, the distribution of \(\bs{X}\) is specified by \(H_1\)), then \(\P(\bs{X} \notin R)\) is the probability of a type 2 error for this distribution. Again, if \(H_1\) is composite then \(H_1\) specifies a variety of different distributions for \(\bs{X}\), and thus there will be a set of type 2 error probabilities. Generally, there is a tradeoff between the type 1 and type 2 error probabilities. If we reduce the probability of a type 1 error, by making the rejection region \(R\) smaller, we necessarily increase the probability of a type 2 error because the complementary region \(S \setminus R\) is larger.</p>
+
+<p>The extreme cases can give us some insight. First consider the decision rule in which we <em>never</em> reject \(H_0\), regardless of the evidence \(\bs{x}\). This corresponds to the rejection region \(R = \emptyset\). A type 1 error is impossible, so the significance level is 0. On the other hand, the probability of a type 2 error is 1 for any distribution defined by \(H_1\). At the other extreme, consider the decision rule in which we always rejects \(H_0\) regardless of the evidence \(\bs{x}\). This corresponds to the rejection region \(R = S\). A type 2 error is impossible, but now the probability of a type 1 error is 1 for any distribution defined by \(H_0\). In between these two worthless tests are meaningful tests that take the evidence \(\bs{x}\) into account.</p>
+
+<h4 id="pow">Power</h4>
+
+<div class="unit" id="pow1">
+	<p class="dfn">If \(H_1\) is true, so that the distribution of \(\bs{X}\) is specified by \(H_1\), then \(\P(\bs{X} \in R)\), the probability of rejecting \(H_0\) is the <dfn>power</dfn> of the test for that distribution.</p>
+</div>
+
+<p>Thus the power of the test for a distribution specified by \( H_1 \) is the probability of making the correct decision.</p>
+
+<div class="unit" id="pow2">
+	<p class="dfn">Suppose that we have two tests, corresponding to rejection regions \(R_1\) and \(R_2\), respectively, each having significance level \(\alpha\). The test with region \(R_1\) is <dfn>uniformly more powerful</dfn> than the test with region \(R_2\) if
+	\[ \P(\bs{X} \in R_1) \ge \P(\bs{X} \in R_2) \text{ for every distribution of } \bs{X} \text{ specified by } H_1 \]</p>
+</div>
+
+<p>Naturally, in this case, we would prefer the first test. Often, however, two tests will not be uniformly ordered; one test will be more powerful for some distributions specified by \(H_1\) while the other test will be more powerful for other distributions specified by \(H_1\).</p>
+
+<div class="unit" id="pow3">
+	<p class="dfn">If a test has significance level \(\alpha\) and is uniformly more powerful than any other test with significance level \(\alpha\), then the test is said to be a <dfn>uniformly most powerful test</dfn> at level \(\alpha\).</p>
+</div>
+
+<p>Clearly a uniformly most powerful test is the best we can do.</p>
+
+<h4 id="pva">\(P\)-value</h4>
+
+<p>In most cases, we have a general procedure that allows us to construct a test (that is, a rejection region \(R_\alpha\)) for any given significance level \(\alpha \in (0, 1)\). Typically, \(R_\alpha\) decreases (in the subset sense) as \(\alpha\) decreases.</p>
+
+<div class="unit" id="pva1">
+	<p class="dfn">The <dfn>\(P\)-value</dfn> of the observed value \(\bs{x}\) of \(\bs{X}\), denoted \(P(\bs{x})\), is defined to be the smallest \(\alpha\) for which \(\bs{x} \in R_\alpha\); that is, the smallest significance level for which \(H_0\) is rejected, given \(\bs{X} = \bs{x}\).</p>
+</div>
+
+<p>Knowing \(P(\bs{x})\) allows us to test \(H_0\) at any significance level for the given data \(\bs{x}\): If \(P(\bs{x}) \le \alpha\) then we would reject \(H_0\) at significance level \(\alpha\); if \(P(\bs{x}) \gt \alpha\) then we fail to reject \(H_0\) at significance level \(\alpha\). Note that \(P(\bs{X})\) is a <em>statistic</em>. Informally, \(P(\bs{x})\) can often be thought of as the probability of an outcome <q>as or more extreme</q> than the observed value \(\bs{x}\), where <em>extreme</em> is interpreted relative to the null hypothesis \(H_0\).</p>
+
+<h4 id="jus">Analogy with Justice Systems</h4>
+
+<p>There is a helpful analogy between statistical hypothesis testing and the criminal justice system in the US and various other countries.  Consider a person charged with a crime.  The presumed <em>null hypothesis</em> is that the person is innocent of the crime; the conjectured <em>alternative hypothesis</em> is that the person is guilty of the crime. The test of the hypotheses is a trial with evidence presented by both sides playing the role of the data. After considering the evidence, the jury delivers the decision as either <em>not guilty</em> or <em>guilty</em>. Note that <em>innocent</em> is not a possible verdict of the jury, because it is not the point of the trial to <em>prove</em> the person innocent. Rather, the point of the trial is to see whether there is sufficient evidence to overturn the null hypothesis that the person is innocent in favor of the alternative hypothesis of that the person is guilty. A <em>type 1 error</em> is convicting a person who is innocent; a <em>type 2 error</em> is acquitting a person who is guilty.  Generally, a type 1 error is considered the more serious of the two possible errors, so in an attempt to hold the chance of a type 1 error to a very low level, the standard for conviction in serious criminal cases is <em>beyond a reasonable doubt</em>. </p>
+
+<h3 id="par">Tests of an Unknown Parameter</h3>
+
+<p>Hypothesis testing is a very general concept, but an important special class occurs when the distribution of the data variable \(\bs{X}\) depends on a parameter \(\theta\) taking values in a parameter space \(\Theta\). The parameter may be vector-valued, so that \(\bs{\theta} = (\theta_1, \theta_2, \ldots, \theta_n)\) and \(\Theta \subseteq \R^k\) for some \(k \in \N_+\). The hypotheses generally take the form
+\[ H_0: \theta \in \Theta_0 \text{ versus } H_1: \theta \notin \Theta_0 \]
+where \(\Theta_0\) is a prescribed subset of the parameter space \(\Theta\). In this setting, the probabilities of making an error or a correct decision depend on the true value of \(\theta\). If \(R\) is the rejection region, then the <dfn>power function</dfn> \( Q \) is given by
+\[ Q(\theta) = \P_\theta(\bs{X} \in R), \quad \theta \in \Theta \]
+The power function gives a lot of information about the test.</p>
+
+<div class="unit" id="par1">
+	<p class="math">The power function satisfies the following properties:</p>
+	<ol class="sub">
+		<li>\(Q(\theta)\) is the probability of a type 1 error when \(\theta \in \Theta_0\).</li>
+		<li>\(\max\left\{Q(\theta): \theta \in \Theta_0\right\}\) is the significance level of the test.</li>
+		<li>\(1 - Q(\theta)\) is the probability of a type 2 error when \(\theta \notin \Theta_0\).</li>
+		<li>\(Q(\theta)\) is the power of the test when \(\theta \notin \Theta_0\).</li>
+	</ol>
+</div>
+
+<p>If we have two tests, we can compare them by means of their power functions.</p>
+
+<div class="unit" id="par2">
+	<p class="math">Suppose that we have two tests, corresponding to rejection regions \(R_1\) and \(R_2\), respectively, each having significance level \(\alpha\). The test with rejection region \(R_1\) is uniformly more powerful than the test with rejection region \(R_2\) if \( Q_1(\theta) \ge Q_2(\theta)\) for all \( \theta \notin \Theta_0 \).</p>
+</div>
+
+<p>Most hypothesis tests of an unknown real parameter \(\theta\) fall into three special cases:</p>
+
+<div class="unit" id="par3">
+	<p class="dfn">Suppose that \( \theta \) is a real parameter and \( \theta_0 \in \Theta \) a specified value. The tests below are respectively the <dfn>two-sided test</dfn>, the <dfn>left-tailed test</dfn>, and the <dfn>right-tailed test</dfn>.</p>
+	<ol class="sub">
+		<li>\(H_0: \theta = \theta_0\) versus \(H_1: \theta \ne \theta_0\)</li>
+		<li>\(H_0: \theta \ge \theta_0\) versus \(H_1: \theta \lt \theta_0\)</li>
+		<li>\(H_0: \theta \le \theta_0\) versus \(H_1: \theta \gt \theta_0\)	</li>
+	</ol>
+</div>
+
+<p>Thus the tests are named after the conjectured alternative. Of course, there may be other unknown parameters besides \(\theta\) (known as <dfn>nuisance parameters</dfn>).</p>
+
+<h4 id="equ">Equivalence Between Hypothesis Test and Confidence Sets</h4>
+
+<p>There is an equivalence between hypothesis tests and <a href="../interval/Introduction.html">confidence sets</a> for a parameter \(\theta\).</p>
+
+<div class="unit" id="equ1">
+	<p class="math">Suppose that \(C(\bs{x})\) is a \(1 - \alpha\) level confidence set for \(\theta\). The following test has significance level \(\alpha\) for the hypothesis \( H_0: \theta = \theta_0 \) versus \( H_1: \theta \ne \theta_0 \): Reject \(H_0\) if and only if \(\theta_0 \notin C(\bs{x})\)</p>
+	<details>
+		<summary>Details:</summary>
+		<p>By definition, \(\P[\theta \in C(\bs{X})] = 1 - \alpha\). Hence if \(H_0\) is true so that \(\theta = \theta_0\), then the probability of a type 1 error is \(P[\theta \notin C(\bs{X})] = \alpha\).</p>
+	</details>
+</div>
+
+<p>Equivalently, we <em>fail</em> to reject \(H_0\) at significance level \(\alpha\) if and only if \(\theta_0\) is in the corresponding \(1 - \alpha\) level confidence set. In particular, this equivalence applies to interval estimates of a real parameter \(\theta\) and the common tests for \(\theta\) given in <a href="#par3" class="ref"></a>.</p>
+
+<div class="unit" id="equ2">
+	<p class="math">. In each case below, the confidence interval has confidence level \(1 - \alpha\) and the test has significance level \(\alpha\).</p>
+	<ol class="sub">
+		<li>Suppose that \(\left[L(\bs{X}, U(\bs{X})\right]\) is a two-sided confidence interval for \(\theta\). Reject \(H_0: \theta = \theta_0\) versus \(H_1: \theta \ne \theta_0\) if and only if \(\theta_0 \lt L(\bs{X})\) or \(\theta_0 \gt U(\bs{X})\).</li>
+		<li>Suppose that \(L(\bs{X})\) is a confidence lower bound for \(\theta\). Reject \(H_0: \theta \le \theta_0\) versus \(H_1: \theta \gt \theta_0\) if and only if \(\theta_0 \lt L(\bs{X})\).</li>
+		<li>Suppose that \(U(\bs{X})\) is a confidence upper bound for \(\theta\). Reject \(H_0: \theta \ge \theta_0\) versus \(H_1: \theta \lt \theta_0\) if and only if \(\theta_0 \gt U(\bs{X})\).</li>
+	</ol>
+</div>
+
+<h4 id="piv">Pivot Variables and Test Statistics</h4>
+
+<p>Recall that confidence sets of an unknown parameter \(\theta\) are often constructed through a <dfn>pivot variable</dfn>, that is, a random variable \(W(\bs{X}, \theta)\) that depends on the data vector \(\bs{X}\) and the parameter \(\theta\), but  whose distribution does not depend on \(\theta\) and is known. In this case, a natural test statistic for the basic tests in definition <a href="#par3" class="ref"></a> is \(W(\bs{X}, \theta_0)\).</p>
+
+<footer>
+	<ol class="map">
+		<li class="parent"><a href="../index.html">Random</a></li>
+		<li class="parent"><a href="index.html">8. Hypothesis Testing</a></li>
+		<li class="current">1</li>
+		<li class="child"><a href="Normal.html" title="Tests in the Normal Model">2</a></li>
+		<li class="child"><a href="Bernoulli.html" title="Tests in the Bernoulli Model">3</a></li>
+		<li class="child"><a href="BivariateNormal.html" title="Tests in the Two-Sample Normal Model">4</a></li>
+		<li class="child"><a href="Likelihood.html" title="Likelihood Ratio Tests">5</a></li>
+		<li class="child"><a href="ChiSquare.html" title="Chi-Square Tests">6</a></li>
+		<li class="details"><button type="button" title="Expand Details" onclick="expandDetails(true);"><img src="../icons/Plus.svg" alt="Expand"></button></li>
+		<li class="details"><button type="button" title="Contract Details" onclick="expandDetails(false);"><img src="../icons/Minus.svg" alt="Contract"></button></li>
+	</ol>
+	<ul class="map">
+		<li class="sister"><a href="JavaScript:openAncillary('../apps/index.html')" class="ancillary">Apps</a></li>
+		<li class="sister"><a href="JavaScript:openAncillary('../data/index.html')" class="ancillary">Data Sets</a></li>
+		<li class="child"><a href="JavaScript:openAncillary('../biographies/index.html')" class="ancillary"> Biographies</a></li>
+	</ul>
+</footer>
+
+<script>getReferences();</script>
+
+</body>
+</html>

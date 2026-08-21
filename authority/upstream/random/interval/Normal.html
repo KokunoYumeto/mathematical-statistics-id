@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<title>Estimation in the Normal Model</title>
+	<meta name="author" content="Kyle Siegrist">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="keywords" content="probability, statistics, set estimation, interval estimation, normal distribution, mean, variance, robust estimation, confidence level">
+	<link rel="icon" href="../icons/Icon.svg" type="image/svg">
+	<link rel="stylesheet" href="../Screen.css" type="text/css" media="screen">
+	<script src="../Basic.js"></script>
+	<script src="../../MathJax/tex-svg.js" id="MathJax-script" async></script>
+</head>
+
+<body>
+
+<div class="latex">
+	\(\newcommand{\R}{\mathbb{R}}\) 
+	\(\newcommand{\N}{\mathbb{N}}\)
+	\(\newcommand{\Z}{\mathbb{Z}}\)
+	\(\newcommand{\P}{\mathbb{P}}\)
+	\(\newcommand{\E}{\mathbb{E}}\)
+	\(\newcommand{\var}{\text{var}}\)
+	\(\newcommand{\sd}{\text{sd}}\)
+	\(\newcommand{\bs}{\boldsymbol}\)
+</div>
+
+<header>
+	<ol class="map">
+		<li class="parent"><a href="../index.html">Random</a></li>
+		<li class="parent"><a href="index.html">7. Set Estimation</a></li>
+		<li class="child"><a href="Introduction.html" title="Introduction">1</a></li>
+		<li class="current">2</li>
+		<li class="child"><a href="Bernoulli.html" title="Estimation in the Bernoulli Model">3</a></li>
+		<li class="child"><a href="BivariateNormal.html" title="Estimation in the Two-Sample Normal Model">4</a></li>
+		<li class="child"><a href="Bayes.html" title="Bayesian Interval Estimation">5</a></li>
+		<li class="details"><button type="button" title="Expand Details" onclick="expandDetails(true);"><img src="../icons/Plus.svg" alt="Expand"></button></li>
+		<li class="details"><button type="button" title="Contract Details" onclick="expandDetails(false);"><img src="../icons/Minus.svg" alt="Contract"></button></li>
+	</ol>
+	<h2>2. Estimation in the Normal Model</h2>
+</header>
+
+<h3 id="the">Basic Theory</h3>
+
+<h4 id="mod">The Normal Model</h4>
+
+<p>The <a href="../special/Normal.html">normal distribution</a> is perhaps the most important distribution in the study of mathematical statistics, in part because of the <a href="../sample/CLT.html">central limit theorem</a>. As a consequence of this theorem, a measured quantity that is subject to numerous small, random errors will have, at least approximately, a normal distribution. Such variables are ubiquitous in statistical experiments, in subjects varying from the physical and biological sciences to the social sciences.</p>
+
+<p>So in this section, we assume that \(\bs{X} = (X_1, X_2, \ldots, X_n)\) is a <a href="../sample/Introduction.html">random sample</a> from the <a href="../special/Normal.html">normal distribution</a> with <a href="../expect/Properties.html">mean</a> \(\mu\) and <a href="../expect/Variance.html">standard deviation</a> \(\sigma\). Our goal is to construct <a href="Introduction.html">confidence intervals</a> for \(\mu\) and \(\sigma\) individually, and then more generally, confidence sets for \( (\mu, \sigma) \). These are among of the most important special cases of set estimation. A parallel section on <a href="../hypothesis/Normal.html">Tests in the Normal Model</a> is in <a href="../hypothesis/index.html">Chapter 8</a> on hypothesis testing. First we need to review some basic facts that will be critical for our analysis.</p>
+
+<div class="unit" id="mod1">
+	<p class="math">Recall that the <a href="../sample/LLN.html">sample mean</a> \( M \) and <a href="../sample/Variance.html">sample variance</a> \( S^2 \) are
+	\[ M = \frac{1}{n} \sum_{i=1}^n X_i, \quad S^2 = \frac{1}{n - 1} \sum_{i=1}^n (X_i - M)^2\]</p>
+</div>
+
+<p>From our study of <a href="../point/index.html">point estimation</a>, recall that \( M \) is an unbiased and consistent estimator of \( \mu \) while \( S^2 \) is an unbiased and consistent estimator of \( \sigma^2 \). From these basic statistics we can construct the <a href="Introduction.html#piv">pivot variables</a> that will be used to construct our interval estimates. Recall the following <a href="../sample/Normal.html">special properties of the normal distribution</a>:</p>
+
+<div class="unit" id="mod2">
+	<p class="math">Define
+	\[ Z = \frac{M - \mu}{\sigma \big/ \sqrt{n}}, \quad T = \frac{M - \mu}{S \big/ \sqrt{n}}, \quad V = \frac{n - 1}{\sigma^2} S^2 \]</p>
+	<ol class="sub">
+		<li>\( Z \) has the <a href="../special/Normal.html">standard normal distribution</a>.</li>
+		<li>\( T \) has the <a href="../special/Student.html">student \( t \) distribution</a> with \( n - 1 \) degrees of freedom.</li>
+		<li>\( V \) has the <a href="../special/ChiSquare.html">chi-square distribution</a> with \( n - 1 \) degrees of freedom.</li>
+		<li>\( Z \) and \( V \) are independent.</li>
+	</ol>
+</div>
+
+<p>It follows that each of these random variables is a pivot variable for \( (\mu, \sigma) \) since the distributions do not depend on the parameters, but the variables themselves functionally depend on one or both parameters. Pivot variables \( Z \) and \( T \) will be used to construct interval estimates of \( \mu \) while \( V \) will be used to construct interval estimates of \( \sigma^2 \). To construct our estimates, we will need <a href="../dist/CDF.html#qnt">quantiles</a> of these standard distributions. The quantiles can be computed using the <a href="JavaScript:openAncillary('../apps/QuantileApp.html')" class="ancillary"> quantile app</a> or from most mathematical and statistical software packages. Here is the notation we will use:</p>
+
+<div class="unit" id="mod3">
+	<p class="dfn">Let \( p \in (0, 1) \) and \( k \in \N_+ \).</p>
+	<ol class="sub">
+		<li>\( z(p) \) denotes the quantile of order \( p \) for the standard normal distribution.</li>
+		<li>\(t_k(p)\) denotes the quantile of order \( p \) for the student \( t \) distribution with \( k \) degrees of freedom.</li>
+		<li>\( \chi^2_k(p) \) denotes the quantile of order \( p \) for the chi-square distribution with \( k \) degrees of freedom</li>
+	</ol>
+</div>
+
+<p>Since the standard normal and student \( t \) distributions are symmetric about 0, it follows that \( z(1 - p) = -z(p) \) and \( t_k(1 - p) = -t_k(p) \) for \( p \in (0, 1) \) and \( k \in \N_+ \). On the other hand, the chi-square distribution is not symmetric. </p>
+
+<h4 id="muk">Confidence Intervals for \( \mu \) with \( \sigma \) Known</h4>
+
+<p>For our first discussion, we assume that the distribution mean \( \mu \) is unknown but the standard deviation \( \sigma \) is known. This is not always an artificial assumption. There are often situations where \( \sigma \) is stable over time, and hence is at least approximately known, while \( \mu \) changes because of different <q>treatments</q>. Examples are given in the computational exercises below. The pivot variable \( Z \) leads to confidence intervals for \( \mu \).</p>
+
+<div class="unit" id="muk1">
+	<p class="math">For \( \alpha \in (0, 1) \),</p>
+	<ol class="sub">
+		<li>\( \left[M - z\left(1 - \frac{\alpha}{2}\right) \frac{\sigma}{\sqrt{n}}, M + z\left(1 - \frac{\alpha}{2}\right) \frac{\sigma}{\sqrt{n}}\right] \) is a \( 1 - \alpha \) confidence interval for \( \mu \).</li>
+		<li>\( M - z(1 - \alpha) \frac{\sigma}{\sqrt{n}} \) is a \( 1 - \alpha \) confidence lower bound for \( \mu \)</li>
+		<li>\( M + z(1 - \alpha) \frac{\sigma}{\sqrt{n}} \) is a \( 1 - \alpha \) confidence upper bound for \( \mu \)</li></ol>
+
+	<details>
+		<summary>Details:</summary>
+		<p>Since \( Z = \frac{M - \mu}{\sigma / \sqrt{n}} \) has the standard normal distribution, each of the following events has probability \( 1 - \alpha \) by definition of the quantiles:</p>
+		<ol class="sub">
+			<li>\( \left\{-z\left(1 - \frac{\alpha}{2}\right) \le \frac{M - \mu}{\sigma / \sqrt{n}} \le z\left(1 - \frac{\alpha}{2}\right)\right\} \)</li>
+			<li>\( \left\{\frac{M - \mu}{\sigma / \sqrt{n}} \ge z(1 - \alpha)\right\} \)</li>
+			<li>\( \left\{\frac{M - \mu}{\sigma / \sqrt{n}} \le -z(1 - \alpha)\right\} \)</li>
+		</ol>
+		<p>In each case, solving the inequality for \( \mu \) gives the result.</p>
+	</details>
+</div>
+
+<p>These are the standard interval estimates for \( \mu \) when \( \sigma \) is known. The two-sided confidence interval in (a) is symmetric about the sample mean \( M \), and as the proof shows, corresponds to equal probability \( \frac{\alpha}{2} \) in each tail of the distribution of the pivot variable \( Z \). But of course, this is not the only two-sided \( 1 - \alpha \) confidence interval; we can divide the probability \( \alpha \) anyway we want between the left and right tails of the distribution of \( Z \).</p>
+
+<div class="unit" id="muk2">
+	<p class="math">For every \(\alpha, \, p \in (0, 1)\), a \(1 - \alpha\) confidence interval for \(\mu\) is
+	\[ \left[M - z(1 - p \alpha) \frac{\sigma}{\sqrt{n}}, M - z(\alpha - p \alpha) \frac{\sigma}{\sqrt{n}} \right] \]</p>
+	<ol class="sub">
+		<li>\( p = \frac{1}{2} \) gives the symmetric, equal-tail confidence interval.</li>
+		<li>\( p \to 0 \) gives the interval with the confidence upper bound.</li>
+		<li>\( p \to 1 \) gives the interval with the confidence lower bound.</li>
+	</ol>
+	<details>
+		<summary>Details:</summary>
+		<p>From the normal distribution of \( M \) and the definition of the quantile function,
+		\[ \P \left[ z(\alpha - p \, \alpha) \lt \frac{M - \mu}{\sigma / \sqrt{n}} \lt z(1 - p \alpha) \right] = 1 - \alpha \]
+		The result then follows by solving for \(\mu\) in the inequality.</p>
+	</details>
+</div>
+
+<p>In terms of the distribution of the pivot variable \( Z \), as the proof shows, the two-sided confidence interval above corresponds to \( p \alpha \) in the right tail and \( (1 - p) \alpha \) in the left tail. Next, let's study the length of this confidence interval.</p>
+
+<div class="unit" id="muk3">
+	<p class="math">For \( \alpha, \, p \in (0, 1) \), the (deterministic) length of the two-sided \( 1 - \alpha \) confidence interval above is
+	\[L = \frac{\left[z(1 - p \alpha) - z(\alpha - p \alpha)\right] \sigma}{\sqrt{n}} \]</p>
+	<ol class="sub">
+		<li>\(L\) is a decreasing function of \(\alpha\), and \(L \downarrow 0\) as \(\alpha \uparrow 1\) and \(L \uparrow \infty\) as \(\alpha \downarrow 0\).</li>
+		<li>\(L\) is a decreasing function of \(n\), and \(L \downarrow 0\) as \(n \uparrow \infty\).</li>
+		<li>\(L\) is an increasing function of \(\sigma\), and \(L \downarrow 0\) as \(\sigma \downarrow 0\) and \(L \uparrow \infty\) as \(\sigma \uparrow \infty\).</li>
+		<li>As a function of \( p \), \(L\) decreases and then increases, with minimum at the point of symmetry \(p = \frac{1}{2}\).</li>
+	</ol>
+</div>
+
+<p>The last result shows again that there is a tradeoff between the confidence level and the length of the confidence interval. If \(n\) and \(p\) are fixed, we can decrease \(L\), and hence tighten our estimate, only at the expense of decreasing our confidence in the estimate. Conversely, we can increase our confidence in the estimate only at the expense of increasing the length of the interval. In terms of \(p\), the best of the two-sided \(1 - \alpha\) confidence intervals (and the one that is almost always used) is symmetric, equal-tail interval with \( p = \frac{1}{2} \):
+
+<div class="unit" id="muk4">
+	<p class="app">Use the <a href="JavaScript:openAncillary('../apps/MeanEstimate.html')" class="ancillary">mean estimation experiment</a> to explore the procedure. Select the normal distribution and select normal pivot. Use various parameter values, confidence levels, sample sizes, and interval types. For each configuration, run the experiment 1000 times. As the simulation runs, note that the confidence interval successfully captures the mean if and only if the value of the pivot variable is between the quantiles. Note the size and location of the confidence intervals and compare the proportion of successful intervals to the theoretical confidence level.</p>
+</div>
+
+	<div class="unit" id="muk5">
+	<p class="math">For the standard confidence intervals, let \(d\) denote the distance between the sample mean \(M\) and an endpoint. That is,
+	\[ d = z_\alpha \frac{\sigma}{\sqrt{n}} \]
+	where \(z_\alpha = z(1 - \alpha /2 )\) for the two-sided interval and \(z_\alpha = z(1 - \alpha)\) for the upper or lower confidence interval. The number \( d \) is the <dfn>margin of error</dfn> of the estimate.</p>
+</div>
+
+<p>Note that \(d\) is deterministic, and the length of the standard two-sided interval is \(L = 2 d\). In many cases, the first step in the <em>design of the experiment</em> is to determine the sample size needed to estimate \(\mu\) with a given margin of error and a given confidence level.</p>
+
+<div class="unit" id="muk6">
+	<p class="math">The sample size needed to estimate \(\mu\) with confidence \(1 - \alpha\) and margin of error \(d\) is
+	\[ n = \left \lceil \frac{z_\alpha^2 \sigma^2}{d^2} \right\rceil \]</p>
+	<details>
+		<summary>Details:</summary>
+		<p>This follows by solving for \( n \) in the definition of \( d \) above, and then rounding up to the next integer.</p>
+	</details>
+</div>
+
+<p>Note that \(n\) varies directly with \(z_\alpha^2\) and with \(\sigma^2\) and inversely with \(d^2\). This last fact implies a <em>law of diminishing return</em> in reducing the margin of error. For example, if we want to reduce a given margin of error by a factor of \(\frac{1}{2}\), we must increase the sample size by a factor of 4.</p>
+
+<h4 id="muu">Confidence Intervals for \( \mu \) with \( \sigma \) Unknown</h4>
+
+<p>For our next discussion, we assume that the distribution mean \( \mu \) and standard deviation \( \sigma \) are unknown, the usual situation. In this case, we can use the \( T \) pivot variable, rather than the \( Z \) pivot variable, to construct confidence intervals for \( \mu \).</p>
+
+<div class="unit" id="muu1">
+	<p class="math">For \( \alpha \in (0, 1) \),</p>
+	<ol class="sub">
+		<li>\( \left[M - t_{n-1}\left(1 - \frac{\alpha}{2}\right) \frac{S}{\sqrt{n}}, M + t_{n-1}\left(1 - \frac{\alpha}{2}\right) \frac{S}{\sqrt{n}}\right] \) is a \( 1 - \alpha \) confidence interval for \( \mu \).</li>
+		<li>\( M - t_{n-1}(1 - \alpha) \frac{S}{\sqrt{n}} \) is a \( 1 - \alpha \) lower bound for \( \mu \)</li>
+		<li>\( M + t_{n-1}(1 - \alpha) \frac{S}{\sqrt{n}} \) is a \( 1 - \alpha \) upper bound for \( \mu \)</li></ol>
+	<details>
+		<summary>Details:</summary>
+		<p>Since \( T = \frac{M - \mu}{S / \sqrt{n}} \) has the \( t \) distribution with \( n - 1 \) degees of freedom, each of the following events has probability \( 1 - \alpha \), by definition of the quantiles:</p>
+		<ol class="sub">
+			<li>\( \left\{-t_{n-1}\left(1 - \frac{\alpha}{2}\right) \le \frac{M - \mu}{S / \sqrt{n}} \le t_{n-1}\left(1 - \frac{\alpha}{2}\right)\right\} \)</li>
+			<li>\( \left\{\frac{M - \mu}{S / \sqrt{n}} \ge t_{n-1}(1 - \alpha)\right\} \)</li>
+			<li>\( \left\{\frac{M - \mu}{S / \sqrt{n}} \le -t_{n-1}(1 - \alpha)\right\} \)</li>
+		</ol>
+		<p>In each case, solving for \( \mu \) in the inequality gives the result.</p>
+	</details>
+</div>
+
+<p>These are the standard interval estimates of \( \mu \) with \( \sigma \) unknown. The two-sided confidence interval in (a) is symmetric about the sample mean \( M \) and corresponds to equal probability \( \frac{\alpha}{2} \) in each tail of the distribution of the pivot variable \( T \). As before, this is not the only confidence interval; we can divide \( \alpha \) between the left and right tails any way that we want.</p>
+
+<div class="unit" id="muu2">
+	<p class="math">For every \(\alpha, \, p \in (0, 1)\), a \(1 - \alpha\) confidence interval for \(\mu\) is
+	\[ \left[M - t_{n-1}(1 - p \alpha) \frac{S}{\sqrt{n}}, M - t_{n-1}(\alpha - p \alpha) \frac{S}{\sqrt{n}} \right] \]</p>
+	<ol class="sub">
+		<li>\( p = \frac{1}{2} \) gives the symmetric, equal-tail confidence interval.</li>
+		<li>\( p \to 0 \) gives the interval with the confidence upper bound.</li>
+		<li>\( p \to 1 \) gives the interval with the confidence lower bound.</li>
+	</ol>
+	<details>
+		<summary>Details:</summary>
+		<p>Since \( T \) has the student \( t \) distribution with \( n - 1 \) degrees of freedom, it follows from the definition of the quantiles that
+		\[ \P \left[ t_{n-1}(\alpha - p \alpha) \lt \frac{M - \mu}{S \big/ \sqrt{n}} \lt t_{n-1}(1 - p \alpha) \right] = 1 - \alpha \]
+		The result then follows by solving for \(\mu\) in the inequality.</p>
+	</details>
+</div>
+
+<p>The two-sided confidence interval above corresponds to \( p \alpha \) in the right tail and \( (1 - p) \alpha \) in the left tail of the distribution of the pivot variable \( T \). Next, let's study the length of this confidence interal.</p>
+
+<div class="unit" id="muu3">
+	<p class="math">For \( \alpha, \, p \in (0, 1) \), the (random) length of the two-sided \( 1 - \alpha \) confidence interval above is
+	\[ L = \frac{t_{n-1}(1 - p \alpha) - t_{n-1}(\alpha - p \alpha)} {\sqrt{n}} S \]</p>
+	<ol class="sub">
+		<li>\(L\) is a decreasing function of \(\alpha\), and \(L \downarrow 0\) as \(\alpha \uparrow 1\) and \(L \uparrow \infty\) as \(\alpha \downarrow 0\).</li>
+		<li>As a function of \( p \), \(L\) decreases and then increases, with minimum at the point of symmetry \(p = \frac{1}{2}\).</li>
+		<li>\[ \E(L) = \frac{[t_{n-1}(1 - p \alpha) - t_{n-1}(\alpha - p \alpha)] \sqrt{2} \sigma \Gamma(n/2)}{\sqrt{n (n - 1)} \Gamma[(n - 1)/2]} \]</li>
+		<li>\[ \var(L) = \frac{1}{n}\left[t_{n-1}(1 - p \alpha) - t_{n-1}(\alpha - p \alpha)\right]^2 \sigma^2\left[1 - \frac{2 \Gamma^2(n / 2)}{(n - 1) \Gamma^2[(n - 1) / 2]}\right] \]</li>
+	</ol>
+	<details>
+		<summary>Details:</summary>
+		<p>Parts (a) and (b) follow from properties of the student quantile function \( t_{n-1} \). Parts (c) and (d) follow from the fact that \( \frac{\sqrt{n - 1}}{\sigma} S \) has a chi distribution with \( n - 1 \) degrees of freedom.</p>
+	</details>
+</div>
+
+<p>Once again, there is a tradeoff between the confidence level and the length of the confidence interval. If \(n\) and \(p\) are fixed, we can decrease \(L\), and hence tighten our estimate, only at the expense of decreasing our confidence in the estimate. Conversely, we can increase our confidence in the estimate only at the expense of increasing the length of the interval. In terms of \(p\), the best of the two-sided \(1 - \alpha\) confidence intervals (and the one that is almost always used) is symmetric, equal-tail interval with \( p = \frac{1}{2} \). Finally, note that it does not really make sense to consider \( L \) as a function of \( S \), since \( S \) is a statistic rather than an algebraic variable. Similarly, it does not make sense to consider \( L \) as a function of \( n \), since changing \( n \) means new data and hence a new value of \( S \).</p>
+
+<div class="unit" id="muu4">
+	<p class="app">Use the <a href="JavaScript:openAncillary('../apps/MeanEstimate.html')" class="ancillary">mean estimation experiment</a> to explore the procedure. Select the normal distribution and the \( T \) pivot. Use various parameter values, confidence levels, sample sizes, and interval types. For each configuration, run the experiment 1000 times. As the simulation runs, note that the confidence interval successfully captures the mean if and only if the value of the pivot variable is between the quantiles. Note the size and location of the confidence intervals and compare the proportion of successful intervals to the theoretical confidence level.</p>
+</div>
+
+<h4 id="sig">Confidence Intervals for \( \sigma^2 \)</h4>
+
+<p>Next we will construct confidence intervals for \( \sigma^2 \) using the pivot variable \( V \) given in <a href="#mod2" class="ref"></a></p>
+
+<div class="unit" id="sig1">
+	<p class="math">For \( \alpha \in (0, 1) \),</p>
+	<ol class="sub">
+		<li>\(\left[\frac{n - 1}{\chi^2_{n-1}\left(1 - \alpha / 2\right)} S^2,\frac{n - 1}{\chi^2_{n-1}\left(\alpha / 2\right)} S^2\right]\) is a \( 1 - \alpha \) confidence interval for \( \sigma^2 \)</li>
+		<li>\(\frac{n - 1}{\chi^2_{n-1}\left(1 - \alpha\right)} S^2\) is a \( 1 - \alpha \) confidence lower bound for \( \sigma^2 \) </li>
+		<li>\(\frac{n - 1}{\chi^2_{n-1}(\alpha)} S^2\) is a \( 1 - \alpha \) confidence upper bound for \( \sigma^2 \). </li>
+	</ol>
+	<details>
+		<summary>Details:</summary>
+		<p>Since \( V = \frac{n - 1}{\sigma^2} S^2 \) has the chi-square distribution with \( n - 1 \) degrees of freedom, each of the following events has probability \( 1 - \alpha \) by definition of the quantiles:</p>
+		<ol class="sub">
+			<li>\( \left\{\chi^2_{n-1}(\alpha / 2) \le \frac{n - 1}{\sigma^2} S^2 \le \chi^2_{n-1}(1 - \alpha / 2)\right\}  \)</li>
+			<li>\( \left\{\frac{n - 1}{\sigma^2} S^2 \le \chi^2_{n-1}(1 - \alpha)\right\} \)</li>
+			<li>\( \left\{\frac{n - 1}{\sigma^2} S^2 \ge \chi^2_{n-1}(\alpha)\right\} \)</li>
+		</ol>
+		<p>In each case, solving for \( \sigma^2 \) in the inequality give the result.</p>
+	</details>
+</div>
+
+<p>These are the standard interval estimates for \( \sigma^2 \). The two-sided interval in (a) is the <dfn>equal-tail</dfn> interval, corresponding to probability \( \alpha / 2 \) in each tail of the distribution of the pivot variable \( V \). Note however that this interval is not symmetric about the sample variance \( S^2 \). Once again, we can partition the probability \( \alpha \) between the left and right tails of the distribution of \( V \) any way that we like.</p>
+
+<div class="unit" id="sig2">
+	<p class="math">For every \( \alpha, \, p \in (0, 1) \), a \( 1 - \alpha \) confidence interval for \( \sigma^2 \) is
+	\[ \left[\frac{n - 1}{\chi^2_{n-1}(1 - p \alpha)} S^2, \frac{n - 1}{\chi^2_{n-1}(\alpha - p \alpha)} S^2\right]\]</p>
+	<ol class="sub">
+		<li>\( p = \frac{1}{2} \) gives the equal-tail \( 1 - \alpha \) confidence interval.</li>
+		<li>\( p \to 0 \) gives the interval with the \( 1 - \alpha \) upper bound</li>
+		<li>\( p \to 1 \) gives the interval with the \( 1 - \alpha \) lower bound.</li>
+	</ol>
+</div>
+
+<p>In terms of the distribution of the pivot variable \( V \), the confidence interval above corresponds to \( p \alpha \) in the right tail and \( (1 - p) \alpha \) in the left tail. Once again, let's look at the length of the general two-sided confidence interval. The length is random, but is a multiple of the sample variance \( S^2 \). Hence we can compute the expected value and variance of the length.</p>
+
+<div class="unit" id="sig3">
+	<p class="math">For \( \alpha, \, p \in (0, 1) \), the (random) length of the two-sided confidence interval in the last theorem is 
+	\[ L = \left[\frac{1}{\chi^2_{n-1}(\alpha - p \alpha)} - \frac{1}{\chi^2_{n-1}(1 - p \alpha)}\right] (n - 1) S^2 \]</p>
+	<ol class="sub">
+		<li>\( \E(L) = \left[\frac{1}{\chi^2_{n-1}(\alpha - p \alpha)} - \frac{1}{\chi^2_{n-1}(1 - p \alpha)}\right] (n - 1) \sigma^2 \)</li>
+		<li>\(\var(L) = 2 \left[\frac{1}{\chi^2_{n-1}(\alpha - p \alpha)} - \frac{1}{\chi^2_{n-1}(1 - p \alpha)}\right]^2 (n - 1) \sigma^4\)</li>
+	</ol>
+</div>
+
+<p>To construct an optimal two-sided confidence interval, it would be natural to find \( p \) that minimizes the expected length. This is a complicated problem, but it turns out that for large \( n \), the equal-tail interval with \( p = \frac{1}{2} \) is close to optimal. Of course, taking square roots of the endpoints of any of the confidence intervals for \( \sigma^2 \) gives \( 1 - \alpha \) confidence intervals for the distribution standard deviation \( \sigma \).</p>
+
+<div class="unit" id="sig4">
+	<p class="app">Use <a href="JavaScript:openAncillary('../apps/VarianceEstimate.html')" class="ancillary">variance estimation experiment</a> to explore the procedure. Select the normal distribution. Use various parameter values, confidence levels, sample sizes, and interval types. For each configuration, run the experiment 1000 time. As the simulation runs, note that the confidence interval successfully captures the standard deviation if and only if the value of the pivot variable is between the quantiles. Note the size and location of the confidence intervals and compare the proportion of successful intervals to the theoretical confidence level.</p>
+</div>
+
+<h3 id="bth">Confidence Sets for \( (\mu, \sigma) \)</h3>
+
+<p>In the discussion above, we constructed confidence intervals for \( \mu \) and for \( \sigma \) separately (again, usually both parameters are unknown). In our next discussion, we will consider confidence <em>sets</em> for the parameter point \( (\mu, \sigma) \). These sets will be subsets of the underlying parameter space \( \R \times (0, \infty) \).</p>
+
+<h4 id="set">Confidence Sets Constructed from the Pivot Variables</h4>
+
+<p>Each of the pivot variables \( Z \), \( T \), and \( V \) can be used to construct confidence sets for \( (\mu, \sigma) \). In isolation, each will produce an unbounded confidence set, not surprising since, we are using a single pivot variable to estimate two parameters. We consider the normal pivot variable \( Z \) first.</p>
+
+<div class="unit" id="set1">
+	<p class="math">For any \(\alpha, \, p \in (0, 1)\), a \(1 - \alpha\) level confidence set for \((\mu, \sigma)\) is
+	\[ Z_{\alpha,p} = \left\{ (\mu, \sigma): M - z(1 - p \alpha) \frac{\sigma}{\sqrt{n}} \lt \mu \lt M - z(\alpha - p \alpha) \frac{\sigma}{\sqrt{n}} \right\} \]
+	The confidence set is a <q>cone</q> in the \((\mu, \sigma)\) parameter space, with vertex at \((M, 0)\) and boundary lines of slopes \(-\sqrt{n} \big/ z(1 - p \alpha)\) and \(-\sqrt{n} \big/ z(\alpha - p \alpha)\)
+	<details>
+		<summary>Details:</summary>
+		<p>From the normal distribution of \( M \) and the definition of the quantile function,
+		\[ \P \left[ z(\alpha - p \, \alpha) \lt \frac{M - \mu}{\sigma / \sqrt{n}} \lt z(1 - p \alpha) \right] = 1 - \alpha \]
+		The result then follows by solving for \(\mu\) in the inequality.</p>
+	</details>
+</div>
+
+<p>The confidence cone is shown in the graph below. (Note, however, that both slopes might be negative or both positive.)</p>
+
+<figure id="set2">
+	<figcaption>The confidence set based on the normal pivot variable</figcaption>
+	<img src="ZSet.png" alt="Confidence">
+</figure>
+
+<p>The pivot variable \(T\) leads to the following result:</p>
+
+<div class="unit" id="set3">
+	<p class="math">For every \(\alpha, \, p \in (0, 1)\), a \(1 - \alpha\) level confidence set for \((\mu, \sigma)\) is
+	\[ T_{\alpha, p} = \left\{ (\mu, \sigma): M - t_{n-1}(1 - p \alpha) \frac{S}{\sqrt{n}} \lt \mu \lt M - t_{n-1}(\alpha - p \alpha) \frac{S}{\sqrt{n}} \right\}\]</p>
+	<details>
+		<summary>Details:</summary>
+		<p>From the student distribution of \( T \) and the definition of the quanitle function,
+		\[ \P \left[ t_{n-1}(\alpha - p \alpha) \lt \frac{M - \mu}{S \big/ \sqrt{n}} \lt t_{n-1}(1 - p \alpha) \right] = 1 - \alpha \]
+		The result now follows from solving for \(\mu\) in the inequality.</p>
+	</details>
+</div>
+
+<figure id="set4">
+	<figcaption>The confidence set based on the \( T \) pivot variable</figcaption>
+	<img src="TSet.png" alt="Confidence set">
+</figure>
+
+<p>By design, this confidence set gives no information about \(\sigma\). Finally, the pivot variable \(V\) leads to the following result:</p>
+
+<div class="unit" id="set5">
+	<p class="math">For every \(\alpha, \, p \in (0, 1)\), a \(1 - \alpha\) level confidence set for \((\mu, \sigma)\) is
+	\[ V_{\alpha, p} = \left\{ (\mu, \sigma): \frac{(n - 1)S^2}{\chi_{n-1}^2(1 - p \alpha)} \lt \sigma^2 \lt \frac{(n - 1)S^2}{\chi_{n-1}^2(\alpha - p \alpha)} \right\} \]</p>
+	<details>
+		<summary>Details:</summary>
+		<p>From the chi-square distribution of \( V \) and the definition of the quantile function,
+		\[ \P \left[\chi_{n-1}^2(\alpha - p \, \alpha) \lt \frac{n^2}{\sigma^2} V^2 \lt \chi_{n-1}^2(1 - p \alpha) \right] = 1 - \alpha \]
+		The result then follows by solving for \(\sigma^2\) in the inequalilty.</p>
+	</details>
+</div>
+
+<figure id="set6">
+	<figcaption>The confidence set based on the pivot variable \( V \)</figcaption>
+	<img src="VSet.png" alt="Confidence set">
+</figure>
+
+<p>By design, this confidence set gives no information about \(\mu\).</p>
+
+<h4 id="int">Intersections</h4>
+
+<p>We can now form intersections of some of the confidence sets constructed above to obtain <em>bounded</em> confidence sets for \((\mu, \sigma)\). We will use the fact that the sample mean \(M\) and the sample variance \(S^2\) are independent, one of the most important <a href="../sample/Normal.html">special properties</a> of a normal sample.  We will also need the result from the <a href="Introduction.html#int">introduction</a> on the intersection of confidence interals.  In the following theorems, suppose that \(\alpha, \, \beta, \, p, \, q \in (0, 1)\) with \(\alpha + \beta \lt 1\).</p>
+
+<div class="unit" id="int1">
+	<p class="math">The set \(T_{\alpha, p} \cap V_{\beta, q}\) is a conservative \(1 - (\alpha + \beta)\) confidence sets for \((\mu, \sigma)\).</p>
+</div>
+
+<figure>
+	<figcaption>The confidence set \(T_{\alpha, p} \cap V_{\beta, q}\)</figcaption>
+	<img src="TVSet.png" alt="Confidence set">
+</figure>
+
+<div class="unit" id="int2">
+	<p class="math">The set \(Z_{\alpha, p} \cap V_{\beta, q}\) is a \((1 - \alpha)(1 - \beta)\) confidence set for \((\mu, \sigma)\).</p>
+</div>
+
+<figure>
+	<figcaption>The confidence set \(Z_{\alpha, p} \cap V_{\beta, q}\)</figcaption>
+	<img src="ZVSet.png" alt="Confidence set">
+</figure>
+
+<p>It is interesting to note that the confidence set \(T_{\alpha, p} \cap V_{\beta, q}\) is a product set as a subset of the parameter space, but is not a product set as a subset of the sample space.  By contrast, the confidence set \(Z_{\alpha, p} \cap V_{\beta, q}\) is not a product set as a subset of the parameter space, but is a product set as a subset of the sample space.</p>
+
+<h3 id="exe">Exercises</h3>
+
+<h4 id="rob">Robustness</h4>
+
+<p>The main assumption that we made was that the underlying sampling distribution is normal. Of course, in real statistical problems, we are unlikely to know much about the sampling distribution, let alone whether or not it is normal. When a statistical procedure works reasonably well, even when the underlying assumptions are violated, the procedure is said to be <dfn>robust</dfn>. In this subsection, we will explore the robustness of the estimation procedures for \(\mu\) and \(\sigma\).</p>
+
+<p>Suppose in fact that the underlying distribution is not normal. When the sample size \(n\) is relatively large, the distribution of the sample mean will still be approximately normal by the <a href="../sample/CLT.html">central limit theorem</a>.  Thus, our interval estimates of \(\mu\) may still be approximately valid.</p>
+
+<div class="unit" id="rob1">
+	<p class="app">Use the simulation of the <a href="JavaScript:openAncillary('../apps/MeanEstimate.html')" class="ancillary">mean estimation experiment</a> to explore the procedure. Select the gamma distribution and select student pivot. Use various parameter values, confidence levels, sample sizes, and interval types. For each configuration, run the experiment 1000 times. Note the size and location of the confidence intervals and compare the proportion of successful intervals to the theoretical confidence level.</p>
+</div>
+
+<div class="unit" id="rob2">
+	<p class="app">In the <a href="JavaScript:openAncillary('../apps/MeanEstimate.html')" class="ancillary">mean estimation experiment</a>, repeat the previous exercise with the uniform distribution.</p>
+</div>
+
+<p>How large \(n\) needs to be for the interval estimation procedures of \(\mu\) to work well depends, of course, on the underlying distribution; the more this distribution deviates from normality, the larger \(n\) must be. Fortunately, convergence to normality in the central limit theorem is rapid and hence, as you observed in the exercises, we can get away with relatively small sample sizes (30 or more) in most cases.</p>
+
+<p>In general, the interval estimation procedures for \(\sigma\) are not robust; there is no analog of the central limit theorem to save us from deviations from normality.</p>
+
+<div class="unit" id="rob3">
+	<p class="app">In <a href="JavaScript:openAncillary('../apps/VarianceEstimate.html')" class="ancillary">variance estimation experiment</a>, select the gamma distribution. Use various parameter values, confidence levels, sample sizes, and interval types. For each configuration, run the experiment 1000 times. Note the size and location of the confidence intervals and compare the proportion of successful intervals to the theoretical confidence level.</p>
+</div>
+
+<div class="unit" id="rob4">
+	<p class="app">In <a href="JavaScript:openAncillary('../apps/VarianceEstimate.html')" class="ancillary">variance estimation experiment</a>, select the uniform distribution. Use various parameter values, confidence levels, sample sizes, and interval types. For each configuration, run the experiment 1000 times. Note the size and location of the confidence intervals and compare the proportion of successful intervals to the theoretical confidence level.</p>
+</div>
+
+<h4 id="cmp">Computational Exercises</h4>
+
+<p>In the following exercises, use the equal-tailed construction for two-sided confidence intervals, unless otherwise instructed.</p>
+
+<div class="unit" id="cmp1">
+	<p class="math">The length of a certain machined part is supposed to be 10 centimeters but due to imperfections in the manufacturing process, the actual length is a normally distributed with mean \(\mu\) and variance \(\sigma^2\). The variance is due to inherent factors in the process, which remain fairly stable over time. From historical data, it is known that \(\sigma = 0.3\). On the other hand, \(\mu\) may be set by adjusting various parameters in the process and hence may change to an unknown value fairly frequently. A sample of 100 parts has mean 10.2.</p>
+	<ol class="sub">
+		<li>Construct the 95% confidence interval for \(\mu\).</li>
+		<li>Construct the 95% confidence upper bound for \(\mu\).</li>
+		<li>Construct the 95% confidence lower bound for \(\mu\).</li>
+	</ol>
+	<details>
+		<summary>Details:</summary>
+		<ol class="sub">
+			<li>\((10.1, 10.26)\)</li>
+			<li>10.25</li>
+			<li>10.15</li>
+		</ol>
+	</details>
+</div>
+
+<div class="unit" id="cmp2">
+	<p class="math">Suppose that the weight of a bag of potato chips (in grams) is a normally distributed random  variable with mean \(\mu\) and standard deviation \(\sigma\), both unknown. A sample of 75 bags has mean 250 and standard deviation 10. </p>
+	<ol class="sub">
+		<li>Construct the 90% confidence interval for \(\mu\).</li>
+		<li>Construct the 90% confidence interval for \(\sigma\).</li>
+		<li>Construct a conservative 90% confidence rectangle for \((\mu, \sigma)\).</li>
+	</ol>
+	<details>
+		<summary>Details:</summary>
+		<ol class="sub">
+			<li>\((248.1, 251.9)\)</li>
+			<li>\((8.8, 11.6)\)</li>
+			<li>\((247.70, 252.30) \times (8.62, 11.92)\)</li>
+		</ol>
+	</details>
+</div>
+
+<div class="unit" id="cmp3">
+	<p class="math">At a telemarketing firm, the length of a telephone solicitation (in seconds) is a normally distributed random variable with mean \(\mu\) and standard deviation \(\sigma\), both unknown. A sample of 50 calls has mean length 300 and standard deviation 60.</p>
+	<ol class="sub">
+		<li>Construct the 95% confidence upper bound for \(\mu\).</li>
+		<li>Construct the 95% confidence lower bound for \(\sigma\).</li>
+	</ol>
+	<details>
+		<summary>Details:</summary>
+		<ol class="sub">
+			<li>314.3.</li>
+			<li>51.6.</li>
+		</ol>
+	</details>
+</div>
+
+<div class="unit" id="cmp4">
+	<p class="math">At a certain farm the weight of a peach (in ounces) at harvest time is a normally distributed random variable with standard deviation 0.5. How many peaches must be sampled to estimate the mean weight with a margin of error \(\pm 2\) and with 95% confidence.</p>
+	<details>
+		<summary>Details:</summary>
+		<p>25</p>
+	</details>
+</div>
+
+<div class="unit" id="cmp5">
+	<p class="math">The hourly salary for a certain type of construction work is a normally distributed random variable with standard deviation $1.25 and unknown mean \(\mu\). How many workers must be sampled to construct a 95% confidence lower bound for \(\mu\) with margin of error $0.25? </p>
+	<details>
+		<summary>Details:</summary>
+		<p>68</p>
+	</details>
+</div>
+
+<h4 id="dat">Data Analysis Exercises</h4>
+
+<div class="unit" id="dat1">
+	<p class="stat">In <a href="JavaScript:openAncillary('../data/Michelson.html')" class="ancillary">Michelson's data</a>, assume that the measured speed of light has a normal distribution with mean \(\mu\) and standard deviation \(\sigma\), both unknown. </p>
+	<ol class="sub">
+		<li>Construct the 95% confidence interval for \(\mu\). Is the <q>true</q> value of the speed of light in this interval?</li>
+		<li>Construct the 95% confidence interval for \(\sigma\).</li>
+		<li>Explore, in an informal graphical way, the assumption that the underlying distribution is normal.</li>
+	</ol>
+	<details>
+		<summary>Details:</summary>
+		<ol class="sub">
+			<li>\((836.8, 868.0)\). No, the true value is not in the interval.</li>
+			<li>\((69.4, 91.8)\)</li>
+		</ol>
+	</details>
+</div>
+
+<div class="unit" id="dat2">
+	<p class="stat">In <a href="JavaScript:openAncillary('../data/Cavendish.html')" class="ancillary">Cavendish's data</a>, assume that the measured density of the earth has a normal distribution with mean \(\mu\) and standard deviation \(\sigma\), both unknown. </p>
+	<ol class="sub">
+		<li>Construct the 95% confidence interval for \(\mu\). Is the <q>true</q> value of the density of the earth in this interval?</li>
+		<li>Construct the 95% confidence interval for \(\sigma\).</li>
+		<li>Explore, in an informal graphical way, the assumption that the underlying distribution is normal.</li>
+	</ol>
+	<details>
+		<summary>Details:</summary>
+		<ol class="sub">
+			<li>\((5.364, 5.532)\). Yes, the true value is in the interval.</li>
+			<li>\((0.1725, 0.3074)\)</li>
+		</ol>
+	</details>
+</div>
+
+<div class="unit" id="dat3">
+	<p class="stat">In <a href="JavaScript:openAncillary('../data/Short.html')" class="ancillary">Short's data</a>, assume that the measured parallax of the sun has a normal distribution with mean \(\mu\) and standard deviation \(\sigma\), both unknown. </p>
+	<ol class="sub">
+		<li>Construct the 95% confidence interval for \(\mu\). Is the <q>true</q> value of the parallax of the sun in this interval?</li>
+		<li>Construct the 95% confidence interval for \(\sigma\).</li>
+		<li>Explore, in an informal graphical way, the assumption that the underlying distribution is normal.</li>
+	</ol>
+	<details>
+		<summary>Details:</summary>
+		<ol class="sub">
+			<li>\((8.410, 8.822)\). Yes, the true value is in the interval.</li>
+			<li>\((0.629, 0.927)\)</li>
+		</ol>
+	</details>
+</div>
+
+<div class="unit" id="dat4">
+	<p class="stat">Suppose that the length of an iris petal of a given type (Setosa, Verginica, or Versicolor) is normally distributed.  Use <a href="JavaScript:openAncillary('../data/Fisher.html')" class="ancillary">Fisher's iris data</a> to construct 90% two-sided confidence intervals for each of the following parameters.</p>
+	<ol class="sub">
+		<li>The mean length of a Sertosa iris petal.</li>
+		<li>The mean length of a Vergnica iris petal.</li>
+		<li>The mean length of a Versicolor iris petal.</li>
+	</ol>
+	<details>
+		<summary>Details:</summary>
+		<ol class="sub">
+			<li>\((14.21, 15.03)\)</li>
+			<li>\((54.21, 56.83)\)</li>
+			<li>\((41.95, 44.49)\)</li>
+		</ol>
+	</details>
+</div>
+
+<footer>
+	<ol class="map">
+		<li class="parent"><a href="../index.html">Random</a></li>
+		<li class="parent"><a href="index.html">7. Set Estimation</a></li>
+		<li class="child"><a href="Introduction.html" title="Introduction">1</a></li>
+		<li class="current">2</li>
+		<li class="child"><a href="Bernoulli.html" title="Estimation in the Bernoulli Model">3</a></li>
+		<li class="child"><a href="BivariateNormal.html" title="Estimation in the Two-Sample Normal Model">4</a></li>
+		<li class="child"><a href="Bayes.html" title="Bayesian Interval Estimation">5</a></li>
+		<li class="details"><button type="button" title="Expand Details" onclick="expandDetails(true);"><img src="../icons/Plus.svg" alt="Expand"></button></li>
+		<li class="details"><button type="button" title="Contract Details" onclick="expandDetails(false);"><img src="../icons/Minus.svg" alt="Contract"></button></li>
+	</ol>
+	<ul class="map">
+		<li class="sister"><a href="JavaScript:openAncillary('../apps/index.html')" class="ancillary">Apps</a></li>
+		<li class="sister"><a href="JavaScript:openAncillary('../data/index.html')" class="ancillary">Data Sets</a></li>
+		<li class="child"><a href="JavaScript:openAncillary('../biographies/index.html')" class="ancillary"> Biographies</a></li>
+	</ul>
+</footer>
+
+<script>getReferences();</script>
+
+</body>
+</html>

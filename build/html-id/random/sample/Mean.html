@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="id-ID">
+
+<head>
+	<meta charset="utf-8">
+	<title>Rata-Rata Sampel</title>
+	<meta name="author" content="Kyle Siegrist">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="keywords" content="probabilitas, statistika, sampel acak, rata-rata sampel, probabilitas empiris, fungsi distribusi empiris, fungsi densitas empiris, histogram">
+	<link rel="icon" href="../icons/Icon.svg" type="image/svg">
+	<link rel="stylesheet" href="../Screen.css" type="text/css" media="screen">
+	<script src="../Basic.js"></script>
+	<script src="../../MathJax/tex-svg.js" id="MathJax-script" async></script>
+</head>
+
+<body>
+
+<div class="latex">
+	\(\newcommand{\R}{\mathbb{R}}\)
+	\(\newcommand{\N}{\mathbb{N}}\)
+	\(\newcommand{\E}{\mathbb{E}}\)
+	\(\newcommand{\P}{\mathbb{P}}\)
+	\(\newcommand{\var}{\text{var}}\)
+	\(\newcommand{\bs}{\boldsymbol}\)
+</div>
+
+<header>
+	<ol class="map">
+		<li class="parent"><a href="https://www.randomservices.org/random/index.html">Random</a></li>
+		<li class="parent"><a href="index.html">5. Sampel Acak</a></li>
+		<li class="child"><a href="Introduction.html" title="Pendahuluan">1</a></li>
+		<li class="current">2</li>
+		<li class="child"><a href="https://www.randomservices.org/random/sample/LLN.html" title="Hukum Bilangan Besar">3</a></li>
+		<li class="child"><a href="https://www.randomservices.org/random/sample/CLT.html" title="Teorema Limit Pusat">4</a></li>
+		<li class="child"><a href="https://www.randomservices.org/random/sample/Variance.html" title="Varians Sampel">5</a></li>
+		<li class="child"><a href="https://www.randomservices.org/random/sample/OrderStatistics.html" title="Statistik Terurut">6</a></li>
+		<li class="child"><a href="https://www.randomservices.org/random/sample/Covariance.html" title="Korelasi dan Regresi Sampel">7</a></li>
+		<li class="child"><a href="https://www.randomservices.org/random/sample/Normal.html" title="Sifat Khusus Sampel Normal">8</a></li>
+		<li class="details"><button type="button" title="Perluas Rincian" onclick="expandDetails(true);"><img src="../icons/Plus.svg" alt="Perluas"></button></li>
+		<li class="details"><button type="button" title="Ciutkan Rincian" onclick="expandDetails(false);"><img src="../icons/Minus.svg" alt="Ciutkan"></button></li>
+	</ol>
+	<h2 id="o006.random.sample.mean.page">2. Rata-Rata Sampel</h2>
+</header>
+
+<h3 id="o006.random.sample.mean.basic-theory">Teori Dasar</h3>
+
+<p>Ingat kembali model dasar statistika: kita memiliki populasi objek yang menjadi perhatian dan berbagai pengukuran (variabel) yang dilakukan terhadap objek-objek tersebut. Kita memilih objek dari populasi dan mencatat variabel untuk objek-objek dalam sampel; catatan ini menjadi data kita. Pembahasan pertama kita menggunakan sudut pandang yang sepenuhnya deskriptif. Artinya, kita tidak mengasumsikan bahwa data dihasilkan oleh suatu distribusi probabilitas yang mendasarinya. Namun, ingat bahwa data itu sendiri mendefinisikan suatu distribusi probabilitas.</p>
+
+<h4 id="prp">Definisi dan Sifat Dasar</h4>
+
+<div class="unit" id="prp1">
+	<p class="dfn">Misalkan \(\bs{x} = (x_1, x_2, \ldots, x_n)\) merupakan sampel berukuran \(n\) dari suatu variabel bernilai riil. <dfn>Rata-rata sampel</dfn> hanyalah rata-rata aritmetika nilai-nilai sampel:
+	\[ m = \frac{1}{n} \sum_{i = 1}^n x_i \]</p>
+</div>
+
+<p>Jika kita ingin menekankan kebergantungan rata-rata pada data, kita menulis \(m(\bs{x})\), bukan hanya \(m\). Perhatikan bahwa \(m\) memiliki satuan fisik yang sama dengan variabel yang mendasarinya. Sebagai contoh, jika kita mempunyai sampel berat tonggeret dalam gram, maka \(m\) juga dinyatakan dalam gram. Rata-rata sampel sering digunakan sebagai <dfn>ukuran pemusatan</dfn> data. Bahkan, jika setiap \(x_i\) merupakan lokasi suatu <dfn>massa titik</dfn>, maka \(m\) adalah <dfn>pusat massa</dfn> sebagaimana didefinisikan dalam fisika. Salah satu penyajian grafis sederhana untuk data ialah <dfn>diagram titik</dfn>: pada garis bilangan, sebuah titik ditempatkan di \(x_i\) untuk setiap \(i\). Jika ada nilai yang berulang, titik-titik ditumpuk secara vertikal. Rata-rata sampel \(m\) merupakan titik keseimbangan diagram titik. Gambar di bawah menunjukkan diagram titik dengan rata-rata sebagai titik keseimbangannya.</p>
+
+<figure>
+	<figcaption>Diagram titik</figcaption>
+	<img src="DotPlot.png" alt="Diagram titik">
+</figure>
+
+<p>Notasi baku untuk rata-rata sampel yang bersesuaian dengan data \(\bs{x}\) adalah \(\bar{x}\). Dalam teks ini, kita menyimpang dari tradisi dan tidak menggunakan notasi garis atas karena notasi itu kurang praktis serta tidak konsisten dengan notasi statistik lain, seperti varians sampel, simpangan baku sampel, dan kovarians sampel. Namun, Anda perlu mengetahui notasi baku tersebut karena hampir pasti akan menjumpainya dalam sumber lain.</p>
+
+<p>Latihan-latihan berikut menetapkan beberapa sifat sederhana rata-rata sampel. Misalkan \(\bs{x} = (x_1, x_2, \ldots, x_n)\) dan \(\bs{y} = (y_1, y_2, \ldots, y_n)\) merupakan sampel berukuran \(n\) dari variabel populasi bernilai riil, dan misalkan \(c\) suatu konstanta. Dalam notasi vektor, ingat bahwa \(\bs{x} + \bs{y} = (x_1 + y_1, x_2 + y_2, \ldots, x_n + y_n)\) dan \(c \bs{x} = (c x_1, c x_2, \ldots, c x_n)\).</p>
+
+<div class="unit" id="prp2">
+	<p class="math">Menghitung rata-rata sampel merupakan <dfn>operasi linear</dfn>.</p>
+	<ol class="sub">
+		<li>\(m(\bs{x} + \bs{y}) = m(\bs{x}) + m(\bs{y})\)</li>
+		<li>\(m(c \, \bs{x}) = c \, m(\bs{x})\)</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<ol class="sub">
+			<li>
+			\[ m(\bs{x} + \bs{y}) = \frac{1}{n} \sum_{i=1}^n (x_i + y_i) = \frac{1}{n} \sum_{i=1}^n x_i + \frac{1}{n} \sum_{i=1}^n y_i = m(\bs{x}) + m(\bs{y}) \]</li>
+			<li>
+			\[ m(c \bs{x}) = \frac{1}{n} \sum_{i=1}^n c x_i = c \frac{1}{n} \sum_{i=1}^n x_i = c m(\bs{x}) \]</li>
+		</ol>
+	</details>
+</div>
+
+<div class="unit" id="prp3">
+	<p class="math">Rata-rata sampel mempertahankan urutan.</p>
+	<ol class="sub">
+		<li>Jika \(x_i \ge 0\) untuk setiap \(i\), maka \(m(\bs{x}) \ge 0\).</li>
+		<li>Jika \(x_i \ge 0\) untuk setiap \(i\) dan \(x_j \gt 0\) untuk suatu \(j\), maka \(m(\bs{x}) \gt 0\)</li>
+		<li>Jika \(x_i \le y_i\) untuk setiap \(i\), maka \(m(\bs{x}) \le m(\bs{y})\)</li>
+		<li>Jika \(x_i \le y_i\) untuk setiap \(i\) dan \(x_j \lt y_j\) untuk suatu \(j\), maka \(m(\bs{x}) \lt m(\bs{y})\)</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Bagian (a) dan (b) langsung terlihat dari definisi <a href="#prp1" class="ref"></a>. Bagian (c) mengikuti dari bagian (a) dan linearitas rata-rata sampel. Secara khusus, jika \(\bs{x} \le \bs{y}\) (dalam urutan hasil kali), maka \(\bs{y} - \bs{x} \ge 0\). Karena itu, menurut (a), \(m(\bs{y} - \bs{x}) \ge 0\). Namun, \(m(\bs{y} - \bs{x}) = m(\bs{y}) - m(\bs{x})\). Jadi, \(m(\bs{y}) \ge m(\bs{x})\). Dengan cara serupa, (d) mengikuti dari (b) dan linearitas rata-rata sampel.</p>
+	</details>
+</div>
+
+<p>Secara langsung, rata-rata suatu sampel konstan hanyalah konstanta tersebut.</p>
+
+<div class="unit" id="prp4">
+	<p class="math">Jika \(\bs{c} = (c, c, \ldots, c)\) merupakan sampel konstan, maka \(m(\bs{c}) = c\).</p>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Perhatikan bahwa</p>
+		\[m(\bs{c}) = \frac{1}{n} \sum_{i = 1}^n c_i = \frac{n c}{n} = c\]
+	</details>
+</div>
+
+<p>Sebagai kasus khusus dari hasil-hasil ini, misalkan \(\bs{x} = (x_1, x_2, \ldots, x_n)\) merupakan sampel berukuran \(n\) yang bersesuaian dengan variabel riil \(x\), dan misalkan \(a\) dan \(b\) merupakan konstanta. Dalam notasi vektor kita, sampel yang bersesuaian dengan variabel \(y = a + b x\) ialah \(\bs{a} + b \bs{x}\). Rata-rata sampelnya berhubungan dengan cara yang persis sama, yaitu \(m(\bs{a} + b \bs{x}) = a + b m(\bs{x})\). Transformasi linear jenis ini, ketika \(b \gt 0\), sering muncul saat satuan fisik diubah. Dalam hal ini, transformasi tersebut sering disebut transformasi <dfn>lokasi-skala</dfn>; \(a\) adalah parameter lokasi dan \(b\) adalah parameter skala. Sebagai contoh, jika \(x\) merupakan panjang suatu objek dalam inci, maka \(y = 2.54 x\) merupakan panjang objek tersebut dalam sentimeter. Jika \(x\) merupakan suhu suatu objek dalam derajat Fahrenheit, maka \(y = \frac{5}{9}(x - 32)\) merupakan suhu objek tersebut dalam derajat Celsius. </p>
+
+<p>Rata-rata sampel terdapat di mana-mana dalam statistika. Dalam beberapa paragraf berikut, kita akan membahas sejumlah statistik khusus yang didasarkan pada rata-rata sampel.</p>
+
+<h4 id="emp">Distribusi Empiris</h4>
+
+<p>Misalkan sekarang \(\bs{x} = (x_1, x_2, \ldots, x_n)\) merupakan sampel berukuran \(n\) dari suatu variabel umum yang mengambil nilai dalam himpunan \( S \). Untuk \(A \subseteq S\), <dfn>frekuensi</dfn> \(A\) yang bersesuaian dengan \(\bs{x}\) adalah banyaknya nilai data yang berada dalam \(A\):
+\[ n(A) = \#\{i \in \{1, 2, \ldots, n\}: x_i \in A\} = \sum_{i=1}^n \bs{1}(x_i \in A)\]
+<dfn>Frekuensi relatif</dfn> \(A\) yang bersesuaian dengan \(\bs{x}\) adalah proporsi nilai data yang berada dalam \(A\):
+\[ p(A) = \frac{n(A)}{n} = \frac{1}{n} \, \sum_{i=1}^n \bs{1}(x_i \in A)\]
+Perhatikan bahwa untuk \(A\) tetap, \(p(A)\) itu sendiri merupakan rata-rata sampel yang bersesuaian dengan data \(\{\bs{1}(x_i \in A): i \in \{1, 2, \ldots, n\}\}\). Fakta ini patut ditegaskan kembali: <em>setiap proporsi sampel merupakan rata-rata sampel</em> yang bersesuaian dengan suatu variabel indikator. Pada gambar di bawah, titik merah menyatakan data sehingga \(p(A) = 4/15\).</p>
+
+<figure>
+	<figcaption>Probabilitas empiris \( A \)</figcaption>
+	<img src="EmpiricalPDF.png" alt="Probabilitas empiris A">
+</figure>
+
+<div class="unit" id="emp1">
+	<p class="math">\(p\) merupakan <a href="https://www.randomservices.org/random/prob/Probability.html">ukuran probabilitas</a> pada \(S\).</p>
+	<ol class="sub">
+		<li>\(p(A) \ge 0\) untuk setiap \(A \subseteq S\)</li>
+		<li>\(p(S) = 1\)</li>
+		<li>Jika \(\{A_j: j \in J\}\) merupakan koleksi terhitung dari himpunan-himpunan bagian \(S\) yang saling lepas berpasangan, maka \(p\left(\bigcup_{j \in J} A_j\right) = \sum_{j \in J} p(A_j)\)</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Bagian (a) dan (b) langsung terlihat. Untuk bagian (c), perhatikan bahwa karena himpunan-himpunan tersebut saling lepas,
+		\begin{align}
+			p\left(\bigcup_{j \in J} A_j\right) &amp; = \frac{1}{n} \sum_{i=1}^n \bs{1}\left(x_i \in \bigcup_{j \in J} A_j\right) = \frac{1}{n} \sum_{i=1}^n \sum_{j \in J} \bs{1}(x_i \in A_j) \\
+			&amp; = \sum_{j \in J} \frac{1}{n} \sum_{i=1}^n \bs{1}(x_i \in A_j) = \sum_{j \in J} p(A_j)
+		\end{align}</p>
+	</details>
+</div>
+
+<p>Ukuran probabilitas ini dikenal sebagai <dfn>distribusi probabilitas empiris</dfn> yang terkait dengan himpunan data \(\bs{x}\). Distribusi ini merupakan distribusi diskret yang menempatkan probabilitas \(\frac{1}{n}\) pada setiap titik \(x_i\). Bahkan, pengamatan ini memberikan bukti yang lebih sederhana untuk teorema sebelumnya. Jadi, jika nilai-nilai data berbeda-beda, distribusi empiris tersebut merupakan <a href="https://www.randomservices.org/random/dist/Discrete.html#uni">distribusi seragam diskret</a> pada \(\{x_1, x_2, \ldots, x_n\}\). Secara lebih umum, jika \(x \in S\) muncul \(k\) kali dalam data, distribusi empiris memberikan probabilitas \(k/n\) kepada \(x\).</p>
+
+<p>Jika variabel yang mendasarinya bernilai riil, jelas bahwa rata-rata sampel hanyalah rata-rata distribusi empiris. Dengan demikian, rata-rata sampel memenuhi <em>semua</em> <a href="https://www.randomservices.org/random/expect/Properties.html">sifat nilai harapan</a>, bukan hanya sifat linear dalam <a href="#prp2" class="ref"></a> dan sifat menaik dalam <a href="#prp3" class="ref"></a> yang diberikan di atas. Sifat-sifat tersebut merupakan sifat yang paling penting sehingga diulangi untuk penekanan.</p>
+
+<h4 id="den">Densitas Empiris</h4>
+
+<p>Misalkan sekarang variabel populasi \(x\) mengambil nilai dalam himpunan \(S \subseteq \R^d\) untuk suatu \(d \in \N_+\). Ingat bahwa <dfn>ukuran baku</dfn> pada \(\R^d\) diberikan oleh
+\[ \lambda_d(A) = \int_A 1 \, dx, \quad A \subseteq \R^d \]
+Secara khusus, \(\lambda_1(A)\) adalah panjang \(A\), untuk \(A \subseteq \R\); \(\lambda_2(A)\) adalah luas \(A\), untuk \(A \subseteq \R^2\); dan \(\lambda_3(A)\) adalah volume \(A\), untuk \(A \subseteq \R^3\). Misalkan \(x\) merupakan variabel kontinu dalam arti bahwa \(\lambda_d(S) \gt 0\). Biasanya, \(S\) merupakan interval jika \(d = 1\) dan hasil kali Kartesius dari interval-interval jika \(d \gt 1\). Sekarang, untuk \(A \subseteq S\) dengan \(\lambda_d(A) \gt 0\), <dfn>densitas empiris</dfn> \(A\) yang bersesuaian dengan \(\bs{x}\) adalah
+\[ D(A) = \frac{p(A)}{\lambda_d(A)} = \frac{1}{n \, \lambda_d(A)} \sum_{i=1}^n \bs{1}(x_i \in A) \]
+Dengan demikian, densitas empiris \(A\) adalah proporsi nilai data dalam \(A\) dibagi ukuran \(A\). Pada gambar di bawah (yang bersesuaian dengan \(d = 2\)), jika luas \(A\), misalnya, adalah 5, maka \(D(A) = 4/75\). </p>
+
+<figure>
+	<figcaption>Densitas empiris \( A \)</figcaption>
+	<img src="EmpiricalPDF.png" alt="Densitas empiris A">
+</figure>
+
+<h4 id="cdf">Fungsi Distribusi Empiris</h4>
+
+<p>Misalkan kembali \(\bs{x} = (x_1, x_2, \ldots, x_n)\) merupakan sampel berukuran \(n\) dari suatu variabel bernilai riil. Untuk \(x \in \R\), misalkan \(F(x)\) menyatakan frekuensi relatif dalam <a href="#emp" class="ref"></a> (probabilitas empiris) dari \((-\infty, x]\) yang bersesuaian dengan himpunan data \(\bs{x}\). Jadi, untuk setiap \(x \in \R\), \(F(x)\) merupakan rata-rata sampel dari data \(\{\bs{1}(x_i \le x): i \in \{1, 2, \ldots, n\}\}:\)
+\[ F(x) = p\left((-\infty, x]\right) = \frac{1}{n} \sum_{i = 1}^n \bs{1}(x_i \le x) \]</p>
+
+<div class="unit" id="cdf1">
+	<p class="math">\(F\) merupakan <a href="https://www.randomservices.org/random/dist/CDF.html">fungsi distribusi</a>.</p>
+	<ol class="sub">
+		<li>\(F\) naik dari 0 ke 1.</li>
+		<li>\(F\) merupakan fungsi tangga dengan lompatan pada nilai-nilai sampel yang berbeda \(\{x_1, x_2, \ldots, x_n\}\).</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Misalkan \((y_1,y_2, \ldots, y_k)\) merupakan nilai-nilai data yang berbeda, diurutkan dari yang terkecil hingga terbesar, dan misalkan \(y_j\) muncul \(n_j\) kali dalam data. Maka \(F(x) = 0\) untuk \(x \lt y_1\), \(F(x) = n_1 / n\) untuk \(y_1 \le x \lt y_2\), \(F(x) = (n_1 + n_2) / n\) untuk \(y_2 \le x \lt y_3\), dan seterusnya.</p>
+	</details>
+</div>
+
+<p>Sesuai dengan sifatnya, \(F\) disebut <dfn>fungsi distribusi empiris</dfn> yang terkait dengan \(\bs{x}\), dan hanyalah fungsi distribusi dari distribusi empiris dalam <a href="#emp" class="ref"></a> yang bersesuaian dengan \(\bs{x}\). Jika kita mengetahui ukuran sampel \(n\) dan fungsi distribusi empiris \(F\), kita dapat memulihkan data kecuali urutan pengamatannya. Nilai-nilai data yang berbeda adalah titik-titik tempat \(F\) melompat, dan banyaknya nilai data pada titik semacam itu adalah besar lompatan dikalikan ukuran sampel \(n\).</p>
+
+<h4 id="pmf">Fungsi Densitas Empiris Diskret</h4>
+
+<p>Misalkan sekarang \(\bs{x} = (x_1, x_2, \ldots, x_n)\) merupakan sampel berukuran \(n\) dari suatu variabel diskret yang mengambil nilai dalam himpunan terhitung \(S\). Untuk \(x \in S\), misalkan \(f(x)\) merupakan frekuensi relatif dalam <a href="#emp" class="ref"></a> (probabilitas empiris) dari \(x\) yang bersesuaian dengan himpunan data \(\bs{x}\). Jadi, untuk setiap \(x \in S\), \(f(x)\) merupakan rata-rata sampel dari data \(\{\bs{1}(x_i = x): i \in \{1, 2, \ldots, n\}\}\):
+\[ f(x) = p(\{x\}) = \frac{1}{n} \sum_{i=1}^n \bs{1}(x_i = x) \]
+Pada gambar di bawah, titik-titik tersebut adalah nilai-nilai yang mungkin dari variabel yang mendasarinya. Titik merah menyatakan data, dan angka-angka menunjukkan nilai yang berulang. Titik biru adalah nilai variabel yang mungkin tetapi kebetulan tidak muncul dalam data. Jadi, ukuran sampelnya adalah 12, dan untuk nilai \(x\) yang muncul 3 kali, kita mempunyai \(f(x) = 3/12\).</p>
+
+<figure>
+	<figcaption>Fungsi densitas probabilitas diskret</figcaption>
+	<img src="DiscreteDistribution.png" alt="Fungsi densitas probabilitas diskret">
+</figure>
+
+<div class="unit" id="pmf1">
+	<p class="math">\(f\) merupakan <a href="https://www.randomservices.org/random/dist/Discrete.html">fungsi densitas probabilitas diskret</a>:</p>
+	<ol class="sub">
+		<li>\(f(x) \ge 0\) untuk \(x \in S\)</li>
+		<li>\(\sum_{x \in S} f(x) = 1\)</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Bagian (a) langsung terlihat. Untuk bagian (b), perhatikan bahwa
+		\[ \sum_{x \in S} f(x) = \sum_{x \in S} p(\{x\}) = 1 \]</p>
+	</details>
+</div>
+
+<p>Sesuai dengan sifatnya, \(f\) disebut <dfn>fungsi densitas probabilitas empiris</dfn> atau <dfn>fungsi frekuensi relatif</dfn> yang terkait dengan \(\bs{x}\), dan hanyalah fungsi densitas probabilitas dari distribusi empiris dalam <a href="#emp" class="ref"></a> yang bersesuaian dengan \(\bs{x}\). Jika kita mengetahui fungsi densitas probabilitas empiris \(f\) dan ukuran sampel \(n\), kita dapat memulihkan himpunan data tersebut kecuali urutan pengamatannya.</p>
+
+<div class="unit" id="pmf2">
+	<p class="math">Jika variabel populasi yang mendasarinya bernilai riil, rata-rata sampel merupakan nilai harapan yang dihitung terhadap fungsi densitas empiris. Artinya,
+	\[ \frac{1}{n} \sum_{i=1}^n x_i = \sum_{x \in S} x \, f(x) \]</p>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Perhatikan bahwa
+		\[ \sum_{x \in S} x f(x) = \sum_{x \in S} x \frac{1}{n} \sum_{i=1}^n \bs{1}(x_i = x) = \frac{1}{n}\sum_{i=1}^n \sum_{x \in S} x \bs{1}(x_i = x) = \frac{1}{n} \sum_{i=1}^n x_i \]</p>
+	</details>
+</div>
+
+<p>Seperti telah kita catat, jika variabel populasi bernilai riil, rata-rata sampel merupakan rata-rata distribusi empiris.</p>
+
+<h4 id="pdf">Fungsi Densitas Empiris Kontinu</h4>
+
+<p>Misalkan sekarang \(\bs{x} = (x_1, x_2, \ldots, x_n)\) merupakan sampel berukuran \(n\) dari suatu variabel kontinu yang mengambil nilai dalam himpunan \(S \subseteq \R^d\). Misalkan \(\mathscr{A} = \{A_j: j \in J\}\) merupakan partisi \(S\) berupa koleksi terhitung dari himpunan-himpunan bagian yang masing-masing memiliki ukuran positif dan berhingga. Ingat bahwa istilah <em>partisi</em> berarti himpunan-himpunan bagian tersebut saling lepas berpasangan dan gabungannya adalah \(S\). Misalkan \(f\) merupakan fungsi pada \(S\) yang didefinisikan dengan aturan bahwa \(f(x)\) adalah densitas empiris dalam <a href="#den" class="ref"></a> dari \(A_j\), yang bersesuaian dengan himpunan data \(\bs{x}\), untuk setiap \(x \in A_j\). Dengan demikian, \(f\) konstan pada setiap himpunan partisi:
+\[ f(x) = D(A_j) = \frac{p(A_j)}{\lambda_d(A_j)} = \frac{1}{n \lambda_d(A_j)} \sum_{i=1}^n \bs{1}(x_i \in A_j), \quad x \in A_j \]</p>
+
+<div class="unit" id="pdf1">
+	<p class="math">\(f\) merupakan <a href="https://www.randomservices.org/random/dist/Continuous.html">fungsi densitas probabilitas kontinu</a>.</p>
+	<ol class="sub">
+		<li>\(f(x) \ge 0\) untuk \(x \in S\)</li>
+		<li>\(\int_S f(x) \, dx = 1\)</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Bagian (a) langsung terlihat. Untuk bagian (b), perhatikan bahwa karena \(f\) konstan pada \(A_j\) untuk setiap \(j \in J\), kita mempunyai
+			\[\int_S f(x) \, dx = \sum_{j \in J} \int_{A_j} f(x) \, dx = \sum_{j \in J} \lambda_d(A_j) \frac{p(A_j)}{\lambda_d(A_j)} = \sum_{j \in J} p(A_j) = 1 \]</p>
+	</details>
+</div>
+
+<p>Fungsi \(f\) disebut <dfn>fungsi densitas probabilitas empiris</dfn> yang terkait dengan data \(\bs{x}\) dan partisi \(\mathscr{A}\). Untuk distribusi probabilitas yang didefinisikan oleh \(f\), probabilitas empiris \(p(A_j)\) didistribusikan secara seragam pada \(A_j\) untuk setiap \(j \in J\). Pada gambar di bawah, titik merah menyatakan data dan garis hitam mendefinisikan partisi \(S\) menjadi 9 persegi panjang. Untuk himpunan partisi \(A\) di kanan atas, distribusi empiris akan mendistribusikan probabilitas \(3/15 = 1/5\) secara seragam pada \(A\). Jika luas \(A\), misalnya, adalah 4, maka \(f(x) = 1/20 \) untuk \(x \in A\).</p>
+
+<figure>
+	<figcaption>Fungsi densitas probabilitas empiris</figcaption>
+	<img src="ContinuousDistribution.png" alt="Fungsi densitas probabilitas empiris">
+</figure>
+
+<p>Berbeda dengan kasus diskret, kita tidak dapat memulihkan data dari fungsi densitas probabilitas empiris. Jika kita mengetahui ukuran sampel, tentu kita dapat menentukan banyaknya titik data dalam \(A_j\) untuk setiap \(j\), tetapi tidak dapat menentukan lokasi persis titik-titik tersebut dalam \(A_j\). Karena alasan ini, rata-rata fungsi densitas probabilitas empiris pada umumnya tidak sama dengan rata-rata sampel ketika variabel yang mendasarinya bernilai riil.</p>
+
+<h4 id="his">Histogram</h4>
+
+<p>Pembahasan berikut berkaitan erat dengan pembahasan sebelumnya. Misalkan kembali \(\bs{x} = (x_1, x_2, \ldots, x_n)\) merupakan sampel berukuran \(n\) dari suatu variabel yang mengambil nilai dalam himpunan \(S\), dan misalkan \(\mathscr{A} = (A_1, A_2, \ldots, A_k)\) merupakan partisi \(S\) menjadi \(k\) himpunan bagian. Himpunan-himpunan dalam partisi tersebut kadang-kadang disebut <dfn>kelas</dfn>. Variabel yang mendasarinya dapat bersifat diskret atau kontinu.</p>
+
+<ul>
+	<li>Pemetaan yang memetakan setiap kelas ke frekuensinya disebut <dfn>distribusi frekuensi</dfn> untuk himpunan data dan partisi yang diberikan.</li>
+	<li>Pemetaan yang memetakan setiap kelas ke frekuensi relatifnya disebut <dfn>distribusi frekuensi relatif</dfn> untuk himpunan data dan partisi yang diberikan.</li>
+	<li>Dalam kasus variabel kontinu, pemetaan yang memetakan setiap kelas ke densitasnya disebut <dfn>distribusi densitas</dfn> untuk himpunan data dan partisi yang diberikan.</li>
+</ul>
+
+<p>Dalam dimensi 1 atau 2, diagram batang dari salah satu distribusi tersebut disebut <dfn>histogram</dfn>. Histogram distribusi frekuensi dan histogram distribusi frekuensi relatif yang bersesuaian tampak sama, kecuali perubahan skala pada sumbu vertikal. Jika semua kelas berukuran sama, histogram dari distribusi densitas yang bersesuaian juga tampak sama, sekali lagi kecuali perubahan skala pada sumbu vertikal. Jika variabel yang mendasarinya bernilai riil, kelas-kelas biasanya berupa interval (diskret atau kontinu), dan titik tengah interval-interval ini kadang-kadang disebut <dfn>titik tengah kelas</dfn>.</p>
+
+<figure>
+	<figcaption>Histogram densitas</figcaption>
+	<img src="Histogram.png" alt="Histogram densitas">
+</figure>
+
+<p>Seluruh tujuan pembentukan partisi dan pembuatan grafik salah satu distribusi empiris yang bersesuaian dengan partisi tersebut adalah untuk merangkum dan menyajikan data secara bermakna. Karena itu, terdapat beberapa pedoman umum dalam memilih kelas:</p>
+
+<ol>
+	<li>Banyaknya kelas sebaiknya tidak terlalu sedikit ataupun terlalu banyak.</li>
+	<li>Jika mungkin, kelas-kelas sebaiknya berukuran sama.</li>
+</ol>
+
+<p>Untuk distribusi yang sangat menceng, kelas-kelas dengan ukuran berbeda merupakan pilihan yang tepat agar tidak terbentuk banyak kelas dengan frekuensi sangat kecil. Untuk variabel kontinu dengan ukuran kelas yang berbeda-beda, histogram densitas harus digunakan sebagai pengganti histogram frekuensi atau frekuensi relatif; jika tidak, grafik tersebut menyesatkan secara visual dan bahkan salah secara matematis.</p>
+
+<p>Penting untuk disadari bahwa data frekuensi tidak terelakkan untuk variabel kontinu. Sebagai contoh, misalkan variabel kita menyatakan berat sekantong M&amp;M (dalam gram) dan alat ukur kita (sebuah timbangan) memiliki ketelitian 0.01 gram. Jika berat satu kantong terukur 50.32, sebenarnya kita mengatakan bahwa berat tersebut berada dalam interval \([50.315, 50.325)\) (atau mungkin interval lain, bergantung pada cara kerja alat ukur). Demikian pula, ketika dua kantong memiliki berat <em>terukur</em> yang sama, kesamaan semu tersebut sesungguhnya hanyalah akibat ketidaktelitian alat ukur; berat kedua kantong itu hampir pasti <em>tidak</em> persis sama. Jadi, dua kantong dengan berat terukur yang sama sebenarnya memberikan hitungan frekuensi 2 untuk suatu interval tertentu.</p>
+
+<p>Sekali lagi, terdapat kompromi antara <em>banyaknya</em> kelas dan <em>ukuran</em> kelas; kedua hal ini menentukan <dfn>resolusi</dfn> distribusi empiris yang bersesuaian dengan partisi. Pada satu ekstrem, ketika ukuran kelas lebih kecil daripada ketelitian data yang dicatat, setiap kelas memuat satu datum atau tidak memuat datum sama sekali. Dalam hal ini, tidak ada informasi yang hilang dan kita dapat memulihkan himpunan data asli dari distribusi frekuensi (kecuali <em>urutan</em> perolehan nilai data). Namun, bentuk data dapat sulit dikenali apabila terdapat banyak kelas dengan frekuensi kecil. Pada ekstrem lainnya, terdapat distribusi frekuensi dengan satu kelas yang memuat semua nilai yang mungkin dalam himpunan data. Dalam hal ini, semua informasi hilang kecuali banyaknya nilai dalam himpunan data. Di antara kedua kasus ekstrem ini, suatu distribusi empiris memberi kita informasi parsial, tetapi bukan informasi lengkap. Kasus-kasus antara tersebut dapat menata data secara berguna.</p>
+
+<h4 id="ogi">Ogive</h4>
+
+<p>Misalkan sekarang variabel yang mendasarinya bernilai riil dan himpunan nilai yang mungkin dipartisi menjadi interval-interval \((A_1, A_2, \ldots, A_k)\), dengan titik ujung interval diurutkan dari yang terkecil hingga terbesar. Misalkan \(n_j\) menyatakan frekuensi kelas \(A_j\), sehingga \(p_j = n_j / n\) merupakan frekuensi relatif kelas \(A_j\). Misalkan \(t_j\) menyatakan titik tengah kelas \(A_j\). <dfn>Frekuensi kumulatif</dfn> kelas \(A_j\) adalah \(N_j = \sum_{i=1}^j n_i\), dan <dfn>frekuensi relatif kumulatif</dfn> kelas \(A_j\) adalah \(P_j = \sum_{i=1}^j p_i = N_j / n\). Perhatikan bahwa frekuensi kumulatif naik dari \(n_1\) ke \(n\), sedangkan frekuensi relatif kumulatif naik dari \(p_1\) ke 1.</p>
+
+<ul>
+	<li>Pemetaan yang memetakan setiap kelas ke frekuensi kumulatifnya disebut <dfn>distribusi frekuensi kumulatif</dfn> untuk himpunan data dan partisi yang diberikan. Grafik poligonal yang menghubungkan titik-titik \((t_j, N_j)\) untuk \(j \in \{1, 2, \ldots, k\}\) merupakan <dfn>ogive frekuensi kumulatif</dfn>.</li>
+	<li>Pemetaan yang memetakan setiap kelas ke frekuensi relatif kumulatifnya disebut <dfn>distribusi frekuensi relatif kumulatif</dfn> untuk himpunan data dan partisi yang diberikan. Grafik poligonal yang menghubungkan titik-titik \((t_j, P_j)\) untuk \(j \in \{1, 2, \ldots, k\}\) merupakan <dfn>ogive frekuensi relatif kumulatif</dfn>.</li>
+</ul>
+
+<p>Perhatikan bahwa ogive frekuensi relatif hanyalah grafik fungsi distribusi yang bersesuaian dengan distribusi probabilitas yang menempatkan probabilitas \(p_j\) pada \(t_j\) untuk setiap \(j\).</p>
+
+<h4 id="apr">Mengaproksimasi Rata-Rata</h4>
+
+<p>Dalam keadaan pada subbagian terakhir, misalkan kita tidak memiliki data sebenarnya \(\bs{x}\), tetapi hanya distribusi frekuensi. Nilai hampiran rata-rata sampel adalah
+\[ \frac{1}{n} \sum_{j = 1}^k n_j t_j = \sum_{j = 1}^k p_j t_j \]
+Aproksimasi ini didasarkan pada harapan bahwa rata-rata nilai data dalam setiap kelas dekat dengan titik tengah kelas tersebut. Sebenarnya, ruas kanan adalah nilai harapan distribusi yang menempatkan probabilitas \(p_j\) pada titik tengah kelas \(t_j\) untuk setiap \(j\).</p>
+
+<h3 id="o006.random.sample.mean.exercises">Latihan</h3>
+
+<h4 id="exe">Sifat Dasar</h4>
+
+<div class="unit" id="exe1">
+	<p class="math">Misalkan \(x\) merupakan suhu (dalam derajat Fahrenheit) suatu jenis komponen elektronik tertentu setelah 10 jam beroperasi.</p>
+	<ol class="sub">
+		<li>Klasifikasikan \(x\) menurut jenis dan tingkat pengukurannya.</li>
+		<li> Suatu sampel berisi 30 komponen memiliki rata-rata 113&deg;. Tentukan rata-rata sampel jika suhu dikonversi ke derajat Celsius. Transformasinya adalah \(y = \frac{5}{9}(x - 32)\).</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<ol class="sub">
+			<li>kontinu, interval</li>
+			<li>45&deg;</li>
+		</ol>
+	</details>
+</div>
+
+<div class="unit" id="exe2">
+	<p class="math">Misalkan \(x\) merupakan panjang (dalam inci) suatu komponen hasil pemesinan dalam proses manufaktur.</p>
+	<ol class="sub">
+		<li>Klasifikasikan \(x\) menurut jenis dan tingkat pengukurannya.</li>
+		<li>Suatu sampel berisi 50 komponen memiliki rata-rata 10.0. Tentukan rata-rata sampel jika panjang diukur dalam sentimeter. Transformasinya adalah \(y = 2.54 x\).</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<ol class="sub">
+			<li>kontinu, rasio</li>
+			<li>25.4</li>
+		</ol>
+	</details>
+</div>
+
+<div class="unit" id="exe3">
+	<p class="math">Misalkan \(x\) merupakan banyaknya saudara laki-laki dan \(y\) banyaknya saudara perempuan bagi seseorang dalam populasi tertentu. Jadi, \(z = x + y\) merupakan banyaknya saudara kandung.</p>
+	<ol class="sub">
+		<li>Klasifikasikan variabel-variabel tersebut menurut jenis dan tingkat pengukurannya.</li>
+		<li> Untuk suatu sampel berisi 100 orang, \(m(\bs{x}) = 0.8\) dan \(m(\bs{y}) = 1.2\). Tentukan \(m(\bs{z})\).</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<ol>
+			<li>diskret, rasio</li>
+			<li>2.0</li>
+		</ol>
+	</details>
+</div>
+
+<div class="unit" id="exe4">
+	<p class="math">Profesor Moriarity mengajar 25 mahasiswa dalam salah satu kelas Stat 101 di Enormous State University (ESU). Nilai rata-rata ujian tengah semester pertama adalah 64 (dari maksimum 100 poin). Profesor Moriarity menilai nilai-nilai tersebut agak rendah dan mempertimbangkan berbagai transformasi untuk meningkatkannya. Dalam setiap kasus di bawah, tentukan rata-rata nilai yang telah ditransformasi atau nyatakan bahwa informasi yang tersedia tidak cukup.</p>
+	<ol class="sub">
+		<li>Tambahkan 10 poin pada setiap nilai, sehingga transformasinya adalah \(y = x + 10\).</li>
+		<li>Kalikan setiap nilai dengan 1.2, sehingga transformasinya adalah \(z = 1.2 x\)</li>
+		<li>Gunakan transformasi \(w = 10 \sqrt{x}\). Perhatikan bahwa ini merupakan transformasi nonlinear yang menaikkan nilai secara tajam pada bagian bawah dan hanya sedikit pada bagian atas. Sebagai contoh, nilai 100 tetap menjadi 100, tetapi nilai 36 berubah menjadi 60.</li>
+	</ol>
+	<p>Salah satu mahasiswa sama sekali tidak belajar dan memperoleh nilai 10 pada ujian tengah semester. Profesor Moriarity menganggap nilai ini sebagai pencilan.</p>
+	<ol class="sub" start="4">
+		<li>Berapakah rata-ratanya jika nilai ini dikeluarkan?</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<ol class="sub">
+			<li>74</li>
+			<li>76.8</li>
+			<li>Informasi tidak cukup</li>
+			<li>66.25</li>
+		</ol>
+	</details>
+</div>
+
+<h4 id="cmp">Latihan Komputasi</h4>
+
+<p>Semua paket perangkat lunak statistika dapat menghitung rata-rata dan proporsi, menggambar diagram titik dan histogram, serta secara umum menjalankan prosedur numerik dan grafis yang dibahas dalam bagian ini. Untuk eksperimen statistik nyata, khususnya yang menggunakan himpunan data besar, penggunaan perangkat lunak statistika sangat penting. Di sisi lain, mengerjakan perhitungan secara manual dengan himpunan data kecil dan buatan juga bermanfaat untuk menguasai konsep dan definisi. Dalam subbagian ini, lakukan perhitungan dan gambar grafik dengan bantuan teknologi seminimal mungkin. </p>
+
+<div class="unit" id="cmp1">
+	<p class="math">Misalkan \(x\) merupakan banyaknya mata kuliah matematika yang telah diselesaikan oleh seorang mahasiswa ESU. Sampel yang terdiri atas 10 mahasiswa ESU menghasilkan data \(\bs{x} = (3, 1, 2, 0, 2, 4, 3, 2, 1, 2)\).</p>
+	<ol class="sub">
+		<li>Klasifikasikan \(x\) menurut jenis dan tingkat pengukurannya.</li>
+		<li>Sketsakan diagram titiknya.</li>
+		<li>Hitung rata-rata sampel \(m\) berdasarkan definisinya dan tunjukkan letaknya pada diagram titik.</li>
+		<li>Tentukan fungsi densitas empiris \(f\) dan sketsakan grafiknya.</li>
+		<li>Hitung rata-rata sampel \(m\) menggunakan \(f\).</li>
+		<li>Tentukan fungsi distribusi empiris \(F\) dan sketsakan grafiknya.</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<ol class="sub">
+			<li>diskret, rasio</li>
+			<li value="3">2</li>
+			<li>\(f(0) = 1/10\), \(f(1) = 2/10\), \(f(2) = 4/10\), \(f(3) = 2/10\), \(f(4) = 1/10\)</li>
+			<li>2</li>
+			<li>\(F(x) = 0\) untuk \(x \lt 0\), \(F(x) = 1/10\) untuk \(0 \le x \lt 1\), \(F(x) = 3/10\) untuk \(1 \le x \lt 2\), \(F(x) = 7/10\) untuk \(2 \le x \lt 3\), \(F(x) = 9/10\) untuk \(3 \le x \lt 4\), \(F(x) = 1\) untuk \(x \ge 4\)</li>
+		</ol>
+	</details>
+</div>
+
+<div class="unit" id="cmp2">
+	<p class="math">Misalkan suatu sampel berukuran 12 dari variabel diskret \(x\) memiliki fungsi densitas empiris yang diberikan oleh \(f(-2) = 1/12\), \(f(-1) = 1/4\), \(f(0) = 1/3\), \(f(1) = 1/6\), \(f(2) = 1/6\).</p>
+	<ol class="sub">
+		<li>Sketsakan grafik \(f\).</li>
+		<li>Hitung rata-rata sampel \(m\) menggunakan \(f\).</li>
+		<li>Tentukan fungsi distribusi empiris \(F\)</li>
+		<li>Berikan nilai-nilai sampel yang diurutkan dari yang terkecil hingga terbesar.</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<ol class="sub">
+			<li value="2">\(1/12\)</li>
+			<li>\(F(x) = 0\) untuk \(x \lt -2\), \(F(x) = 1/12\) untuk \(-2 \le x \lt -1\), \(F(x) = 1/3\) untuk \(-1 \le x \lt 0\), \(F(x) = 2/3\) untuk \(0 \le x \lt 1\), \(F(x) = 5/6\) untuk \(1 \le x \lt 2\), \(F(x) = 1\) untuk \(x \ge 2\)</li>
+			<li>\((-2, -1, -1, -1, 0, 0, 0, 0, 1, 1, 2, 2)\)</li>
+		</ol>
+	</details>
+</div>
+
+<div class="unit" id="cmp3">
+	<p class="math">Tabel berikut memberikan distribusi frekuensi jarak perjalanan ke gedung matematika/statistika (dalam mil) untuk suatu sampel mahasiswa ESU.</p>
+	<table>
+		<thead>
+			<tr>
+				<th>Kelas</th>
+				<th>Frekuensi</th>
+				<th>Frekuensi Relatif</th>
+				<th>Densitas</th>
+				<th>Frekuensi Kumulatif</th>
+				<th>Frekuensi Relatif Kumulatif</th>
+				<th>Titik Tengah</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>\((0,2]\)</td>
+				<td>6</td>
+				<td>&nbsp;</td>
+				<td>&nbsp;</td>
+				<td>&nbsp;</td>
+				<td>&nbsp;</td>
+				<td>&nbsp;</td>
+			</tr>
+			<tr>
+				<td>\((2,6]\)</td>
+				<td>16</td>
+				<td>&nbsp;</td>
+				<td>&nbsp;</td>
+				<td>&nbsp;</td>
+				<td>&nbsp;</td>
+				<td>&nbsp;</td>
+			</tr>
+			<tr>
+				<td>\((6,10]\)</td>
+				<td>18</td>
+				<td>&nbsp;</td>
+				<td>&nbsp;</td>
+				<td>&nbsp;</td>
+				<td>&nbsp;</td>
+				<td>&nbsp;</td>
+			</tr>
+			<tr>
+				<td>\((10,20]\)</td>
+				<td>10</td>
+				<td>&nbsp;</td>
+				<td>&nbsp;</td>
+				<td>&nbsp;</td>
+				<td>&nbsp;</td>
+				<td>&nbsp;</td>
+			</tr>
+		</tbody>
+		<tfoot>
+			<tr>
+				<th>Total</th>
+				<td>&nbsp;</td>
+				<td>&nbsp;</td>
+				<th></th>
+				<th></th>
+				<th></th>
+				<th></th>
+			</tr>
+		</tfoot>
+	</table>
+	<ol class="sub">
+		<li>Lengkapi tabel tersebut</li>
+		<li>Sketsakan histogram densitas</li>
+		<li>Sketsakan ogive frekuensi relatif kumulatif.</li>
+		<li>Hitung suatu aproksimasi untuk rata-rata</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<ol class="sub">
+			<li>
+				<table>
+					<thead>
+						<tr>
+							<th>Kelas</th>
+							<th>Frekuensi</th>
+							<th>Frekuensi Relatif</th>
+							<th>Densitas</th>
+							<th>Frekuensi Kumulatif</th>
+							<th>Frekuensi Relatif Kumulatif</th>
+							<th>Titik Tengah</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>\((0,2]\)</td>
+							<td>6</td>
+							<td>0.12</td>
+							<td>0.06</td>
+							<td>6</td>
+							<td>0.12</td>
+							<td>1</td>
+						</tr>
+						<tr>
+							<td>\((2,6]\)</td>
+							<td>16</td>
+							<td>0.32</td>
+							<td>0.08</td>
+							<td>22</td>
+							<td>0.44</td>
+							<td>4</td>
+						</tr>
+						<tr>
+							<td>\((6, 10]\)</td>
+							<td>18</td>
+							<td>0.36</td>
+							<td>0.09</td>
+							<td>40</td>
+							<td>0.80</td>
+							<td>8</td>
+						</tr>
+						<tr>
+								<td>\((10, 20]\)</td>
+							<td>10</td>
+							<td>0.20</td>
+							<td>0.02</td>
+							<td>50</td>
+							<td>1</td>
+							<td>15</td>
+						</tr>
+					</tbody>
+					<tfoot>
+						<tr>
+							<th>Total</th>
+							<td>50</td>
+							<td>1</td>
+							<th></th>
+							<th></th>
+							<th></th>
+							<th></th>
+						</tr>
+					</tfoot>
+				</table>
+			</li>
+			<li value="4">7.28</li>
+		</ol>
+	</details>
+</div>
+
+<h4 id="app">Latihan Aplikasi</h4>
+
+<div class="unit" id="app1">
+	<p class="app">Pada <a href="https://www.randomservices.org/random/apps/Histogram.html" class="ancillary">histogram interaktif</a>, klik sumbu \(x\) pada berbagai titik untuk menghasilkan himpunan data dengan sedikitnya 20 nilai. Ubah-ubah banyaknya kelas dan beralihlah antara histogram frekuensi dan histogram frekuensi relatif. Perhatikan perubahan bentuk histogram ketika Anda melakukan operasi-operasi tersebut. Perhatikan khususnya bagaimana histogram kehilangan resolusi ketika banyaknya kelas dikurangi.</p>
+</div>
+
+<div class="unit" id="app2">
+	<p class="app">Pada <a href="https://www.randomservices.org/random/apps/Histogram.html" class="ancillary">histogram interaktif</a>, klik sumbu untuk menghasilkan distribusi dengan jenis yang diberikan dan sedikitnya 30 titik. Kemudian, ubah-ubah banyaknya kelas dan perhatikan perubahan bentuk distribusinya.</p>
+	<ol class="sub">
+		<li>Distribusi seragam</li>
+		<li>Distribusi unimodal simetris</li>
+		<li>Distribusi unimodal yang menceng ke kanan.</li>
+		<li>Distribusi unimodal yang menceng ke kiri.</li>
+		<li>Distribusi bimodal simetris</li>
+		<li>Distribusi berbentuk \(u\).</li>
+	</ol>
+</div>
+
+<h4 id="dat">Latihan Analisis Data</h4>
+
+<p>Perangkat lunak statistika sebaiknya digunakan untuk soal-soal dalam subbagian ini.</p>
+
+<div class="unit" id="dat1">
+	<p class="stat">Perhatikan variabel panjang mahkota dan spesies dalam <a href="https://www.randomservices.org/random/data/Iris.html" class="ancillary">data iris Fisher</a>. </p>
+	<ol class="sub">
+		<li>Klasifikasikan variabel-variabel tersebut menurut jenis dan tingkat pengukurannya.</li>
+		<li>Hitung rata-rata sampel dan buat histogram densitas untuk panjang mahkota.</li>
+		<li>Hitung rata-rata sampel dan buat histogram densitas untuk panjang mahkota menurut spesies.</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<ol class="sub">
+			<li>panjang mahkota: kontinu, rasio. spesies: diskret, nominal</li>
+			<li>\(m = 37.8\)</li>
+			<li>\(m(0) = 14.6, \; m(1) = 55.5, \; m(2) = 43.2\)</li>
+		</ol>
+	</details>
+</div>
+
+<div class="unit" id="dat2">
+	<p class="stat">Perhatikan variabel erosi dalam <a href="https://www.randomservices.org/random/data/Challenger.html" class="ancillary">himpunan data Challenger</a>.</p>
+	<ol class="sub">
+		<li>Klasifikasikan variabel tersebut menurut jenis dan tingkat pengukurannya.</li>
+		<li>Hitung rata-ratanya</li>
+		<li>Buat histogram densitas dengan kelas-kelas \([0, 5)\), \([5, 40)\), \([40, 50)\), \([50, 60)\).</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<ol class="sub">
+			<li>kontinu, rasio</li>
+			<li> \(m = 7.7\)</li>
+		</ol>
+	</details>
+</div>
+
+<div class="unit" id="dat3">
+	<p class="stat">Perhatikan <a href="https://www.randomservices.org/random/data/Michelson.html" class="ancillary">data kelajuan cahaya Michelson</a>.</p>
+	<ol class="sub">
+		<li>Klasifikasikan variabel tersebut menurut jenis dan tingkat pengukurannya.</li>
+		<li>Buat histogram densitas.</li>
+		<li>Hitung rata-rata sampel.</li>
+		<li>Tentukan rata-rata sampel jika variabel dikonversi ke \(\text{km}/\text{hr}\). Transformasinya adalah \(y = x + 299\,000\)</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<ol class="sub">
+			<li>kontinu, interval</li>
+			<li value="3">\(m = 852.4\)</li>
+			<li>\(m = 299\,852.4\)</li>
+		</ol>
+	</details>
+</div>
+
+<div class="unit" id="dat4">
+	<p class="stat">Perhatikan <a href="https://www.randomservices.org/random/data/Short.html" class="ancillary">data paralaks Matahari Short</a>.</p>
+	<ol class="sub">
+		<li>Klasifikasikan variabel tersebut menurut jenis dan tingkat pengukurannya.</li>
+		<li>Buat histogram densitas.</li>
+		<li>Hitung rata-rata sampel.</li>
+		<li>Tentukan rata-rata sampel jika variabel dikonversi ke derajat. Terdapat 3600 detik busur dalam satu derajat.</li>
+		<li>Tentukan rata-rata sampel jika variabel dikonversi ke radian. Terdapat \(\pi/180\) radian dalam satu derajat.</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<ol class="sub">
+			<li>kontinu, rasio</li>
+			<li value="3">8.616</li>
+			<li>0.00239</li>
+			<li>0.0000418</li>
+		</ol>
+	</details>
+</div>
+
+<div class="unit" id="dat5">
+	<p class="stat">Perhatikan <a href="https://www.randomservices.org/random/data/Cavendish.html" class="ancillary">data densitas Bumi Cavendish</a>.</p>
+	<ol class="sub">
+		<li>Klasifikasikan variabel tersebut menurut jenis dan tingkat pengukurannya.</li>
+		<li>Hitung rata-rata sampel.</li>
+		<li>Buat histogram densitas.</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<ol class="sub">
+			<li>kontinu, rasio</li>
+			<li> \(m = 5.448\)</li>
+		</ol>
+	</details>
+</div>
+
+<div class="unit" id="dat6">
+	<p class="stat">Perhatikan <a href="https://www.randomservices.org/random/data/MM.html" class="ancillary">data M&amp;M</a>.</p>
+	<ol class="sub">
+		<li>Klasifikasikan variabel-variabel tersebut menurut jenis dan tingkat pengukurannya.</li>
+		<li>Hitung rata-rata sampel untuk setiap variabel hitungan warna.</li>
+		<li>Hitung rata-rata sampel untuk jumlah permen seluruhnya dengan menggunakan hasil dari (b).</li>
+		<li>Buat histogram frekuensi relatif untuk jumlah permen seluruhnya.</li>
+		<li>Hitung rata-rata sampel dan buat histogram densitas untuk berat bersih.</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<ol class="sub">
+			<li>hitungan warna: diskret, rasio. berat bersih: kontinu, rasio.</li>
+			<li>\(m(r) = 9.60\), \(m(g) = 7.40\), \(m(bl) = 7.23\), \(m(o) = 6.63\), \(m(y) = 13.77\), \(m(br) = 12.47\) </li>
+			<li>\(m(n) = 57.10\)</li>
+			<li value="5">\(m(w) = 49.215\)</li>
+		</ol>
+	</details>
+</div>
+
+<div class="unit" id="dat7">
+	<p class="stat">Perhatikan variabel berat tubuh, spesies, dan jenis kelamin dalam <a href="https://www.randomservices.org/random/data/Cicada.html" class="ancillary">data tonggeret</a>.</p>
+	<ol class="sub">
+		<li>Klasifikasikan variabel-variabel tersebut menurut jenis dan tingkat pengukurannya.</li>
+		<li>Hitung fungsi frekuensi relatif untuk spesies dan buat grafiknya.</li>
+		<li>Hitung fungsi frekuensi relatif untuk jenis kelamin dan buat grafiknya.</li>
+		<li>Hitung rata-rata sampel dan buat histogram densitas untuk berat tubuh.</li>
+		<li>Hitung rata-rata sampel dan buat histogram densitas untuk berat tubuh menurut spesies.</li>
+		<li>Hitung rata-rata sampel dan buat histogram densitas untuk berat tubuh menurut jenis kelamin.</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<ol class="sub">
+			<li>berat tubuh: kontinu, rasio. spesies: diskret, nominal. jenis kelamin: diskret, nominal.</li>
+			<li>\(f(0) = 0.423\), \(f(1) = 0.519\), \(f(2) = 0.058\)</li>
+			<li>\(f(0) = 0.567\), \(f(1) = 0.433\)</li>
+			<li>\(m = 0.180\)</li>
+			<li>\(m(0) = 0.168, \; m(1) = 0.185, \; m(2) = 0.225\)</li>
+			<li>\(m(0) = 0.206, \; m(1) = 0.145\)</li>
+		</ol>
+	</details>
+</div>
+
+<div class="unit" id="dat8">
+	<p class="stat">Perhatikan <a href="https://www.randomservices.org/random/data/Pearson.html" class="ancillary">data tinggi Pearson</a>. </p>
+	<ol class="sub">
+		<li>Klasifikasikan variabel-variabel tersebut menurut jenis dan tingkat pengukurannya.</li>
+		<li>Hitung rata-rata sampel dan buat histogram densitas untuk tinggi ayah.</li>
+		<li>Hitung rata-rata sampel dan buat histogram densitas untuk tinggi anak laki-laki.</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<ol class="sub">
+			<li>kontinu, rasio</li>
+			<li>\(m(f) = 67.69\)</li>
+			<li>\(m(s) = 68.68\)</li>
+		</ol>
+	</details>
+</div>
+
+<footer>
+	<ol class="map">
+		<li class="parent"><a href="https://www.randomservices.org/random/index.html">Random</a></li>
+		<li class="parent"><a href="index.html">5. Sampel Acak</a></li>
+		<li class="child"><a href="Introduction.html" title="Pendahuluan">1</a></li>
+		<li class="current">2</li>
+		<li class="child"><a href="https://www.randomservices.org/random/sample/LLN.html" title="Hukum Bilangan Besar">3</a></li>
+		<li class="child"><a href="https://www.randomservices.org/random/sample/CLT.html" title="Teorema Limit Pusat">4</a></li>
+		<li class="child"><a href="https://www.randomservices.org/random/sample/Variance.html" title="Varians Sampel">5</a></li>
+		<li class="child"><a href="https://www.randomservices.org/random/sample/OrderStatistics.html" title="Statistik Terurut">6</a></li>
+		<li class="child"><a href="https://www.randomservices.org/random/sample/Covariance.html" title="Korelasi dan Regresi Sampel">7</a></li>
+		<li class="child"><a href="https://www.randomservices.org/random/sample/Normal.html" title="Sifat Khusus Sampel Normal">8</a></li>
+		<li class="details"><button type="button" title="Perluas Rincian" onclick="expandDetails(true);"><img src="../icons/Plus.svg" alt="Perluas"></button></li>
+		<li class="details"><button type="button" title="Ciutkan Rincian" onclick="expandDetails(false);"><img src="../icons/Minus.svg" alt="Ciutkan"></button></li>
+	</ol>
+	<ul class="map">
+		<li class="sister"><a href="https://www.randomservices.org/random/apps/index.html" class="ancillary">Aplikasi</a></li>
+		<li class="sister"><a href="https://www.randomservices.org/random/data/index.html" class="ancillary">Himpunan Data</a></li>
+		<li class="child"><a href="https://www.randomservices.org/random/biographies/index.html" class="ancillary">Biografi</a></li>
+	</ul>
+	<section class="edition-notice" data-o006-edition-notice="v1">
+		<p><strong>Pemberitahuan edisi.</strong> Terjemahan Bahasa Indonesia ini mengadaptasi <a href="https://www.randomservices.org/random/">Random: Probabilitas, Statistika Matematis, dan Proses Stokastik</a> karya Kyle Siegrist. Perubahan pada halaman ini mencakup penerjemahan, penambahan ID stabil, pengalihan tautan inti yang belum diterjemahkan ke sumber resmi, pengubahan tautan pelengkap menjadi tautan HTTPS resmi, serta perbaikan satu nama berkas pada tautan data.</p>
+		<p>Situs asal menyatakan <a href="https://creativecommons.org/licenses/by/2.0/">CC BY 2.0</a>, sedangkan halaman <a href="https://www.randomservices.org/random/Credits.html">Kredit</a> menautkan <a href="https://creativecommons.org/licenses/by/1.0/">CC BY 1.0</a>; perbedaan ini dipertahankan. Edisi independen ini tidak didukung maupun disahkan oleh Kyle Siegrist atau Random Services. Tautan ke data dan biografi pihak ketiga tidak menyatakan hak untuk mendistribusikan ulang materi tersebut.</p>
+	</section>
+</footer>
+
+<script>getReferences();</script>
+
+</body>
+</html>

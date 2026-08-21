@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<title>Introduction</title>
+	<meta name="author" content="Kyle Siegrist">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="keywords" content="probability, statistics, set estimation, interval estimation, confidence level, pivot variable, location-scale family, exponential distribution">
+	<link rel="icon" href="../icons/Icon.svg" type="image/svg">
+	<link rel="stylesheet" href="../Screen.css" type="text/css" media="screen">
+	<script src="../Basic.js"></script>
+	<script src="../../MathJax/tex-svg.js" id="MathJax-script" async></script>
+</head>
+
+<body>
+
+<div class="latex">
+	\(\newcommand{\R}{\mathbb{R}}\)
+	\(\newcommand{\N}{\mathbb{N}}\)
+	\(\newcommand{\Z}{\mathbb{Z}}\)
+	\(\newcommand{\P}{\mathbb{P}}\)
+	\(\newcommand{\E}{\mathbb{E}}\)
+	\(\newcommand{\var}{\text{var}}\)
+	\(\newcommand{\sd}{\text{sd}}\)
+	\(\newcommand{\bs}{\boldsymbol}\)
+</div>
+
+<header>
+	<ol class="map">
+		<li class="parent"><a href="../index.html">Random</a></li>
+		<li class="parent"><a href="index.html">7. Set Estimation</a></li>
+		<li class="current">1</li>
+		<li class="child"><a href="Normal.html" title="Estimation in the Normal Model">2</a></li>
+		<li class="child"><a href="Bernoulli.html" title="Estimation in the Bernoulli Model">3</a></li>
+		<li class="child"><a href="BivariateNormal.html" title="Estimation in the Two-Sample Normal Model">4</a></li>
+		<li class="child"><a href="Bayes.html" title="Bayesian Interval Estimation">5</a></li>
+		<li class="details"><button type="button" title="Expand Details" onclick="expandDetails(true);"><img src="../icons/Plus.svg" alt="Expand"></button></li>
+		<li class="details"><button type="button" title="Contract Details" onclick="expandDetails(false);"><img src="../icons/Minus.svg" alt="Contract"></button></li>
+	</ol>
+	<h2>1. Introduction</h2>
+</header>
+
+<h3>Basic Theory</h3>
+
+<h4 id="mod">The Basic Statistical Model</h4>
+
+<p>As usual, our starting point is a <a href="../prob/Experiments.html">random experiment</a> with an underlying <a href="../prob/Events.html">sample space</a> and a <a href="../prob/Probability.html">probability measure</a> \(\P\). In the basic statistical model, we have an observable <a href="../prob/Probability.html">random variable</a> \(\bs{X}\) taking values in a set \(S\). In general, \(\bs{X}\) can have quite a complicated structure. For example, if the experiment is to sample \(n\) objects from a population and record various measurements of interest, then
+\[ \bs{X} = (X_1, X_2, \ldots, X_n) \]
+where \(X_i\) is the vector of measurements for the \(i\)th object. The most important special case occurs when \((X_1, X_2, \ldots, X_n)\) are independent and identically distributed. In this case, we have a <a href="../sample/Introduction.html">random sample</a> of size \(n\) from the common distribution.</p>
+
+<p>Suppose also that the distribution of \(\bs{X}\) depends on a parameter \(\theta\) with values in a set \(\Theta\). The parameter may also be vector-valued, in which case \(\Theta \subseteq \R^k\) for some \(k \in \N_+\) and the parameter vector has the form \(\bs{\theta} = (\theta_1, \theta_2, \ldots, \theta_k)\).</p>
+
+<h4>Confidence Sets</h4>
+
+<div class="unit">
+	<p class="dfn">A <dfn>confidence set </dfn>is a subset \(C(\bs{X})\) of the parameter set \(\Theta\) that depends only on the data variable \(\bs{X}\), and no unknown parameters. the <dfn>confidence level</dfn> is the smallest probability that \(\theta \in C(\bs{X})\):
+	\[ \min\left\{\P[\theta \in C(\bs{X})]: \theta \in \Theta\right\} \]</p>
+</div>
+
+<p>So in a sense, a confidence set is a <em>set-valued statistic</em>. A confidence set is an estimator of \(\theta\) in the sense that we hope that \(\theta \in C(\bs{X})\) with high probability, so that the confidence level is high. Note that since the distribution of \( \bs{X} \) depends on \( \theta \), there is a dependence on \( \theta \) in the probability measure \( \P \) in the definition of confidence level. However, we usually suppress this, just to keep the notation simple. Usually, we try to construct a confidence set for \(\theta\) with a prescribed confidence level \(1 - \alpha\) where \(0 \lt \alpha \lt 1\). Typical confidence levels are 0.9, 0.95, and 0.99. Sometimes the best we can do is to construct a confidence set whose confidence level is <em>at least</em> \(1 - \alpha\); this is called a <dfn>conservative</dfn> \(1 - \alpha\) confidence set for \(\theta\).</p>
+
+<figure>
+	<figcaption>A set estimate that successfully captured the parameter</figcaption>
+	<img src="SetEstimate.png" alt="SetEstimate.png">
+</figure>
+
+<p>Suppose that \(C(\bs{X})\) is \(1 - \alpha\) level confidence set for a parameter \(\theta\). Note that when we run the experiment and observe the data \(\bs{x}\), the <em>computed</em> confidence set is \(C(\bs{x})\). The true value of \(\theta\) is either in this set, or is not, and we will usually never know. However, by the <a href="../sample/Mean.html">law of large numbers</a>, if we were to repeat the confidence experiment over and over, the proportion of sets that contain \(\theta\) would converge to \(\P[\theta \in C(\bs{X})] = 1 - \alpha\). This is the precise meaning of the term <dfn>confidence</dfn>. In the usual terminology of statistics, the random set \(C(\bs{X})\) is the <dfn>estimator</dfn>; the deterministic set \(C(\bs{x})\) based on an observed value \(\bs{x}\) is the <dfn>estimate</dfn>.</p>
+
+<p>Next, note that the quality of a confidence set, as an estimator of \(\theta\), is based on two factors: the confidence level and the <dfn>precision</dfn> as measured by the <q>size</q> of the set. A good estimator has small size (and hence gives a precise estimate of \(\theta\)) and large confidence. However, for a given \(\bs{X}\), there is usually a tradeoff between confidence level and precision&mdash;increasing the confidence level comes only at the expense of increasing the size of the set, and decreasing the size of the set comes only at the expense of decreasing the confidence level. How we measure the <q>size</q> of the confidence set depends on the dimension of the parameter space and the nature of the confidence set.  Moreover, the size of the set is usually random, although in some special cases it may be deterministic.</p>
+
+<p>Considering the extreme cases may give us some insight.  First, suppose that \(C(\bs{X}) = \Theta\). This set estimator has maximum confidence 1, but no precision and hence it is worthless (we already <em>knew</em> that \(\theta \in \Theta\)). At the other extreme, suppose that \(C(\bs{X})\) is a singleton set.  This set estimator has the best possible precision, but typically for continuous distributions, would have confidence 0. In between these extremes, hopefully, are set estimators that have high confidence and high precision.</p>
+
+<div class="unit" id="int">
+	<p class="math">Suppose that \(C_i(\bs{X})\) is a \(1 - \alpha_i\) level confidence set for \(\theta\) for \(i \in \{1, 2, \ldots, k\}\). If \(\alpha = \alpha_1 + \alpha_2 + \cdots + \alpha_k \lt 1\) then \(C_1(\bs{X}) \cap C_2(\bs{X}) \cap \cdots \cap C_k(\bs{X})\) is a conservative \(1 - \alpha \) level confidence set for \(\theta\).</p>
+	<details>
+		<summary>Details:</summary>
+		<p>This follows from <a href="../prob/Probability.html#boo">Bonferroni's inequality</a>.</p>
+	</details>
+</div>
+
+<h4>Real-Valued Parameters</h4>
+
+<p>In many cases, we are interested in estimating a real-valued parameter \(\lambda = \lambda(\theta)\) with values in an interval  \((a, b)\), where \(a, \, b \in \R\) with \(a \lt b\). Of course, it's possible that \(a = -\infty\) or \(b = \infty\). In this context our confidence set frequently has the form
+\[ C(\bs{X}) = \left\{\theta \in \Theta: L(\bs{X}) \lt \lambda(\theta) \lt U(\bs{X})\right\} \]
+where \(L(\bs{X})\) and \(U(\bs{X})\) are real-valued statistics. In this case \((L(\bs{X}), U(\bs{X}))\) is called a <dfn>confidence interval</dfn> for \(\lambda\). If \(L(\bs{X})\) and \(U(\bs{X})\) are both random, then the confidence interval is often said to be <dfn>two-sided</dfn>. In the special case that \(U(\bs{X}) = b\), \(L(\bs{X})\) is called a <dfn>confidence lower bound</dfn> for \(\lambda\). In the special case that \(L(\bs{X}) = a\), \(U(\bs{X})\) is called a <dfn>confidence upper bound</dfn> for \(\lambda\). </p>
+
+<div class="unit">
+	<p class="math">Suppose that \(L(\bs{X})\) is a \(1 - \alpha\) level confidence lower bound for \(\lambda\) and that \(U(\bs{X})\) is a \(1 - \beta\) level confidence upper bound for \(\lambda\). If \(\alpha + \beta \lt 1\) then \((L(\bs{X}), U(\bs{X}))\) is a conservative \(1 - (\alpha + \beta)\) level confidence interval for \(\lambda\).</p>
+	<details>
+		<summary>Details:</summary>
+		<p>This follows immediately from <a href="#int" class="ref"></a>.</p>
+	</details>
+</div>
+
+<h4 id="piv">Pivot Variables</h4>
+
+<p>You might think that it should be very difficult to construct confidence sets for a parameter \(\theta\). However, in many important special cases, confidence sets can be constructed easily from certain random variables known as <em>pivot variables</em>.</p>
+
+<div class="unit">
+	<p class="dfn">Suppose that \(V\) is a function from \(S \times \Theta\) into a set \(T\). The random variable \(V(\bs{X}, \theta)\) is a <dfn> pivot variable</dfn> for \(\theta\) if its distribution does not depend on \(\theta\). Specifically, \(\P[V(\bs{X}, \theta) \in B]\) is constant in \(\theta \in \Theta\) for each \(B \subseteq T\).</p>
+</div>
+
+<p>The basic idea is that we try to combine \(\bs{X}\) and \(\theta\) algebraically in such a way that we <em>factor out</em> the dependence on \(\theta\) in the distribution of the resulting random variable \(V(\bs{X}, \theta)\).  If we know the distribution of the pivot variable, then for a given \(\alpha\), we can try to find \(B \subseteq T\) (that does not depend on \(\theta\)) such that \( \P_\theta\left[V(\bs{X}, \theta) \in B\right] = 1 - \alpha \). It then follows that a \(1 - \alpha\) confidence set for the parameter is given by \( C(\bs{X}) = \{ \theta \in \Theta: V(\bs{X}, \theta) \in B \} \).</p>
+
+<figure>
+	<figcaption>A confidence set constructed from a pivot variable</figcaption>
+	<img src="PivotVariable.png" alt="Pivot variable">
+</figure>
+
+<p>Suppose now that our pivot variable \(V(\bs{X}, \theta)\) is real-valued, which for simplicity, we will assume has a <a href="../dist/Continuous.html">continuous distribution</a>. For \(p \in (0, 1)\), let \(v(p)\) denote the <a href="../dist/CDF.html#qnt">quantile</a> of order \(p\) for the pivot variable \(V(\bs{X}, \theta)\). By the very meaning of pivot variable, \(v(p)\) does not depend on \(\theta\).</p>
+
+<div class="unit" id="set">
+	<p class="math">For any \(p \in (0, 1)\), a \(1 - \alpha\) level confidence set for \(\theta\) is
+	\[ \left\{\theta \in \Theta: v(\alpha - p \alpha) \lt V(\bs{X}, \theta) \lt v(1 - p \alpha)\right\} \]</p>
+	<details>
+		<summary>Details:</summary>
+		<p>By definition, the probability of the event is \((1 - p \alpha) - (\alpha - p \alpha) = 1 - \alpha\).</p>
+	</details>
+</div>
+
+<p>The confidence set above corresponds to \((1 - p) \alpha\) in the left tail and \(p \alpha\) in the right tail, in terms of the distribution of the pivot variable \(V(\bs{X}, \lambda)\). The special case \(p = \frac{1}{2}\) is the <dfn>equal-tailed case</dfn>, the most common case.</p>
+
+<figure>
+	<figcaption>Distribution of the pivot variable showing \( (1 - p) \alpha \) is the left tail and \( p \alpha \) is the right tail.</figcaption>
+	<img src="Tails.png" alt="Pivot variable">
+</figure>
+
+<div class="unit">
+	<p class="math">The confidence set <a href="#set" class="ref"></a> is decreasing in \(\alpha\) and hence increasing in \(1 - \alpha\) (in the sense of the subset relation) for fixed \(p\).</p>
+</div>
+
+<p>For the confidence set <a href="#set" class="ref"></a>, we would naturally like to choose \(p\) that minimizes the size of the set in some sense. However this is often a difficult problem. The equal-tailed interval, corresponding to \(p = \frac{1}{2}\), is the most commonly used case, and is sometimes (but not always) an optimal choice. Pivot variables are far from unique; the challenge is to find a pivot variable whose distribution is known and which gives tight bounds on the parameter (high precision).</p>
+
+<div class="unit">
+	<p class="math">Suppose that \(V(\bs{X}, \theta)\) is a pivot variable for \(\theta\). If \(g\) is a function defined on the range of \(V\) and \(g\) involves no unknown parameters, then \(U = g[V(\bs{X}, \theta)]\) is also a pivot variable for \(\theta\).</p>
+</div>
+
+<h3>Examples and Special Cases</h3>
+
+<h4>Location-Scale Families</h4>
+
+<p>In the case of <a href="../special/LocationScale.html">location-scale families</a> of distributions, we can easily find pivot variables. Suppose that \(Z\) is a real-valued random variable with a continuous distribution that has probability density function \(g\), and no unknown parameters.  Let \(X = \mu + \sigma Z\) where \(\mu \in \R\) and \(\sigma \in (0, \infty)\) are parameters. Recall that the probability density function of \(X\) is given by
+\[ f_{\mu, \sigma}(x) = \frac{1}{\sigma} g\left( \frac{x - \mu}{\sigma} \right), \quad x \in \R\]
+and the corresponding family of distributions is called the <dfn>location-scale family</dfn> associated with the distribution of \(Z\); \(\mu\) is the <dfn>location parameter</dfn> and \(\sigma\) is the <dfn>scale parameter</dfn>. Generally, we are assuming that these parameters are unknown.</p>
+
+<p>Now suppose that \(\bs{X} = (X_1, X_2, \ldots, X_n)\) is a random sample of size \(n\) from the distribution of \(X\); this is our observable outcome vector. For each \(i\), let
+\[ Z_i = \frac{X_i - \mu}{\sigma} \]</p>
+
+<div class="unit">
+	<p class="math">The random vector \(\bs{Z} = (Z_1, Z_2, \ldots, Z_n)\) is a random sample of size \(n\) from the distribution of \(Z\).</p>
+</div>
+
+<p>In particular, note that \(\bs{Z}\) is a pivot variable for \((\mu, \sigma)\), since \(\bs{Z}\) is a function of \(\bs{X}\), \(\mu\), and \(\sigma\), but the distribution of \(\bs{Z}\) does not depend on \(\mu\) or \(\sigma\). Hence, any function of \(\bs{Z}\) will also be a pivot variable for \((\mu, \sigma)\), (if the function does not involve the parameters). Of course, some of these pivot variables will be much more useful than others in estimating \(\mu\) and \(\sigma\). In the following exercises, we will explore two common and important pivot variables.</p>
+
+<div class="unit">
+	<p class="math">Let \(M(\bs{X})\) and \(M(\bs{Z})\) denote the <a href="../sample/Mean.html">sample means</a> of \(\bs{X}\) and \(\bs{Z}\), respectively. Then \(M(\bs{Z})\) is a pivot variable for \((\mu, \sigma)\) since
+	\[ M(\bs{Z}) = \frac{M(\bs{X}) - \mu}{\sigma} \]</p>
+</div>
+
+<div class="unit" id="lcs">
+	<p class="math">Let \(m\) denote the quantile function of the pivot variable \(M(\bs{Z})\). For any \(p \in (0, 1)\), a \(1 - \alpha\) confidence set for \((\mu, \sigma)\) is
+	\[ Z_{\alpha, p}(\bs{X}) = \{(\mu, \sigma): M(\bs{X}) - m(1 - p \alpha) \sigma \lt \mu \lt M(\bs{X}) - m(\alpha - p \alpha) \sigma \} \]</p>
+</div>
+
+<div class="unit">
+	<p class="math">The confidence set constructed in <a href="#lcs" class="ref"></a> is a <q>cone</q> in the \((\mu, \sigma)\) parameter space, with vertex at \( (M(\bs{X}), 0) \) and boundary lines of slopes \(-1 / m(1 - p \alpha)\) and \(-1 / m(\alpha - p \alpha)\), as shown in the graph below. (Note, however, that both slopes might be negative or both positive.)</p>
+</div>
+
+<figure>
+	<figcaption>The confidence set for \( (\mu, \sigma) \) constructed from \( M \)</figcaption>
+	<img src="ZSet.png" alt="Confidence set">
+</figure>
+
+<p>The fact that the confidence set is unbounded is clearly not good, but is perhaps not surprising; we are estimating two real parameters with a single real-valued pivot variable. However, if \(\sigma\) is known, the confidence set defines a <em>confidence interval</em> for \(\mu\). Geometrically, the confidence interval simply corresponds to the horizontal cross section at \(\sigma\).</p>
+
+<div class="unit">
+	<p class="math">\(1 - \alpha\) confidence sets for \((\mu, \sigma)\) are </p>
+	<ol class="sub">
+		<li>\(Z_{\alpha, 1}(\bs{X}) = \{(\mu, \sigma): M(\bs{X}) - m(1 - \alpha) \sigma \lt \mu \lt \infty\}\)</li>
+		<li>\(Z_{\alpha, 0}(\bs{X}) = \{(\mu, \sigma): - \infty \lt \mu \lt M(\bs{X}) - m(\alpha) \sigma\}\)</li>
+	</ol>
+	<details>
+		<summary>Details:</summary>
+		<p>In the confidence set constructed in <a href="#lcs" class="ref"></a>, let \(p \uparrow 1\) and \(p \downarrow 0\), respectively.</p>
+	</details>
+</div>
+
+<p>If \(\sigma\) is known, then (a) gives a \(1 - \alpha\) confidence lower bound for \(\mu\) and (b) gives a \(1 - \alpha\) confidence upper bound for \(\mu\).</p>
+
+<div class="unit">
+	<p class="math">Let \(S(\bs{X})\) and \(S(\bs{Z})\) denote the <a href="../sample/Variance.html">sample standard deviations</a> of \(\bs{X}\) and \(\bs{Z}\), respectively. Then \(S(\bs{Z})\) is a pivot variable for \((\mu, \sigma)\) and a pivot variable for \(\sigma\) since
+	\[ S(\bs{Z}) = \frac{S(\bs{X})}{\sigma} \]</p>
+</div>
+
+<div class="unit">
+	<p class="math">Let \(s\) denote the quantile function of \(S(\bs{Z})\). For any \(\alpha \in (0, 1)\) and \(p \in (0, 1)\), a \(1 - \alpha\) confidence set for \((\mu, \sigma)\) is
+	\[ V_{\alpha, p}(\bs{X}) = \left\{(\mu, \sigma): \frac{S(\bs{X})}{s(1 - p \alpha)} \lt \sigma \lt \frac{S(\bs{X})}{s(\alpha - p \alpha)} \right\} \]</p>
+</div>
+
+<p>Note that the confidence set gives no information about \(\mu\) since the random variable above is a pivot variable for \(\sigma\) alone. The confidence set can also be viewed as a bounded confidence <em>interval</em> for \(\sigma\).</p>
+
+<figure>
+	<figcaption>The confidence set for \( (\mu, \sigma) \) constructed from \( S \)</figcaption>
+	<img src="VSet.png" alt="Confidence set">
+</figure>
+
+<div class="unit">
+	<p class="math">\(1 - \alpha\) confidence sets for \((\mu, \sigma)\) are </p>
+	<ol class="sub">
+		<li>\(V_{\alpha, 1}(\bs{X}) = \left \{ (\mu, \sigma): S(\bs{X}) / s(1 - \alpha) \lt \sigma \lt \infty \right \}\)</li>
+		<li>\(V_{\alpha, 0}(\bs{X}) = \left \{ (\mu, \sigma): 0 \lt \sigma \lt S(\bs{X}) / s(\alpha) \right \}\)</li>
+	</ol>
+	<details>
+		<summary>Details:</summary>
+		<p>In the confidence set constructed above, let \(p \uparrow 1\) and \(p \downarrow 0\), respectively.</p>
+	</details>
+</div>
+
+<p>The set in part (a) gives a \(1 - \alpha\) confidence lower bound for \(\sigma\) and the set in part (b) gives a \(1 - \alpha\) confidence upper bound for \(\sigma\).</p>
+
+<p>We can intersect the confidence sets corresponding to the two pivot variables to produce conservative, bounded confidence sets.</p>
+
+<div class="unit">
+	<p class="math">If \(\alpha, \; \beta, \; p, \; q \in (0, 1)\) with \(\alpha + \beta \lt 1\) then \(Z_{\alpha, p} \cap V_{\beta, q}\) is a conservative \(1 - (\alpha + \beta)\) confidence set for \((\mu, \sigma)\).</p>
+	<details>
+		<summary>Details:</summary>
+		<p>This results follows from <a href="#int" class="ref"></a>.</p>
+	</details>
+</div>
+
+<figure>
+	<figcaption>The bounded confidence set for \( (\mu, \sigma) \) constructed from \( (M, S) \)</figcaption>
+	<img src="ZVSet.png" alt="Confidence set">
+</figure>
+
+<p>The most important location-scale family is the family of <a href="../special/Normal.html">normal distributions</a>. The problem of <a href="Normal.html">estimation in the normal model</a> is considered in the next section. In the remainder of this section, we will explore another important scale family.</p>
+
+<h4>The Exponential Distribution</h4>
+
+<p>Recall that the <a href="../special/Gamma.html">exponential distribution</a> with scale parameter \(\sigma \in (0, \infty)\) has probability density function \(f(x) = \frac{1}{\sigma} e^{-x / \sigma}, \; x \in [0, \infty)\). It is the scale family associated with the standard exponential distribution, which has probability density function \(g(x) = e^{-x}, \; x \in [0, \infty)\). The exponential distribution is widely used to model random times (such as lifetimes and <q>arrival</q> times), particularly in the context of the Poisson model. Now suppose that \(\bs{X} = (X_1, X_2, \ldots, X_n)\) is a random sample of size \(n\) from the exponential distribution with unknown scale parameter \(\sigma\). Let
+\[ Y = \sum_{i=1}^n X_i \]</p>
+
+<div class="unit">
+	<p class="math">The random variable \(\frac{2}{\sigma} Y\) has the <a href="../special/ChiSquare.html">chi-square distribution</a> with \(2 n\) degrees of freedom, and hence is a pivot variable for \(\sigma\).</p>
+</div>
+
+<p>Note that this pivot variable is a multiple of the variable \( M \) constructed  above for general location-scale families (with \(\mu = 0\)). For \(p \in (0, 1)\) and \(k \in (0, \infty)\), let \(\chi_k^2(p)\) denote the <a href="../dist/CDF.html#qnt">quantile</a> of order \(p\) for the chi-square distribution with \(k\) degrees of freedom. For selected values of \(k\) and \(p\), \(\chi_k^2(p)\) can be obtained from the <a href="JavaScript:openAncillary('../apps/QuantileApp.html')" class="ancillary">quantile app</a> or from most statistical software packages.</p>
+
+<div class="unit">
+	<p class="math">Recall that</p>
+	<ol class="sub">
+		<li>\(\chi_k^2(p) \to 0\) as \(p \downarrow 0\)</li>
+		<li>\(\chi_k^2(p) \to \infty\) as \(p \uparrow 1\)</li>
+	</ol>
+</div>
+
+<div class="unit">
+	<p class="math">For any \(\alpha \in (0, 1)\) and any \(p \in (0, 1)\), a \(1 - \alpha\) confidence interval for \(\sigma\) is
+	\[ \left( \frac{2\,Y}{\chi_{2n}^2(1 - p \alpha)}, \frac{2\,Y}{\chi_{2n}^2(\alpha - p \alpha)} \right) \]</p>
+</div>
+
+<div class="unit">
+	<p class="math">Note that</p>
+	<ol class="sub">
+		<li>\(2 Y \big/ \chi_{2n}^2(1 - \alpha)\) is a \(1 - \alpha\) confidence lower bound for \(\sigma\).</li>
+		<li>\(2 Y \big/ \chi_{2n}^2(\alpha)\) is a \(1 - \alpha\) confidence lower bound for \(\sigma\).</li>
+	</ol>
+</div>
+
+<p>Of the two-sided confidence intervals constructed above, we would naturally prefer the one with the smallest length, because this interval gives the most information about the parameter \(\sigma\). However, minimizing the length as a function of \(p\) is computationally difficult. The two-sided confidence interval that is typically used is the <dfn>equal tailed</dfn> interval obtained by letting \(p = \frac{1}{2}\):
+\[ \left( \frac{2\,Y}{\chi_{2n}^2(1 - \alpha/2)}, \frac{2\,Y}{\chi_{2n}^2(\alpha/2)} \right) \]</p>
+
+<div class="unit">
+	<p class="stat">The lifetime of a certain type of component (in hours) has an exponential distribution with unknown scale parameter \(\sigma\).  Ten devices are operated until failure; the lifetimes are 592, 861, 1470, 2412, 335, 3485, 736, 758, 530, 1961.</p>
+	<ol class="sub">
+		<li>Construct the 95% two-sided confidence interval for \(\sigma\).</li>
+		<li>Construct the 95% confidence lower bound for \(\sigma\).</li>
+		<li>Construct the 95% confidence upper bound for \(\sigma\).</li>
+	</ol>
+	<details>
+		<summary>Details:</summary>
+		<ol class="sub">
+			<li>\((769.1, 2740.1)\)</li>
+			<li>836.7</li>
+			<li>2421.9</li>
+		</ol>
+	</details>
+</div>
+
+<footer>
+	<ol class="map">
+		<li class="parent"><a href="../index.html">Random</a></li>
+		<li class="parent"><a href="index.html">7. Set Estimation</a></li>
+		<li class="current">1</li>
+		<li class="child"><a href="Normal.html" title="Estimation in the Normal Model">2</a></li>
+		<li class="child"><a href="Bernoulli.html" title="Estimation in the Bernoulli Model">3</a></li>
+		<li class="child"><a href="BivariateNormal.html" title="Estimation in the Two-Sample Normal Model">4</a></li>
+		<li class="child"><a href="Bayes.html" title="Bayesian Interval Estimation">5</a></li>
+		<li class="details"><button type="button" title="Expand Details" onclick="expandDetails(true);"><img src="../icons/Plus.svg" alt="Expand"></button></li>
+		<li class="details"><button type="button" title="Contract Details" onclick="expandDetails(false);"><img src="../icons/Minus.svg" alt="Contract"></button></li>
+	</ol>
+	<ul class="map">
+		<li class="sister"><a href="JavaScript:openAncillary('../apps/index.html')" class="ancillary">Apps</a></li>
+		<li class="sister"><a href="JavaScript:openAncillary('../data/index.html')" class="ancillary">Data Sets</a></li>
+		<li class="child"><a href="JavaScript:openAncillary('../biographies/index.html')" class="ancillary"> Biographies</a></li>
+	</ul>
+</footer>
+
+<script>getReferences();</script>
+
+</body>
+</html>

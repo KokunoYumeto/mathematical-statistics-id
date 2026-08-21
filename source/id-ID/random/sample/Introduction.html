@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="id-ID">
+
+<head>
+	<meta charset="utf-8">
+	<title>Pendahuluan</title>
+	<meta name="author" content="Kyle Siegrist">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="keywords" content="probabilitas, statistika, sampel acak, model statistik, distribusi empiris, variabel kontinu, variabel diskret, tingkat pengukuran">
+	<link rel="icon" href="../icons/Icon.svg" type="image/svg">
+	<link rel="stylesheet" href="../Screen.css" type="text/css" media="screen">
+	<script src="../Basic.js"></script>
+	<script src="../../MathJax/tex-svg.js" id="MathJax-script" async></script>
+</head>
+
+<body>
+
+<div class="latex">
+	\(\renewcommand{\P}{\mathbb{P}}\)
+	\(\newcommand{\R}{\mathbb{R}}\) 
+	\(\newcommand{\N}{\mathbb{N}}\)
+	\(\newcommand{\bs}{\boldsymbol}\)
+</div>
+
+<header>
+	<ol class="map">
+		<li class="parent"><a href="https://www.randomservices.org/random/index.html">Random</a></li>
+		<li class="parent"><a href="index.html">5. Sampel Acak</a></li>
+		<li class="current">1</li>
+		<li class="child"><a href="Mean.html" title="Rata-Rata Sampel">2</a></li>
+		<li class="child"><a href="https://www.randomservices.org/random/sample/LLN.html" title="Hukum Bilangan Besar">3</a></li>
+		<li class="child"><a href="https://www.randomservices.org/random/sample/CLT.html" title="Teorema Limit Pusat">4</a></li>
+		<li class="child"><a href="https://www.randomservices.org/random/sample/Variance.html" title="Varians Sampel">5</a></li>
+		<li class="child"><a href="https://www.randomservices.org/random/sample/OrderStatistics.html" title="Statistik Terurut">6</a></li>
+		<li class="child"><a href="https://www.randomservices.org/random/sample/Covariance.html" title="Korelasi dan Regresi Sampel">7</a></li>
+		<li class="child"><a href="https://www.randomservices.org/random/sample/Normal.html" title="Sifat Khusus Sampel Normal">8</a></li>
+		<li class="details"><button type="button" title="Perluas Rincian" onclick="expandDetails(true);"><img src="../icons/Plus.svg" alt="Perluas"></button></li>
+		<li class="details"><button type="button" title="Ciutkan Rincian" onclick="expandDetails(false);"><img src="../icons/Minus.svg" alt="Ciutkan"></button></li>
+	</ol>
+	<h2 id="o006.random.sample.introduction.page">1. Pendahuluan</h2>
+</header>
+
+<h3 id="o006.random.sample.introduction.basic-statistical-model">Model Statistik Dasar</h3>
+
+<p>Dalam model statistik dasar, terdapat suatu <dfn>populasi</dfn> objek yang menjadi perhatian. Objek-objek tersebut dapat berupa orang, keluarga, cip komputer, atau petak lahan jagung. Selain itu, terdapat berbagai pengukuran atau <dfn>variabel</dfn> yang didefinisikan pada objek-objek tersebut. Kita memilih sampel dari populasi dan mencatat variabel yang menjadi perhatian untuk setiap objek dalam sampel. Berikut beberapa contoh berdasarkan <a href="https://www.randomservices.org/random/data/index.html" class="ancillary">himpunan data</a> dalam proyek ini:</p>
+
+<div class="unit" id="o006.random.sample.introduction.unit.examples">
+	<p class="math">Contoh</p>
+	<ol class="sub">
+		<li>Dalam <a href="https://www.randomservices.org/random/data/MM.html" class="ancillary">data M&amp;M</a>, objeknya adalah kantong M&amp;M berukuran tertentu. Variabel yang dicatat untuk satu kantong M&amp;M ialah berat bersih serta banyaknya permen merah, hijau, biru, jingga, kuning, dan cokelat.</li>
+		<li>Dalam <a href="https://www.randomservices.org/random/data/Cicada.html" class="ancillary">data tonggeret</a>, objeknya adalah tonggeret dari wilayah Tennessee bagian tengah. Variabel yang dicatat untuk seekor tonggeret ialah berat tubuh, panjang sayap, lebar sayap, panjang tubuh, jenis kelamin, dan spesies.</li>
+		<li>Dalam <a href="https://www.randomservices.org/random/data/Iris.html" class="ancillary">data iris Fisher</a>, objeknya adalah bunga iris. Variabel yang dicatat untuk satu bunga iris ialah panjang mahkota, lebar mahkota, panjang kelopak, lebar kelopak, dan jenis.</li>
+		<li>Dalam <a href="https://www.randomservices.org/random/data/Polio.html" class="ancillary">himpunan data polio</a>, objeknya adalah anak-anak. Walaupun mungkin banyak variabel yang dicatat untuk seorang anak, dua variabel yang paling penting, keduanya biner, ialah apakah anak tersebut telah divaksinasi dan apakah anak tersebut terjangkit polio dalam jangka waktu tertentu.</li>
+		<li>Dalam <a href="https://www.randomservices.org/random/data/Challenger.html" class="ancillary">himpunan data Challenger</a>, objeknya adalah peluncuran Pesawat Ulang-Alik. Variabel yang dicatat ialah suhu pada saat peluncuran dan berbagai ukuran erosi cincin-O pada pendorong roket padat.</li>
+		<li>Dalam <a href="https://www.randomservices.org/random/data/Michelson.html" class="ancillary">himpunan data Michelson</a>, objeknya adalah berkas cahaya dan variabel yang dicatat ialah kelajuan.</li>
+		<li>Dalam <a href="https://www.randomservices.org/random/data/Pearson.html" class="ancillary">himpunan data Pearson</a>, objeknya adalah pasangan ayah dan anak laki-laki. Variabelnya ialah tinggi ayah dan tinggi anak laki-laki.</li>
+		<li>Dalam <a href="https://www.randomservices.org/random/data/Snow.html" class="ancillary">himpunan data Snow</a>, objeknya adalah orang yang meninggal akibat kolera. Variabelnya mencatat alamat orang tersebut.</li>
+		<li>Dalam salah satu <a href="https://www.randomservices.org/random/data/SAT.html" class="ancillary">himpunan data SAT</a>, objeknya adalah negara bagian dan variabelnya ialah tingkat partisipasi, skor rata-rata SAT Matematika, dan skor rata-rata SAT Verbal.</li>
+	</ol>
+</div>
+
+<p>Dengan demikian, hasil teramati dari suatu eksperimen statistik (yakni data) sering berbentuk \(\bs x = (x_1, x_2, \ldots, x_n)\), dengan \(x_i\) sebagai vektor pengukuran untuk objek ke-\(i\) yang dipilih dari populasi, untuk setiap \( i \in \{1, 2, \ldots, n\} \). Himpunan \(S\) yang memuat semua nilai yang mungkin bagi \(\bs x\) (sebelum eksperimen dilakukan) disebut <dfn>himpunan sampel</dfn>. Secara harfiah, himpunan ini adalah himpunan semua sampel. Jadi, meskipun hasil suatu eksperimen statistik dapat memiliki struktur yang cukup rumit (sebuah vektor dari vektor-vektor), ciri khas abstraksi matematika ialah kemampuan untuk <span style="color:gray">meredupkan</span> fitur-fitur yang tidak relevan pada suatu saat tertentu dan memperlakukan struktur kompleks sebagai satu objek. Itulah yang kita lakukan terhadap hasil \(\bs x\) dari eksperimen tersebut.</p>
+
+<p>Teknik-teknik statistika telah mencapai keberhasilan yang sangat besar; teknik-teknik ini digunakan secara luas dalam hampir setiap bidang yang berkaitan dengan kuantifikasi&mdash;ilmu alam, ilmu sosial, hukum, dan kedokteran. Di sisi lain, statistika memiliki nuansa legalistik serta banyak istilah dan jargon yang pada awalnya dapat membuat bidang ini terasa agak menakutkan. Pada bagian selanjutnya, kita mulai membahas sebagian istilah tersebut.</p>
+
+<h4 id="o006.random.sample.introduction.empirical-distribution">Distribusi Empiris</h4>
+
+<div class="unit" id="o006.random.sample.introduction.unit.empirical-distribution-definition">
+	<p class="dfn">Misalkan suatu eksperimen statistik menghasilkan data \(\bs x = (x_1, x_2, \ldots, x_n)\) untuk suatu \( n \in \N_+ \). <dfn>Distribusi empiris</dfn> yang terkait dengan \(\bs x\) adalah distribusi probabilitas yang menempatkan probabilitas \(1/n\) pada \(x_i\) untuk setiap \( i \in \{1, 2, \ldots, n\} \).</p>
+</div>
+
+<p>Jadi, jika nilainya berbeda-beda, distribusi empiris tersebut merupakan <a href="https://www.randomservices.org/random/dist/Discrete.html">distribusi seragam diskret</a> pada \(\{x_1, x_2, \ldots, x_n\}\). Secara lebih umum, jika \(x\) muncul \(k\) kali dalam data untuk suatu \( k \in \{1, 2, \ldots, n\} \), distribusi empiris memberikan probabilitas \(k / n\) kepada \(x\). Dengan demikian, setiap himpunan data hingga mendefinisikan suatu distribusi probabilitas. Distribusi empiris sangat penting, bukan hanya secara praktis, melainkan juga secara teoretis. <dfn>Metode pengambilan sampel ulang</dfn> modern didasarkan pada distribusi empiris.</p>
+
+<h4 id="o006.random.sample.introduction.statistics">Statistik</h4>
+
+<p>Misalkan kembali bahwa suatu eksperimen statistik menghasilkan data \(\bs x = (x_1, x_2, \ldots, x_n)\) untuk suatu \( n \in \N_+ \).</p>
+
+<div class="unit" id="o006.random.sample.introduction.unit.statistic-definition">
+	<p class="dfn">Secara teknis, suatu <dfn>statistik</dfn> \(w = w(\bs x)\) adalah fungsi teramati dari hasil eksperimen \(\bs x\).</p>
+</div>
+
+<p>Dengan kata lain, statistik adalah fungsi yang dapat dihitung dan didefinisikan pada himpunan sampel \(S\). Istilah <dfn>dapat diamati</dfn> berarti bahwa fungsi tersebut tidak boleh memuat besaran yang tidak diketahui, sebab kita harus dapat menghitung nilai \(w\) dari statistik berdasarkan data teramati \(\bs x\). Seperti halnya data \(\bs x\), statistik \(w\) dapat memiliki struktur yang rumit; biasanya, \(w\) bernilai vektor. Bahkan, hasil \(\bs x\) eksperimen itu sendiri merupakan suatu statistik; semua statistik lainnya diturunkan dari \(\bs x\).</p>
+
+<div class="unit" id="o006.random.sample.introduction.unit.equivalent-statistics-definition">
+	<p class="dfn">Statistik \(u\) dan \(v\) disebut <dfn>ekuivalen</dfn> jika terdapat fungsi satu-ke-satu \(r\) dari daerah hasil \(u\) ke seluruh daerah hasil \(v\) sedemikian sehingga \(v = r(u)\). Statistik ekuivalen memberikan informasi yang ekuivalen tentang \(\bs x\).</p>
+</div>
+
+<div class="unit" id="o006.random.sample.introduction.unit.equivalent-statistics-characterization">
+	<p class="math">Statistik \(u\) dan \(v\) ekuivalen jika dan hanya jika kondisi berikut berlaku: untuk setiap \(\bs x \in S\) dan \(\bs{y} \in S\), \(u(\bs x) = u(\bs{y})\) jika dan hanya jika \(v(\bs x) = v(\bs{y})\).</p>
+</div>
+
+<div class="unit" id="o006.random.sample.introduction.unit.equivalence-relation">
+	<p class="math">Ekuivalensi benar-benar merupakan <a href="https://www.randomservices.org/random/foundations/Equivalence.html">relasi ekuivalensi</a> pada kumpulan statistik untuk suatu eksperimen statistik. Artinya, jika \(u\), \(v\), dan \(w\) adalah statistik sembarang, maka</p>
+	<ol class="sub">
+		<li>\(u\) ekuivalen dengan \(u\) (<dfn>sifat refleksif</dfn>).</li>
+		<li>Jika \(u\) ekuivalen dengan \(v\), maka \(v\) ekuivalen dengan \(u\) (<dfn>sifat simetris</dfn>).</li>
+		<li>Jika \(u\) ekuivalen dengan \(v\) dan \(v\) ekuivalen dengan \(w\), maka \(u\) ekuivalen dengan \(w\) (<dfn>sifat transitif</dfn>).</li>
+	</ol>
+</div>
+
+<h4 id="o006.random.sample.introduction.descriptive-inferential-statistics">Statistika Deskriptif dan Inferensial</h4>
+
+<p>Statistika memiliki dua cabang besar. Istilah <dfn>statistika deskriptif</dfn> merujuk pada metode untuk merangkum dan menyajikan data teramati \(\bs x\). Seperti tersirat dari namanya, metode statistika deskriptif biasanya mencakup perhitungan berbagai statistik (dalam arti teknis) yang memberikan informasi berguna tentang data: ukuran pemusatan dan penyebaran, ukuran keterkaitan, dan sebagainya. Dalam konteks statistika deskriptif, istilah <dfn>parameter</dfn> merujuk pada karakteristik seluruh populasi.</p>
+
+<p>Cabang statistika yang lebih mendalam dan lebih berguna dikenal sebagai <dfn>statistika inferensial</dfn>. Sudut pandang kita dalam cabang ini adalah bahwa eksperimen statistik (sebelum dilakukan) merupakan <a href="https://www.randomservices.org/random/prob/Experiments.html">eksperimen acak</a> dengan suatu <a href="https://www.randomservices.org/random/prob/Probability.html">ukuran probabilitas</a> \(\P\) pada <a href="https://www.randomservices.org/random/prob/Events.html">ruang sampel</a> yang mendasarinya. Dengan demikian, hasil \(\bs x\) eksperimen merupakan nilai teramati dari suatu <a href="https://www.randomservices.org/random/prob/Probability.html">variabel acak</a> \(\bs{X}\) yang didefinisikan pada ruang probabilitas ini, sedangkan distribusi \(\bs{X}\) tidak kita ketahui sepenuhnya. Tujuan kita adalah menarik inferensi tentang distribusi \(\bs{X}\) dari nilai teramati \(\bs x\). Jadi, dalam arti tertentu, statistika inferensial merupakan dual dari probabilitas. Dalam probabilitas, kita berusaha <em>memprediksi</em> nilai \(\bs{X}\) dengan <em>mengasumsikan</em> pengetahuan lengkap tentang distribusinya. Sebaliknya, dalam statistika, kita <em>mengamati</em> nilai \(\bs x\) dari variabel acak \(\bs{X}\) dan berusaha <em>menyimpulkan</em> informasi tentang distribusi \(\bs{X}\) yang mendasarinya. Dalam statistika inferensial, suatu <em>statistik</em> (fungsi dari \(\bs{X}\)) juga merupakan variabel acak dengan distribusinya sendiri. Di sisi lain, istilah <dfn>parameter</dfn> merujuk pada karakteristik distribusi \(\bs{X}\). Sering kali masalah inferensialnya adalah menggunakan berbagai statistik untuk <dfn>mengestimasi</dfn> atau <dfn>menguji hipotesis</dfn> tentang suatu parameter. Cara lain untuk memandang statistika inferensial adalah bahwa kita berusaha menarik inferensi dari distribusi <em>empiris</em> yang terkait dengan data teramati \(\bs x\) menuju distribusi <em>sebenarnya</em> yang terkait dengan \(\bs{X}\).</p>
+
+<p>Dalam ranah umum statistika inferensial terdapat dua jenis dasar eksperimen acak. Suatu <dfn>eksperimen terancang</dfn>, seperti tersirat dari namanya, dirancang dengan cermat untuk mengkaji pertanyaan inferensial tertentu. Pelaku eksperimen memiliki kendali yang cukup besar atas cara objek dipilih, variabel yang akan dicatat untuk objek tersebut, dan nilai beberapa variabel. Sebaliknya, dalam suatu <dfn>studi observasional</dfn>, peneliti hanya memiliki sedikit kendali atas faktor-faktor tersebut. Sering kali peneliti sekadar diberi himpunan data dan diminta untuk memaknainya. Sebagai contoh, <a href="https://www.randomservices.org/random/data/Polio.html" class="ancillary">uji lapangan polio</a> merupakan eksperimen terancang untuk mengkaji keefektifan vaksin Salk. Para peneliti memiliki kendali yang cukup besar atas cara anak-anak dipilih dan ditempatkan ke dalam kelompok perlakuan dan kelompok kontrol. Sebaliknya, <a href="https://www.randomservices.org/random/data/Challenger.html" class="ancillary">himpunan data Challenger</a> yang digunakan untuk mengkaji hubungan antara suhu dan erosi cincin-O merupakan studi observasional. Tentu saja, fakta bahwa suatu eksperimen dirancang tidak serta-merta berarti bahwa eksperimen itu dirancang dengan <em>baik</em>.</p>
+
+<h4 id="o006.random.sample.introduction.difficulties">Kesulitan</h4>
+
+<p>Sejumlah kesulitan dapat timbul ketika kita berusaha mengkaji suatu pertanyaan inferensial. Masalah sering muncul karena <dfn>variabel perancu</dfn>, yaitu variabel yang (seperti tersirat dari namanya) mengganggu pemahaman kita terhadap pertanyaan inferensial tersebut. Dalam rancangan <a href="https://www.randomservices.org/random/data/Polio.html" class="ancillary">uji lapangan polio</a> yang pertama, misalnya, <var>usia</var> dan <var>persetujuan orang tua</var> merupakan dua variabel perancu yang mengganggu penentuan keefektifan vaksin. Sebagai contoh lain, inti <a href="https://www.randomservices.org/random/data/Berkeley.html" class="ancillary">data penerimaan Berkeley</a> adalah menunjukkan bagaimana suatu variabel perancu (<var>departemen</var>) dapat menciptakan korelasi semu antara dua variabel lain (<var>jenis kelamin</var> dan <var>status penerimaan</var>). Ketika kita mengoreksi gangguan yang disebabkan oleh suatu variabel perancu, kita mengatakan bahwa variabel tersebut telah <dfn>dikendalikan</dfn>.</p>
+
+<p>Masalah juga sering timbul karena <dfn>galat pengukuran</dfn>. Beberapa variabel pada dasarnya sulit diukur, dan bias sistematis dalam pengukuran dapat mengganggu pemahaman kita terhadap pertanyaan inferensial. Rancangan <a href="https://www.randomservices.org/random/data/Polio.html" class="ancillary">uji lapangan polio</a> yang pertama sekali lagi memberikan contoh yang baik. Pengetahuan mengenai status vaksinasi anak-anak menyebabkan bias sistematis pada dokter yang berusaha mendiagnosis polio pada anak-anak tersebut. Galat pengukuran kadang-kadang disebabkan oleh variabel perancu tersembunyi.</p>
+
+<p>Variabel perancu dan galat pengukuran banyak dijumpai dalam jajak pendapat politik, ketika pertanyaan inferensialnya adalah siapa yang akan memenangi pemilihan. Bagaimana variabel perancu seperti ras, pendapatan, usia, dan jenis kelamin (untuk menyebut beberapa saja) memengaruhi pilihan seseorang? Bagaimana kita mengetahui bahwa seseorang benar-benar akan memilih kandidat yang menurut pengakuannya akan ia pilih, atau bahkan akan memberikan suara (galat pengukuran)? <a href="https://www.randomservices.org/random/data/LiteraryDigest.html" class="ancillary">Jajak pendapat Literary Digest</a> dalam pemilihan presiden tahun 1936 dan <a href="https://www.randomservices.org/random/data/Election1948.html" class="ancillary">jajak pendapat profesional</a> dalam pemilihan presiden tahun 1948 menggambarkan masalah-masalah ini.</p>
+
+<p>Variabel perancu, galat pengukuran, dan penyebab lain sering mengakibatkan <dfn>bias seleksi</dfn>, yang berarti bahwa sampel tidak mewakili populasi sehubungan dengan pertanyaan inferensial yang sedang dikaji. Pengacakan sering digunakan untuk mengatasi dampak variabel perancu dan galat pengukuran.</p>
+
+<h4 id="Samples">Sampel Acak</h4>
+
+<p>Kasus khusus yang paling umum dan penting dari model statistik inferensial terjadi ketika variabel pengamatan
+\[ \bs{X} = (X_1, X_2, \ldots, X_n) \]
+merupakan barisan variabel acak yang saling bebas dan berdistribusi identik. Sekali lagi, dalam model pengambilan sampel baku, \(X_i\) itu sendiri merupakan vektor pengukuran untuk objek ke-\(i\) dalam sampel; karena itu, kita memandang \((X_1, X_2, \ldots, X_n)\) sebagai salinan-salinan bebas dari suatu vektor pengukuran dasar \(X\). Dalam hal ini, \((X_1, X_2, \ldots, X_n)\) disebut <dfn>sampel acak</dfn> berukuran \(n\) dari distribusi \(X\).</p>
+
+<h3 id="Variables">Variabel</h3>
+
+<p>Operasi matematika yang bermakna bagi suatu variabel dalam eksperimen statistik bergantung pada <em>jenis</em> dan <em>tingkat pengukuran</em> variabel tersebut.</p>
+
+<h4 id="o006.random.sample.introduction.type">Jenis</h4>
+
+<p>Ingat bahwa suatu variabel riil \(x\) disebut <dfn>kontinu</dfn> jika nilai-nilai yang mungkin membentuk interval bilangan riil. Sebagai contoh, variabel berat dalam himpunan data M&amp;M serta variabel panjang dan lebar dalam data iris Fisher bersifat kontinu. Sebaliknya, suatu <dfn>variabel diskret</dfn> adalah variabel yang himpunan nilai mungkinnya membentuk himpunan diskret. Sebagai contoh, variabel hitungan dalam himpunan data M&amp;M, variabel jenis dalam data iris Fisher, serta variabel nilai dan jenis kartu dalam eksperimen kartu bersifat diskret. Variabel kontinu menyatakan besaran yang, secara teoretis, dapat diukur hingga tingkat ketelitian berapa pun. Dalam praktiknya, tentu saja, alat ukur memiliki ketelitian terbatas sehingga data yang dikumpulkan dari variabel kontinu niscaya bersifat diskret. Artinya, hanya terdapat himpunan hingga (meskipun mungkin sangat besar) dari nilai yang benar-benar dapat diukur. Jadi, pembedaan antara variabel diskret dan kontinu didasarkan pada apa yang secara teoretis mungkin, bukan pada apa yang benar-benar diukur. Beberapa contoh tambahan dapat membantu:</p>
+
+<ul>
+	<li><em>Usia</em> seseorang biasanya dinyatakan dalam tahun. Namun, usia dapat pula dibayangkan dinyatakan dalam bulan, minggu, atau bahkan (jika waktu kelahiran diketahui dengan ketelitian yang memadai) dalam detik. Usia, baik usia perangkat maupun orang, biasanya dianggap sebagai variabel kontinu.</li>
+	<li><em>Harga</em> suatu barang biasanya dinyatakan (di Amerika Serikat) dalam dolar dan sen, dan tentu saja benda moneter terkecil dalam peredaran adalah uang satu sen ($0.01). Namun, pajak kadang-kadang dinyatakan dalam satuan seperseribu dolar ($0.001), dan pembagian dolar yang lebih kecil dapat dibayangkan sekalipun tidak ada koin yang mewakili pembagian tersebut. Ukuran kekayaan biasanya dianggap sebagai variabel kontinu.</li>
+	<li>Di sisi lain, banyaknya orang di dalam mobil pada saat kecelakaan merupakan variabel yang secara mendasar bersifat diskret.</li>
+</ul>
+
+<h4 id="o006.random.sample.introduction.levels-of-measurement">Tingkat Pengukuran</h4>
+
+<p>Suatu variabel riil \(x\) juga dibedakan menurut <dfn>tingkat pengukurannya</dfn>.</p>
+
+<p><dfn>Variabel kualitatif</dfn> semata-mata menyandikan <em>jenis</em> atau <em>nama</em>; karena itu, hanya sedikit operasi matematika yang bermakna, sekalipun bilangan digunakan sebagai sandi. Variabel semacam ini memiliki <dfn>tingkat pengukuran nominal</dfn>. Sebagai contoh, variabel jenis dalam data iris Fisher bersifat kualitatif. Jenis kelamin, variabel yang umum dalam banyak penelitian mengenai manusia dan hewan, juga bersifat kualitatif. Variabel kualitatif hampir selalu diskret; sulit membayangkan tak terhingga banyak nama yang membentuk suatu kontinuum.</p>
+
+<p>Variabel yang hanya <em>urutannya</em> bermakna dikatakan memiliki tingkat pengukuran <dfn>ordinal</dfn>; selisih tidak bermakna sekalipun bilangan digunakan sebagai sandi. Sebagai contoh, dalam banyak permainan kartu, jenis kartu diperingkat sehingga variabel jenis kartu memiliki tingkat pengukuran ordinal. Sebagai contoh lain, perhatikan skala baku lima poin (sangat buruk, buruk, sedang, baik, sangat baik) yang digunakan untuk memeringkat guru, film, restoran, dan sebagainya.</p>
+
+<p>Variabel kuantitatif yang <em>selisihnya</em> bermakna, tetapi <em>rasionya</em> tidak bermakna, dikatakan memiliki tingkat pengukuran <dfn>interval</dfn>. Secara ekuivalen, variabel pada tingkat ini memiliki nilai nol relatif, bukan nilai nol mutlak. Contoh khasnya adalah suhu (dalam Fahrenheit atau Celsius) atau waktu (jam atau kalender).</p>
+
+<p>Terakhir, variabel kuantitatif yang rasionya bermakna dikatakan memiliki tingkat pengukuran <dfn>rasio</dfn>. Variabel pada tingkat ini memiliki nilai nol mutlak. Variabel hitungan dan berat dalam himpunan data M&amp;M serta variabel panjang dan lebar dalam data iris Fisher merupakan contohnya.</p>
+
+<h4 id="o006.random.sample.introduction.subsamples">Subsampel</h4>
+
+<p>Dalam model statistik dasar, subsampel yang bersesuaian dengan beberapa variabel dapat dibentuk melalui <dfn>penyaringan</dfn> berdasarkan variabel lain. Hal ini sangat umum ketika variabel penyaring bersifat kualitatif. Sebagai contoh, perhatikan <a href="https://www.randomservices.org/random/data/Cicada.html" class="ancillary">data tonggeret</a>. Kita mungkin tertarik pada variabel kuantitatif berat tubuh, panjang tubuh, lebar sayap, dan panjang sayap <em>menurut spesies</em>, yaitu secara terpisah untuk spesies 0, 1, dan 2. Atau, kita mungkin tertarik pada variabel kuantitatif tersebut <em>menurut jenis kelamin</em>, yaitu secara terpisah untuk jantan dan betina.</p>
+
+<h3 id="o006.random.sample.introduction.exercises">Latihan</h3>
+
+<div class="unit" id="o006.random.sample.introduction.unit.exercise.michelson">
+	<p class="stat">Pelajari <a href="https://www.randomservices.org/random/data/Michelson.html" class="ancillary">eksperimen Michelson</a> untuk mengukur kelajuan cahaya.</p>
+	<ol class="sub">
+		<li>Apakah ini eksperimen terancang atau studi observasional?</li>
+		<li>Klasifikasikan variabel kelajuan cahaya menurut jenis dan tingkat pengukurannya.</li>
+		<li>Bahas variabel perancu yang mungkin ada dan masalah yang berkaitan dengan galat pengukuran.</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<ol class="sub">
+			<li>Eksperimen terancang</li>
+			<li>Kontinu, interval. Tingkat pengukurannya hanya interval karena variabel yang dicatat adalah kelajuan cahaya dalam \(\text{km} / \text{hr}\) dikurangi \(299\,000\) (agar bilangannya lebih sederhana). Kelajuan sebenarnya dalam \(\text{km} / \text{hr}\) merupakan variabel kontinu dengan tingkat pengukuran rasio.</li>
+		</ol>
+	</details>
+</div>
+
+<div class="unit" id="o006.random.sample.introduction.unit.exercise.cavendish">
+	<p class="stat">Pelajari <a href="https://www.randomservices.org/random/data/Cavendish.html" class="ancillary">eksperimen Cavendish</a> untuk mengukur densitas Bumi.</p>
+	<ol class="sub">
+		<li>Apakah ini eksperimen terancang atau studi observasional?</li>
+		<li>Klasifikasikan variabel densitas Bumi menurut jenis dan tingkat pengukurannya.</li>
+		<li>Bahas variabel perancu yang mungkin ada dan masalah yang berkaitan dengan galat pengukuran.</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<ol class="sub">
+			<li>Eksperimen terancang</li>
+			<li>Kontinu, rasio.</li>
+		</ol>
+	</details>
+</div>
+
+<div class="unit" id="o006.random.sample.introduction.unit.exercise.short">
+	<p class="stat">Pelajari <a href="https://www.randomservices.org/random/data/Short.html" class="ancillary">eksperimen Short</a> untuk mengukur paralaks Matahari.</p>
+
+	<ol class="sub">
+		<li>Apakah ini eksperimen terancang atau studi observasional?</li>
+		<li>Klasifikasikan variabel paralaks Matahari menurut jenis dan tingkat pengukurannya.</li>
+		<li>Bahas variabel perancu yang mungkin ada dan masalah yang berkaitan dengan galat pengukuran.</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<ol class="sub">
+			<li>Studi observasional</li>
+			<li>Kontinu, rasio.</li>
+		</ol>
+	</details>
+</div>
+
+<div class="unit" id="o006.random.sample.introduction.unit.exercise.mm">
+	<p class="stat">Dalam <a href="https://www.randomservices.org/random/data/MM.html" class="ancillary">data M&amp;M</a>, klasifikasikan setiap variabel menurut jenis dan tingkat pengukurannya.</p>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Setiap variabel hitungan warna: diskret, rasio; berat bersih: kontinu, rasio</p>
+	</details>
+</div>
+
+<div class="unit" id="o006.random.sample.introduction.unit.exercise.cicada">
+	<p class="stat">Dalam <a href="https://www.randomservices.org/random/data/Cicada.html" class="ancillary">data tonggeret</a>, klasifikasikan setiap variabel menurut jenis dan tingkat pengukurannya.</p>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Berat tubuh, panjang sayap, lebar sayap, panjang tubuh: kontinu, rasio. Jenis kelamin, spesies: diskret, nominal</p>
+	</details>
+</div>
+
+<div class="unit" id="o006.random.sample.introduction.unit.exercise.iris">
+	<p class="stat">Dalam <a href="https://www.randomservices.org/random/data/Iris.html" class="ancillary">data iris Fisher</a>, klasifikasikan setiap variabel menurut jenis dan tingkat pengukurannya.</p>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Lebar mahkota, panjang mahkota, lebar kelopak, panjang kelopak: kontinu, rasio. Jenis: diskret, nominal</p>
+	</details>
+</div>
+
+<div class="unit" id="o006.random.sample.introduction.unit.exercise.challenger">
+	<p class="stat">Pelajari <a href="https://www.randomservices.org/random/data/Challenger.html" class="ancillary">eksperimen Challenger</a> untuk mengkaji hubungan antara suhu dan erosi cincin-O.</p>
+	<ol class="sub">
+		<li>Apakah ini eksperimen terancang atau studi observasional?</li>
+		<li>Klasifikasikan setiap variabel menurut jenis dan tingkat pengukurannya.</li>
+		<li>Bahas variabel perancu yang mungkin ada dan masalah yang berkaitan dengan galat pengukuran.</li>
+	</ol>
+	<details>
+	<summary>Rincian:</summary>
+		<ol class="sub">
+			<li>Studi observasional</li>
+			<li>Suhu: kontinu, interval; erosi: kontinu, rasio; indeks kerusakan: diskret, ordinal</li>
+		</ol>
+	</details>
+</div>
+
+<div class="unit" id="o006.random.sample.introduction.unit.exercise.vietnam-draft">
+	<p class="stat">Dalam <a href="https://www.randomservices.org/random/data/Draft.html" class="ancillary">data undian wajib militer era Perang Vietnam</a>, klasifikasikan setiap variabel menurut jenis dan tingkat pengukurannya.</p>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Bulan lahir: diskret, interval; tanggal lahir: diskret, interval</p>
+	</details>
+</div>
+
+<div class="unit" id="o006.random.sample.introduction.unit.exercise.sat">
+	<p class="stat">Dalam kedua <a href="https://www.randomservices.org/random/data/SAT.html" class="ancillary">himpunan data SAT</a>, klasifikasikan setiap variabel menurut jenis dan tingkat pengukurannya.</p>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Skor SAT Matematika dan Verbal: mungkin kontinu, rasio; negara bagian: diskret, nominal; tahun: diskret, interval</p>
+	</details>
+</div>
+
+<div class="unit" id="o006.random.sample.introduction.unit.exercise.literary-digest">
+	<p class="stat">Pelajari <a href="https://www.randomservices.org/random/data/LiteraryDigest.html" class="ancillary">eksperimen Literary Digest</a> untuk memprediksi hasil pemilihan presiden tahun 1936.</p>
+	<ol class="sub">
+		<li>Apakah ini eksperimen terancang atau studi observasional?</li>
+		<li>Klasifikasikan setiap variabel menurut jenis dan tingkat pengukurannya.</li>
+		<li>Bahas variabel perancu yang mungkin ada dan masalah yang berkaitan dengan galat pengukuran.</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<ol class="sub">
+			<li>Eksperimen terancang, meskipun dirancang dengan buruk</li>
+			<li>Negara bagian: diskret, nominal; suara elektoral: diskret, rasio; hitungan Landon: diskret, rasio; hitungan Roosevelt: diskret, rasio</li>
+		</ol>
+	</details>
+</div>
+
+<div class="unit" id="o006.random.sample.introduction.unit.exercise.election-1948">
+	<p class="stat">Pelajari <a href="https://www.randomservices.org/random/data/Election1948.html" class="ancillary">jajak pendapat tahun 1948</a> untuk memprediksi hasil pemilihan presiden antara Truman dan Dewey. Apakah jajak pendapat ini merupakan eksperimen terancang atau studi observasional?</p>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Eksperimen-eksperimen terancang, tetapi dirancang dengan buruk</p>
+	</details>
+</div>
+
+<div class="unit" id="o006.random.sample.introduction.unit.exercise.pearson">
+	<p class="stat">Pelajari <a href="https://www.randomservices.org/random/data/Pearson.html" class="ancillary">eksperimen Pearson</a> untuk mengkaji hubungan antara tinggi ayah dan tinggi anak laki-laki.</p>
+	<ol class="sub">
+		<li>Apakah ini eksperimen terancang atau studi observasional?</li>
+		<li>Klasifikasikan setiap variabel menurut jenis dan tingkat pengukurannya.</li>
+		<li>Bahas variabel perancu yang mungkin ada.</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<ol class="sub">
+			<li>Studi observasional</li>
+			<li>Tinggi ayah: kontinu, rasio; tinggi anak laki-laki: kontinu, rasio</li>
+		</ol>
+	</details>
+</div>
+
+<div class="unit" id="o006.random.sample.introduction.unit.exercise.polio">
+	<p class="stat">Pelajari <a href="https://www.randomservices.org/random/data/Polio.html" class="ancillary">uji lapangan polio</a>.</p>
+	<ol class="sub">
+		<li>Apakah uji-uji tersebut merupakan eksperimen terancang atau studi observasional?</li>
+		<li>Identifikasi variabel-variabel pokok dan klasifikasikan masing-masing menurut jenis dan tingkat pengukurannya.</li>
+		<li>Bahas variabel perancu yang mungkin ada dan masalah yang berkaitan dengan galat pengukuran.</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<ol class="sub">
+			<li>Eksperimen-eksperimen terancang</li>
+			<li>Status vaksinasi: diskret, nominal; status polio: diskret, nominal</li>
+		</ol>
+	</details>
+</div>
+
+<div class="unit" id="o006.random.sample.introduction.unit.exercise.model-parameters">
+	<p class="math">Identifikasi parameter dalam masing-masing model berikut:</p>
+	<ol class="sub">
+		<li><a href="https://www.randomservices.org/random/buffon/Buffon.html">Eksperimen Koin Buffon</a></li>
+		<li><a href="https://www.randomservices.org/random/buffon/Buffon.html">Eksperimen Jarum Buffon</a></li>
+		<li><a href="https://www.randomservices.org/random/bernoulli/Introduction.html">model percobaan Bernoulli</a></li>
+		<li><a href="https://www.randomservices.org/random/poisson/Introduction.html">model Poisson</a></li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<ol class="sub">
+			<li>jari-jari koin</li>
+			<li>panjang jarum</li>
+			<li>probabilitas keberhasilan</li>
+			<li>laju kedatangan</li>
+		</ol>
+	</details>
+</div>
+
+<div class="unit" id="o006.random.sample.introduction.unit.exercise.distribution-parameters">
+	<p class="math">Catat parameter untuk setiap keluarga <a href="https://www.randomservices.org/random/special/index.html">distribusi khusus</a> berikut:</p>
+	<ol class="sub">
+		<li><a href="https://www.randomservices.org/random/special/Normal.html">distribusi normal</a></li>
+		<li><a href="https://www.randomservices.org/random/special/Gamma.html">distribusi gama</a></li>
+		<li><a href="https://www.randomservices.org/random/special/Beta.html">distribusi beta</a></li>
+		<li><a href="https://www.randomservices.org/random/special/Pareto.html">distribusi Pareto</a></li>
+		<li><a href="https://www.randomservices.org/random/special/Weibull.html">distribusi Weibull</a></li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<ol class="sub">
+			<li>rata-rata \(\mu\) dan simpangan baku \(\sigma\)</li>
+			<li>parameter bentuk \(k\) dan parameter skala \(b\)</li>
+			<li>parameter kiri \(a\) dan parameter kanan \(b\)</li>
+			<li>parameter bentuk \(a\) dan parameter skala \(b\)</li>
+			<li>parameter bentuk \(k\) dan parameter skala \(b\)</li>
+		</ol>
+	</details>
+</div>
+
+<div class="unit" id="o006.random.sample.introduction.unit.exercise.german-tank-serials">
+	<p class="stat">Selama Perang Dunia II, pihak Sekutu mencatat nomor seri tank Jerman yang berhasil direbut. Klasifikasikan variabel <em>nomor seri</em> yang mendasarinya menurut jenis dan tingkat pengukuran.</p>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Diskret, ordinal.</p>
+	</details>
+</div>
+
+<p>Untuk pembahasan mengenai penggunaan nomor seri tersebut dalam mengestimasi jumlah seluruh tank, lihat bagian <a href="https://www.randomservices.org/random/urn/OrderStatistics.html">Statistik Terurut</a> dalam <a href="https://www.randomservices.org/random/urn/index.html">Bab 11</a> mengenai model pengambilan sampel berhingga.</p>
+
+<footer>
+	<ol class="map">
+		<li class="parent"><a href="https://www.randomservices.org/random/index.html">Random</a></li>
+		<li class="parent"><a href="index.html">5. Sampel Acak</a></li>
+		<li class="current">1</li>
+		<li class="child"><a href="Mean.html" title="Rata-Rata Sampel">2</a></li>
+		<li class="child"><a href="https://www.randomservices.org/random/sample/LLN.html" title="Hukum Bilangan Besar">3</a></li>
+		<li class="child"><a href="https://www.randomservices.org/random/sample/CLT.html" title="Teorema Limit Pusat">4</a></li>
+		<li class="child"><a href="https://www.randomservices.org/random/sample/Variance.html" title="Varians Sampel">5</a></li>
+		<li class="child"><a href="https://www.randomservices.org/random/sample/OrderStatistics.html" title="Statistik Terurut">6</a></li>
+		<li class="child"><a href="https://www.randomservices.org/random/sample/Covariance.html" title="Korelasi dan Regresi Sampel">7</a></li>
+		<li class="child"><a href="https://www.randomservices.org/random/sample/Normal.html" title="Sifat Khusus Sampel Normal">8</a></li>
+		<li class="details"><button type="button" title="Perluas Rincian" onclick="expandDetails(true);"><img src="../icons/Plus.svg" alt="Perluas"></button></li>
+		<li class="details"><button type="button" title="Ciutkan Rincian" onclick="expandDetails(false);"><img src="../icons/Minus.svg" alt="Ciutkan"></button></li>
+	</ol>
+	<ul class="map">
+		<li class="sister"><a href="https://www.randomservices.org/random/apps/index.html" class="ancillary">Aplikasi</a></li>
+		<li class="sister"><a href="https://www.randomservices.org/random/data/index.html" class="ancillary">Himpunan Data</a></li>
+		<li class="child"><a href="https://www.randomservices.org/random/biographies/index.html" class="ancillary">Biografi</a></li>
+	</ul>
+	<section class="edition-notice" data-o006-edition-notice="v1">
+		<p><strong>Pemberitahuan edisi.</strong> Terjemahan Bahasa Indonesia ini mengadaptasi <a href="https://www.randomservices.org/random/">Random: Probabilitas, Statistika Matematis, dan Proses Stokastik</a> karya Kyle Siegrist. Perubahan pada halaman ini mencakup penerjemahan, penambahan ID stabil, pengalihan tautan inti yang belum diterjemahkan ke sumber resmi, pengubahan tautan pelengkap menjadi tautan HTTPS resmi, serta perbaikan dua nama berkas pada tautan data.</p>
+		<p>Situs asal menyatakan <a href="https://creativecommons.org/licenses/by/2.0/">CC BY 2.0</a>, sedangkan halaman <a href="https://www.randomservices.org/random/Credits.html">Kredit</a> menautkan <a href="https://creativecommons.org/licenses/by/1.0/">CC BY 1.0</a>; perbedaan ini dipertahankan. Edisi independen ini tidak didukung maupun disahkan oleh Kyle Siegrist atau Random Services. Tautan ke data dan biografi pihak ketiga tidak menyatakan hak untuk mendistribusikan ulang materi tersebut.</p>
+	</section>
+</footer>
+
+<script>getReferences();</script>
+
+</body>
+</html>

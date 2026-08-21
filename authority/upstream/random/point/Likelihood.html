@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<title>Maximum Likelihood</title>
+	<meta name="author" content="Kyle Siegrist">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="keywords" content="probability, statistics, point estimation, maximum likelihood, likelihood function, log likelihood function, Bernoulli distribution, geometric distribution, negative binomial distribution, Poisson distribution, normal distribution, gamma distribution, beta distribution, Pareto distribution, uniform distribution, hypergeometric distribution">
+	<link rel="icon" href="../icons/Icon.svg" type="image/svg">
+	<link rel="stylesheet" href="../Screen.css" type="text/css" media="screen">
+	<script src="../Basic.js"></script>
+	<script src="../../MathJax/tex-svg.js" id="MathJax-script" async></script>
+</head>
+
+<body>
+
+<div class="latex">
+	\(\newcommand{\R}{\mathbb{R}}\)
+	\(\newcommand{\N}{\mathbb{N}}\)
+	\(\newcommand{\Z}{\mathbb{Z}}\)
+	\(\newcommand{\E}{\mathbb{E}}\)
+	\(\newcommand{\P}{\mathbb{P}}\)
+	\(\newcommand{\var}{\text{var}}\)
+	\(\newcommand{\sd}{\text{sd}}\)
+	\(\newcommand{\cov}{\text{cov}}\)
+	\(\newcommand{\cor}{\text{cor}}\)
+	\(\newcommand{\bias}{\text{bias}}\)
+	\(\newcommand{\mse}{\text{mse}}\)
+	\(\newcommand{\bs}{\boldsymbol}\)
+</div>
+
+<header>
+	<ol class="map">
+		<li class="parent"><a href="../index.html">Random</a></li>
+		<li class="parent"><a href="index.html">6. Point Estimation</a></li>
+		<li class="child"><a href="Estimators.html" title="Estimators">1</a></li>
+		<li class="child"><a href="Moments.html" title="The Method of Moments">2</a></li>
+		<li class="current">3</li>
+		<li class="child"><a href="Bayes.html" title="Bayes' Estimators">4</a></li>
+		<li class="child"><a href="Unbiased.html" title="Best Unbiased Estimators">5</a></li>
+		<li class="child"><a href="Sufficient.html" title="Complete, Sufficient, and Ancillary Statistics">6</a></li>
+		<li class="details"><button type="button" title="Expand Details" onclick="expandDetails(true);"><img src="../icons/Plus.svg" alt="Expand"></button></li>
+		<li class="details"><button type="button" title="Contract Details" onclick="expandDetails(false);"><img src="../icons/Minus.svg" alt="Contract"></button></li>
+	</ol>
+	<h2>3. Maximum Likelihood</h2>
+</header>
+
+<h3 id="the">Basic Theory</h3>
+
+<h4 id="mle">The Method</h4>
+
+<p>Suppose again that we have an observable <a href="../prob/Probability.html">random variable</a> \(\bs{X}\) for a <a href="../prob/Experiments.html">random experiment</a>, with values in a set \(S\). Suppose also that distribution of \(\bs{X}\) depends on an unknown parameter \(\theta\), with values in a parameter set \(T\). Of course, our data variable \(\bs{X}\) will almost always be vector valued.  The parameter \(\theta\) may also be vector valued. We will denote the probability density function of \(\bs{X}\) on \(S\) by \(f_\theta\) for \(\theta \in T\). The distribution of \( \bs{X} \) could be <a href="../dist/Discrete.html">discrete</a> or <a href="../dist/Continuous.html">continuous</a>.</p>
+
+<p>The likelihood function is the function obtained by reversing the roles of \(\bs{x}\) and \(\theta\) in the probability density function; that is, we view \(\theta\) as the variable and \(\bs{x}\) as the given information (which is precisely the point of view in estimation).</p>
+
+<div class="unit">
+	<p class="dfn">The <dfn>likelihood function</dfn> at \( \bs{x} \in S \) is the function \( L_{\bs{x}}: T \to [0, \infty) \) given by
+	\[ L_\bs{x}(\theta) = f_\theta(\bs{x}), \quad \theta \in T \]</p>
+</div>
+
+<p>In the method of <dfn>maximum likelihood</dfn>, we try to find the value of the parameter that maximizes the likelihood function for each value of the data vector.</p>
+
+<div class="unit">
+	<p class="dfn">Suppose that the maximum value of \( L_{\bs{x}} \) occurs at \( u(\bs{x}) \in T \) for each \( \bs{x} \in S \). Then the statistic \( u(\bs{X}) \) is a <dfn>maximum likelihood estimator</dfn> of \( \theta \).</p>
+</div>
+
+<p>The method of maximum likelihood is intuitively appealing&mdash;we try to find the value of the parameter that would have most likely produced the data we in fact observed.</p>
+
+<p>Since the natural logarithm function is strictly increasing on \( (0, \infty) \), the maximum value of the likelihood function, if it exists, will occur at the same points as the maximum value of the logarithm of the likelihood function.</p>
+
+<div class="unit">
+	<p class="dfn">The <dfn>log-likelihood function</dfn> at \( \bs{x} \in S \) is the function \( \ln L_{\bs{x}} \): 
+	\[ \ln L_{\bs{x}}(\theta) = \ln f_\theta(\bs{x}), \quad \theta \in T \]
+	If the maximum value of \( \ln L_{\bs{x}} \) occurs at \( u(\bs{x}) \in T \) for each \( \bs{x} \in S \). Then the statistic \( u(\bs{X}) \) is a maximum likelihood estimator of \( \theta \)</p>
+</div>
+
+<P>The log-likelihood function is often easier to work with than the likelihood function (typically because the probability density function \(f_\theta(\bs{x})\) has a product structure).</p>
+
+<h4 id="vec">Vector of Parameters</h4>
+
+<p>An important special case is when \(\bs{\theta} = (\theta_1, \theta_2, \ldots, \theta_k)\) is a vector of \(k\) real parameters, so that \(T \subseteq \R^k\). In this case, the maximum likelihood problem is to maximize a function of several variables. If \(T\) is a continuous set, the methods of calculus can be used. If the maximum value of \(L_\bs{x}\) occurs at a point \(\bs{\theta}\) in the interior of \(T\), then \(L_\bs{x}\) has a local maximum at \(\bs{\theta}\). Therefore, assuming that the likelihood function is differentiable, we can find this point by solving
+\[ \frac{\partial}{\partial \theta_i} L_\bs{x}(\bs{\theta}) = 0, \quad i \in \{1, 2, \ldots, k\} \]
+or equivalently
+\[ \frac{\partial}{\partial \theta_i} \ln L_\bs{x}(\bs{\theta}) = 0, \quad i \in \{1, 2, \ldots, k\} \]
+On the other hand, the maximum value may occur at a boundary point of \(T\), or may not exist at all.</p>
+
+<h4 id="sam">Random Samples</h4>
+
+<p>The most important special case is when the data variables form a <a href="../sample/index.html">random sample</a> from a distribution.</p>
+
+<div class="unit">
+	<p class="math">Suppose that \(\bs{X} = (X_1, X_2, \ldots, X_n)\) is a random sample of size \(n\) from the distribution of a random variable \(X\) taking values in \(R\), with probability density function \(g_\theta\) for \(\theta \in T\). Then \(\bs{X}\) takes values in \(S = R^n\), and the likelihood and log-likelihood functions for \( \bs{x} = (x_1, x_2, \ldots, x_n) \in S \) are
+	\begin{align*}
+		L_\bs{x}(\theta) &amp; = \prod_{i=1}^n g_\theta(x_i), \quad \theta \in T \\
+		\ln L_\bs{x}(\theta) &amp; = \sum_{i=1}^n \ln g_\theta(x_i), \quad \theta \in T
+	\end{align*}</p>
+</div>
+
+<h4 id="inv">Extending the Method and the Invariance Property</h4>
+
+<p>Returning to the general setting, suppose now that \(h\) is a one-to-one function from the parameter set \(T\) onto a set \(\Lambda\). We can view \(\lambda = h(\theta)\) as a new parameter with values in the set \(\Lambda\), and it is easy to re-parameterize the probability density function with the new parameter. Thus, let \( \hat{f}_\lambda(\bs{x}) = f_{h^{-1}(\lambda)}(\bs{x})\) for \( \bs{x} \in S \) and \( \lambda \in \Lambda \). The corresponding likelihood function for \( \bs{x} \in S \) is
+\[ \hat{L}_\bs{x}(\lambda) = L_\bs{x}\left[h^{-1}(\lambda)\right], \quad \lambda \in \Lambda \]
+Clearly if \(u(\bs{x}) \in T\) maximizes \(L_\bs{x}\) for \(\bs{x} \in S\). Then \(h\left[u(\bs{x})\right] \in \Lambda\) maximizes \(\hat{L}_\bs{x}\) for \(\bs{x} \in S\). It follows that if \(U\) is a maximum likelihood estimator for \(\theta\), then \(V = h(U)\) is a maximum likelihood estimator for \( \lambda = h(\theta) \).</p>
+
+<p>If the function \(h\) is not one-to-one, the maximum likelihood function for the new parameter \(\lambda = h(\theta)\) is not well defined, because we cannot parameterize the probability density function in terms of \(\lambda\). However, there is a natural generalization of the method.</p>
+
+<div class="unit" id="inv1">
+	<p class="dfn">Suppose that \( h: T \to \Lambda \), and let \( \lambda = h(\theta) \) denote the new parameter. Define the <dfn>likelihood function</dfn> for \( \lambda \) at \( \bs{x} \in S\) by
+	\[ \hat{L}_\bs{x}(\lambda) = \max\left\{L_\bs{x}(\theta): \theta \in h^{-1}\{\lambda\} \right\}; \quad \lambda \in \Lambda \]
+	If \( v(\bs{x}) \in \Lambda \) maximizes \( \hat{L}_{\bs{x}} \) for each \( \bs{x} \in S \), then \( V = v(\bs{X}) \) is a <dfn>maximum likelihood estimator</dfn> of \( \lambda \). </p>
+</div>
+
+<p>This definition extends the maximum likelihood method to cases where the probability density function is not completely parameterized by the parameter of interest. The following theorem is known as the <dfn>invariance property</dfn>: if we can solve the maximum likelihood problem for \( \theta \) then we can solve the maximum likelihood problem for \( \lambda = h(\theta) \).</p>
+
+<div class="unit">
+	<p class="math">In the setting of definition <a href="#inv1" class="ref"></a>, if \( U \) is a maximum likelihood estimator of \( \theta \), then \( V = h(U) \) is a maximum likelihood estimator of \( \lambda \).</p>
+	<details>
+		<summary>Details:</summary>
+		<p>As before, if \(u(\bs{x}) \in T\) maximizes \(L_\bs{x}\) for \(\bs{x} \in S\). Then \(h\left[u(\bs{x})\right] \in \Lambda\) maximizes \(\hat{L}_\bs{x}\) for \(\bs{x} \in S\).</p>
+	</details>
+</div>
+
+<h3 id="exe">Examples and Special Cases</h3>
+
+<p>In the following subsections, we will study maximum likelihood estimation for a number of special parametric families of distributions.  Recall that if \(\bs{X} = (X_1, X_2, \ldots, X_n)\) is a random sample from a distribution with mean \(\mu\) and variance \(\sigma^2\), then the <a href="Moments.html">method of moments</a> estimators of \(\mu\) and \(\sigma^2\) are, respectively,
+\begin{align} 
+	M &amp; = \frac{1}{n} \sum_{i=1}^n X_i \\
+	T^2 &amp; = \frac{1}{n} \sum_{i=1}^n (X_i - M)^2
+\end{align}
+Of course, \(M\) is the <a href="../sample/Mean.html">sample mean</a>, and \(T^2 \)  is the biased version of the <a href="../sample/Variance.html">sample variance</a>. These statistics will also sometimes occur as maximum likelihood estimators. Another statistic that will occur in some of the examples below is
+\[ M_2 = \frac{1}{n} \sum_{i=1}^n X_i^2 \]
+the second-order sample mean. As always, be sure to try the derivations yourself before expanding the details.</p>
+
+<h4 id="ber">The Bernoulli Distribution</h4>
+
+<p>Suppose that \(\bs{X} = (X_1, X_2, \ldots, X_n)\) is a random sample of size \(n\)  from the <a href="../bernoulli/Introduction.html">Bernoulli distribution</a> with success parameter \(p \in [0, 1]\). Recall that the Bernoulli probability density function is
+\[ g(x) = p^x (1 - p)^{1 - x}, \quad x \in \{0, 1\} \]
+Thus, \(\bs{X}\) is a sequence of independent indicator variables with \(\P(X_i = 1) = p\) for each \(i\). In the usual language of reliability, \(X_i\) is the outcome of trial \(i\), where 1 means success and 0 means failure. Let \(Y = \sum_{i=1}^n X_i\) denote the number of successes, so that the proportion of successes (the sample mean) is \(M = Y / n\). Recall that \(Y\) has the <a href="../bernoulli/Binomial.html">binomial distribution</a> with parameters \(n\) and \(p\).</p>
+
+<div class="unit" id="ber1">
+	<p class="math">The sample mean \(M\) is the maximum likelihood estimator of \(p\) on the parameter set \( (0, 1) \).</p>
+	<details>
+		<summary>Details:</summary>
+		<p>Note that \(\ln g(x) = x \ln p + (1 - x) \ln(1 - p)\) for \( x \in \{0, 1\} \) Hence the log-likelihood function at \( \bs{x} = (x_1, x_2, \ldots, x_n) \in \{0, 1\}^n \) is
+		\[ \ln L_{\bs{x}}(p) = \sum_{i=1}^n [x_i \ln p + (1 - x_i) \ln(1 - p)], \quad p \in (0, 1) \]
+		Differentiating with respect to \(p\) and simplifying gives
+		\[ \frac{d}{dp} \ln L_{\bs{x}}(p) = \frac{y}{p} - \frac{n - y}{1 - p} \]
+		where \(y = \sum_{i=1}^n x_i\). Thus, there is a single critical point at \(p = y / n = m\). The second deriviative is
+		\[ \frac{d^2}{d p^2} \ln L_{\bs{x}}(p) = -\frac{y}{p^2} - \frac{n - 1}{(1 - p)^2} \lt 0 \]
+		Hence the log-likelihood function is concave downward and so the maximum occurs at the unique critical point \(m\).</p>
+	</details>
+</div>
+
+<p>Recall that \(M\) is also the <a href="Moments.html">method of moments</a> estimator of \(p\). It's always nice when two different estimation procedures yield the same result. Next let's look at the same problem, but with a much restricted parameter set.</p>
+
+<div class="unit" id="ber2">
+	<p class="math">Suppose now that \(p\) takes values in \(\left\{\frac{1}{2}, 1\right\}\). Then the maximum likelihood estimator of \(p\) is the statistic
+	\[ U = \begin{cases} 1, &amp; Y = n\\ \frac{1}{2}, &amp; Y \lt n \end{cases} \]</p>
+	<ol class="sub">
+		<li>\(\E(U) = \begin{cases} 1, &amp; p = 1 \\ \frac{1}{2} + \left(\frac{1}{2}\right)^{n+1}, &amp; p = \frac{1}{2} \end{cases}\)</li>
+		<li>\(U\) is positively biased, but is asymptotically unbiased.</li>
+		<li>\(\mse(U) = \begin{cases} 0 &amp; p = 1 \\ \left(\frac{1}{2}\right)^{n+2}, &amp; p = \frac{1}{2} \end{cases}\)</li>
+		<li>\(U\) is consistent.</li>
+	</ol>
+	<details>
+		<summary>Details:</summary>
+		<p>Note that the likelihood function at \( \bs{x} = (x_1, x_2, \ldots, x_n) \in \{0, 1\}^n \) is \(L_{\bs{x}}(p) = p^y (1 - p)^{n-y}\) for \( p \in \left\{\frac{1}{2}, 1\right\} \) where as usual, \(y = \sum_{i=1}^n x_i\). Thus \(L_{\bs{x}}\left(\frac{1}{2}\right) = \left(\frac{1}{2}\right)^y\). On the other hand, \(L_{\bs{x}}(1) = 0\) if \(y \lt n\) while \(L_{\bs{x}}(1) = 1\) if \(y = n\). Thus, if \(y = n\) the maximum occurs when \(p = 1\) while if \(y \lt n\) the maximum occurs when \(p = \frac{1}{2}\).</p>
+		<ol class="sub">
+			<li>If \(p = 1\) then \(\P(U = 1) = \P(Y = n) = 1\), so trivially \(\E(U) = 1\). If \(p = \frac{1}{2}\),
+			\[ \E(U) = 1 \P(Y = n) + \frac{1}{2} \P(Y \lt n) = 1 \left(\frac{1}{2}\right)^n + \frac{1}{2}\left[1 	- \left(\frac{1}{2}\right)^n\right] = \frac{1}{2} + \left(\frac{1}{2}\right)^{n+1} \]
+			</li>
+			<li>Note that \( \E(U) \ge p \) and \(\E(U) \to p\) as \(n \to \infty\) both in the case that \(p = 1\) and \(p = \frac{1}{2}\).</li>
+			<li>If \( p = 1 \) then \( U = 1 \) with probability 1, so trivially \( \mse(U) = 0 \). If \( p = \frac{1}{2} \),
+			\[ \mse(U) = \left(1 - \frac{1}{2}\right)^2 \P(Y = n) + \left(\frac{1}{2} - \frac{1}{2}\right)^2 \P(Y \lt n) = \left(\frac{1}{2}\right)^2 \left(\frac{1}{2}\right)^n = \left(\frac{1}{2}\right)^{n+2}\]
+			</li>
+			<li>From (c), \( \mse(U) \to 0 \) as \( n \to \infty \).</li>
+		</ol>
+	</details>
+</div>
+
+<p>Note that the Bernoulli distribution in <a href="#ber2" class="ref"></a> would model a coin that is either fair or two-headed. Exercises <a href="#ber1" class="ref"></a> and <a href="#ber2" class="ref"></a> show that the maximum likelihood estimator of a parameter, like the solution to any maximization problem, depends critically on the domain.</p>
+
+<div class="unit" id="ber3">
+	<p class="math">\(U\) is uniformly better than \(M\) on the parameter set \(\left\{\frac{1}{2}, 1\right\}\).</p>
+	<details>
+		<summary>Details:</summary>
+		<p>Recall that \( \mse(M) = \var(M) = p (1 - p) / n \). If \( p = 1 \) then \( \mse(M) = \mse(U) = 0 \) so that both estimators give the correct answer.  If \( p = \frac{1}{2} \), \( \mse(U) = \left(\frac{1}{2}\right)^{n+2} \lt \frac{1}{4 n} = \mse(M) \).</p>
+	</details>
+</div>
+
+<div class="unit">
+	<p class="math">Suppose that \(\bs{X} = (X_1, X_2, \ldots, X_n)\) is a random sample of size \(n\) from the Bernoulli distribution with unknown success parameter \(p \in (0, 1)\). Find the maximum likelihood estimator of \(p (1 - p)\), which is the variance of the sampling distribution.</p>
+	<details>
+		<summary>Details:</summary>
+		<p>By the invariance principle, the estimator is \(M (1 - M)\) where \(M\) is the sample mean.</p>
+	</details>
+</div>
+
+<h4 id="geo">The Geometric Distribution</h4>
+
+<p>Recall that the <a href="../bernoulli/Geometric.html">geometric distribution</a> on \(\N_+\) with success parameter \(p \in (0, 1)\) has probability density function
+\[ g(x) = p (1 - p)^{x-1}, \quad x \in \N_+ \]
+The geometric distribution governs the trial number of the first success in a sequence of <a href="../bernoulli/index.html">Bernoulli Trials</a>.</p>
+
+<div class="unit" id="geo1">
+	<p class="math">Suppose that \(\bs{X} = (X_1, X_2, \ldots, X_n)\) is a random sample from the geometric distribution with unknown parameter \(p \in (0, 1)\). The maximum likelihood estimator of \(p\) is \(U = 1 / M\).</p>
+	<details>
+		<summary>Details:</summary>
+		<p>Note that \( \ln g(x) = \ln p + (x - 1) \ln(1 - p) \) for \( x \in \N_+ \). Hence the log-likelihood function corresponding to the data \( \bs{x} = (x_1, x_2, \ldots, x_n) \in \N_+^n \) is 
+		\[ \ln L_\bs{x}(p) = n \ln p + (y - n) \ln(1 - p), \quad p \in (0, 1) \]
+		where \( y = \sum_{i=1}^n x_i \). So
+		\[ \frac{d}{dp} \ln L(p) = \frac{n}{p} - \frac{y - n}{1 - p} \]
+		The derivative is 0 when \( p = n / y = 1 / m \). Finally, \( \frac{d^2}{dp^2} \ln L_\bs{x}(p) = -n / p^2 - (y - n) / (1 - p)^2 \lt 0 \) so the maximum occurs at the critical point.  </p>
+	</details>
+</div>
+
+<p>Recall that \(U\) is also the <a href="Moments.html#geo">method of moments estimator</a> of \(p\). It's always reassuring when two different estimation procedures produce the same estimator.</p>
+
+<h4 id="ngb">The Negative Binomial Distribution</h4>
+
+<p>More generally, the <a href="../bernoulli/NegativeBinomial.html">negative binomial distribution</a> on \( \N \) with shape parameter \( k \in (0, \infty) \) and success parameter \( p \in (0, 1) \) has probability density function
+\[ g(x) = \binom{x + k - 1}{k - 1} p^k (1 - p)^x, \quad x \in \N \]
+If \( k \) is a positive integer, then this distribution governs the number of failures before the \( k \)th success in a sequence of <a href="../bernoulli/index.html">Bernoulli trials</a> with success parameter \( p \). However, the distribution makes sense for general \( k \in (0, \infty) \).</p>
+
+<div class="unit" id="nbg1">
+	<p class="math">Suppose that \(\bs{X} = (X_1, X_2, \ldots, X_n)\) is a random sample of size \(n\) from the negative binomial distribution on \( \N \) with known shape parameter \( k \) and unknown success parameter \( p \in (0, 1) \). The maximum likelihood estimator of \( p \) is 
+	\[ U = \frac{k}{k + M} \]</p>
+	<details>
+		<summary>Details:</summary>
+		<p>Note that \( \ln g(x) = \ln \binom{x + k - 1}{k - 1} + k \ln p + x \ln(1 - p) \) for \( x \in \N \). Hence the log-likelihood function corresponding to \( \bs{x} = (x_1, x_2, \ldots, x_n) \in \N^n \) is 
+		\[ \ln L_\bs{x}(p) = n k \ln p + y \ln(1 - p) + C, \quad p \in (0, 1) \]
+		where \( y = \sum_{i=1}^n x_i \) and \( C = \sum_{i=1}^n \ln \binom{x_i + k - 1}{k - 1} \). Hence 
+		\[ \frac{d}{dp} \ln L_\bs{x}(p) = \frac{n k}{p} - \frac{y}{1 - p} \]
+		The derivative is 0 when \( p = n k / (n k + y) = k / (k + m) \) where as usual, \( m = y / n \). Finally, \( \frac{d^2}{dp^2} \ln L_\bs{x}(p) = - n k / p^2 - y / (1 - p)^2 \lt 0 \), so the maximum occurs at the critical point.</p>
+	</details>
+</div>
+
+<p>Once again, this is the same as the method of moments estimator of \( p \) with \( k \) known.</p>
+
+<h4 id="poi">The Poisson Distribution</h4>
+
+<p>Recall that the <a href="../poisson/Poisson.html">Poisson distribution</a> with parameter \(r \gt 0\) has probability density function
+\[ g(x) = e^{-r} \frac{r^x}{x!}, \quad x \in \N \]
+The Poisson distribution is named for <a href="JavaScript:openAncillary('../biographies/Poisson.html')" class="ancillary">Simeon Poisson</a> and is widely used to model the number of random <q>points</q> in a region of time or space, particularly in the context of the <a href="../poisson/index.html">Poisson process</a>. The parameter \( r\) is proportional to the size of the region.</p>
+
+<div class="unit" id="poi1">
+	<p class="math">Suppose that \(\bs{X} = (X_1, X_2, \ldots, X_n)\) is a random sample from the Poisson distribution with unknown parameter \(r \in (0, \infty)\). The maximum likelihood estimator of \(r\) is the sample mean \(M\).</p>
+	<details>
+		<summary>Details:</summary>
+		<p>Note that \( \ln g(x)  = -r + x \ln r - \ln(x!) \) for \( x \in \N \). Hence the log-likelihood function corresponding to \( \bs{x} = (x_1, x_2, \ldots, x_n) \in \N^n\) is 
+		\[ \ln L_\bs{x}(r) = -n r + y \ln r  - C, \quad r \in (0, \infty) \]
+		where \( y = \sum_{i=1}^n x_i \) and \( C = \sum_{i=1}^n \ln(x_i!) \). Hence \( \frac{d}{dr} \ln L_\bs{x}(r) = -n + y / r \). The derivative is 0 when \( r = y / n = m \). Finally, \( \frac{d^2}{dr^2} \ln L_\bs{x}(r) = -y / r^2 \lt 0 \), so the maximum occurs at the critical point.</p>
+	</details>
+</div>
+
+<p>Recall that for the  Poisson distribution, the parameter \(r\) is both the mean and the variance. Thus \(M\) is also the <a href="Moments.html">method of moments estimator</a> of \(r\).  We showed in the <a href="Estimators.html#poi">introductory section</a> that \(M\) has smaller mean square error than \(S^2\), although both are unbiased.</p>
+
+<div class="unit" id="poi3">
+	<p class="math">Suppose that \(\bs{X} = (X_1, X_2, \ldots, X_n)\) is a random sample from the Poisson distribution with parameter \(r \in (0, \infty)\), and let \(p = \P(X = 0) = e^{-r}\). Find the maximum likelihood estimator of \(p\) in two ways:</p>
+	<ol class="sub">
+		<li>Directly, by finding the likelihood function corresponding to the parameter \(p\).</li>
+		<li>By using the result of <a href="#poi1" class="ref"></a> and the invariance property.</li>
+	</ol>
+	<details>
+		<summary>Details:</summary>
+		<p>\(e^{-M}\) where \(M\) is the sample mean.</p>
+	</details>
+</div>
+
+<h4 id="nor">The Normal Distribution</h4>
+
+<p>Recall that the <a href="../special/Normal.html">normal distribution</a> with mean \(\mu\) and variance \(\sigma^2\) has probability density function
+\[ g(x) = \frac{1}{\sqrt{2 \, \pi} \sigma} \exp \left[-\frac{1}{2} \left(\frac{x - \mu}{\sigma}\right)^2\right], \quad x \in \R \]
+Normal distributions are often used to model physical quantities subject to small, random errors.</p>
+
+<div class="unit" id="nor1">
+	<p class="math">Suppose that \(\bs{X} = (X_1, X_2, \ldots, X_n)\) is a random sample from the normal distribution with unknown mean \(\mu \in \R\) and variance \(\sigma^2 \in (0, \infty)\). The maximum likelihood estimators of \(\mu\) and \(\sigma^2\) are \(M\) and \(T^2\), respectively.</p>
+	<details>
+		<summary>Details:</summary>
+		<p>Note that
+		\[ \ln g(x) = -\frac{1}{2} \ln(2 \pi) - \frac{1}{2} \ln(\sigma^2) - \frac{1}{2 \sigma^2} (x - \mu)^2, \quad x \in \R \]
+		Hence the log-likelihood function corresponding to the data \( \bs{x} = (x_1, x_2, \ldots, x_n) \in \R^n \) is
+		\[ \ln L_\bs{x}(\mu, \sigma^2) = -\frac{n}{2} \ln(2 \pi) - \frac{n}{2} \ln(\sigma^2) - \frac{1}{2 \sigma^2} \sum_{i=1}^n (x_i - \mu)^2, \quad (\mu, \sigma^2) \in \R \times (0, \infty) \]
+		Taking partial derivatives gives
+		\begin{align*}
+			\frac{\partial}{\partial \mu} \ln L_\bs{x}(\mu, \sigma^2) &amp;= \frac{1}{\sigma^2} \sum_{i=1}^n (x_i - \mu) = \frac{1}{\sigma^2}\left(\sum_{i=1}^n x_i - n \mu\right) \\
+			\frac{\partial}{\partial \sigma^2} \ln L_\bs{x}(\mu, \sigma^2) &amp;= -\frac{n}{2 \sigma^2} + \frac{1}{2 \sigma^4} \sum_{i=1}^n (x_i - \mu)^2
+		\end{align*}
+		The partial derivatives are 0 when \( \mu = \frac{1}{n} \sum_{i=1}^n x_i\) and \( \sigma^2 = \frac{1}{n} \sum_{i=1}^n (x_i - \mu)^2 \). Hence the unique critical point is \( (m, t^2) \). Finally, with a bit more calculus, the second partial derivatives evaluated at the critical point are
+		\[ \frac{\partial^2}{\partial \mu^2} \ln L_\bs{x}(m, t^2) = -n / t^2, \; \frac{\partial^2}{\partial \mu \partial \sigma^2} \ln L_\bs{x}(m, t^2) = 0, \; \frac{\partial^2}{\partial (\sigma^2)^2} \ln L_\bs{x}(m, t^2) = -n / t^4\]
+		Hence the second derivative matrix at the critical point is negative definite and so the maximum occurs at the critical point.</p>
+	</details>
+</div>
+
+<p>Of course, \(M\) and \(T^2\) are also the method of moments estimators of \(\mu\) and \(\sigma^2\), respectively.</p>
+
+<div class="unit" id="nor2">
+	<p class="app">Run the <a href="JavaScript:openAncillary('../apps/NormalEstimate.html')" class="ancillary">Normal estimation experiment</a> 1000 times for several values of the sample size \(n\), the mean \(\mu\), and the variance \(\sigma^2\). For the parameter \(\sigma^2\),  compare the maximum likelihood estimator \(T^2\) with the standard sample variance \(S^2\). Which estimator seems to work better in terms of mean square error?</p>
+</div>
+
+<div class="unit" id="nor3">
+	<p class="math">Suppose again that \(\bs{X} = (X_1, X_2, \ldots, X_n)\) is a random sample from the normal distribution with unknown mean \(\mu \in \R\) and unknown variance \(\sigma^2 \in (0, \infty)\). Find the maximum likelihood estimator of \(\mu^2 + \sigma^2\), which is the second moment about 0 for the sampling distribution.</p>
+	<details>
+		<summary>Details:</summary>
+		<p>By the invariance principle, the estimator is \(M^2 + T^2\) where \(M\) is the sample mean and \(T^2\) is the (biased version of the) sample variance.</p>
+	</details>
+</div>
+
+<h4 id="gam">The Gamma Distribution</h4>
+
+<p>Recall that the <a href="../special/Gamma.html">gamma distribution</a> with shape parameter \(k \gt 0\) and scale parameter \(b \gt 0\) has probability density function
+\[ g(x) = \frac{1}{\Gamma(k) \, b^k} x^{k-1} e^{-x / b}, \quad 0 \lt x \lt \infty \]
+Gamma distributions are often used to model random times, particularly in the context of the <a href="../poisson/index.html">Poisson process</a>, and certain other types of positive random variables.</p>
+
+<div class="unit" id="gam1">
+	<p class="math">Suppose that \(\bs{X} = (X_1, X_2, \ldots, X_n)\) is a random sample from the gamma distribution with known shape parameter \(k\) and unknown scale parameter \(b \in (0, \infty)\). The maximum likelihood estimator of \(b\) is \(V_k = \frac{1}{k} M\).</p>
+	<details>
+		<summary>Details:</summary>
+		<p>Note that for \( x \in (0, \infty) \),
+		\[ \ln g(x) = -\ln \Gamma(k) - k \ln b + (k - 1) \ln x - \frac{x}{b} \]
+		and hence the log-likelihood function corresponding to the data \( \bs{x} = (x_1, x_2, \ldots, x_n) \in (0, \infty)^n \) is 
+		\[ \ln L_\bs{x}(b) = - n k \ln b - \frac{y}{b} + C, \quad b \in (0, \infty)\]
+		where \( y = \sum_{i=1}^n x_i \) and \( C = -n \ln \Gamma(k) + (k - 1) \sum_{i=1}^n \ln x_i \). It follows that 
+		\[ \frac{d}{d b} \ln L_\bs{x}(b)  = -\frac{n k}{b} + \frac{y}{b^2} \]
+		The derivative is 0 when \( b = y / n k = 1 / k m \). Finally, \( \frac{d^2}{db^2} \ln L_\bs{x}(b) = n k / b^2 - 2 y / b^3 \). At the critical point \( b = y / n k \), the second derivative is \(-(n k)^3 / y^2 \lt 0\) so the maximum occurs at the critical point.</p>
+	</details>
+</div>
+
+<p>Recall that \(V_k\) is also the method of moments estimator of \(b\) when \(k\) is known. But when \(k\) is unknown, the method of moments estimator of \(b\) is \(V = \frac{T^2}{M}\).</p>
+
+<div class="unit" id="gam2">
+	<p class="app">Run the <a href="JavaScript:openAncillary('../apps/GammaEstimate.html')" class="ancillary">gamma estimation experiment</a> 1000 times for several values of the sample size \(n\), shape parameter \(k\), and scale parameter \(b\). In each case, compare the <a href="Moments.html">method of moments estimator</a> \(V\) of \(b\) when \(k\) is unknown with the method of moments and maximum likelihood estimator \(V_k\) of \(b\) when \(k\) is known. Which estimator seems to work better in terms of mean square error?</p>
+</div>
+
+<h4 id="bet">The Beta Distribution</h4>
+
+<p>Recall that the <a href="../special/Beta.html">beta distribution</a> with left parameter \(a \in (0, \infty)\) and right parameter \(b = 1\) has probability density function
+\[ g(x) = a x^{a-1}, \quad x \in (0, 1) \]
+Beta distributions are often used to model random proportions and other random variables that take values in bounded intervals.</p>
+
+<div class="unit" id="bet1">
+	<p class="math">Suppose that \(\bs{X} = (X_1, X_2, \ldots, X_n)\) is a random sample from the beta distribution with unknown left parameter \(a \in (0, \infty)\) and right parameter \(b = 1\). The maximum likelihood estimator of \(a\) is
+	\[ W = - \frac{n}{\sum_{i=1}^n \ln X_i} = -\frac{n}{\ln(X_1 X_2 \cdots X_n)} \]</p>
+	<details>
+		<summary>Details:</summary>
+		<p>Note that \( \ln g(x) = \ln a + (a - 1) \ln x \) for \( x \in (0, \infty) \) Hence the log-likelihood function corresponding to the data \( \bs{x} = (x_1, x_2, \ldots, x_n) \in (0, \infty)^n \) is 
+		\[ \ln L_\bs{x}(a) = n \ln a + (a - 1) \sum_{i=1}^n \ln x_i, \quad a \in (0, \infty) \] 
+		Therefore \( \frac{d}{da} \ln L_\bs{x}(a)  = n / a + \sum_{i=1}^n \ln x_i \). The derivative is 0 when \( a = -n \big/ \sum_{i=1}^n \ln x_i \). Finally, \( \frac{d^2}{da^2} \ln L_\bs{x}(a) = -n / a^2 \lt 0 \), so the maximum occurs at the critical point.</p>
+	</details>
+</div>
+
+<p>Recall that when \(b = 1\), the <a href="Moments.html#bet">method of moments estimator</a> of \(a\) is \(U_1 = M \big/ (1 - M)\), but when \(b \in (0, \infty)\) is also unknown, the method of moments estimator of \(a\) is \(U = M (M - M_2) \big/ (M_2 - M^2)\). When \(b = 1\), which estimator is better, the method of moments estimator or the maximum likelihood estimator?</p>
+
+<div class="unit" id="bet2">
+	<p class="app">In the <a href="JavaScript:openAncillary('../apps/BetaEstimate.html')" class="ancillary">beta estimation experiment</a>, set \(b = 1\). Run the experiment 1000 times for several values of the sample size \(n\) and the parameter \(a\). In each case, compare the estimators \(U\), \(U_1\) and \(W\). Which estimator seems to work better in terms of mean square error?</p>
+</div>
+
+<p>Finally, note that \( 1 / W \) is the sample mean for a random sample of size \( n \) from the distribution of \( -\ln X \). This distribution is the exponential distribution with rate \( a \).</p>
+
+<h4 id="par">The Pareto Distribution</h4>
+
+<p>Recall that the <a href="../special/Pareto.html">Pareto distribution</a> with shape parameter \(a \gt 0\) and scale parameter \(b \gt 0\) has probability density function
+\[ g(x) = \frac{a b^a}{x^{a+1}}, \quad b \le x \lt \infty \]
+It is named for <a href="JavaScript:openAncillary('../biographies/Pareto.html')" class="ancillary">Vilfredo Pareto</a>, and is a heavy-tailed distribution often used to model income and certain other types of random variables.</p>
+
+<div class="unit" id="par1">
+	<p class="math">Suppose that \(\bs{X} = (X_1, X_2, \ldots, X_n)\) is a random sample from the Pareto distribution with unknown shape parameter \(a \in (0, \infty)\) and scale parameter \(b \in (0, \infty)\). The maximum likelihood estimator of \( b \) is \( X_{(1)} = \min\{X_1, X_2, \ldots, X_n\} \), the first <a href="../sample/OrderStatistics.html">order statistic</a>. The maximum likelihood estimator of \( a \) is
+	\[ U = \frac{n}{\sum_{i=1}^n \ln X_i - n \ln X_{(1)}} = \frac{n}{\sum_{i=1}^n \left(\ln X_i - \ln X_{(1)}\right)}\]</p>
+	<details>
+		<summary>Details:</summary>
+		<p>Note that \( \ln g(x) = \ln a + a \ln b - (a + 1) \ln x \) for \( x \in [b, \infty) \). Hence the log-likelihood function corresponding to the data \( \bs{x} = (x_1, x_2, \ldots, x_n) \) is 
+		\[ \ln L_\bs{x}(a, b) = n \ln a + n a \ln b - (a + 1) \sum_{i=1}^n \ln x_i; \quad 0 \lt a \lt \infty, \, 0 \lt b \le x_i \text{ for each } i \in \{1, 2, \ldots, n\} \]
+		Equivalently, the domain is \( 0 \lt a \lt \infty \) and \( 0 \lt b \le x_{(1)} \). Note that \( \ln L_{\bs{x}}(a, b) \) is increasing in \( b \) for each \( a \), and hence is maximized when \( b = x_{(1)} \) for each \( a \). Next,
+		\[ \frac{d}{d a} \ln L_{\bs{x}}\left(a, x_{(1)}\right) = \frac{n}{a} + n \ln x_{(1)} - \sum_{i=1}^n \ln x_i \]
+		The derivative is 0 when \( a = n \big/ \left(\sum_{i=1}^n \ln x_i - n \ln x_{(1)}\right) \). Finally, \( \frac{d^2}{da^2} \ln L_\bs{x}\left(a, x_{(1)}\right) = -n / a^2 \lt 0 \), so the maximum occurs at the critical point.</p>
+	</details>
+</div>
+
+<p>Recall that if \(a \gt 2\), the <a href="Moments.html#par">method of moments estimators</a> of \(a\) and \( b \) are
+\[ 1 + \sqrt{\frac{M_2}{M_2 - M^2}}, \; \frac{M_2}{M} \left(1 - \sqrt{\frac{M_2 - M^2}{M_2}}\right)\]</p>
+
+<div class="unit" id="par2">
+	<p class="app">Open the the <a href="JavaScript:openAncillary('../apps/ParetoEstimate.html')" class="ancillary"> Pareto estimation experiment</a>. Run the experiment 1000 times for several values of the sample size \(n\) and the parameters \(a\) and \( b \). Compare the method of moments and maximum likelihood estimators. Which estimators seem to work better in terms of bias and mean square error?</p>
+</div>
+
+<p>Often the scale parameter in the Pareto distribution is known.</p>
+
+<div class="unit" id="par3">
+	<p class="math">Suppose that \(\bs{X} = (X_1, X_2, \ldots, X_n)\) is a random sample from the Pareto distribution with unknown shape parameter \(a \in (0, \infty)\) and known scale parameter \(b \in (0, \infty)\). The maximum likelihood estimator of \( a \) is
+	\[ U = \frac{n}{\sum_{i=1}^n \ln X_i - n \ln b} = \frac{n}{\sum_{i=1}^n \left(\ln X_i - \ln b \right)}\]</p>
+	<details>
+		<summary>Details:</summary>
+		<p>Modifying the previous proof, the log-likelihood function corresponding to the data \( \bs{x} = (x_1, x_2, \ldots, x_n) \) is 
+		\[ \ln L_\bs{x}(a) = n \ln a + n a \ln b - (a + 1) \sum_{i=1}^n \ln x_i, \quad 0 \lt a \lt \infty \]
+		The derivative is
+		\[ \frac{d}{d a} \ln L_{\bs{x}}(a) = \frac{n}{a} + n \ln b - \sum_{i=1}^n \ln x_i \]
+		The derivative is 0 when \( a = n \big/ \left(\sum_{i=1}^n \ln x_i - n \ln b\right) \). Finally, \( \frac{d^2}{da^2} \ln L_\bs{x}(a) = -n / a^2 \lt 0 \), so the maximum occurs at the critical point.</p>
+	</details>
+</div>
+
+<h4 id="uni">Uniform Distributions</h4>
+
+<p>In this section we will study estimation problems related to the uniform distribution that are a good source of insight and counterexamples. In a sense, our first estimation problem is the continuous analogue of an estimation problem studied in the section on <a href="../urn/OrderStatistics.html">order statistics</a> in the chapter on <a href="../urn/index.html">finite sampling models</a>. Suppose that \(\bs{X} = (X_1, X_2, \ldots, X_n)\) is a random sample from the <a href="../dist/Continuous.html#uni">uniform distribution</a> on the interval \([0, h]\), where \(h \in (0, \infty)\) is an unknown parameter. Thus, the sampling distribution has probability density function
+\[ g(x) = \frac{1}{h}, \quad x \in [0, h] \]
+First let's review results from the last section.</p>
+
+<div class="unit" id="uni1">
+	<p class="math">The method of moments estimator of \(h\) is \(U = 2 M\). The estimator \(U\) satisfies the following properties:</p>
+	<ol class="sub">
+		<li>\(U\) is unbiased.</li>
+		<li>\(\var(U) = \frac{h^2}{3 n}\) so \(U\) is consistent.</li>
+	</ol>
+</div>
+
+<p>Now let's find the maximum likelihood estimator</p>
+
+<div class="unit" id="uni2">
+	<p class="math">The maximum likelihood estimator of \(h\) is \(X_{(n)} = \max\{X_1, X_2, \ldots, X_n\}\), the \(n\)th <a href="../sample/OrderStatistics.html">order statistic</a>. The estimator \(X_{(n)}\) satisfies the following properties:</p>
+	<ol class="sub">
+		<li>\(\E\left(X_{(n)}\right) = \frac{n}{n + 1} h\)</li>
+		<li>\(\bias\left(X_{(n)}\right) = -\frac{h}{n+1}\) so that \(X_{(n)}\) is negatively biased but asymptotically unbiased.</li>
+		<li>\(\var\left(X_{(n)}\right) = \frac{n}{(n+2)(n+1)^2} h^2\)</li>
+		<li>\(\mse\left(X_{(n)}\right) = \frac{2}{(n+1)(n+2)}h^2\) so that \(X_{(n)}\) is consistent.</li>
+	</ol>
+	<details>
+		<summary>Details:</summary>
+		<p>The likelihood function corresponding to the data \( \bs{x} = (x_1, x_2, \ldots, x_n) \) is \( L_\bs{x}(h) = 1 / h^n \) for \( h \ge x_i \) for each \( i \in \{1, 2, \ldots n\} \).  The domain is equivalent to \( h \ge x_{(n)} \). The function \( h \mapsto 1 / h^n \) is decreasing, and so the maximum occurs at the smallest value, namely \( x_{(n)} \). Parts (a) and (c) are restatements of results from the section on order statistics. Parts (b) and (d) follow from (a) and (c).</p>
+	</details>
+</div>
+
+<p>Since the expected value of \(X_{(n)}\) is a known multiple of the parameter \(h\), we can easily construct an unbiased estimator. </p>
+
+<div class="unit" id="uni3">
+	<p class="math">Let \(V = \frac{n+1}{n} X_{(n)}\). The estimator \(V\) satisfies the following properties:</p>
+	<ol class="sub">
+		<li>\(V\) is unbiased.</li>
+		<li>\(\var(V) = \frac{h^2}{n(n + 2)}\) so that \(V\) is consistent.</li>
+		<li>The asymptotic relative efficiency of \(V\) to \(U\) is infinite.</li>
+	</ol>
+	<details>
+		<summary>Details:</summary>
+		<p>Parts (a) and (b) follow from <a href="#uni2" class="ref"></a> and basic properties of the expected value and variance. For part (c), 
+		\[ \frac{\var(U)}{\var(V)} = \frac{h^2 / 3 n}{h^2 / n (n + 2)} = \frac{n + 2}{3} \to \infty \text{ as } n \to \infty \]</p>
+	</details>
+</div>
+
+<p>The last part shows that the unbiased version \(V\) of the maximum likelihood estimator is a much better estimator than the method of moments estimator \(U\). In fact, an estimator such as \(V\), whose mean square error decreases on the order of \(\frac{1}{n^2}\), is called <dfn>super efficient</dfn>. Now, having found a really good estimator, let's see if we can find a really bad one. A natural candidate is an estimator based on \(X_{(1)} = \min\{X_1, X_2, \ldots, X_n\}\), the <em>first</em> order statistic. The next result will make the computations very easy.</p>
+
+<div class="unit" id="uni4">
+	<p class="math">The sample \(\bs{X} = (X_1, X_2, \ldots, X_n)\) satisfies the following properties:</p>
+	<ol class="sub">
+		<li>\(h - X_i\) is uniformly distributed on \([0, h]\) for each \(i\).</li>
+		<li>\((h - X_1, h - X_2, \ldots, h - X_n)\) is also a random sample from the uniform distribution on \([0, h]\).</li>
+		<li>\(X_{(1)}\) has the same distribution as \(h - X_{(n)}\).</li>
+	</ol>
+	<details>
+		<summary>Details:</summary>
+		<ol class="sub">
+			<li>This is a simple consequence of the fact that uniform distributions are preserved under linear transformations on the random variable.</li>
+			<li>This follows from (a) and that the fact that if \( \bs{X} \) is a sequence of independent variables, then so is \( (h - X_1, h - X_2, \ldots, h - X_n) \).</li>
+			<li>From part (b), \( X_{(1)} = \min\{X_1, X_2, \ldots, X_n\} \) has the same distribution as \( \min\{h - X_1, h - X_2, \ldots, h - X_n\} = h - \max\{X_1, X_2, \ldots, X_n\} = h - X_{(n)} \).</li>
+		</ol>
+	</details>
+</div>
+
+<p>Now we can construct our really bad estimator.</p>
+
+<div class="unit" id="uni5">
+	<p class="math">Let \(W = (n + 1)X_{(1)}\). Then
+	<ol class="sub">
+		<li>\( W \) is an unbiased estimator of \( h \).</li>
+		<li>\(\var(W) = \frac{n}{n+2} h^2\), so \(W\) is not even consistent.</li>
+	</ol>
+	<details>
+		<summary>Details:</summary>
+		<p>These results follow from <a href="#uni4" class="ref"></a>:</p>
+		<ol class="sub">
+			<li>\( \E(X_{(1)}) = h - \E(X_{(n)}) = h - \frac{n}{n + 1} h = \frac{1}{n + 1} h  \) and hence \( \E(W) = h \).</li>
+			<li>\( \var(W) = (n + 1)^2 \var(X_{(1)}) = (n + 1)^2 \var(h - X_{(n)}) = (n + 1)^2 \frac{n}{(n + 1)^2 (n + 2)} h^2 = \frac{n}{n + 2} h^2\).</li>
+		</ol>
+	</details>
+</div>
+
+<div class="unit" id="uni6">
+	<p class="app">Run the <a href="JavaScript:openAncillary('../apps/UniformEstimate.html')" class="ancillary">uniform estimation experiment</a> 1000 times for several values of the sample size \(n\) and the parameter \(a\). In each case, compare the empirical bias and mean square error of the estimators with their theoretical values. Rank the estimators in terms of empirical mean square error.</p>
+</div>
+
+<p>Our next series of exercises will show that the maximum likelihood estimator is not necessarily unique. Suppose that \(\bs{X} = (X_1, X_2, \ldots, X_n)\) is a random sample from the <a href="../dist/Continuous.html#uni">uniform distribution</a> on the interval \([a, a + 1]\), where \(a \in \R\) is an unknown parameter. Thus, the sampling distribution has probability density function
+\[ g(x) = 1, \quad a \le x \le a + 1 \]
+As usual, let's first review the method of moments estimator.</p>
+
+<div class="unit" id="uni7">
+	<p class="math">The method of moments estimator of \(a\) is \(U = M - \frac{1}{2}\). The estimator \(U\) satisfies the following properties:</p>
+	<ol class="sub">
+		<li>\(U\) is unbiased.</li>
+		<li>\(\var(U) = \frac{1}{12 n}\) so \(U\) is consistent.</li>
+	</ol>
+</div>
+
+<p>However, as promised, there is not a unique maximum likelihood estimator.</p>
+
+<div class="unit" id="uni8">
+	<p class="math">Any statistic \(V \in \left[X_{(n)} - 1, X_{(1)}\right]\) is a maximum likelihood estimator of \(a\).</p>
+	<details>
+		<summary>Details:</summary>
+		<p>The likelihood function corresponding to the data \( \bs{x} = (x_1, x_2, \ldots, x_n\} \) is \( L_\bs{x}(a) = 1 \) for \( a \le x_i \le a + 1 \) and \( i \in \{1, 2, \ldots, n\} \). The domain is equivalent to \( a \le x_{(1)} \) and \( a \ge x_{(n)} - 1 \). Since the likelihood function is constant on this domain, the result follows.</p>
+	</details>
+</div>
+
+<p>For completeness, let's consider the full estimation problem. Suppose that \( \bs{X} = (X_1, X_2, \ldots, X_n) \) is a random sample of size \( n \) from the uniform distribution on \( [a, a + h] \) where \( a \in \R \) and \( h \in (0, \infty) \) are both unknown. Here's the result from the last section:</p>
+
+<div class="unit" id="uni9">
+	<p class="math">Let \( U \) and \( V \) denote the method of moments estimators of \( a \) and \( h \), respectively. Then
+	\[ U = 2 M - \sqrt{3} T, \quad V = 2 \sqrt{3} T \]
+	where \( M = \frac{1}{n} \sum_{i=1}^n X_i \) is the sample mean, and \( T = \frac{1}{n} \sum_{i=1}^n (X_i - M)^2 \) is the biased version of the sample variance.</p>
+</div>
+
+<p>It should come as no surprise at this point that the maximum likelihood estimators are functions of the largest and smallest order statistics.</p>
+
+<div class="unit">
+	<p class="math">The maximum likelihood estimators or \( a \) and \( h \) are \( U = X_{(1)} \) and \( V = X_{(n)} - X_{(1)} \), respectively.</p>
+	<ol class="sub">
+		<li>\( E(U) = a + \frac{h}{n + 1} \) so \( U \) is positively biased and asymptotically unbiased.</li>
+		<li>\( E(V) = h \frac{n - 1}{n + 1} \) so \( V \) is negatively biased and asymptotically unbiased.</li>
+		<li>\( \var(U) = h^2 \frac{n}{(n + 1)^2 (n + 2)} \) so \( U \) is consistent.</li>
+		<li>\( \var(V) = h^2 \frac{2(n - 1)}{(n + 1)^2(n + 2)} \) so \( V \) is consistent.</li>
+	</ol>
+	<details>
+		<summary>Details:</summary>
+		<p>The likelihood function corresponding to the data \( \bs{x} = (x_1, x_2, \ldots, x_n) \) is \( L_\bs{x}(a, h) = \frac{1}{h^n} \) for \( a \le x_i \le a + h \) and \( i \in \{1, 2, \ldots, n\} \). The domain is equivalent to \( a \le x_{(1)} \) and \( a + h \ge x_{(n)} \). Since the likelihood function depends only on \( h \) in this domain and is decreasing, the maximum occurs when \( a = x_{(1)} \) and \( h = x_{(n)} - x_{(1)} \). Parts (a)&ndash;(d) follow from standard results for the order statistics from the uniform distribution.</p>
+	</details>
+</div>
+
+<h4 id="hyp">The Hypergeometric Model</h4>
+
+<p>In all of our previous examples, the sequence of observed random variables \( \bs{X} = (X_1, X_2, \ldots, X_n) \) is a random sample from a distribution. However, maximum likelihood is a very general method that does not require the observation variables to be independent or identically distributed. In the <dfn>hypergeometric model</dfn>, we have a population of \( N \) objects with \( r \) of the objects <dfn>type 1</dfn> and the remaining \( N - r \) objects <dfn>type 0</dfn>. The  <dfn>population size</dfn> \( N \), is a positive integer. The <dfn>type 1 size</dfn> \( r \), is a nonnegative integer with \( r \le N \). These are the basic parameters, and typically one or both is unknown. Here are some typical examples:</p>
+
+<ol>
+	<li>The objects are devices, classified as <dfn>good</dfn> or <dfn>defective</dfn>.</li>
+	<li>The objects are persons, classified as <dfn>female</dfn> or <dfn>male</dfn>.</li>
+	<li>The objects are voters, classified as <dfn>for</dfn> or <dfn>against</dfn> a particular candidate.</li>
+	<li>The objects are wildlife or a particular type, either <dfn>tagged</dfn> or <dfn>untagged</dfn>.</li>
+</ol>
+
+<p>We sample \( n \) objects from the population at random, without replacement. Let \( X_i \) be the type of the \( i \)th object selected, so that our sequence of observed variables is \( \bs{X} = (X_1, X_2, \ldots, X_n) \). The variables are identically distributed indicator variables, with \( P(X_i = 1) = r / N \) for each \( i \in \{1, 2, \ldots, n\} \), but are dependent since the sampling is without replacement. The number of type 1 objects in the sample is \( Y = \sum_{i=1}^n X_i \). This statistic has the  <a href="../urn/Hypergeometric.html">hypergeometric distribution</a> with parameter \( N \), \( r \), and \( n \), and has probability density function given by
+\[ P(Y = y) = \frac{\binom{r}{y} \binom{N - r}{n - y}}{\binom{N}{n}} = \binom{n}{y} \frac{r^{(y)} (N - r)^{(n - y)}}{N^{(n)}}, \quad y \in \{\max\{0, N - n + r\}, \ldots, \min\{n, r\}\} \]
+Recall the <dfn>falling power</dfn> notation: \( x^{(k)} = x (x - 1) \cdots (x - k + 1) \) for \( x \in \R \) and \( k \in \N \). </p>
+
+<div class="unit" id="hyp1">
+	<p class="math">As above, let \( \bs{X} = (X_1, X_2, \ldots, X_n) \) be the observed variables in the hypergeometric model with parameters \( N \) and \( r \). Then</p>
+	<ol class="sub">
+		<li>The maximum likelihood estimator of \( r \) with \( N \) known is \( U = \lfloor N M \rfloor = \lfloor N Y / n \rfloor \).</li>
+		<li>The maximum likelihood estimator of \( N \) with \( r \) known is \( V = \lfloor r / M \rfloor = \lfloor r n / Y \rfloor \) if \( Y \gt 0 \).</li>
+	</ol>
+	<details>
+		<summary>Details:</summary>
+		<p>By a  simple application of the multiplication rule, the PDF \( f \) of \( \bs{X} \) is
+		\[ f(\bs{x}) = \frac{r^{(y)} (N - r)^{(n - y)}}{N^{(n)}}, \quad \bs{x} = (x_1, x_2, \ldots, x_n) \in \{0, 1\}^n \]
+		where \( y = \sum_{i=1}^n x_i \). </p>
+		<ol class="sub">
+			<li>With \( N \) known, the likelihood function corresponding to the data \(\bs{x} = (x_1, x_2, \ldots, x_n) \in \{0, 1\}^n\) is
+			\[ L_{\bs{x}}(r) = \frac{r^{(y)} (N - r)^{(n - y)}}{N^{(n)}}, \quad r \in \{y, \ldots, \min\{n, y + N - n\}\}  \]
+			After some algebra, \( L_{\bs{x}}(r - 1) \lt L_{\bs{x}}(r) \) if and only if \((r - y)(N - r + 1) \lt r (N - r - n + y + 1)\) if and only if \( r \lt N y / n \). So the maximum of \( L_{\bs{x}}(r) \) occurs when \( r = \lfloor N y / n \rfloor \).
+			</li>
+			<li>Similarly, with \( r \) known, the likelihood function corresponding to the data \(\bs{x} = (x_1, x_2, \ldots, x_n) \in \{0, 1\}^n\) is
+			\[ L_{\bs{x}}(N) = \frac{r^{(y)} (N - r)^{(n - y)}}{N^{(n)}}, \quad N \in \{\max\{r, n\}, \ldots\} \]
+			After some algebra, \( L_{\bs{x}}(N - 1) \lt L_{\bs{x}}(N) \) if and only if \((N - r - n + y) / (N - n) \lt (N - r) / N\) if and only if \( N \lt r n / y \) (assuming \( y \gt 0 \)). So the maximum of \( L_{\bs{x}}(r) \) occurs when \( N = \lfloor r n / y \rfloor \).</li>
+		</ol>
+	</details>
+</div>
+
+<p>In the reliability example, we might typically know \( N \) and would be interested in estimating \( r \). In the wildlife example, we would typically know \( r \) and would be interested in estimating \( N \). This example is known as the <dfn>capture-recapture</dfn> model.</p>
+
+<p>Clearly there is a close relationship between the hypergeometric model and the <a href="#ber">Bernoulli trials model</a> in the subsection above. In fact, if the sampling is <em>with</em> replacement, the Bernoulli trials model with \( p = r / N \) would apply rather than the hypergeometric model. In addition, if the population size \( N \) is large compared to the sample size \( n \), the hypergeometric model is well approximated by the Bernoulli trials model, again with \( p = r / N \).</p>
+
+<footer>
+	<ol class="map">
+		<li class="parent"><a href="../index.html">Random</a></li>
+		<li class="parent"><a href="index.html">6. Point Estimation</a></li>
+		<li class="child"><a href="Estimators.html" title="Estimators">1</a></li>
+		<li class="child"><a href="Moments.html" title="The Method of Moments">2</a></li>
+		<li class="current">3</li>
+		<li class="child"><a href="Bayes.html" title="Bayes' Estimators">4</a></li>
+		<li class="child"><a href="Unbiased.html" title="Best Unbiased Estimators">5</a></li>
+		<li class="child"><a href="Sufficient.html" title="Complete, Sufficient, and Ancillary Statistics">6</a></li>
+		<li class="details"><button type="button" title="Expand Details" onclick="expandDetails(true);"><img src="../icons/Plus.svg" alt="Expand"></button></li>
+		<li class="details"><button type="button" title="Contract Details" onclick="expandDetails(false);"><img src="../icons/Minus.svg" alt="Contract"></button></li>
+	</ol>
+	<ul class="map">
+		<li class="sister"><a href="JavaScript:openAncillary('../apps/index.html')" class="ancillary">Apps</a></li>
+		<li class="sister"><a href="JavaScript:openAncillary('../data/index.html')" class="ancillary">Data Sets</a></li>
+		<li class="child"><a href="JavaScript:openAncillary('../biographies/index.html')" class="ancillary"> Biographies</a></li>
+	</ul>
+</footer>
+
+<script>getReferences();</script>
+
+</body>
+</html>

@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<title>Tests in the Normal Model</title>
+	<meta name="author" content="Kyle Siegrist">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="keywords" content="probability, statistics, hypothesis test, normal distribution, mean, variance, student t distribution, chi-square distribution, power, robust procedure">
+	<link rel="icon" href="../icons/Icon.svg" type="image/svg">
+	<link rel="stylesheet" href="../Screen.css" type="text/css" media="screen">
+	<script src="../Basic.js"></script>
+	<script src="../../MathJax/tex-svg.js" id="MathJax-script" async></script>
+</head>
+
+<body>
+
+<div class="latex">
+	\(\newcommand{\R}{\mathbb{R}}\) 
+	\(\newcommand{\N}{\mathbb{N}}\)
+	\(\newcommand{\Z}{\mathbb{Z}}\)
+	\(\newcommand{\P}{\mathbb{P}}\)
+	\(\newcommand{\E}{\mathbb{E}}\)
+	\(\newcommand{\var}{\text{var}}\)
+	\(\newcommand{\sd}{\text{sd}}\)
+	\(\newcommand{\bs}{\boldsymbol}\)
+</div>
+
+<header>
+	<ol class="map">
+		<li class="parent"><a href="../index.html">Random</a></li>
+		<li class="parent"><a href="index.html">8. Hypothesis Testing</a></li>
+		<li class="child"><a href="Introduction.html" title="Introduction">1</a></li>
+		<li class="current">2</li>
+		<li class="child"><a href="Bernoulli.html" title="Tests in the Bernoulli Model">3</a></li>
+		<li class="child"><a href="BivariateNormal.html" title="Tests in the Two-Sample Normal Model">4</a></li>
+		<li class="child"><a href="Likelihood.html" title="Likelihood Ratio Tests">5</a></li>
+		<li class="child"><a href="ChiSquare.html" title="Chi-Square Tests">6</a></li>
+		<li class="details"><button type="button" title="Expand Details" onclick="expandDetails(true);"><img src="../icons/Plus.svg" alt="Expand"></button></li>
+		<li class="details"><button type="button" title="Contract Details" onclick="expandDetails(false);"><img src="../icons/Minus.svg" alt="Contract"></button></li>
+	</ol>
+	<h2>2. Tests in the Normal Model</h2>
+</header>
+
+<h3 id="the">Basic Theory</h3>
+
+<h4>The Normal Model</h4>
+
+<p>The <a href="../special/Normal.html">normal distribution</a> is perhaps the most important distribution in the study of mathematical statistics, in part because of the <a href="../sample/CLT.html">central limit theorem</a>. As a consequence of this theorem, a measured quantity that is subject to numerous small, random errors will have, at least approximately, a normal distribution. Such variables are ubiquitous in statistical experiments, in subjects varying from the physical and biological sciences to the social sciences.</p>
+
+<p>So in this section, we assume that \(\bs{X} = (X_1, X_2, \ldots, X_n)\) is a <a href="../sample/Introduction.html">random sample</a> from the <a href="../special/Normal.html">normal distribution</a> with <a href="../expect/Properties.html">mean</a> \(\mu\) and <a href="../expect/Variance.html">standard deviation</a> \(\sigma\). Our goal in this section is to to construct <a href="Introduction.html">hypothesis tests</a> for \(\mu\) and \(\sigma\); these are among of the most important special cases of hypothesis testing. This section parallels the section on <a href="../interval/Normal.html">estimation in the normal model</a> in the chapter on <a href="../interval/index.html">set estimation</a>, and in particular, the duality between interval estimation and hypothesis testing will play an important role. But first we need to review some basic facts that will be critical for our analysis.</p>
+
+<div class="unit" id="mod1">
+	<p class="dfn">Recall that the <a href="../sample/LLN.html">sample mean</a> \( M \) and <a href="../sample/Variance.html">sample variance</a> \( S^2 \) are
+	\[ M = \frac{1}{n} \sum_{i=1}^n X_i, \quad S^2 = \frac{1}{n - 1} \sum_{i=1}^n (X_i - M)^2\]</p>
+</div>
+
+<p>From our study of <a href="../point/index.html">point estimation</a>, recall that \( M \) is an unbiased and consistent estimator of \( \mu \) while \( S^2 \) is an unbiased and consistent estimator of \( \sigma^2 \). From these basic statistics we can construct the <a href="Introduction.html#piv">test statistics</a> that will be used to construct our hypothesis tests. The following results are <a href="../sample/Normal.html">special properties</a> of samples form the normal distribution</a>.</p>
+
+<div class="unit" id="mod2">
+	<p class="math">Define
+	\[ Z = \frac{M - \mu}{\sigma \big/ \sqrt{n}}, \quad T = \frac{M - \mu}{S \big/ \sqrt{n}}, \quad V = \frac{n - 1}{\sigma^2} S^2 \]</p>
+	<ol class="sub">
+		<li>\( Z \) has the <a href="../special/Normal.html">standard normal distribution</a>.</li>
+		<li>\( T \) has the <a href="../special/Student.html">student \( t \) distribution</a> with \( n - 1 \) degrees of freedom.</li>
+		<li>\( V \) has the <a href="../special/ChiSquare.html">chi-square distribution</a> with \( n - 1 \) degrees of freedom.</li>
+		<li>\( Z \) and \( V \) are independent.</li>
+	</ol>
+</div>
+
+<p>It follows that each of these random variables is a pivot variable for \( (\mu, \sigma) \) since the distributions do not depend on the parameters, but the variables themselves functionally depend on one or both parameters. The pivot variables will lead to natural test statistics that can then be used to perform the hypothesis tests of the parameters. To construct our tests, we will need <a href="../dist/CDF.html#qnt">quantiles</a> of these standard distributions. The quantiles can be computed using the <a href="JavaScript:openAncillary('../apps/QuantileApp.html')" class="ancillary"> quantile app</a> or from most mathematical and statistical software packages. Here is the notation we will use:</p>
+
+<div class="unit" id="mod3">
+	<p class="dfn">Let \( p \in (0, 1) \) and \( k \in \N_+ \).</p>
+	<ol class="sub">
+		<li>\( z(p) \) denotes the quantile of order \( p \) for the standard normal distribution.</li>
+		<li>\(t_k(p)\) denotes the quantile of order \( p \) for the student \( t \) distribution with \( k \) degrees of freedom.</li>
+		<li>\( \chi^2_k(p) \) denotes the quantile of order \( p \) for the chi-square distribution with \( k \) degrees of freedom</li>
+	</ol>
+</div>
+
+<p>Since the standard normal and student \( t \) distributions are symmetric about 0, it follows that \( z(1 - p) = -z(p) \) and \( t_k(1 - p) = -t_k(p) \) for \( p \in (0, 1) \) and \( k \in \N_+ \). On the other hand, the chi-square distribution is not symmetric. </p>
+
+<h4 id="nor">Tests for the Mean with Known Standard Deviation</h4>
+
+<p>For our first discussion, we assume that the distribution mean \( \mu \) is unknown but the standard deviation \( \sigma \) is known. This is not always an artificial assumption. There are often situations where \( \sigma \) is stable over time, and hence is at least approximately known, while \( \mu \) changes because of different <q>treatments</q>. Examples are given in the computational exercises below.</p>
+
+<div class="unit" id="nor1">
+	<p class="math">For a conjectured \( \mu_0 \in \R \), define the test statistic
+	\[ Z = \frac{M - \mu_0}{\sigma \big/ \sqrt{n}} \]</p>
+	<ol class="sub">
+		<li>If \( \mu = \mu_0 \) then \( Z \) has the standard normal distribution.</li>
+		<li>If \( \mu \ne \mu_0 \) then \( Z \) has the normal distribution with mean \( \frac{\mu - \mu_0}{\sigma / \sqrt{n}} \) and variance 1.</li>
+	</ol>
+</div>
+
+<p>So in case (b), \( \frac{\mu - \mu_0}{\sigma / \sqrt{n}} \) can be viewed as a <dfn>non-centrality parameter</dfn>. The graph of the probability density function of \( Z \) is like that of the standard normal probability density function, but shifted to the right or left by the non-centrality parameter, depending on whether \( \mu \gt \mu_0 \) or \( \mu \lt \mu_0 \).</p>
+
+<div class="unit" id="nor2">
+	<p class="math">For \( \alpha \in (0, 1) \), each of the following tests has significance level \( \alpha \):</p>
+	<ol class="sub">
+		<li>Reject \( H_0: \mu = \mu_0 \) versus \( H_1: \mu \ne \mu_0 \) if and only if \( Z \lt -z(1 - \alpha /2) \) or \( Z \gt z(1 - \alpha / 2) \) if and only if \( M \lt \mu_0 - z(1 - \alpha / 2) \frac{\sigma}{\sqrt{n}} \) or \( M \gt \mu_0 + z(1 - \alpha / 2) \frac{\sigma}{\sqrt{n}} \).</li>
+		<li>Reject \( H_0: \mu \le \mu_0 \) versus \( H_1: \mu \gt \mu_0 \) if and only if \( Z \gt z(1 - \alpha) \) if and only if \( M \gt \mu_0 + z(1 - \alpha) \frac{\sigma}{\sqrt{n}} \).</li>
+		<li>Reject \( H_0: \mu \ge \mu_0 \) versus \( H_1: \mu \lt \mu_0 \) if and only if \( Z \lt -z(1 - \alpha) \) if and only if \( M \lt \mu_0 - z(1 - \alpha) \frac{\sigma}{\sqrt{n}} \).</li>
+	</ol>
+	<details>
+		<summary>Details:</summary>
+		<p>In part (a), \( H_0 \) is a simple hypothesis, and under \( H_0 \),  \( Z \) has the standard normal distribution. So \( \alpha \) is probability of falsely rejecting \( H_0 \) by definition of the quantiles. In parts (b) and (c), \( Z \) has a non-central normal distribution under \( H_0 \) as discussed in <a href="#nor1" class="ref"></a>. So if \( H_0 \) is true, the the maximum type 1 error probability \( \alpha \) occurs when \( \mu = \mu_0 \). The decision rules in terms of \( M \) are equivalent to the corresponding ones in terms of \( Z \) by simple algebra.</p>
+	</details>
+</div>
+
+<p>Part (a) is the standard two-sided test, while (b) is the right-tailed test and (c) is the left-tailed test. Note that in each case, the hypothesis test is the dual of the corresponding interval estimate constructed in the section on <a href="../interval/Normal.html">estimation in the normal model</a>.</p>
+
+<div class="unit" id="nor3">
+	<p class="math">For each of the tests in <a href="#nor4" class="ref"></a>, we <em>fail</em> to reject \(H_0\) at significance level \(\alpha\) if and only if \(\mu_0\) is in the corresponding \(1 - \alpha\) confidence interval, that is</p>
+	<ol class="sub">
+		<li>\( M - z(1 - \alpha / 2) \frac{\sigma}{\sqrt{n}} \le \mu_0 \le M + z(1 - \alpha / 2) \frac{\sigma}{\sqrt{n}} \)</li>
+		<li>\( \mu_0 \le M + z(1 - \alpha) \frac{\sigma}{\sqrt{n}}\)</li>
+		<li>\( \mu_0 \ge M - z(1 - \alpha) \frac{\sigma}{\sqrt{n}}\)</li>
+	</ol>
+	<details>
+		<summary>Details:</summary>
+		<p>This follows from <a href="#nor2" class="ref"></a>. In each case, we start with the inequality that corresponds to not rejecting \( H_0 \) and solve for \( \mu_0 \).</p>
+	</details>
+</div>
+
+<p>The two-sided test in (a) corresponds to \( \alpha / 2 \) in each tail of the distribution of the test statistic \( Z \), under \( H_0 \). This set is said to be <dfn>unbiased</dfn>. But of course we can construct other biased tests by partitioning the confidence level \( \alpha \) between the left and right tails in a non-symmetric way.</p>
+
+<div class="unit" id="nor4">
+	<p class="math">For every \(\alpha, \, p \in (0, 1)\), the following test has significance level \(\alpha\):  Reject \(H_0: \mu = \mu_0\) versus \(H_1: \mu \ne \mu_0\) if and only if \(Z \lt z(\alpha - p \alpha)\) or \(Z \ge z(1 - p \alpha)\).</p>
+	<ol class="sub">
+		<li>\( p = \frac{1}{2} \) gives the symmetric, unbiased test.</li>
+		<li>\( p \downarrow 0 \) gives the left-tailed test.</li>
+		<li>\( p \uparrow 1 \) gives the right-tailed test.</li>
+	</ol>
+	<details>
+		<summary>Details:</summary>
+		<p>As before \( H_0 \) is a simple hypothesis, and if \( H_0 \) is true, \( Z \) has the standard normal distribution. So the probability of falsely rejecting \( H_0 \) is \( \alpha \) by definition of the quantiles. Parts (a)&ndash;(c) follow from properties of the standard normal quantile function.</p>
+	</details>
+</div>
+
+<p>The \(P\)-value of these test can be computed in terms of the standard normal distribution function \(\Phi\).</p>
+
+<div class="unit" id="nor5">
+	<p class="math">The \(P\)-values of the standard tests in <a href="#stu5" class="ref"></a> are respectively</p>
+	<ol class="sub">
+		<li>\( 2 \left[1 - \Phi\left(\left|Z\right|\right)\right]\)</li>
+		<li>\( 1 - \Phi(Z) \)</li>
+		<li>\( \Phi(Z) \)</li>
+	</ol>
+</div>
+
+<p>Recall that the <dfn>power function</dfn> of a test of a parameter is the probability of rejecting the null hypothesis, as a function of the true value of the parameter. Our next series of results will explore the power functions of the tests in <a href="#nor4" class="ref"></a>.</p>
+
+<div class="unit" id="nor6">
+	<p class="math">The power function of the general two-sided test in <a href="#nor4" class="ref"></a> is given by
+	\[ Q(\mu) = \Phi \left( z(\alpha - p \alpha) - \frac{\sqrt{n}}{\sigma} (\mu - \mu_0) \right) + \Phi \left( \frac{\sqrt{n}}{\sigma} (\mu - \mu_0) - z(1 - p \alpha) \right), \quad \mu \in \R \]</p>
+	<ol class="sub">
+		<li>\(Q\) is decreasing on \((-\infty, m_0)\) and increasing on \((m_0, \infty)\) where \(m_0 = \mu_0 + \left[z(\alpha - p \alpha) + z(1 - p \alpha)\right] \frac{\sqrt{n}}{2 \sigma}\).</li>
+		<li>\(Q(\mu_0) = \alpha\).</li>
+		<li>\(Q(\mu) \to 1\) as \(\mu \uparrow \infty\) and \(Q(\mu) \to 1\) as \(\mu \downarrow -\infty\).</li>
+		<li>If \(p = \frac{1}{2}\) then \(Q\) is symmetric about \(\mu_0\) (and \( m_0 = \mu_0 \)).</li>
+		<li>As \(p\) increases, \(Q(\mu)\) increases if \(\mu \gt \mu_0\) and decreases if \(\mu \lt \mu_0\).</li>
+	</ol>
+</div>
+
+<p>So by varying \( p \), we can make the test more powerful for some values of \( \mu \), but only at the expense of making the test less powerful for other values of \( \mu \).</p>
+
+<div class="unit" id="nor7">
+		<p class="math">The power function of the left-tailed test in <a href="#nor4" class="ref"></a> is given by
+		\[ Q(\mu) = \Phi \left( z(\alpha) + \frac{\sqrt{n}}{\sigma}(\mu - \mu_0) \right), \quad \mu \in \R \]</p>
+		<ol class="sub">
+			<li>\(Q\) is increasing on \(\R\).</li>
+			<li>\(Q(\mu_0) = \alpha\).</li>
+			<li>\(Q(\mu) \to 1\) as \(\mu \uparrow \infty\) and \(Q(\mu) \to 0\) as \(\mu \downarrow -\infty\).</li>
+		</ol>
+</div>
+
+<div class="unit" id="nor8">
+	<p class="math">The power function of the right-tailed test in <a href="#nor4" class="ref"></a>, is given by
+	\[ Q(\mu) = \Phi \left( z(\alpha) - \frac{\sqrt{n}}{\sigma}(\mu - \mu_0) \right), \quad \mu \in \R \]</p>
+	<ol class="sub">
+		<li>\(Q\) is decreasing on \(\R\).</li>
+		<li>\(Q(\mu_0) = \alpha\).</li>
+		<li>\(Q(\mu) \to 0\) as \(\mu \uparrow \infty\) and \(Q(\mu) \to 1\) as \(\mu \downarrow -\infty\).</li>
+	</ol>
+</div>
+
+<div class="unit" id="nor9">
+	<p class="math">For any of the three tests in above  in <a href="#nor4" class="ref"></a>, increasing the sample size \(n\) or decreasing the standard deviation \(\sigma\) results in a uniformly more powerful test.</p>
+</div>
+
+<div class="unit" id="nor10">
+	<p class="app">In the <a href="JavaScript:openAncillary('../apps/MeanTest.html')" class="ancillary">mean test experiment</a>, select the normal test statistic and select the normal sampling distribution with standard deviation \(\sigma = 2\) sample size \(n = 20\), and \(\mu_0 = 0\). Run the experiment 1000 times for several values of the true distribution mean \(\mu\). For each value of \(\mu\), note the distribution of the \(P\)-value.</p>
+</div>
+
+<div class="unit" id="nor11">
+	<p class="app">In the <a href="JavaScript:openAncillary('../apps/MeanEstimate.html')" class="ancillary">mean estimate experiment</a>, select the normal pivot variable and select the normal distribution with \(\mu = 0\) and standard deviation \(\sigma = 2\), confidence level \(1 - \alpha = 0.90\), and sample size \(n = 10\). For each of the three types of confidence intervals, run the experiment 20 times. State the corresponding hypotheses and significance level, and for each run, give the set of \(\mu_0\) for which the null hypothesis would be rejected.</p>
+</div>
+
+<p>In many cases, the first step is to <em>design</em> the experiment so that the significance level is \(\alpha\) and so that the test has a given power \(\beta\) for a given alternative \(\mu_1\).</p>
+
+<div class="unit" id="nor12">
+	<p class="math">For either of the one-sided tests in <a href="#nor4" class="ref"></a>, the sample size \(n\) needed for a test with significance level \(\alpha\) and power \(\beta\) for the alternative \(\mu_1\) is
+	\[ n = \left( \frac{\sigma \left[z(\beta) - z(\alpha)\right]}{\mu_1 - \mu_0} \right)^2 \]</p>
+	<details>
+		<summary>Details:</summary>
+		<p>This follows from setting the power function equal to \(\beta\) and solving for \(n\)</p>
+	</details>
+</div>
+
+<div class="unit" id="nor13">
+	<p class="math">For the unbiased, two-sided test, the sample size \(n\) needed for a test with significance level \(\alpha\) and power \(\beta\) for the alternative \(\mu_1\) is approximately
+	\[ n = \left( \frac{\sigma \left[z(\beta) - z(\alpha / 2)\right]}{\mu_1 - \mu_0} \right)^2 \]</p>
+	<details>
+		<summary>Details:</summary>
+		<p>In the power function for the two-sided test given in <a href="#nor6" class="ref"></a>, we can neglect the first term if \(\mu_1 \lt \mu_0\) and neglect the second term if \(\mu_1 \gt \mu_0\).</p>
+	</details>
+</div>
+
+<h4 id="stu">Tests of the Mean with Unknown Standard Deviation</h4>
+
+<p>For our next discussion, we construct tests of \(\mu\) without requiring the assumption that \(\sigma\) is known. And in applications of course, \( \sigma \) is usually unknown.</p>
+
+<div class="unit" id="stu1">
+	<p class="math">For a conjectured \( \mu_0 \in \R \),  define the test statistic
+	\[ T = \frac{M - \mu_0}{S \big/ \sqrt{n}} \]</p>
+	<ol class="sub">
+		<li>If \( \mu = \mu_0 \), the statistic \( T \) has the student \( t \) distribution with \( n - 1 \) degrees of freedom.</li>
+		<li>If \( \mu \ne \mu_0 \) then \( T \) has a <a href="../special/Student.html#non">non-central \( t \) distribution</a> with \( n - 1 \) degrees of freedom and non-centrality parameter \( \frac{\mu - \mu_0}{\sigma / \sqrt{n}} \).</li>
+	</ol>
+</div>
+
+<p>In case (b), the graph of the probability density function of \( T \) is much (but not exactly) the same as that of the ordinary \( t \) distribution with \( n - 1 \) degrees of freedom, but shifted to the right or left by the non-centrality parameter, depending on whether \( \mu \gt \mu_0 \) or \( \mu \lt \mu_0 \).</p>
+
+<div class="unit" id="stu2">
+	<p class="math">For \( \alpha \in (0, 1) \), each of the following tests has significance level \( \alpha \):</p>
+	<ol class="sub">
+		<li>Reject \( H_0: \mu = \mu_0 \) versus \( H_1: \mu \ne \mu_0 \) if and only if \( T \lt -t_{n-1}(1 - \alpha /2) \) or \( T \gt t_{n-1}(1 - \alpha / 2) \) if and only if \( M \lt \mu_0 - t_{n-1}(1 - \alpha / 2) \frac{S}{\sqrt{n}} \) or \( T \gt \mu_0 + t_{n-1}(1 - \alpha / 2) \frac{S}{\sqrt{n}} \).</li>
+		<li>Reject \( H_0: \mu \le \mu_0 \) versus \( H_1: \mu \gt \mu_0 \) if and only if \( T \gt t_{n-1}(1 - \alpha) \) if and only if \( M \gt \mu_0 + t_{n-1}(1 - \alpha) \frac{S}{\sqrt{n}} \).</li>
+		<li>Reject \( H_0: \mu \ge \mu_0 \) versus \( H_1: \mu \lt \mu_0 \) if and only if \( T \lt -t_{n-1}(1 - \alpha) \) if and only if \( M \lt \mu_0 - t_{n-1}(1 - \alpha) \frac{S}{\sqrt{n}} \).</li>
+	</ol>
+	<details>
+		<summary>Details:</summary>
+		<p>In part (a), \( T \) has the chi-square distribution with \( n - 1 \) degrees of freedom under \( H_0 \). So if \( H_0 \) is true, the probability of falsely rejecting \( H_0 \) is \( \alpha \) by definition of the quantiles. In parts (b) and (c), \( T \) has a non-central \( t \) distribution with \( n - 1 \) degrees of freedom under \( H_0 \), as in <a href="#stu1" class="ref"></a>. Hence if \( H_0 \) is true, the maximum type 1 error probability \( \alpha \) occurs when \( \mu = \mu_0 \). The decision rules in terms of \( M \) are equivalent to the corresponding ones in terms of \( T \) by simple algebra.</p>
+	</details>
+</div>
+
+<p>Part (a) is the standard two-sided test, while (b) is the right-tailed test and (c) is the left-tailed test. Note that in each case, the hypothesis test is the dual of the corresponding interval estimate constructed in the section on <a href="../interval/Normal.html">estimation in the normal model</a>.</p>
+
+<div class="unit" id="stu3">
+	<p class="math">For each of the tests in <a href="#stu2" class="ref"></a>, we <em>fail</em> to reject \(H_0\) at significance level \(\alpha\) if and only if \(\mu_0\) is in the corresponding \(1 - \alpha\) confidence interval.</p>
+	<ol class="sub">
+		<li>\( M - t_{n-1}(1 - \alpha / 2) \frac{S}{\sqrt{n}} \le \mu_0 \le M + t_{n-1}(1 - \alpha / 2) \frac{S}{\sqrt{n}} \)</li>
+		<li>\( \mu_0 \le M + t_{n-1}(1 - \alpha) \frac{S}{\sqrt{n}}\)</li>
+		<li>\( \mu_0 \ge M - t_{n-1}(1 - \alpha) \frac{S}{\sqrt{n}}\)</li>
+	</ol>
+	<details>
+		<summary>Details:</summary>
+		<p>This follows from <a href="#stu2" class="ref"></a>. In each case, we start with the inequality that corresponds to <em>not</em> rejecting \( H_0 \) and then solve for \( \mu_0 \).</p>
+	</details>
+</div>
+
+<p>The two-sided test in (a) corresponds to \( \alpha / 2 \) in each tail of the distribution of the test statistic \( T \), under \( H_0 \). This set is said to be <dfn>unbiased</dfn>. But of course we can construct other biased tests by partitioning the confidence level \( \alpha \) between the left and right tails in a non-symmetric way.</p>
+
+<div class="unit" id="stu5">
+	<p class="math">For every \(\alpha, \, p \in (0, 1)\), the following test has significance level \(\alpha\):  Reject \(H_0: \mu = \mu_0\) versus \(H_1: \mu \ne \mu_0\) if and only if \(T \lt t_{n-1}(\alpha - p \alpha)\) or \(T \ge t_{n-1}(1 - p \alpha)\) if and only if \( M \lt \mu_0 + t_{n-1}(\alpha - p \alpha) \frac{S}{\sqrt{n}} \) or \( M \gt \mu_0 + t_{n-1}(1 - p \alpha) \frac{S}{\sqrt{n}} \).</p>
+	<ol class="sub">
+		<li>\( p = \frac{1}{2} \) gives the symmetric, unbiased test.</li>
+		<li>\( p \downarrow 0 \) gives the left-tailed test.</li>
+		<li>\( p \uparrow 1 \) gives the right-tailed test.</li>
+	</ol>
+	<details>
+		<summary>Details:</summary>
+		<p>Once again, \( H_0 \) is a simple hypothesis, and under \( H_0 \) the test statistic \( T \) has the student \( t \) distribution with \( n - 1 \) degrees of freedom. So if \( H_0 \) is true, the probability of falsely rejecting \( H_0 \) is \( \alpha \) by definition of the quantiles. Parts (a)&ndash;(c) follow from properties of the quantile function.</p>
+	</details>
+</div>
+
+<p>The \(P\)-value of these test can be computed in terms of the distribution function \(\Phi_{n-1}\) of the \(t\)-distribution with \(n - 1\) degrees of freedom.</p>
+
+<div class="unit" id="stu6">
+	<p class="math">The \(P\)-values of the standard tests in <a href="#stu5" class="ref"></a> are respectively</p>
+	<ol class="sub">
+		<li>\( 2 \left[1 - \Phi_{n-1}\left(\left|T\right|\right)\right]\)</li>
+		<li>\( 1 - \Phi_{n-1}(T) \)</li>
+		<li>\( \Phi_{n-1}(T) \)</li>
+	</ol>
+</div>
+
+<div class="unit" id="stu7">
+	<p class="app">In the <a href="JavaScript:openAncillary('../apps/MeanTest.html')" class="ancillary">mean test experiment</a>, select the student test statistic and select the normal sampling distribution with standard deviation \(\sigma = 2\), sample size \(n = 20\), and \(\mu_0 = 1\). Run the experiment 1000 times for several values of the true distribution mean \(\mu\). For each value of \(\mu\), note the empirical distribution of \(\P\).</p>
+</div>
+
+<div class="unit" id="stu8">
+	<p class="app">In the <a href="JavaScript:openAncillary('../apps/MeanEstimate.html')" class="ancillary">mean estimate experiment</a>, select the student pivot variable and select the normal sampling distribution with mean 0 and standard deviation 2. Select confidence level 0.90 and sample size 10. For each of the three types of intervals, run the experiment 20 times. State the corresponding hypotheses and significance level, and for each run, give the set of \(\mu_0\) for which the null hypothesis would be rejected.</p>
+</div>
+
+<p>The power function for the \( t \) tests in <a href="#stu5" class="ref"></a> can be computed explicitly in terms of the non-central \(t\) distribution function. Qualitatively, the graphs of the power functions are similar to the case when \(\sigma\) is known, given in <a href="#nor6" class="ref"></a> (two-sided), <a href="#nor7" class="ref"></a> (left-tailed), and <a href="#nor8" class="ref"></a> (right-tailed).</p>
+
+<p>If an upper bound \(\sigma_0\) on the standard deviation \(\sigma\) is known, then conservative estimates on the sample size needed for a given confidence level and a given margin of error can be obtained using the methods for the normal pivot variable, in <a href="#nor12" class="ref"></a> for the two-sided case and <a href="#nor13" class="ref"></a> for the one-sided cases.</p>
+
+<h4 id="chi">Tests of the Standard Deviation</h4>
+
+<p>For our next discussion, we will construct hypothesis tests for the distribution standard deviation \( \sigma \). So our assumption is that \( \sigma \) is unknown, and of course almost always, \( \mu \) would be unknown as well.</p>
+
+<div class="unit" id="chi1">
+	<p class="math">For a conjectured value \( \sigma_0 \in (0, \infty)\), define the test statistic
+	\[ V = \frac{n - 1}{\sigma_0^2} S^2 \]</p>
+	<ol class="sub">
+		<li>If \( \sigma = \sigma_0 \), then \( V \) has the chi-square distribution with \( n - 1 \) degrees of freedom.</li>
+		<li>If \( \sigma \ne \sigma_0 \) then \( V \) has the <a href="../special/Gamma.html">gamma distribution</a> with shape parameter \( (n - 1) / 2 \) and scale parameter \( 2 \sigma^2 \big/ \sigma_0^2 \).</li>
+	</ol>
+</div>
+
+<p>Recall that the ordinary chi-square distribution with \( n - 1 \) degrees of freedom is the gamma distribution with shape parameter \( (n - 1) / 2 \) and scale parameter \( \frac{1}{2} \). So in case (b), the ordinary chi-square distribution is scaled by \( \sigma^2 \big/ \sigma_0^2 \). In particular, the scale factor is greater than 1 if \( \sigma \gt \sigma_0 \) and less than 1 if \( \sigma \lt \sigma_0 \).</p>
+
+<div class="unit" id="chi2">
+	<p class="math">For every \(\alpha \in (0, 1)\), the following test has significance level \(\alpha\):</p>
+	<ol class="sub">
+		<li>Reject \(H_0: \sigma = \sigma_0\) versus \(H_1: \sigma \ne \sigma_0\) if and only if \(V \lt \chi_{n-1}^2(\alpha / 2)\) or \(V \gt \chi_{n-1}^2(1 - \alpha / 2)\) if and only if \( S^2 \lt \chi_{n-1}^2(\alpha / 2) \frac{\sigma_0^2}{n - 1} \) or \( S^2 \gt \chi_{n-1}^2(1 - \alpha / 2) \frac{\sigma_0^2}{n - 1} \)</li>
+		<li>Reject \(H_0: \sigma \ge \sigma_0\) versus \(H_1: \sigma \lt \sigma_0\) if and only if \(V \lt \chi_{n-1}^2(\alpha)\) if and only if \( S^2 \lt \chi_{n-1}^2(\alpha) \frac{\sigma_0^2}{n - 1} \)</li>
+		<li>Reject \(H_0: \sigma \le \sigma_0\) versus \(H_1: \sigma \gt \sigma_0\) if and only if \(V \gt \chi_{n-1}^2(1 - \alpha)\) if and only if \( S^2 \gt \chi_{n-1}^2(1 - \alpha) \frac{\sigma_0^2}{n - 1} \)</li>
+	</ol>
+	<details>
+		<summary>Details:</summary>
+		<p>The logic is largely the same as with our other hypothesis test. In part (a), \( H_0 \) is a simple hypothesis, and under \( H_0 \), the test statistic \( V \) has the chi-square distribution with \( n - 1 \) degrees of freedom.  So if \( H_0 \) is true, the probability of falsely rejecting \( H_0 \) is \( \alpha \) by definition of the quantiles. In parts (b) and (c),  \( V \) has the more general gamma distribution under \( H_0 \), as discussed in <a href="#chi1" class="ref"></a>. If \( H_0 \) is true, the maximum type 1 error probability is \( \alpha \) and occurs when \( \sigma = \sigma_0 \).</p>
+	</details>
+</div>
+
+<p>Part (a) is the unbiased, two-sided test that corresponds to \( \alpha / 2 \) in each tail of the chi-square distribution of the test statistic \( V \), under \( H_0 \). Part (b) is the left-tailed test and part (c) is the right-tailed test. Once again, we have a duality between the hypothesis tests and the interval estimates constructed in the section on <a href="../interval/Normal.html">estimation in the normal model</a>.</p>
+
+<div class="unit" id="chi3">
+	<p class="math">For each of the tests in <a href="#chi2" class="ref"></a>, we <em>fail</em> to reject \(H_0\) at significance level \(\alpha\) if and only if \(\sigma_0^2\) is in the corresponding \(1 - \alpha\) confidence interval. That is</p>
+	<ol class="sub">
+		<li>\( \frac{n - 1}{\chi_{n-1}^2(1 - \alpha / 2)} S^2 \le \sigma_0^2 \le \frac{n - 1}{\chi_{n-1}^2(\alpha / 2)} S^2 \)</li>
+		<li>\( \sigma_0^2 \le \frac{n - 1}{\chi_{n-1}^2(\alpha)} S^2 \)</li>
+		<li>\( \sigma_0^2 \ge \frac{n - 1}{\chi_{n-1}^2(1 - \alpha)} S^2 \)</li>
+	</ol>
+	<details>
+		<summary>Details:</summary>
+		<p>This follows from <a href="#chi2" class="ref"></a>. In each case, we start with the inequality that corresponds to <em>not</em> rejecting \( H_0 \) and then solve for \( \sigma_0^2 \).</p>
+	</details>
+</div>
+
+<p>As before, we can construct more general two-sided tests by partitioning the significance level \( \alpha \) between the left and right tails of the chi-square distribution in an arbitrary way.</p>
+
+<div class="unit" id="chi4">
+	<p class="math">For every \(\alpha, \, p \in (0, 1)\), the following test has significance level \(\alpha\):  Reject \(H_0: \sigma = \sigma_0\) versus \(H_1: \sigma \ne \sigma_0\) if and only if \(V \le \chi_{n-1}^2(\alpha - p \alpha)\) or \(V \ge \chi_{n-1}^2(1 - p \alpha)\) if and only if \( S^2 \lt \chi_{n-1}^2(\alpha - p \alpha) \frac{\sigma_0^2}{n - 1} \) or \( S^2 \gt \chi_{n-1}^2(1 -  p \alpha) \frac{\sigma_0^2}{n - 1} \).</p>
+	<ol class="sub">
+		<li>\( p = \frac{1}{2} \) gives the equal-tail test.</li>
+		<li>\( p \downarrow 0 \) gives the left-tail test.</li>
+		<li>\( p \uparrow 1 \) gives the right-tail test.</li>
+	</ol>
+	<details>
+		<summary>Details:</summary>
+		<p>As before, \( H_0 \) is a simple hypothesis, and under \( H_0 \) the test statistic \( V \) has the chi-square distribution with \( n - 1 \) degrees of freedom. So if \( H_0 \) is true, the probability of falsely rejecting \( H_0 \) is \( \alpha \) by definition of the quantiles. Parts (a)&ndash;(c) follow from properties of the quantile function.</p>
+	</details>
+</div>
+
+<p>Recall again that the <dfn>power function</dfn> of a test of a parameter is the probability of rejecting the null hypothesis, as a function of the true value of the parameter. The power functions of the tests for \( \sigma \) can be expressed in terms of the distribution function \( G_{n-1} \) of the chi-square distribution with \( n - 1 \) degrees of freedom.</p>
+
+<div class="unit" id="chi5">
+	<p class="math">The power function of the general two-sided test in <a href="#chi4" class="ref"></a> is given by the following formula, and satisfies the given properties:
+	\[ Q(\sigma) = 1 - G_{n-1} \left( \frac{\sigma_0^2}{\sigma^2} \chi_{n-1}^2(1 - p \, \alpha) \right) + G_{n-1} \left(\frac{\sigma_0^2}{\sigma^2} \chi_{n-1}^2(\alpha - p \, \alpha) \right)\]</p>
+	<ol class="sub">
+		<li>\(Q\) is decreasing on \((-\infty, \sigma_0)\) and increasing on \((\sigma_0, \infty)\).</li>
+		<li>\(Q(\sigma_0) = \alpha\).</li>
+		<li>\(Q(\sigma) \to 1\) as \(\sigma \uparrow \infty\) and \(Q(\sigma) \to 1\) as \(\sigma \downarrow 0\).</li>
+	</ol>
+</div>
+
+<div class="unit" id="chi6">
+	<p class="math">The power function of the left-tailed test in <a href="#chi2" class="ref"></a> is given by the following formula, and satisfies the given properties:
+	\[ Q(\sigma) = 1 - G_{n-1} \left( \frac{\sigma_0^2}{\sigma^2} \chi_{n-1}^2(1 - \alpha) \right) \]</p>
+	<ol class="sub">
+		<li>\(Q\) is increasing on \((0, \infty)\).</li>
+		<li>\(Q(\sigma_0) = \alpha\).</li>
+		<li>\(Q(\sigma) \to 1\) as \(\sigma \uparrow \infty\) and \(Q(\sigma) \to 0\) as \(\sigma \downarrow 0\).</li>
+	</ol>
+</div>
+
+<div class="unit" id="chi7">
+	<p class="math">The power function for the right-tailed test in <a href="#chi2" class="ref"></a> is given by the following formula, and satisfies the given properties:
+	\[ Q(\sigma) = G_{n-1} \left( \frac{\sigma_0^2}{\sigma^2} \chi_{n-1}^2(\alpha) \right) \]</p>
+	<ol class="sub">
+		<li>\(Q\) is decreasing on \((0, \infty)\).</li>
+		<li>\(Q(\sigma_0) =\alpha\).</li>
+		<li>\(Q(\sigma) \to 0\) as \(\sigma \uparrow \infty)\) and
+		\(Q(\sigma) \to 0\) as \(\sigma \uparrow \infty\) and as \(\sigma \downarrow 0\).</li>
+	</ol>
+</div>
+
+<div class="unit" id="chi8">
+	<p class="app">In the <a href="JavaScript:openAncillary('../apps/VarianceTestExperiment.html')" class="ancillary">variance test experiment</a>, select the normal distribution with mean 0, and select significance level 0.1, sample size 10, and test standard deviation 1.0. For various values of the true standard deviation, run the simulation 1000 times. Record the relative frequency of rejecting the null hypothesis and plot the empirical power curve.</p>
+	<ol class="sub">
+		<li>Two-sided test</li>
+		<li>Left-tailed test</li>
+		<li>Right-tailed test</li>
+	</ol>
+</div>
+
+<div class="unit" id="chi9">
+	<p class="app">In the <a href="JavaScript:openAncillary('../apps/VarianceEstimate.html')" class="ancillary">variance estimate experiment</a>, select the normal distribution with mean 0 and standard deviation 2, and select confidence level 0.90 and sample size 10. Run the experiment 20 times. State the corresponding hypotheses and significance level, and for each run, give the set of test standard deviations for which the null hypothesis would be rejected.</p>
+	<ol class="sub">
+		<li>Two-sided confidence interval</li>
+		<li>Confidence lower bound</li>
+		<li>Confidence upper bound</li>
+	</ol>
+</div>
+
+<h3 id="exe">Exercises</h3>
+
+<h4 id="rob">Robustness</h4>
+
+<p>The primary assumption that we made is that the underlying sampling distribution is normal. Of course, in real statistical problems, we are unlikely to know much about the sampling distribution, let alone whether or not it is normal. Suppose in fact that the underlying distribution is not normal. When the sample size \(n\) is relatively large, the distribution of the sample mean will still be approximately normal by the <a href="../sample/CLT.html">central limit theorem</a>, and thus our tests of the mean \(\mu\) should still be approximately valid. On the other hand, tests of the variance \(\sigma^2\) are less robust to deviations form the assumption of normality. The following exercises explore these ideas.</p>
+
+<div class="unit" id="rob1">
+	<p class="app">In the <a href="JavaScript:openAncillary('../apps/MeanTest.html')" class="ancillary">mean test experiment</a>, select the <a href="../special/Gamma.html">gamma distribution</a> with shape parameter 1 and scale parameter 1. For the three different tests and for various sample sizes, and values of \(\mu_0\), run the experiment 1000 times. For each configuration, note the empirical distribution of \(\P\).</p>
+</div>
+
+<div class="unit" id="rob2">
+	<p class="app">In the <a href="JavaScript:openAncillary('../apps/MeanTest.html')" class="ancillary">mean test experiment</a>, select the <a href="../dist/Continuous.html">uniform distribution</a> on \([0, 4]\). For the three different tests and for various sample sizes and values of \(\mu_0\), run the experiment 1000 times. For each configuration, note the empirical distribution of \(\P\).</p>
+</div>
+
+<p>How large \(n\) needs to be for the testing procedure to work well depends, of course, on the underlying distribution; the more this distribution deviates from normality, the larger \(n\) must be. Fortunately, convergence to normality in the central limit theorem is rapid and hence, as you observed in the exercises, we can get away with relatively small sample sizes (30 or more) in most cases.</p>
+
+<div class="unit" id="rob3">
+	<p class="app">In the <a href="JavaScript:openAncillary('../apps/VarianceTestExperiment.html')" class="ancillary">variance test experiment</a>, select the <a href="../special/Gamma.html">gamma distribution</a> with shape parameter 1 and scale parameter 1. For the three different tests and for various significance levels, sample sizes, and values of \(\sigma_0\), run the experiment 1000 times. For each configuration, note the relative frequency of rejecting \(H_0\). When \(H_0\) is true, compare the relative frequency with the significance level.</p>
+</div>
+
+<div class="unit" id="rob4">
+	<p class="app">In the <a href="JavaScript:openAncillary('../apps/VarianceTestExperiment.html')" class="ancillary">variance test experiment</a>, select the <a href="../dist/Continuous.html">uniform distribution</a> on \([0, 4]\). For the three different tests and for various significance levels, sample sizes, and values of \(\mu_0\), run the experiment 1000 times. For each configuration, note the relative frequency of rejecting \(H_0\). When \(H_0\) is true, compare the relative frequency with the significance level.</p>
+</div>
+
+<h4 id="com">Computational Exercises</h4>
+
+<div class="unit" id="com1">
+	<p class="math">The length of a certain machined part is supposed to be 10 centimeters. In fact, due to imperfections in the manufacturing process, the actual length is a random variable. The standard deviation is due to inherent factors in the process, which remain fairly stable over time. From historical data, the standard deviation is known with a high degree of accuracy to be 0.3. The mean, on the other hand, may be set by adjusting various parameters in the process and hence may change to an unknown value fairly frequently. We are interested in testing \(H_0: \mu = 10\) versus \(H_1: \mu \ne 10\).</p>
+	<ol class="sub">
+		<li>Suppose that a sample of 100 parts has mean 10.1. Perform the test at the 0.1 level of significance.</li>
+		<li>Compute the \(P\)-value for the data in (a).</li>
+		<li>Compute the power of the test in (a) at \(\mu = 10.05\).</li>
+		<li>Compute the approximate sample size needed for significance level 0.1 and power 0.8 when \(\mu = 10.05\).</li>
+	</ol>
+	<details>
+	<summary>Details:</summary>
+	<ol class="sub">
+		<li>Test statistic 3.33, critical values \(\pm 1.645\). Reject \(H_0\).</li>
+		<li>\(P = 0.0010\)</li>
+		<li>The power of the test at 10.05 is approximately 0.0509.</li>
+		<li>Sample size 223</li>
+	</ol>
+	</details>
+</div>
+
+<div class="unit" id="com2">
+	<p class="math">A bag of potato chips of a certain brand has an advertised weight of 250 grams. Actually, the weight (in grams) is a random variable. Suppose that a sample of 75 bags has mean 248 and standard deviation 5. At the 0.05 significance level, perform the following tests: </p>
+	<ol class="sub">
+		<li>\(H_0: \mu \ge 250\) versus \(H_1: \mu \lt 250\)</li>
+		<li>\(H_0: \sigma \ge 7\) versus \(H_1: \sigma \lt 7\)</li>
+	</ol>
+	<details>
+		<summary>Details:</summary>
+		<ol class="sub">
+			<li>Test statistic \(-3.464\), critical value \(-1.665\). Reject \(H_0\).</li>
+			<li>\(P \lt 0.0001\) so reject \(H_0\).</li>
+		</ol>
+	</details>
+</div>
+
+<div class="unit" id="com3">
+	<p class="math">At a telemarketing firm, the length of a telephone solicitation (in seconds) is a random variable. A sample of 50 calls has mean 310 and standard deviation 25. At the 0.1 level of significance, can we conclude that </p>
+	<ol class="sub">
+		<li>\(\mu \gt 300\)?</li>
+		<li>\(\sigma \gt 20\)?</li>
+	</ol>
+	<details>
+		<summary>Details:</summary>
+		<ol class="sub">
+			<li>Test statistic 2.828, critical value 1.2988. Reject \(H_0\).</li>
+			<li>\(P = 0.0071\) so reject \(H_0\).</li>
+		</ol>
+	</details>
+</div>
+
+<div class="unit" id="com4">
+	<p class="math">At a certain farm the weight of a peach (in ounces) at harvest time is a random variable. A sample of 100 peaches has mean 8.2 and standard deviation 1.0. At the 0.01 level of significance, can we conclude that </p>
+	<ol class="sub">
+		<li>\(\mu \gt 8\)?</li>
+		<li>\(\sigma \lt 1.5\)?</li>
+	</ol>
+	<details>
+		<summary>Details:</summary>
+		<ol class="sub">
+			<li>Test statistic 2.0, critical value 2.363. Fail to reject \(H_0\).</li>
+			<li>\(P \lt 0.0001\) so reject \(H_0\).</li>
+		</ol>
+	</details>
+</div>
+
+<div class="unit" id="com5">
+	<p class="math">The hourly wage for a certain type of construction work is a random variable with standard deviation 1.25. For sample of 25 workers, the mean wage was $6.75. At the 0.01 level of significance, can we conclude that \(\mu \lt 7.00\)?</p>
+	<details>
+		<summary>Details:</summary>
+		<p>Test statistic \(-1\), critical value \(-2.328\). Fail to reject \(H_0\).</p>
+	</details>
+</div>
+
+<h4 id="dat">Data Analysis Exercises</h4>
+
+<div class="unit" id="dat1">
+	<p class="stat">Using <a href="JavaScript:openAncillary('../data/Michelson.html')" class="ancillary">Michelson's data</a>, test to see if the velocity of light is greater than 730 (+299000) km/sec, at the 0.005 significance level. </p>
+	<details>
+		<summary>Details:</summary>
+		<p>Test statistic 15.49, critical value 2.6270.  Reject \(H_0\).</p>
+	</details>
+</div>
+
+<div class="unit" id="dat2">
+	<p class="stat">Using <a href="JavaScript:openAncillary('../data/Cavendish.html')" class="ancillary">Cavendish's data</a>, test to see if the density of the earth is less than 5.5 times the density of water, at the 0.05 significance level .</p>
+	<details>
+		<summary>Details:</summary>
+		<p>Test statistic \(-1.269\), critical value \(-1.7017\). Fail to reject \(H_0\).</p>
+	</details>
+</div>
+
+<div class="unit" id="dat3">
+	<p class="stat">Using <a href="JavaScript:openAncillary('../data/Short.html')" class="ancillary">Short's data</a>, test to see if the parallax of the sun differs from 9 seconds of a degree, at the 0.1 significance level. </p>
+	<details>
+		<summary>Details:</summary>
+		<p> Test statistic \(-3.730\), critical value \(\pm 1.6749\). Reject \(H_0\).</p>
+	</details>
+</div>
+
+<div class="unit" id="dat4">
+	<p class="stat">Using <a href="JavaScript:openAncillary('../data/Fisher.html')" class="ancillary">Fisher's iris data</a>, perform the following tests, at the 0.1 level: </p>
+	<ol class="sub">
+		<li>The mean petal length of Setosa irises differs from 15 mm.</li>
+		<li>The mean petal length of Verginica irises is greater than 52 mm.</li>
+		<li>The mean petal length of Versicolor irises is less than 44 mm.</li>
+	</ol>
+	<details>
+		<summary>Details:</summary>
+		<ol class="sub">
+			<li>Test statistic \(-1.563\), critical values \(\pm 1.672\). Fail to reject \(H_0\).</li>
+			<li>Test statistic 4.556, critical value 1.2988. Reject \(H_0\).</li>
+			<li>Test statistic \(-1.028\), critical value \(-1.2988\). Fail to Reject \(H_0\).</li>
+		</ol>
+	</details>
+</div>
+
+<footer>
+	<ol class="map">
+		<li class="parent"><a href="../index.html">Random</a></li>
+		<li class="parent"><a href="index.html">8. Hypothesis Testing</a></li>
+		<li class="child"><a href="Introduction.html" title="Introduction">1</a></li>
+		<li class="current">2</li>
+		<li class="child"><a href="Bernoulli.html" title="Tests in the Bernoulli Model">3</a></li>
+		<li class="child"><a href="BivariateNormal.html" title="Tests in the Two-Sample Normal Model">4</a></li>
+		<li class="child"><a href="Likelihood.html" title="Likelihood Ratio Tests">5</a></li>
+		<li class="child"><a href="ChiSquare.html" title="Chi-Square Tests">6</a></li>
+		<li class="details"><button type="button" title="Expand Details" onclick="expandDetails(true);"><img src="../icons/Plus.svg" alt="Expand"></button></li>
+		<li class="details"><button type="button" title="Contract Details" onclick="expandDetails(false);"><img src="../icons/Minus.svg" alt="Contract"></button></li>
+	</ol>
+	<ul class="map">
+		<li class="sister"><a href="JavaScript:openAncillary('../apps/index.html')" class="ancillary">Apps</a></li>
+		<li class="sister"><a href="JavaScript:openAncillary('../data/index.html')" class="ancillary">Data Sets</a></li>
+		<li class="child"><a href="JavaScript:openAncillary('../biographies/index.html')" class="ancillary"> Biographies</a></li>
+	</ul>
+</footer>
+
+<script>getReferences();</script>
+
+</body>
+</html>

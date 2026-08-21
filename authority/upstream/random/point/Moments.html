@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<title>The Method of Moments</title>
+	<meta name="author" content="Kyle Siegrist">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="keywords" content="probability, statistics, point estimation, method of moments, mean, variance, normal distribution, Bernoulli distribution, geometric distribution, negative binomial distribution, Poisson distribution, gamma distribution, beta distribution, Pareto distribution, uniform distribution, hypergeometric distribution">
+	<link rel="icon" href="../icons/Icon.svg" type="image/svg">
+	<link rel="stylesheet" href="../Screen.css" type="text/css" media="screen">
+	<script src="../Basic.js"></script>
+	<script src="../../MathJax/tex-svg.js" id="MathJax-script" async></script>
+</head>
+
+<body>
+
+<div class="latex">
+	\(\newcommand{\R}{\mathbb{R}}\)
+	\(\newcommand{\N}{\mathbb{N}}\)
+	\(\newcommand{\Z}{\mathbb{Z}}\)
+	\(\newcommand{\E}{\mathbb{E}}\)
+	\(\newcommand{\P}{\mathbb{P}}\)
+	\(\newcommand{\var}{\text{var}}\)
+	\(\newcommand{\sd}{\text{sd}}\)
+	\(\newcommand{\cov}{\text{cov}}\)
+	\(\newcommand{\cor}{\text{cor}}\)
+	\(\newcommand{\bias}{\text{bias}}\)
+	\(\newcommand{\mse}{\text{mse}}\)
+	\(\newcommand{\bs}{\boldsymbol}\)
+</div>
+
+<header>
+	<ol class="map">
+		<li class="parent"><a href="../index.html">Random</a></li>
+		<li class="parent"><a href="index.html">6. Point Estimation</a></li>
+		<li class="child"><a href="Estimators.html" title="Estimators">1</a></li>
+		<li class="current">2</li>
+		<li class="child"><a href="Likelihood.html" title="Maximum Likelihood">3</a></li>
+		<li class="child"><a href="Bayes.html" title="Bayes' Estimators">4</a></li>
+		<li class="child"><a href="Unbiased.html" title="Best Unbiased Estimators">5</a></li>
+		<li class="child"><a href="Sufficient.html" title="Complete, Sufficient, and Ancillary Statistics">6</a></li>
+		<li class="details"><button type="button" title="Expand Details" onclick="expandDetails(true);"><img src="../icons/Plus.svg" alt="Expand"></button></li>
+		<li class="details"><button type="button" title="Contract Details" onclick="expandDetails(false);"><img src="../icons/Minus.svg" alt="Contract"></button></li>
+	</ol>
+	<h2>2. The Method of Moments</h2>
+</header>
+
+<h3>Basic Theory</h3>
+
+<h4>The Method</h4>
+
+<p>Suppose that we have a basic <a href="../prob/Experiments.html">random experiment</a> with an observable, real-valued <a href="../prob/Probability.html">random variable</a> \(X\). The distribution of \(X\) has \(k\) unknown real-valued parameters, or equivalently, a parameter vector \(\bs{\theta} = (\theta_1, \theta_2, \ldots, \theta_k)\) with values in a subset of \( \R^k \). As usual, we repeat the experiment \(n\) times to generate a <a href="../sample/Introduction.html">random sample</a> of size \(n\) from the distribution of \(X\).
+\[ \bs{X} = (X_1, X_2, \ldots, X_n) \]
+So \(\bs{X}\) is a sequence of <a href="../prob/Independence.html">independent</a> random variables, each with the distribution of \(X\). The <dfn>method of moments</dfn> is a technique for constructing <a href="Estimators.html">estimators</a> of the parameters that is based on matching the <em>sample moments</em> with the corresponding <em>distribution moments</em>.</p>
+
+<div class="unit">
+	<p class="dfn">Let \(\mu^{(j)}(\bs{\theta})\) denote the \(j\)th <a href="../expect/Properties.html#mom">moment</a> of \(X\) about 0:
+	\[ \mu^{(j)}(\bs{\theta}) = \E\left(X^j\right), \quad j \in \N_+ \]</p>
+</div>
+
+<p>Note that we are emphasizing the dependence of these moments on the vector of parameters \(\bs{\theta}\). Note also that \(\mu^{(1)}(\bs{\theta})\) is just the mean of \(X\), which we usually denote simply by \(\mu\).</p>
+
+<div class="unit">
+	<p class="dfn">Let \(M^{(j)}(\bs{X})\) denote the \(j\)th sample moment about 0:
+	\[ M^{(j)}(\bs{X}) = \frac{1}{n} \sum_{i=1}^n X_i^j, \quad j \in \N_+ \]</p>
+</div>
+
+<p>Equivalently, \(M^{(j)}(\bs{X})\) is the sample mean for the random sample \(\left(X_1^j, X_2^j, \ldots, X_n^j\right)\) from the distribution of \(X^j\). Note that we are emphasizing the dependence of the sample moments on the sample \(\bs{X}\). Note also that \(M^{(1)}(\bs{X})\) is just the ordinary sample mean, which we usually just denote by \(M\) (or by \( M_n \) if we wish to emphasize the dependence on the sample size). From our previous work, we know that \(M^{(j)}(\bs{X})\) is an unbiased and consistent estimator of \(\mu^{(j)}(\bs{\theta})\) for each \(j\). Here's how the method works:</p>
+
+<div class="unit" id="mom">
+	<p class="dfn">To construct the <dfn>method of moments</dfn> estimators \(\left(W_1, W_2, \ldots, W_k\right)\) for the parameters \((\theta_1, \theta_2, \ldots, \theta_k)\) respectively, we consider the equations
+	\[ \mu^{(j)}(W_1, W_2, \ldots, W_k) = M^{(j)}(X_1, X_2, \ldots, X_n) \]
+	consecutively for \( j \in \N_+ \) until we are able to solve for \(\left(W_1, W_2, \ldots, W_k\right)\) in terms of \(\left(M^{(1)}, M^{(2)}, \ldots\right)\).</p>
+</div>
+
+<p>The equations for \( j \in \{1, 2, \ldots, k\} \) give \(k\) equations in \(k\) unknowns, so there is hope (but no guarantee) that the equations can be solved for \( (W_1, W_2, \ldots, W_k) \) in terms of \( (M^{(1)}, M^{(2)}, \ldots, M^{(k)}) \). In fact, sometimes we need equations with \( j \gt k \). Exercise <a href="#bet2" class="ref"></a> gives a simple example. The method of moments can be extended to parameters associated with bivariate or more general multivariate distributions, by matching sample product moments with the corresponding distribution product moments. The method of moments also sometimes makes sense when the sample variables \( (X_1, X_2, \ldots, X_n) \) are not independent, but at least are identically distributed. The <a href="#hyp" >hypergeometric model</a> in the subsection below is an example of this. </p>
+
+<p>Of course, the method of moments estimators depend on the sample size \( n \in \N_+ \). We have suppressed this so far, to keep the notation simple. But in the applications below, we put the notation back in because we want to discuss asymptotic behavior.</p>
+
+<h4 id="est">Estimates for the Mean and Variance</h4>
+
+<p>Estimating the <a href="../expect/Properties.html">mean</a> and <a href="../expect/Variance.html">variance</a> of a distribution are the simplest applications of the method of moments. Throughout this subsection, we assume that we have a basic real-valued random variable \( X \) with \( \mu = \E(X) \in \R \) and \( \sigma^2 = \var(X) \in (0, \infty) \). Occasionally we will also need \( \sigma_4 = \E[(X - \mu)^4] \), the fourth central moment. We sample from the distribution of \( X \) to produce a sequence \( \bs X = (X_1, X_2, \ldots) \) of independent variables, each with the distribution of \( X \). For each \( n \in \N_+ \), \( \bs X_n = (X_1, X_2, \ldots, X_n) \) is a random sample of size \( n \) from the distribution of \( X \). We start by estimating the mean, which is essentially trivial by this method.</p>
+
+<div class="unit">
+	<p class="math">Suppose that the mean \(\mu\) is unknown. The method of moments estimator of \( \mu \) based on \( \bs X_n \) is the sample mean
+	\[ M_n = \frac{1}{n} \sum_{i=1}^n X_i\]</p>
+	<ol class="sub">
+		<li>\( \E(M_n) = \mu \) so \( M_n \) is unbiased for \( n \in \N_+ \)</li>
+		<li>\( \var(M_n) = \sigma^2/n \) for \( n \in \N_+ \)so \( \bs M = (M_1, M_2, \ldots) \) is consistent.</li>
+	</ol>
+	<details>
+		<summary>Details:</summary>
+		<p>It does not get any more basic than this. The method of moments works by matching the distribution mean with the sample mean. The fact that \( \E(M_n) = \mu \) and \( \var(M_n) = \sigma^2 / n \) for \( n \in \N_+ \) are properties that we have seen several times before.</p>
+	</details>
+</div>
+
+<p>Estimating the variance of the distribution, on the other hand, depends on whether the distribution mean \( \mu \) is known or unknown. First we will consider the more realistic case when the mean in also unknown. Recall that for \( n \in \{2, 3, \ldots\} \), the <a href="../sample/Variance.html">sample variance</a> based on \( \bs X_n \) is 
+\[ S_n^2 = \frac{1}{n - 1} \sum_{i=1}^n (X_i - M_n)^2 \]
+Recall also that \(\E(S_n^2) = \sigma^2\) so \( S_n^2 \) is unbiased for \( n \in \{2, 3, \ldots\} \), and that \(\var(S_n^2) = \frac{1}{n} \left(\sigma_4 - \frac{n - 3}{n - 1} \sigma^4 \right)\) so \( \bs S^2 = (S_2^2, S_3^2, \ldots) \) is consistent.</p>
+
+<div class="unit">
+	<p class="math">Suppose that the mean \( \mu \) and the variance \( \sigma^2 \) are both unknown. For \( n \in \N_+ \), the method of moments estimator of \(\sigma^2\) based on \( \bs X_n \) is
+	\[T_n^2 = \frac{1}{n} \sum_{i=1}^n (X_i - M_n)^2\]</p>
+	<ol class="sub">
+		<li>\(\bias(T_n^2) = -\sigma^2 / n\) for \( n \in \N_+ \) so \( \bs T^2 = (T_1^2, T_2^2, \ldots) \) is asymptotically unbiased.</li>
+		<li>\(\mse(T_n^2) = \frac{1}{n^3}\left[(n - 1)^2 \sigma_4 - (n^2 - 5 n + 3) \sigma^4\right]\) for \( n \in \N_+ \) so \( \bs T^2 \) is consistent.</li>
+	</ol>
+	<details>
+		<summary>Details:</summary>
+
+		<p>As before, the method of moments estimator of the distribution  mean \(\mu\) is the sample mean \(M_n\). On the other hand, \(\sigma^2 = \mu^{(2)} - \mu^2\) and hence the method of moments estimator of \(\sigma^2\) is \(T_n^2 = M_n^{(2)} - M_n^2\), which simplifies to the result above. Note that \(T_n^2 = \frac{n - 1}{n} S_n^2\) for \( n \in \{2, 3, \ldots\} \).</p>
+		<ol class="sub">
+			<li>Note that \(\E(T_n^2) = \frac{n - 1}{n} \E(S_n^2) = \frac{n - 1}{n} \sigma^2\), so \(\bias(T_n^2) = \frac{n-1}{n}\sigma^2 - \sigma^2 = -\frac{1}{n} \sigma^2\).</li>
+			<li>Recall that \(\mse(T_n^2) = \var(T_n^2) + \bias^2(T_n^2)\). But \(\var(T_n^2) = \left(\frac{n-1}{n}\right)^2 \var(S_n^2)\). The result follows from substituting \(\var(S_n^2)\) given above and \(\bias(T_n^2)\) in part (a).</li>
+		</ol>
+	</details>
+</div>
+
+<p>Hence \( T_n^2 \) is negatively biased and on average underestimates \(\sigma^2\). Because of this result, \( T_n^2 \) is referred to as the <dfn>biased sample variance</dfn> to distinguish it from the ordinary (unbiased) sample variance \( S_n^2 \).</p>
+
+<p>Next let's consider the usually unrealistic (but mathematically interesting) case where the mean is known, but not the variance.</p>
+
+<div class="unit">
+	<p class="math">Suppose that the mean \( \mu \) is known and the variance \( \sigma^2 \) unknown. For \( n \in \N_+ \), the method of moments estimator of \(\sigma^2\) based on \( \bs X_n \) is 
+	\[ W_n^2 = \frac{1}{n} \sum_{i=1}^n (X_i - \mu)^2 \]</p>
+	<ol class="sub">
+		<li>\( \E(W_n^2) = \sigma^2 \) so \( W_n^2 \) is unbiased for \( n \in \N_+ \)</li>
+		<li>\(\var(W_n^2) = \frac{1}{n}(\sigma_4 - \sigma^4)\) for \( n \in \N_+ \) so \( \bs W^2 = (W_1^2, W_2^2, \ldots) \) is consistent.</li>
+	</ol>
+	<details>
+		<summary>Details:</summary>
+		<p>These results follow since \( \W_n^2 \) is the sample mean corresponding to a random sample of size \( n \) from the distribution of \( (X - \mu)^2 \).</p>
+	</details>
+</div>
+
+<p>We compared the sequence of estimators \( \bs S^2 \) with the sequence of estimators \( \bs W^2 \) in the introductory section on <a href="Estimators.html">Estimators</a>. Recall that \( \var(W_n^2) \lt \var(S_n^2) \) for \( n \in \{2, 3, \ldots\} \) but \( \var(S_n^2) / \var(W_n^2) \to 1 \) as \( n \to \infty \). There is no simple, general relationship between \( \mse(T_n^2) \) and \( \mse(S_n^2) \) or between \( \mse(T_n^2) \) and \( \mse(W_n^2) \), but the asymptotic relationship is simple.</p>
+
+<div class="unit" id="asymp">
+	<p class="math">\( \mse(T_n^2) / \mse(W_n^2) \to 1 \) and \( \mse(T_n^2) / \mse(S_n^2) \to 1 \) as \( n \to \infty \)</p>
+	<details>
+		<summary>Details:</summary>
+		<p>In light of the previous remarks, we just have to prove one of these limits. The first limit is simple, since the coefficients of \( \sigma_4 \) and \( \sigma^4 \) in \( \mse(T_n^2) \) are asymptotically \( 1 / n \) as \( n \to \infty \).</p>
+	</details>
+</div>
+
+<p>It also follows that if both \( \mu \) and \( \sigma^2 \) are unknown, then the method of moments estimator of the standard deviation \( \sigma \) is \( T = \sqrt{T^2} \). In the unlikely event that \( \mu \) is known, but \( \sigma^2 \) unknown, then the method of moments estimator of \( \sigma \) is \( W = \sqrt{W^2} \).</p>
+
+<h4>Estimating Two Parameters</h4>
+
+<p>There are several important special distributions with two paraemters; some of these are included in the computational exercises in <a href="#spe" class="ref"></a> below.  With two parameters, we can derive the method of moments estimators by matching the distribution mean and variance with the sample mean and variance, rather than matching the distribution mean and second moment with the sample mean and second moment. This alternative approach sometimes leads to easier equations. To setup the notation, suppose that a distribution on \( \R \) has parameters \( a \) and \( b \). We sample from the distribution to produce a sequence of independent variables \( \bs X = (X_1, X_2, \ldots) \), each with the common distribution. For \( n \in \N_+ \), \( \bs X_n = (X_1, X_2, \ldots, X_n) \) is a random sample of size \( n \) from the distribution. Let \( M_n \), \( M_n^{(2)} \), and \( T_n^2 \) denote the sample mean, second-order sample mean, and biased sample variance corresponding to \( \bs X_n \), and let \( \mu(a, b) \), \( \mu^{(2)}(a,  b) \), and \( \sigma^2(a, b) \) denote the mean, second-order mean, and variance of the distribution. </p>
+
+<div class="unit">
+	<p class="math">If the method of moments estimators \( U_n \) and \( V_n \) of \( a \) and \( b \), respectively, can be found by solving the first two equations
+	\[ \mu(U_n, V_n) = M_n, \quad \mu^{(2)}(U_n, V_n) = M_n^{(2)} \]
+	then \( U_n \) and \( V_n \) can also be found by solving the equations
+	\[ \mu(U_n, V_n) = M_n, \quad \sigma^2(U_n, V_n) = T_n^2 \]</p>
+	<details>
+		<summary>Details:</summary>
+		<p>Recall that \( \sigma^2(a, b) = \mu^{(2)}(a, b) - \mu^2(a, b) \). In addition, \( T_n^2 = M_n^{(2)} - M_n^2 \). Hence the equations \( \mu(U_n, V_n) = M_n \), \( \sigma^2(U_n, V_n) = T_n^2 \) are equivalent to the equations \( \mu(U_n, V_n) = M_n \), \( \mu^{(2)}(U_n, V_n) = M_n^{(2)} \).</p>
+	</details>
+</div>
+
+<p>Because of this result, the biased sample variance \( T_n^2 \) will appear in many of the estimation problems for special distributions that we consider below.</p>
+
+<h3 id="spe">Special Distributions</h3>
+
+<h4 id="norm">The Normal Distribution</h4>
+
+<p>The <a href="../special/Normal.html">normal distribution</a> with mean \( \mu \in \R \) and variance \( \sigma^2 \in (0, \infty) \) is a continuous distribution on \( \R \) with probability density function \( g \) given by
+\[ g(x) = \frac{1}{\sqrt{2 \pi} \sigma} \exp\left[-\frac{1}{2}\left(\frac{x - \mu}{\sigma}\right)^2\right], \quad x \in \R \]
+It is one of the most important distributions in probability and statistics, primarily because of the <a href="../sample/CLT.html">central limit theorem</a>.</p>
+
+<p>Suppose now that \( \bs{X} = (X_1, X_2, \ldots, X_n) \) is a random sample of size \( n \) from the normal distribution with mean \( \mu \) and variance \( \sigma^2 \). Form our general work above, we know that if \( \mu \) is unknown then the sample mean \( M \) is the method of moments estimator of \( \mu \), and if in addition, \( \sigma^2 \) is unknown then the method of moments estimator of \( \sigma^2 \) is \( T^2 \). On the other hand, in the unlikely event that \( \mu \) is known then \( W^2 \) is the method of moments estimator of \( \sigma^2 \). Our goal is to see how the comparisons above simplify for the normal distribution.</p>
+
+<div class="unit" id="norm1">
+	<p class="math">Mean square errors of \( S_n^2 \) and \( T_n^2 \).</p>
+	<ol class="sub">
+		<li>\(\mse(T^2) = \frac{2 n - 1}{n^2} \sigma^4\)</li>
+		<li>\(\mse(S^2) = \frac{2}{n - 1} \sigma^4\)</li>
+		<li>\(\mse(T^2) \lt \mse(S^2)\) for \(n \in \{2, 3, \ldots, \}\)</li>
+	</ol>
+	<details>
+	<summary>Details:</summary>
+	<p>Recall that for the normal distribution, \(\sigma_4 = 3 \sigma^4\). Substituting this into the general results gives parts (a) and (b). Part (c) follows from (a) and (b). Of course the asymptotic relative efficiency is still 1, from <a href="#asymp" class="ref"></a>.</p>
+	</details>
+</div>
+
+<p>So \(S^2\) and \(T^2\) are multiplies of one another; \(S^2\) is unbiased, but when the sampling distribution is normal, \(T^2\) has smaller mean square error. Surprisingly, \(T^2\) has smaller mean square error even than \(W^2\).</p>
+
+<div class="unit" id="norm2">
+	<p class="math">Mean square errors of \( T^2 \) and \( W^2 \).</p>
+	<ol class="sub">
+		<li>\(\mse(W^2) = \frac{2}{n} \sigma^4\)</li>
+		<li>\(\mse(T^2) \lt \mse(W^2)\) for \(n \in \{2, 3, \ldots\}\)</li>
+	</ol>
+	<details>
+		<summary>Details:</summary>
+		<p>Again, since the sampling distribution is normal, \(\sigma_4 = 3 \sigma^4\). Substituting this into the gneral formula for \(\var(W_n^2)\) gives part (a).</p>
+	</details>
+</div>
+
+<div class="unit">
+	<p class="app">Run the <a href="JavaScript:openAncillary('../apps/NormalEstimate.html')" class="ancillary">normal estimation experiment</a> 1000 times for several values of the sample size \(n\) and the parameters \(\mu\) and \(\sigma\). Compare the empirical bias and mean square error of \(S^2\) and of \(T^2\) to their theoretical values. Which estimator is better in terms of bias? Which estimator is better in terms of mean square error?</p>
+</div>
+
+<p>Next we consider estimators of the standard deviation \( \sigma \). As noted in the general discussion above, \( T = \sqrt{T^2} \) is the method of moments estimator when \( \mu \) is unknown, while \( W = \sqrt{W^2} \) is the method of moments estimator in the unlikely event that \( \mu \) is known. Another natural estimator, of course, is \( S = \sqrt{S^2} \), the usual sample standard deviation. The following sequence, defined in terms of the <a href="../special/Gamma.html">gamma function</a> turns out to be important in the analysis of all three estimators.</p>
+
+<div class="unit" id="norm3">
+	<p class="math">Consider the sequence
+	\[ a_n = \sqrt{\frac{2}{n}} \frac{\Gamma[(n + 1) / 2)}{\Gamma(n / 2)}, \quad n \in \N_+ \]
+	Then \( 0 \lt a_n \lt 1 \) for \( n \in \N_+ \) and \( a_n \uparrow 1 \) as \( n \uparrow \infty \).</p>
+</div>
+
+<p>First, assume that \( \mu \) is known so that \( W_n \) is the method of moments estimator of \( \sigma \).</p>
+
+<div class="unit" id="norm4">
+	<p class="math">For \( n \in \N_+ \),
+	<ol class="sub">
+		<li>\( \E(W) = a_n \sigma \)</li>
+		<li>\( \bias(W) = (a_n - 1) \sigma \)</li>
+		<li>\( \var(W) = \left(1 - a_n^2\right) \sigma^2 \)</li>
+		<li>\( \mse(W) = 2 (1 - a_n) \sigma^2 \)</li>
+	</ol>
+	<details>
+		<summary>Details:</summary>
+		<p>Recall that \(U^2 =  n W^2 / \sigma^2 \) has the <a href="../special/ChiSquare.html">chi-square distribution</a> with \( n \) degrees of freedom, and hence \( U \) has the <a href="../special/ChiSquare.html#chi">chi distribution</a> with \( n \) degrees of freedom. Solving gives
+		\[ W = \frac{\sigma}{\sqrt{n}} U \]
+		From the formulas for the mean and variance of the chi distribution we have
+		\begin{align*}
+			\E(W) &amp; = \frac{\sigma}{\sqrt{n}} \E(U) = \frac{\sigma}{\sqrt{n}} \sqrt{2} \frac{\Gamma[(n + 1) / 2)}{\Gamma(n / 2)} = \sigma a_n \\
+			\var(W) &amp; = \frac{\sigma^2}{n} \var(U) = \frac{\sigma^2}{n}\left\{n - [\E(U)]^2\right\} = \sigma^2\left(1 - a_n^2\right)
+		\end{align*} </p>
+	</details>
+</div>
+
+<p>So \( W \) is negatively biased as an estimator of \( \sigma \) but asymptotically unbiased and consistent. Of course we know that in general (regardless of the underlying distribution), \( W^2 \) is an unbiased estimator of \( \sigma^2 \) and so \( W \) is negatively biased as an estimator of \( \sigma \). In the normal case, since \( a_n \) involves no unknown parameters, the statistic \( W / a_n \) is an unbiased estimator of \( \sigma \). Next we consider the usual sample standard deviation \( S \).</p>
+
+<div class="unit" id="norm5">
+	<p class="math">For \( n \in \{2, 3, \ldots\} \),
+	<ol class="sub">
+		<li>\( \E(S) = a_{n-1} \sigma \)</li>
+		<li>\( \bias(S) = (a_{n-1} - 1) \sigma \)</li>
+		<li>\( \var(S) = \left(1 - a_{n-1}^2\right) \sigma^2 \)</li>
+		<li>\( \mse(S) = 2 (1 - a_{n-1}) \sigma^2 \)</li>
+	</ol>
+	<details>
+		<summary>Details:</summary>
+		<p>Recall that \(V^2 =  (n - 1) S^2 / \sigma^2 \) has the <a href="../special/ChiSquare.html">chi-square distribution</a> with \( n - 1 \) degrees of freedom, and hence \( V \) has the <a href="../special/ChiSquare.html#chi">chi distribution</a> with \( n - 1 \) degrees of freedom. The proof now proceeds just as in <a href="#norm4" class="ref"></a>, but with \( n - 1 \) replacing \( n \).</p>
+	</details>
+</div>
+
+<p>As with \( W \), the statistic \( S \) is negatively biased as an estimator of \( \sigma \) but asymptotically unbiased, and also consistent. Since \( a_{n - 1}\) involves no unknown parameters, the statistic \( S / a_{n-1} \) is an unbiased estimator of \( \sigma \). Note also that, in terms of bias and mean square error, \( S \) with sample size \( n \) behaves like \( W \) with sample size \( n - 1 \). Finally we consider \( T \), the method of moments estimator of \( \sigma \) when \( \mu \) is unknown.</p>
+
+<div class="unit" id="norm6">
+	<p class="math">For \( n \in \{2, 3, \ldots\} \),</p>
+	<ol class="sub">
+		<li>\( \E(T) = \sqrt{\frac{n - 1}{n}} a_{n-1} \sigma \)</li>
+		<li>\( \bias(T) = \left(\sqrt{\frac{n - 1}{n}} a_{n-1} - 1\right) \sigma \)</li>
+		<li>\( \var(T) = \frac{n - 1}{n} \left(1 - a_{n-1}^2 \right) \sigma^2 \)</li>
+		<li>\( \mse(T) = \left(2 - \frac{1}{n} - 2 \sqrt{\frac{n-1}{n}} a_{n-1} \right) \sigma^2 \)</li>
+	</ol>
+	<details>
+		<summary>Details:</summary>
+		<p>The results follow easily from <a href="#norm5" class="ref"></a> since \( T_n = \sqrt{\frac{n - 1}{n}} S_n \).</p>
+	</details>
+</div>
+
+<h4 id="ber">The Bernoulli Distribution</h4>
+
+<p>Recall that an <dfn>indicator variable</dfn> is a random variable \( X \) that takes only the values 0 and 1. The distribution of \( X \) is known as the <dfn>Bernoulli distribution</dfn>, named for <a href="JavaScript:openAncillary('../biographies/Bernoulli.html')" class="ancillary">Jacob Bernoulli</a>, and has probability density function \( g \) given by
+\[ g(x) = p^x (1 - p)^{1 - x}, \quad x \in \{0, 1\} \]
+where \( p \in (0, 1) \) is the <dfn>success parameter</dfn>. The mean of the distribution is \( p \) and the variance is \( p (1 - p) \).</p>
+
+<p>Suppose now that \( \bs{X} = (X_1, X_2, \ldots, X_n) \) is a random sample of size \( n \) from the Bernoulli distribution with unknown success parameter \( p \). Since the mean of the distribution is \( p \), it follows from our general work in <a href="#est" class="ref"></a> that the method of moments estimator of \( p \) is \( M \), the sample mean. In this case, the sample \( \bs{X} \) is a sequence of <a href="../bernoulli/index.html">Bernoulli Trials</a>, and \( M \) has a scaled version of the <a href="../bernoulli/Binomial.html">binomial distribution</a> with parameters \( n \) and \( p \):
+\[ \P\left(M = \frac{k}{n}\right) = \binom{n}{k} p^k (1 - p)^{n - k}, \quad k \in \{0, 1, \ldots, n\} \]
+Note that since \( X^k = X \) for every \( k \in \N_+ \), it follows that \( \mu^{(k)} = p \) and \( M^{(k)} = M \) for every \( k \in \N_+ \). So any of the method of moments equations would lead to the sample mean \( M \) as the estimator of \( p \). Although very simple, this is an important application, since Bernoulli trials are found embedded in all sorts of estimation problems, such as empirical probability density functions and empirical distribution functions.</p>
+
+<h4 id="geo">The Geometric Distribution</h4>
+
+<p>The <dfn>geometric distribution</dfn> on \(\N_+\) with success parameter \(p \in (0, 1)\) has probability density function \( g \) given by
+\[ g(x) = p (1 - p)^{x-1}, \quad x \in \N_+ \]
+The <a href="../bernoulli/Geometric.html">geometric distribution</a> on \( \N_+ \) governs the number of trials needed to get the first success in a sequence of <a href="../bernoulli/index.html">Bernoulli Trials</a> with success parameter \( p \). The mean of the distribution is \(\mu = 1 / p\).</p>
+
+<div class="unit">
+	<p class="math">Suppose that \(\bs{X} = (X_1, X_2, \ldots, X_n)\) is a random sample of size \(n\) from the geometric distribution on \( \N_+ \) with unknown success parameter \(p\). The method of moments estimator of \(p\) is 
+	\[U = \frac{1}{M}\]</p>
+	<details>
+		<summary>Details:</summary>
+		<p>The method of moments equation for \(U\) is \(1 / U = M\).</p>
+	</details>
+</div>
+
+<p>The geometric distribution on \( \N \) with success parameter \( p \in (0, 1) \) has probability density function 
+\[ g(x) = p (1 - p)^x, \quad x \in \N \]
+This version of the geometric distribution governs the number of failures before the first success in a sequence of Bernoulli trials. The mean of the distribution is \( \mu = (1 - p) \big/ p \).</p>
+
+<div class="unit">
+	<p class="math">Suppose that \(\bs{X} = (X_1, X_2, \ldots, X_n)\) is a random sample of size \(n\) from the geometric distribution on \( \N \) with unknown parameter \(p\). The method of moments estimator of \(p\) is 
+	\[U = \frac{1}{M + 1}\]</p>
+	<details>
+		<summary>Details:</summary>
+		<p>The method of moments equation for \(U\) is \((1 - U) \big/ U = M\).</p>
+	</details>
+</div>
+
+<h4>The Negative Binomial Distribution</h4>
+
+<p>More generally, the <a href="../bernoulli/NegativeBinomial.html">negative binomial distribution</a> on \( \N \) with shape parameter \( k \in (0, \infty) \) and success parameter \( p \in (0, 1) \) has probability density function
+\[ g(x) = \binom{x + k - 1}{k - 1} p^k (1 - p)^x, \quad x \in \N \]
+If \( k \) is a positive integer, then this distribution governs the number of failures before the \( k \)th success in a sequence of <a href="../bernoulli/index.html">Bernoulli trials</a> with success parameter \( p \). However, the distribution makes sense for general \( k \in (0, \infty) \). The mean of the distribution is \( k (1 - p) \big/ p \) and the variance is \( k (1 - p) \big/ p^2 \). Suppose now that \(\bs{X} = (X_1, X_2, \ldots, X_n)\) is a random sample of size \(n\) from the negative binomial distribution on \( \N \) with shape parameter \( k \) and success parameter \( p \)</p>
+
+<div class="unit">
+	<p class="math">If \( k \) and \( p \) are unknown, then the corresponding method of moments estimators \( U \) and \( V \) are
+	\[ U = \frac{M^2}{T^2 - M}, \quad V = \frac{M}{T^2} \]</p>
+	<details>
+		<summary>Details:</summary>
+		<p>Matching the distribution mean and variance to the sample mean and variance gives the equations
+		\[ U \frac{1 - V}{V} = M, \quad U \frac{1 - V}{V^2} = T^2 \]</p>
+	</details>
+</div>
+
+<p>As usual, the results are nicer when one of the parameters is known.</p>
+
+<div class="unit">
+	<p class="math">Suppose that \( k \) is known but \( p \) is unknown. The method of moments estimator \( V_k \) of \( p \) is
+	\[ V_k = \frac{k}{M + k} \]</p>
+	<details>
+		<summary>Details:</summary>
+		<p>Matching the distribution mean to the sample mean gives the equation
+		\[ k \frac{1 - V_k}{V_k} = M \]</p>
+	</details>
+</div>
+
+<div class="unit">
+	<p class="math">Suppose that \( k \) is unknown but \( p \) is known. The method of moments estimator of \( k \) is
+	\[ U_p = \frac{p}{1 - p} M \]</p>
+	<ol class="sub">
+		<li>\( \E(U_p) = k \) so \( U_p \) is unbiased.</li>
+		<li>\( \var(U_p) = \frac{k}{n (1 - p)} \) so \( U_p \) is consistent.</li>
+	</ol>
+	<details>
+		<summary>Details:</summary>
+		<p>Matching the distribution mean to the sample mean gives the equation \( U_p \frac{1 - p}{p} = M\).</p>
+		<ol class="sub">
+			<li>\( E(U_p) = \frac{p}{1 - p} \E(M)\) and \(\E(M) = \frac{1 - p}{p} k\)</li>
+			<li>\( \var(U_p) = \left(\frac{p}{1 - p}\right)^2 \var(M) \) and \( \var(M) = \frac{1}{n} \var(X) = \frac{1 - p}{n p^2} \)</li>
+		</ol>
+	</details>
+</div>
+
+<h4>The Poisson Distribution</h4>
+
+<p>The <a href="../poisson/Poisson.html">Poisson distribution</a> with parameter \( r \in (0, \infty) \) is a discrete distribution on \( \N \) with probability density function \( g \) given by
+\[ g(x) = e^{-r} \frac{r^x}{x!}, \quad x \in \N \]
+The mean and variance are both \( r \). The distribution is named for <a href="JavaScript:openAncillary('../biographies/Poisson.html')" class="ancillary">Simeon Poisson</a> and is widely used to model the number of <q>random points</q> is a region of time or space, particularly in the context of the <a href="../poisson/index.html">Poisson process</a>, The parameter \( r \) is proportional to the size of the region, with the proportionality constant playing the role of the average <dfn>rate</dfn> at which the points are distributed in time or space.</p>
+
+<p>Suppose now that \( \bs{X} = (X_1, X_2, \ldots, X_n) \) is a random sample of size \( n \) from the Poisson distribution with parameter \( r \). Since \( r \) is the mean, it follows from our general work in <a href="#est" class="ref"></a> that the method of moments estimator of \( r \) is the sample mean \( M \).</p>
+
+<h4 id="gam">The Gamma Distribution</h4>
+
+<p>The <a href="../special/Gamma.html">gamma distribution</a> with shape parameter \(k \in (0, \infty) \) and scale parameter \(b \in (0, \infty)\) is a continuous distribution on \( (0, \infty) \) with probability density function \( g \) given by
+\[ g(x) = \frac{1}{\Gamma(k) b^k} x^{k-1} e^{-x / b}, \quad x \in (0, \infty) \]
+The gamma probability density function has a variety of shapes, and so this distribution is used to model various types of positive random variables. When \(k \in \N_+\), the gamma distribution is also known as the <a href="../poisson/Gamma.html">Erlang distribution</a>, named for <a href="JavaScript:openAncillary('../biographies/Erlang.html')" class="ancillary">Agner Erlang</a>. In this case, the distribution governs the time of the \(k\)th arrival in the <a href="../poisson/index.html">Poisson process</a>. The mean is \(\mu = k b\) and the variance is \(\sigma^2 = k b^2\).</p>
+
+<p>Suppose now that \(\bs{X} = (X_1, X_2, \ldots, X_n)\) is a random sample from the gamma distribution with shape parameter \(k\) and scale parameter \(b\).</p>
+
+<div class="unit" id="gam1">
+	<p class="math">
+	Suppose that \(k\) and \(b\) are both unknown, and let \(U\) and \(V\) be the corresponding method of moments estimators. Then
+	\[ U = \frac{M^2}{T^2}, \quad V = \frac{T^2}{M}\]</p>
+	<details>
+		<summary>Details:</summary>
+		<p>Matching the distribution mean and variance with the sample mean and variance leads to the equations \(U V = M\), \(U V^2 = T^2\). Solving gives the results.</p>
+	</details>
+</div>
+
+<p>The method of moments estimators of \(k\) and \(b\) given in <a href="#gam1" class="ref"></a> are complicated, nonlinear functions of the sample mean \(M\) and the sample variance \(T^2\). So computing the bias and mean square errors of these estimators are difficult problems that we will not attempt. However, we can judge the quality of the estimators empirically, through simulations.</p>
+
+<p>When one of the parameters is known, the method of moments estimator of the other parameter is much simpler.</p>
+
+<div class="unit">
+	<p class="math">Suppose that \(k\) is unknown, but \(b\) is known. The method of moments estimator of \( k \) is 
+	\[U_b = \frac{M}{b}\]</p>
+	<ol class="sub">
+		<li>\( \E(U_b) = k \) so \(U_b\) is unbiased.</li>
+		<li>\(\var(U_b) = k / n\) so \(U_b\) is consistent.</li>
+	</ol>
+	<details>
+		<summary>Details:</summary>
+		<p>If \(b\) is known, then the method of moments equation for \(U_b\) is \(b U_b = M\). Solving gives (a). Next, \(\E(U_b) = \E(M) / b = k b / b = k\), so \(U_b\) is unbiased.  Finally \(\var(U_b) = \var(M) / b^2 = k b ^2 / (n b^2) = k / n\).</p>
+	</details>
+</div>
+
+<div class="unit">
+	<p class="math">Suppose that \(b\) is unknown, but \(k\) is known. The method of moments estimator of \(b\) is
+	\[V_k = \frac{M}{k}\]</p>
+	<ol class="sub">
+		<li>\( \E(V_k) = b \) so \(V_k\) is unbiased.</li>
+		<li>\( \var(V_k) = b^2 / k n \) so that \(V_k\) is consistent.</li>
+	</ol>
+	<details>
+		<summary>Details:</summary>
+		<p>If \(k\) is known, then the method of moments equation for \(V_k\) is \(k V_k = M\). Solving gives (a). Next, \(\E(V_k) = \E(M) / k = k b / k = b\), so \(V_k\) is unbiased.  Finally \(\var(V_k) = \var(M) / k^2 = k b ^2 / (n k^2) = b^2 / k n\).</p>
+	</details>
+</div>
+
+<div class="unit">
+	<p class="app">Run the <a href="JavaScript:openAncillary('../apps/GammaEstimate.html')" class="ancillary">gamma estimation experiment</a> 1000 times for several different values of the sample size \(n\) and the parameters \(k\) and \(b\). Note the empirical bias and mean square error of the estimators \(U\), \(V\), \(U_b\), and \(V_k\). One would think that the estimators when one of the parameters is known should work better than the corresponding estimators when both parameters are unknown; but investigate this question empirically.</p>
+</div>
+
+<h4 id="bet">The Beta Distribution</h4>
+
+<p>The <a href="../special/Beta.html">beta distribution</a> with left parameter \(a \in (0, \infty) \) and right parameter \(b \in (0, \infty)\) is a continuous distribution on \( (0, 1) \) with probability density function \( g \) given by
+\[ g(x) = \frac{1}{B(a, b)} x^{a-1} (1 - x)^{b-1}, \quad 0 \lt x \lt 1 \]
+The beta probability density function has a variety of shapes, and so this distribution is widely used to model random probabilities and proportions and (properly scaled) various types of random variables that take values in bounded intervals. The first two moments are
+\[\mu = \frac{a}{a + b}, \quad \mu^{(2)} = \frac{a (a + 1)}{(a + b)(a + b + 1)}\]
+Suppose now that \(\bs{X} = (X_1, X_2, \ldots, X_n)\) is a random sample of size \(n\) from the beta distribution with left parameter \(a\) and right parameter \(b\).</p>
+
+<div class="unit" id="bet1">
+	<p class="math">Suppose that \(a\) and \(b\) are both unknown, and let \(U\) and \(V\) be the corresponding method of moments estimators. Then
+	\[U = \frac{M \left(M - M^{(2)}\right)}{M^{(2)} - M^2}, \quad V = \frac{(1 - M)\left(M - M^{(2)}\right)}{M^{(2)} - M^2}\]</p>
+	<details>
+		<summary>Details:</summary>
+		<p>The method of moments equations for \(U\) and \(V\) are
+		\[\frac{U}{U + V} = M, \quad \frac{U(U + 1)}{(U + V)(U + V + 1)} = M^{(2)}\]
+		Solving gives the result.</p>
+	</details>
+</div>
+
+<p>The method of moments estimators of \(a\) and \(b\) given in <a href="#bet1" class="ref"></a> are complicated nonlinear functions of the sample moments \(M\) and \(M^{(2)}\). Thus, we will not attempt to determine the bias and mean square errors analytically, but you will have an opportunity to explore them empricially through a simulation.</p>
+
+<div class="unit">
+	<p class="math">Suppose that \(a\) is unknown, but \(b\) is known. Let \(U_b\) be the method of moments estimator of \(a\). Then
+	\[ U_b = b \frac{M}{1 - M} \]</p>
+	<details>
+		<summary>Details:</summary>
+		<p>If \(b\) is known then the method of moments equation for \(U_b\) as an estimator of \(a\) is \(U_b \big/ (U_b + b) = M\). Solving for \(U_b\) gives the result.</p>
+	</details>
+</div>
+
+<div class="unit">
+	<p class="math">Suppose that \(b\) is unknown, but \(a\) is known. Let \(V_a\) be the method of moments estimator of \(b\). Then
+	\[ V_a = a \frac{1 - M}{M} \]</p>
+	<details>
+		<summary>Details:</summary>
+		<p>If \(a\) is known then the method of moments equation for \(V_a\) as an estimator of \(b\) is \(a \big/ (a + V_a) = M\). Solving for \(V_a\) gives the result.</p>
+	</details>
+</div>
+
+<div class="unit">
+	<p class="app">Run the <a href="JavaScript:openAncillary('../apps/BetaEstimate.html')" class="ancillary"> beta estimation experiment</a> 1000 times for several different values of the sample size \(n\) and the parameters \(a\) and \(b\). Note the empirical bias and mean square error of the estimators \(U\), \(V\), \(U_b\), and \(V_a\). One would think that the estimators when one of the parameters is known should work better than the corresponding estimators when both parameters are unknown; but investigate this question empirically.</p>
+</div>
+
+<p>Exercse <a href="#bet2" class="ref"></a> next gives a distribution with just one parameter but the second moment equation from the method of moments is needed to derive an estimator.</p>
+
+<div class="unit" id="bet2">
+	<p class="math">Suppose that \( \bs{X} = (X_1, X_2, \ldots, X_n) \) is a random sample from the <dfn>symmetric</dfn> beta distribution, in which the left and right parameters are equal to an unknown value \( c \in (0, \infty) \). The method of moments estimator of \( c \) is
+	\[ U = \frac{2 M^{(2)}}{1 - 4 M^{(2)}} \]</p>
+	<details>
+		<summary>Details:</summary>
+		<p>Note that the mean \( \mu \) of the symmetric distribution is \( \frac{1}{2} \), independently of \( c \), and so the first equation in the method of moments is useless. However, matching the second distribution moment to the second sample moment leads to the equation
+		\[ \frac{U + 1}{2 (2 U + 1)} = M^{(2)} \]
+		Solving gives the result.</p>
+	</details>
+</div>
+
+<h4 id="par">The Pareto Distribution</h4>
+
+<p>The <a href="../special/Pareto.html">Pareto distribution</a> with shape parameter \(a \in (0, \infty)\) and scale parameter \(b \in (0, \infty)\) is a continuous distribution on \( (b, \infty) \) with probability density function \( g \) given by
+\[ g(x) = \frac{a b^a}{x^{a + 1}}, \quad b \le x \lt \infty \]
+The Pareto distribution is named for <a href="JavaScript:openAncillary('../biographies/Pareto.html')" class="ancillary">Vilfredo Pareto</a> and is a highly skewed and <dfn>heavy-tailed</dfn> distribution. It is often used to model income and certain other types of positive random variables. If \(a \gt 2\), the first two moments of the Pareto distribution are 
+\[\mu = \frac{a b}{a - 1}, \quad \mu^{(2)} = \frac{a b^2}{a - 2}\]
+Suppose now that \(\bs{X} = (X_1, X_2, \ldots, X_n)\) is a random sample of size \(n\) from the Pareto distribution with shape parameter \(a \gt 2\) and scale parameter \(b \gt 0\).</p>
+
+<div class="unit" id="par1">
+	<p class="math">Suppose that \(a\) and \(b\) are both unknown, and let \(U\) and \(V\) be the corresponding method of moments estimators. Then
+	\begin{align}
+		U &amp; = 1 + \sqrt{\frac{M^{(2)}}{M^{(2)} - M^2}} \\
+		V &amp; = \frac{M^{(2)}}{M} \left( 1 - \sqrt{\frac{M^{(2)} - M^2}{M^{(2)}}} \right)
+	\end{align}</p>
+	<details>
+		<summary>Details:</summary>
+		<p>The method of moments equations for \(U\) and \(V\) are
+		\begin{align}
+			\frac{U V}{U - 1} &amp; = M \\
+			\frac{U V^2}{U - 2} &amp; = M^{(2)}
+		\end{align}
+		Solving for \(U\) and \(V\) gives the results.</p>
+	</details>
+</div>
+
+<p>The method of moments estimators in example <a href="#par1" class="ref"></a> are complicatd nonlinear functions of \(M\) and \(M^{(2)}\), so computing the bias and mean square error of the estimator is difficult. Instead, we can investigate the bias and mean square error empirically, through a simulation.
+
+<div class="unit">
+	<p class="app">Run the <a href="JavaScript:openAncillary('../apps/ParetoEstimate.html')" class="ancillary"> Pareto estimation experiment</a> 1000 times for several different values of the sample size \(n\) and the parameters \(a\) and \(b\). Note the empirical bias and mean square error of the estimators \(U\) and \(V\).</p>
+</div>
+
+<p>When one of the parameters is known, the method of moments estimator for the other parameter is simpler.</p>
+
+<div class="unit">
+	<p class="math">Suppose that \(a\) is unknown, but \(b\) is known. Let \(U_b\) be the method of moments estimator of \(a\). Then
+	\[ U_b = \frac{M}{M - b}\]</p>
+	<details>
+		<summary>Details:</summary>
+		<p>If \(b\) is known then the method of moment equation for \(U_b\) as an estimator of \(a\) is \(b U_b \big/ (U_b - 1) = M\). Solving for \(U_b\) gives the result.</p>
+	</details>
+</div>
+
+<div class="unit">
+	<p class="math">Suppose that \(b\) is unknown, but \(a\) is known. Let \(V_a\) be the method of moments estimator of \(b\). Then
+	\[V_a = \frac{a - 1}{a}M\]</p>
+	<ol class="sub">
+		<li>\( \E(V_a) = b \) so \(V_a\) is unbiased.</li>
+		<li>\(\var(V_a) = \frac{b^2}{n a (a - 2)}\) so \(V_a\) is consistent.</li>
+	</ol>
+	<details>
+		<summary>Details:</summary>
+		<p>If \(a\) is known then the method of moments equation for \(V_a\) as an estimator of \(b\) is \(a V_a \big/ (a - 1) = M\). Solving for \(V_a\) gives (a). Next, \(\E(V_a) = \frac{a - 1}{a} \E(M) = \frac{a - 1}{a} \frac{a b}{a - 1} = b\) so \(V_a\) is unbiased. Finally, \(\var(V_a) = \left(\frac{a - 1}{a}\right)^2 \var(M) = \frac{(a - 1)^2}{a^2} \frac{a b^2}{n (a - 1)^2 (a - 2)} = \frac{b^2}{n a (a - 2)}\).</p>
+	</details>
+</div>
+
+<h4 id="uni">The Uniform Distribution</h4>
+
+<p>The (continuous) <a href="../special/UniformContinuous.html">uniform distribution</a> with location parameter \( a \in \R \) and scale parameter \( h \in (0, \infty) \) has probability density function \( g \) given by 
+\[ g(x) = \frac{1}{h}, \quad x \in [a, a + h] \]
+The distribution models a point chosen <q>at random</q> from the interval \( [a, a + h] \). The mean of the distribution is \( \mu = a + \frac{1}{2} h \) and the variance is \( \sigma^2 = \frac{1}{12} h^2 \). Suppose now that \( \bs{X} = (X_1, X_2, \ldots, X_n) \) is a random sample of size \( n \) from the uniform distribution.</p>
+
+<div class="unit">
+	<p class="math">Suppose that \( a \) and \( h \) are both unknown, and let \( U \) and \( V \) denote the corresponding method of moments estimators. Then
+	\[ U = 2 M - \sqrt{3} T, \quad V = 2 \sqrt{3} T \]</p>
+	<details>
+		<summary>Details:</summary>
+		<p>Matching the distribution mean and variance to the sample mean and variance leads to the equations \( U + \frac{1}{2} V = M \) and \( \frac{1}{12} V^2 = T^2 \). Solving gives the result.</p>
+	</details>
+</div>
+
+<p>As usual, we get nicer results when one of the parameters is known.</p>
+
+<div class="unit">
+	<p class="math">Suppose that \( a \) is known and \( h \) is unknown, and let \( V_a \) denote the method of moments estimator of \( h \). Then 
+	\[ V_a = 2 (M - a) \]</p>
+	<ol class="sub">
+		<li>\( \E(V_a) = h \) so \( V \) is unbiased.</li>
+		<li>\( \var(V_a) = \frac{h^2}{3 n} \) so \( V_a \) is consistent.</li>
+	</ol>
+	<details>
+		<summary>Details:</summary>
+		<p>Matching the distribution mean to the sample mean leads to the equation \( a + \frac{1}{2} V_a = M \). Solving gives the result.</p>
+		<ol class="sub">
+			<li>\( \E(V_a) = 2[\E(M) - a] = 2(a + h/2 - a) = h \)</li>
+			<li>\( \var(V_a) = 4 \var(M) = \frac{h^2}{3 n} \)</li>
+		</ol>
+	</details>
+</div>
+
+<div class="unit">
+	<p class="math">Suppose that \( h \) is known and \( a \) is unknown, and let \( U_h \) denote the method of moments estimator of \( a \). Then 
+	\[ U_h = M - \frac{1}{2} h \]</p>
+	<ol class="sub">
+		<li>\( \E(U_h) = a \) so \( U_h \) is unbiased.</li>
+		<li>\( \var(U_h) = \frac{h^2}{12 n} \) so \( U_h \) is consistent.</li>
+	</ol>
+	<details>
+		<summary>Details:</summary>
+		<p>Matching the distribution mean to the sample mean leads to the quation \( U_h + \frac{1}{2} h = M \). Solving gives the result.</p>
+		<ol class="sub">
+			<li>\( \E(U_h) = \E(M) - \frac{1}{2}h = a + \frac{1}{2} h - \frac{1}{2} h = a \)</li>
+			<li>\( \var(U_h) = \var(M) = \frac{h^2}{12 n} \)</li>
+		</ol>
+	</details>
+</div>
+
+<h4 id="hyp">The Hypergeometric Model</h4>
+
+<p>Our basic assumption in the method of moments is that the sequence of observed random variables \( \bs{X} = (X_1, X_2, \ldots, X_n) \) is a random sample from a distribution. However, the method makes sense, at least in some cases, when the variables are identically distributed but dependent. In the <dfn>hypergeometric model</dfn>, we have a population of \( N \) objects with \( r \) of the objects <dfn>type 1</dfn> and the remaining \( N - r \) objects <dfn>type 0</dfn>. The parameter \( N \), the <dfn>population size</dfn>, is a positive integer. The parameter \( r \), the <dfn>type 1 size</dfn>, is a nonnegative integer with \( r \le N \). These are the basic parameters, and typically one or both is unknown. Here are some typical examples:</p>
+
+<ol>
+	<li>The objects are devices, classified as <dfn>good</dfn> or <dfn>defective</dfn>.</li>
+	<li>The objects are persons, classified as <dfn>female</dfn> or <dfn>male</dfn>.</li>
+	<li>The objects are voters, classified as <dfn>for</dfn> or <dfn>against</dfn> a particular candidate.</li>
+	<li>The objects are wildlife or a particular type, either <dfn>tagged</dfn> or <dfn>untagged</dfn>.</li>
+</ol>
+
+<p>We sample \( n \) objects from the population at random, without replacement. Let \( X_i \) be the type of the \( i \)th object selected, so that our sequence of observed variables is \( \bs{X} = (X_1, X_2, \ldots, X_n) \). The variables are identically distributed indicator variables, with \( P(X_i = 1) = r / N \) for each \( i \in \{1, 2, \ldots, n\} \), but are dependent since the sampling is without replacement. The number of type 1 objects in the sample is \( Y = \sum_{i=1}^n X_i \). This statistic has the <a href="../urn/Hypergeometric.html">hypergeometric distribution</a> with parameter \( N \), \( r \), and \( n \), and has probability density function given by
+\[ P(Y = y) = \frac{\binom{r}{y} \binom{N - r}{n - y}}{\binom{N}{n}} = \binom{n}{y} \frac{r^{(y)} (N - r)^{(n - y)}}{N^{(n)}}, \quad y \in \{\max\{0, N - n + r\}, \ldots, \min\{n, r\}\} \]
+
+<div class="unit">
+	<p class="math">As above, let \( \bs{X} = (X_1, X_2, \ldots, X_n) \) be the observed variables in the hypergeometric model with parameters \( N \) and \( r \). Then</p>
+	<ol class="sub">
+		<li>The method of moments estimator of \( p = r / N \) is \( M = Y / n \), the sample mean.</li>
+		<li>The method of moments estimator of \( r \) with \( N \) known is \( U = N M = N Y / n \).</li>
+		<li>The method of moments estimator of \( N \) with \( r \) known is \( V = r / M = r n / Y \) if \( Y > 0 \).</li>
+	</ol>
+	<details>
+		<summary>Details:</summary>
+		<p>These results all follow simply from the fact that \( \E(X) = \P(X = 1) = r / N \).</p>
+	</details>
+</div>
+
+<p>In the voter example (3) above, typically \( N \) and \( r \) are both unknown, but we would only be interested in estimating the ratio \( p = r / N \). In the reliability example (1), we might typically know \( N \) and would be interested in estimating \( r \). In the wildlife example (4), we would typically know \( r \) and would be interested in estimating \( N \). This example is known as the <dfn>capture-recapture</dfn> model.</p>
+
+<p>Clearly there is a close relationship between the hypergeometric model and the <a href="#ber">Bernoulli trials model</a> in the subsection above. In fact, if the sampling is <em>with</em> replacement, the Bernoulli trials model would apply rather than the hypergeometric model. In addition, if the population size \( N \) is large compared to the sample size \( n \), the hypergeometric model is well approximated by the Bernoulli trials model.</p>
+
+<footer>
+	<ol class="map">
+		<li class="parent"><a href="../index.html">Random</a></li>
+		<li class="parent"><a href="index.html">6. Point Estimation</a></li>
+		<li class="child"><a href="Estimators.html" title="Estimators">1</a></li>
+		<li class="current">2</li>
+		<li class="child"><a href="Likelihood.html" title="Maximum Likelihood">3</a></li>
+		<li class="child"><a href="Bayes.html" title="Bayes' Estimators">4</a></li>
+		<li class="child"><a href="Unbiased.html" title="Best Unbiased Estimators">5</a></li>
+		<li class="child"><a href="Sufficient.html" title="Complete, Sufficient, and Ancillary Statistics">6</a></li>
+		<li class="details"><button type="button" title="Expand Details" onclick="expandDetails(true);"><img src="../icons/Plus.svg" alt="Expand"></button></li>
+		<li class="details"><button type="button" title="Contract Details" onclick="expandDetails(false);"><img src="../icons/Minus.svg" alt="Contract"></button></li>
+	</ol>
+	<ul class="map">
+		<li class="sister"><a href="JavaScript:openAncillary('../apps/index.html')" class="ancillary">Apps</a></li>
+		<li class="sister"><a href="JavaScript:openAncillary('../data/index.html')" class="ancillary">Data Sets</a></li>
+		<li class="child"><a href="JavaScript:openAncillary('../biographies/index.html')" class="ancillary"> Biographies</a></li>
+	</ul>
+</footer>
+
+<script>getReferences();</script>
+
+</body>
+</html>

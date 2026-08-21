@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<title>Estimators</title>
+	<meta name="author" content="Kyle Siegrist">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="keywords" content="probability, statistics, point estimation, unbiased estimator, mean square error, consistent estimator, sample mean, sample variance, sample covariance, linear regression, Poisson distribution">
+	<link rel="icon" href="../icons/Icon.svg" type="image/svg">
+	<link rel="stylesheet" href="../Screen.css" type="text/css" media="screen">
+	<script src="../Basic.js"></script>
+	<script src="../../MathJax/tex-svg.js" id="MathJax-script" async></script>
+</head>
+
+<body>
+
+<div class="latex">
+	\(\newcommand{\R}{\mathbb{R}}\)
+	\(\newcommand{\N}{\mathbb{N}}\)
+	\(\newcommand{\Z}{\mathbb{Z}}\)
+	\(\newcommand{\E}{\mathbb{E}}\)
+	\(\newcommand{\P}{\mathbb{P}}\)
+	\(\newcommand{\var}{\text{var}}\)
+	\(\newcommand{\sd}{\text{sd}}\)
+	\(\newcommand{\cov}{\text{cov}}\)
+	\(\newcommand{\cor}{\text{cor}}\)
+	\(\newcommand{\bias}{\text{bias}}\)
+	\(\newcommand{\mse}{\text{mse}}\)
+	\(\newcommand{\eff}{\text{eff}}\)
+	\(\newcommand{\bs}{\boldsymbol}\)
+	\( \newcommand{\ms}{\mathscr} \)
+</div>
+
+<header>
+	<ol class="map">
+		<li class="parent"><a href="../index.html">Random</a></li>
+		<li class="parent"><a href="index.html">6. Point Estimation</a></li>
+		<li class="current">1</li>
+		<li class="child"><a href="Moments.html" title="The Method of Moments">2</a></li>
+		<li class="child"><a href="Likelihood.html" title="Maximum Likelihood">3</a></li>
+		<li class="child"><a href="Bayes.html" title="Bayes' Estimators">4</a></li>
+		<li class="child"><a href="Unbiased.html" title="Best Unbiased Estimators">5</a></li>
+		<li class="child"><a href="Sufficient.html" title="Complete, Sufficient, and Ancillary Statistics">6</a></li>
+		<li class="details"><button type="button" title="Expand Details" onclick="expandDetails(true);"><img src="../icons/Plus.svg" alt="Expand"></button></li>
+		<li class="details"><button type="button" title="Contract Details" onclick="expandDetails(false);"><img src="../icons/Minus.svg" alt="Contract"></button></li>
+	</ol>
+	<h2>1. Estimators</h2>
+</header>
+
+<h3>The Basic Statistical Model</h3>
+
+<p>As usual, our starting point is a <a href="../prob/Experiments.html">random experiment</a> modeled by a <a href="../prob/Probability2.html">probability space</a> \((\Omega, \ms F, \P)\). In the basic statistical model, we have an observable <a href="../prob/Probability.html">random variable</a> \(\bs{X}\) with values in a set \(S\). Recall that in general, this variable can have quite a complicated structure. For example, if the experiment is to sample \(n\) objects from a population and record various measurements of interest, then the data vector has the form 
+\[ \bs{X} = (X_1, X_2, \ldots, X_n) \]
+where \(X_i\) is the vector of measurements for the \(i\)th object. The most important special case is when \((X_1, X_2, \ldots, X_n)\) are independent and identically distributed (IID). In this case \(\bs{X}\) is a <a href="../sample/Introduction.html">random sample</a> of size \(n\) from the distribution of an underlying measurement variable \(X\).</p>
+
+<h4>Statistics</h4>
+
+<p>Recall also that a <dfn>statistic</dfn> is a random variable that is an observable function of the outcome variable of the random experiment: \(\bs{U} = \bs{u}(\bs{X})\) where \( \bs{u} \) is a known function from \( S \) into another set. Thus, a statistic is simply a random variable derived from the observation variable \(\bs{X}\), with the assumption that \(\bs{U}\) is also observable. As the notation indicates, \(\bs{U}\) is typically also vector-valued. Note that the original data vector \(\bs{X}\) is itself a statistic, but usually we are interested in statistics derived from \(\bs{X}\). A statistic \(\bs{U}\) may be computed to answer an inferential question. In this context, if the dimension of \(\bs{U}\) (as a vector) is smaller than the dimension of \(\bs{X}\) (as is usually the case), then we have achieved <dfn>data reduction</dfn>. Ideally, we would like to achieve significant data reduction with no loss of information about the inferential question at hand.</p>
+
+<h4>Parameters</h4>
+
+<div class="unit">
+	<p class="dfn">In the technical sense, a <dfn>parameter</dfn> \(\bs{\theta}\) is a function of the <em>distribution</em> of \(\bs{X}\), with values in a set \(T\).</p>
+	<details>
+		<p>As usual, \(T\) comes with a <a href="../foundations/Measurable.html">\(\sigma\)-algebra</a> \(\ms T\) of admissible subsets, so that \((T, \ms T)\) is the <dfn>parameter space</dfn>.</p>
+	</details>
+</div>	
+	
+<p>Typically, the distribution of \(\bs{X}\) will have \(k \in \N_+\) real parameters of interest, so that \(\bs{\theta}\) has the form \(\bs{\theta} = (\theta_1, \theta_2, \ldots, \theta_k)\) and thus \(T \subseteq \R^k\). In many cases, one or more of the parameters are unknown, and must be estimated from the data variable \(\bs{X}\). This is one of the of the most important and basic of all statistical problems, and is the subject of this chapter. If \( \bs{U} \) is a statistic, then the distribution of \( \bs{U} \) will depend on the parameters of \( \bs{X} \), and thus so will distributional constructs such as means, variances, covariances, probability density functions and so forth. We usually suppress this dependence notationally to keep our mathematical expressions from becoming too unwieldy, but it's very important to realize that the underlying dependence is present. Remember that the critical idea is that by observing a value \( \bs{u} \) of a statistic \( \bs{U} \) we (hopefully) gain information about the unknown parameters.</p>
+
+<h4 id="est">Estimators</h4>
+
+<p>Suppose now that we have an unknown real parameter \(\theta\) taking values in a parameter space \(T \subseteq \R\). A real-valued statistic \(U = u(\bs{X})\) that is used to estimate \(\theta\) is called, appropriately enough, an <dfn>estimator</dfn> of \(\theta\). Thus, the estimator is a random variable and hence has a distribution, a mean, a variance, and so on (all of which, as noted above, will generally depend on \( \theta \)). When we actually run the experiment and observe the data \(\bs{x}\), the observed value \(u = 
+u(\bs{x})\) (a single number) is the <dfn>estimate</dfn> of the parameter \(\theta\). The following definitions are basic.</p>
+
+<div class="unit">
+	<p class="dfn">Suppose that \( U \) is a statistic used as an estimator of a parameter \( \theta \) with values in \( T \subseteq \R \). For \( \theta \in \Theta \),</p>
+	<ol class="sub">
+		<li>\( U - \theta \) is the <dfn>error</dfn>.</li>
+		<li>\(\bias(U) = E(U - \theta) = \E(U) - \theta \) is the <dfn>bias</dfn> of \( U \)</li>
+		<li>\(\mse(U) = \E\left[(U - \theta)^2\right] \) is the <dfn>mean square error</dfn> of \( U \)</li>
+	</ol>
+</div>
+
+<p>Thus the error is the difference between the estimator and the parameter being estimated, so of course the error is a random variable. The bias of \( U \) is simply the expected error, and the mean square error (the name says it all) is the expected square of the error. Note that bias and mean square error are functions of \( \theta \in T \). The following definitions are a natural complement to the definition of bias.</p>
+
+<div class="unit">
+	<p class="dfn">Suppose again that \( U \) is a statistic used as an estimator of a parameter \( \theta \) with values in \( T \subseteq \R \).</p>
+	<ol class="sub">
+		<li>\(U\) is <dfn>unbiased</dfn> if \(\bias(U) = 0\), or equivalently \(\E(U) = \theta\), for all \(\theta \in T\). </li>
+		<li>\(U\) is <dfn>negatively biased</dfn> if \(\bias(U) \le 0\), or equivalently \(\E(U) \le \theta\), for all \(\theta \in T\).</li>
+		<li>\(U\) is <dfn>positively biased</dfn> if \(\bias(U) \ge 0\), or equivalently \(\E(U) \ge \theta\), for all \(\theta \in T\).</li>
+	</ol>
+</div>
+
+<p>So for an unbiased estimator, the expected value of the estimator is the parameter being estimated, clearly a desirable property. On the other hand, a positively biased estimator overestimates the parameter, on average, while a negatively biased estimator underestimates the parameter on average. Our definitions of negative and positive bias are <em>weak</em> in the sense that the weak inequalities \(\le\) and \(\ge\) are used. There are corresponding strong definitions, of course, using the strong inequalities \(\lt\) and \(\gt\). Note, however, that none of these definitions may apply. For example, it might be the case that \(\bias(U) \lt 0\) for some \(\theta \in T\), \(\bias(U) = 0\)  for other \(\theta \in T\), and \(\bias(U) \gt 0\) for yet other \(\theta \in T\) .</p>
+
+<div class="unit" id="est3">
+	<p class="math">\(\mse(U) = \var(U) + \bias^2(U)\)</p>
+	<details>
+		<summary>Details:</summary>
+		<p>This follows from basic properties of expected value and variance:
+		\[ \E[(U - \theta)^2] = \var(U - \theta) + [\E(U - \theta)]^2 = \var(U) + \bias^2(U) \]</p>
+	</details>
+</div>
+
+<p>In particular, if the estimator is unbiased, then the mean square error of \(U\) is simply the <a href="../expect/Variance.html">variance</a> of \(U\).</p>
+
+<p>Ideally, we would like to have unbiased estimators with small mean square error. However, this is not always possible, and <a href="#est3" class="ref"></a> shows the delicate relationship between bias and mean square error. In the next section we will see an example with two estimators of a parameter that are multiples of each other; one is unbiased, but the other has smaller mean square error. However, if we have two unbiased estimators of \(\theta\), we naturally prefer the one with the smaller variance (mean square error). </p>
+
+<div class="unit">
+	<p class="dfn">Suppose that \( U \) and \( V \) are unbiased estimators of a parameter \( \theta \) with values in \( T \subseteq \R \).</p>
+	<ol class="sub">
+		<li>\( U \) is <dfn>more efficient than</dfn> \( V \) if \( \var(U) \le \var(V) \).</li>
+		<li>The <dfn>relative efficiency</dfn> of \(U\) with respect to \(V\) is
+		\[ \eff(U, V) = \frac{\var(V)}{\var(U)} \]</li>
+	</ol>
+</div>
+
+<h4>Asymptotic Properties</h4>
+
+<p>Suppose again that we have a real parameter \( \theta \) with possible values in a parameter space \( T \). Often in a statistical experiment, we observe an infinite sequence of random variables over time, \(\bs{X} = (X_1, X_2, \ldots,)\), so that at time \( n \) we have observed \( \bs{X}_n = (X_1, X_2, \ldots, X_n) \). In this setting we often have a general formula that defines an estimator of \(\theta\) for each sample size \(n\). Technically, this gives a <em>sequence</em> of real-valued estimators of \(\theta\): \( \bs{U} = (U_1, U_2, \ldots) \) where \( U_n \) is a real-valued function of \( \bs{X}_n \) for each \( n \in \N_+ \). In this case, we can discuss the asymptotic properties of the estimators as \(n \to \infty\). Most of the definitions are natural generalizations of the ones above.</p>
+
+<div class="unit">
+	<p class="dfn">The sequence of estimators \(\bs{U} = (U_1, U_2, \ldots)\) is <dfn>asymptotically unbiased</dfn> if \( \bias(U_n) \to 0\) as \(n \to \infty\) for every \(\theta \in T \), or equivalently, \(\E(U_n) \to \theta\) as \(n \to \infty\) for every \(\theta \in T\).</p>
+</div>
+
+<div class="unit">
+	<p class="dfn">Suppose that \(\bs{U} = (U_1, U_2, \ldots)\) and \(\bs{V} = (V_1, V_2, \ldots)\) are two sequences of estimators that are asymptotically unbiased. The <dfn>asymptotic relative efficiency</dfn> of \(\bs{U}\) to \(\bs{V}\) is
+	\[ \lim_{n \to \infty} \eff(U_n, V_n) = \lim_{n \to \infty} \frac{\var(V_n)}{\var(U_n)} \]
+	assuming that the limit exists.</p>
+</div>
+
+<p>Naturally, we expect our estimators to improve, as the sample size \(n\) increases, and in some sense to converge to the parameter as \( n \to \infty \). This general idea is known as <em>consistency</em>. Once again, for the remainder of this discussion, we assume that \(\bs{U} = (U_1, U_2, \ldots)\) is a sequence of estimators for a real-valued parameter \( \theta \), with values in the parameter space \( T \).</p>
+
+<div class="unit">
+	<p class="dfn">Consistency</p>
+	<ol class="sub">
+		<li>\( \bs{U} \) is <dfn>consistent</dfn> if \(U_n \to \theta\) as \(n \to \infty\) <a href="../prob/Convergence.html">in probability</a> for each \(\theta \in T\). That is, \( \P\left(\left|U_n - \theta\right| \gt \epsilon\right) \to 0\) as \(n \to \infty\) for every \(\epsilon \gt 0\) and \(\theta \in T\).</li>
+		<li>\( \bs{U} \) is <dfn>mean-square consistent</dfn> if \( \mse(U_n) = \E[(U_n - \theta)^2] \to 0 \) as \( n \to \infty \) for \( \theta \in T \).</li>
+	</ol>
+</div>
+
+<p>Here is the connection between the two definitions:</p>
+
+<div class="unit">
+	<p class="math">If \( \bs{U} \) is mean-square consistent then \(\bs{U}\) is consistent.</p>
+	<details>
+		<summary>Details:</summary>
+		<p>From <a href="../expect/Properties2.html#mar">Markov's inequality</a>,
+		\[ \P\left(\left|U_n - \theta\right| \gt \epsilon\right) = \P\left[(U_n - \theta)^2 \gt \epsilon^2\right] \le \frac{\E\left[(U_n - \theta)^2\right]}{\epsilon^2} \to 0 \text{ as } n \to \infty \]</p>
+	</details>
+</div>
+
+<p>That mean-square consistency implies simple consistency is simply a statistical version of the theorem that states that <a href="../expect/Variance.html">mean-square convergence</a> implies convergence in probability. Here is another nice consequence of mean-square consistency.</p>
+
+<div class="unit">
+	<p class="math">If \( \bs{U} \) is mean-square consistent then \( \bs{U} \) is asymptotically unbiased.</p>
+	<details>
+		<summary>Details:</summary>
+		<p>This result follows from the fact that mean absolute error is smaller than root mean square error, which in turn is special case of a general result for norms. See the section on <a href="../expect/Spaces.html">vector spaces</a> for more details. So, using this result and the ordinary triangle inequality for expected value we have
+		\[ |\E(U_n - \theta)| \le \E(|U_n - \theta|) \le \sqrt{\E[(U_n - \theta)]^2} \to 0 \text{ as } n \to \infty \]
+		Hence \( \E(U_n) \to \theta \) as \( n \to \infty \) for \( \theta \in T \).</p>
+	</details>
+</div>
+
+<p>In the next several subsections, we will review several basic estimation problems that were studied in the chapter on <a href="../sample/index.html">random samples</a>.</p>
+
+<h3>Estimation in the Single Variable Model</h3>
+
+<p>Suppose that \( X \) is a basic real-valued random variable for an experiment, with mean \( \mu \in \R\) and variance \( \sigma^2 \in (0, \infty) \). We sample from the distribution of \( X \) to produce a sequence \(\bs{X} = (X_1, X_2, \ldots)\) of independent variables, each with the distribution of \( X \). For each \( n \in \N_+ \), \( \bs{X}_n = (X_1, X_2, \ldots, X_n) \) is a random sample of size \(n\) from the distribution of \(X\).</p>
+
+<h4 id="mea">Estimating the Mean</h4>
+
+<p>This subsection is a review of some results obtained in the section on the <a href="../sample/LLN.html">law of Large numbers</a>. Recall that a natural estimator of the distribution mean \(\mu\) is the <a href="../sample/LLN.html">sample mean</a>, defined by
+\[ M_n = \frac{1}{n} \sum_{i=1}^n X_i, \quad n \in \N_+ \]</p>
+
+<div class="unit" id="mea1">
+	<p class="math">Properties of \( \bs M = (M_1, M_2, \ldots) \) as a sequence of estimators of \( \mu \).</p>
+	<ol class="sub">
+		<li>\(\E(M_n) = \mu\) so \(M_n\) is unbiased for \( n \in \N_+ \)</li>
+		<li>\(\var(M_n) = \sigma^2 / n\) for \( n \in \N_+ \) so \( \bs M \) is consistent.</li>
+	</ol>
+</div>
+
+<p>The consistency of \(\bs M\) is simply the <a href="../sample/LLN.html">weak law of large numbers</a>. Moreover, there are a number of important special cases of <a href="#mea1" class="ref"></a>. See the section on the <a href="../sample/Mean.html">sample mean</a> for the details.</p>
+
+<div class="unit">
+	<p class="math">Special cases of the sample mean</p>
+	<ol class="sub">
+		<li>Suppose that \(X = \bs{1}_A\), the indicator variable for an event \(A\) that has probability \(\P(A)\). Then the sample mean for a random sample of size \( n \in \N_+ \) from the distribution of \( X \) is the <dfn>relative frequency</dfn> or <dfn>empirical probability</dfn> of \(A\), denoted \(P_n(A)\). Hence \(P_n(A)\) is an unbiased estimator of \( \P(A) \) for \( n \in \N_+ \) and \( (\P_n(A): n \in \N_+) \) is consistent..</li>
+		<li>Suppose that \(F\) denotes the distribution function of a real-valued random variable \(Y\). Then for fixed \(y \in \R\), the <dfn>empirical distribution function</dfn> \(F_n(y)\) is simply the sample mean for a random sample of size \(n \in \N_+\) from the distribution of the indicator variable \(X = \bs{1}(Y \le y)\). Hence \(F_n(y)\) is an unbiased estimator of \( F(y) \) for \( n \in \N_+ \) and \( (F_n(y): n \in \N_+) \) is consistent.</li>
+		<li>Suppose that \(U\) is a random variable with a discrete distribution on a countable set \(S\) and \(f\) denotes the probability density function of \(U\). Then for fixed \(u \in S\), the <dfn>empirical probability density function</dfn> \(f_n(u)\) is simply the sample mean for a random sample of size \(n \in \N_+\) from the distribution of the indicator variable \(X = \bs{1}(U = u)\). Hence \(f_n(u)\) is an unbiased estimator of \( f(u) \) for \( n \in \N_+ \) and \( (f_n(u): n \in \N_+) \) is consistent.</li>
+	</ol>
+</div>
+
+<h4>Estimating the Variance</h4>
+
+<p>This subsection is a review of some results obtained in the section on the <a href="../sample/Variance.html">sample variance</a>. We also assume that the fourth central moment \(\sigma_4 = \E\left[(X - \mu)^4\right]\) is finite. Recall that \(\sigma_4 / \sigma^4\) is the <a href="../expect/Skew.html#kur">kurtosis</a> of \(X\). Recall first that if \(\mu\) is known (almost always an artificial assumption), then a natural estimator of \(\sigma^2\) is a special version of the <a href="../sample/Variance.html">sample variance</a>, defined by
+\[ W_n^2 = \frac{1}{n} \sum_{i=1}^n (X_i - \mu)^2, \quad n \in \N_+ \]</p>
+
+<div class="unit">
+	<p class="math">Properties of \( \bs W^2 = (W_1^2, W_2^2, \ldots) \) as a sequence of estimators of \( \sigma^2 \).</p>
+	<ol class="sub">
+		<li>\(\E\left(W_n^2\right) = \sigma^2\) so \(W_n^2\) is unbiased for \( n \in \N_+ \)</li>
+		<li>\(\var\left(W_n^2\right) = \frac{1}{n}(\sigma_4 - \sigma^4)\) for \( n \in \N_+ \) so \(\bs W^2\) is consistent.</li>
+	</ol>
+	<details>
+		<summary>Details:</summary>
+		<p>\( \bs W^2 \) corresponds to sampling from the distribution of \( (X - \mu)^2 \). This distribution as mean \( \sigma^2 \) and variance \( \sigma_4 - \sigma^4 \), so the results follow immediately from <a href="#mea1" class="ref"></a>.</p>
+	</details>
+</div>
+
+<p>If \(\mu\) is unknown (the more reasonable assumption), then a natural estimator of the distribution variance is the standard version of the <a href="../sample/Variance.html">sample variance</a>, defined by
+\[ S_n^2 = \frac{1}{n - 1} \sum_{i=1}^n (X_i - M_n)^2, \quad n \in \{2, 3, \ldots\} \]</p>
+
+<div class="unit">
+	<p class="math">Properties of \( \bs S^2 = (S_2^2, S_3^2, \ldots) \) as a sequence of estimators of \( \sigma^2 \)</p>
+	<ol class="sub">
+		<li>\(\E\left(S_n^2\right) = \sigma^2\) so \(S_n^2\) is unbiased for \( n \in \{2, 3, \ldots\} \)</li>
+		<li>\(\var\left(S_n^2\right) = \frac{1}{n} \left(\sigma_4 - \frac{n - 3}{n - 1} \sigma^4 \right)\) for \( n \in \{2, 3, \ldots\} \) so \(\bs S^2\) is consistent sequence.</li>
+	</ol>
+</div>
+
+<p>Naturally, we would like to compare the sequences \( \bs W^2 \) and \( \bs S^2 \) as estimators of \( \sigma^2 \). But again remember that \( \bs W^2 \) only makes sense if \( \mu \) is known.</p>
+
+<div class="unit" id="comp">
+	<p class="math">Comparison of \( \bs W^2 \) and \( \bs S^2 \)</p>
+	<ol class="sub">
+		<li>\(\var\left(W_n^2\right) \lt \var(S_n^2)\) for \( n \in \{2, 3, \ldots\} \).</li>
+		<li>The asymptotic relative efficiency of \(\bs W^2\) to \(\bs S^2\) is 1.</li>
+	</ol>
+</div>
+
+<p>So by part (a) of <a href="#comp" class="ref"></a>, \(W_n^2\) is better than \(S_n^2\) for \( n \in \{2, 3, \ldots\} \), assuming that \(\mu\) is known so that we can actually <em>use</em> \(W_n^2\). This is perhaps not surprising, but by part (b) \(S_n^2\) works just about as well as \(W_n^2\) for a large sample size \( n \). Of course, the sample standard deviation \(S_n\) is a natural estimator of the distribution standard deviation \(\sigma\). Unfortunately, this estimator is biased. Here is a more general result:</p>
+
+<div class="unit">
+	<p class="math">Suppose that \( \theta \) is a parameter with possible values in \(T \subseteq (0, \infty) \) (with at least two points) and that \( U \) is a statistic with values in \( T \). If \( U^2 \) is an unbiased estimator of \( \theta^2 \) then \( U \) is a negatively biased estimator of \( \theta \).</p>
+	<details>
+		<summary>Details:</summary>
+		<p>Note that
+		\[ \var(U) = \E(U^2) - [\E(U)]^2 = \theta^2 - [\E(U)]^2, \quad \theta \in T \]
+		Since \( T \) has at least two points, \( U \) cannot be deterministic so \( \var(U) \gt 0 \). It follows that \( [\E(U)]^2 \lt \theta^2 \) so \( \E(U) \lt \theta \) for \( \theta \in T \).</p>
+	</details>
+</div>
+
+<p>So we should not be too obsessed with the unbiased property. For most sampling distributions, there will be no statistic \(U\) with the property that \(U\) is an unbiased estimator of \(\sigma\) and \(U^2\) is an  unbiased estimator of \(\sigma^2\).</p>
+
+<h3>Estimation in the Bivariate Model</h3>
+
+<p>In this subsection we review some of the results obtained in the section on <a href="../sample/Covariance.html">correlation and regression</a>.</p>
+
+<p>Suppose that \( X \) and \( Y \) are real-valued random variables for an experiment, so that \( (X, Y) \) has a bivariate distribution in \( \R^2 \). Let \( \mu = \E(X)\) and \( \sigma^2 = \var(X) \) denote the mean and variance of \( X \), and let \( \nu = \E(Y) \) and \( \tau^2 = \var(Y) \) denote the mean and variance of \( Y \). For the bivariate parameters, let \( \delta = \cov(X, Y) \) denote the distribution covariance and \( \rho = \cor(X, Y) \) the distribution correlation. We need one higher-order moment as well: let \( \delta_2 = \E\left[(X - \mu)^2 (Y - \nu)^2\right] \), and as usual, we assume that all of the parameters exist. So the general parameter spaces are \( \mu, \, \nu \in \R \), \( \sigma^2, \, \tau^2 \in (0, \infty) \), \( \delta \in \R \), and \( \rho \in [0, 1] \). Suppose now that we sample from the distribution of \( (X, Y) \) to generate a sequence of independent variables \(\left((X_1, Y_1), (X_2, Y_2), \ldots\right)\), each with the distribution of \( (X, Y) \). As usual, we will let \(\bs{X}_n = (X_1, X_2, \ldots, X_n)\) and \(\bs{Y}_n = (Y_1, Y_2, \ldots, Y_n)\); these are random samples of size \(n\) from the distributions of \(X\) and \(Y\), respectively. Since we now have two underlying variables, we will need to enhance our notation somewhat. </p>
+
+<h4>Estimating the Covariance</h4>
+
+<p>If \(\mu\) and \(\nu\) are known (almost always an artificial assumption), then a natural estimator of the distribution covariance \(\delta\) is a special version of the sample covariance, defined by
+\[ W_n = W_n\left(\bs{X}, \bs{Y}\right) = \frac{1}{n} \sum_{i=1}^n (X_i - \mu)(Y_i - \nu), \quad n \in \N_+\]</p>
+
+<div class="unit">
+	<p class="math">Properties of \( \bs W = (W_1, W_2, \ldots) \) as a sequence of estimators of \( \delta \).</p>
+	<ol class="sub">
+		<li>\(\E\left(W_n\right) = \delta\) so \(W_n\) is unbiased for \( n \in \N_+ \).</li>
+		<li>\( \var\left(W_n\right) = \frac{1}{n}(\delta_2 - \delta^2) \) for \( n \in \N_+ \) so \(\bs W\) is consistent.</li>
+	</ol>
+	<details>
+		<summary>Details:</summary>
+		<p>We've done this proof before, but it's so basic that it's worth repeating. Note that \( \bs W \) corresponds to sampling from the distribution of \( (X - \mu) (Y - \nu) \). This distribution as mean \( \delta \) and variance \( \delta_2 - \delta^2 \), so the results follow immediately from <a href="#mea1" class="ref"></a>.</p>
+	</details>
+</div>
+
+<p>If \(\mu\) and \(\nu\) are unknown (usually the more reasonable assumption), then a natural estimator of the distribution covariance \(\delta\) is the standard version of the sample covariance, defined by
+\[  S_n = S_n(\bs X , \bs Y) = \frac{1}{n - 1} \sum_{i=1}^n [X_i - M_n(\bs X)][Y_i - M_n(\bs Y)], \quad n \in \{2, 3, \ldots\}\]</p>
+
+<div class="unit">
+	<p class="math">Properties of \( \bs S = (S_2, S_3, \ldots) \) as a sequence of estimators of \( \delta \).</p>
+	<ol class="sub">
+		<li>\(\E\left(S_n\right) = \delta\) so \( S_n \)is unbiased for \( n \in \{2, 3, \ldots\} \).</li>
+		<li>\( \var\left(S_n\right) = \frac{1}{n}\left(\delta_2 + \frac{1}{n - 1} \sigma^2 \tau^2 - \frac{n - 2}{n - 1} \delta^2\right) \) for \( n \in \{2, 3, \ldots\} \) so \(\bs S\) is consistent.</li>
+	</ol>
+</div>
+
+<p>Once again, since we have two competing sequences of estimators of \( \delta \), we would like to compare them.</p>
+
+<div class="unit">
+	<p class="math">Comparison of \(\bs W\) and \(\bs S\) as estimators of \(\delta\):</p>
+	<ol class="sub">
+		<li>\(\var\left(W_n\right) \lt \var\left(S_n\right)\) for \( n \in \{2, 3, \ldots\} \) .</li>
+		<li>The asymptotic relative efficiency of \(\bs W\) to \(\bs S\) is 1.</li>
+	</ol>
+</div>
+
+<p>So \(U_n\) is better than \(V_n\) for \( n \in \{2, 3, \ldots\} \), assuming that \(\mu\) and \( \nu \) are known so that we can actually <em>use</em> \(W_n\). But for large \( n \), \(V_n\) works just about as well as \(U_n\).</p>
+
+<h4>Estimating the Correlation</h4>
+
+<p>A natural estimator of the distribution correlation \(\rho\) is the sample correlation
+\[ R_n = \frac{S_n (\bs X, \bs Y)}{S_n(\bs X) S_n(\bs Y)}, \quad n \in \{2, 3, \ldots\} \]
+Note that this statistics is a nonlinear function of the sample covariance and the two sample standard deviations.  For most distributions of \((X, Y)\), we have no hope of computing the bias or mean square error of this estimator. If we <em>could</em> compute the expected value, we would probably find that the estimator is biased.  On the other hand, even though we cannot compute the mean square error, a simple application of the law of large numbers shows that \(R_n \to \rho\) as \(n \to \infty\) with probability 1. Thus, \( \bs R = (R_2, R_3, \ldots) \) is at least consistent.</p>
+
+<h4>Estimating the regression coefficients</h4>
+
+<p>Recall that the <a href="../expect/Covariance.html#blp">distribution regression line</a>, with \(X\) as the predictor variable and \(Y\) as the response variable, is \(y = a + b \, x\) where
+\[ a = \E(Y) - \frac{\cov(X, Y)}{\var(X)} \E(X), \quad b = \frac{\cov(X, Y)}{\var(X)} \]
+On the other hand, the sample regression line, based on the sample of size \( n \in \{2, 3, \ldots\} \), is \(y = A_n + B_n x\) where
+\[ A_n = M_n(\bs Y) - \frac{S_n(\bs X, \bs Y)}{S_n^2(\bs X )} M_n(\bs X), \quad B_n = \frac{S_n(\bs X, \bs Y)}{S_n^2(\bs X)} \]
+Of course, the statistics \(A_n\) and \(B_n\) are natural estimators of the parameters \(a\) and \(b\), respectively, and in a sense are derived from our previous estimators of the distribution mean, variance, and covariance. Once again, for most distributions of \((X, Y)\), it would be difficult to compute the bias and mean square errors of these estimators. But applications of the law of large numbers show that with probability 1, \( A_n \to a \) and \( B_n \to b \) as \( n \to \infty \), so at least \( \bs A = (A_2, A_3, \ldots) \) and \( \bs B = (B_2, B_3, \ldots) \) are consistent.</p>
+
+<h3>Exercises and Special Cases</h3>
+
+<h4 id="poi">The Poisson Distribution</h4>
+
+<p>Let's consider a simple example that illustrates some of the ideas above.  Recall that the <a href="../poisson/Poisson.html"></a>Poisson distribution</a> with parameter \(\lambda \in (0, \infty)\) has probability density function \(g\) given by
+\[ g(x) = e^{-\lambda} \frac{\lambda^x}{x!}, \quad x \in \N \]
+The Poisson distribution is often used to model the number of random <q>points</q> in a region of time or space, particularly in the context of the <a href="../poisson/index.html">Poisson process</a>. The parameter \(\lambda\) is proportional to the size of the region of time or space; the proportionality constant is the average <dfn>rate</dfn> of the random points. The distribution is named for <a href="JavaScript:openAncillary('../biographies/Poisson.html')" class="ancillary">Simeon Poisson</a>.</p>
+
+<div class="unit">
+	<p class="math">Suppose that \(X\) has the Poisson distribution with parameter \(\lambda\). . Hence</p>
+	<ol class="sub">
+		<li>\(\mu = \E(X) = \lambda\)</li>
+		<li>\(\sigma^2 = \var(X) = \lambda\)</li>
+		<li>\(\sigma_4 = \E\left[(X - \lambda)^4\right] = 3 \lambda^2 + \lambda\)</li>
+	</ol>
+	<details>
+		<summary>Details:</summary>
+		<p>Recall the permutation notation \( x^{(n)} = x (x - 1) \cdots (x - n + 1) \) for \( x \in \R \) and \( n \in \N \). The expected value \( \E[X^{(n)}] \) is the <dfn>factorial moment</dfn> of \( X \) of order \( n \). It's easy to see that he factorial moments are \( \E\left[X^{(n)}\right] = \lambda^n \) for \( n \in \N \). The results follow from this.</p>
+	</details>
+</div>
+
+<p>Suppose now that we sample from the distribution of \( X \) to produce a sequence of independent random variables \( \bs{X} = (X_1, X_2, \ldots) \), each having the Poisson distribution with unknown parameter \( \lambda \in (0, \infty) \). Again, \(\bs{X}_n = (X_1, X_2, \ldots, X_n)\) is a random sample of size \(n \in \N_+\) from the from the distribution for each \( n \in \N \). From the previous exercise, \(\lambda\) is both the mean and the variance of the distribution, so that we could use either the sample mean \(M_n\) or the sample variance \(S_n^2\) as an estimator of \(\lambda\). Both are unbiased, so which is better?  Naturally, we use mean square error as our criterion.</p>
+
+<div class="unit">
+	<p class="math">Comparison of \(\bs M\) to \(\bs S^2\) as estimators of \(\lambda\).</p>
+	<ol class="sub">
+		<li>\(\var\left(M_n\right) = \frac{\lambda}{n}\) for \( n \in \N_+ \).</li>
+		<li>\(\var\left(S_n^2\right) = \frac{\lambda}{n} \left(1 + 2 \lambda \frac{n}{n - 1} \right)\) for \( n \in \{2, 3, \ldots\} \).</li>
+		<li>\(\var\left(M_n\right) \lt \var\left(S_n^2\right)\) so \( M_n \) for \( n \in \{2, 3, \ldots\} \).</li>
+		<li>The asymptotic relative efficiency of \(\bs M\) to \(\bs S^2\) is \(1 + 2 \lambda\).</li>
+	</ol>
+</div>
+
+<p>So our conclusion is that the sample mean \(M_n\) is a better estimator of the parameter \(\lambda\) than the sample variance \(S_n^2\) for \( n \in \{2, 3, \ldots\} \), and the difference in quality increases with \( \lambda \).</p>
+
+<div class="unit">
+	<p class="app">Run the <a href="JavaScript:openAncillary('../apps/Poisson.html')" class="ancillary">Poisson experiment</a> 100 times for several values of the parameter. In each case, compute the estimators \(M\) and \(S^2\). Which estimator seems to work better?</p>
+</div>
+
+<div class="unit">
+	<p class="stat">The emission of elementary particles from a sample of radioactive material in a time interval is often assumed to follow the Poisson distribution. Thus, suppose that the <a href="JavaScript:openAncillary('../data/Alpha.html')" class="ancillary">alpha emissions data set</a> is a sample from a Poisson distribution. Estimate the rate parameter \(\lambda\).</p>
+	<ol class="sub">
+		<li>using the sample mean</li>
+		<li>using the sample variance</li>
+	</ol>
+	<details>
+		<summary>Details:</summary>
+		<ol class="sub">
+			<li>8.367</li>
+			<li>8.649</li>
+		</ol>
+	</details>
+</div>
+
+<h4>Simulation Exercises</h4>
+
+<div class="unit">
+	<p class="app">In the <a href="JavaScript:openAncillary('../apps/MeanEstimate.html')" class="ancillary">sample mean experiment</a>, set the sampling distribution to gamma. Increase the sample size with the scrollbar and note graphically and numerically the unbiased and consistent properties. Run the experiment 1000 times and compare the sample mean to the distribution mean.</p>
+</div>
+
+<div class="unit">
+	<p class="app">Run the <a href="JavaScript:openAncillary('../apps/NormalEstimate.html')" class="ancillary">normal estimation experiment</a> 1000 times for several values of the parameters.</p>
+	<ol class="sub">
+		<li>Compare the empirical bias and mean square error of \(M\) with the theoretical values.</li>
+		<li>Compare the empirical bias and mean square error of \(S^2\) and of \(W^2\) to their theoretical values. Which estimator seems to work better?</li>
+	</ol>
+</div>
+
+<div class="unit">
+	<p class="app">In <a href="JavaScript:openAncillary('../apps/Match.html')" class="ancillary">matching experiment</a>, the random variable is the number of matches. Run the simulation 1000 times and compare</p>
+	<ol class="sub">
+		<li>the sample mean to the distribution mean.</li>
+		<li>the empirical density function to the probability density function.</li>
+	</ol>
+</div>
+
+<div class="unit">
+	<p class="app">Run the <a href="JavaScript:openAncillary('../apps/ExponentialExperiment.html')" class="ancillary">exponential experiment</a> 1000 times and compare the sample standard deviation to the distribution standard deviation.</p>
+</div>
+
+<h4>Data Analysis Exercises</h4>
+
+<div class="unit">
+	<p class="stat">For <a href="JavaScript:openAncillary('../data/Michelson.html')" class="ancillary">Michelson's velocity of light data</a>, compute the sample mean and sample variance.</p>
+	<details>
+		<summary>Details:</summary>
+		<p>852.4, 6242.67</p>
+	</details>
+</div>
+
+<div class="unit">
+	<p class="stat">For <a href="JavaScript:openAncillary('../data/Cavendish.html')" class="ancillary">Cavendish's density of the earth data</a>, compute the sample mean and sample variance.</p>
+	<details>
+		<summary>Details:</summary>
+		<p>5.448, 0.048817</p>
+	</details>
+</div>
+
+<div class="unit">
+	<p class="stat">For <a href="JavaScript:openAncillary('../data/Short.html')" class="ancillary">Short's parallax of the sun data</a>, compute the sample mean and sample variance.</p>
+	<details>
+		<summary>Details:</summary>
+		<p>8.616, 0.561032</p>
+	</details>
+</div>
+
+<div class="unit">
+	<p class="stat">Consider the <a href="JavaScript:openAncillary('../data/Cicada.html')" class="ancillary">Cicada data</a>.</p>
+	<ol class="sub">
+		<li>Compute the sample mean and sample variance of the body length variable.</li>
+		<li>Compute the sample mean and sample variance of the body weight variable.</li>
+		<li>Compute the sample covariance and sample correlation between the body length and body weight variables.</li>
+	</ol>
+	<details>
+		<summary>Details:</summary>
+		<ol class="sub">
+			<li>24.0, 3.92</li>
+			<li>0.180, 0.003512</li>
+			<li>0.0471, 0.4012</li>
+		</ol>
+	</details>
+</div>
+
+<div class="unit">
+	<p class="stat">Consider the <a href="JavaScript:openAncillary('../data/MM.html')" class="ancillary">M&amp;M data</a>.</p>
+	<ol class="sub">
+		<li>Compute the sample mean and sample variance of the net weight variable.</li>
+		<li>Compute the sample mean and sample variance of the total number of candies.</li>
+		<li>Compute the sample covariance and sample correlation between the number of candies and the net weight.</li>
+	</ol>
+	<details>
+		<summary>Details:</summary>
+		<ol class="sub">
+			<li>57.1, 5.68</li>
+			<li>49.215, 2.3163</li>
+			<li>2.878, 0.794</li>
+		</ol>
+	</details>
+</div>
+
+<div class="unit">
+	<p class="stat">Consider the <a href="JavaScript:openAncillary('../data/Pearson.html')" class="ancillary">Pearson data</a>.</p>
+	<ol class="sub">
+		<li>Compute the sample mean and sample variance of the height of the father.</li>
+		<li>Compute the sample mean and sample variance of the height of the son.</li>
+		<li>Compute the sample covariance and sample correlation between the height of the father and height of the son.</li>
+	</ol>
+	<details>
+		<summary>Details:</summary>
+		<ol class="sub">
+			<li>67.69, 7.5396</li>
+			<li>68.68, 7.9309</li>
+			<li>3.875, 0.501</li>
+		</ol>
+	</details>
+</div>
+
+<p>The estimators of the mean, variance, and covariance that we have considered in this section have been natural in a sense. However, for other parameters, it is not clear how to even find a reasonable estimator in the first place. In the next several sections, we will consider the problem of constructing estimators. Then we return to the study of the mathematical properties of estimators, and consider the question of when we can know that an estimator is the best possible, given the data.</p>
+
+<footer>
+	<ol class="map">
+		<li class="parent"><a href="../index.html">Random</a></li>
+		<li class="parent"><a href="index.html">6. Point Estimation</a></li>
+		<li class="current">1</li>
+		<li class="child"><a href="Moments.html" title="The Method of Moments">2</a></li>
+		<li class="child"><a href="Likelihood.html" title="Maximum Likelihood">3</a></li>
+		<li class="child"><a href="Bayes.html" title="Bayes' Estimators">4</a></li>
+		<li class="child"><a href="Unbiased.html" title="Best Unbiased Estimators">5</a></li>
+		<li class="child"><a href="Sufficient.html" title="Complete, Sufficient, and Ancillary Statistics">6</a></li>
+		<li class="details"><button type="button" title="Expand Details" onclick="expandDetails(true);"><img src="../icons/Plus.svg" alt="Expand"></button></li>
+		<li class="details"><button type="button" title="Contract Details" onclick="expandDetails(false);"><img src="../icons/Minus.svg" alt="Contract"></button></li>
+	</ol>
+	<ul class="map">
+		<li class="sister"><a href="JavaScript:openAncillary('../apps/index.html')" class="ancillary">Apps</a></li>
+		<li class="sister"><a href="JavaScript:openAncillary('../data/index.html')" class="ancillary">Data Sets</a></li>
+		<li class="child"><a href="JavaScript:openAncillary('../biographies/index.html')" class="ancillary"> Biographies</a></li>
+	</ul>
+</footer>
+
+<script>getReferences();</script>
+
+</body>
+</html>

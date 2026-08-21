@@ -1,0 +1,14 @@
+__pycache__/
+*.py[cod]
+.cache/
+.tmp/
+.publication-work/
+
+# The complete 205-file evidentiary freeze remains local because a frozen
+# ancillary is not automatically cleared for republication.  The bounded
+# public commit force-adds only the 29 admitted core HTML files and the exact
+# support/licence files required by the offline reader and deterministic QA.
+authority/upstream/**
+authority/component-assets/**
+authority/component-licenses/**
+

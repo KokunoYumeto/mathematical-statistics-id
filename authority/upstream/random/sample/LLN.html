@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<title>The Law of Large Numbers</title>
+	<meta name="author" content="Kyle Siegrist">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="keywords" content="probability, statistics, random sample, law of large numbers, empirical probability, empirical distribution function, empirical density function, unbiased estimator, mean square error">
+	<link rel="icon" href="../icons/Icon.svg" type="image/svg">
+	<link rel="stylesheet" href="../Screen.css" type="text/css" media="screen">
+	<script src="../Basic.js"></script>
+	<script src="../../MathJax/tex-svg.js" id="MathJax-script" async></script>
+</head>
+
+<body>
+
+<div class="latex">
+	\(\newcommand{\R}{\mathbb{R}}\)
+	\(\newcommand{\N}{\mathbb{N}}\)
+	\(\newcommand{\E}{\mathbb{E}}\)
+	\(\newcommand{\P}{\mathbb{P}}\)
+	\(\newcommand{\var}{\text{var}}\)
+	\(\newcommand{\cov}{\text{cov}}\)
+	\(\newcommand{\bs}{\boldsymbol}\)
+</div>
+
+<header>
+	<ol class="map">
+		<li class="parent"><a href="../index.html">Random</a></li>
+		<li class="parent"><a href="index.html">5. Random Samples</a></li>
+		<li class="child"><a href="Introduction.html" title="Introduction">1</a></li>
+		<li class="child"><a href="Mean.html" title="The Sample Mean">2</a></li>
+		<li class="current">3</li>
+		<li class="child"><a href="CLT.html" title="The Central Limit Theorem">4</a></li>
+		<li class="child"><a href="Variance.html" title="The Sample Variance">5</a></li>
+		<li class="child"><a href="OrderStatistics.html" title="Order Statistics">6</a></li>
+		<li class="child"><a href="Covariance.html" title="Sample Correlation and Regression">7</a></li>
+		<li class="child"><a href="Normal.html" title="Special Properties of Normal Samples">8</a></li>
+		<li class="details"><button type="button" title="Expand Details" onclick="expandDetails(true);"><img src="../icons/Plus.svg" alt="Expand"></button></li>
+		<li class="details"><button type="button" title="Contract Details" onclick="expandDetails(false);"><img src="../icons/Minus.svg" alt="Contract"></button></li>
+	</ol>
+	<h2>3. The Law of Large Numbers</h2>
+</header>
+
+<h3>Basic Theory</h3>
+
+<p>This section continues the discussion of the <a href="Mean.html">sample mean</a> from the last section, but we now consider the more interesting setting where the variables are random. Specifically, suppose that we have a basic <a href="../prob/Experiments.html">random experiment</a> with an underlying probability measure \( \P \), and that \(X\) is <a href="../prob/Probability.html">random variable</a> for the experiment. Suppose now that we perform \(n\) independent replications of the basic experiment. This defines a new, compound experiment with a sequence of independent random variables \(\bs{X} = (X_1, X_2, \ldots, X_n)\), each with the same distribution as \(X\). Recall that in statistical terms, \(\bs{X}\) is a <a href="Introduction.html#Samples">random sample</a> of size \(n\) from the distribution of \(X\). All of the relevant statistics discussed in the the <a href="Mean.html">previous section</a>, are defined for \(\bs{X}\), but of course now these statistics are random variables with distributions of their own. For the most part, we use the notation established previously, except that for the usual convention of denoting random variables with capital letters. Of course, the deterministic properties and relations established previously apply as well. When we acutally <em>run</em> the experiment and observe the values \( \bs{x} = (x_1, x_2, \ldots, x_n) \) of the random variables, then we are precisely in the setting of the previous section.</p>
+
+<p>Suppose now that the basic variable \( X \) is real valued, and let \(\mu = \E(X)\) denote the <a href="../expect/Properties.html">expected value</a>) of \(X\) and \(\sigma^2 = \var(X)\) the <a href="../expect/Variance.html">variance</a> of \(X\) (assumed finite). The <dfn>sample mean</dfn> is
+\[ M = \frac{1}{n} \sum_{i=1}^n X_i \]
+Ofen the distribution mean \(\mu\) is unknown and the sample mean \(M\) is used as an <a href="../point/Estimators.html">estimator</a> of this unknown parameter.</p>
+
+<h4 id="prp">Moments</h4>
+
+<div class="unit" id="prp1">
+	<p class="math">The mean and variance of \(M\) are</p>
+	<ol class="sub">
+		<li>\(\E(M) = \mu\)</li>
+		<li>\(\var(M) = \sigma^2 / n\)</li>
+	</ol>
+	<details>
+		<summary>Details:</summary>
+		<ol class="sub">
+			<li>This follows from the linear property of expected value:
+			\[ \E(M) = \frac{1}{n} \sum_{i=1}^n \E(X_i) = \frac{1}{n} \sum_{i=1}^n \mu = \frac{1}{n} n \mu = \mu \]</li>
+			<li>This follows from basic properties of variance. Recall in particular that the variance of the sum of independent variables is the sum of the variances.
+			\[ \var(M) = \frac{1}{n^2} \sum_{i=1}^n \var(X_i) = \frac{1}{n^2} \sum_{i=1}^n \sigma^2 = \frac{1}{n^2} n \sigma^2 = \frac{\sigma^2}{n} \]</li>
+		</ol>
+	</details>
+</div>
+
+<p>Part (a) means that the sample mean \(M\) is an <dfn>unbiased</dfn> estimator of the distribution mean \(\mu\).  Therefore, the variance of \(M\) is the <dfn>mean square error</dfn>, when \(M\) is used as an estimator of \(\mu\). Note that the variance of \(M\) is an increasing function of the distribution variance and a decreasing function of the sample size. Both of these make intuitive sense if we think of the sample mean \(M\) as an estimator of the distribution mean \(\mu\). The fact that the mean square error (variance in this case) decreases to 0 as the sample size \(n\) increases to \(\infty\) means that the sample mean \(M\) is a <dfn>consistent</dfn> estimator of the distribution mean \(\mu\).</p>
+
+<p>Recall that \(X_i - M\) is the <dfn>deviation</dfn> of \(X_i\) from \(M\), that is, the directed distance from \(M\) to \(X_i\). The following theorem states that the sample mean is uncorrelated with each deviation, a result that will be crucial for showing the independence of the sample mean and the <a href="Variance.html"> sample variance</a> when the <a href="Normal.html">sampling distribution is normal.</a></p>
+
+<div class="unit" id="prp2">
+	<p class="math">\(M\) and \(X_i - M\) are uncorrelated.</p>
+	<details>
+		<summary>Details:</summary>
+		<p>This result follows from simple properties of covariance. Note that \( \cov(M, X_i - M) = \cov(M, X_i) - \cov(M, M) \). By independence,
+		\[ \cov(M, X_i) = \cov\left(\frac{1}{n}\sum_{j=1}^n X_j, X_i\right) = \frac{1}{n} \sum_{j=1}^n \cov(X_j, X_i) = \frac{1}{n} \cov(X_i, X_i) = \frac{1}{n} \var(X_i) = \frac{\sigma^2}{n} \]
+		But <a href="#prp1" class="ref"></a>, \(\cov(M, M) = \var(M) = \sigma^2 / n\).</p>
+	</details>
+</div>
+
+<h4 id="lln">The Weak and Strong Laws of Large Numbers</h4>
+
+<p>The <dfn>law of large numbers</dfn> states that the sample mean converges to the distribution mean as the sample size increases, and is one of the fundamental theorems of probability. There are different versions of the law, depending on the <em>mode</em> of convergence.</p>
+
+<p>Suppose again that \(X\) is a real-valued random variable for our basic experiment, with mean \(\mu\) and standard deviation \(\sigma\) (assumed finite). We repeat the basic experiment indefinitely to create a new, compound experiment with an infinite sequence of independent random variables \((X_1, X_2, \ldots)\), each with the same distribution as \(X\). In statistical terms, we are <dfn>sampling</dfn> from the distribution of \(X\). In probabilistic terms, we have an independent, identically distributed (<dfn>IID</dfn>) sequence. For each \(n\), let \(M_n\) denote the sample mean of the first \(n\)  sample variables:
+\[ M_n = \frac{1}{n} \sum_{i=1}^n X_i \]
+From the variance result in <a href="#prp1" class="ref"></a>, note that \(\var(M_n) = \E\left[\left(M_n - \mu\right)^2\right] \to 0\) as \(n \to \infty\). This means that \(M_n \to \mu\) as \(n \to \infty\) <a href="../expect/Spaces.html#con">in mean square</a>. As stated in the next theorem, \(M_n \to \mu\) as \(n \to \infty\) <a href="../prob/Convergence.html#lim2">in probability</a> as well.</p>
+
+<div class="unit" id="lln1">
+	<p class="math">\(\P\left(\left|M_n - \mu\right| \gt \epsilon\right) \to 0\) as  \(n \to \infty\) for every \(\epsilon \gt 0\).</p>
+	<details>
+		<summary>Details:</summary>
+		<p>This follows from <a href="../expect/Variance.html#chb">Chebyshev's inequality</a>:
+		\[ \P\left(\left|M_n - \mu\right| \gt \epsilon\right) \le \frac{\var(M_n)}{\epsilon^2} = \frac{\sigma^2}{n \epsilon^2} \to 0 \text{ as } n \to \infty \]</p>
+	</details>
+</div>
+
+<p>Recall that in general, convergence in mean square implies convergence in probability. The convergence of the sample mean to the distribution mean in mean square and in probability are known as <dfn>weak laws of large numbers</dfn>.</p>
+
+<p>Finally, the<dfn> strong law of large numbers</dfn> states that the sample mean \(M_n\) converges to the distribution mean \(\mu\) <a href="../prob/Convergence.html#lim1">with probability 1 </a>. As the name suggests, this is a much stronger result than the weak laws. We will need some additional notation for the proof. First let \(Y_n = \sum_{i=1}^n X_i\) so that \(M_n = Y_n / n\). Next, recall the definitions of the <dfn>positive and negative parts</dfn> a real number \(x\): \(x^+ = \max\{x, 0\}\), \(x^- = \max\{-x, 0\}\). Note that \(x^+ \ge 0\), \(x^- \ge 0\), \(x = x^+ - x^-\), and \(|x| = x^+ + x^-\).</p>
+
+<div class="unit" id="lln2">
+	<p class="math">\(M_n \to \mu\) as \(n \to \infty\) with probability 1.</p>
+	<details>
+		<summary>Details:</summary>
+		<p>The proof is in three major steps. The first step is to show that with probability 1, \(M_{n^2} \to \mu\) as \( n \to \infty\). From <a href="../expect/Variance.html#chb">Chebyshev's inequality</a>,  \(\P\left(\left|M_{n^2} - \mu\right| \gt \epsilon\right) \le \sigma^2 \big/ n^2 \epsilon^2 \) for every \(n \in \N_+\) and every \(\epsilon \gt 0\). Since \( \sum_{n=1}^\infty \sigma^2 \big/ n^2 \epsilon^2 \lt \infty \), it follows from the <a href="../prob/Convergence.html">first Borel-Cantelli lemma</a> that for every \(\epsilon \gt 0\),
+		\[\P\left(\left|M_{n^2} - \mu \right| \gt \epsilon \text{ for infinitely many } n \in \N_+\right) = 0\]
+		Next, from <a href="../prob/Probability.html">Boole's inequality</a> it follows that
+		\[\P\left(\text{For some rational } \epsilon \gt 0, \left|M_{n^2} - \mu\right| \gt \epsilon \text{ for infinitely many } n \in \N_+\right) = 0\]
+		This is equivalent to the statment that \( M_{n^2} \to \mu \) as \( n \to \infty \) with probability 1.</p>
+		<p>For our next step, we will show that if the underlying sampling variable is nonnegative, so that \(\P(X \ge 0) = 1\), then \(M_n \to \mu\) as \( n \to \infty \). with probabiity 1. Note first that with probability 1, \(Y_n\) is increasing in \(n\). For \(n \in \N_+\), let \(k_n\) be the unique positive integer such that \(k_n^2 \le n \lt (k_n + 1)^2\). From the increasing property and simple algebra, it follows that with probability 1,
+		\[ \frac{Y_{k_n^2}}{(k_n + 1)^2} \le \frac{Y_n}{n} \le \frac{Y_{(k_n + 1)^2}}{k_n^2} \]
+		From our first step, with probability 1,
+		\[ \frac{Y_{k_n^2}}{(k_n + 1)^2} = \frac{Y_{k_n^2}}{k_n^2} \frac{k_n^2}{(k_n+1)^2} \to \mu \text{ as } n \to \infty \]
+		Similarly with probability 1
+		\[ \frac{Y_{(k_n+1)^2}}{k_n^2} = \frac{Y_{(k_n+1)^2}}{(k_n+1)^2} \frac{(k_n+1)^2}{k_n^2} \to \mu \text{ as } n \to \infty \]
+		Finally by the squeeze theorem for limits it follows that with probability 1, \( M_n = Y_n / n \to \mu \) as \( n \to \infty \).</p>
+		<p>Finally we relax the condition that the underlying sampling variable \(X\) is nonnegative. From step two, it follows that \(\frac{1}{n} \sum_{i=1}^n X_i^+ \to \E\left(X^+\right)\) as \(n \to \infty\) with probability 1, and \(\frac{1}{n} \sum_{i=1}^n X_i^- \to \E\left(X^-\right)\) as \(n \to \infty\) with probability 1. Now from algebra and the linearity of expected value, with probability 1,
+		\[ \frac{1}{n} \sum_{i=1}^n X_i = \frac{1}{n}\sum_{i=1}^n \left(X_i^+ - X_i^-\right) = \frac{1}{n} \sum_{i=1}^n X_i^+ - \sum_{i=1}^n X_i^- \to \E\left(X^+\right) - \E\left(X^-\right) = \E\left(X^+ - X^-\right) = \E(X) \text{ as } n \to \infty \]</p>
+	</details>
+</div>
+
+<p>The proof of the strong law of large numbers given above requires that the variance of the sampling distribution be finite (note that this is critical in the first step). However, there are better proofs that only require that \(\E\left(\left|X\right|\right) \lt \infty\). An elegant proof showing that \( M_n \to \mu \) as \( n \to \infty \) with probability 1 and <a href="../expect/Spaces.html#con">in mean</a>, using <a href="../martingales/Backwards.html#lln">backwards martingales</a>, is given in the chapter on <a href="../martingales/index.html">martingales</a>. In the next few paragraphs, we apply the law of large numbers to some of the special statistics studied in the section on the <a href="Mean.html">sample mean</a>.</p>
+
+<h4 id="emp">Emprical Probability</h4>
+
+<p>Suppose that \(X\) is the outcome random variable for a basic experiment, with sample space \(S\) and probability measure \(\P\). Now suppose that we repeat the basic experiment indefinitley to form a sequence of independent random variables \((X_1, X_2, \ldots)\) each with the same distribution as \(X\). That is, we sample from the distribution of \(X\). For \(A \subseteq S\), let \(P_n(A)\) denote the <a href="Mean.html#emp">empricial probability</a> of \(A\) corresponding to the sample \((X_1, X_2, \ldots, X_n)\):
+\[ P_n(A) = \frac{1}{n} \sum_{i=1}^n \bs{1}(X_i \in A) \]
+Now of course, \(P_n(A)\) is a random variable for each event \(A\). In fact, the sum \(\sum_{i=1}^n \bs{1}(X_i \in A)\) has the <a href="../bernoulli/Binomial.html">binomial distribution</a> with parameters \(n\) and \(\P(A)\).</p>
+
+<div class="unit" id="emp1">
+	<p class="math">For each event \(A\),</p>
+	<ol class="sub">
+		<li>\(\E\left[P_n(A)\right] = \P(A)\)</li>
+		<li>\(\var\left[P_n(A)\right] = \frac{1}{n} \P(A) \left[1 - \P(A)\right]\)</li>
+		<li>\(P_n(A) \to \P(A)\) as \(n \to \infty\) with probability 1.</li>
+	</ol>
+	<details>
+		<summary>Details:</summary>
+		<p>These results follow from the results of this section, since \( P_n(A) \) is the sample mean for the random sample \( \{\bs{1}(X_i \in A): i \in \{1, 2, \ldots, n\}\} \) from the distribution of \( \bs{1}(X \in A) \).</p>
+	</details>
+</div>
+
+<p>This special case of the law of large numbers is central to the very concept of probability: the relative frequency of an event converges to the probability of the event as the experiment is repeated.</p>
+
+<h4 id="cdf">The Empirical Distribution Function</h4>
+
+<p>Suppose now that \(X\) is a real-valued random variable for a basic experiment. Recall that the <a href="../dist/CDF.html">distribution function</a> of \(X\) is the function \(F\) given by
+\[ F(x) = \P(X \le x), \quad x \in \R \]
+Now suppose that we repeat the basic experiment indefintely to form a sequence of independent random variables \((X_1, X_2, \ldots)\), each with the same distribution as \(X\). That is, we sample from the distribution of \(X\). Let \(F_n\) denote the <a href="Mean.html#cdf">empirical distribution function</a> corresponding to the sample \((X_1, X_2, \ldots, X_n)\):
+\[ F_n(x) = \frac{1}{n} \sum_{i=1}^n \bs{1}(X_i \le x), \quad x \in \R \]
+Now, of course, \(F_n(x)\) is a random variable for each \(x \in \R\). In fact, the sum \(\sum_{i=1}^n \bs{1}(X_i \le x)\) has the binomial distribution with parameters \(n\) and \(F(x)\).</p>
+
+<div class="unit" id="cdf1">
+	<p class="math">For each \(x \in \R\),</p>
+	<ol class="sub">
+		<li>\(\E\left[F_n(x)\right] = F(x)\)</li>
+		<li>\(\var\left[F_n(x)\right] = \frac{1}{n} F(x) \left[1 - F(x)\right]\)</li>
+		<li>\(F_n(x) \to F(x)\)	as \(n \to \infty\)	with probability 1.</li>
+	</ol>
+	<details>
+		<summary>Details:</summary>
+		<p>These results follow immediately from the results in this section, since \( F_n(x) \) is the sample mean for the random sample \( \{\bs{1}(X_i \le x): i \in \{1, 2, \ldots, n\}\} \) from the distribution of \( \bs{1}(X \le x) \).</p>
+	</details>
+</div>
+
+<h4 id="pmf">Empirical Density for a Discrete Variable</h4>
+
+<p>Suppose now that \(X\) is a random variable for a basic experiment with a <a href="../dist/Discrete.html">discrete distribution</a> on a countable set \(S\). Recall that the  <a href="../dist/Discrete.html">probability density function</a> of \(X\) is the function \(f\) given by
+\[ f(x) = \P(X = x), \quad x \in S \]
+Now suppose that we repeat the basic experiment to form a sequence of independent random variables \((X_1, X_2, \ldots)\) each with the same distribution as \(X\). That is, we sample from the distribution of  \(X\). Let \(f_n\) denote the <a href="Mean.html#pmf">empirical probability density function</a> corresponding to the sample \((X_1, X_2, \ldots, X_n)\):
+\[ f_n(x) = \frac{1}{n} \sum_{i=1}^n \bs{1}(X_i = x), \quad x \in S \]
+Now, of course, \(f_n(x)\) is a random variable for each \(x \in S\). In fact, the sum \(\sum_{i=1}^n \bs{1}(X_i = x)\) has the binomial distribution with parameters \(n\) and \(f(x)\).</p>
+
+<div class="unit">
+	<p class="math">For each \(x \in S\),</p>
+	<ol class="sub">
+		<li>\(\E\left[f_n(x)\right] = f(x)\)</li>
+		<li>\(\var\left[f_n(x)\right] = \frac{1}{n} f(x) \left[1 - f(x)\right]\)</li>
+		<li>\(f_n(x) \to f(x)\)	as \(n \to \infty\)	with probability 1.</li>
+	</ol>
+	<details>
+		<summary>Details:</summary>
+		<p>These results follow immediately from the results in this section, since \( f_n(x) \) is the sample mean for the random sample \( \{\bs{1}(X_i = x): i \in \{1, 2, \ldots, n\}\} \) from the distribution of \( \bs{1}(X = x) \).</p>
+	</details>
+</div>
+
+<p>Recall that a countable intersection of events with probability 1 still has probability 1. Thus, in the context of the previous theorem, we actually have
+\[ \P\left[f_n(x) \to f(x) \text{ as } n \to \infty \text{ for every } x \in S\right] = 1 \]</p>
+
+<h4 id="pdf">Empirical Density for a Continuous Variable</h4>
+
+<p>Suppose now that \(X\) is a random variable for a basic experiment, with a <a href="../dist/Continuous.html">continuous distribution</a> on \(S \subseteq \R^d\), and that \(X\) has <a href="../dist/Continuous.html">probability density function</a> \(f\).  Technically, \(f\) is the probability density function with respect to the standard (Lebsesgue) measure \(\lambda_d\). Thus, by definition,
+\[ \P(X \in A) = \int_A f(x) \, dx, \quad A \subseteq S \]
+Again we repeat the basic experiment to generate a sequence of independent random variables \((X_1, X_2, \ldots)\) each with the same distribution as \(X\). That is, we sample from the distribution of \(X\). Suppose now that \(\mathscr{A} = \{A_j: j \in J\}\)  is a partition of \(S\) into a countable number of subsets, each with positive, finite size.  Let \(f_n\) denote the <a href="Mean.html#pdf">empirical probability density function</a> corresponding to the sample \((X_1, X_2, \ldots, X_n)\) and the partition \(\mathscr{A}\):
+\[ f_n(x) = \frac{P_n(A_j)}{\lambda_d(A_j)} = \frac{1}{n \, \lambda_d(A_j)} \sum_{i=1}^n \bs{1}(X_i \in A_j); \quad j \in J, \; x \in A_j \]
+Of course now, \(f_n(x)\) is a random variable for each \(x \in S\). If the partition is sufficiently fine (so that \(\lambda_d(A_j)\) is small for each \(j\)), and if the sample size \(n\) is sufficiently large, then by the law of large numbers,
+\[ f_n(x) \approx f(x), \quad x \in S \]</p>
+
+<h3>Exercises</h3>
+
+<h4 id="sim">Simulation Exercises</h4>
+
+<div class="unit" id="sim1">
+	<p class="app">In the <a href="JavaScript:openAncillary('../apps/Dice.html')" class="ancillary">dice experiment</a>, recall that the dice scores form a random sample from the specified die distribution.  Select the average random variable, which is the sample mean of the sample of dice scores. For each die distribution, start with 1 die and increase the sample size \(n\). Note how the distribution of the sample mean begins to resemble a point mass distribution. Note also that the mean of the sample mean stays the same, but the standard deviation of the sample mean decreases. For selected values of \(n\) and selected die distributions, run the simulation 1000 times and compare the relative frequency function of the sample mean to the true probability density function, and compare the empirical moments of the sample mean to the true moments.</p>
+</div>
+
+<p>Several apps in this project are simulations of random experiments with events of interest. When you run the experiment, you are performing independent replications of the experiment. In most cases, the app displays the relative frequency of the event and its complement, both graphically in blue, and numerically in a table. When you run the experiment, the relative frequencies are shown graphically in red and also numerically. </p>
+
+<div class="unit" id="sim2">
+	<p class="app">In the simulation of <a href="JavaScript:openAncillary('../apps/BuffonCoin.html')" class="ancillary">Buffon's coin experiment</a>, the event of interest is that the coin crosses a crack. For various values of the parameter (the radius of the coin), run the experiment 1000 times and compare the relative frequency of the event to the true probability.</p>
+</div>
+
+<div class="unit" id="sim3">
+	<p class="app">In the simulation of <a href="JavaScript:openAncillary('../apps/Bertrand.html')" class="ancillary">Bertrand's experiment</a>, the event of interest is that a <q>random chord</q> on a circle will be longer than the length of a side of the inscribed equilateral triangle. For each of the various models, run the experiment 1000 times  and compuare the relative frequency of the event to the true probability.</p>
+</div>
+
+<p>Many of the apps in this project are simulations of experiments which result in discrete variables. When you run the simulation, you are performing independent replications of the experiment. In most cases, the app displays the true probability density function numerically in a table and visually as a blue bar graph. When you run the simulation, the relative frequency function is also shown numerically in the table and visually as a red bar graph.</p>
+
+<div class="unit" id="sim4">
+	<p class="app">In the simulation of the <a href="JavaScript:openAncillary('../apps/BinomialCoin.html')" class="ancillary">binomial coin experiment</a>, select the number of heads. For selected values of the parameters, run the simulation 1000 times and compare the sample mean to the distribution mean, and compare the empirical density function to the probability density function.</p>
+</div>
+
+<div class="unit" id="sim5">
+	<p class="app">In the simulation of the <a href="JavaScript:openAncillary('../apps/Match.html')" class="ancillary">matching experiment</a>, the random variable is the number of matches. For selected values of the parameter, run the simulation 1000 times and compare the sample mean and the distribution mean, and compare the empirical density function to the probability density function.</p>
+</div>
+
+<div class="unit" id="sim6">
+	<p class="app">In the <a href="JavaScript:openAncillary('../apps/Poker.html')" class="ancillary">poker experiment</a>, the random variable is the type of hand. Run the simulation 1000 times and compare the empirical density function to the true probability density function.</p>
+</div>
+
+<p>Many of the apps in this project are simulations of experiments which result in  variables with continuous distributions. When you run the simulation, you are performing independent replications of the experiment. In most cases, the app displays the true probability density function visually as a blue graph. When you run the simulation, an empirical density function, based on a partition, is also shown visually as a red bar graph.</p>
+
+<div class="unit" id="sim7">
+	<p class="app">In the simulation of the <a href="JavaScript:openAncillary('../apps/Gamma.html')" class="ancillary">gamma experiment</a>, the random variable represents a random arrival time. For selected values of the parameters, run the experiment 1000 times and compare the sample mean to the distribution mean, and compare the empirical density function to the probability density function.</p>
+</div>
+
+<div class="unit" id="sim8">
+	<p class="app">In the <a href="JavaScript:openAncillary('../apps/SpecialSimulator.html')" class="ancillary">special distribution simulator</a>, select the <a href="../special/Normal.html">normal distribution</a>. For various values of the parameters (the mean and standard deviation), run the experiment 1000 times and compare the sample mean to the distribution mean, and compare the empirical density function to the probability density function.</p>
+</div>
+
+<h4 id="exe">Probability Exercises</h4>
+
+<div class="unit" id="exe1">
+	<p class="math">Suppose that \(X\) has probability density function \(f(x) = 12 x^2 (1 - x)\) for \(0 \le x \le 1\). The distribution of \(X\) is a member of the <a href="../special/Beta.html">beta family</a>. Compute each of the following</p>
+	<ol class="sub">
+		<li>\(\E(X)\)</li>
+		<li>\(\var(X)\)</li>
+		<li>\(\P\left(X \le \frac{1}{2}\right)\)</li>
+	</ol>
+	<details>
+		<summary>Details:</summary>
+		<ol class="sub">
+			<li>\(\frac{3}{5}\)</li>
+			<li>\(\frac{1}{25}\)</li>
+			<li>\(\frac{5}{16}\)</li>
+		</ol>
+	</details>
+</div>
+
+<div class="unit" id="exe2">
+	<p class="math">Suppose now that \((X_1, X_2, \ldots, X_9)\) is a random sample of size 9 from the distribution in the previous problem. Find the expected value and variance of each of the following random variables:</p>
+	<ol class="sub">
+		<li>The sample mean \(M\)</li>
+		<li>The empirical probability  \(P\left(\left[0, \frac{1}{2}\right]\right)\)</li>
+	</ol>
+	<details>
+		<summary>Details:</summary>
+		<ol class="sub">
+			<li>\(\frac{3}{5}, \; \frac{1}{225}\)</li>
+			<li>\(\frac{5}{16}, \; \frac{55}{2304}\)</li>
+		</ol>
+	</details>
+</div>
+
+<div class="unit" id="exe3">
+	<p class="math">Suppose that \(X\) has probability density function \(f(x) = \frac{3}{x^4}\) for \(1 \le x \lt \infty\).  The distribution of  \(X\) is a member of the <a href="../special/Pareto.html">Pareto family</a>. Compute each of the following</p>
+	<ol class="sub">
+		<li>\(\E(X)\))</li>
+		<li>\(\var(X)\)</li>
+		<li>\(\P(2 \le X \le 3)\)</li>
+	</ol>
+	<details>
+		<summary>Details:</summary>
+		<ol class="sub">
+			<li>\(\frac{3}{2}\)</li>
+			<li>\(\frac{3}{4}\)</li>
+			<li>\(\frac{19}{216}\)</li>
+		</ol>
+	</details>
+</div>
+
+<div class="unit" id="exe4">
+	<p class="math">Suppose now that \(\left(X_1, X_2, \ldots, X_{16}\right)\) is a random sample of size 16 from the distribution in the previous problem. Find the expected value and variance of each of the following random variables:</p>
+	<ol class="sub">
+		<li>The sample mean \(M\)</li>
+		<li>The empirical probability  \(P\left([2, 3]\right)\)</li>
+	</ol>
+	<details>
+		<summary>Details:</summary>
+		<ol class="sub">
+			<li>\(\frac{3}{2}, \; \frac{3}{64}\)</li>
+			<li>\(\frac{19}{216}, \frac{3743}{746 \; 496}\)</li>
+		</ol>
+	</details>
+</div>
+
+<div class="unit" id="exe5">
+	<p class="math">Recall that for an <dfn>ace-six flat die</dfn>, faces 1 and 6 have probability \(\frac{1}{4}\) each, while faces 2, 3, 4, and 5 have probability \(\frac{1}{8}\) each. Let \(X\) denote the score when an ace-six flat die is thrown. Compute each of the following:</p>
+	<ol class="sub">
+		<li>The probability density function \(f(x)\) for \(x \in \{1, 2, 3, 4, 5, 6\}\)</li>
+		<li>The distribution function \(F(x)\) for \(x \in \{1, 2, 3, 4, 5, 6\}\)</li>
+		<li>\(\E(X)\)</li>
+		<li>\(\var(X)\)</li>
+	</ol>
+	<details>
+		<summary>Details:</summary>
+		<ol class="sub">
+			<li>\(f(x) = \frac{1}{4}, \; x \in \{1, 6\}; \quad f(x) = \frac{1}{8}, \; x \in \{2, 3, 4, 5\}\)</li>
+			<li>\(F(1) = \frac{1}{4}, \; F(2) = \frac{3}{8}, \; F(3) = \frac{1}{2}, \; F(4) = \frac{5}{8}, \; F(5) = \frac{3}{4}, \; F(6) = 1\)</li>
+			<li>\(\E(X) = \frac{7}{2}\)</li>
+			<li>\(\var(X) = \frac{15}{4}\)</li>
+		</ol>
+	</details>
+</div>
+
+<div class="unit" id="exe6">
+	<p class="math">Suppose now that an ace-six flat die is thrown \( n \) times. Find the expected value and variance of each of the following random variables:</p>
+	<ol class="sub">
+		<li>The empirical probability density function \(f_n(x)\) for \(x \in \{1, 2, 3, 4, 5, 6\}\)</li>
+		<li>The empirical distribution function \(F_n(x)\) for \(x \in \{1, 2, 3, 4, 5, 6\}\)</li>
+		<li>The average score \(M\)</li>
+	</ol>
+	<details>
+		<summary>Details:</summary>
+		<ol class="sub">
+			<li>\(\E[f_n(x)] = \frac{1}{4}, \; x \in \{1, 6\}; \quad \E[f_n(x)] = \frac{1}{8}, \; x \in \{2, 3, 4, 5\}\)</li>
+			<li>\(\var[f_n(x)] = \frac{3}{16 n}, \; x \in \{1, 6\}; \quad \var[f_n(x)] = \frac{7}{64 n}, \; x \in \{2, 3, 4, 5\}\)</li>
+			<li>\(\E[F_n(1)] = \frac{1}{4}, \; \E[F_n(2)] = \frac{3}{8}, \; \E[F_n(3)] = \frac{1}{2}, \; \E[F_n(4)] = \frac{5}{8}, \; \E[F_n(5)] = \frac{3}{4}, \; \E[F_n(6)] = 1\)</li>
+			<li>\(\var[F_n(1)] = \frac{3}{16 n}, \; \var[F_n(2)] = \frac{15}{64 n}, \; \var[F_n(3)] = \frac{1}{4 n}, \; \var[F_n(4)] = \frac{15}{64 n}, \; \var[F_n(5)] = \frac{3}{16 n}, \; \var[F_n(6)] = 0\)</li>
+			<li>\(\E(M) = \frac{7}{2}, \; \var(M) = \frac{15}{4 n}\)</li>
+		</ol>
+	</details>
+</div>
+
+<footer>
+	<ol class="map">
+		<li class="parent"><a href="../index.html">Random</a></li>
+		<li class="parent"><a href="index.html">5. Random Samples</a></li>
+		<li class="child"><a href="Introduction.html" title="Introduction">1</a></li>
+		<li class="child"><a href="Mean.html" title="The Sample Mean">2</a></li>
+		<li class="current">3</li>
+		<li class="child"><a href="CLT.html" title="The Central Limit Theorem">4</a></li>
+		<li class="child"><a href="Variance.html" title="The Sample Variance">5</a></li>
+		<li class="child"><a href="OrderStatistics.html" title="Order Statistics">6</a></li>
+		<li class="child"><a href="Covariance.html" title="Sample Correlation and Regression">7</a></li>
+		<li class="child"><a href="Normal.html" title="Special Properties of Normal Samples">8</a></li>
+		<li class="details"><button type="button" title="Expand Details" onclick="expandDetails(true);"><img src="../icons/Plus.svg" alt="Expand"></button></li>
+		<li class="details"><button type="button" title="Contract Details" onclick="expandDetails(false);"><img src="../icons/Minus.svg" alt="Contract"></button></li>
+	</ol>
+	<ul class="map">
+		<li class="sister"><a href="JavaScript:openAncillary('../apps/index.html')" class="ancillary">Apps</a></li>
+		<li class="sister"><a href="JavaScript:openAncillary('../data/index.html')" class="ancillary">Data Sets</a></li>
+		<li class="child"><a href="JavaScript:openAncillary('../biographies/index.html')" class="ancillary"> Biographies</a></li>
+	</ul>
+</footer>
+
+<script>getReferences();</script>
+
+</body>
+</html>
