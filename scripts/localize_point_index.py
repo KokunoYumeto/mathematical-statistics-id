@@ -98,6 +98,7 @@ LOCAL_URLS = {
     "https://www.randomservices.org/random/point/index.html": "index.html",
     "https://www.randomservices.org/random/point/Estimators.html": "Estimators.html",
     "https://www.randomservices.org/random/point/Moments.html": "Moments.html",
+    "https://www.randomservices.org/random/point/Likelihood.html": "Likelihood.html",
 }
 
 

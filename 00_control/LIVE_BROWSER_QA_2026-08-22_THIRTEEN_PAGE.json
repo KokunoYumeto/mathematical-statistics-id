@@ -1,0 +1,53 @@
+{
+  "checked_at": "2026-08-22T19:11:40.8932665+02:00",
+  "disclosures": {
+    "after_collapse": 0,
+    "after_expand": 22,
+    "total": 22
+  },
+  "page": "random/point/Likelihood.html",
+  "reader_manifest": {
+    "bytes": 4228,
+    "file_count": 43,
+    "path": "build/FIRST_UNIT_MANIFEST.csv",
+    "reader_bytes": 2415553,
+    "sha256": "eac39713ed320b88ba61170e7dbdd2f08104a0bea7e0ffc5d8ac2c8b0816e9a8"
+  },
+  "result": "pass",
+  "schema": "o006.random.live-browser-qa.v1",
+  "surfaces": {
+    "desktop_1280x720": {
+      "body_left_px": 56.4444465637207,
+      "body_max_width_px": 1152,
+      "body_width_px": 1152,
+      "center_delta_px": 0.055553436279296875,
+      "complete_images": 4,
+      "console_warnings_or_errors": 0,
+      "effective_client_width_px": 1265,
+      "mathjax_containers": 592,
+      "out_of_viewport_elements": 0,
+      "page_level_horizontal_overflow": false,
+      "raw_tex_tokens": 0
+    },
+    "mobile_390x844": {
+      "body_left_px": 12,
+      "body_margin_px": 12,
+      "body_width_px": 351.1111145019531,
+      "complete_images": 4,
+      "console_warnings_or_errors": 0,
+      "effective_client_width_px": 375,
+      "mathjax_containers": 592,
+      "page_level_horizontal_overflow": false,
+      "raw_tex_tokens": 0,
+      "uncontained_wide_elements": 0,
+      "wide_locally_contained_elements": 1
+    }
+  },
+  "target": {
+    "bytes": 58295,
+    "path": "source/id-ID/random/point/Likelihood.html",
+    "sha256": "628ffb35d3a391c9764013c3d7ee7c9d29440c07a77b87c26de80d5898a5d636"
+  },
+  "test_transport": "task-owned loopback HTTP server",
+  "title": "Kemungkinan Maksimum"
+}

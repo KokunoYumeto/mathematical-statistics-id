@@ -1,0 +1,82 @@
+{
+  "schema": "o006.random.zenodo-publication-receipt.v1",
+  "checked_at": "2026-08-22T19:26:08.3705004+02:00",
+  "result": "published-and-public-bytes-verified",
+  "record": {
+    "record_id": "22059764",
+    "concept_record_id": "22059763",
+    "version_doi": "10.5281/zenodo.22059764",
+    "concept_doi": "10.5281/zenodo.22059763",
+    "record_url": "https://zenodo.org/records/22059764",
+    "title": "Statistika Matematis — Edisi Bahasa Indonesia (id-ID): Checkpoint 13 dari 29 (Belum Lengkap)",
+    "version": "2026.08.22.13",
+    "publication_date": "2026-08-22",
+    "resource_type": "book",
+    "language": "ind",
+    "access_right": "open",
+    "license": "other-open",
+    "completion_claim": "13 of 29 core pages; incomplete edition"
+  },
+  "lineage_audit": {
+    "method": "Authenticated deposit inventory using an Authorization header; credential held only in memory and omitted from this receipt.",
+    "matching_depositions": 1,
+    "single_clean_lineage": true,
+    "matching_record_id": "22059764",
+    "matching_record_state": "done",
+    "matching_record_submitted": true,
+    "matching_record_file_count": 5,
+    "duplicate_matching_drafts": 0,
+    "duplicate_matching_public_records": 0
+  },
+  "public_readback": {
+    "method": "Credential-free curl requests to the public record API and each public file-content URL; no access token, cookie jar, or authenticated browser session used.",
+    "file_count": 5,
+    "total_bytes": 2647370,
+    "metadata_size_matches": true,
+    "metadata_md5_matches": true,
+    "local_public_sha256_matches": true,
+    "all_files_match": true,
+    "files": [
+      {
+        "name": "mathematical-statistics-id-2026.08.22.13-source-provenance.zip",
+        "bytes": 747513,
+        "md5": "b09c6b05a8da5449b9ac3b9e9b244e8d",
+        "sha256": "fbf68552bb0515ce29ca2b2eb43791d5b270d70164b21dd96a64c8d0f739994c"
+      },
+      {
+        "name": "mathematical-statistics-id-2026.08.22.13-reader.zip",
+        "bytes": 875600,
+        "md5": "4cddb8cfb01c92698c855c41cfd2a378",
+        "sha256": "c692d68526bce894a16158821746346f46267639c07ca1742917b659a79a2ddb"
+      },
+      {
+        "name": "mathematical-statistics-id-2026.08.22.13-release-manifest.json",
+        "bytes": 33081,
+        "md5": "bd2b18d737a3777b7f9d35a117d6709c",
+        "sha256": "de768b416689120ce5f1b2d7ad75401323bb5c525ce3d253c071426ba4e1bfa8"
+      },
+      {
+        "name": "mathematical-statistics-id-2026.08.22.13-modular-backend.zip",
+        "bytes": 990673,
+        "md5": "fc66bfb3ff5efb5ef76be1dc8f0934ab",
+        "sha256": "78cc226d4eb1bbfcf371e016bcc394b558847465bdee2ca7cd6965a648701a89"
+      },
+      {
+        "name": "SHA256SUMS.txt",
+        "bytes": 503,
+        "md5": "5275a8aa279e046053bf98c3ac30d472",
+        "sha256": "ce873ab4249fa3612cceb3c72991f5d12c16963c06ccb3a25baf6e2cb7b1663b"
+      }
+    ]
+  },
+  "package_replay": {
+    "command": "python scripts/package_zenodo_checkpoint.py --check-only",
+    "result": "published-release-verified",
+    "published_version_immutable": true,
+    "archive_integrity": true,
+    "entry_inventory_verified": true,
+    "redistribution_boundary": "Translated source, bounded provenance, offline reader, locale-neutral backend, manifests, receipts, and component-license witnesses only; wholesale upstream closure, third-party biography media, datasets, caches, credentials, and Git internals excluded."
+  },
+  "github_status": "Temporarily unavailable because the publishing account is suspended while a support ticket is pending; no GitHub retry was made during this Zenodo verification.",
+  "upstream_contact": "none"
+}

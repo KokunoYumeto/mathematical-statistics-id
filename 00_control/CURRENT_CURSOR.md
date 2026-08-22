@@ -7,12 +7,12 @@
   `d36e0f8bf9fa44a38a7504f9688a08af6787d88ede99298316a3e022b6f799f5`
 - Ordered core: the `core_paths` array in
   `authority/SOURCE_FREEZE_RECEIPT.json`
-- Last completed source page: `random/point/Moments.html` (core ordinal 12 of 29)
-- Next contiguous source page: `random/point/Likelihood.html` (core ordinal 13).
-- Latest reader: 12 translated pages; 42 files; 2,357,478 bytes; manifest
-  SHA-256 `020f808d914fefd34e92473da916c2d3f845464ebb38e3bc4380ef173451669f`
+- Last completed source page: `random/point/Likelihood.html` (core ordinal 13 of 29)
+- Next contiguous source page: `random/point/Bayes.html` (core ordinal 14).
+- Latest reader: 13 translated pages; 43 files; 2,415,553 bytes; manifest
+  SHA-256 `eac39713ed320b88ba61170e7dbdd2f08104a0bea7e0ffc5d8ac2c8b0816e9a8`
 - Latest deterministic QA receipt SHA-256:
-  `7369eae27c7958b964c780983b0c0929ab0beed10ad16c42f83439df9fe01a4b`
+  `ad45412cee740debc42cc952014c7ae67bfaa772d10504f6574d811ffff418b3`
 - Publication transaction: commit
   `1806863320c1c0859e04a2d93773adbb8d4ae377`, workflow `32557204624`, job
   `96993176639`, deployment `6034057446`, and deployment status `17154596564`
@@ -49,9 +49,26 @@
   `4c964912663bdd985984210d09e10bc15fccf374`). The one bounded push at
   2026-08-22T18:13:08.3417299+02:00 returned GitHub's explicit suspended-account
   HTTP 403 response; no credential was read or retried.
+- Thirteen-page preservation checkpoint:
+  `CHECKPOINT_2026-08-22_THIRTEEN_PAGE.md`; ordinal 13 preserves the exact
+  397-element hierarchy and 589 TeX spans, binds 3,521 translated backend
+  entities, passes two deterministic backend/build/QA replays, and passes live
+  desktop/mobile centered reflow checks with all 592 MathJax containers, four
+  complete images, no page-level overflow, and functional 22/22 disclosure
+  controls. GitHub is not retried while its support ticket is pending.
+  Authenticated Zenodo deduplication found no matching record among 228 owned
+  depositions, and the single in-progress version was published as record
+  `22059764`, concept record `22059763`, DOI
+  `10.5281/zenodo.22059764`, version `2026.08.22.13`. Its five public files /
+  2,647,370 bytes match the local packages by metadata size, Zenodo MD5, and
+  independently recomputed SHA-256. A post-publication authenticated audit
+  finds exactly this one matching submitted record and no duplicate matching
+  draft. Sanitized evidence is
+  `ZENODO_PUBLICATION_RECEIPT_2026-08-22_THIRTEEN_PAGE.json`; 3,618 bytes;
+  SHA-256 `478e7ab515dfd9e08913b5c130731446a582520f198b5b6c981bf91559be9139`.
 
 Resume by reading this file, `CURRENT_STATE.md`, the freeze receipt, and the
 last row of `TRANSLATION_LEDGER.csv`. Continue with
-`random/point/Likelihood.html`; perform only one bounded GitHub current-state
-recheck at each future substantial boundary. Do not
-restart source selection or repeat the completed pages.
+`random/point/Bayes.html`. Do not retry GitHub while the support ticket is
+pending, restart source
+selection, or repeat the completed pages.

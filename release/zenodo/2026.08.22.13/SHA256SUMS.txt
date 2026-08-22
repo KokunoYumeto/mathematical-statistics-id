@@ -1,0 +1,4 @@
+78cc226d4eb1bbfcf371e016bcc394b558847465bdee2ca7cd6965a648701a89  mathematical-statistics-id-2026.08.22.13-modular-backend.zip
+c692d68526bce894a16158821746346f46267639c07ca1742917b659a79a2ddb  mathematical-statistics-id-2026.08.22.13-reader.zip
+fbf68552bb0515ce29ca2b2eb43791d5b270d70164b21dd96a64c8d0f739994c  mathematical-statistics-id-2026.08.22.13-source-provenance.zip
+de768b416689120ce5f1b2d7ad75401323bb5c525ce3d253c071426ba4e1bfa8  mathematical-statistics-id-2026.08.22.13-release-manifest.json

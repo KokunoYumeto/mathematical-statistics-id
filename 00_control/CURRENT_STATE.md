@@ -5,9 +5,10 @@ Updated: 2026-08-22
 ## Status
 
 Edition source admitted; exact authority and component-rights freezes complete; the
-first twelve contiguous Indonesian pages and the full 29-page machine backend
-are locally verified. Every entity on those twelve pages is now bound to its target
-path, locale, byte count, and SHA-256. The repository is public; the repaired
+first thirteen contiguous Indonesian pages and the full 29-page machine backend
+are locally verified. Every entity on those thirteen pages is now bound to its target
+path, locale, byte count, and SHA-256. The repository was public before the
+publishing account was suspended; the repaired
 three- and four-page Pages checkpoints remain historical evidence. The
 five-page boundary through the central limit theorem remains publicly verified.
 The six-page boundary through sample variance has passed its bounded target
@@ -46,7 +47,21 @@ reader without page-level overflow; all 29 disclosure controls open and close
 correctly. The authority remains immutable. The complete 29-page edition is
 not yet claimed.
 
-Ordinal 13, `random/point/Likelihood.html`, is the next contiguous production
+The thirteen-page boundary completes `random/point/Likelihood.html`. It passed
+independent language, mathematics, topology, and integration audits, exact
+397-element topology and 589-span protected-math gates, backend/build/QA, two
+byte-identical deterministic replays, and live desktop/mobile rendering. All
+592 rendered MathJax containers fit the centered page-filling reader; all 22
+disclosures open and close; four images are complete; and no raw TeX,
+page-level overflow, uncontained wide surface, or console warning/error remains.
+Zenodo is now the active public preservation route while GitHub support reviews
+the VPN-triggered account suspension. The 13-page checkpoint is published as
+Zenodo version DOI `10.5281/zenodo.22059764` under concept DOI
+`10.5281/zenodo.22059763`. Its five public files / 2,647,370 bytes match the
+local packages by size, MD5, and SHA-256; a post-publication lineage audit finds
+one matching submitted record and no duplicate matching draft.
+
+Ordinal 14, `random/point/Bayes.html`, is the next contiguous production
 page. Do not skip to the separate Penn State component or repeat completed
 Random pages.
 
@@ -117,18 +132,18 @@ entities and 9,035 relations. It contains 29 documents, 366 sections, 760
 structural units, 451 disclosures, 2,891 math-text containers, 24 figures, 236
 assets, and 1,810 internal links. The source-grounded exercise rule designates
 260 units and leaves 500 undesignated; its exact basis is 123 both, 95
-exercise-section only, 42 native `app`/`stat` only, and 500 neither. All 3,243
-entities on ordinals 1–12 carry verified id-ID bindings; 3,324 later entities
+exercise-section only, 42 native `app`/`stat` only, and 500 neither. All 3,521
+entities on ordinals 1–13 carry verified id-ID bindings; 3,046 later entities
 carry explicit untranslated/null locale fields.
 
-- Entity JSONL: 10,431,935 bytes; SHA-256
-  `be579f147cef70bade84bcb30f34973697eaa61018b4e7f277c0381f7307c233`.
+- Entity JSONL: 10,459,457 bytes; SHA-256
+  `b3aa63bb840cbde1e78dcef627c0e0e762a558e390d515de22c1a70dd8ca3843`.
 - Relation CSV: 1,182,589 bytes; SHA-256
   `b235f4d4d724c7fe8653dfd06b075b2225cc2d116f3b87d0fda950d47030159a`.
 - Backend receipt SHA-256:
-  `9c93c0a65c48790ed5759fe6fab289d56e3fa5aaeeb6b63b2728cdb03237dace`.
+  `8744bcb138a7ce8ffd667aeade887ae94a44930369131a34624df9483a1afbd1`.
 - Bound translation-ledger SHA-256:
-  `fc910d4b723de0cc37b9b4955407914521a9915c9334b297373167366f72b578`.
+  `ad21c7c2a63c68705936450d1306fe867ebf8903cf4ef7eacbb4d261e03c4f83`.
 - Replay: `python scripts/generate_random_backend.py --check-only`.
 
 ## Four-page reader checkpoint
@@ -415,6 +430,47 @@ warning/error console. Exact evidence is in
 account-suspended HTTP 403 response; no credential was read or retried. The
 commit remains preserved locally.
 
+## Thirteen-page preservation checkpoint
+
+Core ordinals 1–13 are complete through
+`random/point/Likelihood.html`. The reader is 43 files / 2,415,553 bytes;
+canonical manifest SHA-256 is
+`eac39713ed320b88ba61170e7dbdd2f08104a0bea7e0ffc5d8ac2c8b0816e9a8`.
+Build-receipt SHA-256 is
+`4db31a4d175f691cfe65d3ae92ff4a33db53def4c47329ead2e69c55c1718d39`;
+QA-receipt SHA-256 is
+`ad45412cee740debc42cc952014c7ae67bfaa772d10504f6574d811ffff418b3`.
+
+Likelihood preserves the exact 397-element hierarchy and all 589 TeX spans,
+contains 35 units and 22 disclosures, and carries every 45 native ID plus
+eight additive stable IDs. Thirty-six protected mathematical repairs and one
+TeX-text localization cover maximum-likelihood existence, parameter-space
+boundaries, likelihood derivatives, support and notation defects, degenerate
+samples, uniform formulas, and exact hypergeometric selectors/ties. Its 33
+href-delta categories account for 40 occurrences. The aggregate census is
+6,198 source elements, 397 units, 267 disclosures, 5,125 TeX spans, 598 IDs,
+472 local references, and 118 fragments. The backend binds 3,521 translated
+entities.
+
+Two complete backend/build/QA check-only replays returned byte-identical
+identities. Live desktop/mobile inspection rendered all 592 MathJax
+containers, found a centered page-filling layout with zero page-level overflow,
+and exercised all 22 disclosures in both directions with an empty warning/error
+console. Exact evidence is in
+`CHECKPOINT_2026-08-22_THIRTEEN_PAGE.md` and
+`LIVE_BROWSER_QA_2026-08-22_THIRTEEN_PAGE.json`.
+
+GitHub is not retried while its support ticket is pending. Authenticated Zenodo
+deduplication found no prior matching owned draft or public lineage, so one
+in-progress version was published at DOI `10.5281/zenodo.22059764` (record
+22059764; concept record 22059763), explicitly labeled checkpoint 13 of 29 and
+incomplete. Credential-free readback matched all five files / 2,647,370 bytes
+to the local packages by size, MD5, and SHA-256. A post-publication audit finds
+exactly this one submitted record and no duplicate matching draft. Sanitized
+evidence is `ZENODO_PUBLICATION_RECEIPT_2026-08-22_THIRTEEN_PAGE.json`; 3,618
+bytes; SHA-256
+`478e7ab515dfd9e08913b5c130731446a582520f198b5b6c981bf91559be9139`.
+
 ## Rights boundary
 
 The Random landing page identifies CC BY 2.0; `Credits.html` links CC BY 1.0.
@@ -428,7 +484,7 @@ the site-wide notice; they must be cleared, replaced, or linked externally.
 
 ## Known upstream defects (do not silently alter authority)
 
-`ADVERSE_LEDGER.jsonl` runs through `O006-ADV-0141`. CLT repairs include the
+`ADVERSE_LEDGER.jsonl` runs through `O006-ADV-0163`. CLT repairs include the
 zero-origin condition, correlation domain/formula/citation, the rigorous
 characteristic-function proof, continuity notation, dice answer, chi-square
 definition, negative-binomial support/domain/answer mapping, and determinate
@@ -473,16 +529,23 @@ estimator notation; four omitted paragraph closes; and determinate prose and
 orphan part-reference defects. All are target-only; the 48,492-byte authority
 remains unchanged.
 
+Likelihood repairs cover its log-zero convention and profile supremum;
+Bernoulli, geometric, negative-binomial, Poisson, normal, Pareto, and uniform
+boundary/non-attainment cases; generalized negative-binomial coefficients;
+the normal Hessian; gamma grouping; beta support; uniform moment/MLE formulas;
+and both hypergeometric parameter domains, exact modes, and feasible adjacent
+ties. One omitted paragraph close is target-only. The 49,551-byte authority
+remains unchanged.
+
 ## Next work
 
-1. Continue immediately through all 17 remaining source pages, beginning with
-   `random/point/Likelihood.html` (core ordinal 13), while growing the same
+1. Continue immediately through all 16 remaining source pages, beginning with
+   `random/point/Bayes.html` (core ordinal 14), while growing the same
    deterministic reader and stable-ID backend.
-2. Record the exact twelve-page content commit and briefly recheck current
-   GitHub availability once. The
-   supplied credentials currently resolve to one suspended account and one
-   invalid credential; do not loop or expose either token. Preserve the exact
-   local history until an active identity exists.
+2. Maintain later substantial verified checkpoints as new versions in the
+   same Zenodo concept lineage. Do not retry GitHub while its account-support
+   ticket is pending; preserve the exact local history for a later push when
+   the identity is restored.
 3. Keep Penn State reconstruction, the one-page Random completeness donor, and
    original C140 companion in separate component paths/repositories; begin
    them only after this clean checkpoint or in a demonstrably non-overlapping

@@ -73,6 +73,7 @@ TARGETS = (
     PurePosixPath("random/point/index.html"),
     PurePosixPath("random/point/Estimators.html"),
     PurePosixPath("random/point/Moments.html"),
+    PurePosixPath("random/point/Likelihood.html"),
 )
 
 # Screen.css references all of these local assets. Keeping the complete exact set
@@ -1344,10 +1345,251 @@ PROTECTED_MATH_CORRECTIONS += tuple(
     for span_index, old, new, reason in MOMENTS_MATH_CORRECTIONS
 )
 
+LIKELIHOOD_MATH_CORRECTIONS = (
+    (
+        95,
+        r"\[ \hat{L}_\bs{x}(\lambda) = \max\left\{L_\bs{x}(\theta): \theta \in h^{-1}\{\lambda\} \right\}; \quad \lambda \in \Lambda \]",
+        r"\[ \hat{L}_\bs{x}(\lambda) = \sup\left\{L_\bs{x}(\theta): \theta \in h^{-1}\{\lambda\} \right\}, \quad \lambda \in \Lambda \]",
+        "make the noninjective profile likelihood well-defined without assuming fiberwise attainment",
+    ),
+    (
+        120,
+        r"\[ M_2 = \frac{1}{n} \sum_{i=1}^n X_i^2 \]",
+        r"\[ M^{(2)} = \frac{1}{n} \sum_{i=1}^n X_i^2 \]",
+        "use the edition's established notation for the second sample moment",
+    ),
+    (
+        137,
+        r"\( (0, 1) \)",
+        r"\( [0, 1] \)",
+        "include the Bernoulli boundary values required for an MLE on every sample",
+    ),
+    (
+        146,
+        r"\[ \frac{d^2}{d p^2} \ln L_{\bs{x}}(p) = -\frac{y}{p^2} - \frac{n - 1}{(1 - p)^2} \lt 0 \]",
+        r"\[ \frac{d^2}{d p^2} \ln L_{\bs{x}}(p) = -\frac{y}{p^2} - \frac{n - y}{(1 - p)^2} \lt 0 \]",
+        "restore the failure-count factor in the Bernoulli second derivative",
+    ),
+    (
+        162,
+        r"\(L_{\bs{x}}\left(\frac{1}{2}\right) = \left(\frac{1}{2}\right)^y\)",
+        r"\(L_{\bs{x}}\left(\frac{1}{2}\right) = \left(\frac{1}{2}\right)^n\)",
+        "correct the restricted Bernoulli likelihood at one half",
+    ),
+    (
+        198,
+        r"\(p \in (0, 1)\)",
+        r"\(p \in [0, 1]\)",
+        "align the Bernoulli variance exercise with the closed parameter space",
+    ),
+    (
+        202,
+        r"\(\N_+\)",
+        r"\(\mathbb{N}_+\)",
+        "replace the undefined positive-integer macro in the geometric support",
+    ),
+    (
+        204,
+        r"\[ g(x) = p (1 - p)^{x-1}, \quad x \in \N_+ \]",
+        r"\[ g(x) = p (1 - p)^{x-1}, \quad x \in \mathbb{N}_+ \]",
+        "replace the undefined positive-integer macro in the geometric density",
+    ),
+    (
+        210,
+        r"\( x \in \N_+ \)",
+        r"\( x \in \mathbb{N}_+ \)",
+        "replace the undefined positive-integer macro in the geometric proof",
+    ),
+    (
+        211,
+        r"\( \bs{x} = (x_1, x_2, \ldots, x_n) \in \N_+^n \)",
+        r"\( \bs{x} = (x_1, x_2, \ldots, x_n) \in \mathbb{N}_+^n \)",
+        "replace the undefined positive-integer macro in the geometric sample space",
+    ),
+    (
+        214,
+        r"\[ \frac{d}{dp} \ln L(p) = \frac{n}{p} - \frac{y - n}{1 - p} \]",
+        r"\[ \frac{d}{dp} \ln L_{\bs{x}}(p) = \frac{n}{p} - \frac{y - n}{1 - p} \]",
+        "restore the data subscript on the geometric log-likelihood",
+    ),
+    (
+        222,
+        r"\[ g(x) = \binom{x + k - 1}{k - 1} p^k (1 - p)^x, \quad x \in \N \]",
+        r"\[ g(x) = \frac{\Gamma(x + k)}{\Gamma(k)\,x!} p^k (1 - p)^x, \quad x \in \N \]",
+        "make the negative-binomial coefficient unambiguous for noninteger positive shape",
+    ),
+    (
+        234,
+        r"\( \ln g(x) = \ln \binom{x + k - 1}{k - 1} + k \ln p + x \ln(1 - p) \)",
+        r"\( \ln g(x) = \ln \Gamma(x + k) - \ln \Gamma(k) - \ln(x!) + k \ln p + x \ln(1 - p) \)",
+        "use the same gamma-function coefficient in the negative-binomial log-density",
+    ),
+    (
+        239,
+        r"\( C = \sum_{i=1}^n \ln \binom{x_i + k - 1}{k - 1} \)",
+        r"\( C = \sum_{i=1}^n [\ln \Gamma(x_i + k) - \ln \Gamma(k) - \ln(x_i!)] \)",
+        "use the same gamma-function coefficient in the negative-binomial constant",
+    ),
+    (
+        290,
+        r"\[ \frac{\partial^2}{\partial \mu^2} \ln L_\bs{x}(m, t^2) = -n / t^2, \; \frac{\partial^2}{\partial \mu \partial \sigma^2} \ln L_\bs{x}(m, t^2) = 0, \; \frac{\partial^2}{\partial (\sigma^2)^2} \ln L_\bs{x}(m, t^2) = -n / t^4\]",
+        r"\[ \frac{\partial^2}{\partial \mu^2} \ln L_\bs{x}(m, t^2) = -n / t^2, \; \frac{\partial^2}{\partial \mu \partial \sigma^2} \ln L_\bs{x}(m, t^2) = 0, \; \frac{\partial^2}{\partial (\sigma^2)^2} \ln L_\bs{x}(m, t^2) = -n / (2 t^4)\]",
+        "restore the missing one-half factor in the normal Hessian",
+    ),
+    (
+        323,
+        r"\( b = y / n k = 1 / k m \)",
+        r"\( b = \frac{y}{n k} = \frac{m}{k} \)",
+        "group the gamma scale critical value unambiguously",
+    ),
+    (
+        325,
+        r"\( b = y / n k \)",
+        r"\( b = \frac{y}{n k} \)",
+        "group the repeated gamma scale critical value unambiguously",
+    ),
+    (
+        351,
+        r"\( x \in (0, \infty) \)",
+        r"\( x \in (0, 1) \)",
+        "correct the beta distribution support",
+    ),
+    (
+        352,
+        r"\( \bs{x} = (x_1, x_2, \ldots, x_n) \in (0, \infty)^n \)",
+        r"\( \bs{x} = (x_1, x_2, \ldots, x_n) \in (0, 1)^n \)",
+        "correct the beta sample-data domain",
+    ),
+    (
+        362,
+        r"\(U = M (M - M_2) \big/ (M_2 - M^2)\)",
+        r"\(U = M (M - M^{(2)}) \big/ (M^{(2)} - M^2)\)",
+        "keep the beta method-of-moments comparison notation consistent",
+    ),
+    (
+        401,
+        r"\[ 1 + \sqrt{\frac{M_2}{M_2 - M^2}}, \; \frac{M_2}{M} \left(1 - \sqrt{\frac{M_2 - M^2}{M_2}}\right)\]",
+        r"\[ 1 + \sqrt{\frac{M^{(2)}}{M^{(2)} - M^2}}, \; \frac{M^{(2)}}{M} \left(1 - \sqrt{\frac{M^{(2)} - M^2}{M^{(2)}}}\right)\]",
+        "keep the Pareto method-of-moments comparison notation consistent",
+    ),
+    (
+        438,
+        r"\( i \in \{1, 2, \ldots n\} \)",
+        r"\( i \in \{1, 2, \ldots, n\} \)",
+        "restore the missing separator in the uniform index set",
+    ),
+    (
+        451,
+        r"\[ \frac{\var(U)}{\var(V)} = \frac{h^2 / 3 n}{h^2 / n (n + 2)} = \frac{n + 2}{3} \to \infty \text{ as } n \to \infty \]",
+        r"\[ \frac{\var(U)}{\var(V)} = \frac{h^2/(3n)}{h^2/[n(n + 2)]} = \frac{n + 2}{3} \to \infty \text{ ketika } n \to \infty \]",
+        "group the variance ratio unambiguously and localize its limit phrase",
+    ),
+    (
+        478,
+        r"\(a\)",
+        r"\(h\)",
+        "name the actual scale parameter in the uniform simulation exercise",
+    ),
+    (
+        491,
+        r"\( \bs{x} = (x_1, x_2, \ldots, x_n\} \)",
+        r"\( \bs{x} = (x_1, x_2, \ldots, x_n) \)",
+        "close the uniform data vector with the correct delimiter",
+    ),
+    (
+        506,
+        r"\[ U = 2 M - \sqrt{3} T, \quad V = 2 \sqrt{3} T \]",
+        r"\[ U = M - \sqrt{3} T, \quad V = 2 \sqrt{3} T \]",
+        "correct the two-parameter uniform location moment estimator",
+    ),
+    (
+        508,
+        r"\( T = \frac{1}{n} \sum_{i=1}^n (X_i - M)^2 \)",
+        r"\( T^2 = \frac{1}{n} \sum_{i=1}^n (X_i - M)^2 \)",
+        "identify the biased sample variance as T squared rather than T",
+    ),
+    (
+        513,
+        r"\( E(U) = a + \frac{h}{n + 1} \)",
+        r"\( \E(U) = a + \frac{h}{n + 1} \)",
+        "use the declared expectation macro for the uniform location estimator",
+    ),
+    (
+        515,
+        r"\( E(V) = h \frac{n - 1}{n + 1} \)",
+        r"\( \E(V) = h \frac{n - 1}{n + 1} \)",
+        "use the declared expectation macro for the uniform scale estimator",
+    ),
+    (
+        541,
+        r"\( P(X_i = 1) = r / N \)",
+        r"\( \P(X_i = 1) = r / N \)",
+        "use the declared probability macro in the hypergeometric setup",
+    ),
+    (
+        547,
+        r"\[ P(Y = y) = \frac{\binom{r}{y} \binom{N - r}{n - y}}{\binom{N}{n}} = \binom{n}{y} \frac{r^{(y)} (N - r)^{(n - y)}}{N^{(n)}}, \quad y \in \{\max\{0, N - n + r\}, \ldots, \min\{n, r\}\} \]",
+        r"\[ \P(Y = y) = \frac{\binom{r}{y} \binom{N - r}{n - y}}{\binom{N}{n}} = \binom{n}{y} \frac{r^{(y)} (N - r)^{(n - y)}}{N^{(n)}}, \quad y \in \{\max\{0, n - N + r\}, \ldots, \min\{n, r\}\} \]",
+        "use the probability macro and correct the hypergeometric support lower bound",
+    ),
+    (
+        556,
+        r"\( U = \lfloor N M \rfloor = \lfloor N Y / n \rfloor \)",
+        r"\( U = \min\{N, \lfloor (N + 1)Y / n \rfloor\} \)",
+        "correct the known-population hypergeometric maximum-likelihood selector",
+    ),
+    (
+        567,
+        r"\[ L_{\bs{x}}(r) = \frac{r^{(y)} (N - r)^{(n - y)}}{N^{(n)}}, \quad r \in \{y, \ldots, \min\{n, y + N - n\}\}  \]",
+        r"\[ L_{\bs{x}}(r) = \frac{r^{(y)} (N - r)^{(n - y)}}{N^{(n)}}, \quad r \in \{y, \ldots, N - n + y\} \]",
+        "correct the feasible type-one population-size domain",
+    ),
+    (
+        570,
+        r"\( r \lt N y / n \)",
+        r"\( r \lt (N + 1)y / n \)",
+        "correct the adjacent-likelihood comparison for the type-one size",
+    ),
+    (
+        572,
+        r"\( r = \lfloor N y / n \rfloor \)",
+        r"\( r = \min\{N, \lfloor (N + 1)y / n \rfloor\} \)",
+        "apply the corrected hypergeometric mode selector in the proof",
+    ),
+    (
+        580,
+        r"\( L_{\bs{x}}(r) \)",
+        r"\( L_{\bs{x}}(N) \)",
+        "name the population-size likelihood being maximized",
+    ),
+)
+
+PROTECTED_MATH_CORRECTIONS += tuple(
+    {
+        "page": "random/point/Likelihood.html",
+        "old": old,
+        "new": new,
+        "span_old": old,
+        "span_new": new,
+        "span_index": span_index,
+        "replacements": 1,
+        "surface": "math_span",
+        "reason": reason,
+    }
+    for span_index, old, new, reason in LIKELIHOOD_MATH_CORRECTIONS
+)
+
 # Reader-facing language inside TeX \text{...} remains protected mathematics:
 # these exact substitutions localize words while leaving every operator,
 # identifier, delimiter, and formula position unchanged.
 MATH_TEXT_LOCALIZATIONS = (
+    {
+        "page": "random/point/Likelihood.html",
+        "old": r"\text{ for each }",
+        "new": r"\text{ untuk setiap }",
+        "replacements": 1,
+        "surface": "math_span",
+    },
     {
         "page": "random/sample/Covariance.html",
         "old": r"\text{ as }",

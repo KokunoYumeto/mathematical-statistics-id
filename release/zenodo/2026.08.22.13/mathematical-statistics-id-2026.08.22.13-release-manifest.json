@@ -1,0 +1,871 @@
+{
+  "artifacts": [
+    {
+      "bytes": 875600,
+      "entries": [
+        {
+          "bytes": 7352,
+          "path": "_evidence/CHECKPOINT_2026-08-22_THIRTEEN_PAGE.md",
+          "sha256": "692a612417f121fad0a83d51d4cd98876d56fd79588095b137c4cf621c4caef7"
+        },
+        {
+          "bytes": 148569,
+          "path": "_evidence/FIRST_UNIT_BUILD_RECEIPT.json",
+          "sha256": "4db31a4d175f691cfe65d3ae92ff4a33db53def4c47329ead2e69c55c1718d39"
+        },
+        {
+          "bytes": 4228,
+          "path": "_evidence/FIRST_UNIT_MANIFEST.csv",
+          "sha256": "eac39713ed320b88ba61170e7dbdd2f08104a0bea7e0ffc5d8ac2c8b0816e9a8"
+        },
+        {
+          "bytes": 132961,
+          "path": "_evidence/FIRST_UNIT_QA_RECEIPT.json",
+          "sha256": "ad45412cee740debc42cc952014c7ae67bfaa772d10504f6574d811ffff418b3"
+        },
+        {
+          "bytes": 1993,
+          "path": "_evidence/LICENSE.md",
+          "sha256": "ec8972beaaa01d436dbc921f74d5188c6f5f0d0c83fd899e752702c309eaa3e7"
+        },
+        {
+          "bytes": 1619,
+          "path": "_evidence/LIVE_BROWSER_QA_2026-08-22_THIRTEEN_PAGE.json",
+          "sha256": "e346227c1981689a221a85ecbf2678faad9a25adf63d318ed275cbc8e80332ab"
+        },
+        {
+          "bytes": 2219,
+          "path": "_evidence/README.md",
+          "sha256": "c5b53b7e86497acae24c76133e2ffc7e31e516725cbffe2b58645a16240d99ee"
+        },
+        {
+          "bytes": 533,
+          "path": "index.html",
+          "sha256": "4c3ebe50dcba83834c290440a8abbaa43ab646152006114498b83bf85e35a186"
+        },
+        {
+          "bytes": 7048,
+          "path": "licenses/CC0-1.0-legalcode.txt",
+          "sha256": "a2010f343487d3f7618affe54f789f5487602331c0a8d03f49e9a7c547cf0499"
+        },
+        {
+          "bytes": 930,
+          "path": "licenses/index.html",
+          "sha256": "d56c188e6c54122847d24f29e6d0e6dfd69e7e5c9dcbf67530c701388deb8d80"
+        },
+        {
+          "bytes": 11358,
+          "path": "licenses/MathJax-3.1.2-LICENSE.txt",
+          "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+        },
+        {
+          "bytes": 4709,
+          "path": "MathJax/input/tex/extensions/boldsymbol.js",
+          "sha256": "716cf8735d00abfb1627f8adbbf4aeb915ac9b5c55d47aeaf276e73dac6a2aa1"
+        },
+        {
+          "bytes": 1704911,
+          "path": "MathJax/tex-svg.js",
+          "sha256": "dba9c7e8646389650c445e0547023942bed229b3fdb9513b1c6c01237af0b81a"
+        },
+        {
+          "bytes": 935,
+          "path": "random/Basic.js",
+          "sha256": "006372877a2b384e20c3e1a364ddde4791890ad02020f654c22372206891b00b"
+        },
+        {
+          "bytes": 396,
+          "path": "random/icons/DieBlue5.svg",
+          "sha256": "10a43a1d654a084d696913ead5d746d85bd6fec19e5f9e61db0b44a72ad4d27e"
+        },
+        {
+          "bytes": 375,
+          "path": "random/icons/DieGreen5.svg",
+          "sha256": "a7b7c27d57699c441ffbfd1748ef3feb946418b7e8fd862a5f6e151f0981a374"
+        },
+        {
+          "bytes": 395,
+          "path": "random/icons/DieRed5.svg",
+          "sha256": "f2c0603e9ebc5e0c971811cdfccb790c6e8bb9742757929024fd078031587358"
+        },
+        {
+          "bytes": 373,
+          "path": "random/icons/Icon.svg",
+          "sha256": "09ccb2c9f9c50cd4d7a1c867fa112534afa56a12ef0f8a96a0d682ec6b8a9d8b"
+        },
+        {
+          "bytes": 223,
+          "path": "random/icons/Minus.svg",
+          "sha256": "a55a72ce346d0fe73318fecfa994c7fda8766694a448c3b968122df7a916d7fc"
+        },
+        {
+          "bytes": 291,
+          "path": "random/icons/Plus.svg",
+          "sha256": "1bd78cdc7997d6237bc809cef5f36e074c551ec3224b226c38735be898bc439a"
+        },
+        {
+          "bytes": 297,
+          "path": "random/icons/Reset.svg",
+          "sha256": "1aad695720b25d02c03cc76f686e8d58ccbcaf424b19dfc57b58008802583292"
+        },
+        {
+          "bytes": 177,
+          "path": "random/icons/Run.svg",
+          "sha256": "75d0cdf139f0d01390440c9f655a8183c95d2da709ec67e39e9fc8863192795d"
+        },
+        {
+          "bytes": 123,
+          "path": "random/icons/Step.svg",
+          "sha256": "2fd15de2c1c6c7344adb513b3f1a47319749c7b3bda3251da0f49aa334bf7c05"
+        },
+        {
+          "bytes": 131,
+          "path": "random/icons/Stop.svg",
+          "sha256": "54bf3c5fd23ccf5dd602750aaf09c42ca6d4b1b10b8333e54bc580580f06686e"
+        },
+        {
+          "bytes": 44264,
+          "path": "random/point/Estimators.html",
+          "sha256": "14f05894ff840181d0f3ed11dc01b98db5a0cbe4a9cb3574adf03dd51d104958"
+        },
+        {
+          "bytes": 11223,
+          "path": "random/point/index.html",
+          "sha256": "dc04019c1dd9285178a752176401b4b25baef59ef804f58ed1bbcc7d30379e68"
+        },
+        {
+          "bytes": 58295,
+          "path": "random/point/Likelihood.html",
+          "sha256": "628ffb35d3a391c9764013c3d7ee7c9d29440c07a77b87c26de80d5898a5d636"
+        },
+        {
+          "bytes": 57413,
+          "path": "random/point/Moments.html",
+          "sha256": "390aed46191f08b1155583268b9d4bdf2d570bd92c161e4db41dfbebe48b95f0"
+        },
+        {
+          "bytes": 790,
+          "path": "random/sample/BoxPlot.png",
+          "sha256": "7bcb3be4ffad0fc64d06cc5bc4fb14122ab3b117f31f0713988b0188fb8062f1"
+        },
+        {
+          "bytes": 46128,
+          "path": "random/sample/CLT.html",
+          "sha256": "10d28d9d12e4d2df32044e81222e479dd1788ec4903bebe40322896c026d20e3"
+        },
+        {
+          "bytes": 1272,
+          "path": "random/sample/ContinuousDistribution.png",
+          "sha256": "273418cb67c56115e2573f47fbd59cbd22aa64cc6768952d6f518edd9d6d3da5"
+        },
+        {
+          "bytes": 80842,
+          "path": "random/sample/Covariance.html",
+          "sha256": "f66fe02402dbe33914a86a8e0796c7c8d9d292744168c8796091fc2bc561e11d"
+        },
+        {
+          "bytes": 1323,
+          "path": "random/sample/DiscreteDistribution.png",
+          "sha256": "2d9495bbb2a610ea534e31549679dd76375a3c55fb52c057a27f4c4dcdf4a620"
+        },
+        {
+          "bytes": 2964,
+          "path": "random/sample/DotPlot.png",
+          "sha256": "837553335dfca3d70cf094db1850ca31cfbe5a290fc4fc0f7506627baba9153b"
+        },
+        {
+          "bytes": 1526,
+          "path": "random/sample/EmpiricalPDF.png",
+          "sha256": "c866a068848217ecd427afbe710ce62487950369316d6e071164d86fdb917898"
+        },
+        {
+          "bytes": 4239,
+          "path": "random/sample/Histogram.png",
+          "sha256": "17bbf2b59e4b0902a84e8ea66f1b40a0343ddff578359ce842c60f109ea047ae"
+        },
+        {
+          "bytes": 11573,
+          "path": "random/sample/index.html",
+          "sha256": "9b0efeae9ab7df2e5f5f5e18448fe00a8a6b387e5cc84d9f0970f1cd23756b54"
+        },
+        {
+          "bytes": 36248,
+          "path": "random/sample/Introduction.html",
+          "sha256": "2b2bf3606433b0759fd172c68a44c9bb92a10b5b428fc5baa1a7edf0968a6d76"
+        },
+        {
+          "bytes": 8403,
+          "path": "random/sample/LinearPredictor.png",
+          "sha256": "eb0cb55795d2a48852107a6f6c331ec2f87fabdfb226d8d5b16888761d6b8afe"
+        },
+        {
+          "bytes": 34785,
+          "path": "random/sample/LLN.html",
+          "sha256": "d712ac4ed7c26757d6a13d873b0bf003c8cf487270b2f90fe6c074008ef372c0"
+        },
+        {
+          "bytes": 45871,
+          "path": "random/sample/Mean.html",
+          "sha256": "f21bd99cfcd9b6609526966b27e59cd4c1600caf825ec7d428f0e1e63b3a703a"
+        },
+        {
+          "bytes": 38857,
+          "path": "random/sample/Normal.html",
+          "sha256": "846c53efe49d203e5358f8f170d71bf705db9bff00a951318ae229cbc17338c5"
+        },
+        {
+          "bytes": 68830,
+          "path": "random/sample/OrderStatistics.html",
+          "sha256": "a36e792a8d53d12a5c5783cacbac478d4563f86e224d07abba8fb5682f2812ce"
+        },
+        {
+          "bytes": 6324,
+          "path": "random/sample/SampleLinearPredictor.png",
+          "sha256": "e6548fd85a97649ad87a8efff010ef2c07d7e16b70c3c81f717581097fd4052c"
+        },
+        {
+          "bytes": 12152,
+          "path": "random/sample/SampleRegression.png",
+          "sha256": "15782d5d41f81e3be7b4539c6a565dc721086720a3e46fc707e124bd539b8671"
+        },
+        {
+          "bytes": 13129,
+          "path": "random/sample/SampleRegressionMean.png",
+          "sha256": "6e0a8943af7ddef57c4b87b8a9b3f80205f6be8dbf951854af2cd5a3b37c2a24"
+        },
+        {
+          "bytes": 11182,
+          "path": "random/sample/ScatterPlot.png",
+          "sha256": "d546fefb4e505f5df089bd15fef57fcd032997c8b1f76b2b47d6fbb7c0fde9ca"
+        },
+        {
+          "bytes": 18766,
+          "path": "random/sample/ScatterPlotMeans.png",
+          "sha256": "d798b203ee1826ab3a1068c22c8d15a61feab442f369de8456dea0b7a134b468"
+        },
+        {
+          "bytes": 59529,
+          "path": "random/sample/Variance.html",
+          "sha256": "651b09ef4f59b4a8c3ace0ce8315d9e6bff278e9f5d0e0b76e156fa67a4af70b"
+        },
+        {
+          "bytes": 6420,
+          "path": "random/Screen.css",
+          "sha256": "b8af913a9be5c7e0313653afc6eae3121f3850fd72535cdab9e36f03279fcc34"
+        }
+      ],
+      "entry_count": 50,
+      "filename": "mathematical-statistics-id-2026.08.22.13-reader.zip",
+      "sha256": "c692d68526bce894a16158821746346f46267639c07ca1742917b659a79a2ddb",
+      "uncompressed_bytes": 2714494
+    },
+    {
+      "bytes": 747513,
+      "entries": [
+        {
+          "bytes": 521,
+          "path": ".gitattributes",
+          "sha256": "b7021179b9d099919386476d599f92b8155ee7620fd8df741be0145ed76aa786"
+        },
+        {
+          "bytes": 69559,
+          "path": "00_control/ADVERSE_LEDGER.jsonl",
+          "sha256": "3ef5f228271714192137b44425580f76eca4b7055a33f6e7eb4d1ee8ca799e27"
+        },
+        {
+          "bytes": 5871,
+          "path": "00_control/C140_CONFIGURED_ARCHITECTURE_2026-08-21.md",
+          "sha256": "2835d53d598a36a70d651bb310cc5f3d4d6aa2b2803cf6299fac25d51151c3ed"
+        },
+        {
+          "bytes": 5902,
+          "path": "00_control/CHECKPOINT_2026-08-21_FIVE_PAGE.md",
+          "sha256": "6192499ac016bbb34491345d87e9f769097cf1e1eba1296dcd2111bf2a839ee5"
+        },
+        {
+          "bytes": 5054,
+          "path": "00_control/CHECKPOINT_2026-08-21_FOUR_PAGE.md",
+          "sha256": "98c547f242c900dc3f358f02b6e510937fd8eaab3f05b2aa68c6f6af0e6170f3"
+        },
+        {
+          "bytes": 3655,
+          "path": "00_control/CHECKPOINT_2026-08-21_THREE_PAGE.md",
+          "sha256": "b10c385edd53f52e31d5b0ee17acbca04c9a963097463ffe6034d5afb02c018b"
+        },
+        {
+          "bytes": 7223,
+          "path": "00_control/CHECKPOINT_2026-08-22_EIGHT_PAGE.md",
+          "sha256": "d2a77fb0b7f289bbdc269deab7a3c60cc33191b4ed397fd370b2c25c38b83aa9"
+        },
+        {
+          "bytes": 6974,
+          "path": "00_control/CHECKPOINT_2026-08-22_ELEVEN_PAGE.md",
+          "sha256": "025fd59894d6ed4a6117bbf8db85b07eefa26ceff6ea7604d0cd4a1cbf107fea"
+        },
+        {
+          "bytes": 6164,
+          "path": "00_control/CHECKPOINT_2026-08-22_NINE_PAGE.md",
+          "sha256": "1b3207765948c51ebc69a131225ab0bed0fe0e5f498d4ec717adedbece754e4d"
+        },
+        {
+          "bytes": 5719,
+          "path": "00_control/CHECKPOINT_2026-08-22_SEVEN_PAGE.md",
+          "sha256": "15e41ba2e2e0ca7227c0be3dc5dc967270e59f0922e3c96ba3356581744cac85"
+        },
+        {
+          "bytes": 4567,
+          "path": "00_control/CHECKPOINT_2026-08-22_SIX_PAGE.md",
+          "sha256": "a745d64d4ada0d30ec9170863168e131c1b6be3949dae51f581cbd50b9ff3610"
+        },
+        {
+          "bytes": 5323,
+          "path": "00_control/CHECKPOINT_2026-08-22_TEN_PAGE.md",
+          "sha256": "96a63189ca27fa8f50cdfe9a146fdc434913dea6813983fa088d34df453bbadb"
+        },
+        {
+          "bytes": 7352,
+          "path": "00_control/CHECKPOINT_2026-08-22_THIRTEEN_PAGE.md",
+          "sha256": "692a612417f121fad0a83d51d4cd98876d56fd79588095b137c4cf621c4caef7"
+        },
+        {
+          "bytes": 7378,
+          "path": "00_control/CHECKPOINT_2026-08-22_TWELVE_PAGE.md",
+          "sha256": "20a38176fffa8e004c975a0312257e4e74e4a0b7cbfed5f203ce4ee32cd835a5"
+        },
+        {
+          "bytes": 2160,
+          "path": "00_control/CROSS_LANE_BOUNDARY.md",
+          "sha256": "d77b36f9c5cb527b3960b3e580799d8fc2dc9c8a5fc8f9f2cc90315f764c8cd0"
+        },
+        {
+          "bytes": 4418,
+          "path": "00_control/CURRENT_CURSOR.md",
+          "sha256": "4f2a0bffb884fd80578b8ea0a31d00cf58884c7a03607c5283f49fc3fba98eb0"
+        },
+        {
+          "bytes": 31612,
+          "path": "00_control/CURRENT_STATE.md",
+          "sha256": "3a058cce69a942ad52ec9e92c84d634349050b570a24b805af3c33c6786042c1"
+        },
+        {
+          "bytes": 8032,
+          "path": "00_control/DECISION_LOG.md",
+          "sha256": "80364011c47f9a3a1e505fc0e82464233dcb9bae6c475e89eb822883b43e3fcb"
+        },
+        {
+          "bytes": 1619,
+          "path": "00_control/LIVE_BROWSER_QA_2026-08-22_THIRTEEN_PAGE.json",
+          "sha256": "e346227c1981689a221a85ecbf2678faad9a25adf63d318ed275cbc8e80332ab"
+        },
+        {
+          "bytes": 4562,
+          "path": "00_control/PUBLICATION_RECEIPT_2026-08-21.json",
+          "sha256": "35ca61902a110eea71ea1a06e0ac566a81b1f27d7dbfac4e4cb006d50220276c"
+        },
+        {
+          "bytes": 4469,
+          "path": "00_control/PUBLICATION_RECEIPT_2026-08-22.json",
+          "sha256": "96a8721193f3173ceec85dcff31607c635540e042fcf499d80b318d0ff21ca0f"
+        },
+        {
+          "bytes": 7035,
+          "path": "00_control/PUBLICATION_RECEIPT_2026-08-22_EIGHT_PAGE.json",
+          "sha256": "588d64e4e16903d655b11b5edf058f4980d67329740813631a7799524a6c890e"
+        },
+        {
+          "bytes": 5337,
+          "path": "00_control/PUBLICATION_RECEIPT_2026-08-22_NINE_PAGE.json",
+          "sha256": "4d7b0e510724c6e9d7cda858441e8526d7896e8983a28c238ed4d5d72b9efa36"
+        },
+        {
+          "bytes": 6823,
+          "path": "00_control/PUBLICATION_RECEIPT_2026-08-22_SEVEN_PAGE.json",
+          "sha256": "e90d168806308a4d996f399c04738fd654cb9654679107e1ceb9eba423153920"
+        },
+        {
+          "bytes": 1438,
+          "path": "00_control/RIGHTS_AND_COMPONENTS.md",
+          "sha256": "0b23e73e23b28bad42bf769ec16a83a5ce418a64ff851e51565939c3856f1b39"
+        },
+        {
+          "bytes": 3387,
+          "path": "00_control/SOURCE_AUTHORITY.json",
+          "sha256": "3e307d3a09c029ec488fdede9de4ac093e660b2a74001921696db75c4662b936"
+        },
+        {
+          "bytes": 5574,
+          "path": "00_control/TRANSLATION_LEDGER.csv",
+          "sha256": "ad21c7c2a63c68705936450d1306fe867ebf8903cf4ef7eacbb4d261e03c4f83"
+        },
+        {
+          "bytes": 4782,
+          "path": "00_control/WORKFLOW.md",
+          "sha256": "b4f4b8eccd8fa383647915897a597faab9af8f71af9bfcb34a91611c8f79af85"
+        },
+        {
+          "bytes": 4260,
+          "path": "authority/component-licenses/cards/adrian-kennard-cards-authority.html",
+          "sha256": "fb59cf861e0661d89af0d5f0a5b98f185881909b739e92c43efba66006fc945e"
+        },
+        {
+          "bytes": 7048,
+          "path": "authority/component-licenses/cc0-1.0/legalcode.txt",
+          "sha256": "a2010f343487d3f7618affe54f789f5487602331c0a8d03f49e9a7c547cf0499"
+        },
+        {
+          "bytes": 753,
+          "path": "authority/component-licenses/FREEZE_RECEIPT.json",
+          "sha256": "55460a73c59f38992c38cfd0e54407cbcb57713c070104b248d040edcab220f6"
+        },
+        {
+          "bytes": 11358,
+          "path": "authority/component-licenses/mathjax-3.1.2/LICENSE.txt",
+          "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+        },
+        {
+          "bytes": 32398,
+          "path": "authority/component-licenses/monty/svg-silh-cc0-authority.html",
+          "sha256": "f7f5f77d6973ca6cad43550be7f2c8729a7ee484d350fff2f20c45e6aca4bd82"
+        },
+        {
+          "bytes": 1330,
+          "path": "authority/component-licenses/URL_MANIFEST.csv",
+          "sha256": "8a06fecb45a9696c8308e268cbbdacb5d3685ab48a2e10f9d2b4d534395cb777"
+        },
+        {
+          "bytes": 358443,
+          "path": "authority/REFERENCE_URL_MANIFEST.csv",
+          "sha256": "ffb82f5cded17f48b40be83f582d908be69f6f2ff1f64a262cb8dd661cd95004"
+        },
+        {
+          "bytes": 6281,
+          "path": "authority/runtime/MathJax-3.1.2/boldsymbol.js.base64",
+          "sha256": "c613a859a03f6aff52641565de9d05d616add490072d3860598de5803deeaf33"
+        },
+        {
+          "bytes": 901,
+          "path": "authority/runtime/MathJax-3.1.2/RUNTIME_RECEIPT.json",
+          "sha256": "9668ae41d64447438b777739e92844ce194783932496e63fcb016c58b157a3fe"
+        },
+        {
+          "bytes": 2020,
+          "path": "authority/SOURCE_FREEZE_RECEIPT.json",
+          "sha256": "a2acff91b787c87bb7e14925ef854521c582a2ef5735777f967ac2e44b64f232"
+        },
+        {
+          "bytes": 50913,
+          "path": "authority/SOURCE_URL_MANIFEST.csv",
+          "sha256": "d36e0f8bf9fa44a38a7504f9688a08af6787d88ede99298316a3e022b6f799f5"
+        },
+        {
+          "bytes": 23703,
+          "path": "authority/upstream/random/hypothesis/Bernoulli.html",
+          "sha256": "a3691cdf98c1b182bf434ec94479cfea344e1e555c5928ee74555ff09ce0e603"
+        },
+        {
+          "bytes": 26540,
+          "path": "authority/upstream/random/hypothesis/BivariateNormal.html",
+          "sha256": "4a1e7607fc2ca8d18704b5cf8a9edecb5bc45556399ea6bb9ed4965c9d7669f8"
+        },
+        {
+          "bytes": 39651,
+          "path": "authority/upstream/random/hypothesis/ChiSquare.html",
+          "sha256": "379cf5939801c94b251884c0c82f0e6efc7ecce35cec11a645881d7ca9c7a6aa"
+        },
+        {
+          "bytes": 8129,
+          "path": "authority/upstream/random/hypothesis/index.html",
+          "sha256": "4965a9bfd13b94d932cdd44268b3322078f1e9fce934173c84e170c6a6d6ed1f"
+        },
+        {
+          "bytes": 20738,
+          "path": "authority/upstream/random/hypothesis/Introduction.html",
+          "sha256": "fb05a9d71b55ba113e2f71afa052bc059b35f2c5b6946012c19ecbc693faab1a"
+        },
+        {
+          "bytes": 21772,
+          "path": "authority/upstream/random/hypothesis/Likelihood.html",
+          "sha256": "60b047835a3f644cd2317c8ab984b8d41ae7669f53c1d32a79705942670b9b04"
+        },
+        {
+          "bytes": 43435,
+          "path": "authority/upstream/random/hypothesis/Normal.html",
+          "sha256": "fd7bc50171fc51310f41e9132005b66cdbbd31bf507a70a0246394b05a379ab2"
+        },
+        {
+          "bytes": 23436,
+          "path": "authority/upstream/random/interval/Bayes.html",
+          "sha256": "f89dfc9ed4b9475b2cd83b467f19cfbfa6164600f14567f4237fdae9076d1cb7"
+        },
+        {
+          "bytes": 27886,
+          "path": "authority/upstream/random/interval/Bernoulli.html",
+          "sha256": "764f961e4f0db2562a3b1e42a446d3b5b3854cd8dc3468d017ee544f3aa87750"
+        },
+        {
+          "bytes": 30167,
+          "path": "authority/upstream/random/interval/BivariateNormal.html",
+          "sha256": "fde8da8c5d1e7b7d583f9eb47dac719234f1a63072c0333bdb815c117078211a"
+        },
+        {
+          "bytes": 7789,
+          "path": "authority/upstream/random/interval/index.html",
+          "sha256": "85fcad0292636fbae0935ebb775a87b9e4dbdf33692b5e2823b353163d168403"
+        },
+        {
+          "bytes": 24577,
+          "path": "authority/upstream/random/interval/Introduction.html",
+          "sha256": "e5e6cb402c737c1d63a58ef4509975633f9cfa483f8f0afa8860ff9b6dbb4ee3"
+        },
+        {
+          "bytes": 40632,
+          "path": "authority/upstream/random/interval/Normal.html",
+          "sha256": "21c59dd27f38c17148de5af35d53d94a01c51cd4f230c81d75e91173a9917586"
+        },
+        {
+          "bytes": 49645,
+          "path": "authority/upstream/random/point/Bayes.html",
+          "sha256": "96904b1fd4ab905bbffa62bd5cc0d965b3c969e543a983124e968718ed25d550"
+        },
+        {
+          "bytes": 37864,
+          "path": "authority/upstream/random/point/Estimators.html",
+          "sha256": "10914ffca9034209da0111918cfb534d60982bde0bba142a11d61d43114c6e2a"
+        },
+        {
+          "bytes": 8311,
+          "path": "authority/upstream/random/point/index.html",
+          "sha256": "b0e3e9e5f55bfd4ebac0047dafff725628d6a0ca6e638d7a2847095b311d637c"
+        },
+        {
+          "bytes": 49551,
+          "path": "authority/upstream/random/point/Likelihood.html",
+          "sha256": "f8c94e3de84f7a025fd32395169938f37e7fd7958d5a8be9d56b54ed307d6ffd"
+        },
+        {
+          "bytes": 48492,
+          "path": "authority/upstream/random/point/Moments.html",
+          "sha256": "43755b5bee6179fca8d7c1c964e7c6a9bb1a9de6f3916130100c69e666a3194e"
+        },
+        {
+          "bytes": 57507,
+          "path": "authority/upstream/random/point/Sufficient.html",
+          "sha256": "4d7402f2a960ea2b4232e57e4ee5992ac29801b9269f300f17f8e83074d5a0e4"
+        },
+        {
+          "bytes": 28635,
+          "path": "authority/upstream/random/point/Unbiased.html",
+          "sha256": "0d9765c5c7b5b8a54b29fc45c3a435d20e2a9200e027609658345087dedcd531"
+        },
+        {
+          "bytes": 40239,
+          "path": "authority/upstream/random/sample/CLT.html",
+          "sha256": "ee6dc9f8e9feb14f19f96a0206c3289a4aedfc014f5e3dabf79422e1dc29f9e3"
+        },
+        {
+          "bytes": 75623,
+          "path": "authority/upstream/random/sample/Covariance.html",
+          "sha256": "1009a5a6a129ee5592aed6c2b914973ae82bb7e7685c477c4c205dbe47fd7072"
+        },
+        {
+          "bytes": 8952,
+          "path": "authority/upstream/random/sample/index.html",
+          "sha256": "9f7b9a075c430efbae92192e131152c6728f7827dc3dde987ce871ec9d6ae35c"
+        },
+        {
+          "bytes": 31343,
+          "path": "authority/upstream/random/sample/Introduction.html",
+          "sha256": "0af72fbf0202413525cae99e696cfa70014a803d6c5ac7a7dcafd1577742414f"
+        },
+        {
+          "bytes": 30754,
+          "path": "authority/upstream/random/sample/LLN.html",
+          "sha256": "8662dfc55683fa40c79a5d453a450730e2ba151716a20eb61a2db307c33f5e85"
+        },
+        {
+          "bytes": 42746,
+          "path": "authority/upstream/random/sample/Mean.html",
+          "sha256": "e21a3da7773a6f7f925b4cb0c583d5331abb1656fe01ed952c8d42b26f238cab"
+        },
+        {
+          "bytes": 35940,
+          "path": "authority/upstream/random/sample/Normal.html",
+          "sha256": "d9a62017ae3a8488aedac3eceedb15d8b68243ae60894104ab88564ace25ff79"
+        },
+        {
+          "bytes": 63965,
+          "path": "authority/upstream/random/sample/OrderStatistics.html",
+          "sha256": "19ff485c600d4294e888c1b3d05ff7eb9196449f958d3325fd72b416aca56d63"
+        },
+        {
+          "bytes": 55878,
+          "path": "authority/upstream/random/sample/Variance.html",
+          "sha256": "452e2841007fad173229a9bb069a4acdda8e0d0bc6c1632f7239ef585248b0c6"
+        },
+        {
+          "bytes": 148569,
+          "path": "build/FIRST_UNIT_BUILD_RECEIPT.json",
+          "sha256": "4db31a4d175f691cfe65d3ae92ff4a33db53def4c47329ead2e69c55c1718d39"
+        },
+        {
+          "bytes": 4228,
+          "path": "build/FIRST_UNIT_MANIFEST.csv",
+          "sha256": "eac39713ed320b88ba61170e7dbdd2f08104a0bea7e0ffc5d8ac2c8b0816e9a8"
+        },
+        {
+          "bytes": 132961,
+          "path": "build/FIRST_UNIT_QA_RECEIPT.json",
+          "sha256": "ad45412cee740debc42cc952014c7ae67bfaa772d10504f6574d811ffff418b3"
+        },
+        {
+          "bytes": 1993,
+          "path": "LICENSE.md",
+          "sha256": "ec8972beaaa01d436dbc921f74d5188c6f5f0d0c83fd899e752702c309eaa3e7"
+        },
+        {
+          "bytes": 2219,
+          "path": "README.md",
+          "sha256": "c5b53b7e86497acae24c76133e2ffc7e31e516725cbffe2b58645a16240d99ee"
+        },
+        {
+          "bytes": 78,
+          "path": "requirements.txt",
+          "sha256": "f975a133bf38beb61aaecf8eac3d8ed962f0a205e10991456b528cc9bf566314"
+        },
+        {
+          "bytes": 106583,
+          "path": "scripts/build_first_unit.py",
+          "sha256": "ea8c38f0b931304d0ff89b867ef49f7c739f71784eacb679a6f2d6a76ea434a2"
+        },
+        {
+          "bytes": 17057,
+          "path": "scripts/freeze_component_assets.py",
+          "sha256": "decfde57be74d664fbfea815d0c5f26d6a9760bb63ffa36a0888f4e36dd8cb59"
+        },
+        {
+          "bytes": 16994,
+          "path": "scripts/freeze_random_core.py",
+          "sha256": "0823d0f320216e03befe7d4f1cee41b93abfee81af857ad4afcc3095c5545115"
+        },
+        {
+          "bytes": 67324,
+          "path": "scripts/generate_random_backend.py",
+          "sha256": "08e213756c3331ac1cb1a5c24906726bd36d63f32f6e5d010fc6eb391c21937c"
+        },
+        {
+          "bytes": 81939,
+          "path": "scripts/localize_covariance.py",
+          "sha256": "d41985a70614521126a852ff9993453cc596845f0c2584d30fde38fdb2917046"
+        },
+        {
+          "bytes": 52139,
+          "path": "scripts/localize_estimators.py",
+          "sha256": "a252b4d87a884c6f185af0b73a8b1f53c155bbb1a66c13c65513173fa7a4dd72"
+        },
+        {
+          "bytes": 57720,
+          "path": "scripts/localize_likelihood.py",
+          "sha256": "c0578e0cba0d19915e7c8304962dfd593ca0362dbd48d574b1d6ea150a9d2eb5"
+        },
+        {
+          "bytes": 55349,
+          "path": "scripts/localize_moments.py",
+          "sha256": "18822792908f8ebea6cf9824026bbd3627c9430081c3b8d96a7f3e32711ed036"
+        },
+        {
+          "bytes": 43894,
+          "path": "scripts/localize_normal.py",
+          "sha256": "5d974c10d3341022a3406826e4c11ac7d6fa3173e96b6b170379c5c232b30715"
+        },
+        {
+          "bytes": 72143,
+          "path": "scripts/localize_order_statistics.py",
+          "sha256": "6eb2add9ac852d483bd93182faa9ea3e5abc97cf77cb883302ff1f5630a7f702"
+        },
+        {
+          "bytes": 14443,
+          "path": "scripts/localize_point_index.py",
+          "sha256": "1406f39c59a8a778b3658874a94479bf62cedadd0869e6accd349e53a359ea03"
+        },
+        {
+          "bytes": 12304,
+          "path": "scripts/package_zenodo_checkpoint.py",
+          "sha256": "7bb159a3d96194df550e7505f827167b97bf091c849f0eb2e452d9342edc67bc"
+        },
+        {
+          "bytes": 91253,
+          "path": "scripts/qa_first_unit.py",
+          "sha256": "de5ce8a85cad9de98cf7f646aa044d3380ade3e4bace7064f37f0ca6037cff7d"
+        },
+        {
+          "bytes": 44264,
+          "path": "source/id-ID/random/point/Estimators.html",
+          "sha256": "14f05894ff840181d0f3ed11dc01b98db5a0cbe4a9cb3574adf03dd51d104958"
+        },
+        {
+          "bytes": 11223,
+          "path": "source/id-ID/random/point/index.html",
+          "sha256": "dc04019c1dd9285178a752176401b4b25baef59ef804f58ed1bbcc7d30379e68"
+        },
+        {
+          "bytes": 58295,
+          "path": "source/id-ID/random/point/Likelihood.html",
+          "sha256": "628ffb35d3a391c9764013c3d7ee7c9d29440c07a77b87c26de80d5898a5d636"
+        },
+        {
+          "bytes": 57413,
+          "path": "source/id-ID/random/point/Moments.html",
+          "sha256": "390aed46191f08b1155583268b9d4bdf2d570bd92c161e4db41dfbebe48b95f0"
+        },
+        {
+          "bytes": 46128,
+          "path": "source/id-ID/random/sample/CLT.html",
+          "sha256": "10d28d9d12e4d2df32044e81222e479dd1788ec4903bebe40322896c026d20e3"
+        },
+        {
+          "bytes": 80842,
+          "path": "source/id-ID/random/sample/Covariance.html",
+          "sha256": "f66fe02402dbe33914a86a8e0796c7c8d9d292744168c8796091fc2bc561e11d"
+        },
+        {
+          "bytes": 11573,
+          "path": "source/id-ID/random/sample/index.html",
+          "sha256": "9b0efeae9ab7df2e5f5f5e18448fe00a8a6b387e5cc84d9f0970f1cd23756b54"
+        },
+        {
+          "bytes": 36248,
+          "path": "source/id-ID/random/sample/Introduction.html",
+          "sha256": "2b2bf3606433b0759fd172c68a44c9bb92a10b5b428fc5baa1a7edf0968a6d76"
+        },
+        {
+          "bytes": 34785,
+          "path": "source/id-ID/random/sample/LLN.html",
+          "sha256": "d712ac4ed7c26757d6a13d873b0bf003c8cf487270b2f90fe6c074008ef372c0"
+        },
+        {
+          "bytes": 45871,
+          "path": "source/id-ID/random/sample/Mean.html",
+          "sha256": "f21bd99cfcd9b6609526966b27e59cd4c1600caf825ec7d428f0e1e63b3a703a"
+        },
+        {
+          "bytes": 38857,
+          "path": "source/id-ID/random/sample/Normal.html",
+          "sha256": "846c53efe49d203e5358f8f170d71bf705db9bff00a951318ae229cbc17338c5"
+        },
+        {
+          "bytes": 68830,
+          "path": "source/id-ID/random/sample/OrderStatistics.html",
+          "sha256": "a36e792a8d53d12a5c5783cacbac478d4563f86e224d07abba8fb5682f2812ce"
+        },
+        {
+          "bytes": 59529,
+          "path": "source/id-ID/random/sample/Variance.html",
+          "sha256": "651b09ef4f59b4a8c3ace0ce8315d9e6bff278e9f5d0e0b76e156fa67a4af70b"
+        }
+      ],
+      "entry_count": 100,
+      "filename": "mathematical-statistics-id-2026.08.22.13-source-provenance.zip",
+      "sha256": "fbf68552bb0515ce29ca2b2eb43791d5b270d70164b21dd96a64c8d0f739994c",
+      "uncompressed_bytes": 3285163
+    },
+    {
+      "bytes": 990673,
+      "entries": [
+        {
+          "bytes": 5574,
+          "path": "00_control/TRANSLATION_LEDGER.csv",
+          "sha256": "ad21c7c2a63c68705936450d1306fe867ebf8903cf4ef7eacbb4d261e03c4f83"
+        },
+        {
+          "bytes": 2020,
+          "path": "authority/SOURCE_FREEZE_RECEIPT.json",
+          "sha256": "a2acff91b787c87bb7e14925ef854521c582a2ef5735777f967ac2e44b64f232"
+        },
+        {
+          "bytes": 50913,
+          "path": "authority/SOURCE_URL_MANIFEST.csv",
+          "sha256": "d36e0f8bf9fa44a38a7504f9688a08af6787d88ede99298316a3e022b6f799f5"
+        },
+        {
+          "bytes": 22566,
+          "path": "backend/BACKEND_RECEIPT.json",
+          "sha256": "8744bcb138a7ce8ffd667aeade887ae94a44930369131a34624df9483a1afbd1"
+        },
+        {
+          "bytes": 10459457,
+          "path": "backend/entities.jsonl",
+          "sha256": "b3aa63bb840cbde1e78dcef627c0e0e762a558e390d515de22c1a70dd8ca3843"
+        },
+        {
+          "bytes": 11897,
+          "path": "backend/entities.schema.json",
+          "sha256": "c4ef6a1f83a3077871db72360e88fd0c54b0080beecda717377a519d4da955ab"
+        },
+        {
+          "bytes": 1182589,
+          "path": "backend/relations.csv",
+          "sha256": "b235f4d4d724c7fe8653dfd06b075b2225cc2d116f3b87d0fda950d47030159a"
+        },
+        {
+          "bytes": 4228,
+          "path": "build/FIRST_UNIT_MANIFEST.csv",
+          "sha256": "eac39713ed320b88ba61170e7dbdd2f08104a0bea7e0ffc5d8ac2c8b0816e9a8"
+        },
+        {
+          "bytes": 1993,
+          "path": "LICENSE.md",
+          "sha256": "ec8972beaaa01d436dbc921f74d5188c6f5f0d0c83fd899e752702c309eaa3e7"
+        },
+        {
+          "bytes": 2219,
+          "path": "README.md",
+          "sha256": "c5b53b7e86497acae24c76133e2ffc7e31e516725cbffe2b58645a16240d99ee"
+        }
+      ],
+      "entry_count": 10,
+      "filename": "mathematical-statistics-id-2026.08.22.13-modular-backend.zip",
+      "sha256": "78cc226d4eb1bbfcf371e016bcc394b558847465bdee2ca7cd6965a648701a89",
+      "uncompressed_bytes": 11743456
+    }
+  ],
+  "authority": {
+    "core_files": 29,
+    "source_manifest_bytes": 50913,
+    "source_manifest_sha256": "d36e0f8bf9fa44a38a7504f9688a08af6787d88ede99298316a3e022b6f799f5"
+  },
+  "backend": {
+    "entities": 6567,
+    "entities_sha256": "b3aa63bb840cbde1e78dcef627c0e0e762a558e390d515de22c1a70dd8ca3843",
+    "relations": 9035,
+    "relations_sha256": "b235f4d4d724c7fe8653dfd06b075b2225cc2d116f3b87d0fda950d47030159a",
+    "translated_entities": 3521
+  },
+  "checkpoint": {
+    "complete": false,
+    "last_page": "random/point/Likelihood.html",
+    "next_page": "random/point/Bayes.html",
+    "total_pages": 29,
+    "translated_pages": 13,
+    "version": "2026.08.22.13"
+  },
+  "exclusions": [
+    ".git and caches",
+    "credentials and local user data",
+    "untranslated closure assets not required by the reader",
+    "third-party biography photographs and datasets without a proved redistribution grant"
+  ],
+  "reader": {
+    "bytes": 4228,
+    "file_count": 43,
+    "reader_bytes": 2415553,
+    "sha256": "eac39713ed320b88ba61170e7dbdd2f08104a0bea7e0ffc5d8ac2c8b0816e9a8"
+  },
+  "rights_model": "component-separated; Random landing CC BY 2.0; Random Credits links CC BY 1.0; MathJax Apache-2.0; identified reader assets CC0; no uniform aggregate relicensing claim",
+  "schema": "o006.random.zenodo-release.v1",
+  "zenodo": {
+    "concept_record_id": "22059763",
+    "record_id": "22059764",
+    "reserved_version_doi": "10.5281/zenodo.22059764",
+    "title": "Statistika Matematis — Edisi Bahasa Indonesia (id-ID): Checkpoint 13 dari 29 (Belum Lengkap)"
+  }
+}

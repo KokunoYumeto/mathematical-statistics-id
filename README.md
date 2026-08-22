@@ -7,21 +7,23 @@ Statistics, and Stochastic Processes*. Edisi lengkap ini tetap diproduksi
 sebagai sumber terbuka tersendiri; edisi ini bukan satu-satunya tulang punggung
 naratif untuk kursus C140 yang dikonfigurasi secara terpisah.
 
-Status pembaca: **7 dari 29 halaman sumber inti telah diterjemahkan**, secara
-berurutan dari indeks Sampel Acak sampai `sample/OrderStatistics.html`.
+Status pembaca: **13 dari 29 halaman sumber inti telah diterjemahkan**, secara
+berurutan dari indeks Sampel Acak sampai `point/Likelihood.html`.
 Korpus belum selesai; repositori ini tidak mengklaim kelengkapan dini.
 
-Checkpoint tujuh halaman lulus dua pemutaran ulang build dan QA deterministik:
-31 berkas pembaca, 205 unit instruksional, 146 pengungkapan jawaban/rincian,
-dan 2.280 rentang TeX. Halaman Statistik Terurut lulus pemeriksaan visual
-desktop/seluler dengan 569 rumus dan lima gambar lengkap, tanpa galat konsol,
-TeX mentah, atau luapan horizontal halaman. Tabel dan rumus yang lebar dapat
-digulir secara lokal pada layar kecil. Seluruh 31 berkas publik cocok dengan
-manifes byte demi byte. Produksi berikutnya berlanjut dari
-`sample/Covariance.html`.
+Checkpoint tiga belas halaman lulus dua pemutaran ulang build dan QA
+deterministik: 43 berkas pembaca, 397 unit instruksional, 267 pengungkapan
+jawaban/rincian, dan 5.125 rentang TeX. Halaman Kemungkinan Maksimum lulus
+pemeriksaan visual desktop/seluler dengan 592 wadah MathJax dan empat gambar
+lengkap, tanpa galat konsol, TeX mentah, atau luapan horizontal halaman.
+Tabel dan rumus yang lebar dapat digulir secara lokal pada layar kecil.
+Produksi berikutnya berlanjut dari `point/Bayes.html`.
 
-- Pembaca web: <https://kokunoyumeto.github.io/mathematical-statistics-id/>
-- Sumber dan bukti: <https://github.com/KokunoYumeto/mathematical-statistics-id>
+- Arsip Zenodo checkpoint 13/29: <https://doi.org/10.5281/zenodo.22059764>
+- DOI konsep semua versi: <https://doi.org/10.5281/zenodo.22059763>
+- Pembaca web dan sumber GitHub: sementara tidak tersedia selama peninjauan
+  penangguhan akun; alamat kanonisnya tetap
+  <https://github.com/KokunoYumeto/mathematical-statistics-id>
 - Karya sumber resmi: <https://www.randomservices.org/random/>
 
 Pembaca luring dibangun secara deterministik dari `source/id-ID/` dengan

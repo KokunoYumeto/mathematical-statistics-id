@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="id-ID">
+
+<head>
+	<meta charset="utf-8">
+    <title>Kemungkinan Maksimum</title>
+	<meta name="author" content="Kyle Siegrist">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="probabilitas, statistika, pendugaan titik, kemungkinan maksimum, fungsi kemungkinan, fungsi log-kemungkinan, distribusi Bernoulli, distribusi geometrik, distribusi binomial negatif, distribusi Poisson, distribusi normal, distribusi gamma, distribusi beta, distribusi Pareto, distribusi seragam, distribusi hipergeometrik">
+	<link rel="icon" href="../icons/Icon.svg" type="image/svg">
+	<link rel="stylesheet" href="../Screen.css" type="text/css" media="screen">
+	<script src="../Basic.js"></script>
+	<script src="../../MathJax/tex-svg.js" id="MathJax-script" async></script>
+</head>
+
+<body>
+
+<div class="latex">
+	\(\newcommand{\R}{\mathbb{R}}\)
+	\(\newcommand{\N}{\mathbb{N}}\)
+	\(\newcommand{\Z}{\mathbb{Z}}\)
+	\(\newcommand{\E}{\mathbb{E}}\)
+	\(\newcommand{\P}{\mathbb{P}}\)
+	\(\newcommand{\var}{\text{var}}\)
+	\(\newcommand{\sd}{\text{sd}}\)
+	\(\newcommand{\cov}{\text{cov}}\)
+	\(\newcommand{\cor}{\text{cor}}\)
+	\(\newcommand{\bias}{\text{bias}}\)
+	\(\newcommand{\mse}{\text{mse}}\)
+	\(\newcommand{\bs}{\boldsymbol}\)
+</div>
+
+<header>
+	<ol class="map">
+		<li class="parent"><a href="https://www.randomservices.org/random/index.html">Random</a></li>
+        <li class="parent"><a href="index.html">6. Pendugaan Titik</a></li>
+        <li class="child"><a href="Estimators.html" title="Penduga">1</a></li>
+        <li class="child"><a href="Moments.html" title="Metode Momen">2</a></li>
+		<li class="current">3</li>
+        <li class="child"><a href="https://www.randomservices.org/random/point/Bayes.html" title="Penduga Bayes">4</a></li>
+        <li class="child"><a href="https://www.randomservices.org/random/point/Unbiased.html" title="Penduga Tak Bias Terbaik">5</a></li>
+        <li class="child"><a href="https://www.randomservices.org/random/point/Sufficient.html" title="Statistik Cukup, Lengkap, dan Ancilar">6</a></li>
+        <li class="details"><button type="button" title="Perluas Rincian" onclick="expandDetails(true);"><img src="../icons/Plus.svg" alt="Perluas"></button></li>
+        <li class="details"><button type="button" title="Ciutkan Rincian" onclick="expandDetails(false);"><img src="../icons/Minus.svg" alt="Ciutkan"></button></li>
+	</ol>
+    <h2 id="o006.random.point.likelihood.page">3. Kemungkinan Maksimum</h2>
+</header>
+
+<h3 id="the">Teori Dasar</h3>
+
+<h4 id="mle">Metode</h4>
+
+<p>Andaikan kembali bahwa kita mempunyai <a href="https://www.randomservices.org/random/prob/Probability.html">variabel acak</a> teramati \(\bs{X}\) untuk suatu <a href="https://www.randomservices.org/random/prob/Experiments.html">eksperimen acak</a>, dengan nilai dalam himpunan \(S\). Andaikan pula bahwa distribusi \(\bs{X}\) bergantung pada parameter tak diketahui \(\theta\), yang nilainya berada dalam himpunan parameter \(T\). Tentu saja, variabel data \(\bs{X}\) hampir selalu bernilai vektor. Parameter \(\theta\) juga dapat bernilai vektor. Fungsi kepadatan probabilitas \(\bs{X}\) pada \(S\) akan kita nyatakan dengan \(f_\theta\) untuk \(\theta \in T\). Distribusi \( \bs{X} \) dapat berupa <a href="https://www.randomservices.org/random/dist/Discrete.html">diskret</a> ataupun <a href="https://www.randomservices.org/random/dist/Continuous.html">kontinu</a>.</p>
+
+<p>Fungsi kemungkinan diperoleh dengan mempertukarkan peran \(\bs{x}\) dan \(\theta\) dalam fungsi kepadatan probabilitas: kita memandang \(\theta\) sebagai peubah dan \(\bs{x}\) sebagai informasi yang diberikan, tepat seperti sudut pandang dalam pendugaan.</p>
+
+<div class="unit" id="o006.random.point.likelihood.unit.likelihood-function">
+    <p class="dfn"><dfn>Fungsi kemungkinan (likelihood)</dfn> pada \( \bs{x} \in S \) adalah fungsi \( L_{\bs{x}}: T \to [0, \infty) \) yang diberikan oleh
+	\[ L_\bs{x}(\theta) = f_\theta(\bs{x}), \quad \theta \in T \]</p>
+</div>
+
+<p>Dalam metode <dfn>kemungkinan maksimum</dfn>, untuk setiap nilai vektor data kita mencari nilai parameter yang memaksimumkan fungsi kemungkinan.</p>
+
+<div class="unit" id="o006.random.point.likelihood.unit.maximum-likelihood-estimator">
+    <p class="dfn">Andaikan nilai maksimum \( L_{\bs{x}} \) dicapai di \( u(\bs{x}) \in T \) untuk setiap \( \bs{x} \in S \). Maka statistik \( u(\bs{X}) \) merupakan <dfn>penduga kemungkinan maksimum</dfn> bagi \( \theta \).</p>
+</div>
+
+<p>Metode kemungkinan maksimum menarik secara intuitif: kita memilih nilai parameter yang memberikan nilai fungsi kemungkinan terbesar pada data yang benar-benar teramati.</p>
+
+<p>Karena fungsi logaritma natural naik secara ketat pada \( (0, \infty) \), nilai maksimum fungsi kemungkinan, jika ada, dicapai pada titik yang sama dengan nilai maksimum logaritma fungsi kemungkinan. Untuk nilai fungsi kemungkinan yang nol, kita menggunakan konvensi nilai diperluas bahwa logaritmanya adalah minus tak hingga.</p>
+
+<div class="unit" id="o006.random.point.likelihood.unit.log-likelihood-function">
+    <p class="dfn"><dfn>Fungsi log-kemungkinan</dfn> pada \( \bs{x} \in S \) adalah fungsi \( \ln L_{\bs{x}} \):
+	\[ \ln L_{\bs{x}}(\theta) = \ln f_\theta(\bs{x}), \quad \theta \in T \]
+    Jika nilai maksimum \( \ln L_{\bs{x}} \) dicapai di \( u(\bs{x}) \in T \) untuk setiap \( \bs{x} \in S \), maka statistik \( u(\bs{X}) \) merupakan penduga kemungkinan maksimum bagi \( \theta \).</p>
+</div>
+
+<p>Fungsi log-kemungkinan sering lebih mudah digunakan daripada fungsi kemungkinan, biasanya karena fungsi kepadatan probabilitas \(f_\theta(\bs{x})\) mempunyai struktur hasil kali.</p>
+
+<h4 id="vec">Vektor Parameter</h4>
+
+<p>Kasus khusus yang penting terjadi ketika \(\bs{\theta} = (\theta_1, \theta_2, \ldots, \theta_k)\) merupakan vektor berisi \(k\) parameter riil, sehingga \(T \subseteq \R^k\). Dalam hal ini, masalah kemungkinan maksimum adalah memaksimumkan fungsi beberapa peubah. Jika ruang parameter \(T\) mempunyai interior tak kosong, metode kalkulus dapat digunakan. Jika nilai maksimum \(L_\bs{x}\) dicapai di titik \(\bs{\theta}\) pada bagian dalam \(T\), maka \(L_\bs{x}\) mempunyai maksimum lokal di \(\bs{\theta}\). Jadi, apabila fungsi kemungkinan terdiferensialkan, persamaan berikut menghasilkan calon titik interior:
+\[ \frac{\partial}{\partial \theta_i} L_\bs{x}(\bs{\theta}) = 0, \quad i \in \{1, 2, \ldots, k\} \]
+atau, secara ekuivalen,
+\[ \frac{\partial}{\partial \theta_i} \ln L_\bs{x}(\bs{\theta}) = 0, \quad i \in \{1, 2, \ldots, k\} \]
+Namun, setiap titik stasioner masih harus dibandingkan dan diperiksa sebagai maksimum; nilai maksimum juga dapat dicapai pada batas \(T\) atau bahkan tidak ada.</p>
+
+<h4 id="sam">Sampel Acak</h4>
+
+<p>Kasus khusus terpenting terjadi ketika variabel data membentuk <a href="../sample/index.html">sampel acak</a> dari suatu distribusi.</p>
+
+<div class="unit" id="o006.random.point.likelihood.unit.random-sample-likelihood">
+    <p class="math">Andaikan \(\bs{X} = (X_1, X_2, \ldots, X_n)\) merupakan sampel acak berukuran \(n\) dari distribusi variabel acak \(X\) yang bernilai dalam suatu himpunan \(R\), dengan fungsi kepadatan probabilitas \(g_\theta\) untuk \(\theta \in T\). Maka \(\bs{X}\) bernilai dalam \(S = R^n\), dan fungsi kemungkinan serta log-kemungkinan untuk \( \bs{x} = (x_1, x_2, \ldots, x_n) \in S \) adalah
+	\begin{align*}
+		L_\bs{x}(\theta) &amp; = \prod_{i=1}^n g_\theta(x_i), \quad \theta \in T \\
+		\ln L_\bs{x}(\theta) &amp; = \sum_{i=1}^n \ln g_\theta(x_i), \quad \theta \in T
+	\end{align*}</p>
+</div>
+
+<h4 id="inv">Perluasan Metode dan Sifat Invariansi</h4>
+
+<p>Kembali ke kerangka umum, andaikan sekarang \(h\) merupakan fungsi satu-satu dari himpunan parameter \(T\) ke seluruh himpunan \(\Lambda\). Kita dapat memandang \(\lambda = h(\theta)\) sebagai parameter baru bernilai dalam \(\Lambda\) dan dengan mudah memparameterkan ulang fungsi kepadatan probabilitas. Jadi, tetapkan \( \hat{f}_\lambda(\bs{x}) = f_{h^{-1}(\lambda)}(\bs{x})\) untuk \( \bs{x} \in S \) dan \( \lambda \in \Lambda \). Fungsi kemungkinan yang bersesuaian untuk \( \bs{x} \in S \) adalah
+\[ \hat{L}_\bs{x}(\lambda) = L_\bs{x}\left[h^{-1}(\lambda)\right], \quad \lambda \in \Lambda \]
+Jelas bahwa jika \(u(\bs{x}) \in T\) memaksimumkan \(L_\bs{x}\) untuk \(\bs{x} \in S\), maka \(h\left[u(\bs{x})\right] \in \Lambda\) memaksimumkan \(\hat{L}_\bs{x}\) untuk \(\bs{x} \in S\). Jadi, jika \(U\) adalah penduga kemungkinan maksimum bagi \(\theta\), maka \(V = h(U)\) adalah penduga kemungkinan maksimum bagi \( \lambda = h(\theta) \).</p>
+
+<p>Jika fungsi \(h\) tidak satu-satu, fungsi kemungkinan biasa untuk parameter baru \(\lambda = h(\theta)\) tidak terdefinisi melalui parameterisasi ulang tunggal, karena kepadatan umumnya tidak ditentukan sepenuhnya oleh \(\lambda\). Namun, metode tersebut mempunyai perluasan alami melalui kemungkinan profil.</p>
+
+<div class="unit" id="inv1">
+    <p class="dfn">Andaikan \( h: T \to \Lambda \), dengan himpunan target sama dengan citra fungsi tersebut, dan nyatakan parameter baru dengan \( \lambda = h(\theta) \). Definisikan <dfn>fungsi kemungkinan profil</dfn> bagi \( \lambda \) pada \( \bs{x} \in S\) dengan
+	\[ \hat{L}_\bs{x}(\lambda) = \sup\left\{L_\bs{x}(\theta): \theta \in h^{-1}\{\lambda\} \right\}, \quad \lambda \in \Lambda \]
+    Jika \( v(\bs{x}) \in \Lambda \) memaksimumkan \( \hat{L}_{\bs{x}} \) untuk setiap \( \bs{x} \in S \), maka \( V = v(\bs{X}) \) merupakan <dfn>penduga kemungkinan maksimum</dfn> bagi \( \lambda \).</p>
+</div>
+
+<p>Definisi ini memperluas metode kemungkinan maksimum ke kasus ketika parameter kepentingan tidak sepenuhnya memparameterkan fungsi kepadatan probabilitas. Teorema berikut dikenal sebagai <dfn>sifat invariansi</dfn>: jika masalah kemungkinan maksimum bagi \( \theta \) dapat diselesaikan, masalah bagi \( \lambda = h(\theta) \) juga dapat diselesaikan.</p>
+
+<div class="unit" id="o006.random.point.likelihood.unit.invariance-property">
+    <p class="math">Dalam kerangka definisi <a href="#inv1" class="ref"></a>, jika \( U \) merupakan penduga kemungkinan maksimum bagi \( \theta \), maka \( V = h(U) \) merupakan penduga kemungkinan maksimum bagi \( \lambda \).</p>
+	<details>
+        <summary>Rincian:</summary>
+        <p>Seperti sebelumnya, jika \(u(\bs{x}) \in T\) memaksimumkan \(L_\bs{x}\) untuk \(\bs{x} \in S\), maka \(h\left[u(\bs{x})\right] \in \Lambda\) memaksimumkan \(\hat{L}_\bs{x}\) untuk \(\bs{x} \in S\).</p>
+	</details>
+</div>
+
+<h3 id="exe">Contoh dan Kasus Khusus</h3>
+
+<p>Dalam subbagian berikut kita mempelajari pendugaan kemungkinan maksimum untuk sejumlah keluarga distribusi parametrik khusus. Ingat bahwa jika \(\bs{X} = (X_1, X_2, \ldots, X_n)\) merupakan sampel acak dari distribusi dengan rata-rata \(\mu\) dan varians \(\sigma^2\), maka penduga <a href="Moments.html">metode momen</a> bagi \(\mu\) dan \(\sigma^2\) masing-masing adalah
+\begin{align} 
+	M &amp; = \frac{1}{n} \sum_{i=1}^n X_i \\
+	T^2 &amp; = \frac{1}{n} \sum_{i=1}^n (X_i - M)^2
+\end{align}
+Tentu saja, \(M\) adalah <a href="../sample/Mean.html">rata-rata sampel</a>, sedangkan \(T^2 \) adalah versi berbias dari <a href="../sample/Variance.html">varians sampel</a>. Statistik-statistik tersebut terkadang juga muncul sebagai penduga kemungkinan maksimum. Statistik lain yang akan muncul dalam beberapa contoh di bawah adalah
+\[ M^{(2)} = \frac{1}{n} \sum_{i=1}^n X_i^2 \]
+momen sampel kedua terhadap titik asal. Seperti biasa, usahakan menurunkan sendiri hasilnya sebelum membuka rincian.</p>
+
+<h4 id="ber">Distribusi Bernoulli</h4>
+
+<p>Andaikan \(\bs{X} = (X_1, X_2, \ldots, X_n)\) merupakan sampel acak berukuran \(n\) dari <a href="https://www.randomservices.org/random/bernoulli/Introduction.html">distribusi Bernoulli</a> dengan parameter keberhasilan \(p \in [0, 1]\). Ingat bahwa fungsi kepadatan probabilitas Bernoulli adalah
+\[ g(x) = p^x (1 - p)^{1 - x}, \quad x \in \{0, 1\} \]
+Jadi, \(\bs{X}\) merupakan barisan variabel indikator saling bebas dengan \(\P(X_i = 1) = p\) untuk setiap \(i\). Dalam istilah keandalan yang lazim, \(X_i\) adalah hasil percobaan ke-\(i\), dengan 1 berarti berhasil dan 0 berarti gagal. Misalkan \(Y = \sum_{i=1}^n X_i\) menyatakan banyaknya keberhasilan, sehingga proporsi keberhasilan—rata-rata sampel—adalah \(M = Y / n\). Ingat bahwa \(Y\) mempunyai <a href="https://www.randomservices.org/random/bernoulli/Binomial.html">distribusi binomial</a> dengan parameter \(n\) dan \(p\).</p>
+
+<div class="unit" id="ber1">
+    <p class="math">Rata-rata sampel \(M\) merupakan penduga kemungkinan maksimum bagi \(p\) pada himpunan parameter \( [0, 1] \).</p>
+	<details>
+        <summary>Rincian:</summary>
+        <p>Perhatikan bahwa \(\ln g(x) = x \ln p + (1 - x) \ln(1 - p)\) untuk \( x \in \{0, 1\} \). Jadi, untuk titik interior, fungsi log-kemungkinan pada \( \bs{x} = (x_1, x_2, \ldots, x_n) \in \{0, 1\}^n \) adalah
+		\[ \ln L_{\bs{x}}(p) = \sum_{i=1}^n [x_i \ln p + (1 - x_i) \ln(1 - p)], \quad p \in (0, 1) \]
+        Mendiferensialkan terhadap \(p\) dan menyederhanakannya menghasilkan
+		\[ \frac{d}{dp} \ln L_{\bs{x}}(p) = \frac{y}{p} - \frac{n - y}{1 - p} \]
+        dengan \(y = \sum_{i=1}^n x_i\). Jika jumlah keberhasilan berada secara ketat antara nol dan ukuran sampel, terdapat satu titik kritis interior pada \(p = y / n = m\). Turunan keduanya adalah
+		\[ \frac{d^2}{d p^2} \ln L_{\bs{x}}(p) = -\frac{y}{p^2} - \frac{n - y}{(1 - p)^2} \lt 0 \]
+        Jadi fungsi log-kemungkinan cekung ketat pada bagian interior. Jika tidak ada keberhasilan, kemungkinan dimaksimumkan di batas p = 0; jika semua percobaan berhasil, kemungkinan dimaksimumkan di batas p = 1. Dengan demikian, dalam semua kasus maksimum pada himpunan parameter tertutup dicapai di \(m\).</p>
+	</details>
+</div>
+
+<p>Ingat bahwa \(M\) juga merupakan penduga <a href="Moments.html">metode momen</a> bagi \(p\). Selalu menyenangkan ketika dua prosedur pendugaan yang berbeda memberikan hasil yang sama. Selanjutnya kita tinjau masalah yang sama dengan himpunan parameter yang jauh lebih terbatas.</p>
+
+<div class="unit" id="ber2">
+    <p class="math">Andaikan sekarang \(p\) bernilai dalam \(\left\{\frac{1}{2}, 1\right\}\). Penduga kemungkinan maksimum bagi \(p\) adalah statistik
+	\[ U = \begin{cases} 1, &amp; Y = n\\ \frac{1}{2}, &amp; Y \lt n \end{cases} \]</p>
+	<ol class="sub">
+		<li>\(\E(U) = \begin{cases} 1, &amp; p = 1 \\ \frac{1}{2} + \left(\frac{1}{2}\right)^{n+1}, &amp; p = \frac{1}{2} \end{cases}\)</li>
+        <li>\(U\) berbias positif dalam arti lemah—biasnya taknegatif—tetapi tak bias secara asimtotik.</li>
+		<li>\(\mse(U) = \begin{cases} 0 &amp; p = 1 \\ \left(\frac{1}{2}\right)^{n+2}, &amp; p = \frac{1}{2} \end{cases}\)</li>
+        <li>\(U\) konsisten.</li>
+	</ol>
+	<details>
+        <summary>Rincian:</summary>
+        <p>Perhatikan bahwa fungsi kemungkinan pada \( \bs{x} = (x_1, x_2, \ldots, x_n) \in \{0, 1\}^n \) adalah \(L_{\bs{x}}(p) = p^y (1 - p)^{n-y}\) untuk \( p \in \left\{\frac{1}{2}, 1\right\} \), dengan \(y = \sum_{i=1}^n x_i\) seperti biasa. Jadi \(L_{\bs{x}}\left(\frac{1}{2}\right) = \left(\frac{1}{2}\right)^n\). Di sisi lain, \(L_{\bs{x}}(1) = 0\) jika \(y \lt n\), sedangkan \(L_{\bs{x}}(1) = 1\) jika \(y = n\). Dengan demikian, jika \(y = n\) maksimum dicapai pada \(p = 1\), sedangkan jika \(y \lt n\) maksimum dicapai pada \(p = \frac{1}{2}\).</p>
+		<ol class="sub">
+            <li>Jika \(p = 1\), maka \(\P(U = 1) = \P(Y = n) = 1\) sehingga \(\E(U) = 1\). Jika \(p = \frac{1}{2}\),
+			\[ \E(U) = 1 \P(Y = n) + \frac{1}{2} \P(Y \lt n) = 1 \left(\frac{1}{2}\right)^n + \frac{1}{2}\left[1 	- \left(\frac{1}{2}\right)^n\right] = \frac{1}{2} + \left(\frac{1}{2}\right)^{n+1} \]
+			</li>
+            <li>Perhatikan bahwa \( \E(U) \ge p \) dan \(\E(U) \to p\) ketika \(n \to \infty\), baik untuk \(p = 1\) maupun \(p = \frac{1}{2}\).</li>
+            <li>Jika \( p = 1 \), maka \( U = 1 \) dengan probabilitas 1 sehingga \( \mse(U) = 0 \). Jika \( p = \frac{1}{2} \),
+			\[ \mse(U) = \left(1 - \frac{1}{2}\right)^2 \P(Y = n) + \left(\frac{1}{2} - \frac{1}{2}\right)^2 \P(Y \lt n) = \left(\frac{1}{2}\right)^2 \left(\frac{1}{2}\right)^n = \left(\frac{1}{2}\right)^{n+2}\]
+			</li>
+            <li>Dari bagian (c), \( \mse(U) \to 0 \) ketika \( n \to \infty \).</li>
+		</ol>
+	</details>
+</div>
+
+<p>Distribusi Bernoulli pada <a href="#ber2" class="ref"></a> memodelkan koin yang adil atau mempunyai gambar pada kedua sisi. Hasil <a href="#ber1" class="ref"></a> dan <a href="#ber2" class="ref"></a> menunjukkan bahwa penduga kemungkinan maksimum suatu parameter, seperti penyelesaian setiap masalah pemaksimuman, sangat bergantung pada domain.</p>
+
+<div class="unit" id="ber3">
+    <p class="math">\(U\) secara seragam lebih baik daripada \(M\) pada himpunan parameter \(\left\{\frac{1}{2}, 1\right\}\).</p>
+	<details>
+        <summary>Rincian:</summary>
+        <p>Ingat bahwa \( \mse(M) = \var(M) = p (1 - p) / n \). Jika \( p = 1 \), maka \( \mse(M) = \mse(U) = 0 \) sehingga kedua penduga memberikan jawaban yang benar. Jika \( p = \frac{1}{2} \), maka \( \mse(U) = \left(\frac{1}{2}\right)^{n+2} \lt \frac{1}{4 n} = \mse(M) \).</p>
+	</details>
+</div>
+
+<div class="unit" id="o006.random.point.likelihood.unit.bernoulli-variance">
+    <p class="math">Andaikan \(\bs{X} = (X_1, X_2, \ldots, X_n)\) merupakan sampel acak berukuran \(n\) dari distribusi Bernoulli dengan parameter keberhasilan tak diketahui \(p \in [0, 1]\). Tentukan penduga kemungkinan maksimum bagi \(p (1 - p)\), yaitu varians distribusi Bernoulli yang mendasarinya.</p>
+	<details>
+        <summary>Rincian:</summary>
+        <p>Berdasarkan sifat invariansi, penduganya adalah \(M (1 - M)\), dengan \(M\) sebagai rata-rata sampel.</p>
+	</details>
+</div>
+
+<h4 id="geo">Distribusi Geometrik</h4>
+
+<p>Ingat bahwa <a href="https://www.randomservices.org/random/bernoulli/Geometric.html">distribusi geometrik</a> pada \(\mathbb{N}_+\) dengan parameter keberhasilan \(p \in (0, 1)\) mempunyai fungsi kepadatan probabilitas
+\[ g(x) = p (1 - p)^{x-1}, \quad x \in \mathbb{N}_+ \]
+Distribusi geometrik mengatur nomor percobaan tempat keberhasilan pertama terjadi dalam barisan <a href="https://www.randomservices.org/random/bernoulli/index.html">percobaan Bernoulli</a>.</p>
+
+<div class="unit" id="geo1">
+    <p class="math">Andaikan \(\bs{X} = (X_1, X_2, \ldots, X_n)\) merupakan sampel acak dari distribusi geometrik dengan parameter tak diketahui \(p \in (0, 1)\). Jika rata-rata sampel lebih besar daripada 1, penduga kemungkinan maksimum bagi \(p\) adalah \(U = 1 / M\). Jika seluruh pengamatan sama dengan 1 sehingga rata-rata sampelnya 1, tidak ada penduga kemungkinan maksimum pada ruang parameter terbuka; supremum kemungkinan didekati ketika parameter menuju 1 dari kiri.</p>
+	<details>
+        <summary>Rincian:</summary>
+        <p>Perhatikan bahwa \( \ln g(x) = \ln p + (x - 1) \ln(1 - p) \) untuk \( x \in \mathbb{N}_+ \). Jadi fungsi log-kemungkinan yang bersesuaian dengan data \( \bs{x} = (x_1, x_2, \ldots, x_n) \in \mathbb{N}_+^n \) adalah
+		\[ \ln L_\bs{x}(p) = n \ln p + (y - n) \ln(1 - p), \quad p \in (0, 1) \]
+        dengan \( y = \sum_{i=1}^n x_i \). Maka
+		\[ \frac{d}{dp} \ln L_{\bs{x}}(p) = \frac{n}{p} - \frac{y - n}{1 - p} \]
+        Jika rata-rata sampel lebih besar daripada 1, turunannya nol ketika \( p = n / y = 1 / m \). Selanjutnya, \( \frac{d^2}{dp^2} \ln L_\bs{x}(p) = -n / p^2 - (y - n) / (1 - p)^2 \lt 0 \), sehingga maksimum dicapai pada titik kritis. Kasus batas ketika rata-rata sampel sama dengan 1 dijelaskan dalam pernyataan di atas.</p>
+	</details>
+</div>
+
+<p>Ingat bahwa \(U\) juga merupakan <a href="Moments.html#geo">penduga metode momen</a> bagi \(p\) ketika nilainya berada dalam ruang parameter. Selalu meyakinkan ketika dua prosedur pendugaan yang berbeda menghasilkan penduga yang sama.</p>
+
+<h4 id="ngb">Distribusi Binomial Negatif</h4>
+
+<p>Secara lebih umum, <a href="https://www.randomservices.org/random/bernoulli/NegativeBinomial.html">distribusi binomial negatif</a> pada \( \N \) dengan parameter bentuk \( k \in (0, \infty) \) dan parameter keberhasilan \( p \in (0, 1) \) mempunyai fungsi kepadatan probabilitas
+\[ g(x) = \frac{\Gamma(x + k)}{\Gamma(k)\,x!} p^k (1 - p)^x, \quad x \in \N \]
+Jika \( k \) bilangan bulat positif, distribusi ini mengatur banyaknya kegagalan sebelum keberhasilan ke-\( k \) dalam barisan <a href="https://www.randomservices.org/random/bernoulli/index.html">percobaan Bernoulli</a> dengan parameter keberhasilan \( p \). Namun, distribusi tersebut juga terdefinisi untuk setiap \( k \in (0, \infty) \), tidak hanya untuk bilangan bulat.</p>
+
+<div class="unit" id="nbg1">
+    <p class="math">Andaikan \(\bs{X} = (X_1, X_2, \ldots, X_n)\) merupakan sampel acak berukuran \(n\) dari distribusi binomial negatif pada \( \N \), dengan parameter bentuk \( k \) diketahui dan parameter keberhasilan \( p \in (0, 1) \) tidak diketahui. Jika rata-rata sampel positif, penduga kemungkinan maksimum bagi \( p \) adalah
+	\[ U = \frac{k}{k + M} \]</p>
+	<details>
+        <summary>Rincian:</summary>
+        <p>Perhatikan bahwa \( \ln g(x) = \ln \Gamma(x + k) - \ln \Gamma(k) - \ln(x!) + k \ln p + x \ln(1 - p) \) untuk \( x \in \N \). Jadi fungsi log-kemungkinan yang bersesuaian dengan \( \bs{x} = (x_1, x_2, \ldots, x_n) \in \N^n \) adalah
+		\[ \ln L_\bs{x}(p) = n k \ln p + y \ln(1 - p) + C, \quad p \in (0, 1) \]
+        dengan \( y = \sum_{i=1}^n x_i \) dan \( C = \sum_{i=1}^n [\ln \Gamma(x_i + k) - \ln \Gamma(k) - \ln(x_i!)] \). Maka
+		\[ \frac{d}{dp} \ln L_\bs{x}(p) = \frac{n k}{p} - \frac{y}{1 - p} \]
+        Turunannya nol ketika \( p = n k / (n k + y) = k / (k + m) \), dengan \( m = y / n \) seperti biasa. Selanjutnya, \( \frac{d^2}{dp^2} \ln L_\bs{x}(p) = - n k / p^2 - y / (1 - p)^2 \lt 0 \), sehingga maksimum dicapai pada titik kritis. Jika rata-rata sampel tersebut nol, rumus tersebut menghasilkan nilai batas 1 yang tidak termasuk ruang parameter terbuka; dalam kasus itu supremum kemungkinan tidak dicapai.</p>
+	</details>
+</div>
+
+<p>Ketika terdefinisi dalam ruang parameter, hasil ini kembali sama dengan penduga metode momen bagi \( p \) ketika \( k \) diketahui.</p>
+
+<h4 id="poi">Distribusi Poisson</h4>
+
+<p>Ingat bahwa <a href="https://www.randomservices.org/random/poisson/Poisson.html">distribusi Poisson</a> dengan parameter \(r \gt 0\) mempunyai fungsi kepadatan probabilitas
+\[ g(x) = e^{-r} \frac{r^x}{x!}, \quad x \in \N \]
+Distribusi Poisson dinamai menurut <a href="https://www.randomservices.org/random/biographies/Poisson.html" class="ancillary">Simeon Poisson</a> dan banyak digunakan untuk memodelkan banyaknya <q>titik</q> acak dalam suatu wilayah waktu atau ruang, terutama dalam konteks <a href="https://www.randomservices.org/random/poisson/index.html">proses Poisson</a>. Parameter \( r\) sebanding dengan ukuran wilayah tersebut.</p>
+
+<div class="unit" id="poi1">
+    <p class="math">Andaikan \(\bs{X} = (X_1, X_2, \ldots, X_n)\) merupakan sampel acak dari distribusi Poisson dengan parameter tak diketahui \(r \in (0, \infty)\). Jika rata-rata sampel positif, penduga kemungkinan maksimum bagi \(r\) adalah rata-rata sampel \(M\). Jika semua pengamatan nol, tidak ada pemaksimum pada ruang parameter terbuka; supremum didekati ketika parameter menuju 0 dari kanan.</p>
+	<details>
+        <summary>Rincian:</summary>
+        <p>Perhatikan bahwa \( \ln g(x)  = -r + x \ln r - \ln(x!) \) untuk \( x \in \N \). Jadi fungsi log-kemungkinan yang bersesuaian dengan \( \bs{x} = (x_1, x_2, \ldots, x_n) \in \N^n\) adalah
+		\[ \ln L_\bs{x}(r) = -n r + y \ln r  - C, \quad r \in (0, \infty) \]
+        dengan \( y = \sum_{i=1}^n x_i \) dan \( C = \sum_{i=1}^n \ln(x_i!) \). Jadi, \( \frac{d}{dr} \ln L_\bs{x}(r) = -n + y / r \). Jika jumlah nilai pengamatan positif, turunan tersebut nol ketika \( r = y / n = m \) dan turunan keduanya \( \frac{d^2}{dr^2} \ln L_\bs{x}(r) = -y / r^2 \lt 0 \), sehingga maksimum dicapai pada titik kritis. Jika jumlah nilai pengamatan nol, fungsi kemungkinan menurun pada ruang parameter dan tidak mempunyai pemaksimum.</p>
+	</details>
+</div>
+
+<p>Ingat bahwa pada distribusi Poisson, parameter \(r\) sekaligus merupakan rata-rata dan varians. Jadi \(M\) juga merupakan <a href="Moments.html">penduga metode momen</a> bagi \(r\). Pada <a href="Estimators.html#poi">bagian pengantar</a> kita menunjukkan bahwa \(M\) mempunyai galat kuadrat rata-rata yang lebih kecil daripada \(S^2\), meskipun keduanya tak bias.</p>
+
+<div class="unit" id="poi3">
+    <p class="math">Andaikan \(\bs{X} = (X_1, X_2, \ldots, X_n)\) merupakan sampel acak dari distribusi Poisson dengan parameter \(r \in (0, \infty)\), dan misalkan \(p = \P(X = 0) = e^{-r}\). Jika rata-rata sampel positif, tentukan penduga kemungkinan maksimum bagi \(p\) dengan dua cara. Jika rata-rata sampel nol, jelaskan mengapa pada ruang parameter semula tidak ada pemaksimum dan nilai 1 hanya merupakan supremum bagi parameter turunan tersebut.</p>
+	<ol class="sub">
+        <li>Secara langsung, dengan menentukan fungsi kemungkinan untuk parameter \(p\).</li>
+        <li>Dengan menggunakan hasil <a href="#poi1" class="ref"></a> dan sifat invariansi.</li>
+	</ol>
+	<details>
+        <summary>Rincian:</summary>
+        <p>Untuk rata-rata sampel positif, hasilnya adalah \(e^{-M}\), dengan \(M\) sebagai rata-rata sampel.</p>
+	</details>
+</div>
+
+<h4 id="nor">Distribusi Normal</h4>
+
+<p>Ingat bahwa <a href="https://www.randomservices.org/random/special/Normal.html">distribusi normal</a> dengan rata-rata \(\mu\) dan varians \(\sigma^2\) mempunyai fungsi kepadatan probabilitas
+\[ g(x) = \frac{1}{\sqrt{2 \, \pi} \sigma} \exp \left[-\frac{1}{2} \left(\frac{x - \mu}{\sigma}\right)^2\right], \quad x \in \R \]
+Distribusi normal sering digunakan untuk memodelkan besaran fisik yang dipengaruhi galat acak kecil.</p>
+
+<div class="unit" id="nor1">
+    <p class="math">Andaikan \(\bs{X} = (X_1, X_2, \ldots, X_n)\) merupakan sampel acak dari distribusi normal dengan rata-rata tak diketahui \(\mu \in \R\) dan varians \(\sigma^2 \in (0, \infty)\). Jika varians sampel positif, penduga kemungkinan maksimum bagi \(\mu\) dan \(\sigma^2\) masing-masing adalah \(M\) dan \(T^2\). Jika varians sampel nol, kemungkinan tidak terbatas ketika varians distribusi mendekati nol dan tidak ada penduga kemungkinan maksimum pada ruang parameter tersebut.</p>
+	<details>
+        <summary>Rincian:</summary>
+        <p>Perhatikan bahwa
+		\[ \ln g(x) = -\frac{1}{2} \ln(2 \pi) - \frac{1}{2} \ln(\sigma^2) - \frac{1}{2 \sigma^2} (x - \mu)^2, \quad x \in \R \]
+        Jadi fungsi log-kemungkinan yang bersesuaian dengan data \( \bs{x} = (x_1, x_2, \ldots, x_n) \in \R^n \) adalah
+		\[ \ln L_\bs{x}(\mu, \sigma^2) = -\frac{n}{2} \ln(2 \pi) - \frac{n}{2} \ln(\sigma^2) - \frac{1}{2 \sigma^2} \sum_{i=1}^n (x_i - \mu)^2, \quad (\mu, \sigma^2) \in \R \times (0, \infty) \]
+        Pengambilan turunan parsial menghasilkan
+		\begin{align*}
+			\frac{\partial}{\partial \mu} \ln L_\bs{x}(\mu, \sigma^2) &amp;= \frac{1}{\sigma^2} \sum_{i=1}^n (x_i - \mu) = \frac{1}{\sigma^2}\left(\sum_{i=1}^n x_i - n \mu\right) \\
+			\frac{\partial}{\partial \sigma^2} \ln L_\bs{x}(\mu, \sigma^2) &amp;= -\frac{n}{2 \sigma^2} + \frac{1}{2 \sigma^4} \sum_{i=1}^n (x_i - \mu)^2
+		\end{align*}
+        Turunan parsial bernilai nol ketika \( \mu = \frac{1}{n} \sum_{i=1}^n x_i\) dan \( \sigma^2 = \frac{1}{n} \sum_{i=1}^n (x_i - \mu)^2 \). Jadi, apabila varians sampel positif, satu-satunya titik kritis adalah \( (m, t^2) \). Dengan sedikit kalkulus tambahan, turunan parsial kedua pada titik kritis adalah
+		\[ \frac{\partial^2}{\partial \mu^2} \ln L_\bs{x}(m, t^2) = -n / t^2, \; \frac{\partial^2}{\partial \mu \partial \sigma^2} \ln L_\bs{x}(m, t^2) = 0, \; \frac{\partial^2}{\partial (\sigma^2)^2} \ln L_\bs{x}(m, t^2) = -n / (2 t^4)\]
+        Matriks Hessian pada titik kritis tersebut definit negatif, dan bentuk log-kemungkinan menunjukkan bahwa titik itu merupakan maksimum global.</p>
+	</details>
+</div>
+
+<p>Tentu saja, \(M\) dan \(T^2\) juga merupakan penduga metode momen masing-masing bagi \(\mu\) dan \(\sigma^2\).</p>
+
+<div class="unit" id="nor2">
+    <p class="app">Jalankan <a href="https://www.randomservices.org/random/apps/NormalEstimate.html" class="ancillary">eksperimen pendugaan normal</a> sebanyak 1.000 kali untuk beberapa nilai ukuran sampel \(n\), rata-rata \(\mu\), dan varians \(\sigma^2\). Untuk parameter \(\sigma^2\), bandingkan penduga kemungkinan maksimum \(T^2\) dengan varians sampel biasa \(S^2\). Penduga mana yang tampaknya lebih baik dari segi galat kuadrat rata-rata?</p>
+</div>
+
+<div class="unit" id="nor3">
+    <p class="math">Andaikan kembali bahwa \(\bs{X} = (X_1, X_2, \ldots, X_n)\) merupakan sampel acak dari distribusi normal dengan rata-rata tak diketahui \(\mu \in \R\) dan varians tak diketahui \(\sigma^2 \in (0, \infty)\). Apabila varians sampel positif, tentukan penduga kemungkinan maksimum bagi \(\mu^2 + \sigma^2\), yaitu momen kedua terhadap titik asal bagi distribusi yang mendasarinya.</p>
+	<details>
+        <summary>Rincian:</summary>
+        <p>Berdasarkan sifat invariansi, penduganya adalah \(M^2 + T^2\), dengan \(M\) sebagai rata-rata sampel dan \(T^2\) sebagai versi berbias dari varians sampel.</p>
+	</details>
+</div>
+
+<h4 id="gam">Distribusi Gamma</h4>
+
+<p>Ingat bahwa <a href="https://www.randomservices.org/random/special/Gamma.html">distribusi gamma</a> dengan parameter bentuk \(k \gt 0\) dan parameter skala \(b \gt 0\) mempunyai fungsi kepadatan probabilitas
+\[ g(x) = \frac{1}{\Gamma(k) \, b^k} x^{k-1} e^{-x / b}, \quad 0 \lt x \lt \infty \]
+Distribusi gamma sering digunakan untuk memodelkan waktu acak, terutama dalam konteks <a href="https://www.randomservices.org/random/poisson/index.html">proses Poisson</a>, serta jenis variabel acak positif tertentu lainnya.</p>
+
+<div class="unit" id="gam1">
+    <p class="math">Andaikan \(\bs{X} = (X_1, X_2, \ldots, X_n)\) merupakan sampel acak dari distribusi gamma dengan parameter bentuk \(k\) diketahui dan parameter skala tak diketahui \(b \in (0, \infty)\). Penduga kemungkinan maksimum bagi \(b\) adalah \(V_k = \frac{1}{k} M\).</p>
+	<details>
+        <summary>Rincian:</summary>
+        <p>Perhatikan bahwa untuk \( x \in (0, \infty) \),
+		\[ \ln g(x) = -\ln \Gamma(k) - k \ln b + (k - 1) \ln x - \frac{x}{b} \]
+        sehingga fungsi log-kemungkinan yang bersesuaian dengan data \( \bs{x} = (x_1, x_2, \ldots, x_n) \in (0, \infty)^n \) adalah
+		\[ \ln L_\bs{x}(b) = - n k \ln b - \frac{y}{b} + C, \quad b \in (0, \infty)\]
+        dengan \( y = \sum_{i=1}^n x_i \) dan \( C = -n \ln \Gamma(k) + (k - 1) \sum_{i=1}^n \ln x_i \). Jadi,
+		\[ \frac{d}{d b} \ln L_\bs{x}(b)  = -\frac{n k}{b} + \frac{y}{b^2} \]
+        Turunannya nol ketika \( b = \frac{y}{n k} = \frac{m}{k} \). Selanjutnya, \( \frac{d^2}{db^2} \ln L_\bs{x}(b) = n k / b^2 - 2 y / b^3 \). Pada titik kritis \( b = \frac{y}{n k} \), turunan keduanya adalah \(-(n k)^3 / y^2 \lt 0\) sehingga maksimum dicapai di titik kritis.</p>
+	</details>
+</div>
+
+<p>Ingat bahwa \(V_k\) juga merupakan penduga metode momen bagi \(b\) ketika \(k\) diketahui. Namun, ketika \(k\) tidak diketahui, penduga metode momen bagi \(b\) adalah \(V = \frac{T^2}{M}\).</p>
+
+<div class="unit" id="gam2">
+    <p class="app">Jalankan <a href="https://www.randomservices.org/random/apps/GammaEstimate.html" class="ancillary">eksperimen pendugaan gamma</a> sebanyak 1.000 kali untuk beberapa nilai ukuran sampel \(n\), parameter bentuk \(k\), dan parameter skala \(b\). Dalam setiap kasus, bandingkan <a href="Moments.html">penduga metode momen</a> \(V\) bagi \(b\) ketika \(k\) tidak diketahui dengan penduga metode momen sekaligus kemungkinan maksimum \(V_k\) bagi \(b\) ketika \(k\) diketahui. Penduga mana yang tampaknya lebih baik dari segi galat kuadrat rata-rata?</p>
+</div>
+
+<h4 id="bet">Distribusi Beta</h4>
+
+<p>Ingat bahwa <a href="https://www.randomservices.org/random/special/Beta.html">distribusi beta</a> dengan parameter kiri \(a \in (0, \infty)\) dan parameter kanan \(b = 1\) mempunyai fungsi kepadatan probabilitas
+\[ g(x) = a x^{a-1}, \quad x \in (0, 1) \]
+Distribusi beta sering digunakan untuk memodelkan proporsi acak dan variabel acak lain yang nilainya berada dalam interval terbatas.</p>
+
+<div class="unit" id="bet1">
+    <p class="math">Andaikan \(\bs{X} = (X_1, X_2, \ldots, X_n)\) merupakan sampel acak dari distribusi beta dengan parameter kiri tak diketahui \(a \in (0, \infty)\) dan parameter kanan \(b = 1\). Penduga kemungkinan maksimum bagi \(a\) adalah
+	\[ W = - \frac{n}{\sum_{i=1}^n \ln X_i} = -\frac{n}{\ln(X_1 X_2 \cdots X_n)} \]</p>
+	<details>
+        <summary>Rincian:</summary>
+        <p>Perhatikan bahwa \( \ln g(x) = \ln a + (a - 1) \ln x \) untuk \( x \in (0, 1) \). Jadi fungsi log-kemungkinan yang bersesuaian dengan data \( \bs{x} = (x_1, x_2, \ldots, x_n) \in (0, 1)^n \) adalah
+		\[ \ln L_\bs{x}(a) = n \ln a + (a - 1) \sum_{i=1}^n \ln x_i, \quad a \in (0, \infty) \] 
+        Karena itu, \( \frac{d}{da} \ln L_\bs{x}(a)  = n / a + \sum_{i=1}^n \ln x_i \). Turunannya nol ketika \( a = -n \big/ \sum_{i=1}^n \ln x_i \). Selanjutnya, \( \frac{d^2}{da^2} \ln L_\bs{x}(a) = -n / a^2 \lt 0 \), sehingga maksimum dicapai pada titik kritis.</p>
+	</details>
+</div>
+
+<p>Ingat bahwa ketika \(b = 1\), <a href="Moments.html#bet">penduga metode momen</a> bagi \(a\) adalah \(U_1 = M \big/ (1 - M)\). Namun, ketika \(b \in (0, \infty)\) juga tidak diketahui, penduga metode momen bagi \(a\) adalah \(U = M (M - M^{(2)}) \big/ (M^{(2)} - M^2)\). Ketika \(b = 1\), mana yang lebih baik: penduga metode momen atau penduga kemungkinan maksimum?</p>
+
+<div class="unit" id="bet2">
+    <p class="app">Dalam <a href="https://www.randomservices.org/random/apps/BetaEstimate.html" class="ancillary">eksperimen pendugaan beta</a>, tetapkan \(b = 1\). Jalankan eksperimen sebanyak 1.000 kali untuk beberapa nilai ukuran sampel \(n\) dan parameter \(a\). Dalam setiap kasus, bandingkan penduga \(U\), \(U_1\), dan \(W\). Penduga mana yang tampaknya lebih baik dari segi galat kuadrat rata-rata?</p>
+</div>
+
+<p>Terakhir, perhatikan bahwa \( 1 / W \) adalah rata-rata sampel untuk sampel acak berukuran \( n \) dari distribusi \( -\ln X \). Distribusi tersebut adalah distribusi eksponensial dengan laju \( a \).</p>
+
+<h4 id="par">Distribusi Pareto</h4>
+
+<p>Ingat bahwa <a href="https://www.randomservices.org/random/special/Pareto.html">distribusi Pareto</a> dengan parameter bentuk \(a \gt 0\) dan parameter skala \(b \gt 0\) mempunyai fungsi kepadatan probabilitas
+\[ g(x) = \frac{a b^a}{x^{a+1}}, \quad b \le x \lt \infty \]
+Distribusi ini dinamai menurut <a href="https://www.randomservices.org/random/biographies/Pareto.html" class="ancillary">Vilfredo Pareto</a> dan merupakan distribusi berekor berat yang sering digunakan untuk memodelkan pendapatan serta jenis variabel acak tertentu lainnya.</p>
+
+<div class="unit" id="par1">
+    <p class="math">Andaikan \(\bs{X} = (X_1, X_2, \ldots, X_n)\) merupakan sampel acak dari distribusi Pareto dengan parameter bentuk tak diketahui \(a \in (0, \infty)\) dan parameter skala tak diketahui \(b \in (0, \infty)\). Jika sampel tidak konstan—yang berlaku hampir pasti untuk sampel kontinu berukuran sekurang-kurangnya dua—penduga kemungkinan maksimum bagi \( b \) adalah \( X_{(1)} = \min\{X_1, X_2, \ldots, X_n\} \), yaitu <a href="../sample/OrderStatistics.html">statistik terurut</a> pertama. Penduga kemungkinan maksimum bagi \( a \) adalah
+	\[ U = \frac{n}{\sum_{i=1}^n \ln X_i - n \ln X_{(1)}} = \frac{n}{\sum_{i=1}^n \left(\ln X_i - \ln X_{(1)}\right)}\]</p>
+	<details>
+        <summary>Rincian:</summary>
+        <p>Perhatikan bahwa \( \ln g(x) = \ln a + a \ln b - (a + 1) \ln x \) untuk \( x \in [b, \infty) \). Jadi fungsi log-kemungkinan yang bersesuaian dengan data \( \bs{x} = (x_1, x_2, \ldots, x_n) \) adalah
+		\[ \ln L_\bs{x}(a, b) = n \ln a + n a \ln b - (a + 1) \sum_{i=1}^n \ln x_i; \quad 0 \lt a \lt \infty, \, 0 \lt b \le x_i \text{ untuk setiap } i \in \{1, 2, \ldots, n\} \]
+        Secara ekuivalen, domainnya adalah \( 0 \lt a \lt \infty \) dan \( 0 \lt b \le x_{(1)} \). Perhatikan bahwa \( \ln L_{\bs{x}}(a, b) \) naik terhadap \( b \) untuk setiap \( a \) sehingga dimaksimumkan ketika \( b = x_{(1)} \) untuk setiap \( a \). Selanjutnya,
+		\[ \frac{d}{d a} \ln L_{\bs{x}}\left(a, x_{(1)}\right) = \frac{n}{a} + n \ln x_{(1)} - \sum_{i=1}^n \ln x_i \]
+        Jika penyebutnya positif, turunannya nol ketika \( a = n \big/ \left(\sum_{i=1}^n \ln x_i - n \ln x_{(1)}\right) \). Selanjutnya, \( \frac{d^2}{da^2} \ln L_\bs{x}\left(a, x_{(1)}\right) = -n / a^2 \lt 0 \), sehingga maksimum dicapai pada titik kritis. Jika semua pengamatan sama, penyebut tersebut nol dan kemungkinan tidak terbatas ketika parameter bentuk bertambah; tidak ada penduga kemungkinan maksimum berhingga.</p>
+	</details>
+</div>
+
+<p>Ingat bahwa jika \(a \gt 2\), <a href="Moments.html#par">penduga metode momen</a> bagi \(a\) dan \( b \) adalah
+\[ 1 + \sqrt{\frac{M^{(2)}}{M^{(2)} - M^2}}, \; \frac{M^{(2)}}{M} \left(1 - \sqrt{\frac{M^{(2)} - M^2}{M^{(2)}}}\right)\]</p>
+
+<div class="unit" id="par2">
+    <p class="app">Buka <a href="https://www.randomservices.org/random/apps/ParetoEstimate.html" class="ancillary">eksperimen pendugaan Pareto</a>. Jalankan eksperimen sebanyak 1.000 kali untuk beberapa nilai ukuran sampel \(n\) dan parameter \(a\) serta \( b \). Bandingkan penduga metode momen dengan penduga kemungkinan maksimum. Penduga mana yang tampaknya lebih baik dari segi bias dan galat kuadrat rata-rata?</p>
+</div>
+
+<p>Parameter skala pada distribusi Pareto sering kali diketahui.</p>
+
+<div class="unit" id="par3">
+    <p class="math">Andaikan \(\bs{X} = (X_1, X_2, \ldots, X_n)\) merupakan sampel acak dari distribusi Pareto dengan parameter bentuk tak diketahui \(a \in (0, \infty)\) dan parameter skala diketahui \(b \in (0, \infty)\). Jika jumlah log-rasio sampel terhadap skala positif, penduga kemungkinan maksimum bagi \( a \) adalah
+	\[ U = \frac{n}{\sum_{i=1}^n \ln X_i - n \ln b} = \frac{n}{\sum_{i=1}^n \left(\ln X_i - \ln b \right)}\]</p>
+	<details>
+        <summary>Rincian:</summary>
+        <p>Dengan menyesuaikan bukti sebelumnya, fungsi log-kemungkinan yang bersesuaian dengan data \( \bs{x} = (x_1, x_2, \ldots, x_n) \) adalah
+		\[ \ln L_\bs{x}(a) = n \ln a + n a \ln b - (a + 1) \sum_{i=1}^n \ln x_i, \quad 0 \lt a \lt \infty \]
+        Turunannya adalah
+		\[ \frac{d}{d a} \ln L_{\bs{x}}(a) = \frac{n}{a} + n \ln b - \sum_{i=1}^n \ln x_i \]
+        Jika penyebutnya positif, turunan nol ketika \( a = n \big/ \left(\sum_{i=1}^n \ln x_i - n \ln b\right) \). Selanjutnya, \( \frac{d^2}{da^2} \ln L_\bs{x}(a) = -n / a^2 \lt 0 \), sehingga maksimum dicapai pada titik kritis. Jika semua pengamatan sama dengan batas skala, penyebutnya nol dan tidak ada pemaksimum berhingga.</p>
+	</details>
+</div>
+
+<h4 id="uni">Distribusi Seragam</h4>
+
+<p>Dalam subbagian ini kita mempelajari masalah pendugaan terkait distribusi seragam yang menjadi sumber wawasan dan contoh tandingan. Dalam suatu arti, masalah pertama merupakan padanan kontinu dari masalah pendugaan yang dipelajari pada bagian <a href="https://www.randomservices.org/random/urn/OrderStatistics.html">statistik terurut</a> dalam bab <a href="https://www.randomservices.org/random/urn/index.html">model pensampelan berhingga</a>. Andaikan \(\bs{X} = (X_1, X_2, \ldots, X_n)\) merupakan sampel acak dari <a href="https://www.randomservices.org/random/dist/Continuous.html#uni">distribusi seragam</a> pada interval \([0, h]\), dengan \(h \in (0, \infty)\) sebagai parameter tak diketahui. Jadi, distribusi asal sampel mempunyai fungsi kepadatan probabilitas
+\[ g(x) = \frac{1}{h}, \quad x \in [0, h] \]
+Mula-mula mari kita tinjau kembali hasil dari bagian sebelumnya.</p>
+
+<div class="unit" id="uni1">
+    <p class="math">Penduga metode momen bagi \(h\) adalah \(U = 2 M\). Penduga \(U\) mempunyai sifat-sifat berikut.</p>
+	<ol class="sub">
+        <li>\(U\) tak bias.</li>
+        <li>\(\var(U) = \frac{h^2}{3 n}\) sehingga \(U\) konsisten.</li>
+	</ol>
+</div>
+
+<p>Sekarang mari kita tentukan penduga kemungkinan maksimumnya.</p>
+
+<div class="unit" id="uni2">
+    <p class="math">Jika maksimum sampel positif, penduga kemungkinan maksimum bagi \(h\) adalah \(X_{(n)} = \max\{X_1, X_2, \ldots, X_n\}\), yaitu <a href="../sample/OrderStatistics.html">statistik terurut</a> ke-\(n\). Penduga ini merupakan penduga kemungkinan maksimum hampir pasti; pada kejadian berprobabilitas nol ketika semua pengamatan sama dengan 0, supremum pada ruang parameter terbuka tidak dicapai. Statistik \(X_{(n)}\) mempunyai sifat-sifat berikut.</p>
+	<ol class="sub">
+		<li>\(\E\left(X_{(n)}\right) = \frac{n}{n + 1} h\)</li>
+        <li>\(\bias\left(X_{(n)}\right) = -\frac{h}{n+1}\) sehingga \(X_{(n)}\) berbias negatif tetapi tak bias secara asimtotik.</li>
+		<li>\(\var\left(X_{(n)}\right) = \frac{n}{(n+2)(n+1)^2} h^2\)</li>
+        <li>\(\mse\left(X_{(n)}\right) = \frac{2}{(n+1)(n+2)}h^2\) sehingga \(X_{(n)}\) konsisten.</li>
+	</ol>
+	<details>
+        <summary>Rincian:</summary>
+        <p>Fungsi kemungkinan yang bersesuaian dengan data \( \bs{x} = (x_1, x_2, \ldots, x_n) \) adalah \( L_\bs{x}(h) = 1 / h^n \) untuk \( h \ge x_i \) bagi setiap \( i \in \{1, 2, \ldots, n\} \), dengan parameter skala positif. Jika maksimum sampel positif, domainnya ekuivalen dengan \( h \ge x_{(n)} \). Fungsi \( h \mapsto 1 / h^n \) menurun, sehingga maksimum dicapai pada nilai terkecil, yaitu \( x_{(n)} \). Bagian (a) dan (c) menyatakan kembali hasil dari bagian statistik terurut; bagian (b) dan (d) mengikuti dari keduanya.</p>
+	</details>
+</div>
+
+<p>Karena nilai harapan \(X_{(n)}\) merupakan kelipatan yang diketahui dari parameter \(h\), kita dapat dengan mudah membangun penduga tak bias.</p>
+
+<div class="unit" id="uni3">
+    <p class="math">Misalkan \(V = \frac{n+1}{n} X_{(n)}\). Penduga \(V\) mempunyai sifat-sifat berikut.</p>
+	<ol class="sub">
+        <li>\(V\) tak bias.</li>
+        <li>\(\var(V) = \frac{h^2}{n(n + 2)}\) sehingga \(V\) konsisten.</li>
+        <li>Efisiensi relatif asimtotik \(V\) terhadap \(U\) tidak berhingga.</li>
+	</ol>
+	<details>
+        <summary>Rincian:</summary>
+        <p>Bagian (a) dan (b) mengikuti dari <a href="#uni2" class="ref"></a> dan sifat dasar nilai harapan serta varians. Untuk bagian (c),
+		\[ \frac{\var(U)}{\var(V)} = \frac{h^2/(3n)}{h^2/[n(n + 2)]} = \frac{n + 2}{3} \to \infty \text{ ketika } n \to \infty \]</p>
+	</details>
+</div>
+
+<p>Bagian terakhir menunjukkan bahwa versi tak bias \(V\) dari penduga kemungkinan maksimum jauh lebih baik daripada penduga metode momen \(U\). Dalam pengertian laju galat kuadrat rata-rata yang digunakan pada halaman ini, sumber menyebut penduga seperti \(V\), yang galat kuadrat rata-ratanya turun pada orde \(\frac{1}{n^2}\), <dfn>super efisien</dfn>; istilah superefisien dalam teori asimtotik umum mempunyai arti yang lebih khusus. Setelah memperoleh penduga yang sangat baik, mari kita cari penduga yang sangat buruk. Calon alami ialah penduga berdasarkan \(X_{(1)} = \min\{X_1, X_2, \ldots, X_n\}\), yaitu statistik terurut <em>pertama</em>. Hasil berikut memudahkan perhitungannya.</p>
+
+<div class="unit" id="uni4">
+    <p class="math">Sampel \(\bs{X} = (X_1, X_2, \ldots, X_n)\) mempunyai sifat-sifat berikut.</p>
+	<ol class="sub">
+        <li>\(h - X_i\) berdistribusi seragam pada \([0, h]\) untuk setiap \(i\).</li>
+        <li>\((h - X_1, h - X_2, \ldots, h - X_n)\) juga merupakan sampel acak dari distribusi seragam pada \([0, h]\).</li>
+        <li>\(X_{(1)}\) mempunyai distribusi yang sama dengan \(h - X_{(n)}\).</li>
+	</ol>
+	<details>
+        <summary>Rincian:</summary>
+		<ol class="sub">
+            <li>Ini merupakan akibat langsung dari fakta bahwa pencerminan afin terhadap titik tengah interval memetakan distribusi seragam pada interval tersebut kembali ke distribusi yang sama.</li>
+            <li>Hasil ini mengikuti bagian (a) dan fakta bahwa jika \( \bs{X} \) merupakan barisan variabel saling bebas, maka \( (h - X_1, h - X_2, \ldots, h - X_n) \) juga demikian.</li>
+            <li>Dari bagian (b), \( X_{(1)} = \min\{X_1, X_2, \ldots, X_n\} \) mempunyai distribusi yang sama dengan \( \min\{h - X_1, h - X_2, \ldots, h - X_n\} = h - \max\{X_1, X_2, \ldots, X_n\} = h - X_{(n)} \).</li>
+		</ol>
+	</details>
+</div>
+
+<p>Sekarang kita dapat membangun penduga yang sangat buruk.</p>
+
+<div class="unit" id="uni5">
+    <p class="math">Misalkan \(W = (n + 1)X_{(1)}\). Maka</p>
+	<ol class="sub">
+        <li>\( W \) merupakan penduga tak bias bagi \( h \).</li>
+        <li>\(\var(W) = \frac{n}{n+2} h^2\) sehingga \(W\) bahkan tidak konsisten.</li>
+	</ol>
+	<details>
+        <summary>Rincian:</summary>
+        <p>Hasil-hasil ini mengikuti dari <a href="#uni4" class="ref"></a>:</p>
+		<ol class="sub">
+            <li>\( \E(X_{(1)}) = h - \E(X_{(n)}) = h - \frac{n}{n + 1} h = \frac{1}{n + 1} h  \) sehingga \( \E(W) = h \).</li>
+			<li>\( \var(W) = (n + 1)^2 \var(X_{(1)}) = (n + 1)^2 \var(h - X_{(n)}) = (n + 1)^2 \frac{n}{(n + 1)^2 (n + 2)} h^2 = \frac{n}{n + 2} h^2\).</li>
+		</ol>
+	</details>
+</div>
+
+<div class="unit" id="uni6">
+    <p class="app">Jalankan <a href="https://www.randomservices.org/random/apps/UniformEstimate.html" class="ancillary">eksperimen pendugaan seragam</a> sebanyak 1.000 kali untuk beberapa nilai ukuran sampel \(n\) dan parameter \(h\). Dalam setiap kasus, bandingkan bias empiris serta galat kuadrat rata-rata penduga dengan nilai teoretisnya. Urutkan penduga berdasarkan galat kuadrat rata-rata empiris.</p>
+</div>
+
+<p>Rangkaian latihan berikut menunjukkan bahwa penduga kemungkinan maksimum tidak selalu unik. Andaikan \(\bs{X} = (X_1, X_2, \ldots, X_n)\) merupakan sampel acak dari <a href="https://www.randomservices.org/random/dist/Continuous.html#uni">distribusi seragam</a> pada interval \([a, a + 1]\), dengan \(a \in \R\) sebagai parameter tak diketahui. Jadi, distribusi asal sampel mempunyai fungsi kepadatan probabilitas
+\[ g(x) = 1, \quad a \le x \le a + 1 \]
+Seperti biasa, mula-mula kita tinjau penduga metode momen.</p>
+
+<div class="unit" id="uni7">
+    <p class="math">Penduga metode momen bagi \(a\) adalah \(U = M - \frac{1}{2}\). Penduga \(U\) mempunyai sifat-sifat berikut.</p>
+	<ol class="sub">
+        <li>\(U\) tak bias.</li>
+        <li>\(\var(U) = \frac{1}{12 n}\) sehingga \(U\) konsisten.</li>
+	</ol>
+</div>
+
+<p>Namun, seperti telah dijanjikan, penduga kemungkinan maksimumnya tidak unik.</p>
+
+<div class="unit" id="uni8">
+    <p class="math">Setiap statistik \(V \in \left[X_{(n)} - 1, X_{(1)}\right]\) merupakan penduga kemungkinan maksimum bagi \(a\).</p>
+	<details>
+        <summary>Rincian:</summary>
+        <p>Fungsi kemungkinan yang bersesuaian dengan data \( \bs{x} = (x_1, x_2, \ldots, x_n) \) adalah \( L_\bs{x}(a) = 1 \) untuk \( a \le x_i \le a + 1 \) dan \( i \in \{1, 2, \ldots, n\} \). Domainnya ekuivalen dengan \( a \le x_{(1)} \) dan \( a \ge x_{(n)} - 1 \). Karena fungsi kemungkinan konstan pada domain ini, hasilnya mengikuti.</p>
+	</details>
+</div>
+
+<p>Untuk melengkapi pembahasan, mari kita tinjau masalah pendugaan penuh. Andaikan \( \bs{X} = (X_1, X_2, \ldots, X_n) \) merupakan sampel acak berukuran \( n \) dari distribusi seragam pada \( [a, a + h] \), dengan \( a \in \R \) dan \( h \in (0, \infty) \) keduanya tidak diketahui. Berikut hasil dari bagian sebelumnya.</p>
+
+<div class="unit" id="uni9">
+    <p class="math">Misalkan \( U \) dan \( V \) masing-masing menyatakan penduga metode momen bagi \( a \) dan \( h \). Maka
+	\[ U = M - \sqrt{3} T, \quad V = 2 \sqrt{3} T \]
+    dengan \( M = \frac{1}{n} \sum_{i=1}^n X_i \) sebagai rata-rata sampel dan \( T^2 = \frac{1}{n} \sum_{i=1}^n (X_i - M)^2 \) sebagai versi berbias dari varians sampel; simbol T menyatakan akar kuadrat nonnegatifnya.</p>
+</div>
+
+<p>Pada tahap ini tidak mengherankan bahwa penduga kemungkinan maksimum merupakan fungsi dari statistik terurut terbesar dan terkecil.</p>
+
+<div class="unit" id="o006.random.point.likelihood.unit.uniform-location-scale-mle">
+    <p class="math">Jika rentang sampel positif, penduga kemungkinan maksimum bagi \( a \) dan \( h \) masing-masing adalah \( U = X_{(1)} \) dan \( V = X_{(n)} - X_{(1)} \). Jika rentang sampel nol, nilai skala 0 berada di luar ruang parameter dan supremum kemungkinan tidak dicapai.</p>
+	<ol class="sub">
+        <li>\( \E(U) = a + \frac{h}{n + 1} \) sehingga \( U \) berbias positif dan tak bias secara asimtotik.</li>
+        <li>\( \E(V) = h \frac{n - 1}{n + 1} \) sehingga \( V \) berbias negatif dan tak bias secara asimtotik.</li>
+        <li>\( \var(U) = h^2 \frac{n}{(n + 1)^2 (n + 2)} \) sehingga \( U \) konsisten.</li>
+        <li>\( \var(V) = h^2 \frac{2(n - 1)}{(n + 1)^2(n + 2)} \) sehingga \( V \) konsisten.</li>
+	</ol>
+	<details>
+        <summary>Rincian:</summary>
+        <p>Fungsi kemungkinan yang bersesuaian dengan data \( \bs{x} = (x_1, x_2, \ldots, x_n) \) adalah \( L_\bs{x}(a, h) = \frac{1}{h^n} \) untuk \( a \le x_i \le a + h \) dan \( i \in \{1, 2, \ldots, n\} \). Domainnya ekuivalen dengan \( a \le x_{(1)} \) dan \( a + h \ge x_{(n)} \). Pada rentang sampel positif, fungsi kemungkinan hanya bergantung pada \( h \) dalam domain ini dan menurun terhadapnya, sehingga maksimum dicapai ketika \( a = x_{(1)} \) dan \( h = x_{(n)} - x_{(1)} \). Bagian (a)&ndash;(d) mengikuti hasil baku bagi statistik terurut dari distribusi seragam.</p>
+	</details>
+</div>
+
+<h4 id="hyp">Model Hipergeometrik</h4>
+
+<p>Dalam semua contoh sebelumnya, barisan variabel acak teramati \( \bs{X} = (X_1, X_2, \ldots, X_n) \) merupakan sampel acak dari suatu distribusi. Namun, kemungkinan maksimum adalah metode yang sangat umum dan tidak mensyaratkan variabel teramati saling bebas ataupun berdistribusi identik. Dalam <dfn>model hipergeometrik</dfn>, terdapat populasi berisi \( N \) objek, dengan \( r \) objek <dfn>tipe 1</dfn> dan \( N - r \) objek lainnya <dfn>tipe 0</dfn>. <dfn>Ukuran populasi</dfn> \( N \) adalah bilangan bulat positif. <dfn>Jumlah objek tipe 1</dfn> \( r \) adalah bilangan bulat taknegatif dengan \( r \le N \). Keduanya merupakan parameter dasar, dan biasanya salah satu atau keduanya tidak diketahui. Berikut beberapa contoh umum.</p>
+
+<ol>
+    <li>Objeknya adalah perangkat, yang diklasifikasikan sebagai <dfn>baik</dfn> atau <dfn>cacat</dfn>.</li>
+    <li>Objeknya adalah orang, yang diklasifikasikan sebagai <dfn>perempuan</dfn> atau <dfn>laki-laki</dfn>.</li>
+    <li>Objeknya adalah pemilih, yang diklasifikasikan sebagai <dfn>pendukung</dfn> atau <dfn>penentang</dfn> kandidat tertentu.</li>
+    <li>Objeknya adalah satwa liar dari jenis tertentu, yang <dfn>ditandai</dfn> atau <dfn>tidak ditandai</dfn>.</li>
+</ol>
+
+<p>Kita mengambil sampel \( n \) objek secara acak dari populasi, tanpa pengembalian, dengan ukuran sampel sekurang-kurangnya satu dan tidak melebihi ukuran populasi. Misalkan \( X_i \) adalah tipe objek terpilih ke-\( i \) sehingga barisan variabel teramati adalah \( \bs{X} = (X_1, X_2, \ldots, X_n) \). Variabel-variabel ini merupakan indikator yang berdistribusi identik, dengan \( \P(X_i = 1) = r / N \) untuk setiap \( i \in \{1, 2, \ldots, n\} \), tetapi saling bergantung karena pensampelan tanpa pengembalian. Banyaknya objek tipe 1 dalam sampel adalah \( Y = \sum_{i=1}^n X_i \). Statistik ini mempunyai <a href="https://www.randomservices.org/random/urn/Hypergeometric.html">distribusi hipergeometrik</a> dengan parameter \( N \), \( r \), dan \( n \), serta fungsi kepadatan probabilitas
+\[ \P(Y = y) = \frac{\binom{r}{y} \binom{N - r}{n - y}}{\binom{N}{n}} = \binom{n}{y} \frac{r^{(y)} (N - r)^{(n - y)}}{N^{(n)}}, \quad y \in \{\max\{0, n - N + r\}, \ldots, \min\{n, r\}\} \]
+Ingat notasi <dfn>pangkat jatuh</dfn>: \( x^{(k)} = x (x - 1) \cdots (x - k + 1) \) untuk \( x \in \R \) dan \( k \in \N \).</p>
+
+<div class="unit" id="hyp1">
+    <p class="math">Seperti di atas, misalkan \( \bs{X} = (X_1, X_2, \ldots, X_n) \) adalah variabel teramati dalam model hipergeometrik dengan parameter \( N \) dan \( r \). Maka</p>
+	<ol class="sub">
+        <li>Salah satu penduga kemungkinan maksimum bagi \( r \) ketika \( N \) diketahui adalah \( U = \min\{N, \lfloor (N + 1)Y / n \rfloor\} \). Jika rasio yang tak dibulatkan merupakan bilangan bulat dan nilai tersebut maupun bilangan bulat tepat di bawahnya sama-sama layak, keduanya memaksimumkan kemungkinan.</li>
+        <li>Salah satu penduga kemungkinan maksimum bagi \( N \) ketika \( r \) diketahui adalah \( V = \lfloor r / M \rfloor = \lfloor r n / Y \rfloor \) jika \( Y \gt 0 \). Jika rasio tersebut bilangan bulat dan kedua nilai bersebelahan layak, keduanya terikat sebagai pemaksimum. Jika tidak ada objek tipe 1 yang teramati dan parameter tipe 1 positif, tidak ada pemaksimum berhingga; jika parameter tipe 1 nol, ukuran populasi tidak teridentifikasi.</li>
+	</ol>
+	<details>
+        <summary>Rincian:</summary>
+        <p>Dari penerapan sederhana aturan perkalian, fungsi kepadatan probabilitas \( f \) bagi \( \bs{X} \) adalah
+		\[ f(\bs{x}) = \frac{r^{(y)} (N - r)^{(n - y)}}{N^{(n)}}, \quad \bs{x} = (x_1, x_2, \ldots, x_n) \in \{0, 1\}^n \]
+        dengan \( y = \sum_{i=1}^n x_i \).</p>
+		<ol class="sub">
+            <li>Dengan \( N \) diketahui, fungsi kemungkinan yang bersesuaian dengan data \(\bs{x} = (x_1, x_2, \ldots, x_n) \in \{0, 1\}^n\) adalah
+			\[ L_{\bs{x}}(r) = \frac{r^{(y)} (N - r)^{(n - y)}}{N^{(n)}}, \quad r \in \{y, \ldots, N - n + y\} \]
+            Dengan syarat nilai parameter satu unit lebih kecil masih berada dalam domain, aljabar memberikan \( L_{\bs{x}}(r - 1) \lt L_{\bs{x}}(r) \) jika dan hanya jika \((r - y)(N - r + 1) \lt r (N - r - n + y + 1)\), yang ekuivalen dengan \( r \lt (N + 1)y / n \). Jadi salah satu maksimum \( L_{\bs{x}}(r) \) dicapai pada \( r = \min\{N, \lfloor (N + 1)y / n \rfloor\} \); jika rasio tersebut merupakan bilangan bulat dan nilai itu maupun bilangan bulat tepat di bawahnya sama-sama layak, keduanya terikat.
+			</li>
+            <li>Demikian pula, dengan \( r \) diketahui, fungsi kemungkinan yang bersesuaian dengan data \(\bs{x} = (x_1, x_2, \ldots, x_n) \in \{0, 1\}^n\) adalah
+			\[ L_{\bs{x}}(N) = \frac{r^{(y)} (N - r)^{(n - y)}}{N^{(n)}}, \quad N \in \{\max\{r, n\}, \ldots\} \]
+            Dengan syarat ukuran populasi satu unit lebih kecil masih layak bagi data teramati sehingga kemungkinan pada nilai itu positif, aljabar memberikan \( L_{\bs{x}}(N - 1) \lt L_{\bs{x}}(N) \) jika dan hanya jika \((N - r - n + y) / (N - n) \lt (N - r) / N\), yang ekuivalen dengan \( N \lt r n / y \) dengan asumsi \( y \gt 0 \). Jadi salah satu maksimum \( L_{\bs{x}}(N) \) dicapai ketika \( N = \lfloor r n / y \rfloor \); jika rasio tersebut merupakan bilangan bulat dan kedua nilai yang bersebelahan layak bagi data teramati, keduanya terikat.</li>
+		</ol>
+	</details>
+</div>
+
+<p>Dalam contoh keandalan, biasanya \( N \) diketahui dan kita ingin menduga \( r \). Dalam contoh satwa liar, biasanya \( r \) diketahui dan kita ingin menduga \( N \). Contoh ini dikenal sebagai model <dfn>tangkap–tangkap kembali</dfn>.</p>
+
+<p>Jelas terdapat hubungan erat antara model hipergeometrik dan <a href="#ber">model percobaan Bernoulli</a> pada subbagian di atas. Jika pensampelan dilakukan <em>dengan</em> pengembalian, model percobaan Bernoulli dengan \( p = r / N \) berlaku, bukan model hipergeometrik. Selain itu, jika ukuran populasi \( N \) besar dibandingkan ukuran sampel \( n \), model hipergeometrik dihampiri dengan baik oleh model percobaan Bernoulli, kembali dengan \( p = r / N \).</p>
+
+<footer>
+	<ol class="map">
+		<li class="parent"><a href="https://www.randomservices.org/random/index.html">Random</a></li>
+        <li class="parent"><a href="index.html">6. Pendugaan Titik</a></li>
+        <li class="child"><a href="Estimators.html" title="Penduga">1</a></li>
+        <li class="child"><a href="Moments.html" title="Metode Momen">2</a></li>
+		<li class="current">3</li>
+        <li class="child"><a href="https://www.randomservices.org/random/point/Bayes.html" title="Penduga Bayes">4</a></li>
+        <li class="child"><a href="https://www.randomservices.org/random/point/Unbiased.html" title="Penduga Tak Bias Terbaik">5</a></li>
+        <li class="child"><a href="https://www.randomservices.org/random/point/Sufficient.html" title="Statistik Cukup, Lengkap, dan Ancilar">6</a></li>
+        <li class="details"><button type="button" title="Perluas Rincian" onclick="expandDetails(true);"><img src="../icons/Plus.svg" alt="Perluas"></button></li>
+        <li class="details"><button type="button" title="Ciutkan Rincian" onclick="expandDetails(false);"><img src="../icons/Minus.svg" alt="Ciutkan"></button></li>
+	</ol>
+	<ul class="map">
+        <li class="sister"><a href="https://www.randomservices.org/random/apps/index.html" class="ancillary">Aplikasi</a></li>
+        <li class="sister"><a href="https://www.randomservices.org/random/data/index.html" class="ancillary">Himpunan Data</a></li>
+        <li class="child"><a href="https://www.randomservices.org/random/biographies/index.html" class="ancillary">Biografi</a></li>
+	</ul>
+    <section class="edition-notice" data-o006-edition-notice="v1">
+        <p><strong>Pemberitahuan edisi.</strong> Terjemahan Bahasa Indonesia ini mengadaptasi <a href="https://www.randomservices.org/random/">Random: Probabilitas, Statistika Matematis, dan Proses Stokastik</a> karya Kyle Siegrist. Perubahan pada halaman ini mencakup penerjemahan, penambahan ID stabil, pengalihan tautan inti yang telah diterjemahkan ke edisi lokal, pengalihan tautan inti yang belum diterjemahkan ke sumber resmi, pengubahan tautan pelengkap menjadi tautan HTTPS resmi, serta koreksi terbatas terhadap kekeliruan matematis dan data yang dicatat dalam daftar koreksi edisi.</p>
+        <p>Situs asal menyatakan <a href="https://creativecommons.org/licenses/by/2.0/">CC BY 2.0</a>, sedangkan halaman <a href="https://www.randomservices.org/random/Credits.html">Kredit</a> menautkan <a href="https://creativecommons.org/licenses/by/1.0/">CC BY 1.0</a>; perbedaan ini dipertahankan. Edisi independen ini tidak didukung maupun disahkan oleh Kyle Siegrist atau Random Services. Tautan ke aplikasi, data, dan biografi pihak ketiga tidak menyatakan hak untuk mendistribusikan ulang materi tersebut.</p>
+    </section>
+</footer>
+
+<script>getReferences();</script>
+
+</body>
+</html>

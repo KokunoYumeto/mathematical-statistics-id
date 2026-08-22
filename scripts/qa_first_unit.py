@@ -38,6 +38,7 @@ PAIRS = (
     PurePosixPath("random/point/index.html"),
     PurePosixPath("random/point/Estimators.html"),
     PurePosixPath("random/point/Moments.html"),
+    PurePosixPath("random/point/Likelihood.html"),
 )
 
 # This is an exact page/original-href allowlist. There is deliberately no URL
@@ -349,7 +350,6 @@ HREF_DELTA_ALLOWLIST: dict[PurePosixPath, dict[str, str]] = {
         "../markov/index.html": "https://www.randomservices.org/random/markov/index.html",
         "../martingales/index.html": "https://www.randomservices.org/random/martingales/index.html",
         "../brown/index.html": "https://www.randomservices.org/random/brown/index.html",
-        "Likelihood.html": "https://www.randomservices.org/random/point/Likelihood.html",
         "Bayes.html": "https://www.randomservices.org/random/point/Bayes.html",
         "Unbiased.html": "https://www.randomservices.org/random/point/Unbiased.html",
         "Sufficient.html": "https://www.randomservices.org/random/point/Sufficient.html",
@@ -402,13 +402,11 @@ HREF_DELTA_ALLOWLIST: dict[PurePosixPath, dict[str, str]] = {
         "JavaScript:openAncillary('../data/Pearson.html')": "https://www.randomservices.org/random/data/Pearson.html",
         "JavaScript:openAncillary('../data/Short.html')": "https://www.randomservices.org/random/data/Short.html",
         "JavaScript:openAncillary('../data/index.html')": "https://www.randomservices.org/random/data/index.html",
-        "Likelihood.html": "https://www.randomservices.org/random/point/Likelihood.html",
         "Sufficient.html": "https://www.randomservices.org/random/point/Sufficient.html",
         "Unbiased.html": "https://www.randomservices.org/random/point/Unbiased.html",
     },
     PurePosixPath("random/point/Moments.html"): {
         "../index.html": "https://www.randomservices.org/random/index.html",
-        "Likelihood.html": "https://www.randomservices.org/random/point/Likelihood.html",
         "Bayes.html": "https://www.randomservices.org/random/point/Bayes.html",
         "Unbiased.html": "https://www.randomservices.org/random/point/Unbiased.html",
         "Sufficient.html": "https://www.randomservices.org/random/point/Sufficient.html",
@@ -444,6 +442,41 @@ HREF_DELTA_ALLOWLIST: dict[PurePosixPath, dict[str, str]] = {
         "JavaScript:openAncillary('../apps/index.html')": "https://www.randomservices.org/random/apps/index.html",
         "JavaScript:openAncillary('../data/index.html')": "https://www.randomservices.org/random/data/index.html",
         "JavaScript:openAncillary('../biographies/index.html')": "https://www.randomservices.org/random/biographies/index.html",
+    },
+    PurePosixPath("random/point/Likelihood.html"): {
+        "../index.html": "https://www.randomservices.org/random/index.html",
+        "../prob/Probability.html": "https://www.randomservices.org/random/prob/Probability.html",
+        "../prob/Experiments.html": "https://www.randomservices.org/random/prob/Experiments.html",
+        "../dist/Discrete.html": "https://www.randomservices.org/random/dist/Discrete.html",
+        "../dist/Continuous.html": "https://www.randomservices.org/random/dist/Continuous.html",
+        "../dist/Continuous.html#uni": "https://www.randomservices.org/random/dist/Continuous.html#uni",
+        "../bernoulli/Introduction.html": "https://www.randomservices.org/random/bernoulli/Introduction.html",
+        "../bernoulli/Binomial.html": "https://www.randomservices.org/random/bernoulli/Binomial.html",
+        "../bernoulli/Geometric.html": "https://www.randomservices.org/random/bernoulli/Geometric.html",
+        "../bernoulli/NegativeBinomial.html": "https://www.randomservices.org/random/bernoulli/NegativeBinomial.html",
+        "../bernoulli/index.html": "https://www.randomservices.org/random/bernoulli/index.html",
+        "../poisson/Poisson.html": "https://www.randomservices.org/random/poisson/Poisson.html",
+        "../poisson/index.html": "https://www.randomservices.org/random/poisson/index.html",
+        "../special/Normal.html": "https://www.randomservices.org/random/special/Normal.html",
+        "../special/Gamma.html": "https://www.randomservices.org/random/special/Gamma.html",
+        "../special/Beta.html": "https://www.randomservices.org/random/special/Beta.html",
+        "../special/Pareto.html": "https://www.randomservices.org/random/special/Pareto.html",
+        "../urn/OrderStatistics.html": "https://www.randomservices.org/random/urn/OrderStatistics.html",
+        "../urn/Hypergeometric.html": "https://www.randomservices.org/random/urn/Hypergeometric.html",
+        "../urn/index.html": "https://www.randomservices.org/random/urn/index.html",
+        "Bayes.html": "https://www.randomservices.org/random/point/Bayes.html",
+        "Unbiased.html": "https://www.randomservices.org/random/point/Unbiased.html",
+        "Sufficient.html": "https://www.randomservices.org/random/point/Sufficient.html",
+        "JavaScript:openAncillary('../apps/NormalEstimate.html')": "https://www.randomservices.org/random/apps/NormalEstimate.html",
+        "JavaScript:openAncillary('../apps/GammaEstimate.html')": "https://www.randomservices.org/random/apps/GammaEstimate.html",
+        "JavaScript:openAncillary('../apps/BetaEstimate.html')": "https://www.randomservices.org/random/apps/BetaEstimate.html",
+        "JavaScript:openAncillary('../apps/ParetoEstimate.html')": "https://www.randomservices.org/random/apps/ParetoEstimate.html",
+        "JavaScript:openAncillary('../apps/UniformEstimate.html')": "https://www.randomservices.org/random/apps/UniformEstimate.html",
+        "JavaScript:openAncillary('../apps/index.html')": "https://www.randomservices.org/random/apps/index.html",
+        "JavaScript:openAncillary('../biographies/Poisson.html')": "https://www.randomservices.org/random/biographies/Poisson.html",
+        "JavaScript:openAncillary('../biographies/Pareto.html')": "https://www.randomservices.org/random/biographies/Pareto.html",
+        "JavaScript:openAncillary('../biographies/index.html')": "https://www.randomservices.org/random/biographies/index.html",
+        "JavaScript:openAncillary('../data/index.html')": "https://www.randomservices.org/random/data/index.html",
     },
 }
 
@@ -507,6 +540,7 @@ NOTICE_MARKUP_SHA256 = {
     PurePosixPath("random/point/index.html"): "5e06080b66862d770e89a0692ad72c347e52055448843e60d132e72aa2fb3e8f",
     PurePosixPath("random/point/Estimators.html"): "eafff6cf003edc517cbc99727456b283de19cff49e07d20b10fea57dca0f8a3d",
     PurePosixPath("random/point/Moments.html"): "eafff6cf003edc517cbc99727456b283de19cff49e07d20b10fea57dca0f8a3d",
+    PurePosixPath("random/point/Likelihood.html"): "eafff6cf003edc517cbc99727456b283de19cff49e07d20b10fea57dca0f8a3d",
 }
 NOTICE_LINKS = (
     "https://www.randomservices.org/random/",
@@ -1124,6 +1158,7 @@ def check_mathjax_runtime() -> dict[str, Any]:
         "random/sample/Normal.html",
         "random/point/Estimators.html",
         "random/point/Moments.html",
+        "random/point/Likelihood.html",
     ]
     if script_pages != expected_script_pages:
         fail(f"MathJax bundle reference pages changed: {script_pages}")
@@ -1361,11 +1396,27 @@ def run(*, check_only: bool = False) -> dict[str, Any]:
         or moments["details"] != 29
         or moments["math_spans"] != 649
         or moments["ids"] != 54
-        or moments["href_delta_entries"] != 37
-        or moments["href_delta_occurrences"] != 48
+        or moments["href_delta_entries"] != 36
+        or moments["href_delta_occurrences"] != 46
         or moments["protected_math_replacements"] != 12
     ):
         fail(f"Moments census changed: {moments}")
+    likelihood = results["random/point/Likelihood.html"]
+    if (
+        likelihood["elements"] != 397
+        or likelihood["hierarchy_sha256"]
+        != "a18199fa53fb52e2c12f46fa5fc93ab06b5d76cda4f3a4d127461901dc9f153a"
+        or likelihood["raw_script_style_blocks"] != 3
+        or likelihood["units"] != 35
+        or likelihood["details"] != 22
+        or likelihood["math_spans"] != 589
+        or likelihood["ids"] != 53
+        or likelihood["href_delta_entries"] != 33
+        or likelihood["href_delta_occurrences"] != 40
+        or likelihood["protected_math_replacements"] != 36
+        or likelihood["math_text_localization_replacements"] != 1
+    ):
+        fail(f"Likelihood census changed: {likelihood}")
     reference_counts = check_reader_references()
     mathjax_runtime = check_mathjax_runtime()
     readable_reflow = check_readable_reflow()
