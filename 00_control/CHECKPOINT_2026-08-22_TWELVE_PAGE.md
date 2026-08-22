@@ -134,8 +134,15 @@ the task-owned temporary HTTP server was stopped.
 
 ## Commit and publication
 
-Boundary content commit and the one bounded GitHub publication attempt are
-pending this checkpoint transaction. No upstream message was sent.
+- Boundary content commit:
+  `f226ea31ea5a786bfdb95158462487eb2f8c7b47`; tree
+  `4c964912663bdd985984210d09e10bc15fccf374`.
+- At 2026-08-22T18:13:08.3417299+02:00, the single bounded
+  `git push origin main` attempt returned exit 128 and GitHub's explicit
+  account-suspended HTTP 403 response. No credential was read or retried.
+  Public-byte readback is impossible because no new remote bytes were
+  accepted; the exact content commit remains preserved locally.
+- No upstream message was sent.
 
 ## Resume
 

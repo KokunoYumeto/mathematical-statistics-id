@@ -45,8 +45,10 @@
   entities, passes two deterministic backend/build/QA replays, and passes fresh
   live desktop/mobile centered reflow checks with all 652 MathJax containers,
   no page-level overflow, and functional 29/29 disclosure controls. Boundary
-  commit and publication disposition are pending the exact local checkpoint
-  transaction.
+  content commit is `f226ea31ea5a786bfdb95158462487eb2f8c7b47` (tree
+  `4c964912663bdd985984210d09e10bc15fccf374`). The one bounded push at
+  2026-08-22T18:13:08.3417299+02:00 returned GitHub's explicit suspended-account
+  HTTP 403 response; no credential was read or retried.
 
 Resume by reading this file, `CURRENT_STATE.md`, the freeze receipt, and the
 last row of `TRANSLATION_LEDGER.csv`. Continue with
