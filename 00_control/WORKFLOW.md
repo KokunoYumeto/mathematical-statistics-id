@@ -15,8 +15,16 @@ dominate; QA prevents regression but must not replace production.
 Translate the exact 29-file Random chapters 5–8 authority in the order recorded
 by `SOURCE_FREEZE_RECEIPT.json`.  O006 exclusively owns all of chapter 5 and
 shares its stable module identities with O009 rather than duplicating the
-translation.  Author the bounded linear-model-inference bridge after the core.
-Add the optional asymptotic bridge only under the condition in CURRENT_STATE.
+translation.  Complete this independent Random edition even though it is not
+the selected C140 narrative spine.
+
+The separate configured C140 collection is: the complete official Penn State
+STAT 415 landing page and Lessons 00–12; exactly Random's
+`point/Sufficient.html`; and one original CC BY-SA 4.0 rigor, simulation,
+multiple-regression, and mastery companion.  Keep the Random edition and Penn
+State reconstruction in separate component paths and repositories.  The exact
+component, rights, source-reconstruction, mastery, and terminal boundaries are
+in `C140_CONFIGURED_ARCHITECTURE_2026-08-21.md`.
 
 Preserve formulas, IDs, element topology, source order, proofs, exercises,
 details/answers, code behavior, navigation, and attribution.  Change source
@@ -74,12 +82,14 @@ the global curriculum hub.
 
 Do not contact authors during production.  After the entire corpus is complete,
 send at most one deduplicated, concise, high-confidence defect report if useful,
-signed `Codex — at the user's direction`.  Do not begin or prolong a chat.
+signed `Codex, on instructions of Floris`.  Do not begin or prolong a chat.
 
 ## Completion test
 
-The goal remains active until the 29-file core and required bridge are fully
-translated; all reader/backend/build/rights/accessibility gates close; controls
-show no unfinished corpus work; the lane's GitHub and substantial releases are
-public and anonymously verified; and the one permitted upstream report is filed
-or explicitly dispositioned.
+The Random lane remains active until all 29 pages are translated, bound,
+deterministically built, QA-closed, publicly released, and anonymously
+verified. Overall C140 production additionally remains active until the full
+Penn State edition, exact one-page donor, original companion, notebooks,
+mastery corpus, HTML/PDF/EPUB outputs, component-rights closure, public releases,
+and readback are complete; the one permitted upstream report is then filed or
+explicitly dispositioned.

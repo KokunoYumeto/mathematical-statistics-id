@@ -31,6 +31,7 @@ PAIRS = (
     PurePosixPath("random/sample/Mean.html"),
     PurePosixPath("random/sample/LLN.html"),
     PurePosixPath("random/sample/CLT.html"),
+    PurePosixPath("random/sample/Variance.html"),
 )
 
 # This is an exact page/original-href allowlist. There is deliberately no URL
@@ -55,7 +56,6 @@ HREF_DELTA_ALLOWLIST: dict[PurePosixPath, dict[str, str]] = {
         "../markov/index.html": "https://www.randomservices.org/random/markov/index.html",
         "../martingales/index.html": "https://www.randomservices.org/random/martingales/index.html",
         "../brown/index.html": "https://www.randomservices.org/random/brown/index.html",
-        "Variance.html": "https://www.randomservices.org/random/sample/Variance.html",
         "OrderStatistics.html": "https://www.randomservices.org/random/sample/OrderStatistics.html",
         "Covariance.html": "https://www.randomservices.org/random/sample/Covariance.html",
         "Normal.html": "https://www.randomservices.org/random/sample/Normal.html",
@@ -80,7 +80,6 @@ HREF_DELTA_ALLOWLIST: dict[PurePosixPath, dict[str, str]] = {
     },
     PurePosixPath("random/sample/Introduction.html"): {
         "../index.html": "https://www.randomservices.org/random/index.html",
-        "Variance.html": "https://www.randomservices.org/random/sample/Variance.html",
         "OrderStatistics.html": "https://www.randomservices.org/random/sample/OrderStatistics.html",
         "Covariance.html": "https://www.randomservices.org/random/sample/Covariance.html",
         "Normal.html": "https://www.randomservices.org/random/sample/Normal.html",
@@ -121,7 +120,6 @@ HREF_DELTA_ALLOWLIST: dict[PurePosixPath, dict[str, str]] = {
     },
     PurePosixPath("random/sample/Mean.html"): {
         "../index.html": "https://www.randomservices.org/random/index.html",
-        "Variance.html": "https://www.randomservices.org/random/sample/Variance.html",
         "OrderStatistics.html": "https://www.randomservices.org/random/sample/OrderStatistics.html",
         "Covariance.html": "https://www.randomservices.org/random/sample/Covariance.html",
         "Normal.html": "https://www.randomservices.org/random/sample/Normal.html",
@@ -146,7 +144,6 @@ HREF_DELTA_ALLOWLIST: dict[PurePosixPath, dict[str, str]] = {
     },
     PurePosixPath("random/sample/LLN.html"): {
         "../index.html": "https://www.randomservices.org/random/index.html",
-        "Variance.html": "https://www.randomservices.org/random/sample/Variance.html",
         "OrderStatistics.html": "https://www.randomservices.org/random/sample/OrderStatistics.html",
         "Covariance.html": "https://www.randomservices.org/random/sample/Covariance.html",
         "Normal.html": "https://www.randomservices.org/random/sample/Normal.html",
@@ -183,7 +180,6 @@ HREF_DELTA_ALLOWLIST: dict[PurePosixPath, dict[str, str]] = {
     },
     PurePosixPath("random/sample/CLT.html"): {
         "../index.html": "https://www.randomservices.org/random/index.html",
-        "Variance.html": "https://www.randomservices.org/random/sample/Variance.html",
         "OrderStatistics.html": "https://www.randomservices.org/random/sample/OrderStatistics.html",
         "Covariance.html": "https://www.randomservices.org/random/sample/Covariance.html",
         "Normal.html": "https://www.randomservices.org/random/sample/Normal.html",
@@ -237,6 +233,47 @@ HREF_DELTA_ALLOWLIST: dict[PurePosixPath, dict[str, str]] = {
         "JavaScript:openAncillary('../data/index.html')": "https://www.randomservices.org/random/data/index.html",
         "JavaScript:openAncillary('../biographies/index.html')": "https://www.randomservices.org/random/biographies/index.html",
     },
+    PurePosixPath("random/sample/Variance.html"): {
+        "../index.html": "https://www.randomservices.org/random/index.html",
+        "OrderStatistics.html": "https://www.randomservices.org/random/sample/OrderStatistics.html",
+        "Covariance.html": "https://www.randomservices.org/random/sample/Covariance.html",
+        "Normal.html": "https://www.randomservices.org/random/sample/Normal.html",
+        "../dist/Discrete.html#uni": "https://www.randomservices.org/random/dist/Discrete.html#uni",
+        "../expect/Properties.html": "https://www.randomservices.org/random/expect/Properties.html",
+        "../expect/Variance.html": "https://www.randomservices.org/random/expect/Variance.html",
+        "../prob/Experiments.html": "https://www.randomservices.org/random/prob/Experiments.html",
+        "../prob/Probability.html": "https://www.randomservices.org/random/prob/Probability.html",
+        "../expect/Properties2.html#jen": "https://www.randomservices.org/random/expect/Properties2.html#jen",
+        "JavaScript:openAncillary('../apps/ErrorFunction.html')": "https://www.randomservices.org/random/apps/ErrorFunction.html",
+        "JavaScript:openAncillary('../apps/BinomialCoin.html')": "https://www.randomservices.org/random/apps/BinomialCoin.html",
+        "JavaScript:openAncillary('../apps/Match.html')": "https://www.randomservices.org/random/apps/Match.html",
+        "JavaScript:openAncillary('../apps/Gamma.html')": "https://www.randomservices.org/random/apps/Gamma.html",
+        "../special/Beta.html": "https://www.randomservices.org/random/special/Beta.html",
+        "../poisson/Exponential.html": "https://www.randomservices.org/random/poisson/Exponential.html",
+        "JavaScript:openAncillary('../data/Fisher.html')": "https://www.randomservices.org/random/data/Iris.html",
+        "JavaScript:openAncillary('../data/Challenger.html')": "https://www.randomservices.org/random/data/Challenger.html",
+        "JavaScript:openAncillary('../data/Michelson.html')": "https://www.randomservices.org/random/data/Michelson.html",
+        "JavaScript:openAncillary('../data/Short.html')": "https://www.randomservices.org/random/data/Short.html",
+        "JavaScript:openAncillary('../data/Cavendish.html')": "https://www.randomservices.org/random/data/Cavendish.html",
+        "JavaScript:openAncillary('../data/MM.html')": "https://www.randomservices.org/random/data/MM.html",
+        "JavaScript:openAncillary('../data/Cicada.html')": "https://www.randomservices.org/random/data/Cicada.html",
+        "JavaScript:openAncillary('../data/Pearson.html')": "https://www.randomservices.org/random/data/Pearson.html",
+        "JavaScript:openAncillary('../apps/index.html')": "https://www.randomservices.org/random/apps/index.html",
+        "JavaScript:openAncillary('../data/index.html')": "https://www.randomservices.org/random/data/index.html",
+        "JavaScript:openAncillary('../biographies/index.html')": "https://www.randomservices.org/random/biographies/index.html",
+    },
+}
+
+# Three source defects require occurrence-specific href deltas because one
+# source href (#spe1) also has a separate correct occurrence on the same page.
+# The element indices are over the source/target element streams after removal
+# of the separately validated edition notice.
+HREF_ELEMENT_DELTAS: dict[
+    tuple[PurePosixPath, int], tuple[str, str]
+] = {
+    (PurePosixPath("random/sample/Variance.html"), 53): ("Variance.html", "#inf"),
+    (PurePosixPath("random/sample/Variance.html"), 220): ("#spe1", "#spe2"),
+    (PurePosixPath("random/sample/Variance.html"), 614): ("#prb4", "#prb3"),
 }
 
 CORRECTION_DELTAS = {
@@ -260,6 +297,11 @@ CORRECTION_DELTAS = {
         "JavaScript:openAncillary('../data/Fisher.html')",
         "https://www.randomservices.org/random/data/Iris.html",
     ),
+    (
+        PurePosixPath("random/sample/Variance.html"),
+        "JavaScript:openAncillary('../data/Fisher.html')",
+        "https://www.randomservices.org/random/data/Iris.html",
+    ),
 }
 
 NOTICE_MARKUP_SHA256 = {
@@ -268,6 +310,7 @@ NOTICE_MARKUP_SHA256 = {
     PurePosixPath("random/sample/Mean.html"): "b5dbee259ec1dd62c84f5d776320e15142359cc401afa413f9a2524f906fb275",
     PurePosixPath("random/sample/LLN.html"): "08fb4fa43d51a1d0882f780de159199be12bfbb4e47ced1c478dec73113d1722",
     PurePosixPath("random/sample/CLT.html"): "9c1477ecc143e8a9bf20f6e0b6239b07d2dad564330df271690796289fa94ac0",
+    PurePosixPath("random/sample/Variance.html"): "d1884c02cc756c0d44493d883eddf398dde3ad6f334691ccb3e33c5741b4504a",
 }
 NOTICE_LINKS = (
     "https://www.randomservices.org/random/",
@@ -460,6 +503,11 @@ def validate_allowlist() -> None:
         for original, target in mapping.items():
             if not original or urlparse(target).scheme != "https":
                 fail(f"non-HTTPS or empty exact href delta for {rel}: {original!r}->{target!r}")
+    for (rel, element_index), (original, target) in HREF_ELEMENT_DELTAS.items():
+        if rel not in PAIRS or element_index < 1 or not original or not target:
+            fail(f"invalid occurrence-specific href delta: {rel} element {element_index}")
+        if _external_url(target):
+            _validate_https(target, f"occurrence-specific href delta {rel} element {element_index}")
     actual_corrections = {
         (rel, original, target)
         for rel, mapping in HREF_DELTA_ALLOWLIST.items()
@@ -561,6 +609,7 @@ def compare_pair(rel: PurePosixPath) -> dict[str, Any]:
     allowed_attr_deltas = {"lang", "title", "alt", "content", "id", "href"}
     page_allowlist = HREF_DELTA_ALLOWLIST[rel]
     seen_deltas: set[tuple[str, str]] = set()
+    seen_element_deltas: set[tuple[int, str, str]] = set()
     href_delta_occurrences = 0
     for index, (source_tag, target_tag) in enumerate(zip(source_tags, target_tags), start=1):
         if source_tag.name != target_tag.name:
@@ -570,8 +619,11 @@ def compare_pair(rel: PurePosixPath) -> dict[str, Any]:
             source_value = source_tag.attrs.get(key)
             target_value = target_tag.attrs.get(key)
             if source_value == target_value:
-                if key == "href" and str(source_value) in page_allowlist:
-                    fail(f"{rel}: allowlisted href delta was not applied at element {index}")
+                if key == "href":
+                    if (rel, index) in HREF_ELEMENT_DELTAS:
+                        fail(f"{rel}: occurrence-specific href delta was not applied at element {index}")
+                    if str(source_value) in page_allowlist:
+                        fail(f"{rel}: allowlisted href delta was not applied at element {index}")
                 continue
             if key not in allowed_attr_deltas:
                 fail(f"{rel}: unexplained attr delta at element {index}: {key}")
@@ -584,19 +636,38 @@ def compare_pair(rel: PurePosixPath) -> dict[str, Any]:
                     fail(f"{rel}: invalid additive stable id at element {index}: {target_value!r}")
             elif key == "href":
                 original = str(source_value)
-                expected = page_allowlist.get(original)
-                if expected is None or target_value != expected:
-                    fail(
-                        f"{rel}: href delta not exactly allowlisted at element {index}: "
-                        f"{source_value!r}->{target_value!r}"
-                    )
-                seen_deltas.add((original, expected))
+                element_delta = HREF_ELEMENT_DELTAS.get((rel, index))
+                if element_delta is not None:
+                    expected_original, expected_target = element_delta
+                    if original != expected_original or target_value != expected_target:
+                        fail(
+                            f"{rel}: occurrence-specific href delta differs at element {index}: "
+                            f"{source_value!r}->{target_value!r}"
+                        )
+                    seen_element_deltas.add((index, expected_original, expected_target))
+                else:
+                    expected = page_allowlist.get(original)
+                    if expected is None or target_value != expected:
+                        fail(
+                            f"{rel}: href delta not exactly allowlisted at element {index}: "
+                            f"{source_value!r}->{target_value!r}"
+                        )
+                    seen_deltas.add((original, expected))
                 href_delta_occurrences += 1
     expected_deltas = set(page_allowlist.items())
     if seen_deltas != expected_deltas:
         missing = sorted(expected_deltas - seen_deltas)
         extra = sorted(seen_deltas - expected_deltas)
         fail(f"{rel}: href-delta use mismatch; missing={missing}; extra={extra}")
+    expected_element_deltas = {
+        (index, original, target)
+        for (page, index), (original, target) in HREF_ELEMENT_DELTAS.items()
+        if page == rel
+    }
+    if seen_element_deltas != expected_element_deltas:
+        missing = sorted(expected_element_deltas - seen_element_deltas)
+        extra = sorted(seen_element_deltas - expected_element_deltas)
+        fail(f"{rel}: occurrence-specific href-delta mismatch; missing={missing}; extra={extra}")
 
     full = soup(target_data, f"target:{rel}:full")
     ids = [str(tag["id"]) for tag in full.find_all(attrs={"id": True})]
@@ -632,8 +703,9 @@ def compare_pair(rel: PurePosixPath) -> dict[str, Any]:
         "math_spans": len(source_math),
         "protected_math_replacements": protected_math_replacements,
         "math_text_localization_replacements": math_text_localization_replacements,
-        "href_delta_entries": len(seen_deltas),
+        "href_delta_entries": len(seen_deltas) + len(seen_element_deltas),
         "href_delta_occurrences": href_delta_occurrences,
+        "occurrence_specific_href_deltas": len(seen_element_deltas),
         "units": len(units),
         "details": len(full.find_all("details")),
         "ids": len(ids),
@@ -843,6 +915,7 @@ def check_mathjax_runtime() -> dict[str, Any]:
         "random/sample/Mean.html",
         "random/sample/LLN.html",
         "random/sample/CLT.html",
+        "random/sample/Variance.html",
     ]
     if script_pages != expected_script_pages:
         fail(f"MathJax bundle reference pages changed: {script_pages}")
@@ -915,6 +988,9 @@ def expected_qa_receipt(
         "href_delta_entries": sum(int(result["href_delta_entries"]) for result in results.values()),
         "href_delta_occurrences": sum(
             int(result["href_delta_occurrences"]) for result in results.values()
+        ),
+        "occurrence_specific_href_deltas": sum(
+            int(result["occurrence_specific_href_deltas"]) for result in results.values()
         ),
         "transport_hardening_deltas": len(build_pipeline.TRANSPORT_HARDENING),
         "controlled_filename_case_corrections": len(CORRECTION_DELTAS),
@@ -1003,6 +1079,18 @@ def run(*, check_only: bool = False) -> dict[str, Any]:
         or clt["ids"] != 56
     ):
         fail(f"CLT census changed: {clt}")
+    variance = results["random/sample/Variance.html"]
+    if (
+        variance["elements"] != 827
+        or variance["hierarchy_sha256"]
+        != "1557ceb7383c4bd50eeda2e0b25aa2a98f91fb3dbc5d65dd4ee660c33e1c85b2"
+        or variance["raw_script_style_blocks"] != 3
+        or variance["units"] != 47
+        or variance["details"] != 39
+        or variance["math_spans"] != 583
+        or variance["ids"] != 64
+    ):
+        fail(f"Variance census changed: {variance}")
     reference_counts = check_reader_references()
     mathjax_runtime = check_mathjax_runtime()
     readable_reflow = check_readable_reflow()

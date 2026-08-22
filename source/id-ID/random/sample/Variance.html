@@ -1,0 +1,1108 @@
+<!DOCTYPE html>
+	<html lang="id-ID">
+	<head>
+	<meta charset="utf-8">
+	<title>Varians Sampel</title>
+	<meta name="author" content="Kyle Siegrist">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="keywords" content="probabilitas, statistika, sampel acak, varians sampel, galat kuadrat rata-rata, penduga tak bias, penduga bias">
+	<link rel="icon" href="../icons/Icon.svg" type="image/svg">
+	<link rel="stylesheet" href="../Screen.css" type="text/css" media="screen">
+	<script src="../Basic.js"></script>
+	<script src="../../MathJax/tex-svg.js" id="MathJax-script" async></script>
+</head>
+
+<body>
+
+<div class="latex">
+	\(\newcommand{\R}{\mathbb{R}}\)
+	\(\newcommand{\N}{\mathbb{N}}\)
+	\(\newcommand{\E}{\mathbb{E}}\)
+	\(\newcommand{\P}{\mathbb{P}}\)
+	\(\newcommand{\var}{\text{var}}\)
+	\(\newcommand{\sd}{\text{sd}}\)
+	\(\newcommand{\mse}{\text{mse}}\)
+	\(\newcommand{\mae}{\text{mae}}\)
+	\(\newcommand{\cov}{\text{cov}}\)
+	\(\newcommand{\cor}{\text{cor}}\)
+	\(\newcommand{\bs}{\boldsymbol}\)
+	\(\newcommand{\skw}{\text{skew}}\)
+	\(\newcommand{\kur}{\text{kurt}}\)
+</div>
+
+<header>
+	<ol class="map">
+		<li class="parent"><a href="https://www.randomservices.org/random/index.html">Random</a></li>
+		<li class="parent"><a href="index.html">5. Sampel Acak</a></li>
+		<li class="child"><a href="Introduction.html" title="Pendahuluan">1</a></li>
+		<li class="child"><a href="Mean.html" title="Rata-Rata Sampel">2</a></li>
+		<li class="child"><a href="LLN.html" title="Hukum Bilangan Besar">3</a></li>
+		<li class="child"><a href="CLT.html" title="Teorema Limit Pusat">4</a></li>
+		<li class="current">5</li>
+		<li class="child"><a href="https://www.randomservices.org/random/sample/OrderStatistics.html" title="Statistik Terurut">6</a></li>
+		<li class="child"><a href="https://www.randomservices.org/random/sample/Covariance.html" title="Korelasi dan Regresi Sampel">7</a></li>
+		<li class="child"><a href="https://www.randomservices.org/random/sample/Normal.html" title="Sifat Khusus Sampel Normal">8</a></li>
+		<li class="details"><button type="button" title="Perluas Rincian" onclick="expandDetails(true);"><img src="../icons/Plus.svg" alt="Perluas"></button></li>
+		<li class="details"><button type="button" title="Ciutkan Rincian" onclick="expandDetails(false);"><img src="../icons/Minus.svg" alt="Ciutkan"></button></li>
+	</ol>
+	<h2 id="o006.random.sample.variance.page">5. Varians Sampel</h2>
+</header>
+
+<h3 id="o006.random.sample.variance.descriptive-theory">Teori Deskriptif</h3>
+
+<p>Ingat kembali model dasar statistika: kita memiliki populasi objek yang menjadi perhatian dan berbagai pengukuran (variabel) yang dilakukan terhadap objek-objek tersebut. Kita memilih objek dari populasi dan mencatat variabel untuk objek-objek dalam sampel; catatan ini menjadi data kita. Sekali lagi, pembahasan pertama kita menggunakan sudut pandang deskriptif. Artinya, kita tidak mengasumsikan bahwa data dihasilkan oleh suatu distribusi probabilitas yang mendasarinya. Namun, ingat bahwa data itu sendiri membentuk suatu distribusi probabilitas.</p>
+
+<h4 id="var">Varians dan Simpangan Baku</h4>
+
+<p>Misalkan \(\bs{x} = (x_1, x_2, \ldots, x_n)\) merupakan sampel berukuran \(n\), dengan sedikitnya dua pengamatan, dari variabel bernilai riil \(x\). Ingat bahwa <a href="Mean.html">rata-rata sampel</a> adalah
+\[ m = \frac{1}{n} \sum_{i=1}^n x_i \]
+dan merupakan ukuran pemusatan terpenting bagi himpunan data. </p>
+
+<div class="unit" id="o006.random.sample.variance.unit.sample-variance-definition">
+<p class="dfn"><dfn>Varians sampel</dfn> didefinisikan sebagai
+	\[ s^2 = \frac{1}{n - 1} \sum_{i=1}^n (x_i - m)^2 \]
+	Akar kuadrat \(s\) dari varians sampel \(s^2\) adalah simpangan baku sampel.</p>
+</div>
+
+<p>Jika kita perlu menunjukkan kebergantungannya pada vektor data \(\bs{x}\), kita menulis \(s^2(\bs{x})\). Selisih \(x_i - m\) adalah <dfn>deviasi</dfn> \(x_i\) dari rata-rata \(m\) himpunan data. Jadi, varians merupakan <dfn>deviasi kuadrat rata-rata</dfn> dan menjadi ukuran penyebaran himpunan data terhadap rata-ratanya. Alasan pembagian dengan \(n - 1\), bukan \(n\), paling baik dipahami melalui <a href="#inf">sudut pandang inferensial</a> yang dibahas di bawah; definisi ini menjadikan varians sampel sebagai penduga tak bias bagi varians distribusi. Namun, alasan perata-rataan tersebut juga dapat dipahami melalui konsep yang terkait.</p>
+
+<div class="unit" id="var1">
+	<p class="math">\(\sum_{i=1}^n (x_i - m) = 0\).</p>
+	<details>
+		<summary>Rincian:</summary>
+		<p>\(\sum_{i=1}^n (x_i - m) = \sum_{i=1}^n x_i - \sum_{i=1}^n m = n m - n m = 0\).</p>
+	</details>
+</div>
+
+<p>Jadi, jika kita mengetahui \(n - 1\) deviasi, kita dapat menghitung deviasi terakhir. Ini berarti hanya ada \(n - 1\) deviasi yang dapat berubah secara bebas, yakni \(n - 1\) <dfn>derajat kebebasan</dfn> dalam himpunan deviasi tersebut. Dalam definisi varians sampel, kita merata-ratakan kuadrat deviasi bukan dengan membaginya menurut banyaknya suku, melainkan menurut banyaknya derajat kebebasan dalam suku-suku itu. Meskipun demikian, <em>dari sudut pandang yang murni deskriptif</em>, pembagian dengan \(n\) dalam definisi varians sampel juga masuk akal. Selain itu, ketika \(n\) cukup besar, hampir tidak ada perbedaan antara pembagian dengan \(n\) dan pembagian dengan \(n - 1\).</p>
+
+<p>Simpangan baku \(s\) adalah <dfn>akar dari rata-rata kuadrat deviasi</dfn> dan juga menjadi ukuran penyebaran data terhadap rata-ratanya. Kedua ukuran penyebaran ini penting. Varians memiliki sifat matematis yang lebih baik, tetapi satuan fisiknya adalah kuadrat satuan \(x\). Sebagai contoh, jika variabel yang mendasarinya, \(x\), adalah tinggi seseorang dalam inci, varians dinyatakan dalam inci kuadrat. Di sisi lain, simpangan baku memiliki satuan fisik yang sama dengan variabel asal, tetapi sifat matematisnya tidak sebaik varians.</p>
+
+<p>Ingat bahwa himpunan data \(\bs{x}\) secara alami menghasilkan suatu distribusi probabilitas, yaitu <dfn>distribusi empiris</dfn> yang menempatkan probabilitas \(\frac{1}{n}\) pada \(x_i\) untuk setiap \(i\). Jadi, jika datanya berbeda-beda, distribusi ini merupakan <a href="https://www.randomservices.org/random/dist/Discrete.html#uni">distribusi seragam</a> pada \(\{x_1, x_2, \ldots, x_n\}\). Rata-rata sampel \(m\) hanyalah <a href="https://www.randomservices.org/random/expect/Properties.html">nilai harapan</a> dari distribusi empiris. Demikian pula, jika kita membagi dengan \(n\), bukan \(n - 1\), varians sampel akan menjadi <a href="https://www.randomservices.org/random/expect/Variance.html">varians</a> distribusi empiris. Sebagian besar sifat dan hasil dalam bagian ini mengikuti sifat dan hasil yang jauh lebih umum untuk varians suatu distribusi probabilitas (meskipun sebagian besar pembuktian diberikan secara mandiri).</p>
+
+<h4 id="err">Ukuran Pemusatan dan Penyebaran</h4>
+
+<p>Ukuran pemusatan dan ukuran penyebaran paling baik dipahami secara bersamaan dalam konteks suatu <dfn>fungsi galat</dfn>. Fungsi galat mengukur seberapa baik sebuah bilangan \(a\) mewakili seluruh himpunan data \(\bs{x}\). Nilai-nilai \(a\) (jika ada) yang meminimumkan fungsi galat menjadi ukuran pemusatan kita; nilai minimum fungsi galat menjadi ukuran penyebaran yang bersesuaian. Tentu saja, kita mengharapkan <em>satu</em> nilai \(a\) saja yang meminimumkan fungsi galat agar ukuran pemusatannya unik.</p>
+
+<p>Mari terapkan prosedur ini pada <dfn>fungsi galat kuadrat rata-rata</dfn> yang didefinisikan oleh
+\[ \mse(a) = \frac{1}{n - 1} \sum_{i=1}^n (x_i - a)^2, \quad a \in \R \]
+Meminimumkan \(\mse\) merupakan persoalan baku dalam kalkulus.</p>
+
+<div class="unit" id="err1">
+	<p class="math">Grafik \(\mse\) merupakan parabola yang terbuka ke atas.</p>
+	<ol class="sub">
+		<li>\(\mse\) mencapai minimum ketika \(a = m\), yaitu rata-rata sampel.</li>
+		<li>Nilai minimum \(\mse\) adalah \(s^2\), yaitu varians sampel.</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Dari bentuk \(\mse\), kita dapat melihat bahwa grafiknya merupakan parabola yang terbuka ke atas. Mengambil turunannya memberikan
+		\[ \frac{d}{da} \mse(a) = -\frac{2}{n - 1}\sum_{i=1}^n (x_i - a) = -\frac{2}{n - 1}(n m - n a) \]
+		Karena itu, \(a = m\) merupakan satu-satunya nilai yang meminimumkan \(\mse\). Tentu saja, \(\mse(m) = s^2\).</p>
+	</details>
+</div>
+
+<p>Jelas bahwa jika fungsi galat kuadrat rata-rata didefinisikan dengan membagi oleh \(n\), bukan \(n - 1\), minimum tetap terjadi pada \(m\), yaitu rata-rata sampel, tetapi nilai minimumnya menjadi versi alternatif varians sampel yang menggunakan pembagi \(n\). Di sisi lain, jika kita menggunakan fungsi <dfn>akar dari galat kuadrat rata-rata</dfn> \(\text{rmse}(a) = \sqrt{\mse(a)}\), maka karena fungsi akar kuadrat meningkat ketat pada \([0, \infty)\), minimum kembali terjadi pada \(m\), yaitu rata-rata sampel, tetapi nilai minimumnya adalah \(s\), yaitu simpangan baku sampel. Pokok pentingnya ialah bahwa untuk semua fungsi galat ini, ukuran pemusatan yang unik adalah rata-rata sampel, sedangkan ukuran penyebaran yang bersesuaian adalah berbagai ukuran yang sedang kita pelajari.</p>
+
+<p>Selanjutnya, mari terapkan prosedur kita pada <dfn>fungsi galat absolut rata-rata</dfn> yang didefinisikan oleh
+\[ \mae(a) = \frac{1}{n - 1} \sum_{i=1}^n \left|x_i - a\right|, \quad a \in \R \]</p>
+
+<div class="unit" id="err2">
+	<p class="math">Fungsi galat absolut rata-rata memiliki sifat-sifat berikut:</p>
+	<ol class="sub">
+		<li>\(\mae\) merupakan fungsi kontinu.</li>
+		<li>Grafik \(\mae\) terdiri atas ruas-ruas garis.</li>
+		<li>Kemiringan garis di \(a\) bergantung pada letak \(a\) dalam himpunan data \(\bs{x}\).</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Untuk bagian (a) dan (b), perhatikan bahwa untuk setiap \(i\), \(\left|x_i - a\right|\) merupakan fungsi kontinu dari \(a\), dengan grafik yang terdiri atas dua garis (berkemiringan \(\pm 1\)) yang bertemu di \(x_i\).</p>
+	</details>
+</div>
+
+<p>Secara matematis, \(\mae\) memiliki beberapa masalah sebagai fungsi galat. Pertama, fungsi ini tidak mulus (tidak terdiferensialkan) di titik pertemuan dua garis yang kemiringannya berbeda. Yang lebih penting, nilai-nilai yang meminimumkannya dapat menempati suatu interval penuh sehingga kita tidak memperoleh ukuran pemusatan yang unik. Latihan <a href="#efe3" class="ref"></a> dan <a href="#efe4" class="ref"></a> menunjukkan bahwa patologi tersebut benar-benar dapat terjadi. Ternyata, \(\mae\) mencapai minimum di setiap titik dalam <a href="https://www.randomservices.org/random/sample/OrderStatistics.html">interval median</a> himpunan data \(\bs{x}\). Pembuktian hasil ini mengikuti suatu <a href="https://www.randomservices.org/random/expect/Variance.html">hasil yang jauh lebih umum</a> untuk distribusi probabilitas. Jadi, median merupakan ukuran pemusatan alami yang terkait dengan \(\mae\) sebagai ukuran galat, sebagaimana rata-rata sampel merupakan ukuran pemusatan yang terkait dengan \(\mse\) sebagai ukuran galat.</p>
+
+<h4 id="prp">Sifat-Sifat</h4>
+
+<p>Dalam bagian ini, kita menetapkan beberapa sifat penting varians dan simpangan baku sampel. Pertama, rumus alternatif berikut untuk varians sampel lebih baik bagi keperluan komputasi dan juga bagi keperluan teoretis tertentu.</p>
+
+<div class="unit" id="prp1">
+	<p class="math">Varians sampel dapat dihitung sebagai
+	\[ s^2 = \frac{1}{n - 1} \sum_{i=1}^n x_i^2 - \frac{n}{n - 1} m^2 \]</p>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Perhatikan bahwa
+		\begin{align}
+			\sum_{i=1}^n (x_i - m)^2 &amp; = \sum_{i=1}^n \left(x_i^2 - 2 m x_i + m^2\right) = \sum_{i=1}^n x_i^2 - 2 m \sum_{i=1}^n x_i + \sum_{i=1}^n m^2\\
+			&amp; = \sum_{i=1}^n x_i^2 - 2 n m^2 + n m^2 = \sum_{i=1}^n x_i^2 - n m^2
+		\end{align}
+		Pembagian dengan \(n - 1\) memberikan hasil tersebut.</p>
+</details>
+
+</div>
+
+<p>Jika \(\bs{x}^2 = (x_1^2, x_2^2, \ldots, x_n^2)\) menyatakan sampel dari variabel \(x^2\), rumus komputasi dalam <a href="#prp1" class="ref"></a> dapat ditulis secara ringkas sebagai
+\[ s^2(\bs{x}) = \frac{n}{n - 1} \left[m(\bs{x}^2) - m^2(\bs{x})\right] \]
+Teorema berikut memberikan rumus komputasi lain untuk varians sampel, langsung dalam variabel-variabelnya sehingga tidak memerlukan perhitungan statistik perantara.</p>
+
+<div class="unit" id="prp2">
+	<p class="math">Varians sampel dapat dihitung sebagai
+	\[ s^2 = \frac{1}{2 n (n - 1)} \sum_{i=1}^n \sum_{j=1}^n (x_i - x_j)^2 \]</p>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Perhatikan bahwa
+		\begin{align}
+			\frac{1}{2 n} \sum_{i=1}^n \sum_{j=1}^n (x_i - x_j)^2 &amp; = \frac{1}{2 n} \sum_{i=1}^n \sum_{j=1}^n (x_i - m + m - x_j)^2 \\
+			&amp; = \frac{1}{2 n} \sum_{i=1}^n \sum_{j=1}^n \left[(x_i - m)^2 + 2 (x_i - m)(m - x_j) + (m - x_j)^2\right] \\
+			&amp; = \frac{1}{2 n} \sum_{i=1}^n \sum_{j=1}^n (x_i - m)^2 + \frac{1}{n} \sum_{i=1}^n \sum_{j=1}^n (x_i - m)(m - x_j) + \frac{1}{2 n} \sum_{i=1}^n \sum_{j=1}^n (m - x_j)^2 \\
+			&amp; = \frac{1}{2} \sum_{i=1}^n (x_i - m)^2 + 0 + \frac{1}{2} \sum_{j=1}^n (m - x_j)^2 \\
+			&amp; = \sum_{i=1}^n (x_i - m)^2
+		\end{align}
+		Pembagian dengan \(n - 1\) memberikan hasil tersebut.</p>
+	</details>
+</div>
+
+<div class="unit" id="prp3">
+	<p class="math">Varians sampel bersifat taknegatif:</p>
+	<ol class="sub">
+		<li>\(s^2 \ge 0\)</li>
+		<li>\(s^2 = 0\) jika dan hanya jika \(x_i = x_j\) untuk setiap \(i, \; j \in \{1, 2, \ldots, n\}\).</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Bagian (a) sudah jelas. Untuk bagian (b), perhatikan bahwa jika \(s^2 = 0\), maka \(x_i = m\) untuk setiap \(i\). Sebaliknya, jika \(\bs{x}\) merupakan vektor konstan, maka \(m\) adalah konstanta yang sama.</p>
+	</details>
+</div>
+
+<p>Jadi, \(s^2 = 0\) jika dan hanya jika himpunan data konstan (dan tentu saja, rata-ratanya adalah nilai bersama tersebut).</p>
+
+<div class="unit" id="prp4">
+	<p class="math">Jika \(c\) merupakan konstanta, maka</p>
+	<ol class="sub">
+		<li>\(s^2(c \, \bs{x}) = c^2 \, s^2(\bs{x})\)</li>
+		<li>\(s(c \, \bs{x}) = \left|c\right| \, s(\bs{x})\)</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Untuk bagian (a), ingat bahwa \(m(c \bs{x}) = c m(\bs{x})\). Karena itu,
+		\[ s^2(c \bs{x}) = \frac{1}{n - 1}\sum_{i=1}^n \left[c x_i - c m(\bs{x})\right]^2 = \frac{1}{n - 1} \sum_{i=1}^n c^2 \left[x_i - m(\bs{x})\right]^2 = c^2 s^2(\bs{x}) \]</p>
+	</details>
+</div>
+
+<div class="unit" id="o006.random.sample.variance.unit.translation-invariance">
+	<p class="math">Jika \(\bs{c}\) merupakan sampel berukuran \(n\) dari suatu konstanta \(c\), maka</p>
+	<ol class="sub">
+		<li>\(s^2(\bs{x} + \bs{c}) = s^2(\bs{x})\).</li>
+		<li>\(s(\bs{x} + \bs{c}) = s(\bs{x})\)</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Ingat bahwa \(m(\bs{x} + \bs{c}) = m(\bs{x}) + c\). Karena itu,
+		\[ s^2(\bs{x} + \bs{c}) = \frac{1}{n - 1} \sum_{i=1}^n \left\{(x_i + c) - \left[m(\bs{x}) + c\right]\right\}^2 =  \frac{1}{n - 1} \sum_{i=1}^n \left[x_i - m(\bs{x})\right]^2 = s^2(\bs{x})\]</p>
+	</details>
+</div>
+
+<p>Sebagai kasus khusus dari hasil-hasil ini, misalkan \(\bs{x} = (x_1, x_2, \ldots, x_n)\) merupakan sampel berukuran \(n\) yang bersesuaian dengan variabel riil \(x\), dan misalkan \(a\) dan \(b\) merupakan konstanta. Dalam notasi vektor kita, sampel yang bersesuaian dengan variabel \(y = a + b x\) adalah \(\bs{a} + b \bs{x}\). Maka \(m(\bs{a} + b \bs{x}) = a + b m(\bs{x})\) dan \(s(\bs{a} + b \bs{x}) = \left|b\right| s(\bs{x})\). Transformasi linear jenis ini, ketika \(b \gt 0\), sering muncul saat satuan fisik diubah. Dalam hal ini, transformasi tersebut sering disebut transformasi <dfn>lokasi-skala</dfn>; \(a\) adalah parameter lokasi dan \(b\) adalah parameter skala. Sebagai contoh, jika \(x\) merupakan panjang suatu objek dalam inci, maka \(y = 2.54 x\) merupakan panjang objek tersebut dalam sentimeter. Jika \(x\) merupakan suhu suatu objek dalam derajat Fahrenheit, maka \(y = \frac{5}{9}(x - 32)\) merupakan suhu objek tersebut dalam derajat Celsius. </p>
+
+<p>Sekarang, anggap himpunan data tidak konstan sehingga simpangan bakunya positif. Untuk \(i \in \{1, 2, \ldots, n\}\), misalkan \( z_i = (x_i - m) / s\). Bilangan \(z_i\) adalah <dfn>skor baku</dfn> yang berkaitan dengan \(x_i\). Karena \(x_i\), \(m\), dan \(s\) mempunyai satuan fisik yang sama, skor baku \(z_i\) bersifat <dfn>tak berdimensi</dfn> (yakni tidak memiliki satuan fisik); skor ini mengukur jarak berarah dari rata-rata \(m\) ke nilai data \(x_i\) dalam satuan simpangan baku.</p>
+
+<div class="unit" id="prp5">
+	<p class="math">Sampel skor baku \(\bs{z} = (z_1, z_2, \ldots, z_n)\) memiliki rata-rata 0 dan varians 1. Artinya,</p>
+	<ol class="sub">
+		<li>\(m(\bs{z}) = 0\)</li>
+		<li>\(s^2(\bs{z}) = 1\)</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Hasil-hasil ini mengikuti sifat penskalaan dan translasi di atas. Dalam notasi vektor, perhatikan bahwa \(\bs{z} = (\bs{x} - \bs{m})/s\). Karena itu, \(m(\bs{z}) = (m - m) / s = 0\) dan \(s(\bs{z}) = s / s = 1\).</p>
+	</details>
+</div>
+
+<h4 id="app">Mengaproksimasi Varians</h4>
+
+<p>Misalkan, sebagai pengganti data sebenarnya \(\bs{x}\), kita mempunyai <a href="Mean.html">distribusi frekuensi</a> yang bersesuaian dengan suatu partisi berkategori (interval) \((A_1, A_2, \ldots, A_k)\), tanda kelas (titik tengah interval) \((t_1, t_2, \ldots, t_k)\), dan frekuensi \((n_1, n_2, \ldots, n_k)\). Ingat bahwa frekuensi relatif kelas \(A_j\) adalah \(p_j = n_j / n\). Dalam hal ini, nilai aproksimasi rata-rata dan varians sampel berturut-turut adalah
+\begin{align}
+	m &amp; = \frac{1}{n} \sum_{j=1}^k n_j \, t_j = \sum_{j = 1}^k p_j \, t_j \\
+	s^2 &amp; = \frac{1}{n - 1} \sum_{j=1}^k n_j (t_j - m)^2 = \frac{n}{n - 1} \sum_{j=1}^k p_j (t_j - m)^2
+\end{align}
+Aproksimasi ini didasarkan pada harapan bahwa nilai data dalam setiap kelas terwakili dengan baik oleh tanda kelasnya. Sesungguhnya, inilah definisi baku rata-rata dan varians sampel bagi himpunan data yang memuat \(t_j\) sebanyak \(n_j\) kali untuk setiap \(j\).</p>
+
+<h3 id="inf">Statistika Inferensial</h3>
+
+<p>Kita melanjutkan pembahasan varians sampel, tetapi kini kita mengasumsikan bahwa variabel-variabelnya acak. Misalkan kita mempunyai suatu <a href="https://www.randomservices.org/random/prob/Experiments.html">percobaan acak</a> dasar dan \(X\) merupakan <a href="https://www.randomservices.org/random/prob/Probability.html">variabel acak</a> bernilai riil bagi percobaan tersebut, dengan <a href="https://www.randomservices.org/random/expect/Properties.html">rata-rata</a> \(\mu\) dan <a href="https://www.randomservices.org/random/expect/Variance.html">simpangan baku</a> \(\sigma\). Kita juga memerlukan beberapa momen berorde lebih tinggi. Misalkan \(\sigma_3 = \E\left[(X - \mu)^3\right]\) dan \(\sigma_4 = \E\left[(X - \mu)^4\right]\) menyatakan momen ke-3 dan ke-4 terhadap rata-rata. Ingat bahwa \(\sigma_3 \big/ \sigma^3 = \skw(X)\), yaitu kemencengan \(X\), dan \(\sigma_4 \big/ \sigma^4 = \kur(X)\), yaitu kurtosis \(X\). Kita mengasumsikan \(\sigma_4 \lt \infty\).</p>
+
+<p>Kita mengulangi percobaan dasar sebanyak \(n\) kali untuk membentuk percobaan gabungan baru, dengan barisan variabel acak independen \(\bs{X} = (X_1, X_2, \ldots, X_n)\), yang masing-masing berdistribusi sama dengan \(X\). Dalam istilah statistika, \(\bs{X}\) merupakan <a href="Introduction.html">sampel acak</a> berukuran \(n\) dari distribusi \(X\). Semua statistik di atas tentu bermakna bagi \(\bs{X}\), tetapi sekarang statistik-statistik tersebut merupakan variabel acak. Kita akan menggunakan notasi yang sama, kecuali konvensi umum untuk menyatakan variabel acak dengan huruf kapital. Terakhir, perhatikan bahwa sifat dan hubungan deterministik yang ditetapkan di atas tetap berlaku.</p>
+
+<p>Selain menjadi ukuran pemusatan data \(\bs{X}\), <a href="Mean.html">rata-rata sampel</a>
+\[ M = \frac{1}{n} \sum_{i=1}^n X_i \]
+merupakan penduga alami bagi rata-rata distribusi \(\mu\). Dalam bagian ini, kita akan menurunkan statistik yang menjadi penduga alami bagi varians distribusi \(\sigma^2\). Statistik yang kita turunkan berbeda, bergantung pada diketahui atau tidaknya \(\mu\); karena alasan ini, \(\mu\) disebut <dfn>parameter pengganggu</dfn> dalam persoalan pendugaan \(\sigma^2\).</p>
+
+<h4 id="spe">Varians Sampel Khusus</h4>
+
+<p>Pertama, kita akan mengasumsikan bahwa \(\mu\) diketahui. Meskipun hampir selalu merupakan asumsi buatan, ini merupakan titik awal yang baik karena analisisnya relatif mudah dan memberi kita wawasan bagi kasus baku. Penduga alami untuk \(\sigma^2\) adalah statistik berikut, yang akan kita sebut <dfn>varians sampel khusus</dfn>.
+\[ W^2 = \frac{1}{n} \sum_{i=1}^n (X_i - \mu)^2 \]</p>
+
+<div class="unit" id="spe1">
+	<p class="math">\(W^2\) merupakan rata-rata sampel bagi sampel acak berukuran \(n\) dari distribusi \((X - \mu)^2\), dan memiliki sifat-sifat berikut:</p>
+	<ol class="sub">
+		<li>\(\E\left(W^2\right) = \sigma^2\)</li>
+		<li>\(\var\left(W^2\right) = \frac{1}{n}\left(\sigma_4 - \sigma^4\right)\)</li>
+		<li>\(W^2 \to \sigma^2\) ketika \(n \to \infty\) dengan probabilitas 1</li>
+		<li>Jika kuadrat deviasi tidak hampir pasti konstan, distribusi \(\sqrt{n}\left(W^2 - \sigma^2\right) \big/ \sqrt{\sigma_4 - \sigma^4}\) konvergen ke distribusi normal baku ketika \(n \to \infty\).</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Hasil-hasil ini langsung mengikuti hasil baku dalam bagian tentang <a href="LLN.html">Hukum Bilangan Besar</a> dan bagian tentang <a href="CLT.html">Teorema Limit Pusat</a>. Untuk bagian (b), perhatikan bahwa
+		\[\var\left[(X - \mu)^2\right] = \E\left[(X - \mu)^4\right] -\left(\E\left[(X - \mu)^2\right]\right)^2 = \sigma_4 - \sigma^4\]</p>
+	</details>
+</div>
+
+<p>Secara khusus, bagian (a) berarti bahwa \(W^2\) merupakan penduga <dfn>tak bias</dfn> bagi \(\sigma^2\). Dari bagian (b), perhatikan bahwa \(\var(W^2) \to 0\) ketika \(n \to \infty\); ini berarti \(W^2\) merupakan penduga <dfn>konsisten</dfn> bagi \(\sigma^2\). Akar kuadrat varians sampel khusus adalah versi khusus dari <dfn>simpangan baku sampel</dfn>, yang dilambangkan dengan \(W\).</p>
+
+<div class="unit" id="spe2">
+	<p class="math">\(\E(W) \le \sigma\). Jadi, \(W\) merupakan penduga <dfn>berbias negatif</dfn> yang cenderung menaksir \(\sigma\) terlalu rendah.</p>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Hasil ini mengikuti sifat tak bias dan <a href="https://www.randomservices.org/random/expect/Properties2.html#jen">ketaksamaan Jensen</a>. Karena \(w \mapsto \sqrt{w}\) cekung ke bawah pada \([0, \infty)\), kita mempunyai \(\E(W) = \E\left(\sqrt{W^2}\right) \le \sqrt{\E\left(W^2\right)} = \sqrt{\sigma^2} = \sigma\).</p>
+	</details>
+</div>
+
+<p>Selanjutnya, kita menghitung kovarians dan korelasi antara rata-rata sampel dan varians sampel khusus. Rumus korelasi berikut berlaku ketika simpangan baku distribusi dasar positif dan kuadrat deviasinya tidak hampir pasti konstan.</p>
+
+<div class="unit" id="spe3">
+	<p class="math">Kovarians dan korelasi antara \(M\) dan \(W^2\) adalah</p>
+	<ol class="sub">
+		<li>\(\cov\left(M, W^2\right) = \sigma_3 / n\).</li>
+		<li>\(\cor\left(M, W^2\right) = \frac{\sigma_3}{\sigma \sqrt{\sigma_4 - \sigma^4}}\)</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<ol class="sub">
+			<li>Dari kebilinearan operator kovarians dan sifat independen,
+			\[ \cov\left(M, W^2\right) = \cov\left[\frac{1}{n}\sum_{i=1}^n X_i, \frac{1}{n} \sum_{j=1}^n (X_j - \mu)^2\right] = \frac{1}{n^2} \sum_{i=1}^n \cov\left[X_i, (X_i - \mu)^2\right] \]
+			Namun, \(\cov\left[X_i, (X_i - \mu)^2\right] = \cov\left[X_i - \mu, (X_i - \mu)^2\right] = \E\left[(X_i - \mu)^3\right] - \E(X_i - \mu) \E\left[(X_i - \mu)^2\right] = \sigma_3\). Substitusi memberikan hasil tersebut.</li>
+			<li>Hasil ini mengikuti bagian (a), sifat tak bias, dan hasil sebelumnya bahwa \(\var(M) = \sigma^2 / n\).</li>
+		</ol>
+	</details>
+</div>
+
+<p>Perhatikan bahwa korelasi tidak bergantung pada ukuran sampel, dan bahwa rata-rata sampel serta varians sampel khusus tidak berkorelasi jika \(\sigma_3 = 0\) (secara ekuivalen, \(\skw(X) = 0\)).</p>
+
+<h4 id="std">Varians Sampel Baku</h4>
+
+<p>Sekarang, tinjau kasus yang lebih realistis ketika \(\mu\) tidak diketahui dan sampel memuat sedikitnya dua pengamatan. Dalam hal ini, pendekatan alami ialah merata-ratakan, dalam arti tertentu, kuadrat deviasi \((X_i - M)^2\) atas \(i \in \{1, 2, \ldots, n\}\). Tampaknya kita seharusnya merata-ratakannya dengan membagi oleh \(n\). Namun, pendekatan lain ialah membagi dengan konstanta yang menghasilkan penduga tak bias bagi \(\sigma^2\). Ternyata konstanta ini adalah \(n - 1\), yang menghasilkan <dfn>varians sampel baku</dfn>:
+\[ S^2 = \frac{1}{n - 1} \sum_{i=1}^n (X_i - M)^2 \]</p>
+
+<div class="unit" id="std1">
+	<p class="math">\(\E\left(S^2\right) = \sigma^2\).</p>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Dengan menguraikannya (seperti ditunjukkan dalam bagian sebelumnya),
+		\[ \sum_{i=1}^n (X_i - M)^2  = \sum_{i=1}^n X_i^2 - n M^2 \]
+		Ingat bahwa \(\E(M) = \mu\) dan \(\var(M) = \sigma^2 / n\). Mengambil nilai harapan pada persamaan yang ditampilkan memberikan
+		\[ \E\left(\sum_{i=1}^n (X_i - M)^2\right) = \sum_{i=1}^n (\sigma^2 + \mu^2) - n \left(\frac{\sigma^2}{n} + \mu^2\right) = n (\sigma^2 + \mu^2) -n \left(\frac{\sigma^2}{n} + \mu^2\right) = (n - 1) \sigma^2 \]</p>
+	</details>
+</div>
+
+<p>Tentu saja, akar kuadrat varians sampel adalah <dfn>simpangan baku sampel</dfn>, yang dilambangkan dengan \(S\).</p>
+
+<div class="unit" id="std2">
+	<p class="math">\(\E(S) \le \sigma\). Jadi, \(S\) merupakan penduga berbias negatif yang cenderung menaksir \(\sigma\) terlalu rendah.</p>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Pembuktiannya persis sama dengan pembuktian bagi simpangan baku sampel khusus dalam <a href="#spe2" class="ref"></a>.</p>
+	</details>
+</div>
+
+<div class="unit" id="std3">
+	<p class="math">\(S^2 \to \sigma^2\) ketika \(n \to \infty\) dengan probabilitas 1.</p>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Hasil ini mengikuti <a href="LLN.html">hukum bilangan besar</a> kuat. Ingat kembali bahwa
+		\[ S^2 = \frac{1}{n - 1} \sum_{i=1}^n X_i^2 - \frac{n}{n - 1} M^2 = \frac{n}{n - 1}[M(\bs{X}^2) - M^2(\bs{X})] \]
+		Namun, dengan probabilitas 1, \(M(\bs{X}^2) \to \sigma^2 + \mu^2\) ketika \(n \to \infty\) dan \(M^2(\bs{X}) \to \mu^2\) ketika \(n \to \infty\).</p>
+	</details>
+</div>
+
+<p>Karena \(S^2\) merupakan penduga tak bias bagi \(\sigma^2\), varians \(S^2\) adalah <dfn>galat kuadrat rata-rata</dfn>, yaitu ukuran kualitas penduga.</p>
+
+<div class="unit" id="std4">
+	<p class="math">\(\var\left(S^2\right) = \frac{1}{n} \left( \sigma_4 - \frac{n - 3}{n - 1} \sigma^4 \right)\).</p>
+	<details>
+		<summary>Rincian:</summary>
+	<p>Ingat dari <a href="#prp2" class="ref"></a> bahwa
+	\[ S^2 = \frac{1}{2 n (n - 1)} \sum_{i=1}^n \sum_{j=1}^n (X_i - X_j)^2 \]
+	Karena itu, dengan menggunakan sifat bilinear kovarians, kita memperoleh
+	\[ \var(S^2) = \cov(S^2, S^2) = \frac{1}{4 n^2 (n - 1)^2} \sum_{i=1}^n \sum_{j=1}^n \sum_{k=1}^n \sum_{l=1}^n \cov[(X_i - X_j)^2, (X_k - X_l)^2] \]
+	Kita menghitung kovarians dalam jumlah ini dengan meninjau kasus-kasus saling lepas:</p>
+	<ul>
+		<li>\(\cov\left[(X_i - X_j)^2, (X_k - X_l)^2\right] = 0\) jika \(i = j\) atau \(k = l\), dan terdapat \(2 n^3 - n^2\) suku seperti ini.</li>
+		<li>\(\cov\left[(X_i - X_j)^2, (X_k - X_l)^2\right] = 0\) jika \(i, j, k, l\) berbeda-beda, dan terdapat \(n (n - 1)(n - 2) (n - 3)\) suku seperti ini.</li>
+		<li>\(\cov\left[(X_i - X_j)^2, (X_k - X_l)^2\right] = 2 \sigma_4 + 2 \sigma^4\) jika \(i \ne j\) dan \(\{k, l\} = \{i, j\}\), dan terdapat \(2 n (n - 1)\) suku seperti ini.</li>
+		<li>\(\cov\left[(X_i - X_j)^2, (X_k - X_l)^2\right] = \sigma_4 - \sigma^4\) jika \(i \ne j\), \(k \ne l\), dan \(\#(\{i, j\} \cap \{k, l\}) = 1\), dan terdapat \(4 n (n - 1)(n - 2)\) suku seperti ini.</li>
+	</ul>
+	<p>Substitusi memberikan hasil tersebut.</p>
+	</details>
+</div>
+
+<p>Perhatikan bahwa \(\var(S^2) \to 0\) ketika \(n \to \infty\), sehingga \(S^2\) merupakan penduga konsisten bagi \(\sigma^2\). Varians dari varians sampel baku (ketika \(\mu\) tidak diketahui) tidak lebih kecil daripada varians dari varians sampel khusus (ketika \(\mu\) diketahui), dan lebih besar ketika varians distribusi dasar positif.</p>
+
+<div class="unit" id="std5">
+	<p class="math">\(\var\left(S^2\right) \ge \var\left(W^2\right)\).</p>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Dari rumus dalam <a href="#spe1" class="ref"></a> untuk varians \( W^2 \), hasil sebelumnya untuk varians \( S^2 \), dan aljabar sederhana,
+		\[ \var\left(S^2\right) - \var\left(W^2\right) = \frac{2}{n (n - 1)} \sigma^4 \]
+		Namun, perhatikan bahwa selisih tersebut menuju 0 ketika \(n \to \infty\).</p>
+	</details>
+</div>
+
+<p>Selanjutnya, kita menghitung kovarians antara rata-rata sampel dan varians sampel.</p>
+
+<div class="unit" id="o006.random.sample.variance.unit.mean-sample-variance-covariance">
+	<p class="math">Kovarians dan korelasi antara rata-rata sampel dan varians sampel adalah sebagai berikut; rumus korelasi berlaku ketika kedua varians pada penyebutnya positif.</p>
+	<ol class="sub">
+		<li>\(\cov\left(M, S^2\right) = \sigma_3 / n\)</li>
+		<li>\(\cor\left(M, S^2\right) = \frac{\sigma_3}{\sigma \sqrt{\sigma_4 - \sigma^4 (n - 3) / (n - 1)}}\)</li>
+	</ol>
+	<details>
+	<summary>Rincian:</summary>
+		<ol class="sub">
+			<li>Ingat kembali bahwa
+			\[ M = \frac{1}{n} \sum_{i=1}^n X_i, \quad S^2 = \frac{1}{2 n (n - 1)} \sum_{j=1}^n \sum_{k=1}^n (X_j - X_k)^2 \]
+			Karena itu, dengan menggunakan sifat bilinear kovarians, kita memperoleh
+			\[ \cov(M, S^2) = \frac{1}{2 n^2 (n - 1)} \sum_{i=1}^n \sum_{j=1}^n \sum_{k=1}^n \cov[X_i, (X_j - X_k)^2] \]
+			Kita menghitung kovarians dalam jumlah ini dengan meninjau kasus-kasus saling lepas:
+			<ul>
+				<li>\(\cov\left[X_i, (X_j - X_k)^2\right] = 0\) jika \(j = k\), dan terdapat \(n^2\) suku seperti ini.</li>
+				<li>\(\cov\left[X_i, (X_j - X_k)^2\right] = 0\) jika \(i, j, k\) berbeda-beda, dan terdapat \(n (n - 1)(n - 2)\) suku seperti ini.</li>
+				<li>\(\cov\left[X_i, (X_j - X_k)^2\right] = \sigma_3\) jika \(j \ne k\) dan \(i \in \{j, k\}\), dan terdapat \(2 n (n - 1)\) suku seperti ini.</li>
+			</ul>
+			Substitusi memberikan hasil tersebut.</li>
+			<li>Hasil ini mengikuti bagian (a), hasil di atas mengenai varians \( S^2 \), dan \(\var(M) = \sigma^2 / n\).</li>
+		</ol>
+	</details>
+</div>
+
+<p>Secara khusus, perhatikan bahwa \(\cov(M, S^2) = \cov(M, W^2)\). Sekali lagi, rata-rata dan varians sampel tidak berkorelasi jika \(\sigma_3 = 0\), sehingga \(\skw(X) = 0\). Hasil terakhir kita memberikan kovarians dan korelasi antara varians sampel khusus dan varians sampel baku. Menariknya, kovarians tersebut sama dengan varians dari varians sampel khusus.</p>
+
+<div class="unit" id="std6">
+	<p class="math">Kovarians dan korelasi antara \(W^2\) dan \(S^2\) adalah sebagai berikut; rumus korelasi berlaku ketika kedua varians pada penyebutnya positif.</p>
+	<ol class="sub">
+		<li>\(\cov\left(W^2, S^2\right) = (\sigma_4 - \sigma^4) / n\)</li>
+		<li>\(\cor\left(W^2, S^2\right) = \sqrt{\frac{\sigma_4 - \sigma^4}{\sigma_4 - \sigma^4 (n - 3) / (n - 1)}}\)</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<ol class="sub">
+			<li>Ingat kembali bahwa
+			\[ W^2 = \frac{1}{n} \sum_{i=1}^n (X_i - \mu)^2, \quad S^2 = \frac{1}{2 n (n - 1)} \sum_{j=1}^n \sum_{k=1}^n (X_j - X_k)^2\]
+			sehingga, berdasarkan sifat bilinear kovarians, kita memperoleh
+			\[ \cov(W^2, S^2) = \frac{1}{2 n^2 (n - 1)} \sum_{i=1}^n \sum_{j=1}^n \sum_{k=1}^n \cov[(X_i - \mu)^2, (X_j - X_k)^2] \]
+			Sekali lagi, kita menghitung kovarians dalam jumlah ini dengan meninjau kasus-kasus saling lepas:
+			<ul>
+				<li>\(\cov[(X_i - \mu)^2, (X_j - X_k)^2] = 0\) jika \(j = k\), dan terdapat \(n^2\) suku seperti ini.</li>
+				<li>\(\cov[(X_i - \mu)^2, (X_j - X_k)^2] = 0\) jika \(i, j, k\) berbeda-beda, dan terdapat \(n (n - 1)(n - 2)\) suku seperti ini.</li>
+				<li>\(\cov[(X_i - \mu)^2, (X_j - X_k)^2] = \sigma_4 - \sigma^4\) jika \(j \ne k\) dan \(i \in \{j, k\}\), dan terdapat \(2 n (n - 1)\) suku seperti ini.</li>
+			</ul>
+			Substitusi memberikan hasil-hasil tersebut.</li>
+			<li>Hasil ini mengikuti bagian (a) serta rumus di atas untuk varians \( W^2 \) dan varians \( S^2 \).</li>
+		</ol>
+	</details>
+</div>
+
+<p>Dari rumus korelasi di atas, jika varians yang diperlukan positif, diperoleh \(\cor\left(W^2, S^2\right) \to 1\) ketika \(n \to \infty\). Konvergensi \(S^2 \to \sigma^2\) dan \(W^2 \to \sigma^2\) ketika \(n \to \infty\) saja tidak cukup untuk menyimpulkan konvergensi korelasi tersebut.</p>
+
+<p>Kasus khusus yang sangat penting terjadi ketika distribusi pengambilan sampel bersifat normal. Kasus ini dikaji dalam bagian tentang <a href="https://www.randomservices.org/random/sample/Normal.html">Sifat Khusus Sampel Normal</a>.</p>
+
+<h3 id="o006.random.sample.variance.exercises">Latihan</h3>
+
+<h4 id="exe">Sifat-Sifat Dasar</h4>
+
+<div class="unit" id="exe1">
+	<p class="math">Misalkan \(x\) adalah suhu (dalam derajat Fahrenheit) suatu jenis komponen elektronik setelah 10 jam beroperasi. Sampel yang terdiri atas 30 komponen memiliki rata-rata 113&deg; dan simpangan baku \(18&deg;\).</p>
+	<ol class="sub">
+		<li>Klasifikasikan \(x\) menurut jenis dan tingkat pengukurannya.</li>
+		<li>Tentukan rata-rata dan simpangan baku sampel jika suhu dikonversi ke derajat Celsius. Transformasinya adalah \(y = \frac{5}{9}(x - 32)\).</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<ol class="sub">
+			<li>kontinu, interval</li>
+			<li>\(m = 45&deg;\), \(s = 10&deg;\)</li>
+		</ol>
+	</details>
+</div>
+
+<div class="unit" id="exe2">
+	<p class="math">Misalkan \(x\) adalah panjang (dalam inci) suatu komponen hasil pemesinan dalam proses manufaktur. Sampel yang terdiri atas 50 komponen memiliki rata-rata 10.0 dan simpangan baku 2.0. </p>
+	<ol class="sub">
+		<li>Klasifikasikan \(x\) menurut jenis dan tingkat pengukurannya.</li>
+		<li>Tentukan rata-rata dan simpangan baku sampel jika panjang diukur dalam sentimeter. Transformasinya adalah \(y = 2.54 x\).</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<ol class="sub">
+			<li>kontinu, rasio</li>
+			<li>\(m = 25.4\), \(s = 5.08\)</li>
+		</ol>
+	</details>
+</div>
+
+<div class="unit" id="exe3">
+	<p class="math">Profesor Moriarity mengajar satu seksi Statistika 101 yang terdiri atas 25 mahasiswa di Enormous State University (ESU). Nilai rata-rata ujian tengah semester pertama adalah 64 (dari maksimum 100 poin) dan simpangan bakunya 16. Ia menganggap nilai-nilai tersebut agak rendah dan mempertimbangkan berbagai transformasi untuk menaikkannya. Dalam setiap kasus di bawah, berikan rata-rata dan simpangan baku nilai yang telah ditransformasi, atau nyatakan bahwa informasinya tidak cukup.</p>
+	<ol class="sub">
+		<li>Tambahkan 10 poin pada setiap nilai, sehingga transformasinya adalah \(y = x + 10\).</li>
+		<li>Kalikan setiap nilai dengan 1.2, sehingga transformasinya adalah \(z = 1.2 x\)</li>
+		<li>Gunakan transformasi \(w = 10 \sqrt{x}\). Perhatikan bahwa ini merupakan transformasi nonlinear yang sangat melengkungkan nilai pada ujung bawah, tetapi hanya sedikit pada ujung atas. Sebagai contoh, nilai 100 tetap menjadi 100, tetapi nilai 36 ditransformasi menjadi 60.</li>
+	</ol>
+	<p>Salah satu mahasiswa sama sekali tidak belajar dan memperoleh nilai 10 pada ujian tengah semester. Profesor Moriarity menganggap nilai ini sebagai pencilan.</p>
+	<ol class="sub" start="4">
+		<li>Tentukan rata-rata dan simpangan baku jika nilai ini dihilangkan.</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<ol class="sub">
+			<li>\(m = 74\), \(s = 16\)</li>
+			<li>\(m = 76.8\), \(s = 19.2\)</li>
+			<li>Informasi tidak cukup</li>
+			<li>\(m = 66.25\), \(s = 11.62\)</li>
+		</ol>
+	</details>
+</div>
+
+<h4 id="cmp">Latihan Komputasi</h4>
+
+<p>Semua paket perangkat lunak statistika dapat menghitung rata-rata, varians, dan simpangan baku, menggambar diagram titik dan histogram, serta secara umum menjalankan prosedur numerik dan grafis yang dibahas dalam bagian ini. Untuk percobaan statistika nyata, terutama yang menggunakan himpunan data besar, penggunaan perangkat lunak statistika sangat penting. Di sisi lain, menghitung secara manual dengan himpunan data buatan yang kecil tetap bermanfaat untuk menguasai konsep dan definisi. Dalam subbagian ini, lakukan perhitungan dan gambarlah grafik dengan bantuan teknologi seminimal mungkin. </p>
+
+<div class="unit" id="cmp1">
+	<p class="math">Misalkan \(x\) adalah banyaknya mata kuliah matematika yang telah diselesaikan seorang mahasiswa ESU. Sampel yang terdiri atas 10 mahasiswa ESU memberikan data \(\bs{x} = (3, 1, 2, 0, 2, 4, 3, 2, 1, 2)\).</p>
+	<ol class="sub">
+		<li>Klasifikasikan \(x\) menurut jenis dan tingkat pengukurannya.</li>
+		<li>Sketsakan diagram titik.</li>
+		<li>Buat tabel dengan baris-baris yang bersesuaian dengan kasus dan kolom-kolom yang bersesuaian dengan \(i\), \(x_i\), \(x_i - m\), dan \((x_i - m)^2\). Tambahkan baris di bagian bawah untuk jumlah dan rata-rata pada kolom \(i\).</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<ol class="sub">
+			<li>diskret, rasio</li>
+			<li value="3">
+				<table>
+					<thead>
+						<tr>
+							<th>\(i\)</th>
+							<th>\(x_i\)</th>
+							<th>\(x_i - m\)</th>
+							<th>\((x_i - m)^2\)</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>\(1\)</td>
+							<td>\(3\)</td>
+							<td>\(1\)</td>
+							<td>\(1\)</td>
+						</tr>
+						<tr>
+							<td>\(2\)</td>
+							<td>\(1\)</td>
+							<td>\(-1\)</td>
+							<td>\(1\)</td>
+						</tr>
+						<tr>
+							<td>\(3\)</td>
+							<td>\(2\)</td>
+							<td>\(0\)</td>
+							<td>\(0\)</td>
+						</tr>
+						<tr>
+							<td>\(4\)</td>
+							<td>\(0\)</td>
+							<td>\(-2\)</td>
+							<td>\(4\)</td>
+						</tr>
+						<tr>
+							<td>\(5\)</td>
+							<td>\(2\)</td>
+							<td>\(0\)</td>
+							<td>\(0\)</td>
+						</tr>
+						<tr>
+							<td>\(6\)</td>
+							<td>\(4\)</td>
+							<td>\(2\)</td>
+							<td>\(4\)</td>
+						</tr>
+						<tr>
+							<td>\(7\)</td>
+							<td>\(3\)</td>
+							<td>\(1\)</td>
+							<td>\(1\)</td>
+						</tr>
+						<tr>
+							<td>\(8\)</td>
+							<td>\(2\)</td>
+							<td>\(0\)</td>
+							<td>\(0\)</td>
+						</tr>
+						<tr>
+							<td>\(9\)</td>
+							<td>\(1\)</td>
+							<td>\(-1\)</td>
+							<td>\(1\)</td>
+						</tr>
+						<tr>
+							<td>\(10\)</td>
+							<td>\(2\)</td>
+							<td>\(0\)</td>
+							<td>\(0\)</td>
+						</tr>
+					</tbody>
+					<tfoot>
+						<tr>
+							<th>Jumlah</th>
+							<td>20</td>
+							<td>0</td>
+							<td>14</td>
+						</tr>
+						<tr>
+							<th>Rata-rata; kolom terakhir: varians sampel</th>
+							<td>2</td>
+							<td>0</td>
+							<td>\(14/9\)</td>
+						</tr>
+					</tfoot>
+				</table>
+			</li>
+		</ol>
+	</details>
+</div>
+
+<div class="unit" id="cmp2">
+	<p class="math">Misalkan sampel berukuran 12 dari variabel diskret \(x\) mempunyai fungsi densitas empiris yang diberikan oleh \(f(-2) = 1/12\), \(f(-1) = 1/4\), \(f(0) = 1/3\), \(f(1) = 1/6\), \(f(2) = 1/6\).</p>
+	<ol class="sub">
+		<li>Sketsakan grafik \(f\).</li>
+		<li>Hitung rata-rata dan varians sampel.</li>
+		<li>Berikan nilai-nilai sampel yang diurutkan dari terkecil hingga terbesar.</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<ol class="sub">
+			<li value="2">\( m = 1/12\), \(s^2 = 203/132\)</li>
+			<li>\((-2, -1, -1, -1, 0, 0, 0, 0, 1, 1, 2, 2)\)</li>
+		</ol>
+	</details>
+</div>
+
+
+<div class="unit" id="cmp3">
+	<p class="math">Tabel berikut memberikan distribusi frekuensi jarak tempuh ke gedung matematika/statistika (dalam mil) bagi suatu sampel mahasiswa ESU.</p>
+	<table>
+		<thead>
+			<tr>
+				<th>Kelas</th>
+				<th>Frek</th>
+				<th>Frek Rel</th>
+				<th>Densitas</th>
+				<th>Frek Kum</th>
+				<th>Frek Rel Kum</th>
+				<th>Titik Tengah</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>\((0, 2]\)</td>
+				<td>6</td>
+				<td>&nbsp;</td>
+				<td>&nbsp;</td>
+				<td>&nbsp;</td>
+				<td>&nbsp;</td>
+				<td>&nbsp;</td>
+			</tr>
+			<tr>
+				<td>\((2, 6]\)</td>
+				<td>16</td>
+				<td>&nbsp;</td>
+				<td>&nbsp;</td>
+				<td>&nbsp;</td>
+				<td>&nbsp;</td>
+				<td>&nbsp;</td>
+			</tr>
+			<tr>
+				<td>\((6, 10]\)</td>
+				<td>18</td>
+				<td>&nbsp;</td>
+				<td>&nbsp;</td>
+				<td>&nbsp;</td>
+				<td>&nbsp;</td>
+				<td>&nbsp;</td>
+			</tr>
+			<tr>
+				<td>\((10, 20]\)</td>
+				<td>10</td>
+				<td>&nbsp;</td>
+				<td>&nbsp;</td>
+				<td>&nbsp;</td>
+				<td>&nbsp;</td>
+				<td>&nbsp;</td>
+			</tr>
+		</tbody>
+		<tfoot>
+			<tr>
+				<th>Jumlah</th>
+				<td>&nbsp;</td>
+				<td>&nbsp;</td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+		</tfoot>
+	</table>
+	<ol class="sub">
+		<li>Lengkapi tabel tersebut</li>
+		<li>Sketsakan histogram densitas</li>
+		<li>Sketsakan ogif frekuensi relatif kumulatif.</li>
+		<li>Hitung aproksimasi rata-rata dan simpangan baku.</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<ol class="sub">
+			<li>
+				<table>
+					<thead>
+						<tr>
+							<th>Kelas</th>
+							<th>Frek</th>
+							<th>Frek Rel</th>
+							<th>Densitas</th>
+							<th>Frek Kum</th>
+							<th>Frek Rel Kum</th>
+							<th>Titik Tengah</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>\((0, 2]\)</td>
+							<td>6</td>
+							<td>0.12</td>
+							<td>0.06</td>
+							<td>6</td>
+							<td>0.12</td>
+							<td>1</td>
+						</tr>
+						<tr>
+							<td>\((2, 6]\)</td>
+							<td>16</td>
+							<td>0.32</td>
+							<td>0.08</td>
+							<td>22</td>
+							<td>0.44</td>
+							<td>4</td>
+						</tr>
+						<tr>
+							<td>\((6, 10]\)</td>
+							<td>18</td>
+							<td>0.36</td>
+							<td>0.09</td>
+							<td>40</td>
+							<td>0.80</td>
+							<td>8</td>
+						</tr>
+						<tr>
+							<td>\((10, 20]\)</td>
+							<td>10</td>
+							<td>0.20</td>
+							<td>0.02</td>
+							<td>50</td>
+							<td>1</td>
+							<td>15</td>
+						</tr>
+					</tbody>
+					<tfoot>
+						<tr>
+							<th>Jumlah</th>
+							<td>50</td>
+							<td>1</td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+					</tfoot>
+				</table>
+			</li>
+			<li value="4">\(m = 7.28\), \(s = 4.549\)</li>
+		</ol>
+	</details>
+</div>
+
+<h4 id="efe">Latihan Fungsi Galat</h4>
+
+<div class="unit" id="efe1">
+	<p class="app">Dalam <a href="https://www.randomservices.org/random/apps/ErrorFunction.html" class="ancillary">aplikasi fungsi galat</a>, pilih akar galat kuadrat rata-rata. Saat Anda menambahkan titik, perhatikan bentuk grafik fungsi galat, nilai yang meminimumkan fungsi tersebut, dan nilai minimum fungsinya.</p>
+</div>
+
+<div class="unit" id="efe2">
+	<p class="app">Dalam <a href="https://www.randomservices.org/random/apps/ErrorFunction.html" class="ancillary">aplikasi fungsi galat</a>, pilih galat absolut rata-rata. Saat Anda menambahkan titik, perhatikan bentuk grafik fungsi galat, nilai-nilai yang meminimumkan fungsi tersebut, dan nilai minimum fungsinya.</p>
+</div>
+
+<div class="unit" id="efe3">
+	<p class="math">Misalkan vektor data kita adalah \((2, 1, 5, 7)\). Nyatakan \(\mae\) secara eksplisit sebagai fungsi sepotong-sepotong dan sketsakan grafiknya. Perhatikan bahwa</p>
+	<ol class="sub">
+		<li>Semua nilai \(a \in [2, 5]\) meminimumkan \(\mae\).</li>
+		<li>\(\mae\) tidak terdiferensialkan pada \(a \in \{1, 2, 5, 7\}\).</li>
+	</ol>
+</div>
+
+<div class="unit" id="efe4">
+	<p class="math">Misalkan vektor data kita adalah \((3, 5, 1)\). Nyatakan \(\mae\) secara eksplisit sebagai fungsi sepotong-sepotong dan sketsakan grafiknya. Perhatikan bahwa</p>
+	<ol class="sub">
+		<li>\(\mae\) mencapai minimum pada \(a = 3\).</li>
+		<li>\(\mae\) tidak terdiferensialkan pada \(a \in \{1, 3, 5\}\).</li>
+	</ol>
+</div>
+
+<h4 id="sim">Latihan Simulasi</h4>
+
+<p>Banyak aplikasi dalam proyek ini menyimulasikan percobaan dengan suatu variabel acak dasar yang menjadi perhatian. Ketika menjalankan simulasi, Anda melakukan replikasi percobaan secara independen. Dalam kebanyakan kasus, aplikasi menampilkan simpangan baku distribusi, baik secara numerik dalam tabel maupun secara grafis sebagai jari-jari bilah horizontal biru di kotak grafik. Ketika simulasi dijalankan, simpangan baku sampel juga ditampilkan secara numerik dalam tabel dan secara grafis sebagai jari-jari bilah horizontal merah di kotak grafik.</p>
+
+<div class="unit" id="sim1">
+	<p class="app">Dalam <a href="https://www.randomservices.org/random/apps/BinomialCoin.html" class="ancillary">percobaan koin binomial</a>, variabel acaknya adalah banyaknya sisi gambar. Untuk berbagai nilai parameter \(n\) (banyaknya koin) dan \(p\) (probabilitas sisi gambar), jalankan simulasi 1.000 kali dan bandingkan simpangan baku sampel dengan simpangan baku distribusi.</p>
+</div>
+
+<div class="unit" id="sim2">
+	<p class="app">Dalam simulasi <a href="https://www.randomservices.org/random/apps/Match.html" class="ancillary">percobaan pencocokan</a>, variabel acaknya adalah banyaknya kecocokan. Untuk nilai \(n\) yang dipilih (banyaknya bola), jalankan simulasi 1.000 kali dan bandingkan simpangan baku sampel dengan simpangan baku distribusi.</p>
+</div>
+
+<div class="unit" id="sim3">
+	<p class="app">Jalankan simulasi <a href="https://www.randomservices.org/random/apps/Gamma.html" class="ancillary">percobaan gamma</a> 1.000 kali untuk berbagai nilai parameter laju \(r\) dan parameter bentuk \(k\). Bandingkan simpangan baku sampel dengan simpangan baku distribusi.</p>
+</div>
+
+<h4 id="prb">Latihan Probabilitas</h4>
+
+<div class="unit" id="prb1">
+	<p class="math">Misalkan \(X\) memiliki fungsi densitas probabilitas \(f(x) = 12 \, x^2 \, (1 - x)\) untuk \(0 \le x \le 1\). Distribusi \(X\) merupakan anggota <a href="https://www.randomservices.org/random/special/Beta.html">keluarga beta</a>. Hitung masing-masing berikut ini</p>
+	<ol class="sub">
+		<li>\(\mu = \E(X)\)</li>
+		<li>\(\sigma^2 = \var(X)\)</li>
+		<li>\(d_3 = \E\left[(X - \mu)^3\right]\)</li>
+		<li>\(d_4 = \E\left[(X - \mu)^4\right]\)</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<ol class="sub">
+			<li>\(3/5\)</li>
+			<li>\(1/25\)</li>
+			<li>\(-2/875\)</li>
+			<li>\(33/8750\)</li>
+		</ol>
+	</details>
+</div>
+
+<div class="unit" id="prb2">
+	<p class="math">Sekarang, misalkan \((X_1, X_2, \ldots, X_{10})\) merupakan sampel acak berukuran 10 dari distribusi beta dalam <a href="#prb1" class="ref"></a>. Tentukan masing-masing berikut ini:</p>
+	<ol class="sub">
+		<li>\(\E(M)\)</li>
+		<li>\(\var(M)\)</li>
+		<li>\(\E\left(W^2\right)\)</li>
+		<li>\(\var\left(W^2\right)\)</li>
+		<li>\(\E\left(S^2\right)\)</li>
+		<li>\(\var\left(S^2\right)\)</li>
+		<li>\(\cov\left(M, W^2\right)\)</li>
+		<li>\(\cov\left(M, S^2\right)\)</li>
+		<li>\(\cov\left(W^2, S^2\right)\)</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<ol class="sub">
+			<li>\(3/5\)</li>
+			<li>\(1/250\)</li>
+			<li>\(1/25\)</li>
+			<li>\(19/87\,500\)</li>
+			<li>\(1/25\)</li>
+			<li>\(199/787\,500\)</li>
+			<li>\(-2/8750\)</li>
+			<li>\(-2/8750\)</li>
+			<li>\(19/87\,500\)</li>
+		</ol>
+	</details>
+</div>
+
+<div class="unit" id="prb3">
+	<p class="math">Misalkan \(X\) memiliki fungsi densitas probabilitas \(f(x) = \lambda e^{-\lambda x}\) untuk \(0 \le x \lt \infty\), dengan \(\lambda \gt 0\) sebagai parameter. Jadi, \(X\) memiliki <a href="https://www.randomservices.org/random/poisson/Exponential.html">distribusi eksponensial</a> dengan parameter laju \(\lambda\). Hitung masing-masing berikut ini</p>
+	<ol class="sub">
+		<li>\(\mu = \E(X)\)</li>
+		<li>\(\sigma^2 = \var(X)\)</li>
+		<li>\(d_3 = \E\left[(X - \mu)^3\right]\)</li>
+		<li>\(d_4 = \E\left[(X - \mu)^4\right]\)</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<ol class="sub">
+			<li>\(1/\lambda\)</li>
+			<li>\(1/\lambda^2\)</li>
+			<li>\(2/\lambda^3\)</li>
+			<li>\(9/\lambda^4\)</li>
+		</ol>
+	</details>
+</div>
+
+<div class="unit" id="prb4">
+	<p class="math">Sekarang, misalkan \((X_1, X_2, \ldots, X_5)\) merupakan sampel acak berukuran 5 dari distribusi eksponensial dalam <a href="#prb3" class="ref"></a>. Tentukan masing-masing berikut ini:</p>
+	<ol class="sub">
+		<li>\(\E(M)\)</li>
+		<li>\(\var(M)\)</li>
+		<li>\(\E\left(W^2\right)\)</li>
+		<li>\(\var\left(W^2\right)\)</li>
+		<li>\(\E\left(S^2\right)\)</li>
+		<li>\(\var\left(S^2\right)\)</li>
+		<li>\(\cov\left(M, W^2\right)\)</li>
+		<li>\(\cov\left(M, S^2\right)\)</li>
+		<li>\(\cov\left(W^2, S^2\right)\)</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<ol class="sub">
+			<li>\(1/\lambda\)</li>
+			<li>\(1/(5 \lambda^2)\)</li>
+			<li>\(1/\lambda^2\)</li>
+			<li>\(8/(5 \lambda^4)\)</li>
+			<li>\(1/\lambda^2\)</li>
+			<li>\(17/(10 \lambda^4)\)</li>
+			<li>\(2/(5 \lambda^3)\)</li>
+			<li>\(2/(5 \lambda^3)\)</li>
+			<li>\(8/(5 \lambda^4)\)</li>
+		</ol>
+	</details>
+</div>
+
+<div class="unit" id="prb5">
+	<p class="math">Ingat bahwa untuk <dfn>dadu tak seimbang yang mengutamakan sisi 1 dan 6</dfn>, sisi 1 dan 6 masing-masing memiliki probabilitas \(\frac{1}{4}\), sedangkan sisi 2, 3, 4, dan 5 masing-masing memiliki probabilitas \(\frac{1}{8}\). Misalkan \(X\) menyatakan skor ketika dadu pipih satu-enam dilempar. Hitung masing-masing berikut ini:</p>
+	<ol class="sub">
+		<li>\(\mu = \E(X)\)</li>
+		<li>\(\sigma^2 = \var(X)\)</li>
+		<li>\(d_3 = \E\left[(X - \mu)^3\right]\)</li>
+		<li>\(d_4 = \E\left[(X - \mu)^4\right]\)</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<ol class="sub">
+			<li>\(7/2\)</li>
+			<li>\(15/4\)</li>
+			<li>\(0\)</li>
+			<li>\(333/16\)</li>
+		</ol>
+	</details>
+</div>
+
+<div class="unit" id="prb6">
+	<p class="math">Sekarang, misalkan dadu tak seimbang yang mengutamakan sisi 1 dan 6 dilempar 8 kali. Tentukan masing-masing berikut ini:</p>
+	<ol class="sub">
+		<li>\(\E(M)\)</li>
+		<li>\(\var(M)\)</li>
+		<li>\(\E\left(W^2\right)\)</li>
+		<li>\(\var\left(W^2\right)\)</li>
+		<li>\(\E\left(S^2\right)\)</li>
+		<li>\(\var\left(S^2\right)\)</li>
+		<li>\(\cov\left(M, W^2\right)\)</li>
+		<li>\(\cov\left(M, S^2\right)\)</li>
+		<li>\(\cov\left(W^2, S^2\right)\)</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<ol class="sub">
+			<li>\(7/2\)</li>
+			<li>\(15/32\)</li>
+			<li>\(15/4\)</li>
+			<li>\(27/32\)</li>
+			<li>\(15/4\)</li>
+			<li>\(603/448\)</li>
+			<li>\(0\)</li>
+			<li>\(0\)</li>
+			<li>\(27/32\)</li>
+		</ol>
+	</details>
+</div>
+
+<h4 id="dat">Latihan Analisis Data</h4>
+
+<p>Perangkat lunak statistika sebaiknya digunakan untuk soal-soal dalam subbagian ini.</p>
+
+<div class="unit" id="dat1">
+	<p class="stat">Tinjau variabel panjang mahkota bunga dan spesies dalam <a href="https://www.randomservices.org/random/data/Iris.html" class="ancillary">data iris Fisher</a>. </p>
+	<ol class="sub">
+		<li>Klasifikasikan variabel-variabel tersebut menurut jenis dan tingkat pengukurannya.</li>
+		<li>Hitung rata-rata dan simpangan baku sampel, lalu buat histogram densitas untuk panjang mahkota bunga.</li>
+		<li>Hitung rata-rata dan simpangan baku sampel, lalu buat histogram densitas untuk panjang mahkota bunga menurut spesies.</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<ol class="sub">
+			<li>panjang mahkota bunga: kontinu, rasio. spesies: diskret, nominal</li>
+			<li>\(m = 37.8\), \(s = 17.8\)</li>
+			<li>\(m(0) = 14.6\), \(s(0) = 1.7\); \(m(1) = 55.5\), \(s(1) = 5.5\); \(m(2) = 43.2\), \(s(2) = 5.4\)</li>
+		</ol>
+	</details>
+</div>
+
+<div class="unit" id="dat2">
+	<p class="stat">Tinjau variabel erosi dalam <a href="https://www.randomservices.org/random/data/Challenger.html" class="ancillary">himpunan data Challenger</a>.</p>
+	<ol class="sub">
+		<li>Klasifikasikan variabel tersebut menurut jenis dan tingkat pengukurannya.</li>
+		<li>Hitung rata-rata dan simpangan bakunya</li>
+		<li>Buat histogram densitas dengan kelas \([0, 5)\), \([5, 40)\), \([40, 50)\), \([50, 60)\).</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<ol class="sub">
+			<li>kontinu, rasio</li>
+			<li> \(m = 7.7\), \(s = 17.2\)</li>
+		</ol>
+	</details>
+</div>
+
+<div class="unit" id="dat3">
+	<p class="stat">Tinjau <a href="https://www.randomservices.org/random/data/Michelson.html" class="ancillary">data kecepatan cahaya Michelson</a>.</p>
+	<ol class="sub">
+		<li>Klasifikasikan variabel tersebut menurut jenis dan tingkat pengukurannya.</li>
+		<li>Buat histogram densitas.</li>
+		<li>Hitung rata-rata dan simpangan baku sampel.</li>
+		<li>Tentukan rata-rata dan simpangan baku sampel jika variabel dikonversi ke \(\text{km}/\text{s}\). Transformasinya adalah \(y = x + 299\,000\)</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<ol class="sub">
+			<li>kontinu, interval</li>
+			<li value="3">\(m = 852.4\), \(s = 79.0\)</li>
+			<li>\(m = 299\,852.4\), \(s = 79.0\)</li>
+		</ol>
+	</details>
+</div>
+
+<div class="unit" id="dat4">
+	<p class="stat">Tinjau <a href="https://www.randomservices.org/random/data/Short.html" class="ancillary">data paralaks matahari Short</a>.</p>
+	<ol class="sub">
+		<li>Klasifikasikan variabel tersebut menurut jenis dan tingkat pengukurannya.</li>
+		<li>Buat histogram densitas.</li>
+		<li>Hitung rata-rata dan simpangan baku sampel.</li>
+		<li>Tentukan rata-rata dan simpangan baku sampel jika variabel dikonversi ke derajat. Terdapat 3.600 detik dalam satu derajat.</li>
+		<li>Tentukan rata-rata dan simpangan baku sampel jika variabel dikonversi ke radian. Terdapat \(\pi/180\) radian dalam satu derajat.</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<ol class="sub">
+			<li>kontinu, rasio</li>
+			<li value="3">\(m = 8.616\), \(s = 0.749\)</li>
+			<li>\(m = 0.00239\), \(s = 0.000208\)</li>
+			<li>\(m = 0.0000418\), \(s = 0.00000363\)</li>
+		</ol>
+	</details>
+</div>
+
+<div class="unit" id="dat5">
+	<p class="stat">Tinjau <a href="https://www.randomservices.org/random/data/Cavendish.html" class="ancillary">data densitas bumi Cavendish</a>.</p>
+	<ol class="sub">
+		<li>Klasifikasikan variabel tersebut menurut jenis dan tingkat pengukurannya.</li>
+		<li>Hitung rata-rata dan simpangan baku sampel.</li>
+		<li>Buat histogram densitas.</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<ol class="sub">
+			<li>kontinu, rasio</li>
+			<li> \(m = 5.448\), \(s = 0.221\)</li>
+		</ol>
+	</details>
+</div>
+
+<div class="unit" id="dat6">
+	<p class="stat">Tinjau <a href="https://www.randomservices.org/random/data/MM.html" class="ancillary">data M&amp;M</a>.</p>
+	<ol class="sub">
+		<li>Klasifikasikan variabel-variabel tersebut menurut jenis dan tingkat pengukurannya.</li>
+		<li>Hitung rata-rata dan simpangan baku sampel untuk variabel banyaknya permen untuk setiap warna.</li>
+		<li>Hitung rata-rata dan simpangan baku sampel untuk jumlah keseluruhan permen.</li>
+		<li>Buat histogram frekuensi relatif untuk jumlah keseluruhan permen.</li>
+		<li>Hitung rata-rata dan simpangan baku sampel, lalu buat histogram densitas untuk berat bersih.</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<ol class="sub">
+			<li>jumlah warna: diskret, rasio. berat bersih: kontinu, rasio.</li>
+			<li>\(m(r) = 9.60\), \(s(r) = 4.12\); \(m(g) = 7.40\), \(s(g) = 3.12\); \(m(bl) = 7.23\), \(s(bl) = 4.35\); \(m(o) = 6.63\), \(s(o) = 3.69\); \(m(y) = 13.77\), \(s(y) = 6.06\); \(m(br) = 12.47\), \(s(br) = 5.13\) </li>
+			<li>\(m(n) = 57.10\), \(s(n) = 2.4\)</li>
+			<li value="5">\(m(w) = 49.215\), \(s(w) = 1.522\)</li>
+		</ol>
+	</details>
+</div>
+
+<div class="unit" id="dat7">
+	<p class="stat">Tinjau variabel berat tubuh, spesies, dan jenis kelamin dalam <a href="https://www.randomservices.org/random/data/Cicada.html" class="ancillary">data tonggeret</a>.</p>
+	<ol class="sub">
+		<li>Klasifikasikan variabel-variabel tersebut menurut jenis dan tingkat pengukurannya.</li>
+		<li>Hitung fungsi frekuensi relatif untuk spesies dan buat grafiknya.</li>
+		<li>Hitung fungsi frekuensi relatif untuk jenis kelamin dan buat grafiknya.</li>
+		<li>Hitung rata-rata dan simpangan baku sampel, lalu buat histogram densitas untuk berat tubuh.</li>
+		<li>Hitung rata-rata dan simpangan baku sampel, lalu buat histogram densitas untuk berat tubuh menurut spesies.</li>
+		<li>Hitung rata-rata dan simpangan baku sampel, lalu buat histogram densitas untuk berat tubuh menurut jenis kelamin.</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<ol class="sub">
+			<li>berat tubuh: kontinu, rasio. spesies: diskret, nominal. jenis kelamin: diskret, nominal.</li>
+			<li>\(f(0) = 0.423\), \(f(1) = 0.519\), \(f(2) = 0.058\)</li>
+			<li>\(f(0) = 0.567\), \(f(1) = 0.433\)</li>
+			<li>\(m = 0.180\), \(s = 0.059\)</li>
+			<li>\(m(0) = 0.168\), \(s(0) = 0.054\); \(m(1) = 0.185\), \(s(1) = 0.055\); \(m(2) = 0.225\), \(s(2) = 0.107\)</li>
+			<li>\(m(0) = 0.206\), \(s(0) = 0.052\); \(m(1) = 0.145\), \(s(1) = 0.051\)</li>
+		</ol>
+	</details>
+</div>
+
+<div class="unit" id="dat8">
+	<p class="stat">Tinjau <a href="https://www.randomservices.org/random/data/Pearson.html" class="ancillary">data tinggi Pearson</a>. </p>
+	<ol class="sub">
+		<li>Klasifikasikan variabel-variabel tersebut menurut jenis dan tingkat pengukurannya.</li>
+		<li>Hitung rata-rata dan simpangan baku sampel, lalu buat histogram densitas untuk tinggi ayah.</li>
+		<li>Hitung rata-rata dan simpangan baku sampel, lalu buat histogram densitas untuk tinggi anak laki-laki.</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<ol class="sub">
+			<li>kontinu, rasio</li>
+			<li>\(m(x) = 67.69\), \(s(x) = 2.75\)</li>
+			<li>\(m(y) = 68.68\), \(s(y) = 2.82\)</li>
+		</ol>
+	</details>
+</div>
+
+<footer>
+	<ol class="map">
+		<li class="parent"><a href="https://www.randomservices.org/random/index.html">Random</a></li>
+		<li class="parent"><a href="index.html">5. Sampel Acak</a></li>
+		<li class="child"><a href="Introduction.html" title="Pendahuluan">1</a></li>
+		<li class="child"><a href="Mean.html" title="Rata-Rata Sampel">2</a></li>
+		<li class="child"><a href="LLN.html" title="Hukum Bilangan Besar">3</a></li>
+		<li class="child"><a href="CLT.html" title="Teorema Limit Pusat">4</a></li>
+		<li class="current">5</li>
+		<li class="child"><a href="https://www.randomservices.org/random/sample/OrderStatistics.html" title="Statistik Terurut">6</a></li>
+		<li class="child"><a href="https://www.randomservices.org/random/sample/Covariance.html" title="Korelasi dan Regresi Sampel">7</a></li>
+		<li class="child"><a href="https://www.randomservices.org/random/sample/Normal.html" title="Sifat Khusus Sampel Normal">8</a></li>
+		<li class="details"><button type="button" title="Perluas Rincian" onclick="expandDetails(true);"><img src="../icons/Plus.svg" alt="Perluas"></button></li>
+		<li class="details"><button type="button" title="Ciutkan Rincian" onclick="expandDetails(false);"><img src="../icons/Minus.svg" alt="Ciutkan"></button></li>
+	</ol>
+	<ul class="map">
+		<li class="sister"><a href="https://www.randomservices.org/random/apps/index.html" class="ancillary">Aplikasi</a></li>
+		<li class="sister"><a href="https://www.randomservices.org/random/data/index.html" class="ancillary">Himpunan Data</a></li>
+		<li class="child"><a href="https://www.randomservices.org/random/biographies/index.html" class="ancillary">Biografi</a></li>
+	</ul>
+	<section class="edition-notice" data-o006-edition-notice="v1">
+		<p><strong>Pemberitahuan edisi.</strong> Terjemahan Bahasa Indonesia ini mengadaptasi <a href="https://www.randomservices.org/random/">Random: Probabilitas, Statistika Matematis, dan Proses Stokastik</a> karya Kyle Siegrist. Perubahan pada halaman ini mencakup penerjemahan, penambahan ID stabil, pengalihan tautan inti yang belum diterjemahkan ke sumber resmi, pengubahan tautan pelengkap menjadi tautan HTTPS resmi, serta perbaikan terverifikasi pada syarat domain, rumus dan indeks kovarians, rujukan silang, hasil numerik, label tabel, satuan, dan ringkasan data.</p>
+		<p>Situs asal menyatakan <a href="https://creativecommons.org/licenses/by/2.0/">CC BY 2.0</a>, sedangkan halaman <a href="https://www.randomservices.org/random/Credits.html">Kredit</a> menautkan <a href="https://creativecommons.org/licenses/by/1.0/">CC BY 1.0</a>; perbedaan ini dipertahankan. Edisi independen ini tidak didukung maupun disahkan oleh Kyle Siegrist atau Random Services. Tautan ke data dan biografi pihak ketiga tidak menyatakan hak untuk mendistribusikan ulang materi tersebut.</p>
+	</section>
+</footer>
+
+<script>getReferences();</script>
+
+</body>
+</html>

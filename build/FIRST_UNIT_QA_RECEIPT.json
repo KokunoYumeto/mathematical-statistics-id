@@ -56,15 +56,85 @@
       "page": "random/sample/CLT.html",
       "reason": "the continuity-corrected dice probability is approximately 0.6797",
       "replacements": 1
+    },
+    {
+      "new": "nilai harapan</a> dari distribusi empiris",
+      "old": "nilai harapan</a>) dari distribusi empiris",
+      "page": "random/sample/Variance.html",
+      "reason": "remove the orphan closing parenthesis after the expected-value link",
+      "replacements": 1
+    },
+    {
+      "new": "nilai-nilai yang meminimumkannya",
+      "old": "nilai-nilai yang meminimumkan mae",
+      "page": "random/sample/Variance.html",
+      "reason": "repair an untranslated bare operator token in prose",
+      "replacements": 1
+    },
+    {
+      "new": "Hasil-hasil ini mengikuti sifat penskalaan dan translasi di atas.",
+      "old": "Hasil-hasil ini mengikuti Teorema 7 dan 8.",
+      "page": "random/sample/Variance.html",
+      "reason": "replace a brittle generated theorem number and spelling defect with the determinate results used",
+      "replacements": 1
+    },
+    {
+      "new": "Sekarang, anggap himpunan data tidak konstan sehingga simpangan bakunya positif. Untuk \\(i \\in \\{1, 2, \\ldots, n\\}\\), misalkan",
+      "old": "Sekarang, untuk \\(i \\in \\{1, 2, \\ldots, n\\}\\), misalkan",
+      "page": "random/sample/Variance.html",
+      "reason": "standard scores require a positive sample standard deviation",
+      "replacements": 1
+    },
+    {
+      "new": "Jika kuadrat deviasi tidak hampir pasti konstan, distribusi \\(\\sqrt{n}\\left(W^2 - \\sigma^2\\right)",
+      "old": "Distribusi \\(\\sqrt{n}\\left(W^2 - \\sigma^2\\right)",
+      "page": "random/sample/Variance.html",
+      "reason": "the standardized CLT denominator must be positive",
+      "replacements": 1
+    },
+    {
+      "new": "Selanjutnya, kita menghitung kovarians dan korelasi antara rata-rata sampel dan varians sampel khusus. Rumus korelasi berikut berlaku ketika simpangan baku distribusi dasar positif dan kuadrat deviasinya tidak hampir pasti konstan.</p>",
+      "old": "Selanjutnya, kita menghitung kovarians dan korelasi antara rata-rata sampel dan varians sampel khusus.</p>",
+      "page": "random/sample/Variance.html",
+      "reason": "state the nondegeneracy conditions under which the displayed correlation exists",
+      "replacements": 1
+    },
+    {
+      "new": "ketika \\(\\mu\\) tidak diketahui dan sampel memuat sedikitnya dua pengamatan. Dalam hal ini",
+      "old": "ketika \\(\\mu\\) tidak diketahui. Dalam hal ini",
+      "page": "random/sample/Variance.html",
+      "reason": "the standard sample variance divides by n-1",
+      "replacements": 1
+    },
+    {
+      "new": "Pembuktiannya persis sama dengan pembuktian bagi simpangan baku sampel khusus dalam",
+      "old": "Pembuktiannya persis sama dengan pembuktian bagi varians baku khusus dalam",
+      "page": "random/sample/Variance.html",
+      "reason": "the Jensen argument parallels the sample-standard-deviation result, not the variance result",
+      "replacements": 1
+    },
+    {
+      "new": "Tentukan rata-rata dan simpangan baku sampel jika panjang diukur dalam sentimeter.",
+      "old": "Tentukan rata-rata sampel jika panjang diukur dalam sentimeter.",
+      "page": "random/sample/Variance.html",
+      "reason": "align the exercise prompt with its two-statistic answer",
+      "replacements": 1
+    },
+    {
+      "new": "<th>Rata-rata; kolom terakhir: varians sampel</th>",
+      "old": "<th>Rata-rata</th>",
+      "page": "random/sample/Variance.html",
+      "reason": "14/9 is the sample variance, not the arithmetic mean of the squared-deviation column",
+      "replacements": 1
     }
   ],
   "build": {
-    "reader_file_count": 28,
-    "reader_manifest_sha256": "c853d3c560b041fd3071f390b636aaf3b90b1bf076bfd47457408e6052350dbd",
-    "reader_total_bytes": 1926717,
-    "receipt_bytes": 36433,
+    "reader_file_count": 29,
+    "reader_manifest_sha256": "d3d2aa5822b4a004536b855d1e08ba72073a4e41c8fbfe5b6932db000c5de1e8",
+    "reader_total_bytes": 1986156,
+    "receipt_bytes": 46190,
     "receipt_path": "build/FIRST_UNIT_BUILD_RECEIPT.json",
-    "receipt_sha256": "364ec734f8e50ea033d4c9ff8dc6a947baf2b062634ef7ffdbd928aa2f89635a"
+    "receipt_sha256": "0afdf82a919d6da686e9c74f002e583d59db218380729be7eaaf8e1c71b982c4"
   },
   "math_text_localizations": [
     {
@@ -110,44 +180,46 @@
     "official_tag": "3.1.2",
     "reader_relative_path": "MathJax/input/tex/extensions/boldsymbol.js",
     "runtime_file_count": 1,
-    "script_page_references": 4,
+    "script_page_references": 5,
     "script_pages": [
       "random/sample/Introduction.html",
       "random/sample/Mean.html",
       "random/sample/LLN.html",
-      "random/sample/CLT.html"
+      "random/sample/CLT.html",
+      "random/sample/Variance.html"
     ],
     "sha256": "716cf8735d00abfb1627f8adbbf4aeb915ac9b5c55d47aeaf276e73dac6a2aa1"
   },
   "pass_counts": {
-    "bounded_text_correction_categories": 9,
-    "controlled_filename_case_corrections": 4,
+    "bounded_text_correction_categories": 19,
+    "controlled_filename_case_corrections": 5,
     "css_files": 1,
     "css_refs": 11,
-    "details": 73,
-    "external_https_anchors": 297,
+    "details": 112,
+    "external_https_anchors": 328,
     "external_https_metadata_links": 3,
-    "fragments": 22,
-    "href_delta_entries": 191,
-    "href_delta_occurrences": 274,
-    "html_pages": 7,
-    "ids": 173,
-    "local_refs": 118,
-    "math_spans": 1128,
+    "fragments": 31,
+    "href_delta_entries": 216,
+    "href_delta_occurrences": 304,
+    "html_pages": 8,
+    "ids": 237,
+    "local_refs": 162,
+    "math_spans": 1711,
     "math_text_localization_categories": 5,
     "math_text_localization_replacements": 10,
     "mathjax_runtime_files": 1,
-    "protected_math_correction_categories": 24,
-    "protected_math_replacements": 24,
-    "raw_script_style_blocks": 13,
+    "occurrence_specific_href_deltas": 3,
+    "protected_math_correction_categories": 43,
+    "protected_math_replacements": 43,
+    "raw_script_style_blocks": 16,
     "readable_layout_css_appends": 1,
-    "reader_bytes": 1926717,
-    "reader_files": 28,
-    "source_elements": 1867,
+    "reader_bytes": 1986156,
+    "reader_files": 29,
+    "source_elements": 2694,
     "svg_files": 10,
-    "translated_pages": 5,
+    "translated_pages": 6,
     "transport_hardening_deltas": 7,
-    "units": 107
+    "units": 154
   },
   "protected_math_corrections": [
     {
@@ -352,6 +424,158 @@
       "span_new": "\\(V\\)",
       "span_old": "\\(Y\\)",
       "surface": "math_span"
+    },
+    {
+      "new": "\\sum_{i=1}^n x_i^2 - 2 m \\sum_{i=1}^n x_i + \\sum_{i=1}^n m^2\\\\",
+      "old": "\\sum_{i=1}^n x_i^2 - 2 m \\sum_{i=1}^n x_i - \\sum_{i=1}^n m^2\\\\",
+      "page": "random/sample/Variance.html",
+      "reason": "the expansion of each squared deviation has a positive m-squared term",
+      "replacements": 1,
+      "surface": "raw_tex"
+    },
+    {
+      "new": "\\(\\cor\\left(M, W^2\\right) = \\frac{\\sigma_3}{\\sigma \\sqrt{\\sigma_4 - \\sigma^4}}\\)",
+      "old": "\\(\\cor\\left(M, W^2\\right) = \\sigma^3 \\big/ \\sqrt{\\sigma^2 (\\sigma_4 - \\sigma^4)}\\)",
+      "page": "random/sample/Variance.html",
+      "reason": "the covariance numerator is the third central moment sigma_3, not sigma cubed",
+      "replacements": 1,
+      "surface": "math_span"
+    },
+    {
+      "new": "\\sum_{l=1}^n \\cov[(X_i - X_j)^2, (X_k - X_l)^2]",
+      "old": "\\sum_{k=1}^n \\cov[(X_i - X_j)^2, (X_k - X_l)^2]",
+      "page": "random/sample/Variance.html",
+      "reason": "the fourth independent summation index is l",
+      "replacements": 1,
+      "surface": "math_span"
+    },
+    {
+      "new": "\\(\\var\\left(S^2\\right) \\ge \\var\\left(W^2\\right)\\)",
+      "old": "\\(\\var\\left(S^2\\right) \\gt \\var\\left(W^2\\right)\\)",
+      "page": "random/sample/Variance.html",
+      "reason": "equality holds for a degenerate population; strictness requires positive variance",
+      "replacements": 1,
+      "surface": "math_span"
+    },
+    {
+      "new": "\\( S^2 \\)",
+      "old": "\\( V^2 \\)",
+      "page": "random/sample/Variance.html",
+      "reason": "the standard sample variance is denoted S-squared; V-squared is undefined",
+      "replacements": 1,
+      "surface": "math_span"
+    },
+    {
+      "new": "\\(s^2 = 203/132\\)",
+      "old": "\\(s^2 = 203/121\\)",
+      "page": "random/sample/Variance.html",
+      "reason": "the twelve-value sample variance is 203/132",
+      "replacements": 1,
+      "surface": "math_span"
+    },
+    {
+      "new": "\\((10, 20]\\)",
+      "old": "\\((10, 20])\\)",
+      "page": "random/sample/Variance.html",
+      "reason": "remove the unmatched literal parenthesis after the interval",
+      "replacements": 1,
+      "surface": "math_span"
+    },
+    {
+      "new": "<li>\\(-2/875\\)</li>",
+      "old": "<li>\\(-2/875\\)\\)</li>",
+      "page": "random/sample/Variance.html",
+      "reason": "remove the orphan closing TeX delimiter after the answer",
+      "replacements": 1,
+      "surface": "raw_tex"
+    },
+    {
+      "new": "\\(1/(5 \\lambda^2)\\)",
+      "old": "\\(1/5 \\lambda^2\\)",
+      "page": "random/sample/Variance.html",
+      "reason": "place lambda-squared in the denominator of var(M)",
+      "replacements": 1,
+      "surface": "math_span"
+    },
+    {
+      "new": "\\(8/(5 \\lambda^4)\\)",
+      "old": "\\(8/5 \\lambda^4\\)",
+      "page": "random/sample/Variance.html",
+      "reason": "place lambda-fourth in the denominator of both exponential-sample answers",
+      "replacements": 2,
+      "surface": "math_span"
+    },
+    {
+      "new": "\\(17/(10 \\lambda^4)\\)",
+      "old": "\\(17/10 \\lambda^4\\)",
+      "page": "random/sample/Variance.html",
+      "reason": "place lambda-fourth in the denominator of var(S-squared)",
+      "replacements": 1,
+      "surface": "math_span"
+    },
+    {
+      "new": "\\(2/(5 \\lambda^3)\\)",
+      "old": "\\(2/5 \\lambda^3\\)",
+      "page": "random/sample/Variance.html",
+      "reason": "place lambda-cubed in the denominator of both covariance answers",
+      "replacements": 2,
+      "surface": "math_span"
+    },
+    {
+      "new": "\\(603/448\\)",
+      "old": "\\(207/512\\)",
+      "page": "random/sample/Variance.html",
+      "reason": "correct var(S-squared) for eight ace-six-flat die rolls",
+      "replacements": 1,
+      "surface": "math_span"
+    },
+    {
+      "new": "\\(s(1) = 5.5\\)",
+      "old": "\\(s(1) = 30.5\\)",
+      "page": "random/sample/Variance.html",
+      "reason": "correct the frozen Iris subgroup sample standard deviation for type 1",
+      "replacements": 1,
+      "surface": "math_span"
+    },
+    {
+      "new": "\\(s(2) = 5.4\\)",
+      "old": "\\(s(2) = 28.7\\)",
+      "page": "random/sample/Variance.html",
+      "reason": "correct the frozen Iris subgroup sample standard deviation for type 2",
+      "replacements": 1,
+      "surface": "math_span"
+    },
+    {
+      "new": "\\(\\text{km}/\\text{s}\\)",
+      "old": "\\(\\text{km}/\\text{hr}\\)",
+      "page": "random/sample/Variance.html",
+      "reason": "the retained transformation x+299000 converts km/s, not km/hr",
+      "replacements": 1,
+      "surface": "math_span"
+    },
+    {
+      "new": "\\(s(g) = 3.12\\)",
+      "old": "\\(s(g) = 0.57\\)",
+      "page": "random/sample/Variance.html",
+      "reason": "correct the frozen green M-and-M count sample standard deviation",
+      "replacements": 1,
+      "surface": "math_span"
+    },
+    {
+      "new": "\\(s(o) = 3.69\\)",
+      "old": "\\(s(0) = 3.69\\)",
+      "page": "random/sample/Variance.html",
+      "reason": "use the letter o for the orange subgroup rather than zero",
+      "replacements": 1,
+      "surface": "math_span"
+    },
+    {
+      "new": "\\(s(1) = 0.055\\)",
+      "old": "\\(s(1) = 0.185\\)",
+      "page": "random/sample/Variance.html",
+      "reason": "correct the frozen species-1 Cicada subgroup sample standard deviation",
+      "replacements": 1,
+      "surface": "math_span"
     }
   ],
   "readable_reflow": {
@@ -378,20 +602,21 @@
       },
       "elements": 424,
       "hierarchy_sha256": "911fcd5705e0e358fb92492b30dea1d53265df24da8d86bf68b10a7f3d56c870",
-      "href_delta_entries": 54,
-      "href_delta_occurrences": 75,
+      "href_delta_entries": 53,
+      "href_delta_occurrences": 73,
       "ids": 56,
       "math_spans": 394,
       "math_text_localization_replacements": 1,
+      "occurrence_specific_href_deltas": 0,
       "protected_math_replacements": 14,
       "raw_script_style_blocks": 3,
-      "reader_bytes": 46488,
-      "reader_sha256": "427b4e396750be3137894296cde1a0bfc558d53a91009c1880447c250f3b0d56",
+      "reader_bytes": 46398,
+      "reader_sha256": "b6759e64b3a89d8feb8342a4c635ce2956a717a1e280a19d12e9d31b4606aef0",
       "reader_target_byte_identical": true,
       "source_bytes": 40239,
       "source_sha256": "ee6dc9f8e9feb14f19f96a0206c3289a4aedfc014f5e3dabf79422e1dc29f9e3",
-      "target_bytes": 46488,
-      "target_sha256": "427b4e396750be3137894296cde1a0bfc558d53a91009c1880447c250f3b0d56",
+      "target_bytes": 46398,
+      "target_sha256": "b6759e64b3a89d8feb8342a4c635ce2956a717a1e280a19d12e9d31b4606aef0",
       "units": 38
     },
     "random/sample/Introduction.html": {
@@ -403,20 +628,21 @@
       },
       "elements": 390,
       "hierarchy_sha256": "bd051917296943b992b386456e522e94e16d29bdbb6dcb7a407b1975fcbc3c37",
-      "href_delta_entries": 39,
-      "href_delta_occurrences": 62,
+      "href_delta_entries": 38,
+      "href_delta_occurrences": 60,
       "ids": 35,
       "math_spans": 101,
       "math_text_localization_replacements": 0,
+      "occurrence_specific_href_deltas": 0,
       "protected_math_replacements": 0,
       "raw_script_style_blocks": 3,
-      "reader_bytes": 36608,
-      "reader_sha256": "f79a0e459b01a0598ee5f135afd7bde0c6f7020e9cbeda3756a773dde5de8539",
+      "reader_bytes": 36518,
+      "reader_sha256": "7a0030e90955f86ad14a5d9cc38ce95814840764846554027c301b043f2a372e",
       "reader_target_byte_identical": true,
       "source_bytes": 31343,
       "source_sha256": "0af72fbf0202413525cae99e696cfa70014a803d6c5ac7a7dcafd1577742414f",
-      "target_bytes": 36608,
-      "target_sha256": "f79a0e459b01a0598ee5f135afd7bde0c6f7020e9cbeda3756a773dde5de8539",
+      "target_bytes": 36518,
+      "target_sha256": "7a0030e90955f86ad14a5d9cc38ce95814840764846554027c301b043f2a372e",
       "units": 22
     },
     "random/sample/LLN.html": {
@@ -428,20 +654,21 @@
       },
       "elements": 305,
       "hierarchy_sha256": "5c0d5dbd8f5ce20bd12602452d97e7e74779ee36a0186126919674afc4789a07",
-      "href_delta_entries": 35,
-      "href_delta_occurrences": 47,
+      "href_delta_entries": 34,
+      "href_delta_occurrences": 44,
       "ids": 33,
       "math_spans": 268,
       "math_text_localization_replacements": 9,
+      "occurrence_specific_href_deltas": 0,
       "protected_math_replacements": 5,
       "raw_script_style_blocks": 3,
-      "reader_bytes": 35270,
-      "reader_sha256": "2083cab957f8b07a0982280548f5c49c6e164ebd0354432036eed25276514ddf",
+      "reader_bytes": 35135,
+      "reader_sha256": "6b10b17131d457adefe2bdbfff7bbc42d204b93e6d064cdf7e0bac6f51d221d8",
       "reader_target_byte_identical": true,
       "source_bytes": 30754,
       "source_sha256": "8662dfc55683fa40c79a5d453a450730e2ba151716a20eb61a2db307c33f5e85",
-      "target_bytes": 35270,
-      "target_sha256": "2083cab957f8b07a0982280548f5c49c6e164ebd0354432036eed25276514ddf",
+      "target_bytes": 35135,
+      "target_sha256": "6b10b17131d457adefe2bdbfff7bbc42d204b93e6d064cdf7e0bac6f51d221d8",
       "units": 21
     },
     "random/sample/Mean.html": {
@@ -453,21 +680,48 @@
       },
       "elements": 585,
       "hierarchy_sha256": "7ce39c793fb28a3924a045db4c7e38d57530c52fb0501dc34642de3325029f92",
-      "href_delta_entries": 23,
-      "href_delta_occurrences": 29,
+      "href_delta_entries": 22,
+      "href_delta_occurrences": 27,
       "ids": 43,
       "math_spans": 365,
       "math_text_localization_replacements": 0,
+      "occurrence_specific_href_deltas": 0,
       "protected_math_replacements": 5,
       "raw_script_style_blocks": 3,
-      "reader_bytes": 46231,
-      "reader_sha256": "a30c72a0b9311a5d817cade1f05f2f1e315fa53aea587237c50b511351ee0e7a",
+      "reader_bytes": 46141,
+      "reader_sha256": "6cd4f20660210ebb30e8f22d772ebe8c19febede137f0ad1d1a4a82086f6f1e4",
       "reader_target_byte_identical": true,
       "source_bytes": 42746,
       "source_sha256": "e21a3da7773a6f7f925b4cb0c583d5331abb1656fe01ed952c8d42b26f238cab",
-      "target_bytes": 46231,
-      "target_sha256": "a30c72a0b9311a5d817cade1f05f2f1e315fa53aea587237c50b511351ee0e7a",
+      "target_bytes": 46141,
+      "target_sha256": "6cd4f20660210ebb30e8f22d772ebe8c19febede137f0ad1d1a4a82086f6f1e4",
       "units": 26
+    },
+    "random/sample/Variance.html": {
+      "details": 39,
+      "edition_notice": {
+        "bytes": 1144,
+        "links": 4,
+        "sha256": "d1884c02cc756c0d44493d883eddf398dde3ad6f334691ccb3e33c5741b4504a"
+      },
+      "elements": 827,
+      "hierarchy_sha256": "1557ceb7383c4bd50eeda2e0b25aa2a98f91fb3dbc5d65dd4ee660c33e1c85b2",
+      "href_delta_entries": 30,
+      "href_delta_occurrences": 40,
+      "ids": 64,
+      "math_spans": 583,
+      "math_text_localization_replacements": 0,
+      "occurrence_specific_href_deltas": 3,
+      "protected_math_replacements": 19,
+      "raw_script_style_blocks": 3,
+      "reader_bytes": 59889,
+      "reader_sha256": "ceb67e081061d1cecd52f9e02434defba71067ff28ae3037587675b11b2f1de4",
+      "reader_target_byte_identical": true,
+      "source_bytes": 55878,
+      "source_sha256": "452e2841007fad173229a9bb069a4acdda8e0d0bc6c1632f7239ef585248b0c6",
+      "target_bytes": 59889,
+      "target_sha256": "ceb67e081061d1cecd52f9e02434defba71067ff28ae3037587675b11b2f1de4",
+      "units": 47
     },
     "random/sample/index.html": {
       "details": 0,
@@ -478,34 +732,35 @@
       },
       "elements": 163,
       "hierarchy_sha256": "6a96ead836c5ac42b781f0ade81b07aa852dac73946f60028b3ba8b43d4829ba",
-      "href_delta_entries": 40,
-      "href_delta_occurrences": 61,
+      "href_delta_entries": 39,
+      "href_delta_occurrences": 60,
       "ids": 6,
       "math_spans": 0,
       "math_text_localization_replacements": 0,
+      "occurrence_specific_href_deltas": 0,
       "protected_math_replacements": 0,
       "raw_script_style_blocks": 1,
-      "reader_bytes": 11669,
-      "reader_sha256": "bfb55848e53e4cb8cb937501e8c11d13472cad7b119d3c7f01af5fbb0023d15d",
+      "reader_bytes": 11624,
+      "reader_sha256": "b66f42cb5f99442a0727c9cb9af0684a081c5d2be5162eebe8b8ed52690f62a7",
       "reader_target_byte_identical": true,
       "source_bytes": 8952,
       "source_sha256": "9f7b9a075c430efbae92192e131152c6728f7827dc3dde987ce871ec9d6ae35c",
-      "target_bytes": 11669,
-      "target_sha256": "bfb55848e53e4cb8cb937501e8c11d13472cad7b119d3c7f01af5fbb0023d15d",
+      "target_bytes": 11624,
+      "target_sha256": "b66f42cb5f99442a0727c9cb9af0684a081c5d2be5162eebe8b8ed52690f62a7",
       "units": 0
     }
   },
   "schema": "o006.random.first-unit-qa.v1",
   "scripts": {
     "build": {
-      "bytes": 46990,
+      "bytes": 56222,
       "path": "scripts/build_first_unit.py",
-      "sha256": "3c6bb7709e8dff633703c68025177ef573b3a30a5b4d7da3044c80b82017c1ab"
+      "sha256": "e67035893bc7bad46a8f1346cf2b0f689d16dc626e23ceb6b895a77acbf724eb"
     },
     "qa": {
-      "bytes": 57648,
+      "bytes": 63677,
       "path": "scripts/qa_first_unit.py",
-      "sha256": "7710201e1ca09521ed15bb178718e7308b3a2fb981842e93d0a564d7ec101fb7"
+      "sha256": "26263c275578a786ef8054dfe4fc9bafc5f899d17aa5f2c6780ccf142d7c60b4"
     }
   },
   "transport_hardening": [

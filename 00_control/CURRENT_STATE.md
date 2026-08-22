@@ -5,13 +5,14 @@ Updated: 2026-08-21
 ## Status
 
 Edition source admitted; exact authority and component-rights freezes complete; the
-first five contiguous Indonesian pages and the full 29-page machine backend
-are verified. Every entity on those five pages is now bound to its target
+first six contiguous Indonesian pages and the full 29-page machine backend
+are verified. Every entity on those six pages is now bound to its target
 path, locale, byte count, and SHA-256. The repository is public; the repaired
 three- and four-page Pages checkpoints remain historical evidence. The
-five-page boundary through the central limit theorem has passed its bounded
-target audit, two deterministic replays, deployment, anonymous byte readback,
-and desktop/mobile live rendering. The exact official MathJax
+five-page boundary through the central limit theorem remains publicly verified.
+The six-page boundary through sample variance has passed its bounded target
+audit, two deterministic replays, and local desktop/mobile rendering and is
+ready for immediate deployment and public readback. The exact official MathJax
 3.1.2 `boldsymbol.js` module remains pinned. The complete 29-page edition is not
 yet claimed.
 
@@ -83,17 +84,18 @@ structural units, 451 disclosures, 2,891 math-text containers, 24 figures, 236
 assets, and 1,810 internal links. The source-grounded exercise rule designates
 260 units and leaves 500 undesignated; its exact basis is 123 both, 95
 exercise-section only, 42 native `app`/`stat` only, and 500 neither. All 949
-entities on the five translated pages carry verified id-ID bindings; the other
-5,618 entities have explicit untranslated/null locale fields.
+entities on the earlier five translated pages plus all 462 entities on Variance
+carry verified id-ID bindings: 1,411 translated and 5,156 explicit
+untranslated/null locale fields.
 
-- Entity JSONL: 10,206,280 bytes; SHA-256
-  `243b4f4294535a421fe18a811795336fae9830ead97a049e2f3f009faa435d55`.
+- Entity JSONL: 10,251,094 bytes; SHA-256
+  `3d983daa9bf034b049a4584828e198ca397ea9ae3d1c91c8b1356ec5f8efc921`.
 - Relation CSV: 1,182,589 bytes; SHA-256
   `b235f4d4d724c7fe8653dfd06b075b2225cc2d116f3b87d0fda950d47030159a`.
 - Backend receipt SHA-256:
-  `1f0fad93c4bd875b7abfa6548c283704922aa6fe4c986e82eb1df1b293e29a45`.
+  `370c15a36c0950846d8bbd7e8363c51fe9dc8bb433e51c155b3766686b541661`.
 - Bound translation-ledger SHA-256:
-  `30553ced7cbf723efb8a20b77b4a8035a088245f0d8a6bd4e3766b9753824d42`.
+  `5a703ac9ea05efe127a121770b443ed49613c7b671ff1a7b3718153f027d939a`.
 - Replay: `python scripts/generate_random_backend.py --check-only`.
 
 ## Four-page reader checkpoint
@@ -154,6 +156,31 @@ SHA-256 is
 `35ca61902a110eea71ea1a06e0ac566a81b1f27d7dbfac4e4cb006d50220276c`.
 This is not a claim that the 29-page edition is complete.
 
+## Six-page local checkpoint
+
+Core ordinals 1–6 are complete through `random/sample/Variance.html`. The
+reader is 29 files / 1,986,156 bytes; canonical manifest SHA-256
+`d3d2aa5822b4a004536b855d1e08ba72073a4e41c8fbfe5b6932db000c5de1e8`.
+Build-receipt SHA-256 is
+`0afdf82a919d6da686e9c74f002e583d59db218380729be7eaaf8e1c71b982c4`;
+QA-receipt SHA-256 is
+`b296c0f884194354d1fb4281c1f80ad973bcfc835d255a934520a1410a36c0a5`.
+
+Variance preserves 827 source elements in the exact hierarchy, 47 units, 39
+disclosures, 583 delimited TeX spans plus three raw math environments, 64 IDs,
+and three byte-identical raw script/style blocks. Nineteen protected correction
+categories account for 21 raw/TeX repairs; 30 exact href-delta entries account
+for 40 occurrences, including three occurrence-specific source-link repairs.
+The aggregate QA census is 2,694 source elements, 154 units, 112 disclosures,
+1,711 delimited TeX spans, 237 IDs, 162 local references, and 31 fragments.
+
+Two consecutive backend/build/QA check-only replays returned identical hashes.
+Local live rendering produced 586/586 MathJax containers at desktop and mobile,
+with 47 units, 39 disclosures, four complete images, no raw TeX, no console
+warnings/errors, and no page-level overflow. The six-page boundary is ready for
+the authorized public push and anonymous readback; it is not a claim that the
+complete edition or configured C140 course is complete.
+
 ## Rights boundary
 
 The Random landing page identifies CC BY 2.0; `Credits.html` links CC BY 1.0.
@@ -167,12 +194,15 @@ the site-wide notice; they must be cleared, replaced, or linked externally.
 
 ## Known upstream defects (do not silently alter authority)
 
-`ADVERSE_LEDGER.jsonl` runs through `O006-ADV-0039`. CLT repairs include the
+`ADVERSE_LEDGER.jsonl` runs through `O006-ADV-0066`. CLT repairs include the
 zero-origin condition, correlation domain/formula/citation, the rigorous
 characteristic-function proof, continuity notation, dice answer, chi-square
 definition, negative-binomial support/domain/answer mapping, and determinate
 cross-reference, simulator, name, spelling, and punctuation defects.
-Open findings are the VarianceTest link family, the interval `two2` fragment,
+Variance repairs include the sample-size and nondegeneracy conditions,
+covariance formula/index corrections, data-summary recomputations, exercise
+answers, units, navigation, markup, and correlation-limit reasoning. Open
+findings are the VarianceTest link family, the interval `two2` fragment,
 the unavailable ExponentialExperiment companion, and the missing
 `Moments.html#poi` fragment. The ledger also records the rejected first Pages
 deployment and local runtime-closure repair as one non-upstream build incident.
@@ -180,10 +210,11 @@ Authority bytes remain immutable. Do not contact upstream during production.
 
 ## Next work
 
-1. Continue immediately with `random/sample/Variance.html` (core ordinal 6).
-2. Advance contiguously through the remaining 24 source pages, growing the
+1. Publish and anonymously verify the six-page Variance boundary.
+2. Continue immediately with `random/sample/OrderStatistics.html` (core ordinal 7).
+3. Advance contiguously through the remaining 23 source pages, growing the
    same deterministic reader and stable-ID backend.
-3. Keep Penn State reconstruction, the one-page Random completeness donor, and
+4. Keep Penn State reconstruction, the one-page Random completeness donor, and
    original C140 companion in separate component paths/repositories; begin
    them only after this clean checkpoint or in a demonstrably non-overlapping
    path.

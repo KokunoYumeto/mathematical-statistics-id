@@ -130,3 +130,17 @@ replays, publish it immediately. Commit
 `79d6adf164a28ba4ba6c9894397ff8cd4d6286df` deployed successfully; anonymous
 readback matched 28/28 files and live desktop/mobile QA rendered 394/394 CLT
 expressions without page-level overflow. Continue at Variance.
+
+## O006-D012 — publish the Variance boundary
+
+Date: 2026-08-22
+Status: controlling; local gates complete, public transaction pending
+
+Treat the first six contiguous pages through sample variance as a substantial
+instructional and correction boundary. Variance alone contains 827 source
+elements, 47 units, 39 disclosed derivations/answers, and 583 delimited TeX
+spans; its independently recomputed formula, answer, data-summary, domain, and
+reference repairs are exact and declared. The six-page reader and 1,411 bound
+backend entities passed two deterministic replays plus local desktop/mobile
+rendering. Publish immediately, anonymously verify every manifest byte and the
+live reader, then continue at `random/sample/OrderStatistics.html`.
