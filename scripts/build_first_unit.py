@@ -68,6 +68,7 @@ TARGETS = (
     PurePosixPath("random/sample/CLT.html"),
     PurePosixPath("random/sample/Variance.html"),
     PurePosixPath("random/sample/OrderStatistics.html"),
+    PurePosixPath("random/sample/Covariance.html"),
 )
 
 # Screen.css references all of these local assets. Keeping the complete exact set
@@ -91,6 +92,12 @@ SUPPORT = (
     PurePosixPath("random/sample/ContinuousDistribution.png"),
     PurePosixPath("random/sample/Histogram.png"),
     PurePosixPath("random/sample/BoxPlot.png"),
+    PurePosixPath("random/sample/ScatterPlot.png"),
+    PurePosixPath("random/sample/ScatterPlotMeans.png"),
+    PurePosixPath("random/sample/SampleRegression.png"),
+    PurePosixPath("random/sample/SampleRegressionMean.png"),
+    PurePosixPath("random/sample/LinearPredictor.png"),
+    PurePosixPath("random/sample/SampleLinearPredictor.png"),
     PurePosixPath("MathJax/tex-svg.js"),
 )
 
@@ -770,10 +777,146 @@ PROTECTED_MATH_CORRECTIONS += tuple(
     for span_index, old, new, reason in ORDER_STATISTICS_MATH_CORRECTIONS
 )
 
+COVARIANCE_RAW_TEX_CORRECTIONS = (
+    (
+        r"\sum_{i=1}^n [(x_i - m(\bs{x})][y_i - m(\bs{y})]",
+        r"\sum_{i=1}^n [x_i - m(\bs{x})][y_i - m(\bs{y})]",
+        "remove the unmatched opening parenthesis in the centered x factor",
+    ),
+    (
+        r"= \frac{1}{2 n} \sum_{i=1}^n \sum_{j=1}^n [x_i - m(\bs{x}) + m(\bs{x}) - x_j][y_i - m(\bs{y}) + m(\bs{y}) - y_j]",
+        r"= \sum_{i=1}^n \sum_{j=1}^n [x_i - m(\bs{x}) + m(\bs{x}) - x_j][y_i - m(\bs{y}) + m(\bs{y}) - y_j]",
+        "remove the spurious one-over-2n factor from the pairwise-covariance expansion",
+    ),
+    (
+        r"\left([(x_i - m(\bs{x})][y_i - m(\bs{y})]",
+        r"\left([x_i - m(\bs{x})][y_i - m(\bs{y})]",
+        "remove the unmatched opening parenthesis in the expanded pairwise sum",
+    ),
+    (
+        r"\sum 2[y_i - (a + b x_i)] (-1)",
+        r"\sum_{i=1}^n 2[y_i - (a + b x_i)] (-1)",
+        "restore the missing limits on the derivative sum with respect to the intercept",
+    ),
+    (
+        r"\sum 2[y_i - (a + b x_i)](-x_i)",
+        r"\sum_{i=1}^n 2[y_i - (a + b x_i)](-x_i)",
+        "restore the missing limits on the derivative sum with respect to the slope",
+    ),
+)
+
+COVARIANCE_MATH_CORRECTIONS = (
+    (
+        69,
+        r"\[ s(\bs{x}, \bs{y}) = \frac{1}{n - 1} \sum_{i=1}^n x_i \, y_i - \frac{n}{n - 1} m(\bs{x}) m(\bs{y}) = \frac{n}{n - 1} [m(\bs{x y}) - m(\bs{x}) m(\bs{y})] \]",
+        r"\[ s(\bs{x}, \bs{y}) = \frac{1}{n - 1} \sum_{i=1}^n x_i \, y_i - \frac{n}{n - 1} m(\bs{x}) m(\bs{y}) = \frac{n}{n - 1} [m(\bs{x}\bs{y}) - m(\bs{x}) m(\bs{y})] \]",
+        "use the product-vector notation defined immediately before the theorem",
+    ),
+    (74, r"\(\cov(\bs{x}, \bs{y})\)", r"\(s(\bs{x}, \bs{y})\)", "conclude with sample-covariance notation rather than the population operator"),
+    (
+        116,
+        r"\[ \bs{u} = \frac{1}{s(\bs{x})}[\bs{x} - m(\bs{x})], \quad \bs{v} = \frac{1}{s(\bs{y})}[\bs{y} - m(\bs{y})] \]",
+        r"\[ \bs{u} = \frac{1}{s(\bs{x})}[\bs{x} - m(\bs{x})\bs{1}], \quad \bs{v} = \frac{1}{s(\bs{y})}[\bs{y} - m(\bs{y})\bs{1}] \]",
+        "subtract the mean times the all-ones vector rather than a scalar from a vector",
+    ),
+    (
+        242,
+        r"\(r^2(\bs{x}, \bs{y}) \sst(\bs{y}) = s^2(\bs{x}, \bs{y}) \big/ s^2(\bs{x})\)",
+        r"\(r^2(\bs{x}, \bs{y}) \sst(\bs{y}) = (n - 1)s^2(\bs{x}, \bs{y}) \big/ s^2(\bs{x})\)",
+        "restore the factor n-minus-one because SST equals (n-minus-one) times the sample variance",
+    ),
+    (
+        245,
+        r"\[ \ssr(\bs{x}, \bs{y}) = \sum_{i=1}^n [\hat{y}_i - m(\bs{y})]^2 = \frac{s^2(\bs{x}, \bs{y})}{s^2(\bs{x})} \]",
+        r"\[ \ssr(\bs{x}, \bs{y}) = \sum_{i=1}^n [\hat{y}_i - m(\bs{y})]^2 = (n - 1)\frac{s^2(\bs{x}, \bs{y})}{s^2(\bs{x})} \]",
+        "restore the factor n-minus-one in the regression sum of squares",
+    ),
+    (290, r"\(\cor[(M(\bs{X}), M(\bs{Y})] = \rho\)", r"\(\cor[M(\bs{X}), M(\bs{Y})] = \rho\)", "remove the unmatched parenthesis in the sample-means correlation"),
+    (
+        309,
+        r"\[ \cov[(X - \mu)^2 (Y - \nu)^2] = \E[(X - \mu)^2 (Y - \nu)^2] - \E[(X - \mu)^2] \E[(Y - \nu)^2] = \delta_2 - \sigma^2 \tau^2 \]",
+        r"\[ \cov[(X - \mu)^2, (Y - \nu)^2] = \E[(X - \mu)^2 (Y - \nu)^2] - \E[(X - \mu)^2] \E[(Y - \nu)^2] = \delta_2 - \sigma^2 \tau^2 \]",
+        "separate the two covariance arguments with a comma",
+    ),
+    (357, r"\([(X_i - M(\bs{X})][Y_i - M(\bs{Y})]\)", r"\([X_i - M(\bs{X})][Y_i - M(\bs{Y})]\)", "remove the unmatched opening parenthesis in the centered product"),
+    (392, r"\(R(\bs{X}, \bs{Y}) \to \delta / \sigma \tau = \rho\)", r"\(R(\bs{X}, \bs{Y}) \to \delta / (\sigma \tau) = \rho\)", "make the product in the correlation denominator explicit"),
+    (
+        396,
+        r"\[ \var[S(\bs{X}), \bs{Y})] = \frac{1}{4 n^2 (n - 1)^2} \sum_{i=1}^n \sum_{j=1}^n \sum_{k=1}^n \sum_{l=1}^n \cov[(X_i - X_j)(Y_i - Y_j), (X_k - X_l)(Y_k - Y_l)] \]",
+        r"\[ \var[S(\bs{X}, \bs{Y})] = \frac{1}{4 n^2 (n - 1)^2} \sum_{i=1}^n \sum_{j=1}^n \sum_{k=1}^n \sum_{l=1}^n \cov[(X_i - X_j)(Y_i - Y_j), (X_k - X_l)(Y_k - Y_l)] \]",
+        "place both sample vectors inside the sample-covariance statistic",
+    ),
+    (
+        423,
+        r"\(\E\{[Y - L(Y \mid X)]\} = \var(Y)[1 - \cor^2(X, Y)] = r^2 (1 - \rho^2)\)",
+        r"\(\E\{[Y - L(Y \mid X)]^2\} = \var(Y)[1 - \cor^2(X, Y)] = \tau^2 (1 - \rho^2)\)",
+        "square the prediction error and use the declared population standard deviation",
+    ),
+    (473, r"\(m = 45&deg;\)", r"\((45, 100)\)", "give both sample means after the Celsius conversion"),
+    (474, r"\(s = 10&deg;\)", r"\((10, 10)\)", "give both sample standard deviations after the Celsius conversion"),
+    (488, r"\(m = 25.4\)", r"\((25.4, 10.16)\)", "give both sample means after the centimetre conversion"),
+    (489, r"\(s = 5.08\)", r"\((5.08, 2.54)\)", "give both sample standard deviations after the centimetre conversion"),
+    (699, r"\(14/3\)", r"\(21/5\)", "divide the squared-x-deviation total by all ten observations in the row labelled mean"),
+    (700, r"\(16/9\)", r"\(8/5\)", "divide the squared-y-deviation total by all ten observations in the row labelled mean"),
+    (701, r"\(8/3\)", r"\(12/5\)", "divide the cross-deviation total by all ten observations in the row labelled mean"),
+    (704, r"\(96/7\)", r"\(48/35\)", "divide the fitted-deviation-square total by all ten observations in the row labelled mean"),
+    (706, r"\(2/7\)", r"\(8/35\)", "divide the residual-square total by all ten observations in the row labelled mean"),
+    (
+        740,
+        r"\(\left((X_1, Y_1), (X_2, Y_2), \ldots (X_9, Y_9)\right)\)",
+        r"\(\left((X_1, Y_1), (X_2, Y_2), \ldots, (X_9, Y_9)\right)\)",
+        "restore the missing separator in the random-sample sequence",
+    ),
+    (771, r"\(5935/21\,676\,032\)", r"\(5939/21\,676\,032\)", "use the exact symbolic variance of the sample variance for the frozen density"),
+    (782, r"\(r = 0.793\)", r"\(r \approx 0.794\)", "round the frozen M-and-M correlation correctly"),
+    (783, r"\(r^2 = 0.629\)", r"\(r^2 \approx 0.630\)", "round the frozen M-and-M coefficient of determination correctly"),
+    (784, r"\(y = 20.278 + 0.507 x\)", r"\(y \approx 20.278 + 0.507 x\)", "mark the rounded M-and-M regression coefficients as approximate"),
+    (785, r"\(r = -0.849\)", r"\(r \approx -0.850\)", "exclude the aggregate footer from the state-level SAT correlation and round correctly"),
+    (786, r"\(r^2 = 0.721\)", r"\(r^2 \approx 0.722\)", "exclude the aggregate footer from the state-level SAT coefficient of determination"),
+    (787, r"\(y = 1141.5 - 2.1 x\)", r"\(y \approx 1141.854 - 2.094 x\)", "fit the state-level SAT regression without the aggregate footer"),
+    (788, r"\(r = 0.614\)", r"\(r \approx 0.614\)", "mark the rounded all-student SAT correlation as approximate"),
+    (789, r"\(r^2 = 0.377\)", r"\(r^2 \approx 0.377\)", "mark the rounded all-student SAT coefficient of determination as approximate"),
+    (790, r"\(y = 321.5 + 0.3 \, x\)", r"\(y \approx 321.503 + 0.356 \, x\)", "use the exact all-student math-on-verbal SAT regression"),
+)
+
+PROTECTED_MATH_CORRECTIONS += tuple(
+    {
+        "page": "random/sample/Covariance.html",
+        "old": old,
+        "new": new,
+        "replacements": 1,
+        "surface": "raw_tex",
+        "reason": reason,
+    }
+    for old, new, reason in COVARIANCE_RAW_TEX_CORRECTIONS
+)
+
+PROTECTED_MATH_CORRECTIONS += tuple(
+    {
+        "page": "random/sample/Covariance.html",
+        "old": old,
+        "new": new,
+        "span_old": old,
+        "span_new": new,
+        "span_index": span_index,
+        "replacements": 1,
+        "surface": "math_span",
+        "reason": reason,
+    }
+    for span_index, old, new, reason in COVARIANCE_MATH_CORRECTIONS
+)
+
 # Reader-facing language inside TeX \text{...} remains protected mathematics:
 # these exact substitutions localize words while leaving every operator,
 # identifier, delimiter, and formula position unchanged.
 MATH_TEXT_LOCALIZATIONS = (
+    {
+        "page": "random/sample/Covariance.html",
+        "old": r"\text{ as }",
+        "new": r"\text{ ketika }",
+        "replacements": 1,
+        "surface": "math_span",
+    },
     {
         "page": "random/sample/CLT.html",
         "old": r"\text{ as }",

@@ -1,0 +1,1236 @@
+<!DOCTYPE html>
+<html lang="id-ID">
+
+<head>
+	<meta charset="utf-8">
+	<title>Korelasi dan Regresi Sampel</title>
+	<meta name="author" content="Kyle Siegrist">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="keywords" content="probabilitas, statistika, sampel acak, kovarians sampel, korelasi sampel, regresi linear, diagram pencar, penaksir takbias">
+	<link rel="icon" href="../icons/Icon.svg" type="image/svg">
+	<link rel="stylesheet" href="../Screen.css" type="text/css" media="screen">
+	<script src="../Basic.js"></script>
+	<script src="../../MathJax/tex-svg.js" id="MathJax-script" async></script>
+</head>
+
+<body>
+
+<div class="latex">
+	\(\newcommand{\R}{\mathbb{R}}\)
+	\(\newcommand{\N}{\mathbb{N}}\)
+	\(\newcommand{\Z}{\mathbb{Z}}\)
+	\(\newcommand{\E}{\mathbb{E}}\)
+	\(\newcommand{\P}{\mathbb{P}}\)
+	\(\newcommand{\var}{\text{var}}\)
+	\(\newcommand{\sd}{\text{sd}}\)
+	\(\newcommand{\cov}{\text{cov}}\)
+	\(\newcommand{\cor}{\text{cor}}\)
+	\(\newcommand{\mse}{\text{mse}}\)
+	\(\newcommand{\sst}{\text{sst}}\)
+	\(\newcommand{\ssr}{\text{ssr}}\)
+	\(\newcommand{\sse}{\text{sse}}\)
+	\(\newcommand{\se}{\text{se}}\)
+	\(\newcommand{\bs}{\boldsymbol}\)
+</div>
+
+<header>
+	<ol class="map">
+		<li class="parent"><a href="https://www.randomservices.org/random/index.html">Random</a></li>
+		<li class="parent"><a href="index.html">5. Sampel Acak</a></li>
+		<li class="child"><a href="Introduction.html" title="Pendahuluan">1</a></li>
+		<li class="child"><a href="Mean.html" title="Rata-Rata Sampel">2</a></li>
+		<li class="child"><a href="LLN.html" title="Hukum Bilangan Besar">3</a></li>
+		<li class="child"><a href="CLT.html" title="Teorema Limit Pusat">4</a></li>
+		<li class="child"><a href="Variance.html" title="Varians Sampel">5</a></li>
+		<li class="child"><a href="OrderStatistics.html" title="Statistik Terurut">6</a></li>
+		<li class="current">7</li>
+		<li class="child"><a href="https://www.randomservices.org/random/sample/Normal.html" title="Sifat Khusus Sampel Normal">8</a></li>
+		<li class="details"><button type="button" title="Perluas Rincian" onclick="expandDetails(true);"><img src="../icons/Plus.svg" alt="Perluas"></button></li>
+		<li class="details"><button type="button" title="Ciutkan Rincian" onclick="expandDetails(false);"><img src="../icons/Minus.svg" alt="Ciutkan"></button></li>
+	</ol>
+	<h2 id="o006.random.sample.covariance.page">7. Korelasi dan Regresi Sampel</h2>
+</header>
+
+<h3 id="des">Teori Deskriptif</h3>
+
+<p>Ingat kembali model dasar statistika: kita memiliki populasi objek yang menjadi perhatian dan berbagai pengukuran (variabel) yang dilakukan terhadap objek-objek tersebut. Kita memilih objek dari populasi dan mencatat variabel untuk objek-objek dalam sampel; catatan ini menjadi data kita. Pembahasan pertama menggunakan sudut pandang yang murni deskriptif. Artinya, kita tidak mengasumsikan bahwa data dihasilkan oleh suatu distribusi probabilitas yang mendasarinya. Namun, seperti biasa, ingat bahwa data itu sendiri mendefinisikan suatu distribusi probabilitas, yaitu <dfn>distribusi empiris</dfn> yang memberikan probabilitas sama kepada setiap titik data.</p>
+
+<p>Misalkan \(x\) dan \(y\) adalah variabel bernilai riil pada suatu populasi, dan \(\left((x_1, y_1), (x_2, y_2), \ldots, (x_n, y_n)\right)\) adalah sampel teramati berukuran \(n\) dari \((x, y)\). Kita akan menggunakan \(\bs{x} = (x_1, x_2, \ldots, x_n)\) untuk menyatakan sampel dari \(x\), dan \(\bs{y} = (y_1, y_2, \ldots, y_n)\) untuk menyatakan sampel dari \(y\). Pada bagian ini, kita tertarik pada statistik yang menjadi <dfn>ukuran asosiasi</dfn> antara \(\bs{x}\) dan \(\bs{y}\), serta pada pencarian garis (atau kurva lain) yang paling sesuai dengan data.</p>
+
+<p>Ingat bahwa <a href="Mean.html">rata-rata sampel</a> adalah
+\[ m(\bs{x}) = \frac{1}{n} \sum_{i=1}^n x_i, \quad m(\bs{y}) = \frac{1}{n} \sum_{i=1}^n y_i \]
+dan <a href="Variance.html">varians sampel</a> adalah
+\[ s^2(\bs{x}) = \frac{1}{n - 1} \sum_{i=1}^n [x_i - m(\bs{x})]^2, \quad s^2(\bs{y}) = \frac{1}{n - 1} \sum_{i=1}^n [y_i - m(\bs{y})]^2 \]</p>
+
+<h4 id="sct">Diagram Pencar</h4>
+
+<p>Sering kali, langkah pertama dalam <dfn>analisis data eksploratif</dfn> ialah menggambar titik-titik data; gambar ini disebut <dfn>diagram pencar</dfn> dan dapat memberikan gambaran visual tentang hubungan statistik antara variabel-variabel tersebut.</p>
+
+<figure>
+	<figcaption>Diagram pencar</figcaption>
+	<img src="ScatterPlot.png" alt="Diagram pencar">
+</figure>
+ 
+<p>Secara khusus, kita ingin mengetahui apakah kumpulan titik tampak menunjukkan kecenderungan linear atau apakah suatu kurva nonlinear mungkin lebih sesuai dengan kumpulan titik tersebut. Kita tertarik pada sejauh mana satu variabel \(x\) dapat digunakan untuk memprediksi variabel lainnya \(y\).</p>
+
+<h4 id="dfn">Definisi</h4>
+
+<p>Tujuan kita berikutnya ialah mendefinisikan statistik yang mengukur asosiasi antara data \(x\) dan \(y\).</p>
+
+<div class="unit" id="o006.random.sample.covariance.unit.sample-covariance-correlation-definition">
+	<p class="math">Untuk ukuran sampel sedikitnya dua, <dfn>kovarians sampel</dfn> didefinisikan sebagai
+	\[ s(\bs{x}, \bs{y}) = \frac{1}{n - 1} \sum_{i=1}^n [x_i - m(\bs{x})][y_i - m(\bs{y})] \]
+	Dengan mengasumsikan bahwa vektor data tidak konstan sehingga simpangan bakunya positif, <dfn>korelasi sampel</dfn> didefinisikan sebagai
+	\[ r(\bs{x}, \bs{y}) = \frac{s(\bs{x}, \bs{y})}{s(\bs{x}) s(\bs{y})} \]</p>
+</div>
+
+<p>Perhatikan bahwa kovarians sampel merupakan rata-rata hasil kali simpangan data \(x\) dan \(y\) dari rata-ratanya. Karena itu, satuan fisik kovarians sampel adalah hasil kali satuan \( x \) dan \( y \). Korelasi adalah bentuk kovarians yang telah dibakukan. Secara khusus, korelasi tidak berdimensi (tidak memiliki satuan fisik), sebab kovarians pada pembilang dan hasil kali simpangan baku pada penyebut memiliki satuan yang sama (yaitu hasil kali satuan \(x\) dan \(y\)). Perhatikan pula bahwa kovarians dan korelasi memiliki <dfn>tanda</dfn> yang sama: positif, negatif, atau nol. Pada kasus pertama, data \(\bs{x}\) dan \(\bs{y}\) dikatakan <dfn>berkorelasi positif</dfn>; pada kasus kedua, \(\bs{x}\) dan \(\bs{y}\) dikatakan <dfn>berkorelasi negatif</dfn>; dan pada kasus ketiga, \(\bs{x}\) dan \(\bs{y}\) dikatakan <dfn>tidak berkorelasi</dfn>.</p>
+
+<p>Untuk melihat bahwa kovarians sampel merupakan ukuran asosiasi, ingat terlebih dahulu bahwa titik \(\left(m(\bs{x}), m(\bs{y})\right)\) merupakan ukuran pusat data bivariat. Bahkan, jika setiap titik adalah lokasi suatu massa satuan, maka \(\left(m(\bs{x}), m(\bs{y})\right)\) adalah <em>pusat massa</em> sebagaimana didefinisikan dalam fisika. Garis horizontal dan vertikal yang melalui titik pusat ini membagi bidang menjadi empat kuadran. Hasil kali simpangan \([x_i - m(\bs{x})][y_i - m(\bs{y})]\) bernilai positif di kuadran pertama dan ketiga, serta negatif di kuadran kedua dan keempat. Setelah mempelajari regresi linear di <a href="#reg" class="ref"></a>, kita akan memahami dengan jauh lebih mendalam apa yang diukur oleh kovarians.</p>
+
+<figure>
+	<figcaption>Diagram pencar dengan rata-rata</figcaption>
+	<img src="ScatterPlotMeans.png" alt="Diagram pencar dengan rata-rata">
+</figure>
+
+<p>Anda mungkin bertanya-tanya mengapa kita merata-ratakan hasil kali simpangan dengan membagi oleh \(n - 1\), bukan \(n\). Penjelasan utamanya ialah bahwa dalam model probabilitas di <a href="#prb" class="ref"></a>, pilihan ini membuat kovarians sampel menjadi penaksir takbias bagi kovarians distribusi. Pemilihan pembagi ini juga dapat dipahami secara tepat melalui <dfn>derajat kebebasan</dfn>, seperti pada <a href="Variance.html">varians sampel</a>. Kedua vektor data mula-mula memiliki \(2 n\) koordinat. Pemusatan dengan rata-rata \(m(\bs{x})\) dan \(m(\bs{y})\) mengenakan satu kendala jumlah-nol pada setiap vektor, sehingga pasangan vektor berpusat memiliki \(2 n - 2\) derajat kebebasan. Setiap vektor berpusat berada dalam subruang berdimensi \(n - 1\), dan kovarians adalah hasil kali dalam kedua vektor tersebut yang dinormalisasi dengan \(n - 1\); tidak ada pengurangan derajat kebebasan tambahan ketika hasil kali komponennya dihitung. Namun, dari sudut pandang yang murni deskriptif, membagi oleh \(n\) juga masuk akal.</p>
+
+<p>Ingat bahwa terdapat distribusi probabilitas alami yang berkaitan dengan data, yaitu distribusi empiris yang memberikan probabilitas \(\frac{1}{n}\) kepada setiap titik data \((x_i, y_i)\). (Jadi, jika titik-titik ini berbeda, distribusi tersebut adalah <a href="https://www.randomservices.org/random/dist/Discrete.html#uni">distribusi seragam diskret</a> pada data.) Rata-rata sampel tidak lain adalah <a href="https://www.randomservices.org/random/expect/Properties.html">nilai harapan</a> distribusi bivariat ini, dan kecuali suatu faktor konstan (pembagian oleh \(n - 1\), bukan \(n\)), varians sampel tidak lain adalah <a href="https://www.randomservices.org/random/expect/Variance.html">varians</a> distribusi bivariat ini. Demikian pula, kecuali suatu faktor konstan (sekali lagi pembagian oleh \(n - 1\), bukan \(n\)), kovarians sampel adalah <a href="https://www.randomservices.org/random/expect/Covariance.html">kovarians</a> distribusi bivariat dan korelasi sampel adalah korelasi distribusi bivariat. Semua hasil berikut dalam pembahasan statistika deskriptif sebenarnya merupakan kasus khusus dari hasil yang lebih umum untuk distribusi probabilitas.</p>
+
+<h4 id="cov">Sifat-Sifat Kovarians</h4>
+
+<p>Beberapa latihan berikut menetapkan sejumlah sifat penting kovarians sampel. Seperti biasa, simbol tebal menyatakan sampel berukuran tetap \(n\) dari variabel populasi yang bersesuaian (yaitu vektor dengan panjang \(n\)), sedangkan simbol dengan huruf biasa menyatakan bilangan riil. Hasil pertama adalah rumus kovarians sampel yang kadang-kadang lebih baik daripada definisinya untuk keperluan komputasi. Agar hasilnya dapat dinyatakan secara ringkas, misalkan \(\bs{x} \bs{y} = (x_1 \, y_1, x_2 \, y_2, \ldots, x_n \, y_n)\) menyatakan sampel dari variabel hasil kali \(x y\).</p>
+
+<div class="unit" id="cov1">
+	<p class="math">Kovarians sampel dapat dihitung sebagai berikut:
+	\[ s(\bs{x}, \bs{y}) = \frac{1}{n - 1} \sum_{i=1}^n x_i \, y_i - \frac{n}{n - 1} m(\bs{x}) m(\bs{y}) = \frac{n}{n - 1} [m(\bs{x}\bs{y}) - m(\bs{x}) m(\bs{y})] \]</p>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Perhatikan bahwa
+		\begin{align}
+			\sum_{i=1}^n [x_i - m(\bs{x})][y_i - m(\bs{y})] &amp; = \sum_{i=1}^n [x_i y_i - x_i m(\bs{y}) - y_i m(\bs{x}) + m(\bs{x}) m(\bs{y})] \\
+			&amp; = \sum_{i=1}^n x_i y_i - m(\bs{y}) \sum_{i=1}^n x_i - m(\bs{x}) \sum_{i=1}^n y_i + n m(\bs{x}) m(\bs{y}) \\ 
+			&amp; = \sum_{i=1}^n x_i y_i - n m(\bs{y}) m(\bs{x}) - n m(\bs{x}) m(\bs{y}) + n m(\bs{x})m(\bs{y}) \\
+			&amp; = \sum_{i=1}^n x_i y_i - n m(\bs{x}) m(\bs{y})
+		\end{align}</p>
+	</details>
+</div>
+
+<p>Teorema berikut memberikan rumus lain untuk kovarians sampel, yang tidak memerlukan perhitungan statistik perantara.</p>
+
+<div class="unit" id="cov2">
+	<p class="math">Kovarians sampel dapat dihitung sebagai berikut:
+	\[ s(\bs{x}, \bs{y}) = \frac{1}{2 n (n - 1)} \sum_{i=1}^n \sum_{j=1}^n (x_i - x_j)(y_i - y_j) \]</p>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Perhatikan bahwa
+		\begin{align}
+			\sum_{i=1}^n \sum_{j=1}^n (x_i - x_j)(y_i - y_j) &amp; = \sum_{i=1}^n \sum_{j=1}^n [x_i - m(\bs{x}) + m(\bs{x}) - x_j][y_i - m(\bs{y}) + m(\bs{y}) - y_j] \\
+			&amp; = \sum_{i=1}^n \sum_{j=1}^n \left([x_i - m(\bs{x})][y_i - m(\bs{y})] + [x_i - m(\bs{x})][m(\bs{y}) - y_j] + [m(\bs{x}) - x_j][y_i - m(\bs{y})] + [m(\bs{x}) - x_j][m(\bs{y}) - y_j]\right)
+		\end{align}
+		Kita menghitung jumlah-jumlah tersebut suku demi suku. Jumlah pertama adalah
+		\[n \sum_{i=1}^n [x_i - m(\bs{x})][y_i - m(\bs{y})]\]
+		Dua jumlah berikutnya bernilai 0. Jumlah terakhir adalah
+		\[n \sum_{j=1}^n [m(\bs{x}) - x_j][m(\bs{y}) - y_j] = n \sum_{i=1}^n [x_i - m(\bs{x})][y_i - m(\bs{y})]\]
+		Membagi seluruh jumlah dengan \(2 n (n - 1)\) menghasilkan \(s(\bs{x}, \bs{y})\).</p>
+	</details>
+</div>
+
+<p>Seperti tersirat dari namanya, kovarians sampel memperumum varians sampel.</p>
+
+<div class="unit" id="cov3">
+	<p class="math">\(s(\bs{x}, \bs{x}) = s^2(\bs{x})\).</p>
+</div>
+
+<p>Berdasarkan <a href="#cov3" class="ref"></a>, kini kita dapat melihat bahwa rumus komputasi pertama di <a href="#cov1" class="ref"></a> dan rumus komputasi kedua di <a href="#cov2" class="ref"></a> memperumum rumus-rumus komputasi untuk <a href="Variance.html">varians sampel</a>. Jelas bahwa kovarians sampel bersifat <dfn>simetris</dfn>.</p>
+
+<div class="unit" id="cov4">
+	<p class="math">\(s(\bs{x}, \bs{y}) = s(\bs{y}, \bs{x})\).</p>
+</div>
+
+<p>Kovarians sampel bersifat linear dalam argumen pertama ketika argumen kedua ditetapkan.</p>
+
+<div class="unit" id="cov5">
+	<p class="math">Jika \(\bs{x}\), \(\bs{y}\), dan \(\bs{z}\) masing-masing adalah vektor data dari variabel populasi \(x\), \(y\), dan \(z\), serta \(c\) adalah suatu konstanta, maka</p>
+	<ol class="sub">
+		<li>\(s(\bs{x} + \bs{y}, \bs{z}) = s(\bs{x}, \bs{z}) + s(\bs{y}, \bs{z})\)</li>
+		<li>\(s(c \bs{x}, \bs{y}) = c s(\bs{x}, \bs{y})\)</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<ol class="sub">
+			<li>Ingat bahwa \(m(\bs{x} + \bs{y}) = m(\bs{x}) + m(\bs{y})\). Oleh karena itu,
+			\begin{align}
+				s(\bs{x} + \bs{y}, \bs{z}) &amp; = \frac{1}{n - 1} \sum_{i=1}^n [x_i + y_i - m(\bs{x} + \bs{y})][z_i - m(\bs{z})] \\
+				&amp; = \frac{1}{n - 1} \sum_{i=1}^n \left([x_i - m(\bs{x})] + [y_i - m(\bs{y})]\right)[z_i - m(\bs{z})] \\
+				&amp; = \frac{1}{n - 1} \sum_{i=1}^n [x_i - m(\bs{x})][z_i - m(\bs{z})] + \frac{1}{n - 1} \sum_{i=1}^n [y_i - m(\bs{y})][z_i - m(\bs{z})] \\
+				&amp; = s(\bs{x}, \bs{z}) + s(\bs{y}, \bs{z})
+			\end{align}</li>
+			<li>Ingat bahwa \(m(c \bs{x}) = c m(\bs{x})\). Oleh karena itu,
+			\begin{align}
+				s(c \bs{x}, \bs{y}) &amp; = \frac{1}{n - 1} \sum_{i=1}^n [c x_i - m(c \bs{x})][y_i - m(\bs{y})] \\ 
+				&amp; = \frac{1}{n - 1} \sum_{i=1}^n [c x_i - c m(\bs{x})][y_i - m(\bs{y})] = c s(\bs{x}, \bs{y})
+			\end{align}</li>
+		</ol>
+	</details>
+</div>
+
+<p>Karena sifat simetri, kovarians sampel juga linear dalam argumen kedua ketika argumen pertama ditetapkan, sehingga bersifat <dfn>bilinear</dfn>. Bentuk umum sifat bilinear diberikan dalam teorema berikut:</p>
+
+<div class="unit" id="cov6">
+	<p class="math">Misalkan \(\bs{x}_i\) adalah vektor data dari variabel populasi \(x_i\) untuk \(i \in \{1, 2, \ldots, k\}\), dan \(\bs{y}_j\) adalah vektor data dari variabel populasi \(y_j\) untuk \(j \in \{1, 2, \ldots, l\}\). Misalkan pula \(a_1, \, a_2, \ldots, \, a_k\) dan \(b_1, \, b_2, \ldots, b_l\) adalah konstanta. Maka
+	\[ s \left( \sum_{i=1}^k a_i \, \bs{x}_i, \sum_{j = 1}^l b_j \, \bs{y}_j \right) = \sum_{i=1}^k \sum_{j=1}^l a_i \, b_j \, s(\bs{x}_i, \bs{y}_j) \]</p>
+</div>
+
+<p>Suatu kasus khusus dari sifat bilinear memberikan cara yang baik untuk menghitung varians sampel dari suatu jumlah.</p>
+
+<div class="unit" id="cov7">
+	<p class="math">\(s^2(\bs{x} + \bs{y}) = s^2(\bs{x}) + 2 s(\bs{x}, \bs{y}) + s^2(\bs{y})\).</p>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Dari hasil-hasil sebelumnya,
+		\begin{align}
+			s^2(\bs{x} + \bs{y}) &amp; = s(\bs{x} + \bs{y}, \bs{x} + \bs{y}) = s(\bs{x}, \bs{x}) + s(\bs{x}, \bs{y}) + s(\bs{y}, \bs{x}) + s(\bs{y}, \bs{y}) \\
+			&amp; = s^2(\bs{x}) + 2 s(\bs{x}, \bs{y}) + s^2(\bs{y})
+		\end{align}</p>
+	</details>
+</div>
+
+<p>Perumuman hasil ini untuk jumlah tiga vektor atau lebih sepenuhnya langsung: varians sampel dari suatu jumlah adalah jumlah semua kovarians sampel berpasangan. Perhatikan bahwa varians sampel suatu jumlah dapat lebih besar, lebih kecil, atau sama dengan jumlah varians sampelnya, bergantung pada tanda dan besar suku-suku silang kovarians. Secara khusus, jika vektor-vektor tersebut tidak berkorelasi secara berpasangan, varians jumlah sama dengan jumlah variansnya.</p>
+
+<div class="unit" id="cov8">
+	<p class="math">Jika \(\bs{c}\) adalah himpunan data konstan, maka \(s(\bs{x}, \bs{c}) = 0\).</p>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Hasil ini langsung mengikuti definisi. Jika \(c_i = c\) untuk setiap \(i\), maka \(m(\bs{c}) = c\), sehingga \(c_i - m(\bs{c}) = 0\) untuk setiap \(i\).</p>
+	</details>
+</div>
+
+<p>Dengan menggabungkan hasil latihan terakhir dan sifat bilinear di <a href="#cov6" class="ref"></a>, kita melihat bahwa kovarians tidak berubah jika konstanta ditambahkan pada himpunan data. Artinya, jika \(\bs{c}\) dan \(\bs{d}\) adalah vektor konstan, maka \(s(\bs{x}+ \bs{c}, \bs{y} + \bs{d}) = s(\bs{x}, \bs{y})\).</p>
+
+<h4 id="cor">Sifat-Sifat Korelasi</h4>
+
+<p>Beberapa sifat sederhana korelasi diberikan berikut ini. Sebagian besar mudah diperoleh dari sifat kovarians yang bersesuaian. Pertama, ingat bahwa <a href="Variance.html">skor baku</a> dari \(x_i\) dan \(y_i\) masing-masing adalah
+\[ u_i = \frac{x_i - m(\bs{x})}{s(\bs{x})}, \quad v_i = \frac{y_i - m(\bs{y})}{s(\bs{y})} \]
+Skor baku dari suatu himpunan data merupakan besaran tak berdimensi yang memiliki rata-rata 0 dan varians 1.</p>
+
+<div class="unit" id="cor1">
+	<p class="math">Korelasi antara \(\bs{x}\) dan \(\bs{y}\) adalah kovarians skor bakunya \(\bs{u}\) dan \(\bs{v}\). Artinya, \(r(\bs{x}, \bs{y}) = s(\bs{u}, \bs{v})\).</p>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Dalam notasi vektor, dengan simbol 1 tebal menyatakan vektor semua-satu, perhatikan bahwa
+		\[ \bs{u} = \frac{1}{s(\bs{x})}[\bs{x} - m(\bs{x})\bs{1}], \quad \bs{v} = \frac{1}{s(\bs{y})}[\bs{y} - m(\bs{y})\bs{1}] \]
+		Karena itu, hasilnya langsung mengikuti sifat-sifat kovarians:
+		\[ s(\bs{u}, \bs{v}) = \frac{1}{s(\bs{x}) s(\bs{y})} s(\bs{x}, \bs{y}) = r(\bs{x}, \bs{y}) \]</p>
+	</details>
+</div>
+
+<p>Korelasi bersifat simetris.</p>
+
+<div class="unit" id="cor2">
+	<p class="math">\(r(\bs{x}, \bs{y}) = r(\bs{y}, \bs{x})\).</p>
+</div>
+
+<p>Berbeda dari kovarians, korelasi tidak berubah jika salah satu himpunan data dikalikan dengan konstanta positif (ingat bahwa hal ini selalu dapat dipandang sebagai perubahan skala pada variabel yang mendasarinya). Sebaliknya, mengalikan suatu himpunan data dengan konstanta negatif mengubah tanda korelasi.</p>
+
+<div class="unit" id="cor3">
+	<p class="math">Jika \(c \ne 0\) adalah suatu konstanta, maka</p>
+	<ol class="sub">
+		<li>\(r(c \bs{x}, \bs{y}) = r(\bs{x}, \bs{y})\) jika \(c \gt 0\)</li>
+		<li>\(r(c \bs{x}, \bs{y}) = -r(\bs{x}, \bs{y})\) jika \(c \lt 0\)</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Berdasarkan definisi dan sifat penskalaan kovarians di <a href="#cov5" class="ref"></a>,
+		\[ r(c \bs{x}, \bs{y}) = \frac{s(c \bs{x}, \bs{y})}{s(c \bs{x}) s(\bs{y})} = \frac{c s(\bs{x}, \bs{y})}{\left|c\right| s(\bs{x}) s(\bs{y})} = \frac{c}{\left|c\right|} r(\bs{x}, \bs{y}) \]
+		dan tentu saja, \( c / \left|c\right| = 1 \) jika \( c \gt 0 \), serta \( c / \left|c\right| = -1 \) jika \( c \lt 0 \).</p>
+	</details>
+</div>
+
+<p>Seperti kovarians, korelasi tidak berubah ketika konstanta ditambahkan pada himpunan data. Menambahkan konstanta pada suatu himpunan data sering kali bersesuaian dengan <dfn>perubahan lokasi</dfn>.</p>
+
+<div class="unit" id="cor4">
+	<p class="math">Jika \(\bs{c}\) dan \(\bs{d}\) adalah vektor konstan, maka \(r(\bs{x} + \bs{c}, \bs{y} + \bs{d}) = r(\bs{x}, \bs{y})\).</p>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Hasil ini langsung mengikuti sifat kovarians dan simpangan baku yang bersesuaian:
+		\[ r(\bs{x} + \bs{c}, \bs{y} + \bs{d}) = \frac{s(\bs{x} + \bs{c}, \bs{y} + \bs{d})}{s(\bs{x} + \bs{c}) s(\bs{y} + \bs{d})} = \frac{s(\bs{x}, \bs{y})}{s(\bs{x}) s(\bs{y})} = r(\bs{x}, \bs{y}) \]</p>
+	</details>
+</div>
+
+<p>Dua sifat terakhir menegaskan bahwa korelasi merupakan ukuran asosiasi baku yang tidak dipengaruhi oleh perubahan satuan pengukuran. Sebagai contoh, dalam <a href="https://www.randomservices.org/random/data/Challenger.html" class="ancillary">himpunan data Challenger</a> pertama, variabel yang menjadi perhatian adalah suhu pada saat peluncuran (dalam derajat Fahrenheit) dan erosi cincin-O (dalam milimeter). Korelasi antara variabel-variabel ini sangat penting. Jika suhu diukur dalam derajat Celsius dan erosi cincin-O dalam inci, korelasi antara kedua variabel tidak akan berubah.</p>
+
+<p>Sifat korelasi yang terpenting muncul ketika kita mempelajari garis yang paling sesuai dengan data, yaitu topik berikutnya.</p>
+
+<h4 id="reg">Regresi Linear</h4>
+
+<p>Dengan mengasumsikan bahwa varians sampel prediktor positif, kita ingin menemukan garis \(y = a + b x\) yang paling sesuai dengan titik-titik sampel \(\left((x_1, y_1), (x_2, y_2), \ldots, (x_n, y_n)\right)\). Ini merupakan masalah dasar dan penting dalam banyak bidang matematika, bukan hanya statistika. Kita memandang \(x\) sebagai <dfn>variabel prediktor</dfn> dan \(y\) sebagai <dfn>variabel respons</dfn>. Dengan demikian, istilah <em>paling sesuai</em> berarti bahwa kita ingin menemukan garis (yaitu mencari koefisien \(a\) dan \(b\)) yang meminimumkan rata-rata galat kuadrat antara nilai \(y\) aktual dalam data dan nilai \(y\) prediksi:
+\[ \mse(a, b) = \frac{1}{n - 1} \sum_{i=1}^n [y_i - (a + b \, x_i)]^2 \]
+Perhatikan bahwa nilai \((a, b)\) yang meminimumkan akan sama jika fungsinya hanya berupa jumlah galat kuadrat, jika kita merata-ratakan dengan membagi oleh \(n\) alih-alih \(n - 1\), atau jika kita menggunakan akar kuadrat dari fungsi-fungsi tersebut. Tentu saja, <em>nilai minimum</em> fungsi yang sebenarnya akan berbeda jika kita mengubah fungsinya, tetapi sekali lagi, bukan titik \((a, b)\) tempat minimum itu terjadi. Pilihan khusus \(\mse\) sebagai fungsi galat paling sesuai untuk keperluan statistika. Menemukan \((a, b)\) yang meminimumkan \(\mse\) merupakan masalah standar dalam kalkulus.</p>
+
+<div class="unit" id="reg1">
+	<p class="math">Grafik \(\mse\) adalah paraboloid yang membuka ke atas. Fungsi \(\mse\) mencapai minimum ketika
+	\begin{align}
+		b(\bs{x}, \bs{y}) &amp; = \frac{s(\bs{x}, \bs{y})}{s^2(\bs{x})} \\
+		a(\bs{x}, \bs{y}) &amp; = m(\bs{y}) - b(\bs{x}, \bs{y}) m(\bs{x}) = m(\bs{y}) - \frac{s(\bs{x}, \bs{y})}{s^2(\bs{x})}  m(\bs{x})
+	\end{align}</p>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Dari bentuk aljabar \( \mse \), kita dapat melihat bahwa grafiknya adalah paraboloid yang membuka ke atas. Untuk menemukan titik tunggal yang meminimumkan \( \mse \), perhatikan bahwa
+		\begin{align}
+			\frac{\partial}{\partial a}\mse(a, b) &amp; = \frac{1}{n - 1} \sum_{i=1}^n 2[y_i - (a + b x_i)] (-1) = \frac{2}{n - 1} [-\sum_{i=1}^n y_i + n a + b \sum_{i=1}^n x_i ]\\
+			\frac{\partial}{\partial b}\mse(a, b) &amp; = \frac{1}{n - 1} \sum_{i=1}^n 2[y_i - (a + b x_i)](-x_i) = \frac{2}{n - 1} [-\sum_{i=1}^n x_i y_i + a \sum_{i=1}^n x_i + b \sum_{i=1}^n x_i^2]
+		\end{align}
+		Menyelesaikan \( \frac{\partial}{\partial a} \mse(a, b) = 0 \) menghasilkan \( a = m(\bs{y}) - b m(\bs{x}) \). Dengan menyubstitusikannya ke dalam \(\frac{\partial}{\partial b} \mse(a, b) = 0 \) dan menyelesaikan terhadap \( b \), diperoleh
+		\[ b = \frac{n[m(\bs{x} \bs{y}) - m(\bs{x}) m(\bs{y})]}{n[m(\bs{x}^2) - m^2(\bs{x})]} \]
+		Dengan membagi pembilang dan penyebut pada ekspresi terakhir oleh \( n - 1 \) dan menggunakan rumus komputasi di atas, kita memperoleh \( b = s(\bs{x}, \bs{y}) / s^2(\bs{x}) \).</p>
+	</details>
+</div>
+
+<p>Tentu saja, nilai optimal \(a\) dan \(b\) adalah <em>statistik</em>, yaitu fungsi dari data. Dengan demikian, <dfn>garis regresi sampel</dfn> adalah
+\[ y = m(\bs{y}) + \frac{s(\bs{x}, \bs{y})}{s^2(\bs{x})} [x - m(\bs{x})] \]</p>
+
+<figure>
+	<figcaption>Diagram pencar dengan garis regresi</figcaption>
+	<img src="SampleRegression.png" alt="Diagram pencar dengan garis regresi">
+</figure>
+
+<p>Perhatikan bahwa garis regresi melalui titik \(\left(m(\bs{x}), m(\bs{y})\right)\), yaitu pusat sampel titik-titik tersebut.</p>
+
+<figure>
+	<figcaption>Garis regresi melalui pusat</figcaption>
+	<img src="SampleRegressionMean.png" alt="Garis regresi melalui pusat">
+</figure>
+
+<div class="unit" id="reg2">
+	<p class="math">Galat kuadrat rata-rata minimum adalah
+	\[ \mse\left[a(\bs{x}, \bs{y}), b(\bs{x}, \bs{y})\right] = s(\bs{y})^2 \left[1 - r^2(\bs{x}, \bs{y})\right] \]</p>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Hasil ini diperoleh dengan menyubstitusikan \( a(\bs{x}, \bs{y}) \) dan \( b(\bs{x}, \bs{y}) \) ke dalam \( \mse \), lalu menyederhanakannya.</p>
+	</details>
+</div>
+
+<div class="unit" id="reg3">
+	<p class="math">Korelasi dan kovarians sampel memenuhi sifat-sifat berikut.</p>
+	<ol class="sub">
+		<li>\(-1 \le r(\bs{x}, \bs{y}) \le 1\)</li>
+		<li>\(-s(\bs{x}) s(\bs{y}) \le s(\bs{x}, \bs{y}) \le s(\bs{x}) s(\bs{y})\)</li>
+		<li>\(r(\bs{x}, \bs{y}) = -1\) jika dan hanya jika titik-titik sampel terletak pada garis dengan kemiringan negatif.</li>
+		<li>\(r(\bs{x}, \bs{y}) = 1\) jika dan hanya jika titik-titik sampel terletak pada garis dengan kemiringan positif.</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Perhatikan bahwa \( \mse \ge 0 \), sehingga berdasarkan teorema sebelumnya kita harus memiliki \( r^2(\bs{x}, \bs{y}) \le 1 \). Ini ekuivalen dengan bagian (a), yang selanjutnya, berdasarkan definisi korelasi sampel, ekuivalen dengan bagian (b). Untuk bagian (c) dan (d), perhatikan bahwa \( \mse(a, b) = 0 \) jika dan hanya jika \( y_i = a + b x_i \) untuk setiap \( i \), dan bahwa \( b(\bs{x}, \bs{y}) \) memiliki tanda yang sama dengan \( r(\bs{x}, \bs{y}) \).</p>
+	</details>
+</div>
+
+<p>Dengan demikian, kini kita melihat secara lebih mendalam bahwa kovarians dan korelasi sampel mengukur derajat kelinearan titik-titik sampel. Ingat dari pembahasan <a href="Variance.html#err">ukuran pusat dan penyebaran</a> bahwa konstanta \(a\) yang meminimumkan
+\[ \mse(a) = \frac{1}{n - 1} \sum_{i=1}^n (y_i - a)^2 \]
+adalah rata-rata sampel \(m(\bs{y})\), dan nilai minimum galat kuadrat rata-ratanya adalah varians sampel \(s^2(\bs{y})\). Jadi, selisih antara nilai galat kuadrat rata-rata ini dan nilai di <a href="#reg2" class="ref"></a>, yaitu \(s^2(\bs{y}) r^2(\bs{x}, \bs{y})\), adalah pengurangan variabilitas data \(y\) ketika suku linear dalam \(x\) ditambahkan pada prediktor. Pengurangan relatifnya ialah \(r^2(\bs{x}, \bs{y})\), sehingga statistik ini disebut <dfn>koefisien determinasi</dfn> (sampel). Perhatikan bahwa jika vektor data \(\bs{x}\) dan \(\bs{y}\) tidak berkorelasi, maka \(x\) tidak memberikan perbaikan prediksi linear bagi \(y\); garis regresi dalam kasus ini adalah garis horizontal \(y = m(\bs{y})\), dan galat kuadrat rata-ratanya adalah \(s^2(\bs{y})\).</p>
+
+<p>Pemilihan variabel prediktor dan respons itu penting.</p>
+
+<div class="unit" id="reg4">
+	<p class="math">Garis regresi sampel dengan \(x\) sebagai variabel prediktor dan \(y\) sebagai variabel respons tidak sama dengan garis regresi sampel dengan \(y\) sebagai variabel prediktor dan \(x\) sebagai variabel respons, kecuali dalam kasus ekstrem \(r(\bs{x}, \bs{y}) = \pm 1\), ketika semua titik sampel terletak pada satu garis.</p>
+</div>
+
+<h4 id="res">Residu</h4>
+
+<p>Selisih antara nilai \(y\) aktual suatu titik data dan nilai yang diprediksi oleh garis regresi disebut <dfn>residu</dfn> titik data tersebut. Dengan demikian, residu yang bersesuaian dengan \((x_i, y_i)\) adalah \( d_i = y_i - \hat{y}_i \), dengan \( \hat{y}_i \) sebagai nilai garis regresi pada \( x_i \):
+\[ \hat{y}_i =  m(\bs{y}) + \frac{s(\bs{x}, \bs{y})}{s(\bs{x})^2} [x_i - m(\bs{x})] \]
+Perhatikan bahwa nilai prediksi \(\hat{y}_i\) dan residu \(d_i\) adalah <em>statistik</em>, yaitu fungsi dari data \((\bs{x}, \bs{y})\), tetapi kebergantungan ini tidak ditampilkan dalam notasi demi kesederhanaan.</p>
+
+<div class="unit" id="res1">
+	<p class="math">Jumlah residu sama dengan 0: \( \sum_{i=1}^n d_i = 0 \).</p>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Hasil ini mengikuti langsung dari definisi dan menyatakan kembali fakta bahwa garis regresi melalui pusat himpunan data \( \left(m(\bs{x}), m(\bs{y})\right) \).</p>
+	</details>
+</div>
+
+<p>Berbagai plot residu dapat membantu memahami hubungan antara data \(x\) dan \(y\). Beberapa yang paling umum diberikan dalam definisi berikut:</p>
+
+<div class="unit" id="res2">
+	<p class="math">Plot residu<p>
+	<ol class="sub">
+		<li>Plot \((i, d_i)\) untuk \(i \in \{1, 2, \ldots, n\}\), yaitu plot indeks terhadap residu.</li>
+		<li>Plot \((x_i, d_i)\) untuk \(i \in \{1, 2, \ldots, n\}\), yaitu plot nilai \(x\) terhadap residu.</li>
+		<li>Plot \((d_i, y_i)\) untuk \(i \in \{1, 2, \ldots, n\}\), yaitu plot residu terhadap nilai \(y\) aktual.</li>
+		<li>Plot \((d_i, \hat{y}_i)\) untuk \(i \in \{1, 2, \ldots, n\}\), yaitu plot residu terhadap nilai \(y\) prediksi.</li>
+		<li><a href="Mean.html#his">Histogram</a> residu \((d_1, d_2, \ldots, d_n)\).</li>
+	</ol>
+</div>
+
+<h4 id="ssq">Jumlah Kuadrat</h4>
+
+<p>Untuk pembahasan berikutnya, kita akan menafsirkan ulang rumus galat kuadrat rata-rata minimum di <a href="#reg2" class="ref"></a>. Berikut adalah definisi-definisi barunya:</p>
+
+<div class="unit" id="ssq1">
+	<p class="dfn">Jumlah kuadrat</p>
+	<ol class="sub">
+		<li>\(\sst(\bs{y}) = \sum_{i=1}^n [y_i - m(\bs{y})]^2 \) adalah <dfn>jumlah kuadrat total</dfn>.</li>
+		<li>\(\ssr(\bs{x}, \bs{y}) = \sum_{i=1}^n [\hat{y}_i - m(\bs{y})]^2 \) adalah <dfn>jumlah kuadrat regresi</dfn>.</li>
+		<li>\(\sse(\bs{x}, \bs{y}) = \sum_{i=1}^n (y_i - \hat{y}_i)^2\) adalah <dfn>jumlah kuadrat galat</dfn>.</li>
+	</ol>
+</div>
+
+<p>Perhatikan bahwa \(\sst(\bs{y})\) tidak lain adalah \(n - 1\) kali varians \(s^2(\bs{y})\), dan merupakan jumlah kuadrat seluruh simpangan nilai \(y\) dari rata-rata nilai \(y\). Demikian pula, \(\sse(\bs{x}, \bs{y})\) tidak lain adalah \(n - 1\) kali galat kuadrat rata-rata minimum yang diberikan di atas. Tentu saja, \(\sst(\bs{y})\) memiliki \(n - 1\) derajat kebebasan, sedangkan \(\sse(\bs{x}, \bs{y})\) memiliki \(n - 2\) derajat kebebasan dan \(\ssr(\bs{x}, \bs{y})\) memiliki satu derajat kebebasan. Jumlah kuadrat total adalah jumlah dari jumlah kuadrat regresi dan jumlah kuadrat galat:</p>
+
+<div class="unit" id="ssq2">
+	<p class="math">Jumlah-jumlah kuadrat berkaitan sebagai berikut:</p>
+	<ol class="sub">
+		<li>\(\ssr(\bs{x}, \bs{y}) = r^2(\bs{x}, \bs{y}) \sst(\bs{y})\)</li>
+		<li>\(\sst(\bs{y}) = \ssr(\bs{x}, \bs{y}) + \sse(\bs{x}, \bs{y})\)</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Berdasarkan definisi \(\sst\) dan \(r\), kita melihat bahwa \(r^2(\bs{x}, \bs{y}) \sst(\bs{y}) = (n - 1)s^2(\bs{x}, \bs{y}) \big/ s^2(\bs{x})\). Namun, dari persamaan regresi,
+		\[ [\hat{y}_i - m(\bs{y})]^2 = \frac{s^2(\bs{x}, \bs{y})}{s^4(\bs{x})} [x_i - m(\bs{x})]^2\]
+		Menjumlahkan terhadap \(i\) menghasilkan
+		\[ \ssr(\bs{x}, \bs{y}) = \sum_{i=1}^n [\hat{y}_i - m(\bs{y})]^2 = (n - 1)\frac{s^2(\bs{x}, \bs{y})}{s^2(\bs{x})} \]
+		Oleh karena itu, \(\ssr(\bs{x}, \bs{y}) = r^2(\bs{x}, \bs{y}) \sst(\bs{y})\). Terakhir, dengan mengalikan hasil di atas oleh \(n - 1\), diperoleh \(\sse(\bs{x}, \bs{y}) = \sst(\bs{y}) - r^2(\bs{x}, \bs{y}) \sst(\bs{y}) = \sst(\bs{y}) - \ssr(\bs{x}, \bs{y})\).</p>
+	</details>
+</div>
+
+<p>Perhatikan bahwa \(r^2(\bs{x}, \bs{y}) = \ssr(\bs{x}, \bs{y}) \big/ \sst(\bs{y})\), sehingga sekali lagi \(r^2(\bs{x}, \bs{y})\) adalah koefisien determinasi&mdash;proporsi variabilitas dalam data \(y\) yang dijelaskan oleh data \(x\). Kita dapat merata-ratakan \(\sse\) dengan membaginya dengan derajat kebebasannya, lalu mengambil akar kuadrat untuk memperoleh galat baku:</p>
+
+<div class="unit" id="o006.random.sample.covariance.unit.standard-error-of-estimate">
+	<p class="math">Untuk ukuran sampel sedikitnya tiga, <dfn>galat baku taksiran</dfn> adalah
+	\[ \se(\bs{x}, \bs{y}) = \sqrt{\frac{\sse(\bs{x}, \bs{y})}{n - 2}} \]</p>
+</div>
+
+<p>Besaran ini memang merupakan galat <em>baku</em> dalam arti yang sama dengan simpangan <em>baku</em>. Besaran ini merupakan semacam rata-rata galat, tetapi dalam pengertian akar rata-rata kuadrat.</p>
+
+<p>Terakhir, penting diperhatikan bahwa regresi linear merupakan gagasan yang jauh lebih kuat daripada yang mungkin tampak pada awalnya, dan istilah <em>linear</em> sebenarnya dapat sedikit menyesatkan. Dengan menerapkan berbagai transformasi pada \(y\), \(x\), atau keduanya, kita dapat menyesuaikan beragam kurva berparameter dua pada data \(\left((x_1, y_1), (x_2, y_2), \ldots, (x_n, y_n)\right)\). Beberapa transformasi yang paling umum dibahas dalam latihan di <a href="#trn" class="ref"></a>.</p>
+
+<h3 id="prb">Teori Probabilitas</h3>
+
+<p>Kita melanjutkan pembahasan kovarians, korelasi, dan regresi sampel, tetapi sekarang dari sudut pandang yang lebih menarik, yakni dengan memperlakukan variabel-variabel tersebut sebagai variabel acak. Secara khusus, misalkan kita memiliki suatu <a href="https://www.randomservices.org/random/prob/Experiments.html">eksperimen acak</a> dasar, dan \(X\) serta \(Y\) adalah <a href="https://www.randomservices.org/random/prob/Probability.html">variabel acak</a> bernilai riil untuk eksperimen tersebut. Secara ekuivalen, \((X, Y)\) adalah vektor acak yang mengambil nilai di \(\R^2\). Misalkan \(\mu = \E(X)\) dan \(\nu = \E(Y)\) menyatakan <a href="https://www.randomservices.org/random/expect/Properties.html">rata-rata distribusi</a>, \(\sigma^2 = \var(X)\) dan \(\tau^2 = \var(Y)\) menyatakan <a href="https://www.randomservices.org/random/expect/Variance.html">varians distribusi</a>, serta \(\delta = \cov(X, Y)\) menyatakan <a href="https://www.randomservices.org/random/expect/Covariance.html">kovarians distribusi</a>, sehingga korelasi distribusinya adalah
+\[ \rho = \cor(X, Y) = \frac{\cov(X, Y)}{\sd(X) \, \sd(Y)} = \frac{\delta}{\sigma \, \tau} \]
+Kita juga memerlukan beberapa momen berorde lebih tinggi. Misalkan \(\sigma_4 = \E\left[(X - \mu)^4\right]\), \(\tau_4 = \E\left[(Y - \nu)^4\right]\), dan \(\delta_2 = \E\left[(X - \mu)^2 (Y - \nu)^2\right]\). Kita mengasumsikan bahwa semua momen tersebut berhingga dan bahwa kedua simpangan baku distribusi positif.</p>
+
+<p>Sekarang misalkan kita menjalankan eksperimen dasar sebanyak \(n\) kali. Ini menghasilkan eksperimen majemuk dengan urutan vektor acak <a href="https://www.randomservices.org/random/prob/Independence.html">independen</a> \(\left((X_1, Y_1), (X_2, Y_2), \ldots, (X_n, Y_n)\right)\), yang masing-masing memiliki distribusi yang sama dengan \((X, Y)\). Dalam istilah statistika, ini adalah <a href="Introduction.html">sampel acak</a> berukuran \(n\) dari distribusi \((X, Y)\). Statistik yang dibahas dalam <a href="#des">subbagian sebelumnya</a> terdefinisi dengan baik, tetapi kini semuanya merupakan variabel acak. Kita menggunakan notasi yang telah ditetapkan sebelumnya, kecuali bahwa sesuai konvensi biasa, variabel acak dilambangkan dengan huruf kapital. Tentu saja, sifat dan hubungan deterministik yang ditetapkan pada subbagian sebelumnya tetap berlaku. Perhatikan bahwa \(\bs{X} = (X_1, X_2, \ldots, X_n)\) adalah sampel acak berukuran \(n\) dari distribusi \(X\), dan \(\bs{Y} = (Y_1, Y_2, \ldots, Y_n)\) adalah sampel acak berukuran \(n\) dari distribusi \(Y\). Tujuan utama subbagian ini ialah mempelajari hubungan antara berbagai statistik dari \(\bs{X}\) dan \(\bs{Y}\), serta statistik yang merupakan penaksir alami bagi kovarians dan korelasi distribusi.</p>
+
+<h4 id="men">Rata-Rata Sampel</h4>
+
+<p>Ingat bahwa rata-rata sampel adalah
+\[ M(\bs{X}) = \frac{1}{n} \sum_{i=1}^n X_i, \quad M(\bs{Y}) = \frac{1}{n} \sum_{i=1}^n  Y_i \]
+Dari bagian mengenai <a href="LLN.html">hukum bilangan besar</a> dan <a href="CLT.html">teorema limit pusat</a>, kita mengetahui banyak hal tentang distribusi \(M(\bs{X})\) dan \(M(\bs{Y})\) secara <em>individual</em>. Namun, kita perlu mengetahui lebih banyak tentang <em>distribusi bersama</em>.</p>
+
+<div class="unit" id="men1">
+	<p class="math">Kovarians dan korelasi antara \(M(\bs{X})\) dan \(M(\bs{Y})\) adalah</p>
+	<ol class="sub">
+		<li>\(\cov[M(\bs{X}), M(\bs{Y})] = \delta / n\)</li>
+		<li>\(\cor[M(\bs{X}), M(\bs{Y})] = \rho\)</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Bagian (a) mengikuti sifat bilinear operator kovarians:
+		\[ \cov\left(\frac{1}{n} \sum_{i=1}^n X_i, \frac{1}{n} \sum_{j=1}^n Y_j\right) = \frac{1}{n^2}\sum_{i=1}^n \sum_{j=1}^n \cov(X_i, Y_j)\]
+		Karena independensi, suku-suku dalam jumlah terakhir bernilai 0 jika \(i \ne j\). Untuk \(i = j\), suku-sukunya adalah \(\cov(X, Y) = \delta\). Terdapat \(n\) suku demikian, sehingga \(\cov[M(\bs{X}), M(\bs{Y})] = \delta / n\). Untuk bagian (b), ingat bahwa \(\var[M(\bs{X})] = \sigma^2 / n\) dan \(\var[M(\bs{Y})] = \tau^2 / n\). Oleh karena itu,
+		\[ \cor[M(\bs{X}), M(\bs{Y})] = \frac{\delta / n}{(\sigma / \sqrt{n}) (\tau / \sqrt{n})} = \frac{\delta}{\sigma \tau}  = \rho\]</p>
+	</details>
+</div>
+
+<p>Perhatikan bahwa korelasi antara rata-rata sampel sama dengan korelasi distribusi pengambilan sampel yang mendasarinya. Secara khusus, korelasi tersebut tidak bergantung pada ukuran sampel \(n\).</p>
+
+<h4 id="var">Varians Sampel</h4>
+
+<p>Ingat bahwa bentuk khusus <a href="Variance.html#spe">varians sampel</a>, dalam keadaan yang jarang terjadi ketika rata-rata distribusi diketahui, adalah
+\[ W^2(\bs{X}) = \frac{1}{n} \sum_{i=1}^n (X_i - \mu)^2, \quad W^2(\bs{Y}) = \frac{1}{n} \sum_{i=1}^n (Y_i - \nu)^2 \]
+Sekali lagi, kita telah mempelajari statistik ini secara individual, sehingga sekarang penekanan kita adalah pada distribusi bersamanya.</p>
+
+<div class="unit" id="var1">
+	<p class="math">Dengan mengasumsikan bahwa penyebut korelasi positif, kovarians dan korelasi antara \(W^2(\bs{X})\) dan \(W^2(\bs{Y})\) adalah</p>
+	<ol class="sub">
+		<li>\(\cov[W^2(\bs{X}), W^2(\bs{Y})] = (\delta_2 - \sigma^2 \tau^2) \big/ n\)</li>
+		<li>\(\cor[W^2(\bs{X}), W^2(\bs{Y})] = (\delta_2 - \sigma^2 \tau^2) \big/ \sqrt{(\sigma_4 - \sigma^4)(\tau_4 - \tau^4)}\)</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Untuk bagian (a), kita menggunakan sifat bilinear operator kovarians untuk memperoleh
+		\[ \cov[W^2(\bs{X}), W^2(\bs{Y})] = \cov\left(\frac{1}{n} \sum_{i=1}^n (X_i - \mu)^2, \frac{1}{n} \sum_{j=1}^n (Y_j - \nu)^2\right) = \frac{1}{n^2} \sum_{i=1}^n \sum_{j=1}^n \cov[(X_i - \mu)^2, (Y_j - \nu)^2] \]
+		Karena independensi, suku-suku dalam jumlah terakhir bernilai 0 ketika \(i \ne j\). Ketika \(i = j\), suku-sukunya adalah
+		\[ \cov[(X - \mu)^2, (Y - \nu)^2] = \E[(X - \mu)^2 (Y - \nu)^2] - \E[(X - \mu)^2] \E[(Y - \nu)^2] = \delta_2 - \sigma^2 \tau^2 \]
+		Terdapat \(n\) suku demikian, sehingga \(\cov[W^2(\bs{X}), W^2(\bs{Y})] = (\delta_2 - \sigma^2 \tau^2) \big/ n\). Bagian (b) mengikuti bagian (a) dan varians \(W^2(\bs{X})\) serta \(W^2(\bs{Y})\) dari bagian <a href="Variance.html">Varians Sampel</a>.</p>
+	</details>
+</div>
+
+<p>Perhatikan bahwa korelasi tidak bergantung pada ukuran sampel \(n\). Selanjutnya, ingat bahwa bentuk standar varians sampel adalah
+\[ S^2(\bs{X}) = \frac{1}{n - 1} \sum_{i=1}^n [X_i - M(\bs{X})]^2, \quad S^2(\bs{Y}) = \frac{1}{n - 1} \sum_{i=1}^n [Y_i - M(\bs{Y})]^2 \]</p>
+
+<div class="unit" id="var2">
+	<p class="math">Dengan mengasumsikan bahwa penyebut korelasi positif, kovarians dan korelasi varians sampel adalah</p>
+	<ol class="sub">
+		<li>\(\cov[S^2(\bs{X}), S^2(\bs{Y})] = (\delta_2 - \sigma^2 \tau^2) \big/ n + 2 \delta^2 / [n (n - 1)]\)</li>
+		<li>\(\cor[S^2(\bs{X}), S^2(\bs{Y})] = [(n - 1)(\delta_2 - \sigma^2 \tau^2) + 2 \delta^2] \big/ \sqrt{[(n - 1) \sigma_4 - (n - 3) \sigma^4][(n - 1) \tau_4 - (n - 3) \tau^4]}\)</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Ingat bahwa
+		\[ S^2(\bs{X}) = \frac{1}{2 n (n - 1)} \sum_{i=1}^n \sum_{j=1}^n (X_i - X_j)^2, \quad S^2(\bs{Y}) = \frac{1}{2 n (n - 1)} \sum_{k=1}^n \sum_{l=1}^n (Y_k - Y_l)^2 \]
+		Dengan menggunakan sifat bilinear operator kovarians, kita memperoleh
+		\[ \cov[S^2(\bs{X}), S^2(\bs{Y})] = \frac{1}{4 n^2 (n - 1)^2} \sum_{i=1}^n \sum_{j=1}^n \sum_{k=1}^n \sum_{l=1}^n \cov[(X_i - X_j)^2, (Y_k - Y_l)^2] \]
+		Kita menghitung kovarians dalam jumlah ini dengan mempertimbangkan kasus-kasus saling lepas:</p>
+		<ul>
+			<li>\(\cov[(X_i - X_j)^2, (Y_k - Y_l)^2] = 0\) jika \(i = j\) atau \(k = l\), dan terdapat \(2 n^3 - n^2\) suku demikian.</li>
+			<li>\(\cov[(X_i - X_j)^2, (Y_k - Y_l)^2] = 0\) berdasarkan independensi jika \(i, j, k, l\) semuanya berbeda, dan terdapat \(n (n - 1)(n - 2)(n - 3)\) suku demikian.</li>
+			<li>\(\cov[(X_i - X_j)^2, (Y_k - Y_l)^2] = 2 \delta_2 - 2 \sigma^2 \tau^2 + 4 \delta^2\) jika \(i \ne j\) dan \(\{k, l\} = \{i, j\}\), dan terdapat \(2 n (n - 1)\) suku demikian.</li>
+			<li>\(\cov[(X_i - X_j)^2, (Y_k - Y_l)^2] = \delta_2 - \sigma^2 \tau^2\) jika \(i \ne j\), \(k \ne l\), dan \(\#(\{i, j\} \cap \{k, l\}) = 1\), dan terdapat \(4 n (n - 1)(n - 2)\) suku demikian.</li>
+		</ul>
+		<p>Substitusi dan penyederhanaan memberikan hasil pada (a). Untuk (b), kita menggunakan definisi korelasi dan rumus \(\var[S^2(\bs{X})]\) serta \(\var[S^2(\bs{Y})]\) dari bagian <a href="Variance.html#std">varians sampel</a>.</p>
+	</details>
+</div>
+
+<p>Secara asimtotik, korelasi antara varians sampel sama dengan korelasi antara varians sampel khusus yang diberikan di <a href="#var1" class="ref"></a>:
+\[ \cor\left[S^2(\bs{X}), S^2(\bs{Y})\right] \to \frac{\delta_2 - \sigma^2 \tau^2}{\sqrt{(\sigma_4 - \sigma^4)(\tau_4 - \tau^4)}} \text{ ketika } n \to \infty \]</p>
+
+<h4 id="prbcov">Kovarians Sampel</h4>
+
+<p>Pertama, misalkan rata-rata distribusi \(\mu\) dan \(\nu\) diketahui. Seperti disebutkan sebelumnya, asumsi ini hampir selalu tidak realistis, tetapi tetap merupakan titik awal yang baik karena analisisnya sangat sederhana dan hasil yang diperoleh akan berguna di bawah.</p>
+
+<div class="unit" id="o006.random.sample.covariance.unit.special-sample-covariance-definition">
+	<p class="dfn">Penaksir alami bagi kovarians distribusi \(\delta = \cov(X, Y)\) ketika rata-rata distribusi diketahui adalah <dfn>kovarians sampel khusus</dfn>
+	\[ W(\bs{X}, \bs{Y}) = \frac{1}{n} \sum_{i=1}^n (X_i - \mu)(Y_i - \nu) \]</p>
+</div>
+
+<p>Perhatikan bahwa kovarians sampel khusus memperumum varians sampel khusus: \(W(\bs{X}, \bs{X}) = W^2(\bs{X})\).</p>
+
+<div class="unit" id="prbcov1">
+	<p class="math">\(W(\bs{X}, \bs{Y})\) adalah rata-rata dari sampel acak berukuran \(n\) yang berasal dari distribusi \((X - \mu)(Y - \nu)\), dan memenuhi sifat-sifat berikut:</p>
+	<ol class="sub">
+		<li>\(\E[W(\bs{X}, \bs{Y})] = \delta\)</li>
+		<li>\(\var[W(\bs{X}, \bs{Y})] = \frac{1}{n}(\delta_2 - \delta^2)\)</li>
+		<li>\(W(\bs{X}, \bs{Y}) \to \delta\) ketika \(n \to \infty\) dengan probabilitas 1</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Hasil-hasil ini langsung mengikuti bagian mengenai <a href="LLN.html">hukum bilangan besar</a>. Untuk bagian (b), perhatikan bahwa
+		\[ \var[(X - \mu)(Y - \nu)] = \E[(X - \mu)^2 (Y - \nu)^2] - \left(\E[(X - \mu)(Y - \nu)]\right)^2 = \delta_2 - \delta^2 \]</p>
+	</details>
+</div>
+
+<p>Sebagai penaksir \(\delta\), bagian (a) berarti bahwa \(W(\bs{X}, \bs{Y})\) bersifat <dfn>takbias</dfn>, sedangkan bagian (c), bersama dengan varians pada bagian (b), menunjukkan bahwa \(W(\bs{X}, \bs{Y})\) bersifat <dfn>konsisten</dfn>.</p>
+
+<p>Sekarang pertimbangkan asumsi yang lebih realistis bahwa rata-rata distribusi \(\mu\) dan \(\nu\) tidak diketahui. Pendekatan alami dalam kasus ini ialah merata-ratakan \([X_i - M(\bs{X})][Y_i - M(\bs{Y})]\) terhadap \(i \in \{1, 2, \ldots, n\}\). Namun, alih-alih membagi rata-rata kita dengan \(n\), kita harus membaginya dengan konstanta yang menghasilkan penaksir takbias bagi \(\delta\). Seperti ditunjukkan di <a href="#prbcov2" class="ref"></a>, konstanta tersebut adalah \(n - 1\), sehingga diperoleh definisi berikut:</p>
+
+<div class="unit" id="o006.random.sample.covariance.unit.sample-covariance-correlation-definition-probability">
+	<p class="dfn">Untuk ukuran sampel sedikitnya dua, <dfn>kovarians sampel</dfn> standar adalah
+	\[ S(\bs{X}, \bs{Y}) = \frac{1}{n - 1} \sum_{i=1}^n [X_i - M(\bs{X})][Y_i - M(\bs{Y})] \]
+	Jika kedua simpangan baku sampel positif, <dfn>korelasi sampel</dfn> adalah
+	\[ R(\bs{X}, \bs{Y}) = \frac{S(\bs{X}, \bs{Y})}{S(\bs{X}) \, S(\bs{Y})} \]
+	</p>
+</div>
+
+<div class="unit" id="prbcov2">
+	<p class="math">\(\E[S(\bs{X}, \bs{Y})] = \delta\).</p>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Dengan mengembangkan seperti di atas, kita memperoleh
+		\[ \sum_{i=1}^n[X_i - M(\bs{X})][Y_i - M(\bs{Y})] = \sum_{i=1}^n X_i Y_i - n M(\bs{X})M(\bs{Y}) \]
+		Namun, \(\E(X_i Y_i) = \cov(X_i, Y_i) + \E(X_i) \E(Y_i) = \delta + \mu \nu\). Demikian pula, berdasarkan kovarians rata-rata sampel dan sifat takbias, \(\E[M(\bs{X}) M(\bs{Y})] = \cov[M(\bs{X}), M(\bs{Y})] + \E[M(\bs{X})] \E[M(\bs{Y})] = \delta / n + \mu \nu\). Jadi, dengan mengambil nilai harapan pada persamaan yang ditampilkan di atas, diperoleh
+		\[ \E\left(\sum_{i=1}^n [X_i - M(\bs{X})][Y_i - M(\bs{Y})]\right) = n ( \delta + \mu \nu) - n (\delta / n + \mu \nu) = (n - 1) \delta \]</p>
+	</details>
+</div>
+
+<div class="unit" id="prbcov3">
+	<p class="math">\(S(\bs{X}, \bs{Y}) \to \delta\) ketika \(n \to \infty\) dengan probabilitas 1.</p>
+	<details>
+	<summary>Rincian:</summary>
+		<p>Sekali lagi, kita memiliki
+		\[ S(\bs{X}, \bs{Y}) = \frac{n}{n - 1} [M(\bs{X} \bs{Y}) - M(\bs{X}) M(\bs{Y})] \]
+		dengan \(M(\bs{X} \bs{Y})\) menyatakan rata-rata sampel dari sampel hasil kali \((X_1 Y_1, X_2 Y_2, \ldots, X_n Y_n)\). Berdasarkan hukum kuat bilangan besar, \(M(\bs{X}) \to \mu\) ketika \(n \to \infty\), \(M(\bs{Y}) \to \nu\) ketika \(n \to \infty\), dan \(M(\bs{X} \bs{Y}) \to \E(X Y) = \delta + \mu \nu\) ketika \(n \to \infty\), masing-masing dengan probabilitas 1. Jadi, hasilnya diperoleh dengan mengambil limit \(n \to \infty\) pada persamaan yang ditampilkan.</p>
+	</details>
+</div>
+
+<p>Karena korelasi sampel \(R(\bs{X}, \bs{Y})\) merupakan fungsi nonlinear dari kovarians sampel dan simpangan baku sampel, secara umum statistik ini bukan penaksir takbias bagi korelasi distribusi \(\rho\). Dalam kebanyakan kasus, bahkan rata-rata dan varians \(R(\bs{X}, \bs{Y})\) akan sulit dihitung. Meskipun demikian, kita dapat menunjukkan konvergensi korelasi sampel menuju korelasi distribusi.</p>
+
+<div class="unit" id="prbcov4">
+	<p class="math">\(R(\bs{X}, \bs{Y}) \to \rho\) ketika \(n \to \infty\) dengan probabilitas 1.</p>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Hasil ini langsung mengikuti hukum kuat bilangan besar dan hasil-hasil sebelumnya. Dari <a href="#prbcov3" class="ref"></a>, \(S(\bs{X}, \bs{Y}) \to \delta\) ketika \(n \to \infty\), dan dari bagian mengenai <a href="Variance.html">varians sampel</a>, \(S(\bs{X}) \to \sigma\) ketika \(n \to \infty\) serta \(S(\bs{Y}) \to \tau\) ketika \(n \to \infty\), masing-masing dengan probabilitas 1. Karena itu, \(R(\bs{X}, \bs{Y}) \to \delta / (\sigma \tau) = \rho\) ketika \(n \to \infty\) dengan probabilitas 1.</p>
+	</details>
+</div>
+
+<p>Teorema <a href="#prbcov5" class="ref"></a> berikut memberikan rumus bagi varians kovarians sampel, yang tidak boleh disamakan dengan kovarians varians sampel di <a href="#var2" class="ref"></a>!</p>
+
+<div class="unit" id="prbcov5">
+	<p class="math">Varians kovarians sampel adalah
+	\[ \var[S(\bs{X}, \bs{Y})] = \frac{1}{n} \left( \delta_2 + \frac{1}{n - 1} \sigma^2 \, \tau^2 - \frac{n - 2}{n - 1} \delta^2 \right) \]</p>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Pertama, ingat bahwa
+		\[ S(\bs{X}, \bs{Y}) = \frac{1}{2 \, n \, (n - 1)} \sum_{i=1}^n \sum_{j=1}^n (X_i - X_j)(Y_i - Y_j) \]
+		Dengan menggunakan sifat bilinear operator kovarians, kita memperoleh
+		\[ \var[S(\bs{X}, \bs{Y})] = \frac{1}{4 n^2 (n - 1)^2} \sum_{i=1}^n \sum_{j=1}^n \sum_{k=1}^n \sum_{l=1}^n \cov[(X_i - X_j)(Y_i - Y_j), (X_k - X_l)(Y_k - Y_l)] \]
+		Kita menghitung kovarians dalam jumlah ini dengan mempertimbangkan kasus-kasus saling lepas:</p>
+		<ul>
+			<li>\(\cov[(X_i - X_j)(Y_i - Y_j), (X_k - X_l)(Y_k - Y_l)] = 0\) jika \(i = j\) atau \(k = l\), dan terdapat \(2 n^3 - n^2\) suku demikian.</li>
+			<li>\(\cov[(X_i - X_j)(Y_i - Y_j), (X_k - X_l)(Y_k - Y_l)] = 0\) jika \(i, j, k, l\) semuanya berbeda, dan terdapat \(n (n - 1)(n - 2)(n - 3)\) suku demikian.</li>
+			<li>\(\cov[(X_i - X_j)(Y_i - Y_j), (X_k - X_l)(Y_k - Y_l)] = 2 \, \delta_2 + 2 \sigma^2 \tau^2\) jika \(i \ne j\) dan \(\{k, l\} = \{i, j\}\), dan terdapat \(2 n (n - 1)\) suku demikian.</li>
+			<li>\(\cov[(X_i - X_j)(Y_i - Y_j), (X_k - X_l)(Y_k - Y_l)] = \delta_2 - \delta^2\) jika \(i \ne j\), \(k \ne l\), dan \(\#(\{i, j\} \cap \{k, l\}) = 1\), dan terdapat \(4 n (n - 1)(n - 2)\) suku demikian.</li>
+		</ul>
+		<p>Substitusi dan penyederhanaan memberikan hasil tersebut.</p>
+	</details>
+</div>
+
+<p>Tidaklah mengejutkan bahwa varians kovarians sampel standar (ketika kita tidak mengetahui rata-rata distribusi) lebih besar daripada varians kovarians sampel khusus (ketika kita mengetahui rata-rata distribusi).</p>
+
+<div class="unit" id="prbcov6">
+	<p class="math">\(\var[S(\bs{X}, \bs{Y})] \gt \var[W(\bs{X}, \bs{Y})]\).</p>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Dari hasil-hasil di atas dan sedikit aljabar sederhana,
+		\[ \var[S(\bs{X}, \bs{Y})] - \var[W(\bs{X}, \bs{Y})] = \frac{1}{n (n - 1)}(\delta^2 + \sigma^2 \tau^2) \gt 0 \]
+		Namun, perhatikan bahwa selisih tersebut menuju 0 ketika \(n \to \infty\).</p>
+	</details>
+</div>
+
+<div class="unit" id="prbcov7">
+	<p class="math">\(\var[S(\bs{X}, \bs{Y})] \to 0\) ketika \(n \to \infty\), sehingga kovarians sampel merupakan penaksir <dfn>konsisten</dfn> bagi kovarians distribusi.</p>
+</div>
+
+<h4 id="prbreg">Regresi</h4>
+
+<p>Dalam pembahasan pertama di <a href="#des" class="ref"></a>, kita mempelajari regresi dari sudut pandang deterministik dan deskriptif. Hasil yang diperoleh hanya berlaku bagi sampel. Pertanyaan yang secara statistik lebih menarik dan lebih mendalam muncul ketika data berasal dari eksperimen acak dan kita mencoba menarik inferensi tentang distribusi yang mendasarinya dari regresi sampel. Ada dua model yang lazim muncul. Salah satunya adalah model dengan variabel respons acak, tetapi variabel prediktor deterministik. Model lainnya, yang kita bahas di sini, memiliki variabel prediktor dan variabel respons yang keduanya acak, sehingga data membentuk sampel acak dari distribusi bivariat.</p>
+
+<p>Dengan demikian, misalkan kembali kita memiliki vektor acak dasar \((X, Y)\) untuk suatu eksperimen. Ingat bahwa dalam bagian mengenai <a href="https://www.randomservices.org/random/expect/Covariance.html#blp">korelasi dan regresi</a> (distribusi), kita menunjukkan bahwa prediktor linear terbaik bagi \(Y\) jika \(X\) diketahui, dalam arti meminimumkan galat kuadrat rata-rata, adalah variabel acak
+\[ L(Y \mid X) = \E(Y) + \frac{\cov(X, Y)}{\var(X)}[X - \E(X)] = \nu + \frac{\delta}{\sigma^2}(X - \mu) \]
+sehingga <dfn>garis regresi distribusi</dfn> diberikan oleh
+\[ y = L(Y \mid X = x) = \nu + \frac{\delta}{\sigma^2}(x - \mu) \]
+Selain itu, nilai minimum galat kuadrat rata-ratanya adalah \(\E\{[Y - L(Y \mid X)]^2\} = \var(Y)[1 - \cor^2(X, Y)] = \tau^2 (1 - \rho^2)\).</p>
+
+<figure>
+	<figcaption>Garis regresi distribusi</figcaption>
+	<img src="LinearPredictor.png" alt="Grafik prediktor linear">
+</figure>
+
+<p>Tentu saja, dalam penerapan nyata kita hampir tidak mungkin mengetahui parameter distribusi \(\mu\), \(\nu\), \(\sigma^2\), dan \(\delta\). Jika ingin menaksir garis regresi distribusi, pendekatan alami ialah mempertimbangkan sampel acak \(\left((X_1, Y_1), (X_2, Y_2), \ldots, (X_n, Y_n)\right)\) dari distribusi \((X, Y)\), lalu menghitung garis regresi sampel. Tentu saja, hasilnya persis sama dengan pembahasan <a href="#des">di atas</a>, kecuali bahwa semua besaran yang relevan kini merupakan variabel acak.</p>
+
+<div class="unit" id="o006.random.sample.covariance.unit.sample-regression-line-definition">
+	<p class="dfn">Jika varians sampel prediktor positif, garis regresi sampel adalah
+	\[ y = M(\bs{Y}) + \frac{S(\bs{X}, \bs{Y})}{S^2(\bs{X})}[x - M(\bs{X})] \]
+	Galat kuadrat rata-ratanya adalah \(S^2(\bs{Y})[1 - R^2(\bs{X}, \bs{Y})]\), dan koefisien determinasinya adalah \(R^2(\bs{X}, \bs{Y})\).</p>
+</div>
+
+<figure>
+	<figcaption>Garis regresi distribusi dan sampel</figcaption>
+	<img src="SampleLinearPredictor.png" alt="Garis regresi distribusi dan sampel">
+</figure>
+
+<p>Fakta bahwa garis regresi sampel dan galat kuadrat rata-rata sepenuhnya analog dengan garis regresi distribusi dan galat kuadrat rata-rata merupakan hal yang elegan dan meyakinkan secara matematis. Sekali lagi, koefisien garis regresi sampel dapat dipandang sebagai penaksir bagi koefisien yang bersesuaian pada garis regresi distribusi.</p>
+
+<div class="unit" id="prbreg1">
+	<p class="math">Dengan mengasumsikan bahwa varians distribusi prediktor positif, koefisien garis regresi sampel konvergen menuju koefisien garis regresi distribusi dengan probabilitas 1.</p>
+	<ol class="sub">
+		<li>\(\frac{S(\bs{X}, \bs{Y})}{S^2(\bs{X})} \to \frac{\delta}{\sigma^2}\) ketika \(n \to \infty\)</li>
+		<li>\(M(\bs{Y}) - \frac{S(\bs{X}, \bs{Y})}{S^2(\bs{X})} M(\bs{X}) \to \nu - \frac{\delta}{\sigma^2} \mu\) ketika \(n \to \infty\)</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Hasil ini mengikuti hukum kuat bilangan besar dan hasil-hasil sebelumnya. Dengan probabilitas 1, \(S(\bs{X}, \bs{Y}) \to \delta\) ketika \(n \to \infty\), \(S^2(\bs{X}) \to \sigma^2\) ketika \(n \to \infty\), \(M(\bs{X}) \to \mu\) ketika \(n \to \infty\), dan \(M(\bs{Y}) \to \nu\) ketika \(n \to \infty\).</p>
+	</details>
+</div>
+
+<p>Tentu saja, jika hubungan linear antara \(X\) dan \(Y\) tidak kuat sebagaimana diukur oleh korelasi sampel, transformasi pada salah satu atau kedua variabel mungkin membantu. Sekali lagi, beberapa transformasi yang lazim dibahas dalam <a href="#trn">subbagian di bawah</a>.</p>
+
+<h3 id="exe">Latihan</h3>
+
+<h4 id="exp">Sifat Dasar</h4>
+
+<div class="unit" id="exp1">
+	<p class="math">Misalkan \( x \) dan \( y \) adalah variabel populasi, sedangkan \( \bs{x} \) dan \( \bs{y} \) masing-masing merupakan sampel berukuran \( n \) dari \( x \) dan \( y \). Misalkan pula \( m(\bs{x})  = 3 \), \( m(\bs{y}) = -1 \), \( s^2(\bs{x} ) = 4\), \( s^2(\bs{y}) = 9 \), dan \( s(\bs{x}, \bs{y}) = 5 \). Tentukan masing-masing nilai berikut:</p>
+	<ol class="sub">
+		<li>\(r(\bs{x}, \bs{y})\)</li>
+		<li>\( m(2 \bs{x} + 3 \bs{y}) \)</li>
+		<li>\( s^2(2 \bs{x} + 3 \bs{y}) \)</li>
+		<li>\( s(2 \bs{x} + 3 \bs{y} - 1, 4 \bs{x} + 2 \bs{y} - 3)\)</li>
+	</ol>
+</div>
+
+<div class="unit" id="exp2">
+	<p class="math">Misalkan \(x\) adalah suhu (dalam derajat Fahrenheit) dan \(y\) adalah hambatan (dalam ohm) untuk suatu jenis komponen elektronik setelah beroperasi selama 10 jam. Untuk sampel yang terdiri atas 30 komponen, \(m(\bs{x}) = 113\), \(s(\bs{x}) = 18\), \(m(\bs{y}) = 100\), \(s(\bs{y}) = 10\), \(r(\bs{x}, \bs{y}) = 0.6\).</p>
+	<ol class="sub">
+		<li>Klasifikasikan \(x\) dan \(y\) berdasarkan jenis dan tingkat pengukurannya.</li>
+		<li>Tentukan kovarians sampelnya.</li>
+		<li>Tentukan persamaan garis regresinya.</li>
+	</ol>
+	<p>Sekarang misalkan suhu dikonversi ke derajat Celsius (transformasinya adalah \(\frac{5}{9}(x - 32)\)).</p>
+	<ol class="sub" start="4">
+		<li>Tentukan rata-rata sampelnya.</li>
+		<li>Tentukan simpangan baku sampelnya.</li>
+		<li>Tentukan kovarians dan korelasi sampelnya.</li>
+		<li>Tentukan persamaan garis regresinya.</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<ol class="sub">
+			<li>suhu: kontinu, interval; hambatan: kontinu, rasio</li>
+			<li>Untuk bagian (d)–(e), pasangan rata-rata adalah \((45, 100)\), dan pasangan simpangan bakunya \((10, 10)\).</li>
+		</ol>
+	</details>
+</div>
+
+<div class="unit" id="exp3">
+	<p class="math">Misalkan \(x\) adalah panjang dan \(y\) adalah lebar (dalam inci) daun dari suatu jenis tumbuhan. Untuk sampel yang terdiri atas 50 daun, \(m(\bs{x}) = 10\), \(s(\bs{x}) = 2\), \(m(\bs{y}) = 4\), \(s(\bs{y}) = 1\), dan \(r(\bs{x}, \bs{y}) = 0.8\). </p>
+	<ol class="sub">
+		<li>Klasifikasikan \(x\) dan \(y\) berdasarkan jenis dan tingkat pengukurannya.</li>
+		<li>Tentukan kovarians sampelnya.</li>
+		<li>Tentukan persamaan garis regresi dengan \(x\) sebagai variabel prediktor dan \(y\) sebagai variabel respons.</li>
+	</ol>
+	<p>Sekarang misalkan \(x\) dan \(y\) dikonversi ke sentimeter (2,54 sentimeter per inci).</p>
+	<ol class="sub" start="4">
+		<li>Tentukan rata-rata sampelnya.</li>
+		<li>Tentukan simpangan baku sampelnya.</li>
+		<li>Tentukan kovarians dan korelasi sampelnya.</li>
+		<li>Tentukan persamaan garis regresinya.</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<ol class="sub">
+			<li>kontinu, rasio</li>
+			<li>Untuk bagian (d)–(e), pasangan rata-rata adalah \((25.4, 10.16)\), dan pasangan simpangan bakunya \((5.08, 2.54)\).</li>
+		</ol>
+	</details>
+</div>
+
+<h4 id="spe">Latihan Diagram Pencar</h4>
+
+<div class="unit" id="spe1">
+	<p class="app">Klik di berbagai tempat pada <a href="https://www.randomservices.org/random/apps/Scatterplot.html" class="ancillary">diagram pencar interaktif</a>, lalu amati perubahan rata-rata, simpangan baku, korelasi, dan garis regresinya.</p>
+</div>
+
+<div class="unit" id="spe2">
+	<p class="app">Klik pada <a href="https://www.randomservices.org/random/apps/Scatterplot.html" class="ancillary">diagram pencar interaktif</a> untuk menentukan 20 titik, lalu cobalah sedekat mungkin dengan masing-masing korelasi sampel berikut:</p>
+	<ol class="sub">
+		<li>\(0\)</li>
+		<li>\(0.5\)</li>
+		<li>\(-0.5\)</li>
+		<li>\(0.7\)</li>
+		<li>\(-0.7\)</li>
+		<li>\(0.9\)</li>
+		<li>\(-0.9\).</li>
+	</ol>
+</div>
+
+<div class="unit" id="spe3">
+	<p class="app">Klik pada <a href="https://www.randomservices.org/random/apps/Scatterplot.html" class="ancillary">diagram pencar interaktif</a> untuk menentukan 20 titik. Cobalah menghasilkan diagram pencar dengan garis regresi yang memiliki</p>
+	<ol class="sub">
+		<li>kemiringan 1, intersep 1</li>
+		<li>kemiringan 3, intersep 0</li>
+		<li>kemiringan \(-2\), intersep 1</li>
+	</ol>
+</div>
+
+<h4 id="sim">Latihan Simulasi</h4>
+
+<div class="unit" id="sim1">
+	<p class="app">Jalankan <a href="https://www.randomservices.org/random/apps/BivariateUniform.html" class="ancillary">eksperimen seragam bivariat</a> sebanyak 2.000 kali untuk masing-masing kasus berikut. Bandingkan rata-rata sampel dengan rata-rata distribusi, simpangan baku sampel dengan simpangan baku distribusi, korelasi sampel dengan korelasi distribusi, dan garis regresi sampel dengan garis regresi distribusi.</p>
+	<ol class="sub">
+		<li>Distribusi seragam pada persegi.</li>
+		<li>Distribusi seragam pada segitiga.</li>
+		<li>Distribusi seragam pada lingkaran.</li>
+	</ol>
+</div>
+
+<div class="unit" id="sim2">
+	<p class="app">Jalankan <a href="https://www.randomservices.org/random/apps/BivariateNormal.html" class="ancillary">eksperimen normal bivariat</a> sebanyak 2.000 kali untuk berbagai nilai simpangan baku dan korelasi distribusi. Bandingkan rata-rata sampel dengan rata-rata distribusi, simpangan baku sampel dengan simpangan baku distribusi, korelasi sampel dengan korelasi distribusi, dan garis regresi sampel dengan garis regresi distribusi.</p>
+</div>
+
+<h4 id="trn">Transformasi</h4>
+
+<div class="unit" id="trn1">
+	<p class="math">Perhatikan fungsi \(y = a + b x^2\).</p>
+	<ol class="sub">
+		<li>Gambarkan sketsa grafiknya untuk beberapa nilai \(a\) dan \(b\) yang representatif.</li>
+		<li>Perhatikan bahwa \(y\) merupakan fungsi linear dari \(x^2\), dengan intersep \(a\) dan kemiringan \(b\). </li>
+		<li>Oleh karena itu, untuk menyesuaikan kurva ini dengan data sampel, cukup terapkan prosedur regresi standar pada data dari variabel \(x^2\) dan \(y\).</li>
+	</ol>
+</div>
+
+<div class="unit" id="trn2">
+	<p class="math">Perhatikan fungsi \(y = \frac{1}{a + b x}\) pada domain tempat penyebut tidak nol.</p>
+	<ol class="sub">
+		<li>Gambarkan sketsa grafiknya untuk beberapa nilai \(a\) dan \(b\) yang representatif.</li>
+		<li>Perhatikan bahwa \(\frac{1}{y}\) merupakan fungsi linear dari \(x\), dengan intersep \(a\) dan kemiringan \(b\).</li>
+		<li>Oleh karena itu, untuk menyesuaikan kurva ini dengan data sampel kita, cukup terapkan prosedur regresi standar pada data dari variabel \(x\) dan \(\frac{1}{y}\).</li>
+	</ol>
+</div>
+
+<div class="unit" id="trn3">
+	<p class="math">Perhatikan fungsi \(y = \frac{x}{a + b x}\) pada domain tempat prediktor dan penyebut tidak nol.</p>
+	<ol class="sub">
+		<li>Gambarkan sketsa grafiknya untuk beberapa nilai \(a\) dan \(b\) yang representatif.</li>
+		<li>Perhatikan bahwa \(\frac{1}{y}\) merupakan fungsi linear dari \(\frac{1}{x}\), dengan intersep \(b\) dan kemiringan \(a\).</li> 
+		<li>Oleh karena itu, untuk menyesuaikan kurva ini dengan data sampel, cukup terapkan prosedur regresi standar pada data dari variabel \(\frac{1}{x}\) dan \(\frac{1}{y}\).</li>
+		<li>Perhatikan kembali bahwa penamaan intersep dan kemiringan terbalik dibandingkan dengan rumus standar.</li>
+	</ol>
+</div>
+
+<div class="unit" id="trn4">
+	<p class="math">Perhatikan fungsi \(y = a e^{b x}\) dengan parameter skala positif.</p>
+	<ol class="sub">
+		<li>Gambarkan sketsa grafiknya untuk beberapa nilai \(a\) dan \(b\) yang representatif.</li>
+		<li>Perhatikan bahwa \(\ln(y)\) merupakan fungsi linear dari \(x\), dengan intersep \(\ln(a)\) dan kemiringan \(b\).</li>
+		<li>Oleh karena itu, untuk menyesuaikan kurva ini dengan data sampel, cukup terapkan prosedur regresi standar pada data dari variabel \(x\) dan \(\ln(y)\).</li> 
+		<li>Setelah menyelesaikan persamaan untuk intersep \(\ln(a)\), peroleh kembali statistik \(a = e^{\ln(a)}\).</li>
+	</ol>
+</div>
+
+<div class="unit" id="trn5">
+	<p class="math">Perhatikan fungsi \(y = a x^b\) dengan parameter skala dan nilai prediktor positif.</p>
+	<ol class="sub">
+		<li>Gambarkan sketsa grafiknya untuk beberapa nilai \(a\) dan \(b\) yang representatif.</li>
+		<li>Perhatikan bahwa \(\ln(y)\) merupakan fungsi linear dari \(\ln(x)\), dengan intersep \(\ln(a)\) dan kemiringan \(b\).</li> 
+		<li>Oleh karena itu, untuk menyesuaikan kurva ini dengan data sampel, cukup terapkan prosedur regresi standar pada data dari variabel \(\ln(x)\) dan \(\ln(y)\).</li>
+		<li>Setelah menyelesaikan persamaan untuk intersep \(\ln(a)\), peroleh kembali statistik \(a = e^{\ln(a)}\).</li>
+	</ol>
+</div>
+
+<h4 id="cmp">Latihan Komputasi</h4>
+
+<p>Semua paket perangkat lunak statistika dapat melakukan analisis regresi. Selain garis regresi, sebagian besar paket biasanya melaporkan koefisien determinasi \(r^2(\bs{x}, \bs{y})\), jumlah kuadrat \(\sst(\bs{y})\), \(\ssr(\bs{x}, \bs{y})\), \(\sse(\bs{x}, \bs{y})\), dan galat baku taksiran \(\se(\bs{x}, \bs{y})\). Sebagian besar paket juga dapat menggambar diagram pencar dengan garis regresi yang ditumpangkan, serta berbagai grafik residu yang dibahas di atas. Banyak paket juga menyediakan cara mudah untuk mentransformasi data. Ketika variabel respons ditransformasi, prosedur tersebut meminimumkan galat kuadrat pada skala hasil transformasi, bukan pada skala respons asli. Karena itu, hampir tidak ada alasan untuk melakukan perhitungan dengan tangan, kecuali pada himpunan data kecil untuk menguasai definisi dan rumus. Dalam soal berikut, lakukan perhitungan dan gambarkan grafik dengan bantuan teknologi seminimal mungkin.</p>
+
+<div class="unit" id="cmp1">
+	<p class="math">Misalkan \(x\) adalah jumlah mata kuliah matematika yang telah diselesaikan dan \(y\) adalah jumlah mata kuliah sains yang telah diselesaikan oleh seorang mahasiswa di Enormous State University (ESU). Sampel yang terdiri atas 10 mahasiswa ESU memberikan data berikut: \(\left((1, 1), (3, 3), (6, 4), (2, 1), (8, 5), (2, 2), (4, 3), (6, 4), (4, 3), (4, 4)\right)\).</p>
+	<ol class="sub">
+		<li>Klasifikasikan \(x\) dan \(y\) berdasarkan jenis dan tingkat pengukurannya.</li>
+		<li>Gambarkan sketsa diagram pencarnya.</li>
+	</ol>
+	<p>Susun tabel dengan baris-baris yang bersesuaian dengan kasus dan kolom-kolom yang bersesuaian dengan \(i\), \(x_i\), \(y_i\),  \(x_i - m(\bs{x})\), \(y_i - m(\bs{y})\), \([x_i - m(\bs{x})]^2\), \([y_i - m(\bs{y})]^2\), \([x_i - m(\bs{x})][y_i - m(\bs{y})]\), \(\hat{y}_i\), \(\hat{y}_i - m(\bs{y})\), \([\hat{y}_i - m(\bs{y})]^2\), \(y_i - \hat{y}_i\), dan \((y_i - \hat{y}_i)^2\). Tambahkan baris di bagian bawah untuk jumlah dan rata-rata. Gunakan aritmetika eksak.</p>
+	<ol class="sub" start="3">
+		<li>Lengkapi delapan kolom pertama.</li>
+		<li>Tentukan korelasi sampel dan koefisien determinasinya.</li>
+		<li>Tentukan persamaan regresi sampelnya.</li>
+		<li>Lengkapi tabel tersebut.</li>
+		<li>Verifikasi identitas-identitas untuk jumlah kuadrat.</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<table>
+			<thead>
+				<tr>
+					<th>\(i\)</th>
+					<th>\(x_i\)</th>
+					<th>\(y_i\)</th>
+					<th>\(x_i - m(\bs{x})\)</th>
+					<th>\(y_i - m(\bs{y})\)</th>
+					<th>\([x_i - m(\bs{x})]^2\)</th>
+					<th>\([y_i - m(\bs{y})]^2\)</th>
+					<th>\([x_i - m(\bs{x})][y_i - m(\bs{y})]\)</th>
+					<th>\(\hat{y}_i\)</th>
+					<th>\(\hat{y}_i - m(\bs{y})\)</th>
+					<th>\([\hat{y}_i - m(\bs{y})]^2\)</th>
+					<th>\(y_i - \hat{y}_i\)</th>
+					<th>\((y_i - \hat{y}_i)^2\)</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>1</td>
+					<td>1</td>
+					<td>1</td>
+					<td>\(-3\)</td>
+					<td>\(-2\)</td>
+					<td>\(9\)</td>
+					<td>\(4\)</td>
+					<td>\(6\)</td>
+					<td>\(9/7\)</td>
+					<td>\(-12/7\)</td>
+					<td>\(144/49\)</td>
+					<td>\(-2/7\)</td>
+					<td>\(4/49\)</td>
+				</tr>
+				<tr>
+					<td>2</td>
+					<td>3</td>
+					<td>3</td>
+					<td>\(-1\)</td>
+					<td>\(0\)</td>
+					<td>\(1\)</td>
+					<td>\(0\)</td>
+					<td>\(0\)</td>
+					<td>\(17/7\)</td>
+					<td>\(-4/7\)</td>
+					<td>\(16/49\)</td>
+					<td>\(4/7\)</td>
+					<td>\(16/49\)</td>
+				</tr>
+				<tr>
+					<td>3</td>
+					<td>6</td>
+					<td>4</td>
+					<td>\(2\)</td>
+					<td>\(1\)</td>
+					<td>\(4\)</td>
+					<td>\(1\)</td>
+					<td>\(2\)</td>
+					<td>\(29/7\)</td>
+					<td>\(8/7\)</td>
+					<td>\(64/49\)</td>
+					<td>\(-1/7\)</td>
+					<td>\(1/49\)</td>
+				</tr>
+				<tr>
+					<td>4</td>
+					<td>2</td>
+					<td>1</td>
+					<td>\(-2\)</td>
+					<td>\(-2\)</td>
+					<td>\(4\)</td>
+					<td>\(4\)</td>
+					<td>\(4\)</td>
+					<td>\(13/7\)</td>
+					<td>\(-8/7\)</td>
+					<td>\(64/49\)</td>
+					<td>\(-6/7\)</td>
+					<td>\(36/49\)</td>
+				</tr>
+				<tr>
+					<td>5</td>
+					<td>8</td>
+					<td>5</td>
+					<td>\(4\)</td>
+					<td>\(2\)</td>
+					<td>\(16\)</td>
+					<td>\(4\)</td>
+					<td>\(8\)</td>
+					<td>\(37/7\)</td>
+					<td>\(16/7\)</td>
+					<td>\(256/49\)</td>
+					<td>\(-2/7\)</td>
+					<td>\(4/49\)</td>
+				</tr>
+				<tr>
+					<td>6</td>
+					<td>2</td>
+					<td>2</td>
+					<td>\(-2\)</td>
+					<td>\(-1\)</td>
+					<td>\(4\)</td>
+					<td>\(1\)</td>
+					<td>\(2\)</td>
+					<td>\(13/7\)</td>
+					<td>\(-8/7\)</td>
+					<td>\(64/49\)</td>
+					<td>\(1/7\)</td>
+					<td>\(1/49\)</td>
+				</tr>
+				<tr>
+					<td>7</td>
+					<td>4</td>
+					<td>3</td>
+					<td>\(0\)</td>
+					<td>\(0\)</td>
+					<td>\(0\)</td>
+					<td>\(0\)</td>
+					<td>\(0\)</td>
+					<td>\(3\)</td>
+					<td>\(0\)</td>
+					<td>\(0\)</td>
+					<td>\(0\)</td>
+					<td>\(0\)</td>
+				</tr>
+				<tr>
+					<td>8</td>
+					<td>6</td>
+					<td>4</td>
+					<td>\(2\)</td>
+					<td>\(1\)</td>
+					<td>\(4\)</td>
+					<td>\(1\)</td>
+					<td>\(2\)</td>
+					<td>\(29/7\)</td>
+					<td>\(8/7\)</td>
+					<td>\(64/49\)</td>
+					<td>\(-1/7\)</td>
+					<td>\(1/49\)</td>
+				</tr>
+				<tr>
+					<td>9</td>
+					<td>4</td>
+					<td>3</td>
+					<td>\(0\)</td>
+					<td>\(0\)</td>
+					<td>\(0\)</td>
+					<td>\(0\)</td>
+					<td>\(0\)</td>
+					<td>\(3\)</td>
+					<td>\(0\)</td>
+					<td>\(0\)</td>
+					<td>\(0\)</td>
+					<td>\(0\)</td>
+				</tr>
+				<tr>
+					<td>10</td>
+					<td>4</td>
+					<td>4</td>
+					<td>\(0\)</td>
+					<td>\(1\)</td>
+					<td>\(0\)</td>
+					<td>\(1\)</td>
+					<td>\(0\)</td>
+					<td>\(3\)</td>
+					<td>\(0\)</td>
+					<td>\(0\)</td>
+					<td>\(1\)</td>
+					<td>\(1\)</td>
+				</tr>
+			</tbody>
+			<tfoot>
+				<tr>
+					<th>Jumlah</th>
+					<td>\(40\)</td>
+					<td>\(30\)</td>
+					<td>\(0\)</td>
+					<td>\(0\)</td>
+					<td>\(42\)</td>
+					<td>\(16\)</td>
+					<td>\(24\)</td>
+					<td>\(30\)</td>
+					<td>\(0\)</td>
+					<td>\(96/7\)</td>
+					<td>\(0\)</td>
+					<td>\(16/7\)</td>
+				</tr>
+				<tr>
+					<th>Rata-rata</th>
+					<td>\(4\)</td>
+					<td>\(3\)</td>
+					<td>\(0\)</td>
+					<td>\(0\)</td>
+					<td>\(21/5\)</td>
+					<td>\(8/5\)</td>
+					<td>\(12/5\)</td>
+					<td>\(3\)</td>
+					<td>\(0\)</td>
+					<td>\(48/35\)</td>
+					<td>\(0\)</td>
+					<td>\(8/35\)</td>
+				</tr>
+			</tfoot>
+		</table>
+		<ol class="sub">
+			<li>diskret, rasio</li>
+			<li value="4">\(r = 2 \sqrt{3/14} \approx 0.926\), \(r^2 = 6/7\)</li>
+			<li>\(y = 3 + \frac{4}{7}(x - 4)\)</li>
+			<li value="7">\(16 = 96/7 + 16/7\)</li>
+		</ol>
+	</details>
+</div>
+
+<p>Dua latihan berikut akan membantu Anda meninjau kembali beberapa topik probabilitas pada bagian ini.</p>
+
+<div class="unit" id="cmp2">
+	<p class="math">Misalkan \((X, Y)\) memiliki distribusi kontinu dengan fungsi kerapatan probabilitas \(f(x, y) = 15 x^2 y\) untuk \(0 \le x \le y \le 1\). Tentukan masing-masing nilai berikut:</p>
+	<ol class="sub">
+		<li>\(\mu = \E(X)\) dan \(\nu = \E(Y)\)</li>
+		<li>\(\sigma^2 = \var(X)\) dan \(\tau^2 = \var(Y)\)</li>
+		<li>\(\sigma_3 = \E\left[(X - \mu)^3\right]\) dan \(\tau_3 = \E\left[(Y - \nu)^3\right]\)</li>
+		<li>\(\sigma_4 = \E\left[(X - \mu)^4\right]\) dan \(\tau_4 = \E\left[(Y - \nu)^4\right]\)</li>
+		<li>\(\delta = \cov(X, Y)\), \(\rho = \cor(X, Y)\), dan \(\delta_2 = \E\left[(X - \mu)^2 (Y - \nu)^2\right]\)</li>
+		<li>\(L(Y \mid X)\) dan \(L(X \mid Y)\)</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<ol class="sub">
+			<li>\(5/8\), \(5/6\)</li>
+			<li>\(17/448\), \(5/252\)</li>
+			<li>\(-5/1792\), \(-5/1512\)</li>
+			<li>\(305/86\,016\), \(5/3024\)</li>
+			<li>\(5/336\), \(\sqrt{5/17}\), \(1/768\)</li>
+			<li>\(L(Y \mid X) = \frac{10}{17} + \frac{20}{51} X\), \(L(X \mid Y) = \frac{3}{4} Y\)</li>
+		</ol>
+	</details>
+</div>
+
+<div class="unit" id="cmp3">
+	<p class="math">Sekarang misalkan \(\left((X_1, Y_1), (X_2, Y_2), \ldots, (X_9, Y_9)\right)\) adalah sampel acak berukuran \(9\) dari distribusi pada latihan sebelumnya. Tentukan masing-masing nilai berikut:</p>
+	<ol class="sub">
+		<li>\(\E[M(\bs{X})]\) dan \(\var[M(\bs{X})]\)</li>
+		<li>\(\E[M(\bs{Y})]\) dan \(\var[M(\bs{Y})]\)</li>
+		<li>\(\cov[M(\bs{X}), M(\bs{Y})]\) dan \(\cor[M(\bs{X}), M(\bs{Y})]\)</li>
+		<li>\(\E[W^2(\bs{X})]\) dan \(\var[W^2(\bs{X})]\)</li>
+		<li>\(\E[W^2(\bs{Y})]\) dan \(\var[W^2(\bs{Y})]\)</li>
+		<li>\(\E[S^2(\bs{X})]\) dan \(\var[S^2(\bs{X})]\)</li>
+		<li>\(\E[S^2(\bs{Y})]\) dan \(\var[S^2(\bs{Y})]\)</li>
+		<li>\(\E[W(\bs{X}, \bs{Y})]\) dan \(\var[W(\bs{X}, \bs{Y})]\)</li>
+		<li>\(\E[S(\bs{X}, \bs{Y})]\) dan \(\var[S(\bs{X}, \bs{Y})]\)</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<ol class="sub">
+			<li>\(5/8\), \(17/4032\)</li>
+			<li>\(5/6\), \(5/2268\)</li>
+			<li>\(5/3024\), \(\sqrt{5/17}\)</li>
+			<li>\(17/448\), \(317/1\,354\,752\)</li>
+			<li>\(5/252\), \(5/35\,721\)</li>
+			<li>\(17/448\), \(5939/21\,676\,032\)</li>
+			<li>\(5/252\), \(115/762\,048\)</li>
+			<li>\(5/336\), \(61/508\,032\)</li>
+			<li>\(5/336\), \(181/1\,354\,752\)</li>
+		</ol>
+	</details>
+</div>
+
+<h4 id="Data">Latihan Analisis Data</h4>
+
+<p>Gunakan perangkat lunak statistika untuk soal-soal berikut.</p>
+
+<div class="unit" id="o006.random.sample.covariance.unit.data-pearson-heights">
+	<p class="stat">Perhatikan variabel-variabel tinggi badan dalam <a href="https://www.randomservices.org/random/data/Pearson.html" class="ancillary">data tinggi badan Pearson</a>.</p>
+	<ol class="sub">
+		<li>Klasifikasikan variabel-variabel tersebut berdasarkan jenis dan tingkat pengukurannya.</li>
+		<li>Hitung koefisien korelasi dan koefisien determinasi.</li>
+		<li>Hitung garis regresi kuadrat terkecil dengan tinggi badan ayah sebagai variabel prediktor dan tinggi badan anak laki-laki sebagai variabel respons.</li>
+		<li>Gambarkan diagram pencar dan garis regresi pada satu grafik.</li>
+		<li>Prediksikan tinggi badan seorang anak laki-laki yang ayahnya bertinggi 68 inci.</li>
+		<li>Hitung garis regresi jika tinggi badan dikonversi ke sentimeter (1 inci sama dengan 2,54 sentimeter).</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<ol class="sub">
+			<li>Kontinu, rasio</li>
+			<li>\(r = 0.501\), \(r^2 = 0.251\)</li>
+			<li>\(y = 33.893 + 0.514 x\)</li>
+			<li value="5">68.85</li>
+			<li>\(y = 86.088 + 0.514 x\)</li>
+		</ol>
+	</details>
+</div>
+
+<div class="unit" id="o006.random.sample.covariance.unit.data-fisher-iris">
+	<p class="stat">Perhatikan variabel panjang daun mahkota, lebar daun mahkota, dan spesies dalam <a href="https://www.randomservices.org/random/data/Iris.html" class="ancillary">data iris Fisher</a>.</p>
+	<ol class="sub">
+		<li>Klasifikasikan variabel-variabel tersebut berdasarkan jenis dan tingkat pengukurannya.</li>
+		<li>Hitung korelasi antara panjang dan lebar daun mahkota.</li>
+		<li>Hitung korelasi antara panjang dan lebar daun mahkota untuk setiap spesies.</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<ol class="sub">
+			<li>Spesies: diskret, nominal; panjang dan lebar daun mahkota: kontinu, rasio</li>
+			<li>0.9559</li>
+			<li>Setosa: 0.3316, Virginica: 0.3496, Versicolor: 0.6162</li>
+		</ol>
+	</details>
+</div>
+
+<div class="unit" id="o006.random.sample.covariance.unit.data-mm">
+	<p class="stat">Perhatikan variabel jumlah permen dan berat bersih dalam <a href="https://www.randomservices.org/random/data/MM.html" class="ancillary">data M&amp;M</a>.</p>
+
+	<ol class="sub">
+		<li>Klasifikasikan variabel-variabel tersebut berdasarkan jenis dan tingkat pengukurannya.</li>
+		<li>Hitung koefisien korelasi dan koefisien determinasi.</li>
+		<li>Hitung garis regresi kuadrat terkecil dengan jumlah permen sebagai variabel prediktor dan berat bersih sebagai variabel respons.</li>
+		<li>Gambarkan diagram pencar dan garis regresi pada bagian (c) dalam satu grafik.</li>
+		<li>Prediksikan berat bersih sekantong M&amp;M yang berisi 56 permen.</li>
+		<li>Secara naif, kita mungkin mengharapkan korelasi yang jauh lebih kuat antara jumlah permen dan berat bersih sekantong M&amp;M. Apa saja sumber variabilitas lain dalam berat bersih?</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<ol class="sub">
+			<li>Jumlah permen: diskret, rasio; berat bersih: kontinu, rasio</li>
+			<li>\(r \approx 0.794\), \(r^2 \approx 0.630\)</li>
+			<li>\(y \approx 20.278 + 0.507 x\)</li>
+			<li value="5">48.657</li>
+			<li>Variabilitas berat masing-masing permen.</li>
+		</ol>
+	</details>
+</div>
+
+
+<div class="unit" id="o006.random.sample.covariance.unit.data-sat-by-state">
+	<p class="stat">Perhatikan variabel tingkat partisipasi dan skor total SAT dalam <a href="https://www.randomservices.org/random/data/SAT.html" class="ancillary">data SAT menurut negara bagian</a>.</p>
+	<ol class="sub">
+		<li>Klasifikasikan variabel-variabel tersebut berdasarkan jenis dan tingkat pengukurannya.</li>
+		<li>Hitung koefisien korelasi dan koefisien determinasi.</li>
+		<li>Hitung garis regresi kuadrat terkecil dengan tingkat partisipasi sebagai variabel prediktor dan skor SAT sebagai variabel respons.</li>
+		<li>Gambarkan diagram pencar dan garis regresi pada satu grafik.</li>
+		<li>Berikan salah satu kemungkinan penjelasan untuk korelasi negatif tersebut.</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<ol class="sub">
+			<li>Tingkat partisipasi: kontinu, rasio. Skor SAT barangkali dapat dianggap diskret ataupun kontinu, tetapi hanya berada pada tingkat pengukuran interval karena skor terkecil yang mungkin adalah 400 (masing-masing 200 pada bagian verbal dan matematika).</li>
+			<li>\(r \approx -0.850\), \(r^2 \approx 0.722\)</li>
+			<li>\(y \approx 1141.854 - 2.094 x\)</li>
+			<li value="5">Negara bagian dengan tingkat partisipasi rendah mungkin merupakan negara bagian yang menjadikan SAT sebagai pilihan. Dalam hal itu, peserta tesnya adalah siswa berprestasi lebih tinggi yang berencana melanjutkan ke perguruan tinggi. Sebaliknya, negara bagian dengan tingkat partisipasi tinggi mungkin merupakan negara bagian yang mewajibkan SAT. Dalam hal itu, semua siswa mengikuti tes, termasuk siswa berprestasi lebih rendah yang tidak berencana melanjutkan ke perguruan tinggi.</li>
+		</ol>
+	</details>
+</div>
+
+<div class="unit" id="o006.random.sample.covariance.unit.data-sat-by-year">
+	<p class="stat">Perhatikan skor SAT verbal dan matematika (untuk seluruh siswa) dalam <a href="https://www.randomservices.org/random/data/SAT.html" class="ancillary">data SAT menurut tahun</a>.</p>
+	<ol class="sub">
+		<li>Klasifikasikan variabel-variabel tersebut berdasarkan jenis dan tingkat pengukurannya.</li>
+		<li>Hitung koefisien korelasi dan koefisien determinasi.</li>
+		<li>Hitung garis regresi kuadrat terkecil dengan skor verbal sebagai variabel prediktor dan skor matematika sebagai variabel respons.</li>
+		<li>Gambarkan diagram pencar dan garis regresi pada satu grafik.</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<ol class="sub">
+			<li>Mungkin kontinu, tetapi hanya berada pada tingkat pengukuran interval karena skor terkecil yang mungkin pada setiap bagian adalah 200.</li>
+			<li>\(r \approx 0.614\), \(r^2 \approx 0.377\)</li>
+			<li>\(y \approx 321.503 + 0.356 \, x\)</li>
+		</ol>
+	</details>
+</div>
+
+<div class="unit" id="o006.random.sample.covariance.unit.data-challenger">
+	<p class="stat">Perhatikan variabel suhu dan erosi dalam himpunan data pertama pada <a href="https://www.randomservices.org/random/data/Challenger.html" class="ancillary">data Challenger</a>.</p>
+	<ol class="sub">
+		<li>Klasifikasikan variabel-variabel tersebut berdasarkan jenis dan tingkat pengukurannya.</li>
+		<li>Hitung koefisien korelasi dan koefisien determinasi.</li>
+		<li>Hitung garis regresi kuadrat terkecil.</li>
+		<li>Gambarkan diagram pencar dan garis regresi pada satu grafik.</li>
+		<li>Prediksikan erosi cincin-O pada suhu 31&deg; F.</li>
+		<li>Apakah prediksi pada bagian (e) bermakna? Jelaskan.</li>
+		<li>Tentukan garis regresi jika suhu dikonversi ke derajat Celsius. Ingat bahwa konversinya adalah \(\frac{5}{9}(x - 32)\).</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<ol class="sub">
+			<li>suhu: kontinu, interval; erosi: kontinu, rasio</li>
+			<li>\(r = -0.555\), \(r^2 = 0.308\)</li>
+			<li>\(y = 106.8 - 1.414 x\)</li>
+			<li value="5">62.9.</li>
+			<li>Taksiran ini bermasalah karena 31&deg; berada jauh di luar rentang data sampel.</li>
+			<li>\(y = 61.54 - 2.545 x\)</li>
+		</ol>
+	</details>
+</div>
+
+<footer>
+	<ol class="map">
+		<li class="parent"><a href="https://www.randomservices.org/random/index.html">Random</a></li>
+		<li class="parent"><a href="index.html">5. Sampel Acak</a></li>
+		<li class="child"><a href="Introduction.html" title="Pendahuluan">1</a></li>
+		<li class="child"><a href="Mean.html" title="Rata-Rata Sampel">2</a></li>
+		<li class="child"><a href="LLN.html" title="Hukum Bilangan Besar">3</a></li>
+		<li class="child"><a href="CLT.html" title="Teorema Limit Pusat">4</a></li>
+		<li class="child"><a href="Variance.html" title="Varians Sampel">5</a></li>
+		<li class="child"><a href="OrderStatistics.html" title="Statistik Terurut">6</a></li>
+		<li class="current">7</li>
+		<li class="child"><a href="https://www.randomservices.org/random/sample/Normal.html" title="Sifat Khusus Sampel Normal">8</a></li>
+		<li class="details"><button type="button" title="Perluas Rincian" onclick="expandDetails(true);"><img src="../icons/Plus.svg" alt="Perluas"></button></li>
+		<li class="details"><button type="button" title="Ciutkan Rincian" onclick="expandDetails(false);"><img src="../icons/Minus.svg" alt="Ciutkan"></button></li>
+	</ol>
+	<ul class="map">
+		<li class="sister"><a href="https://www.randomservices.org/random/apps/index.html" class="ancillary">Aplikasi</a></li>
+		<li class="sister"><a href="https://www.randomservices.org/random/data/index.html" class="ancillary">Himpunan Data</a></li>
+		<li class="child"><a href="https://www.randomservices.org/random/biographies/index.html" class="ancillary"> Biografi</a></li>
+	</ul>
+	<section class="edition-notice" data-o006-edition-notice="v1">
+		<p><strong>Pemberitahuan edisi.</strong> Terjemahan Bahasa Indonesia ini mengadaptasi <a href="https://www.randomservices.org/random/">Random: Probabilitas, Statistika Matematis, dan Proses Stokastik</a> karya Kyle Siegrist. Perubahan pada halaman ini mencakup penerjemahan, penambahan ID stabil, pengalihan tautan inti yang telah diterjemahkan ke edisi lokal, pengalihan tautan inti yang belum diterjemahkan ke sumber resmi, pengubahan tautan pelengkap menjadi tautan HTTPS resmi, serta koreksi terbatas terhadap kekeliruan matematis dan data yang dicatat dalam daftar koreksi edisi.</p>
+		<p>Situs asal menyatakan <a href="https://creativecommons.org/licenses/by/2.0/">CC BY 2.0</a>, sedangkan halaman <a href="https://www.randomservices.org/random/Credits.html">Kredit</a> menautkan <a href="https://creativecommons.org/licenses/by/1.0/">CC BY 1.0</a>; perbedaan ini dipertahankan. Edisi independen ini tidak didukung maupun disahkan oleh Kyle Siegrist atau Random Services. Tautan ke aplikasi, data, dan biografi pihak ketiga tidak menyatakan hak untuk mendistribusikan ulang materi tersebut.</p>
+	</section>
+</footer>
+
+<script>getReferences();</script>
+
+</body>
+</html>
