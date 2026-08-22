@@ -1,0 +1,43 @@
+{
+  "schema": "o006.random.pdf-visual-qa-receipt.v1",
+  "result": "pass",
+  "pdf": {
+    "path": "output/pdf/statistika-matematis-id-reader.pdf",
+    "bytes": 73828250,
+    "sha256": "0b6dfa8384eec9a73cb8a489fd2e47c9052eaf33a899b04a21641a8300d3b5af",
+    "physical_pages": 173,
+    "page_size_points": [
+      595.276,
+      841.89
+    ],
+    "encrypted": false,
+    "outline_entries": 220,
+    "external_uri_annotations": 963,
+    "local_or_loopback_uri_annotations": 0,
+    "minimum_extracted_text_characters": 356
+  },
+  "poppler_render": {
+    "png_pages": 173,
+    "raster_dimensions": [
+      596,
+      842
+    ],
+    "edge_clipping_candidates": 0,
+    "minimum_ink_ratio": 0.02655071816863014,
+    "median_ink_ratio": 0.08008457013502526,
+    "maximum_ink_ratio": 0.9949325670742399
+  },
+  "manual_visual_review": {
+    "contact_sheets": 9,
+    "all_173_pages_reviewed_in_contact_sheets": true,
+    "full_resolution_spot_checks": [
+      1,
+      2,
+      100,
+      160,
+      173
+    ],
+    "observed_defects": 0,
+    "known_limit": "The consolidated PDF is not tagged after deterministic merge; the offline HTML reader remains the accessibility-first surface."
+  }
+}

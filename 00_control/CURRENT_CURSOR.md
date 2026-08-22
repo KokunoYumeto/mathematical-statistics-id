@@ -6,73 +6,49 @@
 - Authority manifest SHA-256:
   `d36e0f8bf9fa44a38a7504f9688a08af6787d88ede99298316a3e022b6f799f5`
 - Ordered core: the `core_paths` array in
-  `authority/SOURCE_FREEZE_RECEIPT.json`
-- Last completed source page: `random/point/Likelihood.html` (core ordinal 13 of 29)
-- Next contiguous source page: `random/point/Bayes.html` (core ordinal 14).
-- Latest reader: 13 translated pages; 43 files; 2,415,553 bytes; manifest
-  SHA-256 `eac39713ed320b88ba61170e7dbdd2f08104a0bea7e0ffc5d8ac2c8b0816e9a8`
-- Latest deterministic QA receipt SHA-256:
-  `ad45412cee740debc42cc952014c7ae67bfaa772d10504f6574d811ffff418b3`
-- Publication transaction: commit
-  `1806863320c1c0859e04a2d93773adbb8d4ae377`, workflow `32557204624`, job
-  `96993176639`, deployment `6034057446`, and deployment status `17154596564`
-  succeeded. All 39 Pages files / 2,244,344 bytes matched anonymously
-  immediately after deployment. GitHub then suspended the publishing account;
-  repository, raw commit, and Pages currently return 404. Public live-browser
-  QA could not be completed after withdrawal. Sanitized evidence:
-  `PUBLICATION_RECEIPT_2026-08-22_NINE_PAGE.json`; SHA-256
-  `4d7b0e510724c6e9d7cda858441e8526d7896e8983a28c238ed4d5d72b9efa36`.
-- Ten-page local checkpoint: `CHECKPOINT_2026-08-22_TEN_PAGE.md` (5,323 bytes;
-  SHA-256 `96a63189ca27fa8f50cdfe9a146fdc434913dea6813983fa088d34df453bbadb`),
-  preserved in local commit `16384bdf1e9c3b00c82815f32c7bc5e11f923034`.
-  Its backend, build, and QA each passed two byte-identical check-only replays. A fresh live
-  browser pass is deferred because the in-app browser was unavailable. The
-  one-shot 2026-08-22T09:14:35+02:00 GitHub check again returned the explicit
-  suspended-account response; no credential was retried.
-- Eleven-page local checkpoint:
-  `CHECKPOINT_2026-08-22_ELEVEN_PAGE.md`; ordinal 11 preserves the exact
-  380-element hierarchy and 432 TeX spans, binds 2,931 translated backend
-  entities, passes two deterministic backend/build/QA replays, and passes new
-  live desktop/mobile centered reflow checks with all 432 MathJax containers,
-  no page-level overflow, and functional 15/15 disclosure controls. The exact
-  content commit is `d3da33e76d1f44ce77681e2588204296e3415b07` (tree
-  `e8de31f98d918f8bf394bebd3527751da6cf0f46`). The single bounded push at
-  2026-08-22T17:02:32.3706667+02:00 returned GitHub's explicit
-  account-suspended HTTP 403 response; no credential was read or retried.
-- Twelve-page local checkpoint:
-  `CHECKPOINT_2026-08-22_TWELVE_PAGE.md`; ordinal 12 preserves the exact
-  440-element hierarchy and 649 TeX spans, binds 3,243 translated backend
-  entities, passes two deterministic backend/build/QA replays, and passes fresh
-  live desktop/mobile centered reflow checks with all 652 MathJax containers,
-  no page-level overflow, and functional 29/29 disclosure controls. Boundary
-  content commit is `f226ea31ea5a786bfdb95158462487eb2f8c7b47` (tree
-  `4c964912663bdd985984210d09e10bc15fccf374`). The one bounded push at
-  2026-08-22T18:13:08.3417299+02:00 returned GitHub's explicit suspended-account
-  HTTP 403 response; no credential was read or retried.
-- Thirteen-page preservation checkpoint:
-  `CHECKPOINT_2026-08-22_THIRTEEN_PAGE.md`; ordinal 13 preserves the exact
-  397-element hierarchy and 589 TeX spans, binds 3,521 translated backend
-  entities, passes two deterministic backend/build/QA replays, and passes live
-  desktop/mobile centered reflow checks with all 592 MathJax containers, four
-  complete images, no page-level overflow, and functional 22/22 disclosure
-  controls. GitHub is not retried while its support ticket is pending.
-  Authenticated Zenodo deduplication found no matching record among 228 owned
-  depositions, and the single in-progress version was published as record
-  `22059764`, concept record `22059763`, DOI
-  `10.5281/zenodo.22059764`, version `2026.08.22.13`. Its five public files /
-  2,647,370 bytes match the local packages by metadata size, Zenodo MD5, and
-  independently recomputed SHA-256. A post-publication authenticated audit
-  finds exactly this one matching submitted record and no duplicate matching
-  draft. Sanitized evidence is
-  `ZENODO_PUBLICATION_RECEIPT_2026-08-22_THIRTEEN_PAGE.json`; 3,618 bytes;
-  SHA-256 `478e7ab515dfd9e08913b5c130731446a582520f198b5b6c981bf91559be9139`.
-  The exact boundary is preserved in local content commit
-  `26b214f89b7d8a403cb57b19876e51f524db4645`, tree
-  `739f0c1a3ce0b29ef3b49dfa5153cb968d23ab6a`; it was not pushed while the
-  GitHub account is suspended.
+  `authority/SOURCE_FREEZE_RECEIPT.json`.
+- Last completed source page: `random/point/Bayes.html` (core ordinal 14 of
+  29); target SHA-256
+  `d292d76240f67b06e4ba2140a0cb95dcc9d674644158131a047a7f23ec755ca8`.
+- Next contiguous source page: `random/point/Unbiased.html` (core ordinal 15);
+  authority 28,635 bytes, SHA-256
+  `0d9765c5c7b5b8a54b29fc45c3a435d20e2a9200e027609658345087dedcd531`.
+- Latest HTML reader: 14 translated pages; 44 files; 2,471,964 bytes;
+  manifest SHA-256
+  `7f00470344a634c3cffe0eb3893690a10784f0894baca9a3fb1bc68418d5dae2`.
+- Latest deterministic HTML QA receipt SHA-256:
+  `70c23cd031da831b2470e5f7b46beaeef9af499451b4096f7fd16a2123ef93a8`.
+- Backend: 6,567 entities / 9,035 relations; 3,777 translated bindings;
+  receipt SHA-256
+  `ee7f0e7e0b4d2bc57df3ed4c62da3baa089b9191663b3d5cd257c3fb94620179`.
+- Reader-first PDF: 173 A4 pages / 73,828,250 bytes; SHA-256
+  `0b6dfa8384eec9a73cb8a489fd2e47c9052eaf33a899b04a21641a8300d3b5af`.
+  Its corrected document map follows the frozen Covariance-then-Normal order;
+  all 173 pages were rerendered and visually reviewed. PDF receipt SHA-256:
+  `f61556e31c1c875b1a21b32d1c5dca94dd4dd37efd1a274042590c9f2410d1aa`;
+  visual-QA receipt SHA-256:
+  `6d4fc0ef3ce02647af4bd2bb93725e8008a3b09f4e5d1d711e5b0fb251731bd2`.
+- Exact local checkpoint:
+  `CHECKPOINT_2026-08-22_FOURTEEN_PAGE.md` and
+  `LIVE_BROWSER_QA_2026-08-22_FOURTEEN_PAGE.json`.
+- GitHub account and repository access are restored. Before this checkpoint's
+  release, public `main`/Pages remains at the nine-page commit
+  `1806863320c1c0859e04a2d93773adbb8d4ae377`; local history is a
+  fast-forward descendant with no divergence. Publish the explicit-path
+  fourteen-page checkpoint, wait for Pages, and anonymously verify bytes.
+- Zenodo lineage is concept `22059763` / concept DOI
+  `10.5281/zenodo.22059763`; current immutable v13 is record `22059764` / DOI
+  `10.5281/zenodo.22059764`. Create v14 only through the existing record's
+  `newversion` action, replace inherited v13 files in the new draft, publish,
+  and anonymously read every byte back.
+- Figshare article `33314784` is a public CC0 metadata pointer with no files.
+  Both license inventories lack Other/custom/mixed rights. Do not upload the
+  mixed-rights reader under CC0 or a false CC BY 4.0 license; update the same
+  pointer to the v14 Zenodo DOI after publication.
 
-Resume by reading this file, `CURRENT_STATE.md`, the freeze receipt, and the
-last row of `TRANSLATION_LEDGER.csv`. Continue with
-`random/point/Bayes.html`. Do not retry GitHub while the support ticket is
-pending, restart source
-selection, or repeat the completed pages.
+Resume by reading this file, `CURRENT_STATE.md`, the freeze receipt, the final
+row of `TRANSLATION_LEDGER.csv`, and the fourteen-page checkpoint. Finish the
+current GitHub/Zenodo/Figshare-pointer release transaction, record anonymous
+readback receipts, and then continue with ordinal 15
+`random/point/Unbiased.html`. Do not restart source selection, duplicate a DOI
+lineage, contact upstream, or repeat completed pages.

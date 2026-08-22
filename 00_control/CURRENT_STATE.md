@@ -5,8 +5,8 @@ Updated: 2026-08-22
 ## Status
 
 Edition source admitted; exact authority and component-rights freezes complete; the
-first thirteen contiguous Indonesian pages and the full 29-page machine backend
-are locally verified. Every entity on those thirteen pages is now bound to its target
+first fourteen contiguous Indonesian pages and the full 29-page machine backend
+are locally verified. Every entity on those fourteen pages is now bound to its target
 path, locale, byte count, and SHA-256. The repository was public before the
 publishing account was suspended; the repaired
 three- and four-page Pages checkpoints remain historical evidence. The
@@ -54,8 +54,8 @@ byte-identical deterministic replays, and live desktop/mobile rendering. All
 592 rendered MathJax containers fit the centered page-filling reader; all 22
 disclosures open and close; four images are complete; and no raw TeX,
 page-level overflow, uncontained wide surface, or console warning/error remains.
-Zenodo is now the active public preservation route while GitHub support reviews
-the VPN-triggered account suspension. The 13-page checkpoint is published as
+Zenodo preserved the work while GitHub support reviewed the VPN-triggered
+account suspension. The 13-page checkpoint is published as
 Zenodo version DOI `10.5281/zenodo.22059764` under concept DOI
 `10.5281/zenodo.22059763`. Its five public files / 2,647,370 bytes match the
 local packages by size, MD5, and SHA-256; a post-publication lineage audit finds
@@ -64,7 +64,19 @@ Local content commit `26b214f89b7d8a403cb57b19876e51f524db4645`, tree
 `739f0c1a3ce0b29ef3b49dfa5153cb968d23ab6a`, preserves the exact boundary
 without attempting a GitHub push.
 
-Ordinal 14, `random/point/Bayes.html`, is the next contiguous production
+The fourteen-page boundary completes `random/point/Bayes.html`. It passed
+independent language, mathematics, and topology audits, exact 352-element
+topology, 625 delimited TeX spans and eight raw `align` environments,
+backend/build/QA, two byte-identical deterministic replays, and fresh
+desktop/mobile rendering. All 633 MathJax containers fit the centered,
+page-filling reader; all 23 disclosures open and close; no raw TeX, missing
+image, page overflow, uncontained wide surface, or console warning/error
+remains. The corrected reader-first PDF is 173 A4 pages. All pages were
+rerendered and reviewed after correcting its initial Covariance/Normal order
+swap. GitHub access is restored; publication and anonymous readback of this
+fourteen-page boundary are the immediate release transaction.
+
+Ordinal 15, `random/point/Unbiased.html`, is the next contiguous production
 page. Do not skip to the separate Penn State component or repeat completed
 Random pages.
 
@@ -135,8 +147,8 @@ entities and 9,035 relations. It contains 29 documents, 366 sections, 760
 structural units, 451 disclosures, 2,891 math-text containers, 24 figures, 236
 assets, and 1,810 internal links. The source-grounded exercise rule designates
 260 units and leaves 500 undesignated; its exact basis is 123 both, 95
-exercise-section only, 42 native `app`/`stat` only, and 500 neither. All 3,521
-entities on ordinals 1–13 carry verified id-ID bindings; 3,046 later entities
+  exercise-section only, 42 native `app`/`stat` only, and 500 neither. All 3,777
+entities on ordinals 1–14 carry verified id-ID bindings; 2,790 later entities
 carry explicit untranslated/null locale fields.
 
 - Entity JSONL: 10,459,457 bytes; SHA-256
@@ -463,7 +475,8 @@ console. Exact evidence is in
 `CHECKPOINT_2026-08-22_THIRTEEN_PAGE.md` and
 `LIVE_BROWSER_QA_2026-08-22_THIRTEEN_PAGE.json`.
 
-GitHub is not retried while its support ticket is pending. Authenticated Zenodo
+At that checkpoint GitHub was not retried while its support ticket was pending.
+Authenticated Zenodo
 deduplication found no prior matching owned draft or public lineage, so one
 in-progress version was published at DOI `10.5281/zenodo.22059764` (record
 22059764; concept record 22059763), explicitly labeled checkpoint 13 of 29 and
@@ -473,6 +486,53 @@ exactly this one submitted record and no duplicate matching draft. Sanitized
 evidence is `ZENODO_PUBLICATION_RECEIPT_2026-08-22_THIRTEEN_PAGE.json`; 3,618
 bytes; SHA-256
 `478e7ab515dfd9e08913b5c130731446a582520f198b5b6c981bf91559be9139`.
+
+## Fourteen-page release checkpoint
+
+Core ordinals 1–14 are complete through `random/point/Bayes.html`. The HTML
+reader is 44 files / 2,471,964 bytes; canonical manifest SHA-256 is
+`7f00470344a634c3cffe0eb3893690a10784f0894baca9a3fb1bc68418d5dae2`.
+Build-receipt SHA-256 is
+`0ba486440adbc5f32bb1d04218f2e0b015859735071e0a670e296ca077ff3840`;
+QA-receipt SHA-256 is
+`70c23cd031da831b2470e5f7b46beaeef9af499451b4096f7fd16a2123ef93a8`.
+
+Bayes preserves the exact 352-element hierarchy, 625 delimited TeX spans,
+eight raw `align` environments, 31 units, 23 disclosures, and 46
+native/additive IDs. Seventeen declared mathematical/notation repairs and the
+bounded posterior-normalizer, prior, loss/posterior-risk, joint-L2,
+martingale, and MLE-domain qualifications account for every protected change.
+The immutable authority is 49,645 bytes, SHA-256
+`96904b1fd4ab905bbffa62bd5cc0d965b3c969e543a983124e968718ed25d550`;
+the id-ID target is 56,719 bytes, SHA-256
+`d292d76240f67b06e4ba2140a0cb95dcc9d674644158131a047a7f23ec755ca8`.
+The backend binds 3,777 translated entities.
+
+Two complete consecutive backend/build/QA check-only sequences reproduced
+byte-identical identities. Fresh desktop/mobile inspection rendered all 633
+MathJax containers, found centered page-filling geometry without page-level
+overflow, exercised every disclosure in both directions, and found no missing
+images, raw TeX, uncontained wide surface, or console warning/error. Exact
+evidence is in `CHECKPOINT_2026-08-22_FOURTEEN_PAGE.md` and
+`LIVE_BROWSER_QA_2026-08-22_FOURTEEN_PAGE.json`.
+
+The reader-first PDF contains all fourteen documents, with disclosures
+expanded, in 173 A4 pages / 73,828,250 bytes; SHA-256
+`0b6dfa8384eec9a73cb8a489fd2e47c9052eaf33a899b04a21641a8300d3b5af`.
+Its first candidate placed Normal before Covariance; the release candidate now
+follows the frozen source order, with Covariance at PDF page 83 and Normal at
+page 106. All 173 corrected pages were rerendered and visually reviewed, and
+the automated and deterministic PDF replays pass. The PDF is not tagged after
+deterministic merge, so HTML remains the accessibility-first surface.
+
+GitHub access is restored and a read-only preflight proves that local `main` is
+a nondivergent fast-forward descendant of the nine-page public tip. The exact
+fourteen-page files are ready to commit and push, followed by Pages and
+anonymous byte verification. Zenodo concept DOI `10.5281/zenodo.22059763` is
+the sole release lineage and must advance through its latest record's
+`newversion` action. Figshare item `33314784` remains an honest public CC0
+metadata pointer: its authenticated license inventory still has no
+Other/custom/mixed-rights option, so no edition bytes may be mislabeled there.
 
 ## Rights boundary
 
@@ -487,7 +547,7 @@ the site-wide notice; they must be cleared, replaced, or linked externally.
 
 ## Known upstream defects (do not silently alter authority)
 
-`ADVERSE_LEDGER.jsonl` runs through `O006-ADV-0163`. CLT repairs include the
+`ADVERSE_LEDGER.jsonl` runs through `O006-ADV-0171`. CLT repairs include the
 zero-origin condition, correlation domain/formula/citation, the rigorous
 characteristic-function proof, continuity notation, dice answer, chi-square
 definition, negative-binomial support/domain/answer mapping, and determinate
@@ -540,16 +600,25 @@ and both hypergeometric parameter domains, exact modes, and feasible adjacent
 ties. One omitted paragraph close is target-only. The 49,551-byte authority
 remains unchanged.
 
+Bayes repairs and qualifications cover the posterior normalizer's positive and
+finite domain, prior notation, the distinction between pointwise loss and
+posterior risk, the joint prior-predictive L2 condition, the martingale
+convergence statement, and the exact domain on which the maximum-likelihood
+comparison is made. All changes are target-only; the 49,645-byte authority
+remains unchanged.
+
 ## Next work
 
-1. Continue immediately through all 16 remaining source pages, beginning with
-   `random/point/Bayes.html` (core ordinal 14), while growing the same
+1. Publish and anonymously verify the fourteen-page checkpoint on the restored
+   GitHub repository/Pages and as v14 in the existing Zenodo concept. Update
+   the existing Figshare CC0 metadata pointer to that Zenodo version without
+   uploading mixed-rights bytes under a false machine license.
+2. Continue immediately through all 15 remaining source pages, beginning with
+   `random/point/Unbiased.html` (core ordinal 15), while growing the same
    deterministic reader and stable-ID backend.
-2. Maintain later substantial verified checkpoints as new versions in the
-   same Zenodo concept lineage. Do not retry GitHub while its account-support
-   ticket is pending; preserve the exact local history for a later push when
-   the identity is restored.
-3. Keep Penn State reconstruction, the one-page Random completeness donor, and
+3. Maintain later substantial verified checkpoints as new versions in the
+   same Zenodo concept lineage and as fast-forward GitHub releases.
+4. Keep Penn State reconstruction, the one-page Random completeness donor, and
    original C140 companion in separate component paths/repositories; begin
    them only after this clean checkpoint or in a demonstrably non-overlapping
    path.

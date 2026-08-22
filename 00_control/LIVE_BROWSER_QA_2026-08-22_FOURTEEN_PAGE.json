@@ -1,0 +1,53 @@
+{
+  "schema": "o006.random.live-browser-qa.v1",
+  "checked_at": "2026-08-22T21:06:00+02:00",
+  "result": "pass",
+  "boundary": {
+    "status": "partial-14-of-29",
+    "page": "random/point/Bayes.html",
+    "target_sha256": "d292d76240f67b06e4ba2140a0cb95dcc9d674644158131a047a7f23ec755ca8",
+    "reader_manifest_sha256": "7f00470344a634c3cffe0eb3893690a10784f0894baca9a3fb1bc68418d5dae2"
+  },
+  "desktop": {
+    "viewport": {"width": 1280, "height": 720},
+    "inner_width": 1280,
+    "client_width": 1265,
+    "document_scroll_width": 1265,
+    "body_width": 1152,
+    "left_gap": 56.4444465637207,
+    "right_gap": 56.5555534362793,
+    "mathjax_containers": 633,
+    "details": 23,
+    "expanded_by_control": 23,
+    "collapsed_by_control": 23,
+    "incomplete_images": 0,
+    "raw_tex_visible": false,
+    "page_overflow": false,
+    "uncontained_wide_elements": 0
+  },
+  "mobile": {
+    "viewport": {"width": 390, "height": 844},
+    "inner_width": 390,
+    "client_width": 375,
+    "document_scroll_width": 375,
+    "body_width": 351.1111145019531,
+    "left_gap": 12,
+    "right_gap": 11.888885498046877,
+    "mathjax_containers": 633,
+    "details": 23,
+    "expanded_by_control": 23,
+    "collapsed_by_control": 23,
+    "incomplete_images": 0,
+    "raw_tex_visible": false,
+    "page_overflow": false,
+    "uncontained_wide_elements": 0
+  },
+  "console_warning_or_error_count": 0,
+  "method": "Fresh local credential-free browser render from build/html-id; both disclosure controls were exercised at both viewports; temporary viewport override was reset and the task-owned tab and server were closed.",
+  "pdf_relationship": {
+    "path": "output/pdf/statistika-matematis-id-reader.pdf",
+    "physical_pages": 173,
+    "sha256": "0b6dfa8384eec9a73cb8a489fd2e47c9052eaf33a899b04a21641a8300d3b5af",
+    "note": "The consolidated PDF contains the same 14 translated documents with all disclosure content expanded; the PDF was independently rendered and visually reviewed."
+  }
+}

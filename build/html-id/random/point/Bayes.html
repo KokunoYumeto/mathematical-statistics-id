@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="id-ID">
+
+<head>
+<meta charset="utf-8">
+    <title>Penduga Bayes</title>
+	<meta name="author" content="Kyle Siegrist">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="probabilitas, statistika, pendugaan titik, penduga Bayes, teorema Bayes, keluarga konjugat, distribusi Bernoulli, distribusi geometrik, distribusi Poisson, distribusi normal, distribusi beta, distribusi Pareto">
+	<link rel="icon" href="../icons/Icon.svg" type="image/svg">
+	<link rel="stylesheet" href="../Screen.css" type="text/css" media="screen">
+	<script src="../Basic.js"></script>
+	<script src="../../MathJax/tex-svg.js" id="MathJax-script" async></script>
+</head>
+
+<body>
+
+<div class="latex">
+	\(\newcommand{\R}{\mathbb{R}}\)
+	\(\newcommand{\N}{\mathbb{N}}\)
+	\(\newcommand{\Z}{\mathbb{Z}}\)
+	\(\newcommand{\E}{\mathbb{E}}\)
+	\(\newcommand{\P}{\mathbb{P}}\)
+	\(\newcommand{\var}{\text{var}}\)
+	\(\newcommand{\sd}{\text{sd}}\)
+	\(\newcommand{\cov}{\text{cov}}\)
+	\(\newcommand{\cor}{\text{cor}}\)
+	\(\newcommand{\bias}{\text{bias}}\)
+	\(\newcommand{\mse}{\text{mse}}\)
+	\(\newcommand{\bs}{\boldsymbol}\)
+</div>
+
+<header>
+	<ol class="map">
+		<li class="parent"><a href="https://www.randomservices.org/random/index.html">Random</a></li>
+        <li class="parent"><a href="index.html">6. Pendugaan Titik</a></li>
+        <li class="child"><a href="Estimators.html" title="Penduga">1</a></li>
+        <li class="child"><a href="Moments.html" title="Metode Momen">2</a></li>
+        <li class="child"><a href="Likelihood.html" title="Kemungkinan Maksimum">3</a></li>
+		<li class="current">4</li>
+        <li class="child"><a href="https://www.randomservices.org/random/point/Unbiased.html" title="Penduga Tak Bias Terbaik">5</a></li>
+        <li class="child"><a href="https://www.randomservices.org/random/point/Sufficient.html" title="Statistik Cukup, Lengkap, dan Ancilar">6</a></li>
+        <li class="details"><button type="button" title="Perluas Rincian" onclick="expandDetails(true);"><img src="../icons/Plus.svg" alt="Perluas"></button></li>
+        <li class="details"><button type="button" title="Ciutkan Rincian" onclick="expandDetails(false);"><img src="../icons/Minus.svg" alt="Ciutkan"></button></li>
+	</ol>
+    <h2 id="o006.random.point.bayes.page">4. Pendugaan Bayes</h2>
+</header>
+
+<h3 id="o006.random.point.bayes.section.basic-theory">Teori Dasar</h3>
+
+<h4 id="o006.random.point.bayes.section.general-method">Metode Umum</h4>
+
+<p>Andaikan kembali bahwa kita mempunyai <a href="https://www.randomservices.org/random/prob/Probability.html">variabel acak</a> teramati \(\bs{X}\) untuk suatu <a href="https://www.randomservices.org/random/prob/Experiments.html">eksperimen acak</a>, dengan nilai dalam himpunan \(S\). Andaikan pula bahwa distribusi \(\bs{X}\) bergantung pada parameter \(\theta\) yang nilainya berada dalam himpunan \(T\). Variabel data \(\bs{X}\) hampir selalu bernilai vektor, sehingga biasanya \( S \subseteq \R^n \) untuk suatu \( n \in \N_+ \). Menurut sifat himpunan sampel \( S \), distribusi \( \bs X \) dapat berupa <a href="https://www.randomservices.org/random/dist/Discrete.html">diskret</a> atau <a href="https://www.randomservices.org/random/dist/Continuous.html">kontinu</a>. Parameter \(\theta\) juga dapat bernilai vektor, sehingga biasanya \( T \subseteq \R^k \) untuk suatu \( k \in \N_+ \).</p>
+
+<p>Dalam <dfn>analisis Bayes</dfn>, yang dinamai menurut <a href="https://www.randomservices.org/random/biographies/Bayes.html" class="ancillary">Thomas Bayes</a>, parameter deterministik tetapi tak diketahui \(\theta\) dimodelkan dengan variabel acak \( \Theta \) yang mempunyai distribusi tertentu pada himpunan parameter \( T \). Menurut sifat himpunan itu, distribusinya dapat diskret atau kontinu. Distribusi tersebut disebut <dfn>distribusi prior</dfn> bagi \(\Theta\) dan dimaksudkan untuk menyatakan pengetahuan awal tentang parameter \( \theta \) <em>sebelum</em> data dikumpulkan. Setelah mengamati \(\bs X = \bs x \in S\), kita menggunakan <a href="https://www.randomservices.org/random/dist/Conditional.html#bay">teorema Bayes</a> untuk menghitung distribusi bersyarat \( \Theta \) dengan syarat \( \bs X = \bs x \). Distribusi ini disebut <dfn>distribusi posterior</dfn> bagi \( \Theta \): distribusi yang diperbarui berdasarkan informasi dalam data. Berikut uraian matematisnya dalam istilah fungsi kepadatan probabilitas.</p>
+
+<div class="unit" id="o006.random.point.bayes.unit.posterior-density">
+    <p class="math">Andaikan <dfn>distribusi prior</dfn> bagi \( \Theta \) pada \( T \) mempunyai fungsi kepadatan probabilitas \( h \), dan, bersyarat pada \( \Theta = \theta \in T \), fungsi kepadatan probabilitas bersyarat \( \bs X \) pada \( S \) adalah \( f(\cdot \mid \theta) \). Untuk data yang mempunyai kepadatan marginal positif dan berhingga, fungsi kepadatan probabilitas <dfn>distribusi posterior</dfn> bagi \( \Theta \) dengan syarat \( \bs X = \bs x \in S \) adalah
+	\[ h(\theta \mid \bs x) = \frac{h(\theta) f(\bs x \mid \theta)}{f(\bs x)}, \quad \theta \in T \]
+    dengan fungsi pada penyebut didefinisikan sebagai berikut, masing-masing untuk kasus diskret dan kontinu:
+	\begin{align*}
+		f(\bs x) &amp; = \sum_{\theta \in T} h(\theta) f(\bs x | \theta), \quad \bs x \in S \\
+		f(\bs x) &amp; = \int_T h(\theta) f(\bs{x} \mid \theta) \, d\theta, \quad \bs x \in S
+	\end{align*}</p>
+	<details>
+        <summary>Rincian:</summary>
+        <p>Ini hanyalah teorema Bayes dengan istilah baru. Ingat bahwa <a href="https://www.randomservices.org/random/dist/Joint.html">fungsi kepadatan probabilitas gabungan</a> bagi \((\bs{X}, \Theta)\) adalah pemetaan pada \(S \times T\) yang diberikan oleh
+		\[ (\bs{x}, \theta) \mapsto h(\theta) f(\bs{x} \mid \theta) \]
+        Fungsi pada penyebut adalah fungsi kepadatan probabilitas marginal bagi \( \bs X \). Jadi, menurut definisi, \( h(\theta \mid \bs x) = h(\theta) f(\bs x \mid \theta) / f(\bs x) \) untuk \( \theta \in T \) merupakan fungsi kepadatan probabilitas bersyarat bagi \( \Theta \) dengan syarat \( \bs X = \bs x \).</p>
+	</details>
+</div>
+
+<p>Untuk \( \bs x \in S \) yang memenuhi syarat kepadatan marginal positif dan berhingga di atas, \(f(\bs{x})\) hanyalah <em>konstanta normalisasi</em> bagi fungsi \(\theta \mapsto h(\theta) f(\bs{x} \mid \theta)\). Kita tidak selalu perlu menghitung \(f(\bs{x})\) secara eksplisit apabila bentuk fungsional \(\theta \mapsto h(\theta) f(\bs{x} \mid \theta)\) dapat dikenali sebagai bentuk suatu distribusi yang diketahui. Hal itu memang terjadi pada beberapa contoh di bawah.</p>
+
+<p>Jika himpunan parameter \( T \) mempunyai ukuran \( c \) yang positif dan berhingga—ukuran cacah dalam kasus diskret atau ukuran Lebesgue dalam kasus kontinu—salah satu pilihan prior adalah <a href="https://www.randomservices.org/random/special/Uniform.html">distribusi seragam</a> pada \( T \), dengan fungsi kepadatan probabilitas \( h(\theta) = 1 / c \) untuk \( \theta \in T \). Dalam parameterisasi dan ukuran acuan yang dipilih, prior datar ini sering disebut prior <dfn>noninformatif</dfn>; penamaan tersebut tidak invarian terhadap perubahan parameter dan tidak secara harfiah berarti ketiadaan pengetahuan.</p>
+
+<h4 id="o006.random.point.bayes.section.random-samples">Sampel Acak</h4>
+
+<p>Kasus khusus yang penting terjadi ketika \(\bs{X} = (X_1, X_2, \ldots, X_n)\) merupakan <a href="../sample/Introduction.html">sampel acak</a> berukuran \(n\) dari distribusi suatu variabel dasar \(X\). Secara khusus, andaikan \(X\) bernilai dalam himpunan \(R\) dan mempunyai fungsi kepadatan probabilitas \(g(\cdot \mid \theta)\) bersyarat pada \(\theta \in T\). Dalam hal ini, \(S = R^n\) dan fungsi kepadatan probabilitas \( f(\cdot \mid \theta) \) bagi \(\bs{X}\) bersyarat pada \(\theta\) adalah
+\[ f(x_1, x_2, \ldots, x_n \mid \theta) = g(x_1 \mid \theta) g(x_2 \mid \theta) \cdots g(x_n \mid \theta), \quad (x_1, x_2, \ldots, x_n) \in S \]</p>
+
+<h4 id="o006.random.point.bayes.section.real-parameters">Parameter Riil</h4>
+
+<p>Andaikan \( \theta \) merupakan parameter bernilai riil, sehingga \( T \subseteq \R \). Berikut definisi utama untuk fungsi kerugian yang dipakai pada halaman ini.</p>
+
+<div class="unit" id="o006.random.point.bayes.unit.posterior-mean">
+    <p class="math">Dengan syarat momen posterior kedua berhingga, <a href="https://www.randomservices.org/random/expect/Conditional.html">nilai harapan bersyarat</a> \(\E(\Theta \mid \bs{X})\) merupakan <dfn>penduga Bayes</dfn> bagi \(\theta\) di bawah fungsi kerugian kuadrat.</p>
+	<ol class="sub">
+        <li>Jika \( \Theta \) mempunyai distribusi diskret pada \( T \), maka
+		\[\E(\Theta \mid \bs X = \bs x) = \sum_{\theta \in T} \theta h(\theta \mid \bs x), \quad \bs x \in S \]
+		</li>
+        <li>Jika \( \Theta \) mempunyai distribusi kontinu pada \( T \), maka
+		\[\E(\Theta \mid \bs X = \bs x) = \int_T \theta h(\theta \mid \bs x) d\theta, \quad \bs x \in S\]
+		</li>
+	</ol>
+</div>
+
+<p>Jika parameter mempunyai momen kedua berhingga di bawah distribusi gabungan prior-prediktif, \(\E(\Theta \mid \bs{X})\) merupakan fungsi dari \(\bs{X}\) dan, di antara semua fungsi \(\bs{X}\), paling dekat dengan \(\Theta\) dalam pengertian kuadrat rata-rata tak bersyarat. Setelah data dikumpulkan dan \(\bs{X} = \bs{x}\) teramati, <dfn>dugaan Bayes</dfn> bagi \(\theta\) adalah \(\E(\Theta \mid \bs{X} = \bs{x})\). Seperti biasa, istilah <em>penduga</em> merujuk pada variabel acak sebelum data dikumpulkan, sedangkan <em>dugaan</em> merujuk pada nilai teramati setelah data dikumpulkan. Definisi <a href="Estimators.html">bias dan galat kuadrat rata-rata</a> tetap seperti sebelumnya, tetapi kini bersyarat pada \( \Theta = \theta \in T\).</p>
+
+<div class="unit" id="o006.random.point.bayes.unit.conditional-risk">
+    <p class="math">Andaikan \( U \) merupakan penduga Bayes bagi \( \theta \).</p>
+	<ol class="sub">
+        <li><dfn>Bias</dfn> \( U \) adalah \(\bias(U \mid \theta) = \E(U - \theta \mid \Theta = \theta) \) untuk \( \theta \in T \).</li>
+        <li><dfn>Galat kuadrat rata-rata</dfn> \( U \) adalah \( \mse(U \mid \theta) = \E[(U - \theta)^2 \mid \Theta = \theta] \) untuk \( \theta \in T \).</li>
+	</ol>
+</div>
+
+<p>Seperti sebelumnya, \( \bias(U \mid \theta) = \E(U \mid \theta) - \theta \) dan \( \mse(U \mid \theta) = \var(U \mid \theta) + \bias^2(U \mid \theta) \). Andaikan sekarang variabel acak \( (X_1, X_2, X_3, \ldots) \) diamati secara berurutan, dan untuk setiap \( U_n \) kita menghitung penduga Bayes \( \theta \) bagi \( (X_1, X_2, \ldots, X_n) \) berdasarkan \( n \in \N_+ \). Kasus yang paling lazim kembali berupa pensampelan dari suatu distribusi, sehingga barisan itu saling bebas dan berdistribusi identik bersyarat pada \( \theta \). Sifat asimtotik alaminya adalah sebagai berikut.</p>
+
+<div class="unit" id="o006.random.point.bayes.unit.asymptotic-properties">
+    <p class="math">Misalkan \( \bs U = (U_n: n \in \N_+) \) merupakan barisan penduga Bayes bagi \( \theta \) seperti di atas.</p>
+	<ol class="sub">
+        <li>\( \bs U \) <dfn>tak bias secara asimtotik</dfn> jika \( \bias(U_n \mid \theta) \to 0 \) ketika \( n \to \infty \) untuk setiap \( \theta \in T \).</li>
+        <li>\( \bs U \) <dfn>konsisten dalam kuadrat rata-rata</dfn> jika \( \mse(U_n \mid \theta) \to 0 \) ketika \( n \to \infty \) untuk setiap \( \theta \in T \).</li>
+	</ol>
+</div>
+
+<p>Kita sering tidak dapat membentuk penduga Bayes yang tak bias, tetapi berharap penduga tersebut setidaknya tak bias secara asimtotik dan konsisten. Dengan syarat parameter terintegralkan, barisan penduga Bayes \( \bs U \)—yakni harapan bersyarat terhadap filtrasi yang dibangkitkan oleh data—merupakan <a href="https://www.randomservices.org/random/martingales/index.html">martingal</a> di bawah distribusi gabungan prior-prediktif. Teori martingal menyediakan perangkat yang kuat untuk mempelajari penduga ini.</p>
+
+<p>Dari sudut pandang Bayes, distribusi posterior \( \Theta \) dengan syarat data \( \bs X = \bs x \) merupakan objek utama; dugaan titik bagi \( \theta \) yang diturunkan darinya bersifat sekunder. Secara khusus, fungsi \( u \mapsto \E[(\Theta - u)^2 \mid \bs X = \bs x] \) adalah risiko posterior di bawah kerugian kuadrat dan, seperti telah dicatat, diminimumkan pada \( \E(\Theta \mid \bs X = \bs x) \). Kerugian kuadrat bukan satu-satunya <dfn>fungsi kerugian</dfn> yang dapat dipakai, meskipun hanya itulah yang dibahas di halaman ini. Untuk kerugian absolut, fungsi \( u \mapsto \E(|\Theta - u| \mid \bs X = \bs x) \) adalah risiko posterior dan <a href="https://www.randomservices.org/random/expect/Spaces.html#cen">diketahui</a> diminimumkan pada setiap median distribusi posterior.</p>
+
+<h4 id="o006.random.point.bayes.section.conjugate-families">Keluarga Konjugat</h4>
+
+<p>Sering kali distribusi prior \( \Theta \) sendiri merupakan anggota suatu keluarga parametrik, dengan parameter yang dipilih untuk menyatakan pengetahuan awal tentang \( \theta \). Dalam banyak kasus penting, keluarga itu dapat dipilih sehingga distribusi posterior \(\Theta\) dengan syarat \(\bs{X} = \bs{x}\) tetap berada dalam keluarga yang sama untuk setiap \( \bs x \in S \). Dalam keadaan tersebut, keluarga distribusi \( \Theta \) dikatakan <dfn>konjugat</dfn> terhadap keluarga distribusi \(\bs{X}\). Keluarga konjugat menguntungkan dari segi komputasi karena distribusi posterior sering dapat dihitung melalui rumus sederhana pada parameter keluarga tanpa menerapkan teorema Bayes secara langsung. Demikian pula, jika parameternya bernilai riil, penduga Bayes sering dapat dihitung dari rumus sederhana pada parameter keluarga konjugat.</p>
+
+<h3 id="o006.random.point.bayes.section.special-distributions">Distribusi Khusus</h3>
+
+<h4 id="ber">Distribusi Bernoulli</h4>
+
+<p>Andaikan \(\bs X = (X_1, X_2, \ldots)\) merupakan barisan variabel saling bebas, masing-masing berdistribusi <a href="https://www.randomservices.org/random/bernoulli/Introduction.html">Bernoulli</a> dengan parameter keberhasilan tak diketahui \(p \in (0, 1)\). Singkatnya, \( \bs X \) merupakan barisan percobaan Bernoulli bersyarat pada \( p \). Dalam istilah keandalan yang lazim, \(X_i = 1\) berarti berhasil pada percobaan ke-\(i\) dan \(X_i = 0\) berarti gagal pada percobaan ke-\(i\). Bersyarat pada \( p \), fungsi kepadatan probabilitas Bernoulli adalah
+\[ g(x \mid p) = p^x (1 - p)^{1-x}, \quad x \in \{0, 1\} \]
+Perhatikan bahwa banyaknya keberhasilan pada \(n\) percobaan pertama adalah \(Y_n = \sum_{i=1}^n X_i\). Bersyarat pada \(p\), variabel acak \(Y_n\) mempunyai <a href="https://www.randomservices.org/random/bernoulli/Binomial.html">distribusi binomial</a> dengan parameter \(n\) dan \(p\).</p>
+
+<p>Andaikan sekarang \(p\) dimodelkan dengan variabel acak \( P \) yang mempunyai <a href="https://www.randomservices.org/random/special/Beta.html">distribusi beta</a> prior dengan parameter kiri \(a \in (0, \infty)\) dan parameter kanan \(b \in (0, \infty)\). Nilai \(a\) dan \(b\) dipilih untuk menyatakan informasi awal tentang \(p\). Jadi, \( P \) mempunyai fungsi kepadatan probabilitas
+\[ h(p) = \frac{1}{B(a, b)} p^{a-1} (1 - p)^{b-1}, \quad p \in (0, 1) \]
+dan mempunyai rata-rata \( a / (a + b) \). Misalnya, jika kita tidak memiliki informasi khusus tentang \(p\), kita dapat mengambil \(a = b = 1\) sehingga distribusi prior seragam pada ruang parameter \((0, 1)\); pilihan datar dalam parameterisasi ini sering disebut prior noninformatif, dengan batas penafsiran yang telah dijelaskan di atas. Sebaliknya, jika \(p\) diyakini sekitar \(\frac{2}{3}\), kita dapat mengambil \(a = 4\) dan \(b = 2\) sehingga prior tersebut unimodal dengan rata-rata \(\frac{2}{3}\). Sebagai proses acak, barisan \( \bs X \) dengan \( p \) yang diacak menurut \( P \) disebut <a href="https://www.randomservices.org/random/bernoulli/BetaBernoulli.html">proses beta–Bernoulli</a> dan menarik untuk dipelajari tersendiri di luar konteks pendugaan Bayes.</p>
+
+<div class="unit" id="ber1">
+    <p class="math">Untuk \( n \in \N_+ \), distribusi posterior \(P\) dengan syarat \(\bs{X}_n = (X_1, X_2, \ldots, X_n)\) adalah beta dengan parameter kiri \(a + Y_n\) dan parameter kanan \(b + (n - Y_n)\).</p>
+	<details>
+        <summary>Rincian:</summary>
+        <p>Tetapkan \( n \in \N_+ \). Misalkan \( \bs x = (x_1, x_2, \ldots, x_n) \in \{0, 1\}^n \) dan \( y = \sum_{i=1}^n x_i \). Maka
+		\[ f(\bs x \mid p) = g(x_1 \mid p) g(x_2 \mid p) \cdots g(x_n \mid p) = p^y (1 - p)^{n-y}  \]
+        Karena itu,
+		\[ h(p) f(\bs x \mid p) = \frac{1}{B(a, b)} p^{a-1} (1 - p)^{b-1} p^y (1 - p)^{n-y} = \frac{1}{B(a, b)}p^{a + y - 1} (1 - p)^{b + n - y - 1}, \quad p \in (0, 1) \]
+        Sebagai fungsi dari \( p \), ungkapan ini sebanding dengan fungsi kepadatan beta berparameter \( a + y \) dan \( b + n - y \). Faktor normalisasi \( f(\bs x) \) tidak perlu dihitung.</p>
+	</details>
+</div>
+
+<p>Jadi, distribusi beta konjugat terhadap distribusi Bernoulli. Distribusi posterior hanya bergantung pada vektor data \(\bs{X}_n\) melalui banyaknya keberhasilan \(Y_n\) karena \(Y_n\) merupakan <a href="https://www.randomservices.org/random/point/Sufficient.html">statistik cukup</a> bagi \(p\). Parameter kiri beta bertambah sebesar banyaknya keberhasilan \(Y_n\), sedangkan parameter kanannya bertambah sebesar banyaknya kegagalan \(n - Y_n\).</p>
+
+<div class="unit" id="ber2">
+    <p class="math">Penduga Bayes bagi \(p\) dengan syarat \(\bs{X}_n\) adalah
+	\[ U_n = \frac{a + Y_n}{a + b + n} \]</p>
+	<details>
+        <summary>Rincian:</summary>
+        <p>Rata-rata distribusi beta adalah parameter kiri dibagi jumlah kedua parameternya, sehingga hasil ini mengikuti hasil sebelumnya.</p>
+	</details>
+</div>
+
+<div class="unit" id="o006.random.point.bayes.unit.beta-coin-posterior-app">
+    <p class="app">Dalam <a href="https://www.randomservices.org/random/apps/BetaCoin.html" class="ancillary">eksperimen koin beta</a>, tetapkan \(n = 20\) dan \(p = 0.3\) serta \(a = 4\) dan \(b = 2\). Jalankan simulasi sebanyak 100 pengulangan; pada setiap pengulangan, amati dugaan \(p\) serta bentuk dan letak fungsi kepadatan posterior \(p\).</p>
+</div>
+
+<p>Selanjutnya kita hitung fungsi bias dan galat kuadrat rata-rata.</p>
+
+<div class="unit" id="ber3">
+    <p class="math">Untuk \( n \in \N_+ \),
+	\[ \bias(U_n \mid p) = \frac{a(1 - p) - b p}{a + b + n}, \quad p \in (0, 1) \]
+    Barisan \( \bs U = (U_n: n \in \N_+) \) tak bias secara asimtotik.</p>
+	<details>
+        <summary>Rincian:</summary>
+        <p>Bersyarat pada \( p \), \( Y_n \) mempunyai distribusi binomial dengan parameter \( n \) dan \( p \), sehingga \( \E(Y_n \mid p) = n p \). Maka
+		\[ \bias(U_n \mid p) = \E(U_n \mid p) - p = \frac{a + n p}{a + b + n} - p\]
+        Penyederhanaan menghasilkan rumus di atas. Jelas bahwa \( \bias(U_n \mid p) \to 0 \) ketika \( n \to \infty \).</p>
+	</details>
+</div>
+
+<p>Kita tidak dapat memilih \(a\) dan \(b\) agar \(U_n\) tak bias untuk semua nilai parameter; pilihan yang meniadakan bias pada satu titik akan bergantung pada nilai sebenarnya \(p\) yang tidak diketahui.</p>
+
+<div class="unit" id="o006.random.point.bayes.unit.beta-coin-bias-app">
+    <p class="app">Dalam <a href="https://www.randomservices.org/random/apps/BetaCoin.html" class="ancillary">eksperimen koin beta</a>, variasikan parameter dan amati perubahan bias. Lalu tetapkan \(n = 20\), \(p = 0.8\), \(a = 2\), dan \(b = 6\). Jalankan simulasi sebanyak 1.000 pengulangan. Pada setiap pembaruan, amati dugaan \(p\) serta bentuk dan letak fungsi kepadatan posterior \(p\). Bandingkan bias empiris dengan bias teoretis.</p>
+</div>
+
+<div class="unit" id="ber4">
+    <p class="math">Untuk \( n \in \N_+ \),
+	\[ \mse(U_n \mid p) = \frac{p [n - 2 \, a (a + b)] + p^2[(a + b)^2 - n] + a^2}{(a + b + n)^2}, \quad p \in (0, 1) \]
+    Barisan \( (U_n: n \in \N_+) \) konsisten dalam kuadrat rata-rata.</p>
+	<details>
+        <summary>Rincian:</summary>
+        <p>Sekali lagi, bersyarat pada \( p \), \( Y_n \) mempunyai distribusi binomial dengan parameter \( n \) dan \( p \), sehingga
+		\[ \var(U_n \mid p) = \frac{n p (1 - p)}{(a + b + n)^2} \]
+        Karena itu,
+		\[ \mse(U_n \mid p) = \frac{n p (1 - p)}{(a + b + n)^2} + \left[\frac{a (1 - p) - b p}{a + b + n}\right]^2 \]
+        Penyederhanaan menghasilkan rumus di atas. Jelas bahwa \( \mse(U_n \mid p) \to 0 \) ketika \( n \to \infty \).</p>
+	</details>
+</div>
+
+<div class="unit" id="o006.random.point.bayes.unit.beta-coin-mse-app">
+    <p class="app">Dalam <a href="https://www.randomservices.org/random/apps/BetaCoin.html" class="ancillary">eksperimen koin beta</a>, variasikan parameter dan amati perubahan galat kuadrat rata-rata. Lalu tetapkan \(n = 10\), \(p = 0.7\), dan \(a = b = 1\). Jalankan simulasi sebanyak 1.000 pengulangan. Pada setiap pembaruan, amati dugaan \(p\) serta bentuk dan letak fungsi kepadatan posterior \(p\). Bandingkan galat kuadrat rata-rata empiris dengan nilai teoretis.</p>
+</div>
+
+<p>Menariknya, kita dapat memilih \(a\) dan \(b\) sehingga galat kuadrat rata-rata \(U_n\) tidak bergantung pada parameter tak diketahui \(p\):</p>
+
+<div class="unit" id="ber5">
+    <p class="math">Misalkan \( n \in \N_+ \) dan \(a = b = \sqrt{n} / 2\). Maka</p>
+	\[ \mse(U_n \mid p) = \frac{n}{4 \left(n + \sqrt{n}\right)^2}, \quad p \in (0, 1) \]
+</div>
+
+<div class="unit" id="o006.random.point.bayes.unit.beta-coin-constant-mse-app">
+    <p class="app">Dalam <a href="https://www.randomservices.org/random/apps/BetaCoin.html" class="ancillary">eksperimen koin beta</a>, tetapkan \(n = 36\) dan \(a = b = 3\). Variasikan \(p\) dan amati bahwa galat kuadrat rata-rata tidak berubah. Lalu tetapkan \(p = 0.8\) dan jalankan simulasi sebanyak 1.000 pengulangan. Pada setiap pembaruan, amati dugaan \(p\) serta bentuk dan letak fungsi kepadatan posterior. Bandingkan bias dan galat kuadrat rata-rata empiris dengan nilai teoretis.</p>
+</div>
+
+<p>Ingat bahwa penduga metode momen bagi \(p\) adalah rata-rata sampel, yaitu proporsi keberhasilan. Pada ruang parameter tertutup, rata-rata sampel juga merupakan penduga kemungkinan maksimum; pada ruang terbuka \( (0, 1) \), maksimum hanya dicapai jika banyaknya keberhasilan berada secara ketat antara nol dan ukuran sampel, sedangkan sampel batas hanya mempunyai supremum di batas:
+\[ M_n = \frac{Y_n}{n} = \frac{1}{n} \sum_{i=1}^n X_i \]
+Penduga ini mempunyai galat kuadrat rata-rata \(\mse(M_n \mid p) = \frac{1}{n} p (1 - p)\). Untuk melihat hubungan antarpeduga, perhatikan dari <a href="#ber2" class="ref"></a> bahwa
+\[ U_n = \frac{a + b}{a + b + n} \frac{a}{a + b} + \frac{n}{a + b + n} M_n \]
+Jadi, \( U_n \) merupakan rata-rata tertimbang dari \( a / (a + b) \), yaitu rata-rata distribusi prior, dan \( M_n \), yaitu penduga kemungkinan maksimum ketika maksimum tersebut dicapai.</p>
+
+<h4 id="o006.random.point.bayes.section.another-bernoulli-distribution">Model Bernoulli Lain</h4>
+
+<p>Pendugaan Bayes, seperti bentuk pendugaan parametrik lainnya, sangat bergantung pada himpunan parameter. Andaikan kembali bahwa \( (X_1, X_2, \ldots) \) merupakan barisan percobaan Bernoulli bersyarat pada parameter keberhasilan tak diketahui \( p \), tetapi sekarang himpunan parameternya adalah \( \left\{\frac{1}{2}, 1\right\} \). Kerangka ini bersesuaian dengan pelemparan koin yang seimbang atau mempunyai gambar kepala pada kedua sisi, tetapi kita tidak mengetahui jenisnya. Kita memodelkan \( p \) dengan variabel acak \(P\) yang mempunyai fungsi kepadatan probabilitas prior \(h\), dengan \(h(1) = a\) dan \(h\left(\frac{1}{2}\right) = 1 - a\); nilai \(a \in (0, 1)\) dipilih untuk menyatakan pengetahuan awal tentang probabilitas bahwa koin tersebut mempunyai gambar kepala pada kedua sisi. Jika sama sekali tidak mempunyai informasi awal, kita dapat mengambil \( a = \frac{1}{2} \), prior datar yang sering disebut noninformatif dengan batas penafsiran yang telah dijelaskan di atas. Jika kita menilai koin tersebut lebih mungkin mempunyai gambar kepala pada kedua sisi, kita dapat mengambil \( a = \frac{3}{4} \). Tetapkan kembali \( Y_n = \sum_{i=1}^n X_i \) untuk \( n \in \N_+ \).</p>
+
+<div class="unit" id="o006.random.point.bayes.unit.two-point-posterior">
+    <p class="math">Distribusi posterior \(P\) dengan syarat \(\bs{X}_n = (X_1, X_2, \ldots, X_n)\) adalah sebagai berikut.</p>
+	<ol class="sub">
+        <li>\(h(1 \mid \bs{X}_n) = \frac{2^n a}{2^n a + (1 - a)}\) jika \(Y_n = n\), dan \(h(1 \mid \bs{X}_n) = 0\) jika \(Y_n \lt n \).</li>
+        <li>\(h\left(\frac{1}{2} \mid \bs{X}_n\right) = \frac{1 - a}{2^n a + (1 - a)}\) jika \(Y_n = n\), dan \(h\left(\frac{1}{2} \mid \bs{X}_n\right) = 1\) jika \(Y_n \lt n\).</li>
+	</ol>
+	<details>
+        <summary>Rincian:</summary>
+        <p>Tetapkan \( n \in \N_+ \). Misalkan \( \bs x = (x_1, x_2, \ldots, x_n) \in \{0, 1\}^n \), dan misalkan \( y = \sum_{i=1}^n x_i \). Seperti sebelumnya,
+		\[ f(\bs x \mid p) = p^y (1 - p)^{n-y} \]
+        Kita menggunakan konvensi lazim—yang memberikan hasil matematis yang benar—bahwa \( 0^k = 0 \) jika \( k \in \N_+ \), sedangkan \( 0^0 = 1 \). Maka, dari teorema Bayes,
+		\begin{align}
+			h(1 \mid \bs x) &amp; = \frac{h(1) f(\bs x \mid 1)}{h(1/2) f(\bs x \mid 1/2) + h(1) f(\bs x \mid 1)} \\
+			&amp; = \frac{a 1^y 0^{n-y}}{(1 - a)(1/2)^n + a 1^y 0^{n-y}}
+		\end{align}
+        Jadi, jika \( y \lt n \) maka \( h(1 \mid \bs x) = 0 \), sedangkan jika \( y = n \),
+		\[ h(1 \mid \bs x) = \frac{a}{(1 - a)(1/2)^n + a} \]
+        Tentu saja, \( h\left(\frac{1}{2} \mid \bs x\right) = 1 - h(1 \mid \bs x) \). Hasil tersebut kemudian diperoleh dengan sedikit aljabar.</p>
+	</details>
+</div>
+
+<p>Sekarang tetapkan
+\[ p_n = \frac{2^{n+1} a + (1 - a)}{2^{n+1} a + 2 (1 - a)} \]</p>
+
+<div class="unit" id="o006.random.point.bayes.unit.two-point-estimator">
+    <p class="math">Penduga Bayes bagi \(p\) dengan syarat \( \bs{X}_n \) adalah statistik \(U_n\) yang didefinisikan oleh</p>
+	<ol class="sub">
+        <li>\(U_n = p_n\) jika \(Y_n = n\).</li>
+        <li>\(U_n = \frac{1}{2}\) jika \(Y_n \lt n\).</li>
+	</ol>
+	<details>
+        <summary>Rincian:</summary>
+        <p>Menurut definisi, penduga Bayes adalah \( U_n = \E(P \mid \bs{X}_n) \). Dari hasil sebelumnya, jika \( Y_n = n \) maka
+		\[ U_n = 1 \cdot \frac{2^n a}{2^n a + (1 - a)} + \frac{1}{2} \cdot \frac{1 - a}{2^n a + (1 - a)} \]
+        yang menyederhana menjadi \( p_n \). Jika \( Y_n \lt n \), maka \( U_n = 1 \cdot 0 + \frac{1}{2} \cdot 1 = \frac{1}{2} \).</p>
+	</details>
+</div>
+
+<p>Jika kita mengamati \( Y_n \lt n \), maka \( U_n \) memberikan nilai yang benar, yaitu \( \frac{1}{2} \). Hal ini wajar karena kita mengetahui bahwa koinnya bukan koin dengan gambar kepala pada kedua sisi. Sebaliknya, jika kita mengamati \( Y_n = n \), jenis koinnya belum pasti dan dugaan Bayes \( p_n \) bahkan tidak berada dalam ruang parameter. Namun, \( p_n \to 1 \) ketika \( n \to \infty \) dengan laju eksponensial. Selanjutnya kita hitung bias dan galat kuadrat rata-rata untuk \( p \in \left\{\frac{1}{2}, 1\right\} \) yang diberikan.</p>
+
+<div class="unit" id="o006.random.point.bayes.unit.two-point-bias">
+    <p class="math">Untuk \( n \in \N_+ \),</p>
+	<ol class="sub">
+		<li>\(\bias(U_n \mid 1) = p_n - 1\)</li>
+		<li>\(\bias\left(U_n \mid \frac{1}{2}\right) = \left(\frac{1}{2}\right)^n \left(p_n - \frac{1}{2}\right)\)</li>
+	</ol>
+    <p>Barisan penduga \( (U_n: n \in \N_+) \) tak bias secara asimtotik.</p>
+	<details>
+        <summary>Rincian:</summary>
+        <p>Menurut definisi, \( \bias(U_n \mid p) = \E(U_n - p \mid p) \). Maka, dari hasil sebelumnya,
+		\begin{align}
+			\bias(U_n \mid p) &amp; = (p_n - p) \P(Y_n = n \mid p) + \left(\frac{1}{2} - p\right) \P(Y_n \lt n \mid p) \\
+			&amp; = (p_n - p) p^n + \left(\frac{1}{2} - p\right) (1 - p^n)
+		\end{align}
+        Menyubstitusikan \( p = 1 \) dan \( p = \frac{1}{2} \) menghasilkan pernyataan tersebut. Dalam kedua kasus, \( \bias(U_n \mid p) \to 0 \) ketika \( n \to \infty \) karena \( p_n \to 1 \) dan \( \left(\frac{1}{2}\right)^n \to 0 \) ketika \( n \to \infty \).</p>
+	</details>
+</div>
+
+<p>Jika \( p = 1 \), penduga \( U_n \) berbias negatif, seperti telah dicatat. Jika \( p = \frac{1}{2} \), maka \( U_n \) berbias positif untuk setiap \( n \) dan setiap nilai \( a \) yang diperbolehkan.</p>
+
+<div class="unit" id="o006.random.point.bayes.unit.two-point-mse">
+    <p class="math">Untuk \( n \in \N_+ \),</p>
+	<ol class="sub">
+		<li>\(\mse(U_n \mid 1) = (p_n - 1)^2\)</li>
+		<li>\(\mse\left(U_n \mid \frac{1}{2}\right) = \left(\frac{1}{2}\right)^n \left(p_n - \frac{1}{2}\right)^2\)</li>
+	</ol>
+    <p>Barisan penduga \( \bs U = (U_n: n \in \N_+) \) konsisten dalam kuadrat rata-rata.</p>
+	<details>
+        <summary>Rincian:</summary>
+        <p>Menurut definisi, \( \mse(U_n \mid p) = \E[(U_n - p)^2 \mid p] \). Maka
+		\begin{align}
+			\mse(U_n \mid p) &amp; = (p_n - p)^2 \P(Y_n = n \mid p) + \left(\frac{1}{2} - p\right)^2 \P(Y_n \lt n \mid p) \\
+			&amp; = (p_n - p)^2 p^n + \left(\frac{1}{2} - p\right)^2 (1 - p^n)
+		\end{align}
+        Menyubstitusikan \( p = 1 \) dan \( p = \frac{1}{2} \) menghasilkan pernyataan tersebut. Dalam kedua kasus, \( \mse(U_n \mid p) \to 0 \) ketika \( n \to \infty \) karena \( p_n \to 1 \) dan \( \left(\frac{1}{2}\right)^n \to 0 \) ketika \( n \to \infty \).</p>
+	</details>
+</div>
+
+<h4 id="geo">Distribusi Geometrik</h4>
+
+<p>Andaikan \(\bs{X} = (X_1, X_2, \ldots)\) merupakan barisan variabel acak saling bebas, masing-masing berdistribusi <a href="https://www.randomservices.org/random/bernoulli/Geometric.html">geometrik</a> pada \(\N_+\) dengan parameter keberhasilan tak diketahui \(p \in (0, 1)\). Variabel-variabel ini dapat ditafsirkan sebagai banyaknya percobaan antara keberhasilan yang berurutan dalam suatu barisan <a href="https://www.randomservices.org/random/bernoulli/index.html">percobaan Bernoulli</a>. Bersyarat pada \(p\), distribusi geometrik mempunyai fungsi kepadatan probabilitas
+\[ g(x \mid p) = p (1 - p)^{x-1}, \quad x \in \N_+ \]
+Sekali lagi, untuk \( n \in \N_+ \), tetapkan \(Y_n = \sum_{i=1}^n X_i\). Dalam kerangka ini, \(Y_n\) adalah nomor percobaan tempat keberhasilan ke-\(n\) terjadi dan, bersyarat pada \(p\), mempunyai <a href="https://www.randomservices.org/random/bernoulli/NegativeBinomial.html">distribusi binomial negatif</a> dengan parameter \(n\) dan \(p\).</p>
+
+<p>Andaikan sekarang \(p\) dimodelkan dengan variabel acak \( P \) yang mempunyai <a href="https://www.randomservices.org/random/special/Beta.html">distribusi beta</a> prior dengan parameter kiri \(a \in (0, \infty)\) dan parameter kanan \(b \in (0, \infty)\). Seperti biasa, \(a\) dan \(b\) dipilih untuk menyatakan pengetahuan awal tentang \(p\).</p>
+
+<div class="unit" id="o006.random.point.bayes.unit.geometric-posterior">
+    <p class="math">Distribusi posterior \(P\) dengan syarat \(\bs{X}_n = (X_1, X_2, \ldots, X_n)\) adalah beta dengan parameter kiri \(a + n\) dan parameter kanan \(b + (Y_n - n)\).</p>
+	<details>
+        <summary>Rincian:</summary>
+        <p>Tetapkan \( n \in \N_+ \). Misalkan \( \bs x = (x_1, x_2, \ldots, x_n) \in \N_+^n \) dan \( y = \sum_{i=1}^n x_i \). Maka
+		\[ f(\bs x \mid p) = g(x_1 \mid p) g(x_2 \mid p) \cdots g(x_n \mid p) = p^n (1 - p)^{y - n} \]
+        Karena itu,
+		\[ h(p) f( \bs x \mid p) = \frac{1}{B(a, b)} p^{a-1} (1 - p)^{b-1} p^n (1 - p)^{y - n} = \frac{1}{B(a, b)} p^{a + n - 1} (1 - p)^{b + y - n - 1}, \quad p \in (0, 1) \]
+        Sebagai fungsi dari \( p \in (0, 1) \), ungkapan ini sebanding dengan fungsi kepadatan beta berparameter \( a + n \) dan \( b + y - n \). Konstanta normalisasi \(f(\bs{x})\) tidak perlu dihitung.</p>
+	</details>
+</div>
+
+<p>Jadi, distribusi beta konjugat terhadap distribusi geometrik. Dalam distribusi beta posterior, parameter kiri bertambah sebesar banyaknya keberhasilan \(n\), sedangkan parameter kanan bertambah sebesar banyaknya kegagalan \(Y_n - n\), seperti pada model Bernoulli dalam <a href="#ber1" class="ref"></a>. Secara khusus, parameter kiri posterior bersifat deterministik dan hanya bergantung pada data melalui ukuran sampel \( n \).</p>
+
+<div class="unit" id="geo1">
+    <p class="math">Penduga Bayes bagi \(p\) berdasarkan \( \bs{X}_n \) adalah
+	\[ V_n = \frac{a + n}{a + b + Y_n} \]</p>
+	<details>
+        <summary>Rincian:</summary>
+        <p>Menurut definisi, penduga Bayes adalah rata-rata distribusi posterior. Ingat kembali bahwa rata-rata distribusi beta adalah parameter kiri dibagi jumlah kedua parameternya, sehingga hasil ini mengikuti teorema sebelumnya.</p>
+	</details>
+</div>
+
+<p>Ingat bahwa <a href="Moments.html#geo">penduga metode momen</a> bagi \( p \) dan, ketika maksimum dicapai, <a href="Likelihood.html#geo">penduga kemungkinan maksimum</a> bagi \(p\) pada interval \( (0, 1) \) sama-sama adalah \(W_n = 1 / M_n = n / Y_n\). Jika seluruh pengamatan sama dengan 1, nilai batas 1 tidak termasuk ruang parameter terbuka dan hanya merupakan supremum. Untuk melihat hubungan antarpeduga, perhatikan dari <a href="#geo1" class="ref"></a> bahwa
+\[ \frac{1}{V_n} = \frac{a}{a + n} \frac{a + b}{a} + \frac{n}{a + n} \frac{1}{W_n} \]
+Jadi, \( 1 / V_n \), yaitu kebalikan penduga Bayes, merupakan rata-rata tertimbang dari \( (a + b) / a \), yaitu kebalikan rata-rata distribusi prior, dan \( 1 / W_n \), yaitu kebalikan penduga kemungkinan maksimum ketika maksimum tersebut dicapai.</p>
+
+<h4 id="poi">Distribusi Poisson</h4>
+
+<p>Andaikan \(\bs{X} = (X_1, X_2, \ldots)\) merupakan barisan variabel acak saling bebas, masing-masing mempunyai <a href="https://www.randomservices.org/random/poisson/Poisson.html">distribusi Poisson</a> dengan parameter tak diketahui \(\lambda \in (0, \infty)\). Ingat bahwa distribusi Poisson sering digunakan untuk memodelkan banyaknya <q>titik acak</q> dalam suatu selang waktu atau daerah ruang, khususnya dalam konteks <a href="https://www.randomservices.org/random/poisson/index.html">proses Poisson</a>. Distribusi ini dinamai menurut <a href="https://www.randomservices.org/random/biographies/Poisson.html" class="ancillary">Simeon Poisson</a> dan, bersyarat pada \(\lambda\), mempunyai fungsi kepadatan probabilitas
+\[ g(x \mid \lambda) = e^{-\lambda} \frac{\lambda^x}{x!}, \quad x \in \N \]
+Sekali lagi, untuk \( n \in \N_+ \), tetapkan \(Y_n = \sum_{i=1}^n X_i\). Bersyarat pada \(\lambda\), variabel acak \(Y_n\) juga mempunyai distribusi Poisson, tetapi dengan parameter \(n \lambda\).</p>
+
+<p>Andaikan sekarang \(\lambda\) dimodelkan dengan variabel acak \( \Lambda \) yang mempunyai <a href="https://www.randomservices.org/random/special/Gamma.html">distribusi gamma</a> prior dengan parameter bentuk \(k \in (0, \infty)\) dan parameter laju \(r \in (0, \infty)\). Seperti biasa, \(k\) dan \(r\) dipilih untuk menyatakan pengetahuan awal tentang \(\lambda\). Jadi, fungsi kepadatan probabilitas prior bagi \(\Lambda\) adalah
+\[ h(\lambda) = \frac{r^k}{\Gamma(k)} \lambda^{k-1} e^{-r \lambda}, \quad \lambda \in (0, \infty) \]
+dan mempunyai rata-rata \( k / r \). Parameter skala distribusi gamma adalah \(b = 1/r\), tetapi rumus-rumus menjadi lebih sederhana jika kita menggunakan parameter laju.</p>
+
+<div class="unit" id="o006.random.point.bayes.unit.poisson-posterior">
+    <p class="math">Distribusi posterior \(\Lambda\) dengan syarat \(\bs{X}_n = (X_1, X_2, \ldots, X_n)\) adalah gamma dengan parameter bentuk \(k + Y_n\) dan parameter laju \(r + n\).</p>
+	<details>
+        <summary>Rincian:</summary>
+        <p>Tetapkan \( n \in \N_+ \). Misalkan \( \bs x = (x_1, x_2, \ldots, x_n) \in \N^n \) dan \( y = \sum_{i=1}^n x_i \). Maka
+		\[ f(\bs x \mid \lambda) = g(x_1 \mid \lambda) g(x_2 \mid \lambda) \cdots g(x_n \mid \lambda) = e^{-n \lambda} \frac{\lambda^y}{x_1! x_2! \cdots x_n!} \]
+        Karena itu,
+		\begin{align}
+			h(\lambda) f( \bs x \mid \lambda) &amp; = \frac{r^k}{\Gamma(k)} \lambda^{k-1} e^{-r \lambda} e^{-n \lambda} \frac{\lambda^y}{x_1! x_2! \cdots x_n!} \\
+			&amp; = \frac{r^k}{\Gamma(k) x_1! x_2! \cdots x_n!} e^{-(r + n) \lambda} \lambda^{k + y - 1}, \quad \lambda \in (0, \infty)
+		\end{align}
+        Sebagai fungsi dari \( \lambda \in (0, \infty) \), ungkapan terakhir sebanding dengan fungsi kepadatan gamma berparameter bentuk \( k + y \) dan parameter laju \( r + n \). Konstanta normalisasi \(f(\bs{x})\) kembali tidak perlu dihitung.</p>
+	</details>
+</div>
+
+<p>Dengan demikian, distribusi gamma konjugat terhadap distribusi Poisson. Parameter laju posterior bersifat deterministik dan hanya bergantung pada data melalui ukuran sampel \( n \).</p>
+
+<div class="unit" id="poi1">
+    <p class="math">Penduga Bayes bagi \(\lambda\) berdasarkan \( \bs{X}_n = (X_1, X_2, \ldots, X_n) \) adalah
+	\[ V_n = \frac{k + Y_n}{r + n} \]</p>
+	<details>
+        <summary>Rincian:</summary>
+        <p>Menurut definisi, penduga Bayes adalah rata-rata distribusi posterior. Ingat bahwa rata-rata distribusi gamma adalah parameter bentuk dibagi parameter laju.</p>
+	</details>
+</div>
+
+<p>Karena \( V_n \) merupakan fungsi linear dari \( Y_n \) dan kita mengetahui distribusi \( Y_n \) bersyarat pada \( \lambda \in (0, \infty) \), kita dapat menghitung fungsi bias dan galat kuadrat rata-ratanya.</p>
+
+<div class="unit" id="o006.random.point.bayes.unit.poisson-bias">
+    <p class="math">Untuk \( n \in \N_+ \),
+	\[ \bias(V_n \mid \lambda) = \frac{k - r \lambda}{r + n}, \quad \lambda \in (0, \infty) \]
+    Barisan penduga \( \bs V = (V_n: n \in \N_+) \) tak bias secara asimtotik.</p>
+	<details>
+        <summary>Rincian:</summary>
+        <p>Perhitungannya sederhana karena distribusi \( Y_n \) bersyarat pada \( \lambda \) adalah Poisson dengan parameter \( n \lambda \).
+		\[ \bias(V_n \mid \lambda) = \E(V_n \mid \lambda) - \lambda = \frac{k + n \lambda}{r + n} - \lambda = \frac{k - r \lambda}{r + n} \]
+        Jelas bahwa \( \bias(V_n \mid \lambda) \to 0 \) ketika \( n \to \infty \).</p>
+	</details>
+</div>
+
+<p>Seperti sebelumnya, kita tidak dapat memilih \(k\) dan \(r\) agar \(V_n\) tak bias untuk seluruh nilai parameter tanpa mengetahui \(\lambda\).</p>
+
+<div class="unit" id="o006.random.point.bayes.unit.poisson-mse">
+    <p class="math">Untuk \( n \in \N_+ \),
+	\[ \mse(V_n \mid \lambda) = \frac{n \lambda + (k - r \lambda)^2}{(r + n)^2}, \quad \lambda \in (0, \infty) \]
+    Barisan penduga \( \bs V = (V_n: n \in \N_+) \) konsisten dalam kuadrat rata-rata.</p>
+	<details>
+        <summary>Rincian:</summary>
+        <p>Sekali lagi, perhitungannya mudah karena distribusi \( Y_n \) bersyarat pada \( \lambda \) adalah Poisson dengan parameter \( n \lambda \).
+		\[ \mse(V_n \mid \lambda) = \var(V_n \mid \lambda) + \bias^2(V_n \mid \lambda) = \frac{n \lambda}{(r + n)^2} + \left(\frac{k - r \lambda}{r + n}\right)^2 \]
+        Jelas bahwa \( \mse(V_n \mid \lambda) \to 0 \) ketika \( n \to \infty \).</p>
+	</details>
+</div>
+
+<p>Ingat bahwa <a href="Moments.html#est">penduga metode momen</a> bagi \( \lambda \) dan, ketika maksimum dicapai, <a href="Likelihood.html#poi">penduga kemungkinan maksimum</a> bagi \(\lambda\) pada interval \( (0, \infty) \) sama-sama adalah \(M_n = Y_n / n\), yaitu rata-rata sampel. Jika semua pengamatan nol, nilai batas 0 tidak termasuk ruang parameter terbuka dan hanya merupakan supremum. Penduga tersebut tak bias dan mempunyai galat kuadrat rata-rata \(\lambda / n\). Untuk melihat hubungan antarpeduga, perhatikan dari <a href="#poi1" class="ref"></a> bahwa
+\[ V_n = \frac{r}{r + n} \frac{k}{r} + \frac{n}{r + n} M_n \] 
+Jadi, \( V_n \) merupakan rata-rata tertimbang dari \( k / r \), yaitu rata-rata distribusi prior, dan \( M_n \), yaitu penduga kemungkinan maksimum ketika maksimum tersebut dicapai.</p>
+
+<h4 id="nor">Distribusi Normal</h4>
+
+<p>Andaikan \(\bs X = (X_1, X_2, \ldots)\) merupakan barisan variabel acak saling bebas, masing-masing mempunyai <a href="https://www.randomservices.org/random/special/Normal.html">distribusi normal</a> dengan rata-rata tak diketahui \(\mu \in \R\) tetapi varians diketahui \(\sigma^2 \in (0, \infty)\). Distribusi normal berperan sangat penting dalam statistika, antara lain karena <a href="../sample/CLT.html">teorema limit pusat</a>. Distribusi normal banyak digunakan untuk memodelkan besaran fisik yang dipengaruhi banyak galat acak kecil. Dalam banyak penerapan statistika, varians distribusi normal lebih stabil daripada rata-ratanya, sehingga asumsi bahwa varians diketahui tidak sepenuhnya dibuat-buat. Ingat bahwa fungsi kepadatan probabilitas normal, bersyarat pada \( \mu \), adalah
+\[ g(x \mid \mu) = \frac{1}{\sqrt{2 \, \pi} \sigma} \exp\left[-\frac{1}{2}\left(\frac{x - \mu}{\sigma}\right)^2 \right], \quad x \in \R \]
+Sekali lagi, untuk \( n \in \N_+ \), misalkan \(Y_n = \sum_{i=1}^n X_i\). Ingat bahwa \(Y_n\) juga mempunyai distribusi normal bersyarat pada \(\mu\), tetapi dengan rata-rata \(n \mu\) dan varians \(n \sigma^2\).</p>
+
+<p>Andaikan sekarang \(\mu\) dimodelkan oleh variabel acak \( \Psi \) yang mempunyai distribusi normal prior dengan rata-rata \(a \in \R\) dan varians \(b^2 \in (0, \infty)\). Seperti biasa, \(a\) dan \(b\) dipilih untuk menyatakan pengetahuan awal tentang \(\mu\). Kasus khusus yang menarik terjadi ketika \(b = \sigma\), sehingga varians distribusi prior \(\Psi\) sama dengan varians distribusi pensampelan yang mendasari.</p>
+
+<div class="unit" id="nor1">
+    <p class="math">Untuk \( n \in \N_+ \), distribusi posterior \(\Psi\) dengan syarat \(\bs{X}_n = (X_1, X_2, \ldots, X_n)\) adalah normal dengan rata-rata dan varians berikut:
+	\begin{align}
+		\E(\Psi \mid \bs{X}_n) &amp; = \frac{Y_n b^2 + a \sigma^2}{n b^2 + \sigma^2}\\
+		\var(\Psi \mid \bs{X}_n) &amp; = \frac{\sigma^2 b^2}{n b^2 + \sigma^2}
+	\end{align}</p>
+	<details>
+        <summary>Rincian:</summary>
+        <p>Tetapkan \( n \in \N_+ \). Andaikan \( \bs x = (x_1, x_2, \ldots, x_n) \in \R^n \), dan misalkan \( y = \sum_{i=1}^n x_i \) serta \( w^2 = \sum_{i=1}^n x_i^2 \). Maka
+		\begin{align} 
+			f(\bs x \mid \mu) &amp; = g(x_1 \mid \mu) g(x_2 \mid \mu) \cdots g(x_n \mid \mu) = \frac{1}{(2 \pi)^{n/2} \sigma^n} \exp\left[-\frac{1}{2} \sum_{i=1}^n \left(\frac{x_i - \mu}{\sigma}\right)^2\right] \\
+			&amp; = \frac{1}{(2 \pi)^{n/2} \sigma^n} \exp\left[-\frac{1}{2 \sigma^2}(w^2 - 2 \mu y + n \mu^2)\right]
+		\end{align}
+        Di sisi lain,
+		\[ h(\mu) = \frac{1}{\sqrt{2 \pi} b} \exp\left[-\frac{1}{2}\left(\frac{\mu - a}{b}\right)^2\right]  = \frac{1}{\sqrt{2 \pi}b} \exp\left[-\frac{1}{2 b^2}(\mu^2 - 2 a \mu + a^2)\right]\]
+        Karena itu,
+		\[ h(\mu) f(\bs x \mid \mu) = C \exp\left\{-\frac{1}{2}\left[\left(\frac{1}{b^2} + \frac{n}{\sigma^2}\right) \mu^2 - 2 \left(\frac{a}{b^2} + \frac{y}{\sigma^2}\right) \mu\right]\right\} \]
+        dengan \( C \) bergantung pada \( n \), \( \sigma \), \( a \), \( b \), dan \( \bs x \), tetapi yang penting <em>tidak</em> pada \( \mu \). Jadi, nilai pasti \( C \) tidak perlu kita ketahui. Melengkapi kuadrat terhadap \( \mu \) dalam ungkapan di atas menghasilkan
+		\[ h(\mu) f(\bs x \mid \mu) = K \exp\left[-\frac{1}{2}\left(\frac{1}{b^2} + \frac{n}{\sigma^2}\right) \left(\mu - \frac{a / b^2 + y / \sigma^2}{1 / b^2 + n / \sigma^2}\right)^2\right] \]
+        dengan \( K \) sebagai faktor lain yang bergantung pada banyak besaran, tetapi tidak pada \( \mu \). Sebagai fungsi dari \( \mu \), ungkapan ini sebanding dengan distribusi normal dengan rata-rata dan varians berikut, secara berurutan:
+		\begin{align} 
+			&amp;\frac{a / b^2 + y / \sigma^2}{1 / b^2 + n / \sigma^2} = \frac{y b^2 + a \sigma^2}{n b^2 + \sigma^2} \\
+			&amp; \frac{1}{1 / b^2 + n / \sigma^2} = \frac{\sigma^2 b^2}{\sigma^2 + n b^2}
+		\end{align}
+        Sekali lagi, konstanta normalisasi \(f(\bs{x})\) tidak perlu dihitung; konstanta itu hanya akan menjadi faktor lain yang tidak kita perlukan.</p>
+	</details>
+</div>
+
+<p>Jadi, keluarga normal konjugat terhadap keluarga distribusi normal dengan rata-rata tak diketahui dan varians diketahui. Perhatikan bahwa varians posterior bersifat deterministik dan bergantung pada data hanya melalui ukuran sampel \( n \). Dalam kasus khusus \(b = \sigma\), distribusi posterior \(\Psi\) dengan syarat \(\bs{X}_n\) adalah normal dengan rata-rata \((Y_n + a) / (n + 1)\) dan varians \(\sigma^2 / (n + 1)\).</p>
+
+<div class="unit" id="nor2">
+    <p class="math">Penduga Bayes bagi \(\mu\) adalah
+	\[ U_n = \frac{Y_n b^2 + a \sigma^2}{n b^2 + \sigma^2} \]</p>
+	<details>
+        <summary>Rincian:</summary>
+        <p>Hasil ini langsung mengikuti <a href="#nor1" class="ref"></a>.</p>
+	</details>
+</div>
+
+<p>Perhatikan bahwa \(U_n = (Y_n + a) / (n + 1)\) dalam kasus khusus \(b = \sigma\).</p>
+
+<div class="unit" id="o006.random.point.bayes.unit.normal-bias">
+    <p class="math">Untuk \( n \in \N_+ \),
+	\[ \bias(U_n \mid \mu) = \frac{\sigma^2 (a - \mu)}{\sigma^2 + n \, b^2}, \quad \mu \in \R \]
+    Barisan penduga \( \bs U = (U_n: n \in \N_+) \) tak bias secara asimtotik.</p>
+	<details>
+        <summary>Rincian:</summary>
+        <p>Ingat bahwa \( Y_n \) mempunyai rata-rata \( n \mu \) bersyarat pada \( \mu \). Maka
+		\[ \bias(U_n \mid \mu) = \E(U_n \mid \mu) - \mu = \frac{n b^2 \mu + a \sigma^2}{n b^2 + \sigma^2} - \mu = \frac{(a - \mu) \sigma^2}{n b^2 + \sigma^2} \]
+        Jelas bahwa \( \bias(U_n \mid \mu) \to 0 \) ketika \( n \to \infty \) untuk setiap \( \mu \in \R \).</p>
+	</details>
+</div>
+
+<p>Ketika \(b = \sigma\), berlaku \(\bias(U_n \mid \mu) = (a - \mu) / (n + 1)\).</p>
+
+<div class="unit" id="o006.random.point.bayes.unit.normal-mse">
+    <p class="math">Untuk \( n \in \N_+ \),
+	\[ \mse(U_n \mid \mu) = \frac{n \sigma^2 b^4 + \sigma^4 (a - \mu)^2}{(\sigma^2 + n \, b^2)^2}, \quad \mu \in \R \]
+    Barisan penduga \( \bs U = (U_n: n \in \N_+) \) konsisten dalam kuadrat rata-rata.</p>
+	<details>
+        <summary>Rincian:</summary>
+        <p>Ingat bahwa \( Y_n \) mempunyai varians \( n \sigma^2 \). Maka
+		\[ \mse(U_n \mid \mu) = \var(U_n \mid \mu) + \bias^2(U_n \mid \mu) = \left(\frac{b^2}{n b^2 + \sigma^2}\right)^2 n \sigma^2 + \left(\frac{(a - \mu) \sigma^2}{n b^2 + \sigma^2}\right)^2 \]
+        Jelas bahwa \( \mse(U_n \mid \mu) \to 0 \) ketika \( n \to \infty \) untuk setiap \( \mu \in \R \).</p>
+	</details>
+</div>
+
+<p>Ketika \(b = \sigma\), berlaku \(\mse(U_n \mid \mu) = [n \sigma^2 + (a - \mu)^2] / (n + 1)^2\).
+Ingat bahwa <a href="Moments.html#est">penduga metode momen</a> bagi \( \mu \) dan <a href="Likelihood.html#nor">penduga kemungkinan maksimum</a> bagi \(\mu\) pada \( \R \) sama-sama adalah \(M_n = Y_n / n\), yaitu rata-rata sampel. Penduga ini tak bias dan mempunyai galat kuadrat rata-rata \(\mse(M_n \mid \mu) = \var(M_n \mid \mu) = \sigma^2 / n\). Untuk melihat hubungan antarpeduga, perhatikan dari <a href="#nor2" class="ref"></a> bahwa
+\[ U_n = \frac{\sigma^2}{n b^2 + \sigma^2} a + \frac{n b^2}{n b^2 + \sigma^2} M_n \]
+Jadi, \( U_n \) merupakan rata-rata tertimbang dari \( a \), yaitu rata-rata distribusi prior, dan \( M_n \), yaitu penduga kemungkinan maksimum.</p>
+
+<h4 id="bet">Distribusi Beta</h4>
+
+<p>Andaikan \(\bs{X} = (X_1, X_2, \ldots)\) merupakan barisan variabel acak saling bebas, masing-masing mempunyai <a href="https://www.randomservices.org/random/special/Beta.html">distribusi beta</a> dengan parameter bentuk kiri tak diketahui \(a \in (0, \infty)\) dan parameter bentuk kanan \(b = 1\). Distribusi beta banyak digunakan untuk memodelkan proporsi dan probabilitas acak serta variabel lain yang nilainya berada dalam interval terbatas, setelah diskalakan ke \( (0, 1) \). Ingat bahwa fungsi kepadatan probabilitasnya, bersyarat pada \(a\), adalah
+\[ g(x \mid a) = a \, x^{a-1}, \quad x \in (0, 1) \]
+Andaikan sekarang \(a\) dimodelkan oleh variabel acak \( A \) yang mempunyai distribusi gamma prior dengan parameter bentuk \(k \in (0, \infty)\) dan parameter laju \(r \in (0, \infty)\). Seperti biasa, \(k\) dan \(r\) dipilih untuk menyatakan pengetahuan awal tentang \(a\). Jadi, fungsi kepadatan probabilitas prior bagi \(A\) adalah
+\[ h(a) = \frac{r^k}{\Gamma(k)} a^{k-1} e^{-r a}, \quad a \in (0, \infty) \]
+Rata-rata distribusi prior adalah \( k / r \).</p>
+
+<div class="unit" id="bet1">
+    <p class="math">Distribusi posterior \(A\) dengan syarat \(\bs{X}_n = (X_1, X_2, \ldots, X_n)\) adalah gamma dengan parameter bentuk \(k + n\) dan parameter laju \(r - \ln(X_1 X_2 \cdots X_n)\).</p>
+	<details>
+        <summary>Rincian:</summary>
+        <p>Tetapkan \( n \in \N_+ \). Misalkan \( \bs x = (x_1, x_2, \ldots, x_n) \in (0, 1)^n \) dan \( z = x_1 x_2 \cdots x_n \). Maka
+		\[ f(\bs x \mid a) = g(x_1 \mid a) g(x_2 \mid a) \cdots g(x_n \mid a) = a^n z^{a - 1} = \frac{a^n}{z} e^{a \ln z} \]
+        Karena itu,
+		\[ h(a) f(\bs x \mid a) = \frac{r^k}{z \Gamma(k)} a^{n + k - 1} e^{-a (r - \ln z)}, \quad a \in (0, \infty) \]
+        Sebagai fungsi dari \( a \in (0, \infty) \), ungkapan ini sebanding dengan fungsi kepadatan gamma dengan parameter bentuk \( n + k \) dan parameter laju \( r - \ln z \). Sekali lagi, konstanta normalisasi \( f(\bs x) \) tidak perlu dihitung.</p>
+	</details>
+</div>
+
+<p>Jadi, distribusi gamma konjugat terhadap distribusi beta dengan parameter kiri tak diketahui dan parameter kanan 1. Perhatikan bahwa parameter bentuk posterior bersifat deterministik dan bergantung pada data hanya melalui ukuran sampel \( n \).</p>
+
+<div class="unit" id="bet2">
+    <p class="math">Penduga Bayes bagi \(a\) berdasarkan \( \bs{X}_n \) adalah
+	\[ U_n = \frac{k + n}{r - \ln(X_1 X_2 \cdots X_n)} \]</p>
+	<details>
+        <summary>Rincian:</summary>
+        <p>Rata-rata distribusi gamma adalah parameter bentuk dibagi parameter laju, sehingga hasil ini mengikuti <a href="#bet1" class="ref"></a>.</p>
+	</details>
+</div>
+
+<p>Mengingat strukturnya yang rumit, bias dan galat kuadrat rata-rata \(U_n\) bersyarat pada \(a \in (0, \infty)\) akan sulit dihitung secara eksplisit. Ingat bahwa <a href="Likelihood.html#bet">penduga kemungkinan maksimum</a> bagi \(a\) adalah \(W_n = -n / \ln(X_1 \, X_2 \cdots X_n)\). Untuk melihat hubungan antarpeduga, perhatikan dari <a href="#bet2" class="ref"></a> bahwa
+\[ \frac{1}{U_n} = \frac{k}{k + n} \frac{r}{k} + \frac{n}{k + n} \frac{1}{W_n}\]
+Jadi, \( 1 / U_n \), yaitu kebalikan penduga Bayes, merupakan rata-rata tertimbang dari \( r / k \), yaitu kebalikan rata-rata distribusi prior, dan \( 1 / W_n \), yaitu kebalikan penduga kemungkinan maksimum.</p>
+
+<h4 id="par">Distribusi Pareto</h4>
+
+<p>Andaikan \(\bs{X} = (X_1, X_2, \ldots)\) merupakan barisan variabel acak saling bebas, masing-masing mempunyai <a href="https://www.randomservices.org/random/special/Pareto.html">distribusi Pareto</a> dengan parameter bentuk tak diketahui \(a \in (0, \infty)\) dan parameter skala \(b = 1\). Distribusi Pareto digunakan untuk memodelkan variabel finansial tertentu dan variabel lain yang berdistribusi berekor berat, serta dinamai menurut <a href="https://www.randomservices.org/random/biographies/Pareto.html" class="ancillary">Vilfredo Pareto</a>. Ingat bahwa fungsi kepadatan probabilitasnya, bersyarat pada \(a\), adalah
+\[ g(x \mid a) = \frac{a}{x^{a+1}}, \quad x \in [1, \infty) \]
+Andaikan sekarang \(a\) dimodelkan oleh variabel acak \( A \) yang mempunyai distribusi gamma prior dengan parameter bentuk \(k \in (0, \infty)\) dan parameter laju \(r \in (0, \infty)\). Seperti biasa, \(k\) dan \(r\) dipilih untuk menyatakan pengetahuan awal tentang \(a\). Jadi, fungsi kepadatan probabilitas prior bagi \(A\) adalah
+\[ h(a) = \frac{r^k}{\Gamma(k)} a^{k-1} e^{-r a}, \quad a \in (0, \infty) \]</p>
+
+<div class="unit" id="par1">
+    <p class="math">Untuk \( n \in \N_+ \), distribusi posterior \(A\) dengan syarat \(\bs{X}_n = (X_1, X_2, \dots, X_n)\) adalah gamma dengan parameter bentuk \(k + n\) dan parameter laju \(r + \ln(X_1 X_2 \cdots X_n)\).</p>
+	<details>
+        <summary>Rincian:</summary>
+        <p>Tetapkan \( n \in \N_+ \). Misalkan \( \bs x = (x_1, x_2, \ldots, x_n) \in [1, \infty)^n \) dan \( z = x_1 x_2 \cdots x_n \). Maka
+		\[ f(\bs x \mid a) = g(x_1 \mid a) g(x_2 \mid a) \cdots g(x_n \mid a) = \frac{a^n}{z^{a + 1}} = \frac{a^n}{z} e^{- a \ln z} \]
+        Karena itu,
+		\[ h(a) f(\bs x \mid a) = \frac{r^k}{z \Gamma(k)} a^{n + k - 1} e^{-a (r + \ln z)}, \quad a \in (0, \infty) \]
+        Sebagai fungsi dari \( a \in (0, \infty) \), ungkapan ini sebanding dengan fungsi kepadatan gamma dengan parameter bentuk \( n + k \) dan parameter laju \( r + \ln z \). Sekali lagi, konstanta normalisasi \( f(\bs x) \) tidak perlu dihitung.</p>
+	</details>
+</div>
+
+<p>Jadi, distribusi gamma konjugat terhadap distribusi Pareto dengan parameter bentuk tak diketahui. Perhatikan bahwa parameter bentuk posterior bersifat deterministik dan bergantung pada data hanya melalui ukuran sampel \( n \).</p>
+
+<div class="unit" id="par2">
+    <p class="math">Penduga Bayes bagi \(a\) berdasarkan \( \bs{X}_n \) adalah
+	\[ U_n = \frac{k + n}{r + \ln(X_1 X_2 \cdots X_n)} \]</p>
+	<details>
+        <summary>Rincian:</summary>
+        <p>Sekali lagi, rata-rata distribusi gamma adalah parameter bentuk dibagi parameter laju, sehingga hasil ini mengikuti <a href="#par1" class="ref"></a>.</p>
+	</details>
+</div>
+
+<p>Mengingat strukturnya yang rumit, bias dan galat kuadrat rata-rata \(U_n\) bersyarat pada \(a \in (0, \infty)\) akan sulit dihitung secara eksplisit. Jika hasil kali sampel lebih besar daripada 1, <a href="Likelihood.html#par">penduga kemungkinan maksimum</a> bagi \(a\) adalah \(W_n = n / \ln(X_1 \, X_2 \cdots X_n)\). Jika hasil kali sampel sama dengan 1, fungsi kemungkinan meningkat tanpa batas ketika parameter bentuk menuju tak hingga, sehingga tidak ada penduga kemungkinan maksimum berhingga. Kasus batas tersebut berprobabilitas nol di bawah model kontinu, tetapi tetap termasuk dalam ruang sampel yang dinyatakan. Untuk melihat hubungan antarpeduga, perhatikan dari <a href="#par2" class="ref"></a> bahwa
+\[ \frac{1}{U_n} = \frac{k}{k + n} \frac{r}{k} + \frac{n}{k + n} \frac{1}{W_n} \]
+Jadi, \( 1 / U_n \), yaitu kebalikan penduga Bayes, merupakan rata-rata tertimbang dari \( r / k \), yaitu kebalikan rata-rata distribusi prior, dan \( 1 / W_n \), yaitu kebalikan penduga kemungkinan maksimum ketika penduga tersebut ada.</p>
+
+<footer>
+	<ol class="map">
+		<li class="parent"><a href="https://www.randomservices.org/random/index.html">Random</a></li>
+        <li class="parent"><a href="index.html">6. Pendugaan Titik</a></li>
+        <li class="child"><a href="Estimators.html" title="Penduga">1</a></li>
+        <li class="child"><a href="Moments.html" title="Metode Momen">2</a></li>
+        <li class="child"><a href="Likelihood.html" title="Kemungkinan Maksimum">3</a></li>
+		<li class="current">4</li>
+        <li class="child"><a href="https://www.randomservices.org/random/point/Unbiased.html" title="Penduga Tak Bias Terbaik">5</a></li>
+        <li class="child"><a href="https://www.randomservices.org/random/point/Sufficient.html" title="Statistik Cukup, Lengkap, dan Ancilar">6</a></li>
+        <li class="details"><button type="button" title="Perluas Rincian" onclick="expandDetails(true);"><img src="../icons/Plus.svg" alt="Perluas"></button></li>
+        <li class="details"><button type="button" title="Ciutkan Rincian" onclick="expandDetails(false);"><img src="../icons/Minus.svg" alt="Ciutkan"></button></li>
+	</ol>
+	<ul class="map">
+        <li class="sister"><a href="https://www.randomservices.org/random/apps/index.html" class="ancillary">Aplikasi</a></li>
+        <li class="sister"><a href="https://www.randomservices.org/random/data/index.html" class="ancillary">Himpunan Data</a></li>
+        <li class="child"><a href="https://www.randomservices.org/random/biographies/index.html" class="ancillary">Biografi</a></li>
+	</ul>
+    <section class="edition-notice" data-o006-edition-notice="v1">
+        <p><strong>Pemberitahuan edisi.</strong> Terjemahan Bahasa Indonesia ini mengadaptasi <a href="https://www.randomservices.org/random/">Random: Probabilitas, Statistika Matematis, dan Proses Stokastik</a> karya Kyle Siegrist. Perubahan pada halaman ini mencakup penerjemahan, penambahan ID stabil, pengalihan tautan inti yang telah diterjemahkan ke edisi lokal, pengalihan tautan inti yang belum diterjemahkan ke sumber resmi, pengubahan tautan pelengkap menjadi tautan HTTPS resmi, serta koreksi terbatas terhadap kekeliruan matematis dan data yang dicatat dalam daftar koreksi edisi.</p>
+        <p>Situs asal menyatakan <a href="https://creativecommons.org/licenses/by/2.0/">CC BY 2.0</a>, sedangkan halaman <a href="https://www.randomservices.org/random/Credits.html">Kredit</a> menautkan <a href="https://creativecommons.org/licenses/by/1.0/">CC BY 1.0</a>; perbedaan ini dipertahankan. Edisi independen ini tidak didukung maupun disahkan oleh Kyle Siegrist atau Random Services. Tautan ke aplikasi, data, dan biografi pihak ketiga tidak menyatakan hak untuk mendistribusikan ulang materi tersebut.</p>
+    </section>
+</footer>
+
+<script>getReferences();</script>
+
+</body>
+</html>

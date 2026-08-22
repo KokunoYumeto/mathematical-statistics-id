@@ -1,4 +1,8 @@
 beautifulsoup4==4.14.3
 lxml==6.1.1
+pikepdf==10.12.0
+Pillow==12.3.0
+pypdf==6.10.0
+reportlab==4.4.9
 soupsieve==2.8.4
 typing_extensions==4.15.0

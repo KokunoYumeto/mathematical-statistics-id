@@ -458,6 +458,17 @@
         "url": "https://www.randomservices.org/random/icons/Stop.svg"
       },
       {
+        "bytes": 49645,
+        "content_type": "text/html",
+        "etag": "\"c1ed-69b43d7c-682d2b4d062fae8b;;;\"",
+        "last_modified": "Fri, 13 Mar 2026 16:38:20 GMT",
+        "purpose": "translation_authority",
+        "relative_path": "random/point/Bayes.html",
+        "role": "core",
+        "sha256": "96904b1fd4ab905bbffa62bd5cc0d965b3c969e543a983124e968718ed25d550",
+        "url": "https://www.randomservices.org/random/point/Bayes.html"
+      },
+      {
         "bytes": 37864,
         "content_type": "text/html",
         "etag": "\"93e8-69b43d7c-68b9cb6f62934717;;;\"",
@@ -816,24 +827,29 @@
     ],
     "targets": [
       {
-        "bytes": 44264,
+        "bytes": 56719,
+        "relative_path": "random/point/Bayes.html",
+        "sha256": "d292d76240f67b06e4ba2140a0cb95dcc9d674644158131a047a7f23ec755ca8"
+      },
+      {
+        "bytes": 44176,
         "relative_path": "random/point/Estimators.html",
-        "sha256": "14f05894ff840181d0f3ed11dc01b98db5a0cbe4a9cb3574adf03dd51d104958"
+        "sha256": "92df36faf79f6708926bc11e2ff5fc12ab58d3766d9c0db90f177eecdd1f076b"
       },
       {
-        "bytes": 11223,
+        "bytes": 11179,
         "relative_path": "random/point/index.html",
-        "sha256": "dc04019c1dd9285178a752176401b4b25baef59ef804f58ed1bbcc7d30379e68"
+        "sha256": "6aca87eee9087266a30493204e778aca152161a4cc203ab4a4b3c92ad0205b6a"
       },
       {
-        "bytes": 58295,
+        "bytes": 58207,
         "relative_path": "random/point/Likelihood.html",
-        "sha256": "628ffb35d3a391c9764013c3d7ee7c9d29440c07a77b87c26de80d5898a5d636"
+        "sha256": "41fded9b3178b4ccbfd5f68769b9cb0168449a908b1d86b3d58370a663320ec8"
       },
       {
-        "bytes": 57413,
+        "bytes": 57325,
         "relative_path": "random/point/Moments.html",
-        "sha256": "390aed46191f08b1155583268b9d4bdf2d570bd92c161e4db41dfbebe48b95f0"
+        "sha256": "594b4c6e7fd564ccf5e3d10373ef00d0ac3998c1cfe5d2bb4114216be394d02e"
       },
       {
         "bytes": 46128,
@@ -2938,11 +2954,189 @@
       "span_new": "\\( L_{\\bs{x}}(N) \\)",
       "span_old": "\\( L_{\\bs{x}}(r) \\)",
       "surface": "math_span"
+    },
+    {
+      "new": "\\( h(\\theta \\mid \\bs x) = h(\\theta) f(\\bs x \\mid \\theta) / f(\\bs x) \\)",
+      "old": "\\( h(\\theta \\mid x) = h(\\theta) f(\\bs x \\mid \\theta) / f(\\bs x) \\)",
+      "page": "random/point/Bayes.html",
+      "reason": "use the sample vector consistently in the posterior-density identity",
+      "replacements": 1,
+      "span_index": 49,
+      "span_new": "\\( h(\\theta \\mid \\bs x) = h(\\theta) f(\\bs x \\mid \\theta) / f(\\bs x) \\)",
+      "span_old": "\\( h(\\theta \\mid x) = h(\\theta) f(\\bs x \\mid \\theta) / f(\\bs x) \\)",
+      "surface": "math_span"
+    },
+    {
+      "new": "\\( u \\mapsto \\E[(\\Theta - u)^2 \\mid \\bs X = \\bs x] \\)",
+      "old": "\\( u \\mapsto \\E[(\\Theta - u)^2 \\mid \\bs X = \\bs x) \\)",
+      "page": "random/point/Bayes.html",
+      "reason": "close the conditional posterior-risk expression with the matching bracket",
+      "replacements": 1,
+      "span_index": 123,
+      "span_new": "\\( u \\mapsto \\E[(\\Theta - u)^2 \\mid \\bs X = \\bs x] \\)",
+      "span_old": "\\( u \\mapsto \\E[(\\Theta - u)^2 \\mid \\bs X = \\bs x) \\)",
+      "surface": "math_span"
+    },
+    {
+      "new": "\\( \\E(Y_n \\mid p) = n p \\)",
+      "old": "\\( E(Y_n \\mid p) = n p \\)",
+      "page": "random/point/Bayes.html",
+      "reason": "use the page's declared expectation macro",
+      "replacements": 1,
+      "span_index": 206,
+      "span_new": "\\( \\E(Y_n \\mid p) = n p \\)",
+      "span_old": "\\( E(Y_n \\mid p) = n p \\)",
+      "surface": "math_span"
+    },
+    {
+      "new": "\\(U_n\\)",
+      "old": "\\(U\\)",
+      "page": "random/point/Bayes.html",
+      "reason": "restore the estimator index in the constant-MSE discussion",
+      "replacements": 1,
+      "span_index": 238,
+      "span_new": "\\(U_n\\)",
+      "span_old": "\\(U\\)",
+      "surface": "math_span"
+    },
+    {
+      "new": "\\[ M_n = \\frac{Y_n}{n} = \\frac{1}{n} \\sum_{i=1}^n X_i \\]",
+      "old": "\\[ M_n = \\frac{Y}{n} = \\frac{1}{n} \\sum_{i=1}^n X_i \\]",
+      "page": "random/point/Bayes.html",
+      "reason": "restore the indexed Bernoulli success count",
+      "replacements": 1,
+      "span_index": 250,
+      "span_new": "\\[ M_n = \\frac{Y_n}{n} = \\frac{1}{n} \\sum_{i=1}^n X_i \\]",
+      "span_old": "\\[ M_n = \\frac{Y}{n} = \\frac{1}{n} \\sum_{i=1}^n X_i \\]",
+      "surface": "math_span"
+    },
+    {
+      "new": "\\( U_n = \\E(P \\mid \\bs{X}_n) \\)",
+      "old": "\\( U_n = E(P \\mid \\bs{X}_n) \\)",
+      "page": "random/point/Bayes.html",
+      "reason": "use the page's declared expectation macro",
+      "replacements": 1,
+      "span_index": 299,
+      "span_new": "\\( U_n = \\E(P \\mid \\bs{X}_n) \\)",
+      "span_old": "\\( U_n = E(P \\mid \\bs{X}_n) \\)",
+      "surface": "math_span"
+    },
+    {
+      "new": "\\( U_n = 1 \\cdot 0 + \\frac{1}{2} \\cdot 1 = \\frac{1}{2} \\)",
+      "old": "\\( U = 1 \\cdot 0 + \\frac{1}{2} \\cdot 1 = \\frac{1}{2} \\)",
+      "page": "random/point/Bayes.html",
+      "reason": "restore the estimator index in the two-point Bernoulli rule",
+      "replacements": 1,
+      "span_index": 304,
+      "span_new": "\\( U_n = 1 \\cdot 0 + \\frac{1}{2} \\cdot 1 = \\frac{1}{2} \\)",
+      "span_old": "\\( U = 1 \\cdot 0 + \\frac{1}{2} \\cdot 1 = \\frac{1}{2} \\)",
+      "surface": "math_span"
+    },
+    {
+      "new": "\\( \\bias(U_n \\mid p) = \\E(U_n - p \\mid p) \\)",
+      "old": "\\( \\bias(U_n \\mid p) = E(U - p \\mid p) \\)",
+      "page": "random/point/Bayes.html",
+      "reason": "use the expectation macro and the indexed estimator in the bias definition",
+      "replacements": 1,
+      "span_index": 317,
+      "span_new": "\\( \\bias(U_n \\mid p) = \\E(U_n - p \\mid p) \\)",
+      "span_old": "\\( \\bias(U_n \\mid p) = E(U - p \\mid p) \\)",
+      "surface": "math_span"
+    },
+    {
+      "new": "\\(Y_n - n\\)",
+      "old": "\\(Y - n\\)",
+      "page": "random/point/Bayes.html",
+      "reason": "restore the indexed geometric failure count",
+      "replacements": 1,
+      "span_index": 376,
+      "span_new": "\\(Y_n - n\\)",
+      "span_old": "\\(Y - n\\)",
+      "surface": "math_span"
+    },
+    {
+      "new": "\\[ \\mse(V_n \\mid \\lambda) ",
+      "old": "\\[ \\mse(V \\mid \\lambda) ",
+      "page": "random/point/Bayes.html",
+      "reason": "restore the estimator index in the Poisson MSE decomposition",
+      "replacements": 1,
+      "span_index": 448,
+      "span_new": "\\[ \\mse(V_n \\mid \\lambda) ",
+      "span_old": "\\[ \\mse(V \\mid \\lambda) ",
+      "surface": "math_span"
+    },
+    {
+      "new": "\\( \\bs x = (x_1, x_2, \\ldots, x_n) \\in \\R^n \\)",
+      "old": "\\( \\bs x = (x_1, x_2, \\ldots, x_n) \\in \\R \\)",
+      "page": "random/point/Bayes.html",
+      "reason": "put the normal data vector in its n-dimensional sample space",
+      "replacements": 1,
+      "span_index": 484,
+      "span_new": "\\( \\bs x = (x_1, x_2, \\ldots, x_n) \\in \\R^n \\)",
+      "span_old": "\\( \\bs x = (x_1, x_2, \\ldots, x_n) \\in \\R \\)",
+      "surface": "math_span"
+    },
+    {
+      "new": "\\(\\mse(U_n \\mid \\mu)",
+      "old": "\\(\\mse(U \\mid \\mu)",
+      "page": "random/point/Bayes.html",
+      "reason": "restore the estimator index in the special-case normal MSE",
+      "replacements": 1,
+      "span_index": 535,
+      "span_new": "\\(\\mse(U_n \\mid \\mu)",
+      "span_old": "\\(\\mse(U \\mid \\mu)",
+      "surface": "math_span"
+    },
+    {
+      "new": "\\(\\mse(M_n \\mid \\mu) = \\var(M_n \\mid \\mu) = \\sigma^2 / n\\)",
+      "old": "\\(\\var(M) = \\sigma^2 / n\\)",
+      "page": "random/point/Bayes.html",
+      "reason": "identify the indexed sample mean and its equal MSE and variance",
+      "replacements": 1,
+      "span_index": 540,
+      "span_new": "\\(\\mse(M_n \\mid \\mu) = \\var(M_n \\mid \\mu) = \\sigma^2 / n\\)",
+      "span_old": "\\(\\var(M) = \\sigma^2 / n\\)",
+      "surface": "math_span"
+    },
+    {
+      "new": "\\(U_n\\)",
+      "old": "\\(U\\)",
+      "page": "random/point/Bayes.html",
+      "reason": "restore the estimator index in the Pareto comparison",
+      "replacements": 1,
+      "span_index": 618,
+      "span_new": "\\(U_n\\)",
+      "span_old": "\\(U\\)",
+      "surface": "math_span"
+    },
+    {
+      "new": "\\bias(U_n \\mid p)",
+      "old": "\\bias(U \\mid p)",
+      "page": "random/point/Bayes.html",
+      "reason": "restore the indexed estimator in the raw bias derivation",
+      "replacements": 1,
+      "surface": "raw_math_environment"
+    },
+    {
+      "new": "\\P(Y_n = n \\mid p)",
+      "old": "\\P(Y = n \\mid p)",
+      "page": "random/point/Bayes.html",
+      "reason": "restore the indexed success count in the raw bias derivation",
+      "replacements": 1,
+      "surface": "raw_math_environment"
+    },
+    {
+      "new": "\\P(Y_n \\lt n \\mid p)",
+      "old": "\\P(Y \\lt n \\mid p)",
+      "page": "random/point/Bayes.html",
+      "reason": "restore the indexed success count in the complementary raw event",
+      "replacements": 1,
+      "surface": "raw_math_environment"
     }
   ],
   "reader": {
     "directory": "build/html-id",
-    "file_count": 43,
+    "file_count": 44,
     "files": [
       {
         "bytes": 533,
@@ -3030,24 +3224,29 @@
         "sha256": "54bf3c5fd23ccf5dd602750aaf09c42ca6d4b1b10b8333e54bc580580f06686e"
       },
       {
-        "bytes": 44264,
+        "bytes": 56719,
+        "relative_path": "random/point/Bayes.html",
+        "sha256": "d292d76240f67b06e4ba2140a0cb95dcc9d674644158131a047a7f23ec755ca8"
+      },
+      {
+        "bytes": 44176,
         "relative_path": "random/point/Estimators.html",
-        "sha256": "14f05894ff840181d0f3ed11dc01b98db5a0cbe4a9cb3574adf03dd51d104958"
+        "sha256": "92df36faf79f6708926bc11e2ff5fc12ab58d3766d9c0db90f177eecdd1f076b"
       },
       {
-        "bytes": 11223,
+        "bytes": 11179,
         "relative_path": "random/point/index.html",
-        "sha256": "dc04019c1dd9285178a752176401b4b25baef59ef804f58ed1bbcc7d30379e68"
+        "sha256": "6aca87eee9087266a30493204e778aca152161a4cc203ab4a4b3c92ad0205b6a"
       },
       {
-        "bytes": 58295,
+        "bytes": 58207,
         "relative_path": "random/point/Likelihood.html",
-        "sha256": "628ffb35d3a391c9764013c3d7ee7c9d29440c07a77b87c26de80d5898a5d636"
+        "sha256": "41fded9b3178b4ccbfd5f68769b9cb0168449a908b1d86b3d58370a663320ec8"
       },
       {
-        "bytes": 57413,
+        "bytes": 57325,
         "relative_path": "random/point/Moments.html",
-        "sha256": "390aed46191f08b1155583268b9d4bdf2d570bd92c161e4db41dfbebe48b95f0"
+        "sha256": "594b4c6e7fd564ccf5e3d10373ef00d0ac3998c1cfe5d2bb4114216be394d02e"
       },
       {
         "bytes": 790,
@@ -3160,10 +3359,10 @@
         "sha256": "b8af913a9be5c7e0313653afc6eae3121f3850fd72535cdab9e36f03279fcc34"
       }
     ],
-    "manifest_bytes": 4228,
+    "manifest_bytes": 4323,
     "manifest_path": "build/FIRST_UNIT_MANIFEST.csv",
-    "manifest_sha256": "eac39713ed320b88ba61170e7dbdd2f08104a0bea7e0ffc5d8ac2c8b0816e9a8",
-    "total_bytes": 2415553
+    "manifest_sha256": "7f00470344a634c3cffe0eb3893690a10784f0894baca9a3fb1bc68418d5dae2",
+    "total_bytes": 2471964
   },
   "reader_customizations": [
     {
@@ -3184,14 +3383,14 @@
   "schema": "o006.random.first-unit-build.v1",
   "scripts": {
     "build": {
-      "bytes": 106583,
+      "bytes": 110564,
       "path": "scripts/build_first_unit.py",
-      "sha256": "ea8c38f0b931304d0ff89b867ef49f7c739f71784eacb679a6f2d6a76ea434a2"
+      "sha256": "f9fa9346e2eec31b48b61bc016d065c3c5d085a6c064dc1542e760a8fc9267c6"
     },
     "qa": {
-      "bytes": 91253,
+      "bytes": 97102,
       "path": "scripts/qa_first_unit.py",
-      "sha256": "de5ce8a85cad9de98cf7f646aa044d3380ade3e4bace7064f37f0ca6037cff7d"
+      "sha256": "116dcc99f9b971ee97293ecb02bc1cf253a46000822669cef23890190b5b0402"
     }
   },
   "transport_hardening": [
