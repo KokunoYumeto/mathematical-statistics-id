@@ -525,10 +525,15 @@ page 106. All 173 corrected pages were rerendered and visually reviewed, and
 the automated and deterministic PDF replays pass. The PDF is not tagged after
 deterministic merge, so HTML remains the accessibility-first surface.
 
-GitHub access is restored and a read-only preflight proves that local `main` is
-a nondivergent fast-forward descendant of the nine-page public tip. The exact
-fourteen-page files are ready to commit and push, followed by Pages and
-anonymous byte verification. Zenodo concept DOI `10.5281/zenodo.22059763` is
+GitHub access is restored. The exact fourteen-page checkpoint is public at
+commit `394b3380dd654af6b133448bcaa999b3d875afa3`; workflow
+`32593666231` / job `97081234452` passed the clean-checkout deterministic gates
+and Pages deployment. Credential-free readback matched all 44 Pages files /
+2,471,964 bytes, eight critical raw-commit files / 10,586,317 bytes, and the
+73,828,250-byte PDF prerelease asset. Public desktop/mobile browser checks also
+pass. Exact evidence is
+`GITHUB_PUBLICATION_RECEIPT_2026-08-22_FOURTEEN_PAGE.json`. Zenodo concept DOI
+`10.5281/zenodo.22059763` is
 the sole release lineage and must advance through its latest record's
 `newversion` action. Figshare item `33314784` remains an honest public CC0
 metadata pointer: its authenticated license inventory still has no
@@ -609,8 +614,8 @@ remains unchanged.
 
 ## Next work
 
-1. Publish and anonymously verify the fourteen-page checkpoint on the restored
-   GitHub repository/Pages and as v14 in the existing Zenodo concept. Update
+1. Publish and anonymously verify the fourteen-page checkpoint as v14 in the
+   existing Zenodo concept. Update
    the existing Figshare CC0 metadata pointer to that Zenodo version without
    uploading mixed-rights bytes under a false machine license.
 2. Continue immediately through all 15 remaining source pages, beginning with

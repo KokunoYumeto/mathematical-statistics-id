@@ -24,6 +24,8 @@ Produksi berikutnya berlanjut dari `point/Unbiased.html`.
 - Pembaca web: <https://kokunoyumeto.github.io/mathematical-statistics-id/>
 - Sumber, riwayat, dan rilis PDF GitHub:
   <https://github.com/KokunoYumeto/mathematical-statistics-id>
+- Rilis PDF checkpoint 14/29:
+  <https://github.com/KokunoYumeto/mathematical-statistics-id/releases/tag/v2026.08.22.14>
 - Karya sumber resmi: <https://www.randomservices.org/random/>
 
 Pembaca luring dibangun secara deterministik dari `source/id-ID/` dengan

@@ -1,0 +1,89 @@
+{
+  "schema": "o006.random.github-publication-receipt.v1",
+  "checked_at": "2026-08-22T21:28:00+02:00",
+  "result": "published-pages-release-and-public-bytes-verified",
+  "repository": {
+    "url": "https://github.com/KokunoYumeto/mathematical-statistics-id",
+    "branch": "main",
+    "commit": "394b3380dd654af6b133448bcaa999b3d875afa3",
+    "previous_public_commit": "1806863320c1c0859e04a2d93773adbb8d4ae377",
+    "update": "fast-forward",
+    "force_push": false,
+    "anonymous_api_commit_match": true
+  },
+  "workflow": {
+    "run_id": 32593666231,
+    "job_id": 97081234452,
+    "artifact_id": 9480984516,
+    "url": "https://github.com/KokunoYumeto/mathematical-statistics-id/actions/runs/32593666231",
+    "result": "success",
+    "exact_source_checkout": true,
+    "backend_reader_replay": "pass",
+    "pages_deploy": "pass"
+  },
+  "closed_release_incident": {
+    "failed_run_id": 32593562091,
+    "failed_commit": "44c4e2172c15da463b907a3433b3a44aa0296ffc",
+    "cause": "The first explicit-path commit omitted the already-modified build and QA replay scripts, so the Linux clean checkout correctly classified Bayes.html as an extra reader file.",
+    "repair": "Commit the six exact replay/localizer scripts, rerun the local deterministic gates, and push the nondivergent fast-forward commit 394b3380dd654af6b133448bcaa999b3d875afa3.",
+    "content_loss": false,
+    "upstream_defect": false
+  },
+  "pages_readback": {
+    "url": "https://kokunoyumeto.github.io/mathematical-statistics-id/",
+    "method": "Credential-free HTTPS download of every manifest row.",
+    "files": 44,
+    "bytes": 2471964,
+    "manifest_sha256": "7f00470344a634c3cffe0eb3893690a10784f0894baca9a3fb1bc68418d5dae2",
+    "all_size_and_sha256_matches": true,
+    "bayes": {
+      "path": "random/point/Bayes.html",
+      "bytes": 56719,
+      "sha256": "d292d76240f67b06e4ba2140a0cb95dcc9d674644158131a047a7f23ec755ca8"
+    }
+  },
+  "public_browser": {
+    "desktop_viewport": [1280, 720],
+    "mobile_viewport": [390, 844],
+    "mathjax_containers_each": 633,
+    "details_each": 23,
+    "expanded_and_collapsed_each": true,
+    "incomplete_images_each": 0,
+    "raw_tex_each": false,
+    "page_overflow_each": false,
+    "uncontained_wide_elements_each": 0,
+    "console_warning_or_error_count": 0,
+    "centered_page_filling_layout": true
+  },
+  "raw_commit_readback": {
+    "method": "Credential-free raw.githubusercontent.com downloads at the exact commit.",
+    "selected_files": 8,
+    "bytes": 10586317,
+    "all_size_and_sha256_matches": true,
+    "selection": [
+      "source/id-ID/random/point/Bayes.html",
+      "backend/entities.jsonl",
+      "backend/BACKEND_RECEIPT.json",
+      "00_control/CHECKPOINT_2026-08-22_FOURTEEN_PAGE.md",
+      "00_control/LIVE_BROWSER_QA_2026-08-22_FOURTEEN_PAGE.json",
+      "build/FIRST_UNIT_MANIFEST.csv",
+      "build/PDF_READER_RECEIPT.json",
+      "README.md"
+    ]
+  },
+  "release": {
+    "tag": "v2026.08.22.14",
+    "url": "https://github.com/KokunoYumeto/mathematical-statistics-id/releases/tag/v2026.08.22.14",
+    "prerelease": true,
+    "completion_claim": "14 of 29 core pages; incomplete edition",
+    "asset": {
+      "name": "statistika-matematis-id-reader.pdf",
+      "url": "https://github.com/KokunoYumeto/mathematical-statistics-id/releases/download/v2026.08.22.14/statistika-matematis-id-reader.pdf",
+      "bytes": 73828250,
+      "sha256": "0b6dfa8384eec9a73cb8a489fd2e47c9052eaf33a899b04a21641a8300d3b5af",
+      "anonymous_download_match": true
+    }
+  },
+  "credential_handling": "Push and release used the existing authenticated GitHub CLI session. All public verification used fresh credential-free HTTP clients; no credential value is present in this receipt.",
+  "upstream_contact": "none"
+}

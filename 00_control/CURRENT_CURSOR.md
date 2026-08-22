@@ -31,11 +31,13 @@
 - Exact local checkpoint:
   `CHECKPOINT_2026-08-22_FOURTEEN_PAGE.md` and
   `LIVE_BROWSER_QA_2026-08-22_FOURTEEN_PAGE.json`.
-- GitHub account and repository access are restored. Before this checkpoint's
-  release, public `main`/Pages remains at the nine-page commit
-  `1806863320c1c0859e04a2d93773adbb8d4ae377`; local history is a
-  fast-forward descendant with no divergence. Publish the explicit-path
-  fourteen-page checkpoint, wait for Pages, and anonymously verify bytes.
+- GitHub account and repository access are restored. The fourteen-page
+  checkpoint is public at commit
+  `394b3380dd654af6b133448bcaa999b3d875afa3`; workflow `32593666231` / job
+  `97081234452` passed. All 44 Pages files / 2,471,964 bytes match the local
+  manifest anonymously, and public desktop/mobile rendering passes. Prerelease
+  `v2026.08.22.14` exposes the byte-verified 173-page PDF. Sanitized evidence:
+  `GITHUB_PUBLICATION_RECEIPT_2026-08-22_FOURTEEN_PAGE.json`.
 - Zenodo lineage is concept `22059763` / concept DOI
   `10.5281/zenodo.22059763`; current immutable v13 is record `22059764` / DOI
   `10.5281/zenodo.22059764`. Create v14 only through the existing record's
@@ -48,7 +50,7 @@
 
 Resume by reading this file, `CURRENT_STATE.md`, the freeze receipt, the final
 row of `TRANSLATION_LEDGER.csv`, and the fourteen-page checkpoint. Finish the
-current GitHub/Zenodo/Figshare-pointer release transaction, record anonymous
-readback receipts, and then continue with ordinal 15
+current Zenodo/Figshare-pointer release transaction, record anonymous readback
+receipts, and then continue with ordinal 15
 `random/point/Unbiased.html`. Do not restart source selection, duplicate a DOI
 lineage, contact upstream, or repeat completed pages.
