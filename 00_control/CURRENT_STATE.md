@@ -60,6 +60,9 @@ Zenodo version DOI `10.5281/zenodo.22059764` under concept DOI
 `10.5281/zenodo.22059763`. Its five public files / 2,647,370 bytes match the
 local packages by size, MD5, and SHA-256; a post-publication lineage audit finds
 one matching submitted record and no duplicate matching draft.
+Local content commit `26b214f89b7d8a403cb57b19876e51f524db4645`, tree
+`739f0c1a3ce0b29ef3b49dfa5153cb968d23ab6a`, preserves the exact boundary
+without attempting a GitHub push.
 
 Ordinal 14, `random/point/Bayes.html`, is the next contiguous production
 page. Do not skip to the separate Penn State component or repeat completed

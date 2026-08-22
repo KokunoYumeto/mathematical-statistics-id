@@ -66,6 +66,10 @@
   draft. Sanitized evidence is
   `ZENODO_PUBLICATION_RECEIPT_2026-08-22_THIRTEEN_PAGE.json`; 3,618 bytes;
   SHA-256 `478e7ab515dfd9e08913b5c130731446a582520f198b5b6c981bf91559be9139`.
+  The exact boundary is preserved in local content commit
+  `26b214f89b7d8a403cb57b19876e51f524db4645`, tree
+  `739f0c1a3ce0b29ef3b49dfa5153cb968d23ab6a`; it was not pushed while the
+  GitHub account is suspended.
 
 Resume by reading this file, `CURRENT_STATE.md`, the freeze receipt, and the
 last row of `TRANSLATION_LEDGER.csv`. Continue with

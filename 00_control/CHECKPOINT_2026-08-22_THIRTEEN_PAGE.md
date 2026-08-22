@@ -124,8 +124,10 @@ server stopped.
 ## Preservation
 
 GitHub remains suspended while its support ticket is pending; no additional
-push retry is needed at this boundary. The local commit will preserve the
-exact tree. Zenodo authenticated deduplication inspected 228 owned
+push retry is needed at this boundary. Local content commit
+`26b214f89b7d8a403cb57b19876e51f524db4645`, tree
+`739f0c1a3ce0b29ef3b49dfa5153cb968d23ab6a`, preserves the exact boundary
+without a push. Zenodo authenticated deduplication inspected 228 owned
 depositions and found no matching draft or public lineage. One new draft was
 therefore created and published for this in-progress edition:
 
