@@ -105,10 +105,29 @@ formulas exceed their own boxes by eight pixels and are correctly contained by
 local horizontal scrollers; neither widens the viewport. Visual inspection of
 the page head and widest table passed. Temporary browser state was restored.
 
-The GitHub Pages publication, anonymous manifest readback, and raw-source
-readback are the remaining gates for this boundary. The last publicly verified
-checkpoint remains seven pages until those transactions are recorded. No
-upstream contact has occurred.
+Commit `830ddbc81b2066c0ac17438e03672de0dfca178c` (tree
+`bd9af01b58fa3378337cdf09d777713999d03c59`) was pushed to `main`.
+Workflow run `32550543678`, job `96976449448`, Pages deployment `6032990532`,
+and deployment status `17151722242` completed successfully. The clean runner
+replayed the deterministic backend, build, and QA gates before publishing.
+
+Anonymous HTTPS readback checked every manifest row. Thirty-seven files matched
+on the first sweep; `random/sample/BoxPlot.png` returned one transient HTTP 503
+error document, then matched its exact 790 bytes and SHA-256 on the immediate
+no-cache retry. The complete verified public inventory is therefore 38 files /
+2,206,217 bytes with zero final size or hash mismatches. Anonymous raw-GitHub
+readback at the accepted commit matched all 42 changed source, authority,
+translation, backend, build, and control files / 11,814,221 bytes.
+
+Public live desktop QA reproduced the local metrics, including 802 MathJax
+containers, 10 loaded described images, 34 functional disclosures, 19 valid
+current-page fragments, zero raw TeX, zero console messages, centered layout,
+and no page overflow. Public mobile QA likewise had a 375/375-px document and
+351/351-px body, no page overflow, a fully contained 13×13 table at 333/333 px
+client/scroll width with zero clipped cells, and exactly two intended local
+formula scrollers at 334/342 px. No console warnings or errors were emitted.
+Temporary browser tabs and viewport overrides were closed/reset. No upstream
+contact occurred.
 
 Next source after closing publication: `random/sample/Normal.html`, ordinal 9
 of 29.

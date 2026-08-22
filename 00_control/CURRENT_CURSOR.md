@@ -13,19 +13,17 @@
   SHA-256 `357552b704242cab0cc5111c6756a5bfb04483d9c6dbe3e9d44ce2a10432357f`
 - Latest deterministic QA receipt SHA-256:
   `9be37d79fb12255a0db3f2081e8e1c0a197e98c58f2af9ec7d90367c8a005387`
-- Public state: the seven-page checkpoint is verified at
+- Public state: the eight-page checkpoint is verified at
   <https://kokunoyumeto.github.io/mathematical-statistics-id/> from source
-  commit `fd340e9f9a834584216a6480dd104c5bcbe4c66c`. All 31 public files / 2,055,914
-  bytes match the manifest. OrderStatistics passed live desktop/mobile
-  rendering with 569/569 MathJax outputs, no raw TeX, no console messages, and
+  commit `830ddbc81b2066c0ac17438e03672de0dfca178c`. All 38 public files / 2,206,217
+  bytes match the manifest; 42 changed raw GitHub files also match the accepted
+  commit. Covariance passed live desktop/mobile rendering with 802/802 MathJax
+  outputs, 10/10 loaded described images, no raw TeX, no console messages, and
   no page-level overflow. Sanitized receipt:
-  `PUBLICATION_RECEIPT_2026-08-22_SEVEN_PAGE.json`; SHA-256
-  `e90d168806308a4d996f399c04738fd654cb9654679107e1ceb9eba423153920`.
+  `PUBLICATION_RECEIPT_2026-08-22_EIGHT_PAGE.json`; SHA-256
+  `588d64e4e16903d655b11b5edf058f4980d67329740813631a7799524a6c890e`.
 
-The eight-page boundary is locally complete and awaiting publication/readback;
-the public state above therefore remains the last verified seven-page boundary
-until that transaction is recorded. Resume by reading this file,
-`CURRENT_STATE.md`, the freeze receipt, and the last row of
-`TRANSLATION_LEDGER.csv`. Continue with `random/sample/Normal.html` only after
-the eight-page publication boundary is closed; do not restart source selection
-or repeat the completed unit.
+Resume by reading this file, `CURRENT_STATE.md`, the freeze receipt, and the
+last row of `TRANSLATION_LEDGER.csv`. Continue with
+`random/sample/Normal.html`; do not restart source selection or repeat the
+completed eight-page unit.

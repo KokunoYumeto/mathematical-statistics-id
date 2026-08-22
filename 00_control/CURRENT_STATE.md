@@ -17,9 +17,9 @@ and live desktop/mobile rendering. The exact official MathJax
 order statistics has passed target audit, two deterministic replays, public
 deployment, anonymous byte readback, and live desktop/mobile rendering. The
 eight-page boundary through covariance has passed its bounded language,
-mathematics, frozen-data, topology, backend, build, and deterministic QA gates;
-its publication/readback transaction is the current boundary. The complete
-29-page edition is not yet claimed.
+mathematics, frozen-data, topology, backend, build, deterministic QA, public
+deployment, anonymous byte readback, and live desktop/mobile rendering gates.
+The complete 29-page edition is not yet claimed.
 
 ## Admitted source
 
@@ -230,7 +230,7 @@ overflow. This is not a claim that the complete edition or configured C140
 course is complete. Sanitized publication-receipt SHA-256 is
 `e90d168806308a4d996f399c04738fd654cb9654679107e1ceb9eba423153920`.
 
-## Eight-page local checkpoint
+## Eight-page public checkpoint
 
 Core ordinals 1–8 are complete through `random/sample/Covariance.html`. The
 reader is 38 files / 2,206,217 bytes; canonical manifest SHA-256 is
@@ -251,9 +251,15 @@ include two occurrence-specific source-fragment repairs. Six frozen figures /
 topology, backend, build, two deterministic replays, and live desktop/mobile
 layout gates pass. The live page rendered all 802 MathJax containers and 10
 images, toggled all 34 disclosures, and had no page-level overflow or console
-messages. Publication/readback is the remaining boundary gate; the complete
-edition and configured C140 course are not claimed. Exact evidence is in
-`CHECKPOINT_2026-08-22_EIGHT_PAGE.md`.
+messages. Commit `830ddbc81b2066c0ac17438e03672de0dfca178c`, workflow run
+`32550543678`, job `96976449448`, Pages deployment `6032990532`, and deployment
+status `17151722242` succeeded. Anonymous readback matched all 38 reader files /
+2,206,217 bytes after one targeted retry of a transient 503, and all 42 changed
+raw source/backend/control files / 11,814,221 bytes matched the accepted commit.
+The complete edition and configured C140 course are not claimed. Exact evidence
+is in `CHECKPOINT_2026-08-22_EIGHT_PAGE.md` and
+`PUBLICATION_RECEIPT_2026-08-22_EIGHT_PAGE.json` (SHA-256
+`588d64e4e16903d655b11b5edf058f4980d67329740813631a7799524a6c890e`).
 
 ## Rights boundary
 
@@ -294,10 +300,9 @@ contact upstream during production.
 
 ## Next work
 
-1. Close publication and anonymous readback for the eight-page covariance
-   checkpoint, then continue immediately through all 21 remaining source
-   pages, beginning with `random/sample/Normal.html` (core ordinal 9), while
-   growing the same deterministic reader and stable-ID backend.
+1. Continue immediately through all 21 remaining source pages, beginning with
+   `random/sample/Normal.html` (core ordinal 9), while growing the same
+   deterministic reader and stable-ID backend.
 2. Keep Penn State reconstruction, the one-page Random completeness donor, and
    original C140 companion in separate component paths/repositories; begin
    them only after this clean checkpoint or in a demonstrably non-overlapping

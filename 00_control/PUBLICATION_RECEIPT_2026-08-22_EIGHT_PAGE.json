@@ -1,0 +1,196 @@
+{
+  "schema": "o006.github-pages-publication.v1",
+  "checkpoint": "eight-page-reader",
+  "verified_at": "2026-08-22T06:11:37+02:00",
+  "repository": {
+    "url": "https://github.com/KokunoYumeto/mathematical-statistics-id",
+    "branch": "main",
+    "public": true
+  },
+  "accepted_deployment": {
+    "source_commit_sha": "830ddbc81b2066c0ac17438e03672de0dfca178c",
+    "source_tree_sha": "bd9af01b58fa3378337cdf09d777713999d03c59",
+    "workflow_run_id": 32550543678,
+    "workflow_job_id": 96976449448,
+    "workflow_url": "https://github.com/KokunoYumeto/mathematical-statistics-id/actions/runs/32550543678",
+    "workflow_status": "completed",
+    "workflow_conclusion": "success",
+    "pages_deployment_id": 6032990532,
+    "pages_deployment_status_id": 17151722242,
+    "pages_deployment_status": "success",
+    "pages_exact_sha_status": "success",
+    "public_url": "https://kokunoyumeto.github.io/mathematical-statistics-id/"
+  },
+  "reader": {
+    "manifest_path": "build/FIRST_UNIT_MANIFEST.csv",
+    "manifest_bytes": 3739,
+    "manifest_sha256": "357552b704242cab0cc5111c6756a5bfb04483d9c6dbe3e9d44ce2a10432357f",
+    "build_receipt_bytes": 92227,
+    "build_receipt_sha256": "c05e9d275140f5100a5b134be64cec693c66e367c7ef5a201cd3c0ceb103c14c",
+    "qa_receipt_bytes": 75254,
+    "qa_receipt_sha256": "9be37d79fb12255a0db3f2081e8e1c0a197e98c58f2af9ec7d90367c8a005387",
+    "files": 38,
+    "bytes": 2206217,
+    "translated_pages": 8,
+    "new_page": {
+      "path": "random/sample/Covariance.html",
+      "bytes": 80932,
+      "sha256": "f07eeac25a26897fffbcd3b10435d393849822b3cbf725c3fca581361a8fdb78"
+    },
+    "new_assets": [
+      {
+        "path": "random/sample/ScatterPlot.png",
+        "bytes": 11182,
+        "sha256": "d546fefb4e505f5df089bd15fef57fcd032997c8b1f76b2b47d6fbb7c0fde9ca"
+      },
+      {
+        "path": "random/sample/ScatterPlotMeans.png",
+        "bytes": 18766,
+        "sha256": "d798b203ee1826ab3a1068c22c8d15a61feab442f369de8456dea0b7a134b468"
+      },
+      {
+        "path": "random/sample/SampleRegression.png",
+        "bytes": 12152,
+        "sha256": "15782d5d41f81e3be7b4539c6a565dc721086720a3e46fc707e124bd539b8671"
+      },
+      {
+        "path": "random/sample/SampleRegressionMean.png",
+        "bytes": 13129,
+        "sha256": "6e0a8943af7ddef57c4b87b8a9b3f80205f6be8dbf951854af2cd5a3b37c2a24"
+      },
+      {
+        "path": "random/sample/LinearPredictor.png",
+        "bytes": 8403,
+        "sha256": "eb0cb55795d2a48852107a6f6c331ec2f87fabdfb226d8d5b16888761d6b8afe"
+      },
+      {
+        "path": "random/sample/SampleLinearPredictor.png",
+        "bytes": 6324,
+        "sha256": "e6548fd85a97649ad87a8efff010ef2c07d7e16b70c3c81f717581097fd4052c"
+      }
+    ],
+    "new_asset_bytes": 69956,
+    "authority_reader_assets_byte_identical": true
+  },
+  "anonymous_byte_readback": {
+    "method": "HTTPS GET of every manifest row with no authorization header and Cache-Control: no-cache",
+    "initial_sweep": {
+      "files_matched": 37,
+      "transient_failures": 1,
+      "failure": {
+        "path": "random/sample/BoxPlot.png",
+        "http_status": 503,
+        "response_bytes": 54887,
+        "classification": "transient GitHub Pages error document, not an artifact mismatch"
+      }
+    },
+    "targeted_retry": {
+      "path": "random/sample/BoxPlot.png",
+      "http_status": 200,
+      "bytes": 790,
+      "sha256": "7bcb3be4ffad0fc64d06cc5bc4fb14122ab3b117f31f0713988b0188fb8062f1",
+      "result": "pass"
+    },
+    "files_checked": 38,
+    "bytes_checked": 2206217,
+    "final_size_mismatches": 0,
+    "final_sha256_mismatches": 0,
+    "manifest_bound_inventory": true,
+    "result": "pass"
+  },
+  "anonymous_github_source_readback": {
+    "method": "HTTPS GET from raw.githubusercontent.com at the accepted commit with no authorization header and Cache-Control: no-cache",
+    "source_commit_sha": "830ddbc81b2066c0ac17438e03672de0dfca178c",
+    "scope": "every path changed by the accepted page-8 commit",
+    "files_checked": 42,
+    "bytes_checked": 11814221,
+    "http_200_responses": 42,
+    "size_mismatches": 0,
+    "sha256_mismatches": 0,
+    "result": "pass"
+  },
+  "browser_verification": {
+    "audio_exercised": false,
+    "page": "random/sample/Covariance.html",
+    "html_lang": "id-ID",
+    "desktop": {
+      "viewport_width": 1280,
+      "viewport_height": 720,
+      "document_client_width": 1265,
+      "document_scroll_width": 1265,
+      "body_width": 1152,
+      "body_left": 56.44,
+      "horizontal_overflow": false,
+      "mathjax_containers": 802,
+      "raw_tex_markers": 0,
+      "complete_images": 10,
+      "incomplete_images": 0,
+      "images_without_alt": 0,
+      "details": 34,
+      "details_after_expand": 34,
+      "details_after_collapse": 0,
+      "current_page_fragments": 19,
+      "broken_current_page_fragments": 0,
+      "table_width": 1030.57,
+      "console_messages": 0
+    },
+    "mobile": {
+      "viewport_width": 390,
+      "viewport_height": 844,
+      "document_client_width": 375,
+      "document_scroll_width": 375,
+      "body_width": 351.11,
+      "body_left": 12,
+      "horizontal_overflow": false,
+      "mathjax_containers": 802,
+      "raw_tex_markers": 0,
+      "complete_images": 10,
+      "incomplete_images": 0,
+      "images_without_alt": 0,
+      "details": 34,
+      "current_page_fragments": 19,
+      "broken_current_page_fragments": 0,
+      "table_client_width": 333,
+      "table_scroll_width": 333,
+      "table_clipped_cells": 0,
+      "contained_formula_scrollers": 2,
+      "formula_scroller_client_width": 334,
+      "formula_scroller_scroll_width": 342,
+      "console_messages": 0
+    },
+    "visual_snapshot_review": "pass",
+    "temporary_viewport_reset": true,
+    "temporary_tabs_closed": true,
+    "result": "pass"
+  },
+  "backend": {
+    "entities": 6567,
+    "relations": 9035,
+    "translated_entity_bindings": 2356,
+    "untranslated_entity_bindings": 4211,
+    "entities_sha256": "b6f70223a2073d44f3e95be67d831a20c6414f5a570ff3f51700fe24395fc45f",
+    "relations_sha256": "b235f4d4d724c7fe8653dfd06b075b2225cc2d116f3b87d0fda950d47030159a",
+    "receipt_sha256": "48b365a1cfff67299f85c7ec912eabac9d100a1f6c3adc49fe83d091638eaeb7",
+    "translation_ledger_sha256": "bcfb072e51c63f119e2a4f1dd87b81f945fa835bd1aaba53116ad3dbd1955003"
+  },
+  "checkpoint_record": {
+    "path": "00_control/CHECKPOINT_2026-08-22_EIGHT_PAGE.md",
+    "bytes": 7223,
+    "sha256": "d2a77fb0b7f289bbdc269deab7a3c60cc33191b4ed397fd370b2c25c38b83aa9"
+  },
+  "previous_accepted_deployment": {
+    "checkpoint": "seven-page-reader",
+    "source_commit_sha": "fd340e9f9a834584216a6480dd104c5bcbe4c66c",
+    "workflow_run_id": 32546766027,
+    "pages_deployment_id": 6032396193,
+    "reader_files": 31,
+    "reader_bytes": 2055914,
+    "status": "superseded-by-verified-eight-page-reader"
+  },
+  "scope": {
+    "complete_random_edition_claimed": false,
+    "configured_c140_complete_claimed": false,
+    "next_random_source": "random/sample/Normal.html",
+    "upstream_contacted": false
+  }
+}
