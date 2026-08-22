@@ -21,8 +21,10 @@ mathematics, frozen-data, topology, backend, build, deterministic QA, public
 deployment, anonymous byte readback, and live desktop/mobile rendering gates.
 The nine-page boundary completes the sample chapter and has passed independent
 language/mathematics audits, topology, backend, build, two deterministic
-replays, and local desktop/mobile rendering; publication and anonymous readback
-are the next gate.
+replays, and local desktop/mobile rendering. Its push, clean workflow,
+deployment, and immediate 39-file anonymous byte readback succeeded. GitHub
+then suspended the publishing account and withdrew both repository and Pages;
+current public live-browser verification is therefore unavailable.
 The complete 29-page edition is not yet claimed.
 
 ## Admitted source
@@ -288,7 +290,10 @@ containers, four complete described images, functional 21/21 disclosure
 controls, no raw TeX, no literal tab escape, no console messages, centered
 page-filling layout, and no page-level overflow. Exact local evidence is in
 `CHECKPOINT_2026-08-22_NINE_PAGE.md`. Publication and public-byte verification
-are next; the complete edition and configured C140 course are not claimed.
+were executed successfully, but current discoverability is false because
+GitHub subsequently suspended the account. The complete edition and configured
+C140 course are not claimed. Sanitized incident-receipt SHA-256 is
+`4d7b0e510724c6e9d7cda858441e8526d7896e8983a28c238ed4d5d72b9efa36`.
 
 ## Rights boundary
 
@@ -333,11 +338,13 @@ upstream during production.
 
 ## Next work
 
-1. Commit, push, deploy, anonymously read back, and publicly live-check the
-   complete nine-page boundary without another confirmation request.
-2. Continue immediately through all 20 remaining source pages, beginning with
+1. Continue immediately through all 20 remaining source pages, beginning with
    `random/point/index.html` (core ordinal 10), while growing the same
    deterministic reader and stable-ID backend.
+2. At the next substantial boundary, briefly recheck current GitHub
+   availability once. The supplied credentials currently resolve to one
+   suspended account and one invalid credential; do not loop or expose either
+   token. Preserve the exact local history until an active identity exists.
 3. Keep Penn State reconstruction, the one-page Random completeness donor, and
    original C140 companion in separate component paths/repositories; begin
    them only after this clean checkpoint or in a demonstrably non-overlapping

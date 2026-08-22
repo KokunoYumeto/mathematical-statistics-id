@@ -1,0 +1,140 @@
+{
+  "schema": "o006.github-pages-publication-incident.v1",
+  "checkpoint": "nine-page-reader",
+  "recorded_at": "2026-08-22T08:48:04+02:00",
+  "repository": {
+    "url": "https://github.com/KokunoYumeto/mathematical-statistics-id",
+    "branch": "main",
+    "current_anonymous_state": "withdrawn-after-account-suspension"
+  },
+  "accepted_deployment": {
+    "source_commit_sha": "1806863320c1c0859e04a2d93773adbb8d4ae377",
+    "source_tree_sha": "688cd4e7d104510416a3f2e647a3a125c29c2544",
+    "workflow_run_id": 32557204624,
+    "workflow_job_id": 96993176639,
+    "workflow_url": "https://github.com/KokunoYumeto/mathematical-statistics-id/actions/runs/32557204624",
+    "workflow_status": "completed",
+    "workflow_conclusion": "success",
+    "pages_deployment_id": 6034057446,
+    "pages_deployment_status_id": 17154596564,
+    "pages_deployment_status": "success",
+    "public_url": "https://kokunoyumeto.github.io/mathematical-statistics-id/"
+  },
+  "reader": {
+    "manifest_path": "build/FIRST_UNIT_MANIFEST.csv",
+    "manifest_bytes": 3836,
+    "manifest_sha256": "e38a70e74ea24f17360b47ccffbf242f09ec26cf784fa326632a85d0f999f5a3",
+    "build_receipt_bytes": 101148,
+    "build_receipt_sha256": "29d389ca58991ac01b676b8348690b053a6841cad2b1afd212e47cc24a6fb621",
+    "qa_receipt_bytes": 84419,
+    "qa_receipt_sha256": "c450c75a0bf52c650f944a19c03faa9f5a2bd828cd7eba9bd52262f60f5f7bf2",
+    "files": 39,
+    "bytes": 2244344,
+    "translated_pages": 9,
+    "new_page": {
+      "path": "random/sample/Normal.html",
+      "bytes": 38892,
+      "sha256": "58a819f8775846488f653ba26dc18ed7f15711a96652866ed84b2ea91c11a6a2"
+    },
+    "new_assets": []
+  },
+  "initial_anonymous_pages_readback": {
+    "sequence": "immediately after the successful Pages deployment",
+    "method": "HTTPS GET of every manifest row with no authorization header and Cache-Control: no-cache",
+    "files_checked": 39,
+    "bytes_checked": 2244344,
+    "http_200_responses": 39,
+    "size_mismatches": 0,
+    "sha256_mismatches": 0,
+    "manifest_bound_inventory": true,
+    "result": "pass"
+  },
+  "subsequent_github_withdrawal": {
+    "checked_at": "2026-08-22T08:47:08+02:00",
+    "repository_html_http_status": 404,
+    "raw_main_http_status": 404,
+    "pages_http_status": 404,
+    "public_browser_title": "Site not found · GitHub Pages",
+    "authenticated_api_message": "Sorry. Your account was suspended",
+    "credential_inventory": {
+      "path": "C:/Users/Floris/Downloads/Github Tokens.md",
+      "credentials_tested": 2,
+      "credential_1_result": "HTTP 403 account suspended",
+      "credential_2_result": "HTTP 401 bad credentials",
+      "credential_values_logged_or_persisted": false
+    },
+    "anonymous_raw_commit_probe": {
+      "scope": "all 33 paths changed by the accepted page-9 commit",
+      "expected_files": 33,
+      "expected_bytes": 11855186,
+      "http_404_responses": 33,
+      "content_mismatches_evaluated": false
+    },
+    "classification": "external GitHub account suspension after a successful deterministic deployment, not a source, build, workflow, or reader failure",
+    "current_public_availability": false
+  },
+  "browser_verification": {
+    "audio_exercised": false,
+    "page": "random/sample/Normal.html",
+    "html_lang": "id-ID",
+    "local_desktop": {
+      "viewport_width": 1280,
+      "viewport_height": 720,
+      "document_client_width": 1265,
+      "document_scroll_width": 1265,
+      "body_width": 1152,
+      "body_left": 56.44,
+      "horizontal_overflow": false,
+      "mathjax_containers": 381,
+      "raw_tex_markers": 0,
+      "complete_images": 4,
+      "incomplete_images": 0,
+      "images_without_alt": 0,
+      "details": 21,
+      "details_after_expand": 21,
+      "details_after_collapse": 0,
+      "literal_tab_escapes": 0,
+      "console_messages": 0
+    },
+    "local_mobile": {
+      "viewport_width": 390,
+      "viewport_height": 844,
+      "document_client_width": 375,
+      "document_scroll_width": 375,
+      "body_width": 351.11,
+      "body_left": 12,
+      "horizontal_overflow": false,
+      "mathjax_containers": 381,
+      "raw_tex_markers": 0,
+      "complete_images": 4,
+      "incomplete_images": 0,
+      "images_without_alt": 0,
+      "details": 21,
+      "literal_tab_escapes": 0,
+      "console_messages": 0
+    },
+    "local_visual_snapshot_review": "pass",
+    "public_live_verification": "not executable after GitHub withdrew the Pages site",
+    "result": "local-pass-public-current-state-unavailable"
+  },
+  "backend": {
+    "entities": 6567,
+    "relations": 9035,
+    "translated_entity_bindings": 2640,
+    "untranslated_entity_bindings": 3927,
+    "entities_sha256": "95c56925d17e34c37e8128e1ed8e4f1f349edd5cd3077ee7816f0eb98862029b",
+    "relations_sha256": "b235f4d4d724c7fe8653dfd06b075b2225cc2d116f3b87d0fda950d47030159a",
+    "receipt_sha256": "681023726a222fafa90934d657e81576d031d2e465a8454e5776cce7772a95e4",
+    "translation_ledger_sha256": "1fd6f61a0a6074282470c12ed2ec26a0395f04a9e50a9eb2632e94d159d6135b"
+  },
+  "checkpoint_record": {
+    "path": "00_control/CHECKPOINT_2026-08-22_NINE_PAGE.md"
+  },
+  "scope": {
+    "complete_random_edition_claimed": false,
+    "configured_c140_complete_claimed": false,
+    "next_random_source": "random/point/index.html",
+    "remaining_random_pages": 20,
+    "upstream_contacted": false
+  }
+}

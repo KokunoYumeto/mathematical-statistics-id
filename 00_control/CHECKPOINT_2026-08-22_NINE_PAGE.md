@@ -84,9 +84,29 @@ disclosures and collapsed all 21 again. Desktop and mobile visual inspection
 showed a centered, page-filling, readable layout. The temporary viewport override
 will be reset after public verification.
 
-Publication is the next executable gate. Once the exact checkpoint is committed
-and pushed, record the accepted commit, workflow/deployment identities,
-anonymous 39-file byte readback, raw source/control readback, and public live
-desktop/mobile results here and in a sanitized publication receipt.
+Commit `1806863320c1c0859e04a2d93773adbb8d4ae377` (tree
+`688cd4e7d104510416a3f2e647a3a125c29c2544`) was pushed to `main`.
+Workflow run `32557204624`, job `96993176639`, Pages deployment `6034057446`,
+and deployment status `17154596564` all completed successfully; the clean
+runner replayed the deterministic backend, build, and QA before deployment.
+
+Immediately after deployment, anonymous HTTPS GETs matched all 39 manifest
+files / 2,244,344 bytes by exact size and SHA-256 with no retry or mismatch.
+Before raw-source and public-browser checks could finish, GitHub suspended the
+publishing account and began returning 404 for the repository, raw commit, and
+Pages site. A bounded credential check found that the first supplied credential
+receives GitHub's explicit account-suspended response and the second receives
+`Bad credentials`; no credential value is stored or exposed. Thus the exact
+reader was successfully deployed and byte-verified, but it is not currently
+publicly available and public live desktop/mobile QA remains unexecuted. This
+is an external GitHub availability incident, not a reader/build failure.
+
+Exact sanitized evidence is in
+`PUBLICATION_RECEIPT_2026-08-22_NINE_PAGE.json` (5,337 bytes; SHA-256
+`4d7b0e510724c6e9d7cda858441e8526d7896e8983a28c238ed4d5d72b9efa36`).
+Do not claim the source mirror
+or Pages reader discoverable until an anonymous current-state check again
+returns the expected bytes. Continue translation locally rather than looping on
+the suspended identity.
 
 Next source after publication: `random/point/index.html`, ordinal 10 of 29.
