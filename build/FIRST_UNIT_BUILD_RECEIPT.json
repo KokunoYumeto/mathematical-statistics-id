@@ -126,6 +126,69 @@
       "page": "random/sample/Variance.html",
       "reason": "14/9 is the sample variance, not the arithmetic mean of the squared-deviation column",
       "replacements": 1
+    },
+    {
+      "new": "distribusi \\(M\\) mendekati distribusi normal ketika \\(n\\) besar, asalkan distribusi asal memiliki varians positif dan berhingga, meskipun distribusi asal tersebut tidak normal",
+      "old": "distribusi \\(M\\) mendekati distribusi normal jika \\(n\\) besar, bahkan ketika distribusi asal sampelnya tidak normal",
+      "page": "random/sample/Normal.html",
+      "reason": "the central limit theorem requires a finite positive parent variance; IID alone is insufficient",
+      "replacements": 1
+    },
+    {
+      "new": "Untuk ukuran sampel sekurang-kurangnya dua, ingat bahwa versi baku varians sampel adalah statistik",
+      "old": "Sekarang, ingat bahwa versi baku varians sampel adalah statistik",
+      "page": "random/sample/Normal.html",
+      "reason": "the standard sample variance divides by n-minus-one",
+      "replacements": 1
+    },
+    {
+      "new": "<p class=\"dfn\">Untuk ukuran sampel sekurang-kurangnya dua, definisikan",
+      "old": "<p class=\"dfn\">Definisikan",
+      "page": "random/sample/Normal.html",
+      "reason": "the one-sample Student statistic requires a nondegenerate sample variance",
+      "replacements": 1
+    },
+    {
+      "new": "Jika ukuran masing-masing sampel sekurang-kurangnya dua, variabel acak berikut berdistribusi \\(F\\) dengan \\(m - 1\\) derajat kebebasan",
+      "old": "Variabel acak berikut berdistribusi \\(F\\) dengan \\(m - 1\\) derajat kebebasan",
+      "page": "random/sample/Normal.html",
+      "reason": "the standard sample-variance ratio requires m and n at least two",
+      "replacements": 1
+    },
+    {
+      "new": "Dengan ukuran setiap sampel sekurang-kurangnya dua, konstruksi terakhir kita dalam model normal dua sampel",
+      "old": "Konstruksi terakhir kita dalam model normal dua sampel",
+      "page": "random/sample/Normal.html",
+      "reason": "the pooled two-sample Student construction requires m and n at least two",
+      "replacements": 1
+    },
+    {
+      "new": "Karena kedua sampel independen, vektor \\((M(\\bs{X}), S(\\bs{X}))\\) independen dari vektor \\((M(\\bs{Y}), S(\\bs{Y}))\\)",
+      "old": "Pasangan-pasangan variabel berikut saling independen:",
+      "page": "random/sample/Normal.html",
+      "reason": "replace the malformed and logically incomplete independence proof with its correct vector argument",
+      "replacements": 1
+    },
+    {
+      "new": "Untuk ukuran sampel sekurang-kurangnya dua, kovarians dan korelasi antara kedua varians sampel baku adalah",
+      "old": "Kovarians dan korelasi antara kedua varians sampel baku adalah",
+      "page": "random/sample/Normal.html",
+      "reason": "standard sample variances require n at least two",
+      "replacements": 1
+    },
+    {
+      "new": "Untuk ukuran sampel sekurang-kurangnya dua, jika \\(\\mu\\) dan \\(\\nu\\) tidak diketahui (sekali lagi, seperti yang biasanya terjadi), penaksir yang wajar",
+      "old": "Jika \\(\\mu\\) dan \\(\\nu\\) tidak diketahui (sekali lagi, ini biasanya merupakan keadaan yang terjadi), penaksir yang wajar",
+      "page": "random/sample/Normal.html",
+      "reason": "the standard sample covariance divides by n-minus-one",
+      "replacements": 1
+    },
+    {
+      "new": "Rata-rata dan varians dari kovarians sampel adalah",
+      "old": "Rata-rata dan varians dari varians sampel adalah",
+      "page": "random/sample/Normal.html",
+      "reason": "the displayed statistic is sample covariance, not sample variance",
+      "replacements": 1
     }
   ],
   "frozen_manifests": {
@@ -426,6 +489,17 @@
         "url": "https://www.randomservices.org/random/sample/Mean.html"
       },
       {
+        "bytes": 35940,
+        "content_type": "text/html",
+        "etag": "\"8c64-69b43de5-8b77ef1cdd3f75fc;;;\"",
+        "last_modified": "Fri, 13 Mar 2026 16:40:05 GMT",
+        "purpose": "translation_authority",
+        "relative_path": "random/sample/Normal.html",
+        "role": "core",
+        "sha256": "d9a62017ae3a8488aedac3eceedb15d8b68243ae60894104ab88564ace25ff79",
+        "url": "https://www.randomservices.org/random/sample/Normal.html"
+      },
+      {
         "bytes": 63965,
         "content_type": "text/html",
         "etag": "\"f9dd-69b43de5-68d2058c0c7f0dab;;;\"",
@@ -586,44 +660,49 @@
     ],
     "targets": [
       {
-        "bytes": 46218,
+        "bytes": 46128,
         "relative_path": "random/sample/CLT.html",
-        "sha256": "2138ce889e2b27769b2dfdc135ef8de53c1f2579a476a7dc29f662f4565a838e"
+        "sha256": "10d28d9d12e4d2df32044e81222e479dd1788ec4903bebe40322896c026d20e3"
       },
       {
-        "bytes": 80932,
+        "bytes": 80842,
         "relative_path": "random/sample/Covariance.html",
-        "sha256": "f07eeac25a26897fffbcd3b10435d393849822b3cbf725c3fca581361a8fdb78"
+        "sha256": "f66fe02402dbe33914a86a8e0796c7c8d9d292744168c8796091fc2bc561e11d"
       },
       {
-        "bytes": 11534,
+        "bytes": 11489,
         "relative_path": "random/sample/index.html",
-        "sha256": "1561c2a84fec5a777647084de095c66e6e38d65f3bf38093884c57358f123a99"
+        "sha256": "0567e8309100240fcb6bd9a008fb8bfb4475c27e550f402a063d4095a4feeaaa"
       },
       {
-        "bytes": 36338,
+        "bytes": 36248,
         "relative_path": "random/sample/Introduction.html",
-        "sha256": "ade0da964904a8aaa4cf29144a840029057896a549a63d45604cc704ce6607bf"
+        "sha256": "2b2bf3606433b0759fd172c68a44c9bb92a10b5b428fc5baa1a7edf0968a6d76"
       },
       {
-        "bytes": 34955,
+        "bytes": 34820,
         "relative_path": "random/sample/LLN.html",
-        "sha256": "c2c88288157eb9e9390e7d0c2004c6d233dd8be4eea1c07b170cb856ebe3e6b9"
+        "sha256": "243118b707ff34b0978f6d659a48b3bc37a358393b4b25283e93585fca12e703"
       },
       {
-        "bytes": 45961,
+        "bytes": 45871,
         "relative_path": "random/sample/Mean.html",
-        "sha256": "7259225405421b79f450b1025f5eaf2e66262760138453f94a4126f8408ac99c"
+        "sha256": "f21bd99cfcd9b6609526966b27e59cd4c1600caf825ec7d428f0e1e63b3a703a"
       },
       {
-        "bytes": 68920,
+        "bytes": 38892,
+        "relative_path": "random/sample/Normal.html",
+        "sha256": "58a819f8775846488f653ba26dc18ed7f15711a96652866ed84b2ea91c11a6a2"
+      },
+      {
+        "bytes": 68830,
         "relative_path": "random/sample/OrderStatistics.html",
-        "sha256": "2cc2031a6735b7167d29d29d0f1ea412a946559255484c891e471d48f1052c01"
+        "sha256": "a36e792a8d53d12a5c5783cacbac478d4563f86e224d07abba8fb5682f2812ce"
       },
       {
-        "bytes": 59664,
+        "bytes": 59529,
         "relative_path": "random/sample/Variance.html",
-        "sha256": "838239690cd8a9e62cc32595d97175981dd443227cb00c053936ae5a19636708"
+        "sha256": "651b09ef4f59b4a8c3ace0ce8315d9e6bff278e9f5d0e0b76e156fa67a4af70b"
       }
     ]
   },
@@ -1891,11 +1970,110 @@
       "span_new": "\\(y \\approx 321.503 + 0.356 \\, x\\)",
       "span_old": "\\(y = 321.5 + 0.3 \\, x\\)",
       "surface": "math_span"
+    },
+    {
+      "new": "\\(\\E\\left[M(\\bs{X}) - M(\\bs{Y})\\right] = \\mu - \\nu\\)",
+      "old": "\\(\\E\\left[(M(\\bs{X}) - M(\\bs{Y})\\right] = \\mu - \\nu\\)",
+      "page": "random/sample/Normal.html",
+      "reason": "remove the unmatched parenthesis from the mean of the sample-mean difference",
+      "replacements": 1,
+      "span_index": 196,
+      "span_new": "\\(\\E\\left[M(\\bs{X}) - M(\\bs{Y})\\right] = \\mu - \\nu\\)",
+      "span_old": "\\(\\E\\left[(M(\\bs{X}) - M(\\bs{Y})\\right] = \\mu - \\nu\\)",
+      "surface": "math_span"
+    },
+    {
+      "new": "\\(\\var\\left[M(\\bs{X}) - M(\\bs{Y})\\right] = \\sigma^2 / m + \\tau^2 / n\\)",
+      "old": "\\(\\var\\left[(M(\\bs{X}) - M(\\bs{Y})\\right] = \\sigma^2 / m + \\tau^2 / n\\)",
+      "page": "random/sample/Normal.html",
+      "reason": "remove the unmatched parenthesis from the variance of the sample-mean difference",
+      "replacements": 1,
+      "span_index": 197,
+      "span_new": "\\(\\var\\left[M(\\bs{X}) - M(\\bs{Y})\\right] = \\sigma^2 / m + \\tau^2 / n\\)",
+      "span_old": "\\(\\var\\left[(M(\\bs{X}) - M(\\bs{Y})\\right] = \\sigma^2 / m + \\tau^2 / n\\)",
+      "surface": "math_span"
+    },
+    {
+      "new": "\\[ Z = \\frac{\\left[M(\\bs{X}) - M(\\bs{Y})\\right] - (\\mu - \\nu)}{\\sqrt{\\sigma^2 / m + \\tau^2 / n}} \\]",
+      "old": "\\[ Z = \\frac{\\left[(M(\\bs{X}) - M(\\bs{Y})\\right] - (\\mu - \\nu)}{\\sqrt{\\sigma^2 / m + \\tau^2 / n}} \\]",
+      "page": "random/sample/Normal.html",
+      "reason": "remove the unmatched parenthesis from the standardized sample-mean difference",
+      "replacements": 1,
+      "span_index": 198,
+      "span_new": "\\[ Z = \\frac{\\left[M(\\bs{X}) - M(\\bs{Y})\\right] - (\\mu - \\nu)}{\\sqrt{\\sigma^2 / m + \\tau^2 / n}} \\]",
+      "span_old": "\\[ Z = \\frac{\\left[(M(\\bs{X}) - M(\\bs{Y})\\right] - (\\mu - \\nu)}{\\sqrt{\\sigma^2 / m + \\tau^2 / n}} \\]",
+      "surface": "math_span"
+    },
+    {
+      "new": "\\((M(\\bs{Y}), S(\\bs{Y}))\\)",
+      "old": "\\((M(\\bs{Y}, S(\\bs{Y}))\\)",
+      "page": "random/sample/Normal.html",
+      "reason": "separate the Y-sample mean and standard deviation as a pair",
+      "replacements": 1,
+      "span_index": 266,
+      "span_new": "\\((M(\\bs{Y}), S(\\bs{Y}))\\)",
+      "span_old": "\\((M(\\bs{Y}, S(\\bs{Y}))\\)",
+      "surface": "math_span"
+    },
+    {
+      "new": "\\(Z / \\sqrt{V / (m + n - 2)}\\)",
+      "old": "\\(Z / \\sqrt{V / (m + n - 2}\\)",
+      "page": "random/sample/Normal.html",
+      "reason": "close the denominator in the pooled two-sample Student construction",
+      "replacements": 1,
+      "span_index": 275,
+      "span_new": "\\(Z / \\sqrt{V / (m + n - 2)}\\)",
+      "span_old": "\\(Z / \\sqrt{V / (m + n - 2}\\)",
+      "surface": "math_span"
+    },
+    {
+      "new": "\\(\\rho \\in [-1, 1]\\)",
+      "old": "\\(\\rho \\in [0, 1]\\)",
+      "page": "random/sample/Normal.html",
+      "reason": "include negative correlations in the bivariate-normal parameter range",
+      "replacements": 1,
+      "span_index": 286,
+      "span_new": "\\(\\rho \\in [-1, 1]\\)",
+      "span_old": "\\(\\rho \\in [0, 1]\\)",
+      "surface": "math_span"
+    },
+    {
+      "new": "\\(\\sigma_3 = \\E\\left[(X - \\mu)^3\\right] = 0\\)",
+      "old": "\\(\\sigma^3 = \\E\\left[(X - \\mu)^3\\right] = 0\\)",
+      "page": "random/sample/Normal.html",
+      "reason": "use the declared third-central-moment subscript notation",
+      "replacements": 1,
+      "span_index": 299,
+      "span_new": "\\(\\sigma_3 = \\E\\left[(X - \\mu)^3\\right] = 0\\)",
+      "span_old": "\\(\\sigma^3 = \\E\\left[(X - \\mu)^3\\right] = 0\\)",
+      "surface": "math_span"
+    },
+    {
+      "new": "\\(((X_1, Y_1), (X_2, Y_2), \\ldots, (X_n, Y_n))\\)",
+      "old": "\\(((X_1, Y_1), (X_2, Y_2), \\ldots (X_n, Y_n))\\)",
+      "page": "random/sample/Normal.html",
+      "reason": "restore the missing separator in the bivariate sample vector",
+      "replacements": 1,
+      "span_index": 305,
+      "span_new": "\\(((X_1, Y_1), (X_2, Y_2), \\ldots, (X_n, Y_n))\\)",
+      "span_old": "\\(((X_1, Y_1), (X_2, Y_2), \\ldots (X_n, Y_n))\\)",
+      "surface": "math_span"
+    },
+    {
+      "new": "\\(\\P(M \\gt 49, S^2 \\lt 20)\\)",
+      "old": "\\(\\P(M \\gt 49, S^2 \\lt 20))\\)",
+      "page": "random/sample/Normal.html",
+      "reason": "remove the extra closing parenthesis from the joint probability",
+      "replacements": 1,
+      "span_index": 355,
+      "span_new": "\\(\\P(M \\gt 49, S^2 \\lt 20)\\)",
+      "span_old": "\\(\\P(M \\gt 49, S^2 \\lt 20))\\)",
+      "surface": "math_span"
     }
   ],
   "reader": {
     "directory": "build/html-id",
-    "file_count": 38,
+    "file_count": 39,
     "files": [
       {
         "bytes": 533,
@@ -1988,9 +2166,9 @@
         "sha256": "7bcb3be4ffad0fc64d06cc5bc4fb14122ab3b117f31f0713988b0188fb8062f1"
       },
       {
-        "bytes": 46218,
+        "bytes": 46128,
         "relative_path": "random/sample/CLT.html",
-        "sha256": "2138ce889e2b27769b2dfdc135ef8de53c1f2579a476a7dc29f662f4565a838e"
+        "sha256": "10d28d9d12e4d2df32044e81222e479dd1788ec4903bebe40322896c026d20e3"
       },
       {
         "bytes": 1272,
@@ -1998,9 +2176,9 @@
         "sha256": "273418cb67c56115e2573f47fbd59cbd22aa64cc6768952d6f518edd9d6d3da5"
       },
       {
-        "bytes": 80932,
+        "bytes": 80842,
         "relative_path": "random/sample/Covariance.html",
-        "sha256": "f07eeac25a26897fffbcd3b10435d393849822b3cbf725c3fca581361a8fdb78"
+        "sha256": "f66fe02402dbe33914a86a8e0796c7c8d9d292744168c8796091fc2bc561e11d"
       },
       {
         "bytes": 1323,
@@ -2023,14 +2201,14 @@
         "sha256": "17bbf2b59e4b0902a84e8ea66f1b40a0343ddff578359ce842c60f109ea047ae"
       },
       {
-        "bytes": 11534,
+        "bytes": 11489,
         "relative_path": "random/sample/index.html",
-        "sha256": "1561c2a84fec5a777647084de095c66e6e38d65f3bf38093884c57358f123a99"
+        "sha256": "0567e8309100240fcb6bd9a008fb8bfb4475c27e550f402a063d4095a4feeaaa"
       },
       {
-        "bytes": 36338,
+        "bytes": 36248,
         "relative_path": "random/sample/Introduction.html",
-        "sha256": "ade0da964904a8aaa4cf29144a840029057896a549a63d45604cc704ce6607bf"
+        "sha256": "2b2bf3606433b0759fd172c68a44c9bb92a10b5b428fc5baa1a7edf0968a6d76"
       },
       {
         "bytes": 8403,
@@ -2038,19 +2216,24 @@
         "sha256": "eb0cb55795d2a48852107a6f6c331ec2f87fabdfb226d8d5b16888761d6b8afe"
       },
       {
-        "bytes": 34955,
+        "bytes": 34820,
         "relative_path": "random/sample/LLN.html",
-        "sha256": "c2c88288157eb9e9390e7d0c2004c6d233dd8be4eea1c07b170cb856ebe3e6b9"
+        "sha256": "243118b707ff34b0978f6d659a48b3bc37a358393b4b25283e93585fca12e703"
       },
       {
-        "bytes": 45961,
+        "bytes": 45871,
         "relative_path": "random/sample/Mean.html",
-        "sha256": "7259225405421b79f450b1025f5eaf2e66262760138453f94a4126f8408ac99c"
+        "sha256": "f21bd99cfcd9b6609526966b27e59cd4c1600caf825ec7d428f0e1e63b3a703a"
       },
       {
-        "bytes": 68920,
+        "bytes": 38892,
+        "relative_path": "random/sample/Normal.html",
+        "sha256": "58a819f8775846488f653ba26dc18ed7f15711a96652866ed84b2ea91c11a6a2"
+      },
+      {
+        "bytes": 68830,
         "relative_path": "random/sample/OrderStatistics.html",
-        "sha256": "2cc2031a6735b7167d29d29d0f1ea412a946559255484c891e471d48f1052c01"
+        "sha256": "a36e792a8d53d12a5c5783cacbac478d4563f86e224d07abba8fb5682f2812ce"
       },
       {
         "bytes": 6324,
@@ -2078,9 +2261,9 @@
         "sha256": "d798b203ee1826ab3a1068c22c8d15a61feab442f369de8456dea0b7a134b468"
       },
       {
-        "bytes": 59664,
+        "bytes": 59529,
         "relative_path": "random/sample/Variance.html",
-        "sha256": "838239690cd8a9e62cc32595d97175981dd443227cb00c053936ae5a19636708"
+        "sha256": "651b09ef4f59b4a8c3ace0ce8315d9e6bff278e9f5d0e0b76e156fa67a4af70b"
       },
       {
         "bytes": 6420,
@@ -2088,10 +2271,10 @@
         "sha256": "b8af913a9be5c7e0313653afc6eae3121f3850fd72535cdab9e36f03279fcc34"
       }
     ],
-    "manifest_bytes": 3739,
+    "manifest_bytes": 3836,
     "manifest_path": "build/FIRST_UNIT_MANIFEST.csv",
-    "manifest_sha256": "357552b704242cab0cc5111c6756a5bfb04483d9c6dbe3e9d44ce2a10432357f",
-    "total_bytes": 2206217
+    "manifest_sha256": "e38a70e74ea24f17360b47ccffbf242f09ec26cf784fa326632a85d0f999f5a3",
+    "total_bytes": 2244344
   },
   "reader_customizations": [
     {
@@ -2112,14 +2295,14 @@
   "schema": "o006.random.first-unit-build.v1",
   "scripts": {
     "build": {
-      "bytes": 75283,
+      "bytes": 81332,
       "path": "scripts/build_first_unit.py",
-      "sha256": "64ac30392029928c220adf64c6c33bc234c678676453855f04016cdfb5c9b95d"
+      "sha256": "d1cc09566b3610cba8f8cb844e0e15969a2c86405199a8edbe241b5ad4a708de"
     },
     "qa": {
-      "bytes": 70961,
+      "bytes": 73459,
       "path": "scripts/qa_first_unit.py",
-      "sha256": "b7b169ae02cf94d83d286123200ddb46ba6c0412b17353b966e7e5c263f0ea4b"
+      "sha256": "1fdce83e6cf5a33f4efbfe28d6274f9ca5ee51bd8f12c0da89d29ba2141234d6"
     }
   },
   "transport_hardening": [

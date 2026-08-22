@@ -5,8 +5,8 @@ Updated: 2026-08-22
 ## Status
 
 Edition source admitted; exact authority and component-rights freezes complete; the
-first eight contiguous Indonesian pages and the full 29-page machine backend
-are locally verified. Every entity on those eight pages is now bound to its target
+first nine contiguous Indonesian pages and the full 29-page machine backend
+are locally verified. Every entity on those nine pages is now bound to its target
 path, locale, byte count, and SHA-256. The repository is public; the repaired
 three- and four-page Pages checkpoints remain historical evidence. The
 five-page boundary through the central limit theorem remains publicly verified.
@@ -19,6 +19,10 @@ deployment, anonymous byte readback, and live desktop/mobile rendering. The
 eight-page boundary through covariance has passed its bounded language,
 mathematics, frozen-data, topology, backend, build, deterministic QA, public
 deployment, anonymous byte readback, and live desktop/mobile rendering gates.
+The nine-page boundary completes the sample chapter and has passed independent
+language/mathematics audits, topology, backend, build, two deterministic
+replays, and local desktop/mobile rendering; publication and anonymous readback
+are the next gate.
 The complete 29-page edition is not yet claimed.
 
 ## Admitted source
@@ -88,18 +92,18 @@ entities and 9,035 relations. It contains 29 documents, 366 sections, 760
 structural units, 451 disclosures, 2,891 math-text containers, 24 figures, 236
 assets, and 1,810 internal links. The source-grounded exercise rule designates
 260 units and leaves 500 undesignated; its exact basis is 123 both, 95
-exercise-section only, 42 native `app`/`stat` only, and 500 neither. All 2,356
-entities on ordinals 1–8 carry verified id-ID bindings; 4,211 later entities
+exercise-section only, 42 native `app`/`stat` only, and 500 neither. All 2,640
+entities on ordinals 1–9 carry verified id-ID bindings; 3,927 later entities
 carry explicit untranslated/null locale fields.
 
-- Entity JSONL: 10,346,519 bytes; SHA-256
-  `b6f70223a2073d44f3e95be67d831a20c6414f5a570ff3f51700fe24395fc45f`.
+- Entity JSONL: 10,373,499 bytes; SHA-256
+  `95c56925d17e34c37e8128e1ed8e4f1f349edd5cd3077ee7816f0eb98862029b`.
 - Relation CSV: 1,182,589 bytes; SHA-256
   `b235f4d4d724c7fe8653dfd06b075b2225cc2d116f3b87d0fda950d47030159a`.
 - Backend receipt SHA-256:
-  `48b365a1cfff67299f85c7ec912eabac9d100a1f6c3adc49fe83d091638eaeb7`.
+  `681023726a222fafa90934d657e81576d031d2e465a8454e5776cce7772a95e4`.
 - Bound translation-ledger SHA-256:
-  `bcfb072e51c63f119e2a4f1dd87b81f945fa835bd1aaba53116ad3dbd1955003`.
+  `1fd6f61a0a6074282470c12ed2ec26a0395f04a9e50a9eb2632e94d159d6135b`.
 - Replay: `python scripts/generate_random_backend.py --check-only`.
 
 ## Four-page reader checkpoint
@@ -261,6 +265,31 @@ is in `CHECKPOINT_2026-08-22_EIGHT_PAGE.md` and
 `PUBLICATION_RECEIPT_2026-08-22_EIGHT_PAGE.json` (SHA-256
 `588d64e4e16903d655b11b5edf058f4980d67329740813631a7799524a6c890e`).
 
+## Nine-page local checkpoint
+
+Core ordinals 1–9 are complete through `random/sample/Normal.html`. The reader
+is 39 files / 2,244,344 bytes; canonical manifest SHA-256 is
+`e38a70e74ea24f17360b47ccffbf242f09ec26cf784fa326632a85d0f999f5a3`.
+Build-receipt SHA-256 is
+`29d389ca58991ac01b676b8348690b053a6841cad2b1afd212e47cc24a6fb621`;
+QA-receipt SHA-256 is
+`c450c75a0bf52c650f944a19c03faa9f5a2bd828cd7eba9bd52262f60f5f7bf2`.
+
+Normal preserves the exact 380-element source hierarchy, 29 units, 21
+disclosures, 380 delimited TeX spans, three raw script/style blocks, and 44 IDs.
+Nine protected math repairs are explicitly declared; its 22 href-delta entries
+account for 38 occurrences. Independent language and mathematics audits found
+and closed the missing finite-variance CLT hypothesis, a proof-regression in the
+first target draft, and bounded idiom/whitespace defects. The aggregate census
+is 4,826 source elements, 292 units, 201 disclosures, 3,455 TeX spans, 434 IDs,
+362 local references, and 88 fragments. Two deterministic replays pass with
+identical bytes. Local desktop/mobile rendering produced 381/381 MathJax
+containers, four complete described images, functional 21/21 disclosure
+controls, no raw TeX, no literal tab escape, no console messages, centered
+page-filling layout, and no page-level overflow. Exact local evidence is in
+`CHECKPOINT_2026-08-22_NINE_PAGE.md`. Publication and public-byte verification
+are next; the complete edition and configured C140 course are not claimed.
+
 ## Rights boundary
 
 The Random landing page identifies CC BY 2.0; `Credits.html` links CC BY 1.0.
@@ -274,7 +303,7 @@ the site-wide notice; they must be cleared, replaced, or linked externally.
 
 ## Known upstream defects (do not silently alter authority)
 
-`ADVERSE_LEDGER.jsonl` runs through `O006-ADV-0103`. CLT repairs include the
+`ADVERSE_LEDGER.jsonl` runs through `O006-ADV-0112`. CLT repairs include the
 zero-origin condition, correlation domain/formula/citation, the rigorous
 characteristic-function proof, continuity notation, dice answer, chi-square
 definition, negative-binomial support/domain/answer mapping, and determinate
@@ -295,15 +324,21 @@ regression `n-1` factors, the population prediction-error identity, omitted
 domain conditions, conversion and comparison-table answers, exact symbolic
 variance, frozen M&M and SAT calculations, and two occurrence-specific
 cross-references. Its invalid residual-plot paragraph close is retained as a
-harmless recorded source artifact. Authority bytes remain immutable. Do not
-contact upstream during production.
+harmless recorded source artifact. Normal repairs cover malformed two-sample
+delimiters, Student construction, correlation range, central-moment and vector
+notation, a covariance label, sample-size and CLT hypotheses, and the logically
+incomplete independence proof. Its orphan paragraph close is retained as a
+recorded source artifact. Authority bytes remain immutable. Do not contact
+upstream during production.
 
 ## Next work
 
-1. Continue immediately through all 21 remaining source pages, beginning with
-   `random/sample/Normal.html` (core ordinal 9), while growing the same
+1. Commit, push, deploy, anonymously read back, and publicly live-check the
+   complete nine-page boundary without another confirmation request.
+2. Continue immediately through all 20 remaining source pages, beginning with
+   `random/point/index.html` (core ordinal 10), while growing the same
    deterministic reader and stable-ID backend.
-2. Keep Penn State reconstruction, the one-page Random completeness donor, and
+3. Keep Penn State reconstruction, the one-page Random completeness donor, and
    original C140 companion in separate component paths/repositories; begin
    them only after this clean checkpoint or in a demonstrably non-overlapping
    path.

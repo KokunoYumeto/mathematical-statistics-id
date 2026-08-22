@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="id-ID">
+
+<head>
+<meta charset="utf-8">
+	<title>Sifat Khusus Sampel Normal</title>
+	<meta name="author" content="Kyle Siegrist">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="keywords" content="probabilitas, statistika, sampel acak, distribusi normal, rata-rata sampel, varians sampel, distribusi t Student, distribusi khi-kuadrat, model dua sampel, model bivariat">
+	<link rel="icon" href="../icons/Icon.svg" type="image/svg">
+	<link rel="stylesheet" href="../Screen.css" type="text/css" media="screen">
+	<link rel="next" href="https://www.randomservices.org/random/point/index.html">
+	<script src="../Basic.js"></script>
+	<script src="../../MathJax/tex-svg.js" id="MathJax-script" async></script>
+</head>
+
+<body>
+
+<div class="latex">
+	\(\newcommand{\R}{\mathbb{R}}\)
+	\(\newcommand{\N}{\mathbb{N}}\)
+	\(\newcommand{\Z}{\mathbb{Z}}\)
+	\(\newcommand{\E}{\mathbb{E}}\)
+	\(\newcommand{\P}{\mathbb{P}}\)
+	\(\newcommand{\var}{\text{var}}\)
+	\(\newcommand{\sd}{\text{sd}}\)
+	\(\newcommand{\cov}{\text{cov}}\)
+	\(\newcommand{\cor}{\text{cor}}\)
+	\(\newcommand{\bs}{\boldsymbol}\)
+</div>
+
+<header>
+	<ol class="map">
+		<li class="parent"><a href="https://www.randomservices.org/random/index.html">Random</a></li>
+		<li class="parent"><a href="index.html">5. Sampel Acak</a></li>
+		<li class="child"><a href="Introduction.html" title="Pendahuluan">1</a></li>
+		<li class="child"><a href="Mean.html" title="Rata-Rata Sampel">2</a></li>
+		<li class="child"><a href="LLN.html" title="Hukum Bilangan Besar">3</a></li>
+		<li class="child"><a href="CLT.html" title="Teorema Limit Pusat">4</a></li>
+		<li class="child"><a href="Variance.html" title="Varians Sampel">5</a></li>
+		<li class="child"><a href="OrderStatistics.html" title="Statistik Terurut">6</a></li>
+		<li class="child"><a href="Covariance.html" title="Korelasi dan Regresi Sampel">7</a></li>
+		<li class="current">8</li>
+		<li class="details"><button type="button" title="Perluas Rincian" onclick="expandDetails(true);"><img src="../icons/Plus.svg" alt="Perluas"></button></li>
+		<li class="details"><button type="button" title="Ciutkan Rincian" onclick="expandDetails(false);"><img src="../icons/Minus.svg" alt="Ciutkan"></button></li>
+	</ol>
+	<h2 id="o006.random.sample.normal.page">8. Sifat Khusus Sampel Normal</h2>
+</header>
+
+<p>Sampel acak dari distribusi normal merupakan kasus khusus terpenting di antara topik-topik dalam bab ini. Seperti yang akan kita lihat, banyak hasil menjadi jauh lebih sederhana ketika distribusi asal sampelnya normal. Selain itu, kita akan menurunkan distribusi sejumlah variabel acak yang dibentuk dari sampel normal dan sangat penting dalam statistika inferensial.</p>
+
+<h3 id="one">Model Satu Sampel</h3>
+
+<p>Misalkan \(\bs{X} = (X_1, X_2, \ldots, X_n)\) merupakan <a href="Introduction.html">sampel acak</a> dari <a href="https://www.randomservices.org/random/special/Normal.html">distribusi normal</a> dengan <a href="https://www.randomservices.org/random/expect/Properties.html">rata-rata</a> \(\mu \in \R\) dan <a href="https://www.randomservices.org/random/expect/Variance.html">simpangan baku</a> \(\sigma \in (0, \infty)\). Ingat bahwa istilah <dfn>sampel acak</dfn> berarti bahwa \(\bs{X}\) adalah barisan variabel acak yang independen dan berdistribusi identik. Ingat pula bahwa distribusi normal memiliki fungsi densitas probabilitas
+\[ f(x) = \frac{1}{\sqrt{2 \, \pi} \sigma} \exp \left[ -\frac{1}{2} \left( \frac{x - \mu}{\sigma} \right)^2 \right], \quad x \in \R \]
+Dalam notasi yang telah kita gunakan di bagian lain bab ini, \(\sigma_3 = \E\left[(X - \mu)^3\right] = 0\) (setara dengan kemencengan distribusi normal yang bernilai 0) dan \(\sigma_4 = \E\left[(X - \mu)^4\right] = 3 \sigma^4\) (setara dengan kurtosis distribusi normal yang bernilai 3). Karena sampel (dan khususnya ukuran sampel \(n\)) dianggap tetap dalam subbagian ini, ketergantungan pada ukuran sampel tidak ditampilkan dalam notasi.</p>
+
+<h4 id="mea">Rata-Rata Sampel</h4>
+
+<p>Pertama, ingat bahwa <a href="Mean.html">rata-rata sampel</a> adalah
+\[ M = \frac{1}{n} \sum_{i=1}^n X_i \]</p>
+
+<div class="unit" id="mea1">
+	<p class="math">\(M\) berdistribusi normal dengan rata-rata dan varians berikut:</p>
+	<ol class="sub">
+		<li>\(\E(M) = \mu\)</li>
+		<li>\(\var(M) = \sigma^2 / n\)</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Hasil ini merupakan konsekuensi dari sifat-sifat dasar distribusi normal. Ingat bahwa jumlah variabel independen yang berdistribusi normal juga berdistribusi normal, dan transformasi linear dari variabel yang berdistribusi normal juga berdistribusi normal. Rata-rata dan varians \(M\) berlaku secara umum dan telah diturunkan dalam bagian tentang <a href="LLN.html">Hukum Bilangan Besar.</a></p>
+	</details>
+</div>
+
+<p>Tentu saja, berdasarkan <a href="CLT.html">teorema limit pusat</a>, distribusi \(M\) mendekati distribusi normal ketika \(n\) besar, asalkan distribusi asal memiliki varians positif dan berhingga, meskipun distribusi asal tersebut tidak normal.</p>
+
+<div class="unit" id="mea2">
+	<p class="math"><dfn>Skor baku</dfn> dari \(M\) adalah
+	\[ Z = \frac{M - \mu}{\sigma / \sqrt{n}} \]
+	\(Z\) berdistribusi normal baku.</p>
+</div>
+
+<p>Skor baku \(Z\) dalam <a href="#mea2" class="ref"></a> berperan penting dalam menyusun <a href="https://www.randomservices.org/random/interval/Normal.html">estimasi interval</a> dan <a href="https://www.randomservices.org/random/hypothesis/Normal.html">uji hipotesis</a> untuk rata-rata distribusi \(\mu\) ketika simpangan baku distribusi \(\sigma\) diketahui. Variabel acak \(Z\) juga akan muncul dalam beberapa penurunan di bagian ini.</p>
+
+<h4 id="var">Varians Sampel</h4>
+
+<p>Tujuan utama subbagian ini ialah menunjukkan bahwa kelipatan tertentu dari kedua versi <a href="Variance.html">varians sampel</a> yang telah kita pelajari memiliki <dfn>distribusi khi-kuadrat</dfn>. Ingat bahwa <a href="https://www.randomservices.org/random/special/ChiSquare.html">distribusi khi-kuadrat</a> dengan \(k \in \N_+\) derajat kebebasan memiliki fungsi densitas probabilitas
+\[ f(x) = \frac{1}{\Gamma(k / 2) 2^{k/2}} x^{k / 2 - 1} e^{-x / 2}, \quad 0 \lt x \lt \infty \]
+serta memiliki rata-rata \(k\) dan varians \(2k\). Fungsi pembangkit momennya adalah
+\[ G(t) = \frac{1}{(1 - 2t)^{k / 2}}, \quad -\infty \lt t \lt \frac{1}{2} \]
+Hasil terpenting yang perlu diingat ialah bahwa distribusi khi-kuadrat dengan \(k\) derajat kebebasan merupakan distribusi dari \(\sum_{i = 1}^k Z_i^2\), dengan \((Z_1, Z_2, \ldots, Z_k)\) berupa barisan variabel acak normal baku yang independen.</p>
+
+<p>Ingat bahwa jika \(\mu\) diketahui, penaksir yang wajar bagi varians \(\sigma^2\) adalah statistik
+\[ W^2 = \frac{1}{n} \sum_{i=1}^n (X_i - \mu)^2 \]
+Meskipun asumsi bahwa \(\mu\) diketahui hampir selalu tidak realistis, \(W^2\) sangat mudah dianalisis dan akan digunakan dalam beberapa penurunan di bawah ini. Hasil pertama kita adalah distribusi suatu kelipatan sederhana dari \(W^2\).</p>
+
+<div class="unit" id="var1">
+	<p class="math">Variabel acak
+	\[ U = \frac{n}{\sigma^2} W^2 \]
+	berdistribusi khi-kuadrat dengan \(n\) derajat kebebasan.</p>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Perhatikan bahwa
+		\[ \frac{n}{\sigma^2} W^2 = \sum_{i=1}^n \left(\frac{X_i - \mu}{\sigma}\right)^2 \]
+		dan suku-suku dalam jumlah tersebut merupakan variabel normal baku yang independen.</p>
+	</details>
+</div>
+
+<p>Variabel \(U\) dalam <a href="#var1" class="ref"></a> berperan penting dalam menyusun <a href="https://www.randomservices.org/random/interval/Normal.html">estimasi interval</a> dan <a href="https://www.randomservices.org/random/hypothesis/Normal.html">uji hipotesis</a> untuk simpangan baku distribusi \(\sigma\) ketika rata-rata distribusi \(\mu\) diketahui (meskipun sekali lagi, asumsi ini biasanya tidak realistis).</p>
+
+<div class="unit" id="var2">
+	<p class="math">Rata-rata dan varians \(W^2\) adalah</p>
+	<ol class="sub">
+		<li>\(\E(W^2) = \sigma^2\)</li>
+		<li>\(\var(W^2) = 2 \sigma^4 / n\)</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Hasil-hasil ini diperoleh dari distribusi khi-kuadrat \(U\) serta sifat-sifat baku nilai harapan dan varians.</p>
+	</details>
+</div>
+
+<p>Sebagai penaksir bagi \(\sigma^2\), bagian (a) berarti bahwa \(W^2\) <dfn>takbias</dfn>, sedangkan bagian (b) berarti bahwa \(W^2\) <dfn>konsisten</dfn>. Tentu saja, hasil-hasil momen ini merupakan kasus khusus dari hasil umum yang diperoleh dalam bagian tentang <a href="Variance.html#spe">Varians Sampel</a>. Dalam bagian tersebut, kita juga menunjukkan bahwa \(M\) dan \(W^2\) tidak berkorelasi jika distribusi asal sampelnya memiliki <a href="https://www.randomservices.org/random/expect/Skew.html#skw">kemencengan</a> 0 (\(\sigma_3 = 0\)), seperti dalam kasus ini. </p>
+
+<p>Untuk ukuran sampel sekurang-kurangnya dua, ingat bahwa versi baku varians sampel adalah statistik
+\[ S^2 = \frac{1}{n - 1} \sum_{i=1}^n (X_i - M)^2 \]
+Varians sampel \(S^2\) merupakan penaksir yang lazim bagi \(\sigma^2\) ketika \(\mu\) tidak diketahui (seperti yang biasanya terjadi). Kita telah menunjukkan <a href="Variance.html">sebelumnya</a> bahwa secara umum, rata-rata sampel \(M\) dan varians sampel \(S^2\) tidak berkorelasi jika distribusi asal sampelnya memiliki kemencengan 0 (\(\sigma_3 = 0\)). Ternyata, jika distribusi sampelnya normal, kedua variabel tersebut bahkan <a href="https://www.randomservices.org/random/prob/Independence.html">independen</a>. Ini merupakan sifat yang sangat penting dan berguna, serta sekilas sangat mengejutkan karena \(S^2\) tampak bergantung secara eksplisit pada \(M\).</p>
+
+<div class="unit" id="var3">
+	<p class="math">Rata-rata sampel \(M\) dan varians sampel \(S^2\) saling independen.</p>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Pembuktiannya didasarkan pada vektor simpangan dari rata-rata sampel. Misalkan
+		\[ \bs{D} = (X_1 - M, X_2 - M, \ldots, X_{n-1} - M) \]
+		Perhatikan bahwa \(S^2\) dapat ditulis sebagai fungsi dari \(\bs{D}\) karena \(\sum_{i=1}^n (X_i - M) = 0\). Selanjutnya, \(M\) dan vektor \(\bs{D}\) memiliki <a href="https://www.randomservices.org/random/special/MultiNormal.html">distribusi normal multivariat</a> bersama. Kita telah menunjukkan <a href="LLN.html">sebelumnya</a> bahwa \(M\) dan \(X_i - M\) tidak berkorelasi untuk setiap \(i\), sehingga \(M\) dan \(\bs{D}\) independen. Terakhir, karena \(S^2\) merupakan fungsi dari \(\bs{D}\), dapat disimpulkan bahwa \(M\) dan \(S^2\) independen.</p>
+	</details>
+</div>
+
+<p>Sekarang kita dapat menentukan distribusi suatu kelipatan sederhana dari varians sampel \(S^2\).</p>
+
+<div class="unit" id="var4">
+	<p class="math">Variabel acak
+	\[ V = \frac{n-1}{\sigma^2} S^2 \]	
+	berdistribusi khi-kuadrat dengan \(n - 1\) derajat kebebasan.</p>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Mula-mula kita tunjukkan bahwa \(U = V + Z^2\), dengan \(U\) sebagai variabel khi-kuadrat yang berkaitan dengan \(W^2\) dan \(Z\) sebagai skor baku yang berkaitan dengan \(M\). Untuk melihatnya, perhatikan bahwa
+		\begin{align}
+			U &amp; = \frac{1}{\sigma^2} \sum_{i=1}^n (X_i - \mu)^2 = \frac{1}{\sigma^2} \sum_{i=1}^n (X_i - M + M - \mu)^2 \\
+			&amp; = \frac{1}{\sigma^2} \sum_{i=1}^n (X_i - M)^2 + \frac{2}{\sigma^2} \sum_{i=1}^n (X_i - M)(M - \mu) + \frac{1}{\sigma^2} \sum_{i=1}^n (M - \mu)^2
+		\end{align}
+		Pada ruas kanan persamaan terakhir, suku pertama adalah \(V\). Suku kedua bernilai 0 karena \(\sum_{i=1}^n (X_i - M) = 0\). Suku terakhir adalah \(\frac{n}{\sigma^2}(M - \mu)^2 = Z^2\). Berdasarkan <a href="#var1" class="ref"></a>, \(U\) berdistribusi khi-kuadrat dengan \(n\) derajat kebebasan, dan tentu saja \(Z^2\) berdistribusi khi-kuadrat dengan 1 derajat kebebasan. Berdasarkan <a href="#var3" class="ref"></a>, \(V\) dan \(Z^2\) independen. Ingat bahwa fungsi pembangkit momen dari jumlah variabel independen adalah hasil kali fungsi pembangkit momen masing-masing. Dengan demikian, mengambil fungsi pembangkit momen pada persamaan \(U = V + Z^2\) memberikan
+		\[ \frac{1}{(1 - 2t)^{n/2}} = \E(e^{t V}) \frac{1}{(1 - 2 t)^{1/2}}, \quad t \lt \frac{1}{2} \]
+		Dengan menyelesaikannya, diperoleh \(\E(e^{t V}) = 1 \big/ (1 - 2 t)^{(n-1)/2}\) untuk \(t \lt 1/2\), sehingga \(V\) berdistribusi khi-kuadrat dengan \(n - 1\) derajat kebebasan.</p>
+	</details>
+</div>
+
+<p>Variabel \(V\) dalam <a href="#var4" class="ref"></a> berperan penting dalam menyusun <a href="https://www.randomservices.org/random/interval/Normal.html">estimasi interval</a> dan <a href="https://www.randomservices.org/random/hypothesis/Normal.html">uji hipotesis</a> untuk simpangan baku distribusi \(\sigma\) ketika rata-rata distribusi \(\mu\) tidak diketahui (seperti yang hampir selalu terjadi).</p>
+
+<div class="unit" id="var5">
+	<p class="math">Rata-rata dan varians \(S^2\) adalah</p>
+	<ol class="sub">
+		<li>\(\E(S^2) = \sigma^2\)</li>
+		<li>\(\var(S^2) = 2 \sigma^4 \big/ (n - 1)\)	</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Hasil-hasil ini diperoleh dari distribusi khi-kuadrat \(V\) serta sifat-sifat baku nilai harapan dan varians.</p>
+	</details>
+</div>
+
+<p>Seperti sebelumnya, hasil-hasil momen ini merupakan kasus khusus dari hasil umum yang diperoleh dalam bagian tentang <a href="Variance.html">Varians Sampel</a>. Sekali lagi, sebagai penaksir bagi \(\sigma^2\), bagian (a) berarti bahwa \(S^2\) takbias, sedangkan bagian (b) berarti bahwa \(S^2\) konsisten. Perhatikan pula bahwa \(\var(S^2)\) lebih besar daripada \(\var(W^2)\) (hal yang tidak mengejutkan), sebesar faktor \(\frac{n}{n - 1}\).</p>
+
+<div class="unit" id="var6">
+	<p class="app">Dalam <a href="https://www.randomservices.org/random/apps/SpecialSimulator.html" class="ancillary">simulator distribusi khusus</a>, pilih distribusi khi-kuadrat. Ubah parameter derajat kebebasan dan perhatikan bentuk serta letak fungsi densitas probabilitas dan bilah rata-rata–simpangan baku. Untuk nilai parameter yang dipilih, jalankan eksperimen 1.000 kali dan bandingkan fungsi densitas empiris serta momen empiris dengan fungsi densitas probabilitas dan momen yang sebenarnya.</p>
+</div>
+
+<div class="unit" id="var7">
+	<p class="math">Kovarians dan korelasi antara varians sampel khusus dan varians sampel baku adalah</p>
+	<ol class="sub">
+		<li>\(\cov(W^2, S^2) = 2 \sigma^4 / n\)</li>
+		<li>\(\cor(W^2, S^2) = \sqrt{(n - 1) / n}\)</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Hasil-hasil ini diperoleh dari hasil umum dalam bagian tentang <a href="Variance.html">varians sampel</a> dan fakta bahwa \(\sigma_4 = 3 \sigma^4\).</p>
+	</details>
+</div>
+
+<p>Perhatikan bahwa korelasi tersebut tidak bergantung pada parameter \(\mu\) dan \(\sigma\), serta konvergen ke 1 ketika \(n \to \infty\).</p>
+
+<h4 id="stu">Variabel \(T\)</h4>
+
+<p>Ingat bahwa <a href="https://www.randomservices.org/random/special/Student.html">distribusi \(t\) Student</a> dengan \(k \in \N_+\) derajat kebebasan memiliki fungsi densitas probabilitas
+\[ f(t) = C_k \left( 1 + \frac{t^2}{k} \right)^{-(k + 1) / 2}, \quad t \in \R \]
+dengan \(C_k\) sebagai konstanta normalisasi yang sesuai. Distribusi ini memiliki rata-rata 0 jika \(k \gt 1\) dan varians \(k / (k - 2)\) jika \(k \gt 2\). Dalam subbagian ini, hal utama yang perlu diingat ialah bahwa distribusi \(t\) dengan \(k\) derajat kebebasan merupakan distribusi dari
+\[ \frac{Z}{\sqrt{V / k}} \] 
+dengan \(Z\) berdistribusi normal baku; \(V\) berdistribusi khi-kuadrat dengan \(k\) derajat kebebasan; serta \(Z\) dan \(V\) independen.</p>
+
+<div class="unit" id="stu0">
+	<p class="dfn">Untuk ukuran sampel sekurang-kurangnya dua, definisikan
+	\[ T = \frac{M - \mu}{S / \sqrt{n}} \]</p>
+</div>
+
+Perhatikan bahwa \(T\) serupa dengan skor baku \(Z\) yang berkaitan dengan \(M\), tetapi simpangan baku sampel \(S\) menggantikan simpangan baku distribusi \(\sigma\). Variabel \(T\) berperan penting dalam menyusun <a href="https://www.randomservices.org/random/interval/Normal.html">estimasi interval</a> dan <a href="https://www.randomservices.org/random/hypothesis/Normal.html">uji hipotesis</a> untuk rata-rata distribusi \(\mu\) ketika simpangan baku distribusi \(\sigma\) tidak diketahui.</p>
+
+<div class="unit" id="stu1">
+	<p class="math">Misalkan \(Z\) menyatakan skor baku dalam <a href="#mea2" class="ref"></a>, dan \(V\) menyatakan variabel khi-kuadrat dalam <a href="#var4" class="ref"></a>. Maka
+	\[ T = \frac{Z}{\sqrt{V / (n - 1)}} \]
+	sehingga \(T\) berdistribusi \(t\) Student dengan \(n - 1\) derajat kebebasan.</p>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Dalam definisi \(T\), bagi pembilang dan penyebut dengan \(\sigma / \sqrt{n}\). Pembilangnya kemudian menjadi \((M - \mu) \big/ (\sigma / \sqrt{n}) = Z\), sedangkan penyebutnya menjadi \(S / \sigma = \sqrt{V / (n - 1)}\). Karena \(Z\) dan \(V\) independen, \(Z\) berdistribusi normal baku, dan \(V\) berdistribusi khi-kuadrat dengan \(n - 1\) derajat kebebasan, dapat disimpulkan bahwa \(T\) berdistribusi \(t\) Student dengan \(n - 1\) derajat kebebasan.</p>
+	</details>
+</div>
+
+<div class="unit" id="stu2">
+	<p class="app">Dalam <a href="https://www.randomservices.org/random/apps/SpecialSimulator.html" class="ancillary">simulator distribusi khusus</a>, pilih distribusi \(t\). Ubah parameter derajat kebebasan dan perhatikan bentuk serta letak fungsi densitas probabilitas dan bilah rata-rata \( \pm \) simpangan baku. Untuk nilai parameter yang dipilih, jalankan eksperimen 1.000 kali dan bandingkan fungsi densitas empiris serta momen empiris dengan fungsi densitas dan momen distribusi.</p>
+</div>
+
+<h3 id="two">Model Dua Sampel</h3>
+
+<p>Misalkan \(\bs{X} = (X_1, X_2, \ldots, X_m)\) merupakan sampel acak berukuran \(m\) dari distribusi normal dengan rata-rata \(\mu \in \R\) dan simpangan baku \(\sigma \in (0, \infty)\), dan \(\bs{Y} = (Y_1, Y_2, \ldots, Y_n)\) merupakan sampel acak berukuran \(n\) dari distribusi normal dengan rata-rata \(\nu \in \R\) dan simpangan baku \(\tau \in (0, \infty)\). Terakhir, misalkan \(\bs{X}\) dan \(\bs{Y}\) independen. Tentu saja, seluruh hasil di atas untuk model satu sampel dalam <a href="#one" class="ref"></a> berlaku secara terpisah bagi \(\bs{X}\) dan \(\bs{Y}\), tetapi sekarang kita tertarik pada statistik yang berguna dalam prosedur inferensial untuk membandingkan kedua distribusi normal tersebut. Kita akan menggunakan notasi dasar yang ditetapkan di atas, tetapi akan menunjukkan sampel yang menjadi acuannya.</p>
+
+<p>Model dua sampel (atau secara lebih umum, model multisampel) muncul secara alami ketika suatu variabel dasar dalam eksperimen statistik <dfn>dipilah</dfn> menurut satu atau beberapa variabel lain (sering kali variabel nominal). Sebagai contoh, dalam <a href="https://www.randomservices.org/random/data/Cicada.html" class="ancillary">data tonggeret</a>, bobot tonggeret jantan dan bobot tonggeret betina dapat dipandang sebagai pengamatan dari model normal dua sampel. Variabel dasar <var>bobot</var> dipilah menurut variabel <var>jenis kelamin</var>. Jika bobot dipilah menurut jenis kelamin dan spesies, kita dapat memperoleh pengamatan dari model normal enam sampel.</p>
+
+<h4 id="dif">Selisih Rata-Rata Sampel</h4>
+
+<p>Kita mengetahui dari <a href="#mea1" class="ref"></a> bahwa \(M(\bs{X})\) dan \(M(\bs{Y})\) berdistribusi normal. Selain itu, kedua rata-rata sampel ini independen karena sampel asalnya, \(\bs{X}\) dan \(\bs{Y}\), independen. Dengan demikian, berdasarkan sifat dasar distribusi normal, setiap kombinasi linear dari \(M(\bs{X})\) dan \(M(\bs{Y})\) juga akan berdistribusi normal. Untuk prosedur inferensial yang membandingkan rata-rata distribusi \(\mu\) dan \(\nu\), kombinasi linear terpenting adalah selisihnya.</p>
+
+<div class="unit" id="dfi1">
+	<p class="math">\(M(\bs{X}) - M(\bs{Y})\) berdistribusi normal dengan rata-rata dan varians berikut:</p>
+	<ol class="sub">
+		<li>\(\E\left[M(\bs{X}) - M(\bs{Y})\right] = \mu - \nu\)</li>
+		<li>\(\var\left[M(\bs{X}) - M(\bs{Y})\right] = \sigma^2 / m + \tau^2 / n\)</li>
+	</ol>
+</div>
+
+<p>Dengan demikian, skor baku
+\[ Z = \frac{\left[M(\bs{X}) - M(\bs{Y})\right] - (\mu - \nu)}{\sqrt{\sigma^2 / m + \tau^2 / n}} \]
+berdistribusi normal baku. Skor baku ini berperan mendasar dalam menyusun <a href="https://www.randomservices.org/random/interval/BivariateNormal.html">estimasi interval</a> dan <a href="https://www.randomservices.org/random/hypothesis/BivariateNormal.html">uji hipotesis</a> untuk selisih \(\mu - \nu\) ketika simpangan baku distribusi \(\sigma\) dan \(\tau\) diketahui.</p>
+
+<h4 id="rat">Rasio Varians Sampel</h4>
+
+<p>Selanjutnya, kita akan menunjukkan bahwa rasio kelipatan tertentu dari varians sampel (untuk kedua versinya) dari \(\bs{X}\) dan \(\bs{Y}\) memiliki <dfn>distribusi \(F\)</dfn>. Ingat bahwa <a href="https://www.randomservices.org/random/special/Fisher.html">distribusi \(F\)</a> dengan \(j \in \N_+\) derajat kebebasan pada pembilang dan \(k \in \N_+\) derajat kebebasan pada penyebut merupakan distribusi dari
+\[\frac{U / j}{V / k}\]
+dengan \(U\) berdistribusi khi-kuadrat dengan \(j\) derajat kebebasan; \(V\) berdistribusi khi-kuadrat dengan \(k\) derajat kebebasan; serta \(U\) dan \(V\) independen. Distribusi \(F\) dinamai untuk menghormati <a href="https://www.randomservices.org/random/biographies/Fisher.html" class="ancillary">Ronald Fisher</a> dan memiliki fungsi densitas probabilitas
+\[ f(x) = C_{j,k} \frac{x^{(j-2) / 2}}{\left[1 + (j / k) x\right]^{(j + k) / 2}}, \quad 0 \lt x \lt \infty \]
+dengan \(C_{j,k}\) sebagai konstanta normalisasi yang sesuai. Rata-ratanya adalah \(\frac{k}{k - 2}\) jika \(k \gt 2\), dan variansnya adalah \(2 \left(\frac{k}{k - 2}\right)^2 \frac{j + k  - 2}{j (k - 4)}\) jika \(k \gt 4\).</p>
+
+<div class="unit" id="rat1">
+	<p class="math">Variabel acak berikut berdistribusi \(F\) dengan \(m\) derajat kebebasan pada pembilang dan \(n\) derajat kebebasan pada penyebut:
+	\[ \frac{W^2(\bs{X}) / \sigma^2}{W^2(\bs{Y}) / \tau^2} \]</p>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Dengan menggunakan notasi dalam <a href="#var1" class="ref"></a>, perhatikan bahwa \(W^2(\bs{X}) / \sigma^2 = U(\bs{X}) / m\) dan \(W^2(\bs{Y}) / \tau^2 = U(\bs{Y}) / n\). Hasil tersebut langsung diperoleh karena \(U(\bs{X})\) dan \(U(\bs{Y})\) merupakan variabel khi-kuadrat independen yang masing-masing memiliki \(m\) dan \(n\) derajat kebebasan.</p>
+	</details>
+</div>
+
+<div class="unit" id="rat2">
+	<p class="math">Jika ukuran masing-masing sampel sekurang-kurangnya dua, variabel acak berikut berdistribusi \(F\) dengan \(m - 1\) derajat kebebasan pada pembilang dan \(n - 1\) derajat kebebasan pada penyebut:
+	\[ \frac{S^2(\bs{X}) / \sigma^2}{S^2(\bs{Y}) / \tau^2} \]</p>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Dengan menggunakan notasi pada <a href="#var4" class="ref"></a>, perhatikan bahwa \(S^2(\bs{X}) / \sigma^2 = V(\bs{X}) \big/ (m - 1)\) dan \(S^2(\bs{Y}) / \tau^2 = V(\bs{Y}) \big/ (n - 1)\). Hasil tersebut langsung diperoleh karena \(V(\bs{X})\) dan \(V(\bs{Y})\) merupakan variabel khi-kuadrat independen dengan derajat kebebasan masing-masing \(m - 1\) dan \(n - 1\).</p>
+	</details>
+</div>
+
+<p>Variabel-variabel ini berguna untuk menyusun <a href="https://www.randomservices.org/random/interval/BivariateNormal.html">estimasi interval</a> dan <a href="https://www.randomservices.org/random/hypothesis/BivariateNormal.html">uji hipotesis</a> bagi rasio simpangan baku \(\sigma / \tau\). Pemilihan variabel \(F\) bergantung pada diketahui atau tidaknya rata-rata \(\mu\) dan \(\nu\). Tentu saja, rata-rata biasanya tidak diketahui, sehingga statistik pada <a href="#rat2" class="ref"></a> digunakan.</p>
+
+<div class="unit" id="o006.random.sample.normal.unit.special-f-simulator">
+	<p class="app">Dalam <a href="https://www.randomservices.org/random/apps/SpecialSimulator.html" class="ancillary">simulator distribusi khusus</a>, pilih distribusi \(F\). Variasikan parameter derajat kebebasan dan perhatikan bentuk serta letak fungsi densitas probabilitas dan bilah rata-rata \( \pm \) simpangan baku. Untuk nilai parameter yang dipilih, jalankan eksperimen 1.000 kali dan bandingkan fungsi densitas serta momen empiris dengan fungsi densitas dan momen distribusi sebenarnya.</p>
+</div>
+
+<h4 id="tst">Variabel \( T \)</h4>
+
+<p>Dengan ukuran setiap sampel sekurang-kurangnya dua, konstruksi terakhir kita dalam model normal dua sampel akan menghasilkan variabel dengan distribusi \( t \) Student. Variabel ini berperan mendasar dalam menyusun <a href="https://www.randomservices.org/random/interval/BivariateNormal.html">estimasi interval</a> dan <a href="https://www.randomservices.org/random/hypothesis/BivariateNormal.html">uji hipotesis</a> bagi selisih \(\mu - \nu\) ketika simpangan baku distribusi \(\sigma\) dan \(\tau\) tidak diketahui. Konstruksi ini memerlukan asumsi tambahan bahwa kedua simpangan baku distribusi sama: \( \sigma = \tau \). Asumsi ini masuk akal jika terdapat variabilitas inheren pada variabel pengukuran yang tidak berubah sekalipun perlakuan berbeda diterapkan pada objek-objek dalam populasi.</p>
+
+<div class="unit" id="std">
+	<p class="math">Skor baku yang terkait dengan selisih rata-rata sampel adalah
+	\[ Z = \frac{[M(\bs{Y}) - M(\bs{X})] - (\nu - \mu)}{\sigma \sqrt{1 / m + 1 / n}} \]</p>
+</div>
+
+<p>Untuk membentuk variabel yang diinginkan, pertama-tama kita memerlukan penaksir bagi \(\sigma^2\). Pendekatan yang wajar adalah menggunakan rata-rata tertimbang dari varians sampel \(S^2(\bs{X})\) dan \(S^2(\bs{Y})\), dengan derajat kebebasan sebagai faktor pembobot.</p>
+
+<div class="unit" id="pool">
+	<p class="dfn"><dfn>Penaksir gabungan</dfn> bagi \(\sigma^2\) adalah
+	\[ S^2(\bs{X}, \bs{Y}) = \frac{(m - 1) S^2(\bs{X}) + (n - 1) S^2(\bs{Y})}{m + n - 2} \]</p>
+</div>
+
+<div class="unit" id="tst1">
+	<p class="math">Variabel acak \( V \) berikut berdistribusi <a href="https://www.randomservices.org/random/special/ChiSquare.html">khi-kuadrat</a> dengan \(m + n - 2\) derajat kebebasan:
+	\[ V = \frac{(m - 1)S^2(\bs{X}) + (n - 1) S^2(\bs{Y})}{\sigma^2} \]</p>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Variabel tersebut dapat dinyatakan sebagai jumlah variabel-variabel khi-kuadrat yang independen.</p>
+	</details>
+</div>
+
+<div class="unit" id="tst2">
+	<p class="math">Variabel \(M(\bs{Y}) - M(\bs{X})\) dan \(S^2(\bs{X}, \bs{Y})\) saling independen.</p>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Karena kedua sampel independen, vektor \((M(\bs{X}), S(\bs{X}))\) independen dari vektor \((M(\bs{Y}), S(\bs{Y}))\). Selain itu, dalam setiap sampel normal, \(M(\bs{X})\) independen dari \(S(\bs{X})\), dan \(M(\bs{Y})\) independen dari \(S(\bs{Y})\). Dengan demikian, vektor kedua rata-rata sampel independen dari vektor kedua simpangan baku sampel; setiap fungsi dari vektor pertama, termasuk selisih rata-rata, independen dari setiap fungsi dari vektor kedua, termasuk varians gabungan.</p>
+	</details>
+</div>
+
+<div class="unit" id="tst3">
+	<p class="math">Variabel acak \( T \) berikut berdistribusi <a href="https://www.randomservices.org/random/special/Student.html">\(t\) Student</a> dengan \(m + n - 2\) derajat kebebasan.
+	\[ T = \frac{[M(\bs{Y}) - M(\bs{X})] - (\nu - \mu)}{S(\bs{X}, \bs{Y}) \sqrt{1 / m + 1 / n}} \]</p>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Variabel acak tersebut dapat ditulis sebagai \(Z / \sqrt{V / (m + n - 2)}\), dengan \(Z\) sebagai variabel normal baku yang diberikan dalam <a href="#std" class="ref"></a> dan \( V \) sebagai variabel khi-kuadrat yang diberikan dalam <a href="#tst1" class="ref"></a>. Selain itu, \( Z \) dan \( V \) independen berdasarkan <a href="#tst2" class="ref"></a>.</p>
+	</details>
+</div>
+
+<h3 id="biv">Model Sampel Bivariat</h3>
+
+<p>Misalkan sekarang \(\left((X_1, Y_1), (X_2, Y_2), \ldots, (X_n, Y_n)\right)\) merupakan sampel acak berukuran \(n\) dari <a href="https://www.randomservices.org/random/special/MultiNormal.html">distribusi normal bivariat</a> dengan rata-rata \(\mu \in \R\) dan \(\nu \in \R\), simpangan baku \(\sigma \in (0, \infty)\) dan \(\tau \in (0, \infty)\), serta korelasi \(\rho \in [-1, 1]\). Tentu saja, \(\bs{X} = (X_1, X_2, \ldots, X_n)\) merupakan sampel acak berukuran \(n\) dari distribusi normal dengan rata-rata \(\mu\) dan simpangan baku \(\sigma\), sedangkan \(\bs{Y} = (Y_1, Y_2, \ldots, Y_n)\) merupakan sampel acak berukuran \(n\) dari distribusi normal dengan rata-rata \(\nu\) dan simpangan baku \(\tau\). Karena itu, hasil-hasil di atas untuk model satu sampel dalam <a href="#one" class="ref"></a> berlaku bagi \(\bs{X}\) dan \(\bs{Y}\) secara terpisah. Perhatian kita dalam bagian ini tertuju pada hubungan antara berbagai statistik yang dihitung dari \(\bs{X}\) dan \(\bs{Y}\), serta sifat-sifat <a href="Covariance.html">kovarians sampel</a>.</p>
+
+<p>Model bivariat (atau, secara lebih umum, multivariat) muncul secara alami ketika dua atau lebih variabel dipertimbangkan dalam eksperimen statistik. Sebagai contoh, pasangan tinggi ayah dan putranya dalam <a href="https://www.randomservices.org/random/data/Pearson.html" class="ancillary">data tinggi Pearson</a> dapat dimodelkan sebagai pengamatan dari model normal bivariat.</p>
+
+<p>Dalam notasi yang telah kita gunakan sebelumnya, ingat bahwa \(\sigma_3 = \E\left[(X - \mu)^3\right] = 0\), \(\sigma_4 = \E\left[(X - \mu)^4\right] = 3 \sigma^4\), \(\tau_3 = \E\left[(Y - \nu)^3\right] = 0\), \(\tau_4 = \E\left[(Y - \nu)^4\right] = 3 \tau^4\), \( \delta = \cov(X, Y) = \sigma \tau \rho\), dan \(\delta_2 = \E[(X - \mu)^2 (Y - \nu)^2] = \sigma^2 \tau^2 (1 + 2 \rho^2)\).</p>
+
+<div class="unit" id="biv1">
+	<p class="math">Vektor data \(((X_1, Y_1), (X_2, Y_2), \ldots, (X_n, Y_n))\) berdistribusi normal multivariat.</p>
+	<ol class="sub">
+		<li>Vektor rata-ratanya berbentuk blok, dengan setiap blok berupa \((\mu, \nu)\).</li>
+		<li>Matriks varians-kovariansnya berbentuk blok diagonal, dengan setiap blok berupa \(\left[\begin{matrix} \sigma^2 &amp; \sigma \tau \rho \\ \sigma \tau \rho &amp; \tau^2 \end{matrix} \right]\).</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Hasil ini merupakan konsekuensi dari hasil-hasil baku untuk distribusi normal multivariat. Blok pada bagian (a) dan (b) masing-masing adalah vektor rata-rata dan matriks varians-kovarians dari satu pengamatan \((X, Y)\).</p>
+	</details>
+</div>
+
+<h4 id="mes">Rata-Rata Sampel</h4>
+
+<div class="unit" id="mes1">
+	<p class="math">\(\left(M(\bs{X}), M(\bs{Y})\right)\) berdistribusi normal bivariat. Kovarians dan korelasinya adalah</p>
+	<ol class="sub">
+		<li>\(\cov\left[M(\bs{X}), M(\bs{Y})\right] = \sigma \tau \rho / n\)</li>
+		<li>\(\cor\left[M(\bs{X}), M(\bs{Y})\right] = \rho\)</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Fakta bahwa pasangan rata-rata tersebut berdistribusi normal bivariat diperoleh dari <a href="#biv1" class="ref"></a> karena \((M(\bs{X}), M(\bs{Y}))\) dapat diperoleh dari vektor data melalui transformasi linear. Bagian (a) dan (b) diperoleh dari hasil pada bagian tentang <a href="Covariance.html">korelasi sampel</a>.</p>
+	</details>
+</div>
+
+<p>Rata-rata dan varians \(M(\bs{X})\) maupun \(M(\bs{Y})\) telah kita ketahui dari <a href="#one">model satu sampel</a> di atas. Oleh karena itu, kita mengetahui distribusi lengkap dari \((M(\bs{X}), M(\bs{Y}))\).</p>
+
+<h4 id="vas">Varians Sampel</h4>
+
+<div class="unit" id="vas1">
+	<p class="math">Kovarians dan korelasi antara kedua varians sampel khusus adalah:</p>
+	<ol class="sub">
+		<li>\(\cov\left[W^2(\bs{X}), W^2(\bs{Y})\right] = 2 \sigma^2 \tau^2 \rho^2 / n\)</li>
+		<li>\(\cor\left[W^2(\bs{X}), W^2(\bs{Y})\right] = \rho^2\)</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Hasil-hasil ini diperoleh dari hasil pada bagian tentang <a href="Covariance.html">korelasi sampel</a> dan bentuk khusus \(\delta_2\), \(\sigma_4\), serta \(\tau_4\).</p>
+	</details>
+</div>
+
+<div class="unit" id="vas2">
+	<p class="math">Untuk ukuran sampel sekurang-kurangnya dua, kovarians dan korelasi antara kedua varians sampel baku adalah</p>
+	<ol class="sub">
+		<li>\(\cov\left[S^2(\bs{X}), S^2(\bs{Y})\right] = 2 \sigma^2 \tau^2 \rho^2 / (n - 1)\)</li>
+		<li>\(\cor\left[S^2(\bs{X}), S^2(\bs{Y})\right] = \rho^2\)</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Hasil-hasil ini diperoleh dari hasil pada bagian tentang <a href="Covariance.html">korelasi sampel</a> dan bentuk khusus \(\delta\), \(\delta_2\), \(\sigma_4\), serta \(\tau_4\).</p>
+	</details>
+</div>
+
+<h4 id="cov">Kovarians Sampel</h4>
+
+<p>Jika \(\mu\) dan \(\nu\) diketahui (sekali lagi, biasanya merupakan asumsi artifisial), penaksir yang wajar bagi kovarians distribusi \(\delta\) adalah bentuk khusus kovarians sampel
+\[ W(\bs{X}, \bs{Y}) = \frac{1}{n} \sum_{i=1}^n (X_i - \mu)(Y_i - \nu) \]</p>
+
+<div class="unit" id="cov1">
+	<p class="math">Rata-rata dan varians \(W(\bs{X}, \bs{Y})\) adalah</p>
+	<ol class="sub">
+		<li>\(\E[W(\bs{X}, \bs{Y})] = \sigma \tau \rho\)</li>
+		<li>\(\var[W(\bs{X}, \bs{Y})] = \sigma^2 \tau^2 (1 + \rho^2) / n\)</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Hasil-hasil ini diperoleh dari hasil pada bagian tentang <a href="Covariance.html">korelasi sampel</a> dan bentuk khusus \(\delta\) serta \(\delta_2\).</p>
+</details>
+</div>
+
+<p>Untuk ukuran sampel sekurang-kurangnya dua, jika \(\mu\) dan \(\nu\) tidak diketahui (sekali lagi, seperti yang biasanya terjadi), penaksir yang wajar bagi kovarians distribusi \(\delta\) adalah kovarians sampel baku
+\[ S(\bs{X}, \bs{Y}) = \frac{1}{n - 1} \sum_{i=1}^n [X_i - M(\bs{X})][Y_i - M(\bs{Y})] \]</p>
+
+<div class="unit" id="cov2">
+	<p class="math">Rata-rata dan varians dari kovarians sampel adalah</p>
+	<ol class="sub">
+		<li>\(\E[S(\bs{X}, \bs{Y})] = \sigma \tau \rho\)</li>
+		<li>\(\var[S(\bs{X}, \bs{Y})] = \sigma^2 \tau^2 (1 + \rho^2) \big/ (n - 1)\)</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Hasil-hasil ini merupakan konsekuensi dari <a href="Covariance.html">hasil umum</a> sebelumnya dan bentuk khusus \(\delta\) serta \(\delta_2\).</p>
+	</details>
+</div>
+
+<h3 id="exe">Latihan Komputasi</h3>
+
+<p>Kita menggunakan notasi dasar yang ditetapkan di atas untuk sampel \(\bs{X}\) dan \(\bs{Y}\), serta untuk statistik \(M\), \(W^2\), \(S^2\), \(T\), dan seterusnya.</p>
+
+<div class="unit" id="exe1">
+	<p class="math">Misalkan bobot bersih (dalam gram) dari 25 bungkus M&amp;M membentuk sampel acak \(\bs{X}\) dari distribusi normal dengan rata-rata 50 dan simpangan baku 4. Tentukan setiap besaran berikut:</p>
+	<ol class="sub">
+		<li>Rata-rata dan simpangan baku \(M\).</li>
+		<li>Rata-rata dan simpangan baku \(W^2\).</li>
+		<li>Rata-rata dan simpangan baku \(S^2\).</li>
+		<li>Rata-rata dan simpangan baku \(T\).</li>
+		<li>\(\P(M \gt 49, S^2 \lt 20)\).</li>
+		<li>\(\P(-1 \lt T \lt 1)\).</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<ol class="sub">
+			<li>\(50, \; 4 / 5\)</li>
+			<li>\(16, \; 16 \sqrt{2} / 5\)</li>
+			<li>\(16, \; 8 / \sqrt{3}\)</li>
+			<li>\(0, \; 2 \sqrt{3 / 11}\)</li>
+			<li>\(0.7291\)</li>
+			<li>\(0.6727\)</li>
+		</ol>
+	</details>
+</div>
+
+<div class="unit" id="exe2">
+	<p class="math">Misalkan skor matematika SAT dari 16 siswa Alabama membentuk sampel acak \(\bs{X}\) dari distribusi normal dengan rata-rata 550 dan simpangan baku 20, sedangkan skor matematika SAT dari 25 siswa Georgia membentuk sampel acak \(\bs{Y}\) dari distribusi normal dengan rata-rata 540 dan simpangan baku 15. Kedua sampel tersebut independen. Tentukan setiap besaran berikut:</p>
+	<ol class="sub">
+		<li>Rata-rata dan simpangan baku \(M(\bs{X})\).</li>
+		<li>Rata-rata dan simpangan baku \(M(\bs{Y})\).</li>
+		<li>Rata-rata dan simpangan baku \(M(\bs{X}) - M(\bs{Y})\).</li>
+		<li>\(\P[M(\bs{X}) \gt M(\bs{Y})]\).</li>
+		<li>Rata-rata dan simpangan baku \(S^2(\bs{X})\).</li>
+		<li>Rata-rata dan simpangan baku \(S^2(\bs{Y})\).</li>
+		<li>Rata-rata dan simpangan baku \(S^2(\bs{X}) / S^2(\bs{Y})\).</li>
+		<li>\(\P[S(\bs{X}) \gt S(\bs{Y})]\).	</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<ol class="sub">
+			<li>\(550, \; 5\)</li>
+			<li>\(540, \; 3\)</li>
+			<li>\(10, \; \sqrt{34}\)</li>
+			<li>\(0.9568\)</li>
+			<li>\(400, \; 80 \sqrt{10 / 3}\)</li>
+			<li>\(225, \; 75 \sqrt{3} / 2\)</li>
+			<li>\(64 / 33, \; \frac{32}{165} \sqrt{74 / 3}\)</li>
+			<li>\(0.8750\)</li>
+		</ol>
+	</details>
+</div>
+
+<footer>
+	<ol class="map">
+		<li class="parent"><a href="https://www.randomservices.org/random/index.html">Random</a></li>
+		<li class="parent"><a href="index.html">5. Sampel Acak</a></li>
+		<li class="child"><a href="Introduction.html" title="Pendahuluan">1</a></li>
+		<li class="child"><a href="Mean.html" title="Rata-Rata Sampel">2</a></li>
+		<li class="child"><a href="LLN.html" title="Hukum Bilangan Besar">3</a></li>
+		<li class="child"><a href="CLT.html" title="Teorema Limit Pusat">4</a></li>
+		<li class="child"><a href="Variance.html" title="Varians Sampel">5</a></li>
+		<li class="child"><a href="OrderStatistics.html" title="Statistik Terurut">6</a></li>
+		<li class="child"><a href="Covariance.html" title="Korelasi dan Regresi Sampel">7</a></li>
+		<li class="current">8</li>
+		<li class="details"><button type="button" title="Perluas Rincian" onclick="expandDetails(true);"><img src="../icons/Plus.svg" alt="Perluas"></button></li>
+		<li class="details"><button type="button" title="Ciutkan Rincian" onclick="expandDetails(false);"><img src="../icons/Minus.svg" alt="Ciutkan"></button></li>
+	</ol>
+	<ul class="map">
+		<li class="sister"><a href="https://www.randomservices.org/random/apps/index.html" class="ancillary">Aplikasi</a></li>
+		<li class="sister"><a href="https://www.randomservices.org/random/data/index.html" class="ancillary">Himpunan Data</a></li>
+		<li class="child"><a href="https://www.randomservices.org/random/biographies/index.html" class="ancillary">Biografi</a></li>
+	</ul>
+	<section class="edition-notice" data-o006-edition-notice="v1">
+		<p><strong>Pemberitahuan edisi.</strong> Terjemahan Bahasa Indonesia ini mengadaptasi <a href="https://www.randomservices.org/random/">Random: Probabilitas, Statistika Matematis, dan Proses Stokastik</a> karya Kyle Siegrist. Perubahan pada halaman ini mencakup penerjemahan, penambahan ID stabil, pengalihan tautan inti yang telah diterjemahkan ke edisi lokal, pengalihan tautan inti yang belum diterjemahkan ke sumber resmi, pengubahan tautan pelengkap menjadi tautan HTTPS resmi, serta koreksi terbatas terhadap kekeliruan matematis dan data yang dicatat dalam daftar koreksi edisi.</p>
+		<p>Situs asal menyatakan <a href="https://creativecommons.org/licenses/by/2.0/">CC BY 2.0</a>, sedangkan halaman <a href="https://www.randomservices.org/random/Credits.html">Kredit</a> menautkan <a href="https://creativecommons.org/licenses/by/1.0/">CC BY 1.0</a>; perbedaan ini dipertahankan. Edisi independen ini tidak didukung maupun disahkan oleh Kyle Siegrist atau Random Services. Tautan ke aplikasi, data, dan biografi pihak ketiga tidak menyatakan hak untuk mendistribusikan ulang materi tersebut.</p>
+	</section>
+</footer>
+
+<script>getReferences();</script>
+
+</body>
+</html>

@@ -69,6 +69,7 @@ TARGETS = (
     PurePosixPath("random/sample/Variance.html"),
     PurePosixPath("random/sample/OrderStatistics.html"),
     PurePosixPath("random/sample/Covariance.html"),
+    PurePosixPath("random/sample/Normal.html"),
 )
 
 # Screen.css references all of these local assets. Keeping the complete exact set
@@ -342,6 +343,69 @@ BOUNDED_TEXT_CORRECTIONS = (
         "new": "<th>Rata-rata; kolom terakhir: varians sampel</th>",
         "replacements": 1,
         "reason": "14/9 is the sample variance, not the arithmetic mean of the squared-deviation column",
+    },
+    {
+        "page": "random/sample/Normal.html",
+        "old": "distribusi \\(M\\) mendekati distribusi normal jika \\(n\\) besar, bahkan ketika distribusi asal sampelnya tidak normal",
+        "new": "distribusi \\(M\\) mendekati distribusi normal ketika \\(n\\) besar, asalkan distribusi asal memiliki varians positif dan berhingga, meskipun distribusi asal tersebut tidak normal",
+        "replacements": 1,
+        "reason": "the central limit theorem requires a finite positive parent variance; IID alone is insufficient",
+    },
+    {
+        "page": "random/sample/Normal.html",
+        "old": "Sekarang, ingat bahwa versi baku varians sampel adalah statistik",
+        "new": "Untuk ukuran sampel sekurang-kurangnya dua, ingat bahwa versi baku varians sampel adalah statistik",
+        "replacements": 1,
+        "reason": "the standard sample variance divides by n-minus-one",
+    },
+    {
+        "page": "random/sample/Normal.html",
+        "old": '<p class="dfn">Definisikan',
+        "new": '<p class="dfn">Untuk ukuran sampel sekurang-kurangnya dua, definisikan',
+        "replacements": 1,
+        "reason": "the one-sample Student statistic requires a nondegenerate sample variance",
+    },
+    {
+        "page": "random/sample/Normal.html",
+        "old": "Variabel acak berikut berdistribusi \\(F\\) dengan \\(m - 1\\) derajat kebebasan",
+        "new": "Jika ukuran masing-masing sampel sekurang-kurangnya dua, variabel acak berikut berdistribusi \\(F\\) dengan \\(m - 1\\) derajat kebebasan",
+        "replacements": 1,
+        "reason": "the standard sample-variance ratio requires m and n at least two",
+    },
+    {
+        "page": "random/sample/Normal.html",
+        "old": "Konstruksi terakhir kita dalam model normal dua sampel",
+        "new": "Dengan ukuran setiap sampel sekurang-kurangnya dua, konstruksi terakhir kita dalam model normal dua sampel",
+        "replacements": 1,
+        "reason": "the pooled two-sample Student construction requires m and n at least two",
+    },
+    {
+        "page": "random/sample/Normal.html",
+        "old": "Pasangan-pasangan variabel berikut saling independen:",
+        "new": "Karena kedua sampel independen, vektor \\((M(\\bs{X}), S(\\bs{X}))\\) independen dari vektor \\((M(\\bs{Y}), S(\\bs{Y}))\\)",
+        "replacements": 1,
+        "reason": "replace the malformed and logically incomplete independence proof with its correct vector argument",
+    },
+    {
+        "page": "random/sample/Normal.html",
+        "old": "Kovarians dan korelasi antara kedua varians sampel baku adalah",
+        "new": "Untuk ukuran sampel sekurang-kurangnya dua, kovarians dan korelasi antara kedua varians sampel baku adalah",
+        "replacements": 1,
+        "reason": "standard sample variances require n at least two",
+    },
+    {
+        "page": "random/sample/Normal.html",
+        "old": "Jika \\(\\mu\\) dan \\(\\nu\\) tidak diketahui (sekali lagi, ini biasanya merupakan keadaan yang terjadi), penaksir yang wajar",
+        "new": "Untuk ukuran sampel sekurang-kurangnya dua, jika \\(\\mu\\) dan \\(\\nu\\) tidak diketahui (sekali lagi, seperti yang biasanya terjadi), penaksir yang wajar",
+        "replacements": 1,
+        "reason": "the standard sample covariance divides by n-minus-one",
+    },
+    {
+        "page": "random/sample/Normal.html",
+        "old": "Rata-rata dan varians dari varians sampel adalah",
+        "new": "Rata-rata dan varians dari kovarians sampel adalah",
+        "replacements": 1,
+        "reason": "the displayed statistic is sample covariance, not sample variance",
     },
 )
 
@@ -904,6 +968,78 @@ PROTECTED_MATH_CORRECTIONS += tuple(
         "reason": reason,
     }
     for span_index, old, new, reason in COVARIANCE_MATH_CORRECTIONS
+)
+
+NORMAL_MATH_CORRECTIONS = (
+    (
+        196,
+        r"\(\E\left[(M(\bs{X}) - M(\bs{Y})\right] = \mu - \nu\)",
+        r"\(\E\left[M(\bs{X}) - M(\bs{Y})\right] = \mu - \nu\)",
+        "remove the unmatched parenthesis from the mean of the sample-mean difference",
+    ),
+    (
+        197,
+        r"\(\var\left[(M(\bs{X}) - M(\bs{Y})\right] = \sigma^2 / m + \tau^2 / n\)",
+        r"\(\var\left[M(\bs{X}) - M(\bs{Y})\right] = \sigma^2 / m + \tau^2 / n\)",
+        "remove the unmatched parenthesis from the variance of the sample-mean difference",
+    ),
+    (
+        198,
+        r"\[ Z = \frac{\left[(M(\bs{X}) - M(\bs{Y})\right] - (\mu - \nu)}{\sqrt{\sigma^2 / m + \tau^2 / n}} \]",
+        r"\[ Z = \frac{\left[M(\bs{X}) - M(\bs{Y})\right] - (\mu - \nu)}{\sqrt{\sigma^2 / m + \tau^2 / n}} \]",
+        "remove the unmatched parenthesis from the standardized sample-mean difference",
+    ),
+    (
+        266,
+        r"\((M(\bs{Y}, S(\bs{Y}))\)",
+        r"\((M(\bs{Y}), S(\bs{Y}))\)",
+        "separate the Y-sample mean and standard deviation as a pair",
+    ),
+    (
+        275,
+        r"\(Z / \sqrt{V / (m + n - 2}\)",
+        r"\(Z / \sqrt{V / (m + n - 2)}\)",
+        "close the denominator in the pooled two-sample Student construction",
+    ),
+    (
+        286,
+        r"\(\rho \in [0, 1]\)",
+        r"\(\rho \in [-1, 1]\)",
+        "include negative correlations in the bivariate-normal parameter range",
+    ),
+    (
+        299,
+        r"\(\sigma^3 = \E\left[(X - \mu)^3\right] = 0\)",
+        r"\(\sigma_3 = \E\left[(X - \mu)^3\right] = 0\)",
+        "use the declared third-central-moment subscript notation",
+    ),
+    (
+        305,
+        r"\(((X_1, Y_1), (X_2, Y_2), \ldots (X_n, Y_n))\)",
+        r"\(((X_1, Y_1), (X_2, Y_2), \ldots, (X_n, Y_n))\)",
+        "restore the missing separator in the bivariate sample vector",
+    ),
+    (
+        355,
+        r"\(\P(M \gt 49, S^2 \lt 20))\)",
+        r"\(\P(M \gt 49, S^2 \lt 20)\)",
+        "remove the extra closing parenthesis from the joint probability",
+    ),
+)
+
+PROTECTED_MATH_CORRECTIONS += tuple(
+    {
+        "page": "random/sample/Normal.html",
+        "old": old,
+        "new": new,
+        "span_old": old,
+        "span_new": new,
+        "span_index": span_index,
+        "replacements": 1,
+        "surface": "math_span",
+        "reason": reason,
+    }
+    for span_index, old, new, reason in NORMAL_MATH_CORRECTIONS
 )
 
 # Reader-facing language inside TeX \text{...} remains protected mathematics:
