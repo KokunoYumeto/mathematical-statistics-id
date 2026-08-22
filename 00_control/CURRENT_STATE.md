@@ -5,16 +5,18 @@ Updated: 2026-08-22
 ## Status
 
 Edition source admitted; exact authority and component-rights freezes complete; the
-first six contiguous Indonesian pages and the full 29-page machine backend
-are verified. Every entity on those six pages is now bound to its target
+first seven contiguous Indonesian pages and the full 29-page machine backend
+are locally verified. Every entity on those seven pages is now bound to its target
 path, locale, byte count, and SHA-256. The repository is public; the repaired
 three- and four-page Pages checkpoints remain historical evidence. The
 five-page boundary through the central limit theorem remains publicly verified.
 The six-page boundary through sample variance has passed its bounded target
 audit, two deterministic replays, public deployment, anonymous byte readback,
 and live desktop/mobile rendering. The exact official MathJax
-3.1.2 `boldsymbol.js` module remains pinned. The complete 29-page edition is not
-yet claimed.
+3.1.2 `boldsymbol.js` module remains pinned. The seven-page boundary through
+order statistics has passed target audit, two deterministic replays, and local
+desktop/mobile rendering; publication is pending. The complete 29-page edition
+is not yet claimed.
 
 ## Admitted source
 
@@ -83,19 +85,18 @@ entities and 9,035 relations. It contains 29 documents, 366 sections, 760
 structural units, 451 disclosures, 2,891 math-text containers, 24 figures, 236
 assets, and 1,810 internal links. The source-grounded exercise rule designates
 260 units and leaves 500 undesignated; its exact basis is 123 both, 95
-exercise-section only, 42 native `app`/`stat` only, and 500 neither. All 949
-entities on the earlier five translated pages plus all 462 entities on Variance
-carry verified id-ID bindings: 1,411 translated and 5,156 explicit
-untranslated/null locale fields.
+exercise-section only, 42 native `app`/`stat` only, and 500 neither. All 1,785
+entities on ordinals 1–7 carry verified id-ID bindings; 4,782 later entities
+carry explicit untranslated/null locale fields.
 
-- Entity JSONL: 10,251,094 bytes; SHA-256
-  `3d983daa9bf034b049a4584828e198ca397ea9ae3d1c91c8b1356ec5f8efc921`.
+- Entity JSONL: 10,289,990 bytes; SHA-256
+  `7fec8864f403d12a281e4f3ff52dd1ee0dfe072e3ba252ee28f0ba7e25e5ae98`.
 - Relation CSV: 1,182,589 bytes; SHA-256
   `b235f4d4d724c7fe8653dfd06b075b2225cc2d116f3b87d0fda950d47030159a`.
 - Backend receipt SHA-256:
-  `370c15a36c0950846d8bbd7e8363c51fe9dc8bb433e51c155b3766686b541661`.
+  `85a2e2ae66a1dbb6ad96ec25157e90abe255bdc6140da62c031316175bd837cc`.
 - Bound translation-ledger SHA-256:
-  `5a703ac9ea05efe127a121770b443ed49613c7b671ff1a7b3718153f027d939a`.
+  `c3d4abc6f72148803e9ccdc83a78a118985c66a58e4c0f44f938f1c889bf6a7e`.
 - Replay: `python scripts/generate_random_backend.py --check-only`.
 
 ## Four-page reader checkpoint
@@ -188,6 +189,33 @@ claim that the complete edition or configured C140 course is complete.
 Publication-receipt SHA-256 is
 `96a8721193f3173ceec85dcff31607c635540e042fcf499d80b318d0ff21ca0f`.
 
+## Seven-page local checkpoint
+
+Core ordinals 1–7 are complete through
+`random/sample/OrderStatistics.html`. The reader is 31 files / 2,055,914
+bytes; canonical manifest SHA-256
+`46ae01e822f9f53416cad5f5d85d64888ecc2265a85ccbeb68c4d9359c400368`.
+Build-receipt SHA-256 is
+`691aec356dd3d445174a029af76451d7b07df604f458fece0d6056d14de9c931`;
+QA-receipt SHA-256 is
+`290c31e8a6cf6dc6764e0d0d1e04c417932850587204bbcfa5f30f1ed0f01c62`.
+
+OrderStatistics preserves the exact 846-element hierarchy, 51 units, 34
+disclosures, 569 TeX spans, four raw blocks, and 73 IDs. Forty-eight declared
+mathematical repairs account for every source/target TeX difference; 38 exact
+href deltas account for 51 occurrences. The aggregate census is 3,540 source
+elements, 205 units, 146 disclosures, 2,280 TeX spans, 310 IDs, 212 local
+references, and 46 fragments. The locale-neutral backend binds 1,785 entities.
+
+Two consecutive backend/build/QA check-only replays returned identical hashes.
+Local desktop/mobile rendering produced 569/569 MathJax containers, five
+complete images, no raw TeX, no console messages, and no page-level overflow.
+The reader-only layout v3 keeps the desktop body centered at 72 rem while
+containing the 662-px Michelson table, wider display equations, and visually
+clipped assistive MathML within the mobile canvas. Publication and anonymous
+public readback remain pending. This is not a claim that the complete edition
+or configured C140 course is complete.
+
 ## Rights boundary
 
 The Random landing page identifies CC BY 2.0; `Credits.html` links CC BY 1.0.
@@ -201,7 +229,7 @@ the site-wide notice; they must be cleared, replaced, or linked externally.
 
 ## Known upstream defects (do not silently alter authority)
 
-`ADVERSE_LEDGER.jsonl` runs through `O006-ADV-0066`. CLT repairs include the
+`ADVERSE_LEDGER.jsonl` runs through `O006-ADV-0092`. CLT repairs include the
 zero-origin condition, correlation domain/formula/citation, the rigorous
 characteristic-function proof, continuity notation, dice answer, chi-square
 definition, negative-binomial support/domain/answer mapping, and determinate
@@ -211,14 +239,19 @@ covariance formula/index corrections, data-summary recomputations, exercise
 answers, units, navigation, markup, and correlation-limit reasoning. Open
 findings are the VarianceTest link family, the interval `two2` fragment,
 the unavailable ExponentialExperiment companion, and the missing
-`Moments.html#poi` fragment. The ledger also records the rejected first Pages
+`Moments.html#poi` fragment. OrderStatistics repairs include quantile and
+empirical-distribution definitions, probability-plot and order-statistic
+notation, range-law domains, exercise probabilities, units, summaries, and
+determinate prose defects; its incomplete Michelson display is retained with
+an explicit data note. The ledger also records the rejected first Pages
 deployment and local runtime-closure repair as one non-upstream build incident.
 Authority bytes remain immutable. Do not contact upstream during production.
 
 ## Next work
 
-1. Continue immediately with `random/sample/OrderStatistics.html` (core ordinal 7).
-2. Advance contiguously through the remaining 23 source pages, growing the
+1. Publish and anonymously verify the seven-page OrderStatistics checkpoint.
+2. Continue immediately through all 22 remaining source pages, beginning with
+   `random/sample/Covariance.html` (core ordinal 8), while growing the
    same deterministic reader and stable-ID backend.
 3. Keep Penn State reconstruction, the one-page Random completeness donor, and
    original C140 companion in separate component paths/repositories; begin

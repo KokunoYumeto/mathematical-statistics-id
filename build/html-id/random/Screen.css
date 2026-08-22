@@ -315,7 +315,7 @@ span.tool{
 
 svg { vertical-align: middle; }
 
-/* O006 id-ID readable layout v1 (edition build only) */
+/* O006 id-ID readable layout v3 (edition build only) */
 @media screen and (min-width: 801px) {
 	body:not(.ancillary) {
 		box-sizing: border-box;
@@ -338,5 +338,27 @@ svg { vertical-align: middle; }
 		box-sizing: border-box;
 		max-width: 100%;
 		overflow-x: auto;
+	}
+	table {
+		display: block;
+		max-width: 100%;
+		overflow-x: auto;
+	}
+	mjx-container[display="true"] {
+		box-sizing: border-box;
+		max-width: 100%;
+		overflow-x: auto;
+		overflow-y: hidden;
+	}
+	mjx-assistive-mml,
+	mjx-assistive-mml[display="block"] {
+		width: 1px !important;
+		height: 1px !important;
+		max-width: 1px !important;
+		max-height: 1px !important;
+		overflow: hidden !important;
+		clip: rect(0 0 0 0) !important;
+		clip-path: inset(50%) !important;
+		white-space: nowrap !important;
 	}
 }

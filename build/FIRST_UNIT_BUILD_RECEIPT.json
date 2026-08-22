@@ -283,6 +283,17 @@
         "url": "https://www.randomservices.org/random/icons/Stop.svg"
       },
       {
+        "bytes": 790,
+        "content_type": "image/png",
+        "etag": "\"316-69b43de5-89cd1c1e846e74cb;;;\"",
+        "last_modified": "Fri, 13 Mar 2026 16:40:05 GMT",
+        "purpose": "reader_support",
+        "relative_path": "random/sample/BoxPlot.png",
+        "role": "asset",
+        "sha256": "7bcb3be4ffad0fc64d06cc5bc4fb14122ab3b117f31f0713988b0188fb8062f1",
+        "url": "https://www.randomservices.org/random/sample/BoxPlot.png"
+      },
+      {
         "bytes": 40239,
         "content_type": "text/html",
         "etag": "\"9d2f-69b43de5-a9a84ced88dac675;;;\"",
@@ -393,6 +404,17 @@
         "url": "https://www.randomservices.org/random/sample/Mean.html"
       },
       {
+        "bytes": 63965,
+        "content_type": "text/html",
+        "etag": "\"f9dd-69b43de5-68d2058c0c7f0dab;;;\"",
+        "last_modified": "Fri, 13 Mar 2026 16:40:05 GMT",
+        "purpose": "translation_authority",
+        "relative_path": "random/sample/OrderStatistics.html",
+        "role": "core",
+        "sha256": "19ff485c600d4294e888c1b3d05ff7eb9196449f958d3325fd72b416aca56d63",
+        "url": "https://www.randomservices.org/random/sample/OrderStatistics.html"
+      },
+      {
         "bytes": 55878,
         "content_type": "text/html",
         "etag": "\"da46-69b43de5-1d068c60b79c54cf;;;\"",
@@ -487,34 +509,39 @@
     ],
     "targets": [
       {
-        "bytes": 46398,
+        "bytes": 46308,
         "relative_path": "random/sample/CLT.html",
-        "sha256": "b6759e64b3a89d8feb8342a4c635ce2956a717a1e280a19d12e9d31b4606aef0"
+        "sha256": "f665c3827b07e5b01c25994a9a0de20973ea1e528c04e8cdc5381c5d7aea6dff"
       },
       {
-        "bytes": 11624,
+        "bytes": 11579,
         "relative_path": "random/sample/index.html",
-        "sha256": "b66f42cb5f99442a0727c9cb9af0684a081c5d2be5162eebe8b8ed52690f62a7"
+        "sha256": "117fe389c8960aaa0aaa392c7a575ff9d34972f8311d6d4c4e0f149ab5776800"
       },
       {
-        "bytes": 36518,
+        "bytes": 36428,
         "relative_path": "random/sample/Introduction.html",
-        "sha256": "7a0030e90955f86ad14a5d9cc38ce95814840764846554027c301b043f2a372e"
+        "sha256": "d3b6ba90e127b2f089a841bd3066cae3b671f122be53e61ad970d0c3c32d7b48"
       },
       {
-        "bytes": 35135,
+        "bytes": 35045,
         "relative_path": "random/sample/LLN.html",
-        "sha256": "6b10b17131d457adefe2bdbfff7bbc42d204b93e6d064cdf7e0bac6f51d221d8"
+        "sha256": "fcca5d57560d25149aa175bfd2e87a3093a5e559166e0b66ba349373c524adf1"
       },
       {
-        "bytes": 46141,
+        "bytes": 46051,
         "relative_path": "random/sample/Mean.html",
-        "sha256": "6cd4f20660210ebb30e8f22d772ebe8c19febede137f0ad1d1a4a82086f6f1e4"
+        "sha256": "6be066a3e28f41448b403eb52bef0e989c85feddf4238486243534c960b14beb"
       },
       {
-        "bytes": 59889,
+        "bytes": 69010,
+        "relative_path": "random/sample/OrderStatistics.html",
+        "sha256": "351bc402538eebdffff10e5fb24161676ff36c39c80530c62b9168213211e48f"
+      },
+      {
+        "bytes": 59754,
         "relative_path": "random/sample/Variance.html",
-        "sha256": "ceb67e081061d1cecd52f9e02434defba71067ff28ae3037587675b11b2f1de4"
+        "sha256": "2fc4a29b3aac650afcc8c15071dfb16fe9d606b714f5384780a326cd0cf41592"
       }
     ]
   },
@@ -873,11 +900,539 @@
       "reason": "correct the frozen species-1 Cicada subgroup sample standard deviation",
       "replacements": 1,
       "surface": "math_span"
+    },
+    {
+      "new": "\\[ x_{(1)} = \\min\\{x_1, x_2, \\ldots, x_n\\}, \\quad x_{(n)} = \\max\\{x_1, x_2, \\ldots, x_n\\} \\]",
+      "old": "\\[ x_{(1)} = \\min\\{x_1, x_2 \\ldots, x_n\\}, \\quad x_{(n)} = \\max\\{x_1, x_2, \\ldots, x_n\\} \\]",
+      "page": "random/sample/OrderStatistics.html",
+      "reason": "restore the missing separator in the minimum list",
+      "replacements": 1,
+      "span_index": 20,
+      "span_new": "\\[ x_{(1)} = \\min\\{x_1, x_2, \\ldots, x_n\\}, \\quad x_{(n)} = \\max\\{x_1, x_2, \\ldots, x_n\\} \\]",
+      "span_old": "\\[ x_{(1)} = \\min\\{x_1, x_2 \\ldots, x_n\\}, \\quad x_{(n)} = \\max\\{x_1, x_2, \\ldots, x_n\\} \\]",
+      "surface": "math_span"
+    },
+    {
+      "new": "\\(\\frac{1}{2}\\left[x_{(n)} + x_{(1)}\\right]\\)",
+      "old": "\\(\\frac{r}{2} = \\frac{1}{2}\\left[x_{(n)} - x_{(1)}\\right]\\)",
+      "page": "random/sample/OrderStatistics.html",
+      "reason": "define the sample midrange as the half-sum of the extremes",
+      "replacements": 1,
+      "span_index": 22,
+      "span_new": "\\(\\frac{1}{2}\\left[x_{(n)} + x_{(1)}\\right]\\)",
+      "span_old": "\\(\\frac{r}{2} = \\frac{1}{2}\\left[x_{(n)} - x_{(1)}\\right]\\)",
+      "surface": "math_span"
+    },
+    {
+      "new": "\\(k \\in \\{1, 2, \\ldots, n - 1\\}\\)",
+      "old": "\\(k \\in \\{1, 2, \\ldots, n\\}\\)",
+      "page": "random/sample/OrderStatistics.html",
+      "reason": "keep the interpolation index valid on the p-less-than-one branch",
+      "replacements": 1,
+      "span_index": 42,
+      "span_new": "\\(k \\in \\{1, 2, \\ldots, n - 1\\}\\)",
+      "span_old": "\\(k \\in \\{1, 2, \\ldots, n\\}\\)",
+      "surface": "math_span"
+    },
+    {
+      "new": "\\(p \\in [0, 1)\\)",
+      "old": "\\(p \\in [0, 1]\\)",
+      "page": "random/sample/OrderStatistics.html",
+      "reason": "separate the right endpoint from the interpolation formula",
+      "replacements": 1,
+      "span_index": 44,
+      "span_new": "\\(p \\in [0, 1)\\)",
+      "span_old": "\\(p \\in [0, 1]\\)",
+      "surface": "math_span"
+    },
+    {
+      "new": "\\(k = \\lfloor (n - 1)p + 1 \\rfloor,\\quad t = [(n - 1)p + 1] - k\\)",
+      "old": "\\(k = \\lfloor (n - 1)p + 1 \\rfloor\\)",
+      "page": "random/sample/OrderStatistics.html",
+      "reason": "state the interpolation index and fraction together",
+      "replacements": 1,
+      "span_index": 46,
+      "span_new": "\\(k = \\lfloor (n - 1)p + 1 \\rfloor,\\quad t = [(n - 1)p + 1] - k\\)",
+      "span_old": "\\(k = \\lfloor (n - 1)p + 1 \\rfloor\\)",
+      "surface": "math_span"
+    },
+    {
+      "new": "\\(x_{[1]} = x_{(n)};\\quad n = 1 \\Longrightarrow x_{[p]} = x_1\\ (p \\in [0, 1])\\)",
+      "old": "\\(t = [(n - 1)p + 1] - k\\)",
+      "page": "random/sample/OrderStatistics.html",
+      "reason": "close the p-equals-one and singleton quantile cases",
+      "replacements": 1,
+      "span_index": 47,
+      "span_new": "\\(x_{[1]} = x_{(n)};\\quad n = 1 \\Longrightarrow x_{[p]} = x_1\\ (p \\in [0, 1])\\)",
+      "span_old": "\\(t = [(n - 1)p + 1] - k\\)",
+      "surface": "math_span"
+    },
+    {
+      "new": "\\(j_k = \\max\\{i : x_{(i)} = x_{(k)}\\},\\ k \\in \\{1, 2, \\ldots, n - 1\\},\\ x_{(k)} \\lt x_{(k+1)}\\)",
+      "old": "\\(F(x) = \\frac{k}{n}\\)",
+      "page": "random/sample/OrderStatistics.html",
+      "reason": "index empirical-CDF jumps by the last tied observation",
+      "replacements": 1,
+      "span_index": 75,
+      "span_new": "\\(j_k = \\max\\{i : x_{(i)} = x_{(k)}\\},\\ k \\in \\{1, 2, \\ldots, n - 1\\},\\ x_{(k)} \\lt x_{(k+1)}\\)",
+      "span_old": "\\(F(x) = \\frac{k}{n}\\)",
+      "surface": "math_span"
+    },
+    {
+      "new": "\\(F(x) = 0\\ (x \\lt x_{(1)});\\quad F(x) = j_k/n\\ (x_{(k)} \\le x \\lt x_{(k+1)});\\quad F(x) = 1\\ (x \\ge x_{(n)})\\)",
+      "old": "\\(x \\in [x_{(k)}, x_{(k+1)})\\)",
+      "page": "random/sample/OrderStatistics.html",
+      "reason": "state a tie-aware empirical CDF on all intervals",
+      "replacements": 1,
+      "span_index": 76,
+      "span_new": "\\(F(x) = 0\\ (x \\lt x_{(1)});\\quad F(x) = j_k/n\\ (x_{(k)} \\le x \\lt x_{(k+1)});\\quad F(x) = 1\\ (x \\ge x_{(n)})\\)",
+      "span_old": "\\(x \\in [x_{(k)}, x_{(k+1)})\\)",
+      "surface": "math_span"
+    },
+    {
+      "new": "\\(\\bs{y} = (a + b x_1, a + b x_2, \\ldots, a + b x_n)\\)",
+      "old": "\\(\\bs{y} = \\bs{a} + b \\bs{x}\\)",
+      "page": "random/sample/OrderStatistics.html",
+      "reason": "replace the undefined bold-a vector with the explicit transformed sample",
+      "replacements": 1,
+      "span_index": 106,
+      "span_new": "\\(\\bs{y} = (a + b x_1, a + b x_2, \\ldots, a + b x_n)\\)",
+      "span_old": "\\(\\bs{y} = \\bs{a} + b \\bs{x}\\)",
+      "surface": "math_span"
+    },
+    {
+      "new": "\\(p = 1,\\ y_{(n)} = a + b x_{(n)}\\)",
+      "old": "\\(p \\in [0, 1]\\)",
+      "page": "random/sample/OrderStatistics.html",
+      "reason": "prove the transformed right-endpoint quantile directly",
+      "replacements": 1,
+      "span_index": 114,
+      "span_new": "\\(p = 1,\\ y_{(n)} = a + b x_{(n)}\\)",
+      "span_old": "\\(p \\in [0, 1]\\)",
+      "surface": "math_span"
+    },
+    {
+      "new": "\\(p \\in [0, 1)\\)",
+      "old": "\\(k \\in \\{1, 2, \\ldots,n\\}\\)",
+      "page": "random/sample/OrderStatistics.html",
+      "reason": "restrict the interpolation proof to the non-endpoint branch",
+      "replacements": 1,
+      "span_index": 115,
+      "span_new": "\\(p \\in [0, 1)\\)",
+      "span_old": "\\(k \\in \\{1, 2, \\ldots,n\\}\\)",
+      "surface": "math_span"
+    },
+    {
+      "new": "\\(k \\in \\{1, 2, \\ldots, n - 1\\},\\ t \\in [0, 1)\\)",
+      "old": "\\(t \\in [0, 1)\\)",
+      "page": "random/sample/OrderStatistics.html",
+      "reason": "keep both interpolation indices valid in the transformation proof",
+      "replacements": 1,
+      "span_index": 116,
+      "span_new": "\\(k \\in \\{1, 2, \\ldots, n - 1\\},\\ t \\in [0, 1)\\)",
+      "span_old": "\\(t \\in [0, 1)\\)",
+      "surface": "math_span"
+    },
+    {
+      "new": "\\(p = 1\\)",
+      "old": "\\(p \\in [0, 1]\\)",
+      "page": "random/sample/OrderStatistics.html",
+      "reason": "separate the convexity proof's right endpoint",
+      "replacements": 1,
+      "span_index": 143,
+      "span_new": "\\(p = 1\\)",
+      "span_old": "\\(p \\in [0, 1]\\)",
+      "surface": "math_span"
+    },
+    {
+      "new": "\\(p \\in [0, 1)\\)",
+      "old": "\\(k \\in \\{1, 2, \\ldots, n\\}\\)",
+      "page": "random/sample/OrderStatistics.html",
+      "reason": "restrict the convexity interpolation branch below one",
+      "replacements": 1,
+      "span_index": 144,
+      "span_new": "\\(p \\in [0, 1)\\)",
+      "span_old": "\\(k \\in \\{1, 2, \\ldots, n\\}\\)",
+      "surface": "math_span"
+    },
+    {
+      "new": "\\(k \\in \\{1, 2, \\ldots, n - 1\\},\\ t \\in [0, 1)\\)",
+      "old": "\\(t \\in [0, 1)\\)",
+      "page": "random/sample/OrderStatistics.html",
+      "reason": "keep convexity interpolation indices within the sample",
+      "replacements": 1,
+      "span_index": 145,
+      "span_new": "\\(k \\in \\{1, 2, \\ldots, n - 1\\},\\ t \\in [0, 1)\\)",
+      "span_old": "\\(t \\in [0, 1)\\)",
+      "surface": "math_span"
+    },
+    {
+      "new": "\\( (-\\infty, x] \\)",
+      "old": "\\( (-\\infty x] \\)",
+      "page": "random/sample/OrderStatistics.html",
+      "reason": "restore the missing interval comma",
+      "replacements": 1,
+      "span_index": 178,
+      "span_new": "\\( (-\\infty, x] \\)",
+      "span_old": "\\( (-\\infty x] \\)",
+      "surface": "math_span"
+    },
+    {
+      "new": "\\( \\left(\\left(x_{(1)}, y_1\\right), \\left(x_{(2)}, y_2\\right), \\ldots, \\left(x_{(n)}, y_n\\right)\\right) \\)",
+      "old": "\\( \\left(\\left(x_{(1)}, y_1\\right), \\left(x_{(2)}, y_2\\right) \\ldots, \\left(x_{(n)}, y_n\\right)\\right) \\)",
+      "page": "random/sample/OrderStatistics.html",
+      "reason": "restore the missing separator in the probability-plot point sequence",
+      "replacements": 1,
+      "span_index": 297,
+      "span_new": "\\( \\left(\\left(x_{(1)}, y_1\\right), \\left(x_{(2)}, y_2\\right), \\ldots, \\left(x_{(n)}, y_n\\right)\\right) \\)",
+      "span_old": "\\( \\left(\\left(x_{(1)}, y_1\\right), \\left(x_{(2)}, y_2\\right) \\ldots, \\left(x_{(n)}, y_n\\right)\\right) \\)",
+      "surface": "math_span"
+    },
+    {
+      "new": "\\(w_{(1)} = 40\\)",
+      "old": "\\(y_{(1)} = 40\\)",
+      "page": "random/sample/OrderStatistics.html",
+      "reason": "use the stated transformed-grade variable",
+      "replacements": 1,
+      "span_index": 328,
+      "span_new": "\\(w_{(1)} = 40\\)",
+      "span_old": "\\(y_{(1)} = 40\\)",
+      "surface": "math_span"
+    },
+    {
+      "new": "\\(q_1(w) = 10\\sqrt{52} \\approx 72.11\\)",
+      "old": "\\(q_1 \\le 72.11\\)",
+      "page": "random/sample/OrderStatistics.html",
+      "reason": "give the exact transformed first quartile",
+      "replacements": 1,
+      "span_index": 329,
+      "span_new": "\\(q_1(w) = 10\\sqrt{52} \\approx 72.11\\)",
+      "span_old": "\\(q_1 \\le 72.11\\)",
+      "surface": "math_span"
+    },
+    {
+      "new": "\\(q_2(w) = 80\\)",
+      "old": "\\(q_2 \\le 80\\)",
+      "page": "random/sample/OrderStatistics.html",
+      "reason": "give the exact transformed median",
+      "replacements": 1,
+      "span_index": 330,
+      "span_new": "\\(q_2(w) = 80\\)",
+      "span_old": "\\(q_2 \\le 80\\)",
+      "surface": "math_span"
+    },
+    {
+      "new": "\\(q_3(w) = 10\\sqrt{72} \\approx 84.85\\)",
+      "old": "\\(q_3 \\le 84.85 \\)",
+      "page": "random/sample/OrderStatistics.html",
+      "reason": "give the exact transformed third quartile",
+      "replacements": 1,
+      "span_index": 331,
+      "span_new": "\\(q_3(w) = 10\\sqrt{72} \\approx 84.85\\)",
+      "span_old": "\\(q_3 \\le 84.85 \\)",
+      "surface": "math_span"
+    },
+    {
+      "new": "\\(w_{(25)} = 90\\)",
+      "old": "\\(y_{(25)} = 90\\)",
+      "page": "random/sample/OrderStatistics.html",
+      "reason": "use the stated transformed-grade variable",
+      "replacements": 1,
+      "span_index": 332,
+      "span_new": "\\(w_{(25)} = 90\\)",
+      "span_old": "\\(y_{(25)} = 90\\)",
+      "surface": "math_span"
+    },
+    {
+      "new": "\\(n \\ge 2\\)",
+      "old": "\\(n\\)",
+      "page": "random/sample/OrderStatistics.html",
+      "reason": "exclude the degenerate one-point uniform range from the beta density",
+      "replacements": 1,
+      "span_index": 400,
+      "span_new": "\\(n \\ge 2\\)",
+      "span_old": "\\(n\\)",
+      "surface": "math_span"
+    },
+    {
+      "new": "\\( n \\ge 2 \\)",
+      "old": "\\( n \\)",
+      "page": "random/sample/OrderStatistics.html",
+      "reason": "state the sample-size domain for the general-uniform range result",
+      "replacements": 1,
+      "span_index": 419,
+      "span_new": "\\( n \\ge 2 \\)",
+      "span_old": "\\( n \\)",
+      "surface": "math_span"
+    },
+    {
+      "new": "\\( \\var(R) = h^2 \\frac{2 (n - 1)}{(n + 1)^2 (n + 2)} \\)",
+      "old": "\\( \\var(R) = h^2 \\frac{2 (n _ 1)}{(n + 1)^2 (n + 2)} \\)",
+      "page": "random/sample/OrderStatistics.html",
+      "reason": "replace the stray underscore with subtraction in the range variance",
+      "replacements": 1,
+      "span_index": 428,
+      "span_new": "\\( \\var(R) = h^2 \\frac{2 (n - 1)}{(n + 1)^2 (n + 2)} \\)",
+      "span_old": "\\( \\var(R) = h^2 \\frac{2 (n _ 1)}{(n + 1)^2 (n + 2)} \\)",
+      "surface": "math_span"
+    },
+    {
+      "new": "\\( X_{(n)} - X_{(1)} = h(U_{(n)} - U_{(1)}) \\)",
+      "old": "\\( X_{(n)} - X_{(1)} = h(U_{(n)} - U_{(1)} \\)",
+      "page": "random/sample/OrderStatistics.html",
+      "reason": "close the transformed-range parenthesis",
+      "replacements": 1,
+      "span_index": 437,
+      "span_new": "\\( X_{(n)} - X_{(1)} = h(U_{(n)} - U_{(1)}) \\)",
+      "span_old": "\\( X_{(n)} - X_{(1)} = h(U_{(n)} - U_{(1)} \\)",
+      "surface": "math_span"
+    },
+    {
+      "new": "\\(\\left\\{\\bs{x} \\in [a, a + h]^n: a \\le x_1 \\le x_2 \\le \\cdots \\le x_n \\le a + h\\right\\}\\)",
+      "old": "\\(\\left\\{\\bs{x} \\in [a, a + h]^n: a \\le x_1 \\le x_2 \\le \\cdots \\le x_n \\lt a + h\\right\\}\\)",
+      "page": "random/sample/OrderStatistics.html",
+      "reason": "include the stated closed uniform endpoint in the support",
+      "replacements": 1,
+      "span_index": 445,
+      "span_new": "\\(\\left\\{\\bs{x} \\in [a, a + h]^n: a \\le x_1 \\le x_2 \\le \\cdots \\le x_n \\le a + h\\right\\}\\)",
+      "span_old": "\\(\\left\\{\\bs{x} \\in [a, a + h]^n: a \\le x_1 \\le x_2 \\le \\cdots \\le x_n \\lt a + h\\right\\}\\)",
+      "surface": "math_span"
+    },
+    {
+      "new": "\\(n \\ge 2\\)",
+      "old": "\\(n\\)",
+      "page": "random/sample/OrderStatistics.html",
+      "reason": "exclude the degenerate one-point exponential range from the density",
+      "replacements": 1,
+      "span_index": 472,
+      "span_new": "\\(n \\ge 2\\)",
+      "span_old": "\\(n\\)",
+      "surface": "math_span"
+    },
+    {
+      "new": "\\[ g(x_1, x_2, \\ldots, x_n) = n! \\lambda^n e^{-\\lambda(x_1 + x_2 + \\cdots + x_n)}, \\quad 0 \\le x_1 \\le x_2 \\le \\cdots \\le x_n \\lt \\infty \\]",
+      "old": "\\[ g(x_1, x_2, \\ldots, x_n) = n! \\lambda^n e^{-\\lambda(x_1 + x_2 + \\cdots + x_n)}, \\quad 0 \\le x_1 \\le x_2 \\cdots \\le x_n \\lt \\infty \\]",
+      "page": "random/sample/OrderStatistics.html",
+      "reason": "restore the missing inequality in the ordered exponential support",
+      "replacements": 1,
+      "span_index": 491,
+      "span_new": "\\[ g(x_1, x_2, \\ldots, x_n) = n! \\lambda^n e^{-\\lambda(x_1 + x_2 + \\cdots + x_n)}, \\quad 0 \\le x_1 \\le x_2 \\le \\cdots \\le x_n \\lt \\infty \\]",
+      "span_old": "\\[ g(x_1, x_2, \\ldots, x_n) = n! \\lambda^n e^{-\\lambda(x_1 + x_2 + \\cdots + x_n)}, \\quad 0 \\le x_1 \\le x_2 \\cdots \\le x_n \\lt \\infty \\]",
+      "surface": "math_span"
+    },
+    {
+      "new": "\\(h(0) = \\frac{6}{1296}, \\; h(1) = \\frac{70}{1296}, \\; h(2) = \\frac{200}{1296}, \\; h(3) = \\frac{330}{1296}, \\; h(4) = \\frac{388}{1296}, \\; h(5) = \\frac{302}{1296}\\)",
+      "old": "\\(h(0) = \\frac{6}{1296}, \\; h(1) = \\frac{70}{1296}, \\; h(2) = \\frac{300}{1296}, \\; h(3) = \\frac{300}{1296}, \\; h(4) = \\frac{318}{1296}, \\; h(5) = \\frac{302}{1296}\\)",
+      "page": "random/sample/OrderStatistics.html",
+      "reason": "correct the four-fair-dice range mass counts",
+      "replacements": 1,
+      "span_index": 532,
+      "span_new": "\\(h(0) = \\frac{6}{1296}, \\; h(1) = \\frac{70}{1296}, \\; h(2) = \\frac{200}{1296}, \\; h(3) = \\frac{330}{1296}, \\; h(4) = \\frac{388}{1296}, \\; h(5) = \\frac{302}{1296}\\)",
+      "span_old": "\\(h(0) = \\frac{6}{1296}, \\; h(1) = \\frac{70}{1296}, \\; h(2) = \\frac{300}{1296}, \\; h(3) = \\frac{300}{1296}, \\; h(4) = \\frac{318}{1296}, \\; h(5) = \\frac{302}{1296}\\)",
+      "surface": "math_span"
+    },
+    {
+      "new": "\\((10, 16, 44, 51, 69)\\)",
+      "old": "\\((10, 15, 44, 51, 69)\\)",
+      "page": "random/sample/OrderStatistics.html",
+      "reason": "correct the frozen Iris five-number summary",
+      "replacements": 1,
+      "span_index": 540,
+      "span_new": "\\((10, 16, 44, 51, 69)\\)",
+      "span_old": "\\((10, 15, 44, 51, 69)\\)",
+      "surface": "math_span"
+    },
+    {
+      "new": "\\((10, 14, 15, 15.75, 19)\\)",
+      "old": "\\((10, 14, 15, 16, 19)\\)",
+      "page": "random/sample/OrderStatistics.html",
+      "reason": "correct the frozen Iris species-zero upper quartile",
+      "replacements": 1,
+      "span_index": 541,
+      "span_new": "\\((10, 14, 15, 15.75, 19)\\)",
+      "span_old": "\\((10, 14, 15, 16, 19)\\)",
+      "surface": "math_span"
+    },
+    {
+      "new": "\\((45, 51, 55.5, 58.75, 69)\\)",
+      "old": "\\((45, 51, 55.5, 59, 69)\\)",
+      "page": "random/sample/OrderStatistics.html",
+      "reason": "correct the frozen Iris species-one upper quartile",
+      "replacements": 1,
+      "span_index": 542,
+      "span_new": "\\((45, 51, 55.5, 58.75, 69)\\)",
+      "span_old": "\\((45, 51, 55.5, 59, 69)\\)",
+      "surface": "math_span"
+    },
+    {
+      "new": "\\(\\text{km}/\\text{s}\\)",
+      "old": "\\(\\text{km}/\\text{hr}\\)",
+      "page": "random/sample/OrderStatistics.html",
+      "reason": "correct the Michelson velocity unit",
+      "replacements": 1,
+      "span_index": 545,
+      "span_new": "\\(\\text{km}/\\text{s}\\)",
+      "span_old": "\\(\\text{km}/\\text{hr}\\)",
+      "surface": "math_span"
+    },
+    {
+      "new": "\\((620, 807.5, 850, 892.5, 1070)\\)",
+      "old": "\\((620, 805, 850, 895, 1071)\\)",
+      "page": "random/sample/OrderStatistics.html",
+      "reason": "correct the complete Michelson five-number summary",
+      "replacements": 1,
+      "span_index": 547,
+      "span_new": "\\((620, 807.5, 850, 892.5, 1070)\\)",
+      "span_old": "\\((620, 805, 850, 895, 1071)\\)",
+      "surface": "math_span"
+    },
+    {
+      "new": "\\((299\\,620, 299\\,807.5, 299\\,850, 299\\,892.5, 300\\,070)\\)",
+      "old": "\\((299\\,620, 299\\,805, 299\\,850, 299\\,895, 300\\,071)\\)",
+      "page": "random/sample/OrderStatistics.html",
+      "reason": "correct the transformed Michelson summary",
+      "replacements": 1,
+      "span_index": 548,
+      "span_new": "\\((299\\,620, 299\\,807.5, 299\\,850, 299\\,892.5, 300\\,070)\\)",
+      "span_old": "\\((299\\,620, 299\\,805, 299\\,850, 299\\,895, 300\\,071)\\)",
+      "surface": "math_span"
+    },
+    {
+      "new": "\\((3, 6.5, 9, 12, 20)\\)",
+      "old": "\\((3, 5.5, 9, 14, 20)\\)",
+      "page": "random/sample/OrderStatistics.html",
+      "reason": "correct the frozen red M-and-M summary",
+      "replacements": 1,
+      "span_index": 554,
+      "span_new": "\\((3, 6.5, 9, 12, 20)\\)",
+      "span_old": "\\((3, 5.5, 9, 14, 20)\\)",
+      "surface": "math_span"
+    },
+    {
+      "new": "\\((2, 6, 7, 9, 17)\\)",
+      "old": "\\((2, 5, 7, 9, 17)\\)",
+      "page": "random/sample/OrderStatistics.html",
+      "reason": "correct the frozen green M-and-M summary",
+      "replacements": 1,
+      "span_index": 555,
+      "span_new": "\\((2, 6, 7, 9, 17)\\)",
+      "span_old": "\\((2, 5, 7, 9, 17)\\)",
+      "surface": "math_span"
+    },
+    {
+      "new": "\\((1, 4, 6.5, 9.75, 19)\\)",
+      "old": "\\((1, 4, 6.5, 10, 19)\\)",
+      "page": "random/sample/OrderStatistics.html",
+      "reason": "correct the frozen blue M-and-M summary",
+      "replacements": 1,
+      "span_index": 556,
+      "span_new": "\\((1, 4, 6.5, 9.75, 19)\\)",
+      "span_old": "\\((1, 4, 6.5, 10, 19)\\)",
+      "surface": "math_span"
+    },
+    {
+      "new": "\\((0, 4, 6, 9, 13)\\)",
+      "old": "\\((0, 3.5, 6, 10.5, 13)\\)",
+      "page": "random/sample/OrderStatistics.html",
+      "reason": "correct the frozen orange M-and-M summary",
+      "replacements": 1,
+      "span_index": 557,
+      "span_new": "\\((0, 4, 6, 9, 13)\\)",
+      "span_old": "\\((0, 3.5, 6, 10.5, 13)\\)",
+      "surface": "math_span"
+    },
+    {
+      "new": "\\((3, 8.25, 13.5, 18, 26)\\)",
+      "old": "\\((3, 8, 13.5, 18, 26)\\)",
+      "page": "random/sample/OrderStatistics.html",
+      "reason": "correct the frozen yellow M-and-M summary",
+      "replacements": 1,
+      "span_index": 558,
+      "span_new": "\\((3, 8.25, 13.5, 18, 26)\\)",
+      "span_old": "\\((3, 8, 13.5, 18, 26)\\)",
+      "surface": "math_span"
+    },
+    {
+      "new": "\\((4, 8, 12.5, 17.75, 20)\\)",
+      "old": "\\((4, 8, 12.5, 18, 20)\\)",
+      "page": "random/sample/OrderStatistics.html",
+      "reason": "correct the frozen brown M-and-M summary",
+      "replacements": 1,
+      "span_index": 559,
+      "span_new": "\\((4, 8, 12.5, 17.75, 20)\\)",
+      "span_old": "\\((4, 8, 12.5, 18, 20)\\)",
+      "surface": "math_span"
+    },
+    {
+      "new": "\\((50, 56, 58, 58, 61)\\)",
+      "old": "\\((50, 55.5, 58, 60, 61)\\)",
+      "page": "random/sample/OrderStatistics.html",
+      "reason": "correct the M-and-M total-count summary",
+      "replacements": 1,
+      "span_index": 560,
+      "span_new": "\\((50, 56, 58, 58, 61)\\)",
+      "span_old": "\\((50, 55.5, 58, 60, 61)\\)",
+      "surface": "math_span"
+    },
+    {
+      "new": "\\((46.22, 48.2925, 49.07, 50.175, 52.06)\\)",
+      "old": "\\((46.22, 48.28, 49.07, 50.23, 52.06)\\)",
+      "page": "random/sample/OrderStatistics.html",
+      "reason": "correct the M-and-M net-weight summary",
+      "replacements": 1,
+      "span_index": 561,
+      "span_new": "\\((46.22, 48.2925, 49.07, 50.175, 52.06)\\)",
+      "span_old": "\\((46.22, 48.28, 49.07, 50.23, 52.06)\\)",
+      "surface": "math_span"
+    },
+    {
+      "new": "\\((0.08, 0.1375, 0.17, 0.22, 0.39)\\)",
+      "old": "\\((0.08, 0.13, 0.17, 0.22, 0.39)\\)",
+      "page": "random/sample/OrderStatistics.html",
+      "reason": "correct the frozen Cicada overall summary",
+      "replacements": 1,
+      "span_index": 562,
+      "span_new": "\\((0.08, 0.1375, 0.17, 0.22, 0.39)\\)",
+      "span_old": "\\((0.08, 0.13, 0.17, 0.22, 0.39)\\)",
+      "surface": "math_span"
+    },
+    {
+      "new": "\\((0.08, 0.1425, 0.18, 0.22, 0.31)\\)",
+      "old": "\\((0.08, 0. 14, 0.18, 0.23, 0.31)\\)",
+      "page": "random/sample/OrderStatistics.html",
+      "reason": "correct the frozen Cicada species-one summary",
+      "replacements": 1,
+      "span_index": 564,
+      "span_new": "\\((0.08, 0.1425, 0.18, 0.22, 0.31)\\)",
+      "span_old": "\\((0.08, 0. 14, 0.18, 0.23, 0.31)\\)",
+      "surface": "math_span"
+    },
+    {
+      "new": "\\((0.12, 0.1325, 0.215, 0.2825, 0.39)\\)",
+      "old": "\\((0.12, 0.12, 0.215, 0.29, 0.39)\\)",
+      "page": "random/sample/OrderStatistics.html",
+      "reason": "correct the frozen Cicada species-two summary",
+      "replacements": 1,
+      "span_index": 565,
+      "span_new": "\\((0.12, 0.1325, 0.215, 0.2825, 0.39)\\)",
+      "span_old": "\\((0.12, 0.12, 0.215, 0.29, 0.39)\\)",
+      "surface": "math_span"
+    },
+    {
+      "new": "\\((0.08, 0.17, 0.21, 0.245, 0.31)\\)",
+      "old": "\\((0.08, 0.17, 0.21, 0.25, 0.31)\\)",
+      "page": "random/sample/OrderStatistics.html",
+      "reason": "correct the frozen female Cicada upper quartile",
+      "replacements": 1,
+      "span_index": 566,
+      "span_new": "\\((0.08, 0.17, 0.21, 0.245, 0.31)\\)",
+      "span_old": "\\((0.08, 0.17, 0.21, 0.25, 0.31)\\)",
+      "surface": "math_span"
     }
   ],
   "reader": {
     "directory": "build/html-id",
-    "file_count": 29,
+    "file_count": 31,
     "files": [
       {
         "bytes": 533,
@@ -965,9 +1520,14 @@
         "sha256": "54bf3c5fd23ccf5dd602750aaf09c42ca6d4b1b10b8333e54bc580580f06686e"
       },
       {
-        "bytes": 46398,
+        "bytes": 790,
+        "relative_path": "random/sample/BoxPlot.png",
+        "sha256": "7bcb3be4ffad0fc64d06cc5bc4fb14122ab3b117f31f0713988b0188fb8062f1"
+      },
+      {
+        "bytes": 46308,
         "relative_path": "random/sample/CLT.html",
-        "sha256": "b6759e64b3a89d8feb8342a4c635ce2956a717a1e280a19d12e9d31b4606aef0"
+        "sha256": "f665c3827b07e5b01c25994a9a0de20973ea1e528c04e8cdc5381c5d7aea6dff"
       },
       {
         "bytes": 1272,
@@ -995,68 +1555,73 @@
         "sha256": "17bbf2b59e4b0902a84e8ea66f1b40a0343ddff578359ce842c60f109ea047ae"
       },
       {
-        "bytes": 11624,
+        "bytes": 11579,
         "relative_path": "random/sample/index.html",
-        "sha256": "b66f42cb5f99442a0727c9cb9af0684a081c5d2be5162eebe8b8ed52690f62a7"
+        "sha256": "117fe389c8960aaa0aaa392c7a575ff9d34972f8311d6d4c4e0f149ab5776800"
       },
       {
-        "bytes": 36518,
+        "bytes": 36428,
         "relative_path": "random/sample/Introduction.html",
-        "sha256": "7a0030e90955f86ad14a5d9cc38ce95814840764846554027c301b043f2a372e"
+        "sha256": "d3b6ba90e127b2f089a841bd3066cae3b671f122be53e61ad970d0c3c32d7b48"
       },
       {
-        "bytes": 35135,
+        "bytes": 35045,
         "relative_path": "random/sample/LLN.html",
-        "sha256": "6b10b17131d457adefe2bdbfff7bbc42d204b93e6d064cdf7e0bac6f51d221d8"
+        "sha256": "fcca5d57560d25149aa175bfd2e87a3093a5e559166e0b66ba349373c524adf1"
       },
       {
-        "bytes": 46141,
+        "bytes": 46051,
         "relative_path": "random/sample/Mean.html",
-        "sha256": "6cd4f20660210ebb30e8f22d772ebe8c19febede137f0ad1d1a4a82086f6f1e4"
+        "sha256": "6be066a3e28f41448b403eb52bef0e989c85feddf4238486243534c960b14beb"
       },
       {
-        "bytes": 59889,
+        "bytes": 69010,
+        "relative_path": "random/sample/OrderStatistics.html",
+        "sha256": "351bc402538eebdffff10e5fb24161676ff36c39c80530c62b9168213211e48f"
+      },
+      {
+        "bytes": 59754,
         "relative_path": "random/sample/Variance.html",
-        "sha256": "ceb67e081061d1cecd52f9e02434defba71067ff28ae3037587675b11b2f1de4"
+        "sha256": "2fc4a29b3aac650afcc8c15071dfb16fe9d606b714f5384780a326cd0cf41592"
       },
       {
-        "bytes": 5922,
+        "bytes": 6420,
         "relative_path": "random/Screen.css",
-        "sha256": "3f676d2cf6a4e111bff4fc2dbbd082e5305250e40a2c91b67b532dc72f13a78f"
+        "sha256": "b8af913a9be5c7e0313653afc6eae3121f3850fd72535cdab9e36f03279fcc34"
       }
     ],
-    "manifest_bytes": 2800,
+    "manifest_bytes": 3001,
     "manifest_path": "build/FIRST_UNIT_MANIFEST.csv",
-    "manifest_sha256": "d3d2aa5822b4a004536b855d1e08ba72073a4e41c8fbfe5b6932db000c5de1e8",
-    "total_bytes": 1986156
+    "manifest_sha256": "46ae01e822f9f53416cad5f5d85d64888ecc2265a85ccbeb68c4d9359c400368",
+    "total_bytes": 2055914
   },
   "reader_customizations": [
     {
-      "append_bytes": 489,
-      "append_sha256": "3fb9928a3bb09eff1e33a0a94ef25c332a8475abe4a47c1f85aad11695f563a6",
+      "append_bytes": 987,
+      "append_sha256": "f25dd42eb8d52325041d6e97c5b275cdc1b11fa1b635cdd60257a4878514e450",
       "authority_bytes": 5433,
       "authority_sha256": "589035811781debb33e3aa90ca0f376532b8ade30d54fad5c56838bec5c8d707",
       "desktop_max_width_rem": 72,
       "desktop_min_width_px": 801,
       "kind": "readable-layout-css-append",
       "mobile_max_width_px": 800,
-      "reader_bytes": 5922,
+      "reader_bytes": 6420,
       "reader_relative_path": "random/Screen.css",
-      "reader_sha256": "3f676d2cf6a4e111bff4fc2dbbd082e5305250e40a2c91b67b532dc72f13a78f",
-      "version": "o006-id-readable-layout-v1"
+      "reader_sha256": "b8af913a9be5c7e0313653afc6eae3121f3850fd72535cdab9e36f03279fcc34",
+      "version": "o006-id-readable-layout-v3"
     }
   ],
   "schema": "o006.random.first-unit-build.v1",
   "scripts": {
     "build": {
-      "bytes": 56222,
+      "bytes": 66904,
       "path": "scripts/build_first_unit.py",
-      "sha256": "e67035893bc7bad46a8f1346cf2b0f689d16dc626e23ceb6b895a77acbf724eb"
+      "sha256": "7f89ae1cfc44d662c4d37f5ea249ce506240504a468a66354f1fee9e42ac927a"
     },
     "qa": {
-      "bytes": 63677,
+      "bytes": 68357,
       "path": "scripts/qa_first_unit.py",
-      "sha256": "26263c275578a786ef8054dfe4fc9bafc5f899d17aa5f2c6780ccf142d7c60b4"
+      "sha256": "fe850cb80d3fe90dcc05aa18086fe3129917214aba21ad2e8b0b2cc6cfcfae62"
     }
   },
   "transport_hardening": [

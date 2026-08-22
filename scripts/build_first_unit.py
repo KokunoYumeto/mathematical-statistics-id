@@ -67,6 +67,7 @@ TARGETS = (
     PurePosixPath("random/sample/LLN.html"),
     PurePosixPath("random/sample/CLT.html"),
     PurePosixPath("random/sample/Variance.html"),
+    PurePosixPath("random/sample/OrderStatistics.html"),
 )
 
 # Screen.css references all of these local assets. Keeping the complete exact set
@@ -89,6 +90,7 @@ SUPPORT = (
     PurePosixPath("random/sample/DiscreteDistribution.png"),
     PurePosixPath("random/sample/ContinuousDistribution.png"),
     PurePosixPath("random/sample/Histogram.png"),
+    PurePosixPath("random/sample/BoxPlot.png"),
     PurePosixPath("MathJax/tex-svg.js"),
 )
 
@@ -99,7 +101,7 @@ SUPPORT = (
 # mobile branch remains fluid and contains wide mathematical surfaces locally.
 READABLE_REFLOW_CSS = b"""
 
-/* O006 id-ID readable layout v1 (edition build only) */
+/* O006 id-ID readable layout v3 (edition build only) */
 @media screen and (min-width: 801px) {
 	body:not(.ancillary) {
 		box-sizing: border-box;
@@ -122,6 +124,28 @@ READABLE_REFLOW_CSS = b"""
 		box-sizing: border-box;
 		max-width: 100%;
 		overflow-x: auto;
+	}
+	table {
+		display: block;
+		max-width: 100%;
+		overflow-x: auto;
+	}
+	mjx-container[display="true"] {
+		box-sizing: border-box;
+		max-width: 100%;
+		overflow-x: auto;
+		overflow-y: hidden;
+	}
+	mjx-assistive-mml,
+	mjx-assistive-mml[display="block"] {
+		width: 1px !important;
+		height: 1px !important;
+		max-width: 1px !important;
+		max-height: 1px !important;
+		overflow: hidden !important;
+		clip: rect(0 0 0 0) !important;
+		clip-path: inset(50%) !important;
+		white-space: nowrap !important;
 	}
 }
 """
@@ -680,6 +704,72 @@ PROTECTED_MATH_CORRECTIONS = (
     },
 )
 
+ORDER_STATISTICS_MATH_CORRECTIONS = (
+    (20, r"\[ x_{(1)} = \min\{x_1, x_2 \ldots, x_n\}, \quad x_{(n)} = \max\{x_1, x_2, \ldots, x_n\} \]", r"\[ x_{(1)} = \min\{x_1, x_2, \ldots, x_n\}, \quad x_{(n)} = \max\{x_1, x_2, \ldots, x_n\} \]", "restore the missing separator in the minimum list"),
+    (22, r"\(\frac{r}{2} = \frac{1}{2}\left[x_{(n)} - x_{(1)}\right]\)", r"\(\frac{1}{2}\left[x_{(n)} + x_{(1)}\right]\)", "define the sample midrange as the half-sum of the extremes"),
+    (42, r"\(k \in \{1, 2, \ldots, n\}\)", r"\(k \in \{1, 2, \ldots, n - 1\}\)", "keep the interpolation index valid on the p-less-than-one branch"),
+    (44, r"\(p \in [0, 1]\)", r"\(p \in [0, 1)\)", "separate the right endpoint from the interpolation formula"),
+    (46, r"\(k = \lfloor (n - 1)p + 1 \rfloor\)", r"\(k = \lfloor (n - 1)p + 1 \rfloor,\quad t = [(n - 1)p + 1] - k\)", "state the interpolation index and fraction together"),
+    (47, r"\(t = [(n - 1)p + 1] - k\)", r"\(x_{[1]} = x_{(n)};\quad n = 1 \Longrightarrow x_{[p]} = x_1\ (p \in [0, 1])\)", "close the p-equals-one and singleton quantile cases"),
+    (75, r"\(F(x) = \frac{k}{n}\)", r"\(j_k = \max\{i : x_{(i)} = x_{(k)}\},\ k \in \{1, 2, \ldots, n - 1\},\ x_{(k)} \lt x_{(k+1)}\)", "index empirical-CDF jumps by the last tied observation"),
+    (76, r"\(x \in [x_{(k)}, x_{(k+1)})\)", r"\(F(x) = 0\ (x \lt x_{(1)});\quad F(x) = j_k/n\ (x_{(k)} \le x \lt x_{(k+1)});\quad F(x) = 1\ (x \ge x_{(n)})\)", "state a tie-aware empirical CDF on all intervals"),
+    (106, r"\(\bs{y} = \bs{a} + b \bs{x}\)", r"\(\bs{y} = (a + b x_1, a + b x_2, \ldots, a + b x_n)\)", "replace the undefined bold-a vector with the explicit transformed sample"),
+    (114, r"\(p \in [0, 1]\)", r"\(p = 1,\ y_{(n)} = a + b x_{(n)}\)", "prove the transformed right-endpoint quantile directly"),
+    (115, r"\(k \in \{1, 2, \ldots,n\}\)", r"\(p \in [0, 1)\)", "restrict the interpolation proof to the non-endpoint branch"),
+    (116, r"\(t \in [0, 1)\)", r"\(k \in \{1, 2, \ldots, n - 1\},\ t \in [0, 1)\)", "keep both interpolation indices valid in the transformation proof"),
+    (143, r"\(p \in [0, 1]\)", r"\(p = 1\)", "separate the convexity proof's right endpoint"),
+    (144, r"\(k \in \{1, 2, \ldots, n\}\)", r"\(p \in [0, 1)\)", "restrict the convexity interpolation branch below one"),
+    (145, r"\(t \in [0, 1)\)", r"\(k \in \{1, 2, \ldots, n - 1\},\ t \in [0, 1)\)", "keep convexity interpolation indices within the sample"),
+    (178, r"\( (-\infty x] \)", r"\( (-\infty, x] \)", "restore the missing interval comma"),
+    (297, r"\( \left(\left(x_{(1)}, y_1\right), \left(x_{(2)}, y_2\right) \ldots, \left(x_{(n)}, y_n\right)\right) \)", r"\( \left(\left(x_{(1)}, y_1\right), \left(x_{(2)}, y_2\right), \ldots, \left(x_{(n)}, y_n\right)\right) \)", "restore the missing separator in the probability-plot point sequence"),
+    (328, r"\(y_{(1)} = 40\)", r"\(w_{(1)} = 40\)", "use the stated transformed-grade variable"),
+    (329, r"\(q_1 \le 72.11\)", r"\(q_1(w) = 10\sqrt{52} \approx 72.11\)", "give the exact transformed first quartile"),
+    (330, r"\(q_2 \le 80\)", r"\(q_2(w) = 80\)", "give the exact transformed median"),
+    (331, r"\(q_3 \le 84.85 \)", r"\(q_3(w) = 10\sqrt{72} \approx 84.85\)", "give the exact transformed third quartile"),
+    (332, r"\(y_{(25)} = 90\)", r"\(w_{(25)} = 90\)", "use the stated transformed-grade variable"),
+    (400, r"\(n\)", r"\(n \ge 2\)", "exclude the degenerate one-point uniform range from the beta density"),
+    (419, r"\( n \)", r"\( n \ge 2 \)", "state the sample-size domain for the general-uniform range result"),
+    (428, r"\( \var(R) = h^2 \frac{2 (n _ 1)}{(n + 1)^2 (n + 2)} \)", r"\( \var(R) = h^2 \frac{2 (n - 1)}{(n + 1)^2 (n + 2)} \)", "replace the stray underscore with subtraction in the range variance"),
+    (437, r"\( X_{(n)} - X_{(1)} = h(U_{(n)} - U_{(1)} \)", r"\( X_{(n)} - X_{(1)} = h(U_{(n)} - U_{(1)}) \)", "close the transformed-range parenthesis"),
+    (445, r"\(\left\{\bs{x} \in [a, a + h]^n: a \le x_1 \le x_2 \le \cdots \le x_n \lt a + h\right\}\)", r"\(\left\{\bs{x} \in [a, a + h]^n: a \le x_1 \le x_2 \le \cdots \le x_n \le a + h\right\}\)", "include the stated closed uniform endpoint in the support"),
+    (472, r"\(n\)", r"\(n \ge 2\)", "exclude the degenerate one-point exponential range from the density"),
+    (491, r"\[ g(x_1, x_2, \ldots, x_n) = n! \lambda^n e^{-\lambda(x_1 + x_2 + \cdots + x_n)}, \quad 0 \le x_1 \le x_2 \cdots \le x_n \lt \infty \]", r"\[ g(x_1, x_2, \ldots, x_n) = n! \lambda^n e^{-\lambda(x_1 + x_2 + \cdots + x_n)}, \quad 0 \le x_1 \le x_2 \le \cdots \le x_n \lt \infty \]", "restore the missing inequality in the ordered exponential support"),
+    (532, r"\(h(0) = \frac{6}{1296}, \; h(1) = \frac{70}{1296}, \; h(2) = \frac{300}{1296}, \; h(3) = \frac{300}{1296}, \; h(4) = \frac{318}{1296}, \; h(5) = \frac{302}{1296}\)", r"\(h(0) = \frac{6}{1296}, \; h(1) = \frac{70}{1296}, \; h(2) = \frac{200}{1296}, \; h(3) = \frac{330}{1296}, \; h(4) = \frac{388}{1296}, \; h(5) = \frac{302}{1296}\)", "correct the four-fair-dice range mass counts"),
+    (540, r"\((10, 15, 44, 51, 69)\)", r"\((10, 16, 44, 51, 69)\)", "correct the frozen Iris five-number summary"),
+    (541, r"\((10, 14, 15, 16, 19)\)", r"\((10, 14, 15, 15.75, 19)\)", "correct the frozen Iris species-zero upper quartile"),
+    (542, r"\((45, 51, 55.5, 59, 69)\)", r"\((45, 51, 55.5, 58.75, 69)\)", "correct the frozen Iris species-one upper quartile"),
+    (545, r"\(\text{km}/\text{hr}\)", r"\(\text{km}/\text{s}\)", "correct the Michelson velocity unit"),
+    (547, r"\((620, 805, 850, 895, 1071)\)", r"\((620, 807.5, 850, 892.5, 1070)\)", "correct the complete Michelson five-number summary"),
+    (548, r"\((299\,620, 299\,805, 299\,850, 299\,895, 300\,071)\)", r"\((299\,620, 299\,807.5, 299\,850, 299\,892.5, 300\,070)\)", "correct the transformed Michelson summary"),
+    (554, r"\((3, 5.5, 9, 14, 20)\)", r"\((3, 6.5, 9, 12, 20)\)", "correct the frozen red M-and-M summary"),
+    (555, r"\((2, 5, 7, 9, 17)\)", r"\((2, 6, 7, 9, 17)\)", "correct the frozen green M-and-M summary"),
+    (556, r"\((1, 4, 6.5, 10, 19)\)", r"\((1, 4, 6.5, 9.75, 19)\)", "correct the frozen blue M-and-M summary"),
+    (557, r"\((0, 3.5, 6, 10.5, 13)\)", r"\((0, 4, 6, 9, 13)\)", "correct the frozen orange M-and-M summary"),
+    (558, r"\((3, 8, 13.5, 18, 26)\)", r"\((3, 8.25, 13.5, 18, 26)\)", "correct the frozen yellow M-and-M summary"),
+    (559, r"\((4, 8, 12.5, 18, 20)\)", r"\((4, 8, 12.5, 17.75, 20)\)", "correct the frozen brown M-and-M summary"),
+    (560, r"\((50, 55.5, 58, 60, 61)\)", r"\((50, 56, 58, 58, 61)\)", "correct the M-and-M total-count summary"),
+    (561, r"\((46.22, 48.28, 49.07, 50.23, 52.06)\)", r"\((46.22, 48.2925, 49.07, 50.175, 52.06)\)", "correct the M-and-M net-weight summary"),
+    (562, r"\((0.08, 0.13, 0.17, 0.22, 0.39)\)", r"\((0.08, 0.1375, 0.17, 0.22, 0.39)\)", "correct the frozen Cicada overall summary"),
+    (564, r"\((0.08, 0. 14, 0.18, 0.23, 0.31)\)", r"\((0.08, 0.1425, 0.18, 0.22, 0.31)\)", "correct the frozen Cicada species-one summary"),
+    (565, r"\((0.12, 0.12, 0.215, 0.29, 0.39)\)", r"\((0.12, 0.1325, 0.215, 0.2825, 0.39)\)", "correct the frozen Cicada species-two summary"),
+    (566, r"\((0.08, 0.17, 0.21, 0.25, 0.31)\)", r"\((0.08, 0.17, 0.21, 0.245, 0.31)\)", "correct the frozen female Cicada upper quartile"),
+)
+
+PROTECTED_MATH_CORRECTIONS += tuple(
+    {
+        "page": "random/sample/OrderStatistics.html",
+        "old": old,
+        "new": new,
+        "span_old": old,
+        "span_new": new,
+        "span_index": span_index,
+        "replacements": 1,
+        "surface": "math_span",
+        "reason": reason,
+    }
+    for span_index, old, new, reason in ORDER_STATISTICS_MATH_CORRECTIONS
+)
+
 # Reader-facing language inside TeX \text{...} remains protected mathematics:
 # these exact substitutions localize words while leaving every operator,
 # identifier, delimiter, and formula position unchanged.
@@ -1057,6 +1147,35 @@ def _runtime_payload() -> tuple[bytes, dict[str, Any]]:
     }
 
 
+def _math_spans(text: str) -> list[str]:
+    """Extract inline/display TeX with the same paragraph-boundary rule as QA."""
+
+    spans: list[str] = []
+    cursor = 0
+    while True:
+        starts = [
+            (value, marker)
+            for value, marker in ((text.find(r"\(", cursor), r"\("), (text.find(r"\[", cursor), r"\["))
+            if value >= 0
+        ]
+        if not starts:
+            break
+        start, opener = min(starts)
+        closer = r"\)" if opener == r"\(" else r"\]"
+        close = text.find(closer, start + 2)
+        paragraph_end = text.find("</p>", start + 2)
+        if paragraph_end >= 0 and (close < 0 or paragraph_end < close):
+            spans.append(text[start:paragraph_end])
+            cursor = paragraph_end
+        elif close >= 0:
+            spans.append(text[start : close + 2])
+            cursor = close + 2
+        else:
+            spans.append(text[start:])
+            break
+    return spans
+
+
 def _validate_target_corrections(
     authority_data: dict[str, bytes], target_data: dict[str, bytes]
 ) -> None:
@@ -1076,6 +1195,31 @@ def _validate_target_corrections(
         source_text = authority_data[change["page"]].decode("utf-8")
         target_text = target_data[change["page"]].decode("utf-8")
         replacements = int(change["replacements"])
+        span_index = change.get("span_index")
+        if change["surface"] == "math_span" and span_index is not None:
+            source_spans = _math_spans(source_text)
+            target_spans = _math_spans(target_text)
+            index = int(span_index) - 1
+            if index < 0 or index >= len(source_spans) or index >= len(target_spans):
+                raise RuntimeError(
+                    f"protected source-correction span index changed in {change['page']}: {span_index}"
+                )
+            old = change.get("span_old", change["old"])
+            new = change.get("span_new", change["new"])
+            if source_spans[index].count(old) != replacements:
+                raise RuntimeError(
+                    f"protected source-correction authority span changed in {change['page']}: {old}"
+                )
+            if target_spans[index].count(old) != 0:
+                raise RuntimeError(
+                    f"stale protected source defect remains in {change['page']} span {span_index}: {old}"
+                )
+            expected_new = source_spans[index].count(new) + replacements
+            if target_spans[index].count(new) != expected_new:
+                raise RuntimeError(
+                    f"protected source-correction span count changed in {change['page']}: {new}"
+                )
+            continue
         if source_text.count(change["old"]) != replacements:
             raise RuntimeError(
                 f"protected source-correction authority count changed in {change['page']}: {change['old']}"
@@ -1165,7 +1309,7 @@ def collect_inputs() -> tuple[dict[PurePosixPath, bytes], dict[str, Any]]:
             reader_customizations.append(
                 {
                     "kind": "readable-layout-css-append",
-                    "version": "o006-id-readable-layout-v1",
+                    "version": "o006-id-readable-layout-v3",
                     "reader_relative_path": rel.as_posix(),
                     "authority_bytes": len(data),
                     "authority_sha256": sha256_bytes(data),

@@ -147,3 +147,18 @@ successfully through workflow `32542434389` and Pages deployment `6031730044`.
 Anonymous readback matched all 29 files / 1,986,156 bytes, and the live desktop
 and mobile page rendered 586/586 expressions without page-level overflow or
 console messages. Continue at `random/sample/OrderStatistics.html`.
+
+## O006-D013 — publish the OrderStatistics boundary
+
+Date: 2026-08-22
+Status: approved for immediate publication; public verification pending
+
+Treat the first seven contiguous pages through order statistics as a
+substantial instructional and correction boundary. OrderStatistics adds 846
+source elements, 51 units, 34 disclosed derivations/answers, 569 TeX spans,
+one required image, and 48 exact declared mathematical repairs. The reader and
+1,785 bound backend entities passed two deterministic replays plus live
+desktop/mobile rendering. Publish the 31-file reader immediately, anonymously
+verify every manifest byte and the live page, then continue at
+`random/sample/Covariance.html` without describing the partial edition as
+complete.

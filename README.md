@@ -1,22 +1,23 @@
 # Statistika Matematis — Bahasa Indonesia (id-ID)
 
-Edisi Bahasa Indonesia independen untuk peran kurikulum O006 / C140,
-Statistika Matematis. Sumber inti yang diterima adalah bab statistika
-matematis (bab 5–8) dari karya Kyle Siegrist, *Random: Probability,
-Mathematical Statistics, and Stochastic Processes*.
+Edisi Bahasa Indonesia independen yang dikerjakan dalam jalur kurikulum O006 /
+C140, Statistika Matematis. Korpus edisi ini adalah bab statistika matematis
+(bab 5–8) dari karya Kyle Siegrist, *Random: Probability, Mathematical
+Statistics, and Stochastic Processes*. Edisi lengkap ini tetap diproduksi
+sebagai sumber terbuka tersendiri; edisi ini bukan satu-satunya tulang punggung
+naratif untuk kursus C140 yang dikonfigurasi secara terpisah.
 
-Status pembaca: **4 dari 29 halaman sumber inti telah diterjemahkan**
-(`sample/index.html`, `sample/Introduction.html`, `sample/Mean.html`, dan
-`sample/LLN.html`).
-Korpus dan jembatan model linear belum selesai; repositori ini tidak mengklaim
-kelengkapan dini.
+Status pembaca: **7 dari 29 halaman sumber inti telah diterjemahkan**, secara
+berurutan dari indeks Sampel Acak sampai `sample/OrderStatistics.html`.
+Korpus belum selesai; repositori ini tidak mengklaim kelengkapan dini.
 
-Checkpoint empat halaman lulus build dan QA deterministik: 27 berkas pembaca,
-69 unit instruksional, 52 pengungkapan jawaban/rincian, dan 734 rentang TeX.
-Seluruh 27 berkas publik cocok dengan manifes byte demi byte. Halaman LLN dan
-halaman regresi Mean juga lulus pemeriksaan visual desktop/seluler: seluruh
-rumus dirender, tanpa galat konsol, aset gagal, atau luapan horizontal halaman.
-Produksi berikutnya berlanjut dari `sample/CLT.html`.
+Checkpoint tujuh halaman lulus dua pemutaran ulang build dan QA deterministik:
+31 berkas pembaca, 205 unit instruksional, 146 pengungkapan jawaban/rincian,
+dan 2.280 rentang TeX. Halaman Statistik Terurut lulus pemeriksaan visual
+desktop/seluler dengan 569 rumus dan lima gambar lengkap, tanpa galat konsol,
+TeX mentah, atau luapan horizontal halaman. Tabel dan rumus yang lebar dapat
+digulir secara lokal pada layar kecil. Produksi berikutnya berlanjut dari
+`sample/Covariance.html` setelah verifikasi publik checkpoint ini.
 
 - Pembaca web: <https://kokunoyumeto.github.io/mathematical-statistics-id/>
 - Sumber dan bukti: <https://github.com/KokunoYumeto/mathematical-statistics-id>

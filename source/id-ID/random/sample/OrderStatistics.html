@@ -1,0 +1,1078 @@
+<!DOCTYPE html>
+<html lang="id-ID">
+
+<head>
+<meta charset="utf-8">
+	<title>Statistik Terurut</title>
+	<meta name="author" content="Kyle Siegrist">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="keywords" content="probabilitas, statistika, sampel acak, statistik terurut, kuantil, kuartil, distribusi, diagram probabilitas">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="icon" href="../icons/Icon.svg" type="image/svg">
+	<link rel="stylesheet" href="../Screen.css" type="text/css" media="screen">
+	<script src="../Basic.js"></script>
+	<script src="../../MathJax/tex-svg.js" id="MathJax-script" async></script>
+	<style>
+		table.stm {border-style: none;}
+		table.stm td {
+			text-align: left;
+			border-style: none;
+		}
+		table.stm th {
+			border-top-style: none;
+			border-bottom-style: none;
+			border-left-style: none;
+			background-color: transparent;
+		}
+	</style>
+</head>
+
+<body onload="getReferences();">
+
+<div class="latex">
+	\(\newcommand{\R}{\mathbb{R}}\)
+	\(\newcommand{\N}{\mathbb{N}}\)
+	\(\newcommand{\Z}{\mathbb{Z}}\)
+	\(\newcommand{\E}{\mathbb{E}}\)
+	\(\newcommand{\P}{\mathbb{P}}\)
+	\(\newcommand{\var}{\text{var}}\)
+	\(\newcommand{\sd}{\text{sd}}\)
+	\(\newcommand{\iqr}{\text{iqr}}\)
+	\(\newcommand{\bs}{\boldsymbol}\)
+</div>
+
+<header>
+	<ol class="map">
+		<li class="parent"><a href="https://www.randomservices.org/random/index.html">Random</a></li>
+		<li class="parent"><a href="index.html">5. Sampel Acak</a></li>
+		<li class="child"><a href="Introduction.html" title="Pendahuluan">1</a></li>
+		<li class="child"><a href="Mean.html" title="Rata-Rata Sampel">2</a></li>
+		<li class="child"><a href="LLN.html" title="Hukum Bilangan Besar">3</a></li>
+		<li class="child"><a href="CLT.html" title="Teorema Limit Pusat">4</a></li>
+		<li class="child"><a href="Variance.html" title="Varians Sampel">5</a></li>
+		<li class="current">6</li>
+		<li class="child"><a href="https://www.randomservices.org/random/sample/Covariance.html" title="Korelasi dan Regresi Sampel">7</a></li>
+		<li class="child"><a href="https://www.randomservices.org/random/sample/Normal.html" title="Sifat Khusus Sampel Normal">8</a></li>
+		<li class="details"><button type="button" title="Perluas Rincian" onclick="expandDetails(true);"><img src="../icons/Plus.svg" alt="Perluas"></button></li>
+		<li class="details"><button type="button" title="Ciutkan Rincian" onclick="expandDetails(false);"><img src="../icons/Minus.svg" alt="Ciutkan"></button></li>
+	</ol>
+	<h2 id="o006.random.sample.order-statistics.page">6. Statistik Terurut</h2>
+</header>
+
+<h3 id="o006.random.sample.order-statistics.descriptive-theory">Teori Deskriptif</h3>
+
+<p>Ingat kembali model dasar statistika: kita memiliki populasi objek yang menjadi perhatian dan berbagai pengukuran (variabel) yang dilakukan terhadap objek-objek tersebut. Kita memilih objek dari populasi dan mencatat variabel untuk objek-objek dalam sampel; catatan ini menjadi data kita. Pembahasan pertama menggunakan sudut pandang yang murni deskriptif. Artinya, kita tidak mengasumsikan bahwa data dihasilkan oleh suatu distribusi probabilitas yang mendasarinya. Namun, seperti biasa, ingat bahwa data itu sendiri membentuk suatu distribusi probabilitas, yaitu <dfn>distribusi empiris</dfn>.</p>
+
+<h4 id="ord">Statistik Terurut</h4>
+
+<div class="unit" id="o006.random.sample.order-statistics.unit.order-statistic-definition">
+	<p class="dfn">Misalkan \(x\) adalah variabel bernilai riil pada suatu populasi dan \(\bs{x} = (x_1, x_2, \ldots, x_n)\) adalah nilai-nilai yang diamati dalam sampel berukuran \(n\) untuk variabel tersebut. <dfn>Statistik terurut</dfn> berperingkat \(k\) adalah nilai terkecil ke-\(k\) dalam himpunan data dan biasanya dilambangkan dengan \(x_{(k)}\). Untuk menegaskan kebergantungannya pada ukuran sampel, notasi lain yang umum ialah \(x_{n:k}\). Jadi
+	\[ x_{(1)} \le x_{(2)} \le \cdots \le x_{(n-1)} \le x_{(n)} \]</p>
+</div>
+
+<p>Secara alami, variabel \(x\) yang mendasarinya sedikitnya harus berada pada tingkat pengukuran ordinal. Statistik terurut memiliki satuan fisik yang sama dengan \(x\). Salah satu langkah awal dalam <dfn>analisis data eksploratif</dfn> ialah mengurutkan data, sehingga statistik terurut muncul secara alami.</p>
+
+<div class="unit" id="o006.random.sample.order-statistics.unit.extreme-order-statistics">
+	<p class="dfn">Secara khusus, <dfn>statistik terurut ekstrem</dfn> adalah
+	\[ x_{(1)} = \min\{x_1, x_2, \ldots, x_n\}, \quad x_{(n)} = \max\{x_1, x_2, \ldots, x_n\} \]
+	<dfn>Rentang sampel</dfn> adalah \(r = x_{(n)} - x_{(1)}\), sedangkan <dfn>nilai tengah rentang sampel</dfn> adalah \(\frac{1}{2}\left[x_{(n)} + x_{(1)}\right]\).</p>
+</div>
+
+<p>Rentang sampel dan nilai tengah rentang sampel memiliki satuan fisik yang sama dengan \(x\). Rentang mengukur penyebaran himpunan data, sedangkan nilai tengah rentang mengukur pemusatannya.</p>
+
+<h4 id="med">Median Sampel</h4>
+
+<div class="unit" id="med1">
+	<p class="dfn">Jika \(n\) ganjil, <dfn>median sampel</dfn> adalah pengamatan tengah dalam data terurut, yaitu \(x_{(k)}\) dengan \(k = \frac{n + 1}{2}\). Jika \(n\) genap, tidak ada satu pengamatan tengah, melainkan dua. Karena itu, <dfn>interval median</dfn> adalah \(\left[x_{(k)}, x_{(k + 1)}\right]\) dengan \(k = \frac{n}{2}\). Dalam hal ini, <dfn>median sampel</dfn> didefinisikan sebagai titik tengah interval median, yaitu \(\frac{1}{2}\left[x_{(k)} + x_{(k+1)}\right]\) dengan \(k = \frac{n}{2}\).</p>
+</div>
+
+<p>Dalam arti tertentu, definisi <a href="#med1" class="ref"></a> agak arbitrer karena tidak ada alasan kuat untuk memilih satu titik dalam interval median dibandingkan titik lainnya. Untuk pembahasan lebih lanjut, lihat <a href="Variance.html#err">fungsi galat</a> pada bagian <a href="Variance.html">Varians Sampel</a>. Bagaimanapun, median sampel merupakan statistik alami yang mengukur pusat himpunan data.</p>
+
+<h4 id="qnt">Kuantil Sampel</h4>
+
+<p>Kita dapat memperumum median sampel di atas menjadi kuantil sampel lainnya. Misalkan \(p \in [0, 1]\). Tujuan kita ialah menemukan nilai pada posisi sebesar proporsi \(p\) sepanjang data yang telah diurutkan. Kita mendefinisikan <em>peringkat</em> nilai yang dicari sebagai \((n - 1)p + 1\). Peringkat ini merupakan fungsi linear dari \(p\): nilainya 1 ketika \(p = 0\) dan \(n\) ketika \(p = 1\). Untuk ukuran sampel sedikitnya dua dan sebelum titik ujung kanan, peringkat pada umumnya bukan bilangan bulat. Kita ambil \(k = \lfloor (n - 1)p + 1 \rfloor\), yaitu bagian bulat peringkat yang diinginkan, dan \(t = [(n - 1)p + 1] - k\), yaitu bagian pecahannya. Dengan demikian, \((n - 1)p + 1 = k + t\), dengan \(k \in \{1, 2, \ldots, n - 1\}\) dan \(t \in [0, 1)\). <dfn>Interpolasi linear</dfn> kemudian menghasilkan definisi berikut:</p>
+
+<div class="unit" id="o006.random.sample.order-statistics.unit.sample-quantile-definition">
+	<p class="dfn">Untuk ukuran sampel sedikitnya dua, <dfn>kuantil sampel</dfn> berorde \(p \in [0, 1)\) adalah
+	\[ x_{[p]} = x_{(k)} + t \left[x_{(k+1)}-x_{(k)}\right] = (1 - t) x_{(k)} + t x_{(k+1)} \]
+	dengan \(k = \lfloor (n - 1)p + 1 \rfloor,\quad t = [(n - 1)p + 1] - k\). Untuk titik ujung kanan dan sampel tunggal, gunakan konvensi \(x_{[1]} = x_{(n)};\quad n = 1 \Longrightarrow x_{[p]} = x_1\ (p \in [0, 1])\).</p>
+</div>
+
+<p>Kuantil sampel memiliki satuan fisik yang sama dengan variabel \(x\) yang mendasarinya. Algoritme ini benar-benar memperumum hasil median sampel dalam <a href="#med" class="ref"></a>.</p>
+
+<div class="unit" id="qnt1">
+	<p class="math">Kuantil sampel berorde \(p = \frac{1}{2}\) adalah median sebagaimana didefinisikan sebelumnya, baik ketika \(n\) ganjil maupun ketika \(n\) genap.</p>
+</div>
+
+<div class="unit" id="o006.random.sample.order-statistics.unit.quartiles">
+	<p class="dfn">Kuartil</p>
+	<ol class="sub">
+		<li>Kuantil sampel berorde \(\frac{1}{4}\) disebut <dfn>kuartil pertama</dfn> dan sering dilambangkan dengan \(q_1\).</li>
+		<li>Median sampel adalah kuartil berorde \(\frac{1}{2}\) dan kadang-kadang dilambangkan dengan \(q_2\).</li>
+		<li>Kuantil sampel berorde \(\frac{3}{4}\) disebut <dfn>kuartil ketiga</dfn> dan sering dilambangkan dengan \(q_3\).</li>
+		<li><dfn>Rentang antarkuartil</dfn> didefinisikan sebagai \(\iqr = q_3 - q_1\).</li>
+	</ol>
+</div>
+
+<p>Perhatikan bahwa \(\iqr\) merupakan statistik yang mengukur penyebaran distribusi di sekitar median, tetapi tentu saja bilangan ini memberikan informasi lebih sedikit daripada <em>interval</em> \([q_1, q_3]\).</p>
+
+<div class="unit" id="o006.random.sample.order-statistics.unit.fences">
+	<p class="dfn">Pagar</p>
+	<ol class="sub">
+		<li>Statistik \( q_1 - \frac{3}{2} \iqr \) disebut <dfn>pagar bawah</dfn>.</li>
+		<li>Statistik \( q_3 + \frac{3}{2} \iqr \) disebut <dfn>pagar atas</dfn>.</li>
+	</ol>
+</div>
+
+<p>Istilah <dfn>batas bawah</dfn> dan <dfn>batas atas</dfn> kadang-kadang digunakan sebagai pengganti pagar bawah dan pagar atas. Nilai data yang berada di bawah pagar bawah atau di atas pagar atas merupakan calon <dfn>pencilan</dfn>, yaitu nilai yang tampaknya tidak mengikuti pola umum data. Pencilan dapat disebabkan oleh galat pengukuran, atau dapat pula merupakan nilai sah yang cukup ekstrem. Dalam kedua keadaan itu, pencilan biasanya patut ditelaah lebih lanjut.</p>
+
+<p>Lima statistik \(\left(x_{(1)}, q_1, q_2, q_3, x_{(n)}\right)\) sering disebut <dfn>ringkasan lima angka</dfn>. Secara bersama-sama, statistik tersebut memberikan banyak informasi tentang pusat, penyebaran, dan kemencengan himpunan data. Kelima angka itu secara kasar membagi data menjadi empat interval yang masing-masing memuat sekitar 25% data. Secara grafis, kelima angka beserta pencilan sering ditampilkan dalam <dfn>diagram kotak</dfn>, yang juga disebut <dfn>diagram kotak-dan-kumis</dfn>. Diagram kotak memiliki sumbu yang membentang sepanjang rentang data. Sebuah garis ditarik dari nilai terkecil yang bukan pencilan (yang mungkin saja minimum \(x_{(1)}\)) hingga nilai terbesar yang bukan pencilan (yang mungkin saja maksimum \(x_{(n)}\)). Tanda vertikal, atau <q>kumis</q>, diletakkan pada kedua ujung garis tersebut. Kotak persegi panjang membentang dari kuartil pertama \(q_1\) hingga kuartil ketiga \(q_3\), dengan garis tambahan pada median \(q_2\). Pencilan ditandai sebagai titik di luar kumis ekstrem. Semua paket statistika dapat menghitung kuartil dan sebagian besar dapat menggambar diagram kotak. Gambar di bawah menunjukkan diagram kotak dengan tiga pencilan.</p>
+
+<figure>
+	<figcaption>Diagram kotak</figcaption>
+	<img src="BoxPlot.png" alt="Diagram kotak dengan tiga pencilan">
+</figure>
+
+<h4 id="alt">Definisi Alternatif</h4>
+
+<p>Algoritme di atas bukan satu-satunya cara yang masuk akal untuk mendefinisikan kuantil sampel; banyak alternatif lain tersedia. Salah satu cara alami ialah terlebih dahulu menghitung <a href="Mean.html#cdf">fungsi distribusi empiris</a>
+\[ F(x) = \frac{1}{n} \sum_{i=1}^n \bs{1}(x_i \le x), \quad x \in \R \]
+Ingat bahwa \(F\) memiliki sifat matematis sebuah <a href="https://www.randomservices.org/random/dist/CDF.html">fungsi distribusi</a> dan memang \(F\) merupakan fungsi distribusi bagi distribusi empiris data. Distribusi ini menempatkan probabilitas \(\frac{1}{n}\) pada setiap nilai data \(x_i\) (jadi, jika semua nilai data berbeda, distribusi ini adalah <a href="https://www.randomservices.org/random/dist/Discrete.html#uni">distribusi seragam diskret</a> pada \(\{x_1, x_2, \ldots, x_n\}\)). Untuk menangani nilai yang sama dengan tepat, tetapkan \(j_k = \max\{i : x_{(i)} = x_{(k)}\},\ k \in \{1, 2, \ldots, n - 1\},\ x_{(k)} \lt x_{(k+1)}\). Maka \(F(x) = 0\ (x \lt x_{(1)});\quad F(x) = j_k/n\ (x_{(k)} \le x \lt x_{(k+1)});\quad F(x) = 1\ (x \ge x_{(n)})\). Kita kemudian dapat mendefinisikan <a href="https://www.randomservices.org/random/dist/CDF.html#qnt" class="man">fungsi kuantil</a> sebagai invers fungsi distribusi, sebagaimana biasanya untuk distribusi probabilitas:
+\[ F^{-1}(p) = \min\{x \in \R: F(x) \ge p\}, \quad p \in (0, 1) \]
+Dengan definisi ini, mudah dilihat bahwa kuantil berorde \(p \in (0, 1)\) adalah \(x_{(k)}\), dengan \(k = \lceil n p \rceil\).</p>
+
+<p>Cara lain ialah menghitung peringkat kuantil berorde \(p \in (0, 1)\) sebagai \((n + 1)p\), bukan \((n - 1)p + 1\), lalu menggunakan interpolasi linear seperti di atas. Untuk memahami alasannya, misalkan variabel \(x\) yang mendasari mengambil nilai dalam interval \((a, b)\). Sebanyak \(n\) titik dalam data \(\bs{x}\) membagi interval tersebut menjadi \(n + 1\) subinterval, sehingga masuk akal memandang \(x_{(k)}\) sebagai kuantil berorde \(\frac{k}{n + 1}\). Cara ini juga menghasilkan perhitungan median baku ketika \(p = \frac{1}{2}\). Namun, cara tersebut gagal jika \(p\) begitu kecil sehingga \((n + 1) p \lt 1\), atau begitu besar sehingga \( (n + 1) p > n \).</p>
+
+<p>Definisi utama di atas merupakan definisi yang paling umum digunakan dalam perangkat lunak statistika dan lembar kerja. Selain itu, ketika ukuran sampel \(n\) besar, pilihan di antara definisi kuantil tersebut biasanya hanya menghasilkan perbedaan kecil.</p>
+
+<h4 id="trn">Transformasi</h4>
+
+<p>Misalkan kembali \(\bs{x} = (x_1, x_2, \ldots, x_n)\) merupakan sampel berukuran \(n\) dari variabel populasi \(x\), dan misalkan pula \(y = a + b x\) adalah variabel baru, dengan \(a \in \R\) dan \(b \in (0, \infty)\). Transformasi semacam ini disebut <dfn>transformasi lokasi-skala</dfn> dan sering bersesuaian dengan perubahan satuan. Sebagai contoh, jika \(x\) adalah panjang benda dalam inci, \(y = 2.54 x\) adalah panjang benda tersebut dalam sentimeter. Jika \(x\) adalah suhu benda dalam derajat Fahrenheit, \(y = \frac{5}{9}(x - 32)\) adalah suhunya dalam derajat Celsius. Misalkan \(\bs{y} = (a + b x_1, a + b x_2, \ldots, a + b x_n)\) menyatakan sampel dari variabel \(y\).</p>
+
+<div class="unit" id="trn1">
+	<p class="math">Statistik terurut dan kuantil dipertahankan oleh transformasi lokasi-skala:</p>
+	<ol class="sub">
+		<li>\(y_{(i)} = a + b x_{(i)}\) untuk \(i \in \{1, 2, \ldots, n\}\)</li>
+		<li>\(y_{[p]} = a + b x_{[p]}\) untuk \(p \in [0, 1]\)</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Bagian (a) langsung mengikuti fakta bahwa transformasi lokasi-skala meningkat ketat sehingga mempertahankan urutan: \(x_i \lt x_j\) jika dan hanya jika \(a + b x_i \lt a + b x_j\). Untuk sampel dengan satu pengamatan, hasilnya langsung dari hubungan transformasi pada pengamatan tersebut. Selanjutnya, anggap ukuran sampel sedikitnya dua. Kasus titik ujung \(p = 1,\ y_{(n)} = a + b x_{(n)}\) berlaku langsung. Untuk \(p \in [0, 1)\), ambil \(k \in \{1, 2, \ldots, n - 1\},\ t \in [0, 1)\) seperti dalam definisi kuantil sampel berorde \(p\). Maka
+		\[ y_{[p]} = y_{(k)} + t[y_{(k+1)} - y_{(k)}] = a + b x_{(k)} + t[a + b x_{(k+1)} - (a + b x_{(k)})] = a + b\left(x_{(k)} + t [x_{(k+1)}- x_{(k)}]\right) = a + b x_{[p]} \]</p>
+	</details>
+</div>
+
+<p>Seperti simpangan baku, yaitu ukuran penyebaran terpenting kita, rentang dan rentang antarkuartil tidak dipengaruhi oleh parameter lokasi, tetapi dikalikan dengan parameter skala.</p>
+
+<div class="unit" id="trn2">
+	<p class="math">Rentang dan rentang antarkuartil dari \(\bs{y}\) adalah</p>
+	<ol class="sub">
+		<li>\(r(\bs{y}) = b \, r(\bs{x})\)</li>
+		<li>\(\iqr(\bs{y}) = b \, \iqr(\bs{x})\)</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Hasil ini langsung mengikuti <a href="#trn1" class="ref"></a>.</p>
+	</details>
+</div>
+
+<p>Secara lebih umum, misalkan \(y = g(x)\), dengan \(g\) fungsi bernilai riil yang meningkat ketat pada himpunan nilai yang mungkin bagi \(x\). Misalkan \(\bs{y} = \left(g(x_1), g(x_2), \ldots, g(x_n)\right)\) adalah sampel yang bersesuaian dengan variabel \(y\). Seperti dalam pembuktian Teorema 2, statistik terurut dipertahankan sehingga \(y_{(i)} = g(x_{(i)})\). Namun, jika \(g\) nonlinear, kuantil tidak dipertahankan karena kuantil menggunakan interpolasi <em>linear</em>. Artinya, \(y_{[p]}\) dan \(g(x_{[p]})\) pada umumnya berbeda. Jika \(g\) <a href="https://www.randomservices.org/random/expect/Properties2.html#jen">konveks</a> atau konkaf, setidaknya kita dapat memberikan suatu pertidaksamaan bagi kuantil sampel.</p>
+
+<div class="unit" id="trn3">
+	<p class="math">Misalkan \(y = g(x)\), dengan \(g\) meningkat ketat. Maka</p>
+	<ol class="sub">
+		<li>\(y_{(i)} = g\left(x_{(i)}\right)\) untuk \(i \in \{1, 2, \ldots, n\}\)</li>
+		<li>Jika \(g\) konveks, maka \(y_{[p]} \ge g\left(x_{[p]}\right)\) untuk \(p \in [0, 1]\)</li>
+		<li>Jika \(g\) konkaf, maka \(y_{[p]} \le g\left(x_{[p]}\right)\) untuk \(p \in [0, 1]\)</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Seperti telah dicatat, bagian (a) mengikuti fakta bahwa \(g\) meningkat ketat sehingga mempertahankan urutan. Jika sampel hanya memuat satu pengamatan, semua kuantil sama dengan pengamatan itu sehingga kedua pertidaksamaan berlaku sebagai kesamaan. Selanjutnya, anggap ukuran sampel sedikitnya dua. Bagian (b) mengikuti definisi kekonveksan. Kasus titik ujung \(p = 1\) berlaku sebagai kesamaan. Untuk \(p \in [0, 1)\), ambil \(k \in \{1, 2, \ldots, n - 1\},\ t \in [0, 1)\) seperti dalam definisi kuantil sampel berorde \(p\); kita memperoleh
+		\[ y_{[p]} = (1 - t) y_{(k)} + t y_{(k+1)} = (1 - t) g\left(x_{(k)}\right) + t g\left(x_{(k+1)}\right) \ge g\left[(1 - t) x_{(k)} + t x_{(k+1)}\right] = g\left(x_{[p]}\right) \]
+		Bagian (c) mengikuti argumen yang sama; kedua pertidaksamaan pada titik ujung kanan berlaku langsung karena kuantil titik ujung adalah pengamatan terbesar.</p>
+	</details>
+</div>
+
+<h4 id="sal">Diagram Batang-Daun</h4>
+
+<p><dfn>Diagram batang-daun</dfn> merupakan tampilan grafis statistik terurut \(\left(x_{(1)}, x_{(2)}, \ldots, x_{(n)}\right)\). Diagram ini menyajikan data secara grafis seperti histogram, sekaligus mempertahankan data yang telah diurutkan. Pertama, kita mengasumsikan format angka yang tetap: sejumlah digit yang tetap, mungkin diikuti tanda desimal dan sejumlah digit tetap lainnya. Diagram batang-daun dibuat dengan menggunakan bagian awal untaian tersebut sebagai <dfn>batang</dfn> dan bagian sisanya sebagai daun. Karena terdapat banyak variasi, alih-alih memberikan definisi lengkap yang rumit, kita akan melihat beberapa contoh dalam latihan di bawah.</p>
+
+<h3 id="prb">Teori Probabilitas</h3>
+
+<p>Kita melanjutkan pembahasan statistik terurut, tetapi kini variabel-variabelnya diasumsikan sebagai variabel acak. Misalkan terdapat <a href="https://www.randomservices.org/random/prob/Experiments.html">percobaan acak</a> dasar dan \(X\) merupakan <a href="https://www.randomservices.org/random/prob/Probability.html">variabel acak</a> bernilai riil dengan <a href="https://www.randomservices.org/random/dist/CDF.html">fungsi distribusi</a> \(F\). Kita melakukan \(n\) pengulangan saling bebas dari percobaan dasar tersebut untuk menghasilkan sampel acak \(\bs{X} = (X_1, X_2, \ldots, X_n)\) berukuran \(n\) dari distribusi \(X\). Ini adalah barisan variabel acak yang <a href="https://www.randomservices.org/random/prob/Independence.html">saling bebas</a>, masing-masing dengan distribusi \(X\). Semua statistik pada bagian sebelumnya masih bermakna, tetapi sekarang merupakan variabel acak. Kita menggunakan notasi sebelumnya dengan konvensi bahwa variabel acak ditulis memakai huruf kapital. Jadi, untuk \(k \in \{1, 2, \ldots, n\}\), \(X_{(k)}\) adalah <dfn>statistik terurut ke-\(k\)</dfn>, yaitu nilai terkecil ke-\(k\) di antara \((X_1, X_2, \ldots, X_n)\). Sekarang kita menelaah distribusi statistik terurut dan statistik yang diturunkan darinya.</p>
+
+<h4 id="dst">Distribusi Statistik Terurut ke-\(k\)</h4>
+
+<p>Menentukan fungsi distribusi statistik terurut merupakan penerapan yang baik dari <a href="https://www.randomservices.org/random/bernoulli/index.html">percobaan Bernoulli</a> dan <a href="https://www.randomservices.org/random/bernoulli/Binomial.html">distribusi binomial</a>.</p>
+
+<div class="unit" id="dst1">
+	<p class="math">Fungsi distribusi \( F_k \) dari \(X_{(k)}\) diberikan oleh
+	\[ F_k(x) = \sum_{j=k}^n \binom{n}{j} \left[F(x)\right]^j \left[1 - F(x)\right]^{n - j}, \quad x \in \R \]</p>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Untuk \( x \in \R \), misalkan
+		\[ N_x = \sum_{i=1}^n \bs{1}(X_i \le x) \]
+		sehingga \( N_x \) adalah banyaknya variabel sampel yang jatuh dalam interval \( (-\infty, x] \). Variabel indikator dalam jumlah tersebut saling bebas dan masing-masing bernilai 1 dengan probabilitas \( F(x) \). Jadi, \( N_x \) berdistribusi binomial dengan parameter \( n \) dan \( F(x) \). Selanjutnya, \(X_{(k)} \le x\) jika dan hanya jika \(N_x \ge k\), untuk \(x \in \R\) dan \(k \in \{1, 2, \ldots, n\}\), sebab kedua kejadian itu sama-sama menyatakan bahwa sedikitnya \( k \) variabel sampel berada dalam interval \( (-\infty, x] \). Karena itu
+		\[ \P\left(X_{(k)} \le x\right) = \P\left(N_x \ge k\right) = \sum_{j=k}^n \binom{n}{j} \left[F(x)\right]^j \left[1 - F(x)\right]^{n - j} \]</p>
+</details>
+</div>
+
+<p>Seperti biasa, statistik terurut ekstrem sangat menarik.</p>
+
+<div class="unit" id="dst2">
+	<p class="math"><a href="https://www.randomservices.org/random/dist/CDF.html">Fungsi distribusi</a> \( F_1 \) dari \( X_{(1)} \) dan \( F_n \) dari \( X_{(n)} \) diberikan oleh</p>
+	<ol class="sub">
+		<li>\(F_1(x) = 1 - \left[1 - F(x)\right]^n\) untuk \(x \in \R\)</li>
+		<li>\(F_n(x) = \left[F(x)\right]^n\) untuk \(x \in \R\)</li>
+	</ol>
+</div>
+
+<div class="unit" id="dst3">
+	<p class="math"><a href="https://www.randomservices.org/random/dist/CDF.html#qnt">Fungsi kuantil</a> \( F_1^{-1} \) dan \( F_n^{-1} \) dari \( X_{(1)} \) dan \( X_{(n)} \) diberikan oleh</p>
+	<ol class="sub">
+		<li>\( F_1^{-1}(p) = F^{-1}\left[1 - (1 - p)^{1/n}\right] \) untuk \( p \in (0, 1) \)</li>
+		<li>\( F_n^{-1}(p) = F^{-1}\left(p^{1/n}\right) \) untuk \( p \in (0, 1) \)</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Rumus-rumus tersebut mengikuti <a href="#dst2" class="ref"></a> dan aljabar sederhana. Ingat bahwa jika \( G \) adalah fungsi distribusi, fungsi kuantil yang bersesuaian diberikan oleh \( G^{-1}(p) = \min\{x \in \R: G(x) \ge p\} \) untuk \( p \in (0, 1) \).</p>
+	</details>
+</div>
+
+<p>Jika distribusi yang mendasarinya kontinu, kita dapat memberikan rumus sederhana bagi fungsi densitas probabilitas statistik terurut.</p>
+
+<div class="unit" id="dst4">
+	<p class="math">Misalkan sekarang \(X\) memiliki <a href="https://www.randomservices.org/random/dist/Continuous.html">distribusi kontinu</a> dengan fungsi densitas probabilitas \( f \). Maka \(X_{(k)}\) memiliki distribusi kontinu dengan fungsi densitas probabilitas \( f_k \) yang diberikan oleh
+	\[ f_k(x) = \frac{n!}{(k - 1)! (n - k)!} \left[F(x)\right]^{k-1} \left[1 - F(x)\right]^{n-k} f(x), \quad x \in \R\]</p>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Tentu saja, \(f_k(x) = F_k^\prime(x)\). Kita mengambil turunan suku demi suku dan menggunakan aturan hasil kali pada
+		\[ \frac{d}{dx}\left[F(x)\right]^j \left[1 - F(x)\right]^{n-j} = j \left[F(x)\right]^{j-1} f(x) \left[1 - F(x)\right]^{n-j} - (n - j)\left[F(x)\right]^j \left[1 - F(x)\right]^{n-j-1}f(x) \]
+		Kita menggunakan identitas binomial \(j \binom{n}{j} = n \binom{n - 1}{j - 1}\) dan \((n - j) \binom{n}{j} = n \binom{n - 1}{j}\). Hasil akhirnya ialah
+		\[ f_k(x) = n f(x) \left[ \sum_{j=k}^n \binom{n - 1}{j - 1}[F(x)]^{j-1} [1 - F(x)]^{(n-1)-(j-1)} 
+			- \sum_{j=k}^{n-1} \binom{n-1}{j} [F(x)]^j [1 - F(x)]^{(n-1)-j}\right] \]
+		Kedua jumlah saling meniadakan, menyisakan hanya suku \(j = k\) pada jumlah pertama. Karena itu
+		\[f_k(x) = n f(x) \binom{n-1}{k-1}[F(x)]^{k-1}[1 - F(x)]^{n-k}\]
+		Namun, \(n \binom{n-1}{k-1} = \frac{n!}{(k-1)!(n-k)!}\).</p>
+		<p>Terdapat pula argumen heuristik sederhana untuk hasil ini. Pertama, \(f_k(x) \, dx\) adalah probabilitas bahwa \(X_{(k)}\) berada dalam interval infinitesimal selebar \(dx\) di sekitar \(x\). Kejadian tersebut berarti bahwa satu variabel sampel berada dalam interval infinitesimal itu, \(k - 1\) variabel sampel kurang dari \(x\), dan \(n - k\) variabel sampel lebih dari \(x\). Banyaknya cara memilih variabel-variabel tersebut adalah koefisien multinomial
+		\[ \binom{n}{k - 1, 1, n - k} = \frac{n!}{(k - 1)! (n - k)!} \]
+		Karena saling bebas, probabilitas bahwa variabel-variabel terpilih berada dalam interval yang ditentukan adalah
+		\[ \left[F(x)\right]^{k-1} \left[1 - F(x)\right]^{n-k} f(x) \, dx \]</p>
+	</details>
+</div>
+
+<p>Berikut adalah kasus khusus untuk statistik terurut ekstrem.</p>
+
+<div class="unit" id="dst5">
+	<p class="math">Fungsi densitas probabilitas \( f_1 \) dari \( X_{(1)} \) dan \( f_n \) dari \( X_{(n)} \) diberikan oleh</p>
+	<ol class="sub">
+		<li>\(f_1(x) = n \left[1 - F(x)\right]^{n-1} f(x)\) untuk \(x \in \R\)</li>
+		<li>\(f_n(x) = n \left[F(x)\right]^{n-1} f(x)\) untuk \(x \in \R\)</li>
+	</ol>
+</div>
+
+<h4 id="jnt">Distribusi Bersama</h4>
+
+<p>Kita kembali mengasumsikan bahwa \(X\) memiliki distribusi kontinu dengan fungsi distribusi \( F \) dan fungsi densitas probabilitas \( f \).</p>
+
+<div class="unit" id="jnt1">
+	<p class="math">Misalkan \(j, k \in \{1, 2, \ldots, n\}\) dengan \(j \lt k\). Fungsi densitas probabilitas bersama \( f_{j,k} \) dari \(\left(X_{(j)}, X_{(k)}\right)\) diberikan oleh</p>
+	\[ f_{j,k}(x, y) = \frac{n!}{(j - 1)! (k - j - 1)! (n - k)!} \left[F(x)\right]^{j-1} \left[F(y) - F(x)\right]^{k - j - 1} \left[1 - F(y)\right]^{n-k} f(x) f(y); \quad x, \, y \in \R, x \lt y \]
+	<details>
+		<summary>Rincian:</summary>
+		<p>Kita ingin menghitung probabilitas bahwa \(X_{(j)}\) berada dalam interval infinitesimal \(dx\) di sekitar \(x\), dan \(X_{(k)}\) berada dalam interval infinitesimal \(dy\) di sekitar \(y\). Harus ada \(j - 1\) variabel sampel yang kurang dari \(x\), satu variabel dalam interval infinitesimal di sekitar \(x\), \(k - j - 1\) variabel sampel di antara \(x\) dan \(y\), satu variabel dalam interval infinitesimal di sekitar \(y\), serta \(n - k\) variabel sampel yang lebih dari \(y\). Banyaknya cara memilih variabel-variabel itu adalah koefisien multinomial
+		\[ \binom{n}{j-1, 1, k - j - 1, 1, n - k} = \frac{n!}{(j - 1)! (k - j - 1)! (n - k)!} \]
+		Karena saling bebas, probabilitas bahwa variabel-variabel terpilih berada dalam interval yang ditentukan adalah
+		\[ \left[F(x)\right]^{j-1} f(x) dx \left[F(y) - F(x)\right]^{k - j - 1} f(y) dy \left[1 - F(y)\right]^{n-k} \]</p>
+	</details>
+</div>
+
+<p>Dari distribusi bersama dua statistik terurut, setidaknya secara prinsip, kita dapat menentukan distribusi berbagai statistik lain: rentang sampel \(R\); kuantil sampel \(X_{[p]}\) untuk \(p \in [0, 1]\), khususnya kuartil sampel \(Q_1\), \(Q_2\), \(Q_3\); serta rentang antarkuartil IQR. Distribusi bersama statistik terurut ekstrem \((X_{(1)}, X_{(n)})\) merupakan kasus yang sangat penting.</p>
+
+<div class="unit" id="jnt2">
+	<p class="math">Untuk ukuran sampel sedikitnya dua, fungsi densitas probabilitas bersama \( f_{1,n} \) dari \(\left(X_{(1)}, X_{(n)}\right)\) diberikan oleh
+	\[ f_{1,n}(x, y) = n (n - 1) \left[F(y) - F(x)\right]^{n-2} f(x) f(y); \quad x, \, y \in \R,  x \lt y \]</p>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Ini merupakan akibat <a href="#jnt1" class="ref"></a> dengan \(j = 1\) dan \(k = n\).</p>
+	</details>
+</div>
+
+<p>Argumen serupa dapat digunakan untuk memperoleh fungsi densitas probabilitas bersama untuk sembarang banyak statistik terurut. Tentu saja, kita terutama tertarik pada fungsi densitas probabilitas bersama dari <em>semua</em> statistik terurut. Ternyata fungsi densitas tersebut memiliki bentuk yang sangat sederhana.</p>
+
+<div class="unit" id="jnt3">
+	<p class="math">\(\left(X_{(1)}, X_{(2)}, \ldots, X_{(n)}\right)\) memiliki fungsi densitas probabilitas bersama \( g \) yang diberikan oleh
+	\[ g(x_1, x_2, \ldots, x_n) = n! f(x_1) \, f(x_2) \, \cdots \, f(x_n), \quad x_1 \lt x_2 \lt \cdots \lt x_n \]</p>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Untuk setiap permutasi \(\bs{i} = (i_1, i_2, \ldots, i_n)\) dari \((1, 2, \ldots, n)\), misalkan \(S_\bs{i} = \{\bs{x} \in \R^n: x_{i_1} \lt x_{i_2} \lt \cdots \lt x_{i_n}\}\). Pada \(S_\bs{i}\), pemetaan \((x_1, x_2, \ldots, x_n) \mapsto (x_{i_1}, x_{i_2}, \ldots, x_{i_n})\) bersifat satu-ke-satu, memiliki turunan parsial pertama yang kontinu, dan memiliki Jacobian 1. Himpunan-himpunan \(S_\bs{i}\), ketika \(\bs{i}\) merentang seluruh \(n!\) permutasi \((1, 2, \ldots, n)\), saling lepas. Probabilitas bahwa \((X_1, X_2, \ldots, X_n)\) tidak berada dalam salah satu himpunan tersebut adalah 0. Hasilnya kini mengikuti rumus <a href="https://www.randomservices.org/random/dist/Transformations.html#cov">perubahan variabel</a> multivariat.</p>
+		<p>Sekali lagi, terdapat argumen heuristik sederhana. Untuk setiap \(\bs{x} \in \R^n\) dengan \(x_1 \lt x_2 \lt \cdots \lt x_n\), ada \(n!\) permutasi koordinat \(\bs{x}\). Densitas probabilitas \((X_1, X_2, \ldots, X_n)\) pada setiap titik itu ialah \(f(x_1) \, f(x_2) \, \cdots \, f(x_n)\). Jadi, densitas probabilitas \((X_{(1)}, X_{(2)}, \ldots, X_{(n)})\) pada \(\bs{x}\) adalah \(n!\) kali hasil kali tersebut.</p>
+	</details>
+</div>
+
+<h4 id="plt">Plot Probabilitas</h4>
+
+<p><dfn>Plot probabilitas</dfn>, yang juga disebut <dfn>plot kuantil-kuantil</dfn> atau singkatnya <dfn>plot Q-Q</dfn>, merupakan uji grafis informal untuk menentukan apakah data yang diamati berasal dari distribusi tertentu. Misalkan kita mengamati data bernilai riil \((x_1, x_2, \ldots, x_n)\) dari <a href="../sample/Introduction.html">sampel acak</a> berukuran \(n\). Kita ingin mengetahui apakah data tersebut secara masuk akal dapat berasal dari <a href="https://www.randomservices.org/random/dist/Continuous.html">distribusi kontinu</a> dengan <a href="https://www.randomservices.org/random/dist/CDF.html">fungsi distribusi</a> \(F\). Pertama, kita mengurutkan data dari yang terkecil hingga terbesar, sehingga diperoleh nilai-nilai statistik terurut yang diamati: \(\left(x_{(1)}, x_{(2)}, \ldots, x_{(n)}\right)\).</p>
+
+<p>Dengan konvensi posisi plot alternatif yang diperkenalkan di atas, kita memandang \(x_{(i)}\) sebagai kuantil <em>sampel</em> berorde \(\frac{i}{n + 1}\); ini bukan aturan interpolasi kuantil utama pada halaman ini. Menurut definisi, kuantil <em>distribusi</em> berorde \(\frac{i}{n + 1}\) adalah \( y_i = F^{-1} \left( \frac{i}{n + 1} \right) \). Jika data benar-benar berasal dari distribusi tersebut, kita mengharapkan titik-titik \( \left(\left(x_{(1)}, y_1\right), \left(x_{(2)}, y_2\right), \ldots, \left(x_{(n)}, y_n\right)\right) \) berada dekat garis diagonal \(y = x\). Sebaliknya, penyimpangan kuat dari garis ini merupakan indikasi kuat bahwa data tidak berasal dari distribusi tersebut. Plot titik-titik itu disebut <dfn>plot probabilitas</dfn>.</p>
+
+<p>Namun, biasanya kita tidak sedang menguji apakah data berasal dari satu distribusi <em>tertentu</em>, melainkan dari suatu <em>keluarga</em> distribusi parametrik, misalnya keluarga normal, seragam, atau eksponensial. Keadaan ini lazim karena parameternya tidak diketahui; langkah berikutnya setelah plot probabilitas mungkin justru menaksir parameter tersebut. Untungnya, metode plot probabilitas memiliki perluasan sederhana untuk setiap keluarga distribusi <a href="https://www.randomservices.org/random/special/LocationScale.html">lokasi-skala</a>. Misalkan \(G\) adalah fungsi distribusi tertentu. Keluarga lokasi-skala yang terkait dengan \(G\) memiliki fungsi distribusi \( F(x) = G \left( \frac{x - a}{b} \right)\), untuk \(x \in \R \), dengan \(a \in \R\) sebagai parameter lokasi dan \(b \in (0, \infty)\) sebagai parameter skala. Untuk \(p \in (0, 1)\), jika \(z_p = G^{-1}(p)\) menyatakan kuantil berorde \(p\) bagi \(G\), dan \(y_p = F^{-1}(p)\) kuantil berorde \(p\) bagi \(F\), maka \( y_p = a + b \, z_p \). Jadi, jika plot probabilitas berdasarkan \(F\) hampir linear, khususnya dekat garis diagonal, plot probabilitas berdasarkan \(G\) juga hampir linear. Dengan demikian, kita dapat menggunakan \(G\) tanpa mengetahui parameter lokasi dan skala.</p>
+
+<p>Dalam latihan di bawah, Anda akan menjelajahi plot probabilitas untuk distribusi <a href="https://www.randomservices.org/random/special/Normal.html">normal</a>, <a href="https://www.randomservices.org/random/poisson/Exponential.html">eksponensial</a>, dan <a href="https://www.randomservices.org/random/dist/Continuous.html#uni">seragam</a>. Prosedur kuantitatif formal, yaitu <a href="https://www.randomservices.org/random/hypothesis/ChiSquare.html#fit">uji kecocokan khi-kuadrat</a>, akan dipelajari dalam bab <a href="https://www.randomservices.org/random/hypothesis/index.html">pengujian hipotesis</a>.</p>
+
+<h3 id="o006.random.sample.order-statistics.exercises-applications">Latihan dan Penerapan</h3>
+
+<h4 id="prp">Sifat Dasar</h4>
+
+<div class="unit" id="prp1">
+	<p class="math">Misalkan \(x\) adalah suhu (dalam derajat Fahrenheit) untuk suatu jenis komponen elektronik setelah beroperasi selama 10 jam. Sampel 30 komponen memiliki ringkasan lima angka \((84, 102, 113, 120, 135)\).</p>
+	<ol class="sub">
+		<li>Klasifikasikan \(x\) menurut jenis dan tingkat pengukurannya.</li>
+		<li>Tentukan rentang dan rentang antarkuartil.</li>
+		<li>Tentukan ringkasan lima angka, rentang, dan rentang antarkuartil jika suhu dikonversi ke derajat Celsius. Transformasinya adalah \(y = \frac{5}{9}(x - 32)\).</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<ol class="sub">
+			<li>kontinu, interval</li>
+			<li>51, 18</li>
+			<li>\((28.89, 38.89, 45.00, 48.89, 57.22)\), 28.33, 10</li>
+		</ol>
+	</details>
+</div>
+
+<div class="unit" id="prp2">
+	<p class="math">Misalkan \(x\) adalah panjang (dalam inci) komponen hasil pemesinan dalam suatu proses manufaktur. Sampel 50 komponen memiliki ringkasan lima angka (9.6, 9.8, 10.0, 10.1, 10.3).</p>
+	<ol class="sub">
+		<li>Klasifikasikan \(x\) menurut jenis dan tingkat pengukurannya.</li>
+		<li>Tentukan rentang dan rentang antarkuartil.</li>
+		<li>Tentukan ringkasan lima angka, rentang, dan rentang antarkuartil jika panjang diukur dalam sentimeter. Transformasinya adalah \(y = 2.54 x\).</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<ol class="sub">
+			<li>kontinu, rasio</li>
+			<li>0.7, 0.3</li>
+			<li>\((24.38, 24.89, 25.40, 25.65, 26.16)\), 1.78, 0.76</li>
+			<li></li>
+		</ol>
+	</details>
+</div>
+
+<div class="unit" id="prp3">
+	<p class="math">Profesor Moriarity mengajar satu kelas Statistika 101 yang terdiri atas 25 mahasiswa di Enormous State University (ESU). Pada ujian tengah semester pertama, ringkasan lima angkanya adalah (16, 52, 64, 72, 81) dari maksimum 100 poin. Profesor Moriarity menilai hasil tersebut agak rendah dan mempertimbangkan beberapa transformasi untuk menaikkan nilai.</p>
+	<ol class="sub">
+		<li>Tentukan rentang dan rentang antarkuartil.</li>
+		<li>Misalkan ia menambahkan 10 poin pada setiap nilai. Tentukan ringkasan lima angka, rentang, dan rentang antarkuartil nilai hasil transformasi.</li>
+		<li>Misalkan ia mengalikan setiap nilai dengan 1.2. Tentukan ringkasan lima angka, rentang, dan rentang antarkuartil nilai hasil transformasi.</li>
+		<li>Misalkan ia menggunakan transformasi \(w = 10 \sqrt{x}\), yang sangat melengkungkan skala di ujung bawah, tetapi hanya sedikit di ujung atas. Berikan semua informasi yang dapat ditentukan tentang ringkasan lima angka nilai hasil transformasi.</li>
+		<li>Tentukan apakah nilai rendah 16 merupakan pencilan.</li>
+	</ol>
+	<details>
+	<summary>Rincian:</summary>
+	<ol class="sub">
+		<li>65, 20</li>
+		<li>\((26, 62, 74, 82, 91)\), 65, 20</li>
+		<li>\((19.2, 62.4, 76.8, 86.4, 97.2)\), 78, 24</li>
+		<li>\(w_{(1)} = 40\), \(q_1(w) = 10\sqrt{52} \approx 72.11\), \(q_2(w) = 80\), \(q_3(w) = 10\sqrt{72} \approx 84.85\), \(w_{(25)} = 90\)</li>
+		<li>Pagar bawahnya adalah 22, sehingga 16 memang merupakan pencilan.</li>
+	</ol>
+	</details>
+</div>
+
+<h4 id="cmp">Latihan Komputasi</h4>
+
+<p>Semua paket perangkat lunak statistika dapat menghitung statistik terurut dan kuantil, menggambar diagram batang-daun dan diagram kotak, serta pada umumnya menjalankan prosedur numerik dan grafis yang dibahas dalam bagian ini. Untuk kajian statistika nyata, khususnya yang menggunakan himpunan data besar, perangkat lunak statistika sangat penting. Namun, mengerjakan perhitungan secara manual pada himpunan data kecil buatan tetap berguna untuk menguasai konsep dan definisi. Dalam subbagian ini, lakukan perhitungan dan gambarlah grafik dengan bantuan teknologi seminimal mungkin.</p>
+
+<div class="unit" id="cmp1">
+	<p class="math">Misalkan \(x\) adalah banyaknya mata kuliah matematika yang telah diselesaikan seorang mahasiswa ESU. Sampel 10 mahasiswa ESU memberikan data \(\bs{x} = (3, 1, 2, 0, 2, 4, 3, 2, 1, 2)\).</p>
+
+	<ol class="sub">
+		<li>Klasifikasikan \(x\) menurut jenis dan tingkat pengukurannya.</li>
+		<li>Berikan statistik terurutnya.</li>
+		<li>Hitung ringkasan lima angka dan gambar diagram kotaknya.</li>
+		<li>Hitung rentang dan rentang antarkuartil.</li>
+	</ol>
+	<details>
+	<summary>Rincian:</summary>
+	<ol class="sub">
+		<li>diskret, rasio</li>
+		<li>\((0, 1, 1, 2, 2, 2, 2, 3, 3, 4)\)</li>
+		<li>\((0, 1.25, 2, 2.75, 4)\)</li>
+		<li>4, 1.5</li>
+	</ol>
+	</details>
+</div>
+
+<div class="unit" id="cmp2">
+	<p class="math">Misalkan sampel berukuran 12 dari variabel diskret \(x\) memiliki fungsi massa empiris \(f(-2) = 1/12\), \(f(-1) = 1/4\), \(f(0) = 1/3\), \(f(1) = 1/6\), dan \(f(2) = 1/6\).</p>
+	<ol class="sub">
+		<li>Berikan statistik terurutnya.</li>
+		<li>Hitung ringkasan lima angka dan gambar diagram kotaknya.</li>
+		<li>Hitung rentang dan rentang antarkuartil.</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<ol class="sub">
+			<li>\((-2, -1, -1, -1, 0, 0, 0, 0, 1, 1, 2, 2)\)</li>
+			<li>\((-2, -1, 0, 1, 2)\)</li>
+			<li>4, 2</li>
+		</ol>
+	</details>
+</div>
+
+<div class="unit" id="cmp3">
+	<p class="math">Diagram batang-daun di bawah menyajikan nilai ujian 100 poin dalam mata kuliah probabilitas yang diikuti 38 mahasiswa. Digit pertama adalah batang dan digit kedua adalah daun. Jadi, nilai terendah adalah 47 dan tertinggi 98. Nilai pada baris dengan batang 6 adalah 60, 60, 62, 63, 65, 65, 67, dan 68.</p>
+	<table class="stm">
+		<tr>
+			<th>4</th>
+			<td>7</td>
+		</tr>
+		<tr>
+			<th>5</th>
+			<td>0</td>
+			<td>3</td>
+			<td>4</td>
+			<td>6</td>
+		</tr>
+		<tr>
+			<th>6</th>
+			<td>0</td>
+			<td>0</td>
+			<td>2</td>
+			<td>3</td>
+			<td>5</td>
+			<td>5</td>
+			<td>7</td>
+			<td>8</td>
+		</tr>
+		<tr>
+			<th>7</th>
+			<td>0</td>
+			<td>1</td>
+			<td>1</td>
+			<td>2</td>
+			<td>3</td>
+			<td>4</td>
+			<td>6</td>
+			<td>6</td>
+			<td>7</td>
+			<td>8</td>
+			<td>8</td>
+			<td>9</td>
+			<td>9</td>
+		</tr>
+		<tr>
+			<th>8</th>
+			<td>2</td>
+			<td>3</td>
+			<td>3</td>
+			<td>6</td>
+			<td>7</td>
+			<td>8</td>
+			<td>8</td>
+			<td>9</td>
+		</tr>
+		<tr>
+			<th>9</th>
+			<td>1</td>
+			<td>3</td>
+			<td>6</td>
+			<td>8</td>
+		</tr>
+	</table>
+	<p>Hitung ringkasan lima angka dan gambar diagram kotaknya.</p>
+	<details>
+		<summary>Rincian:</summary>
+		<p>\((47, 65, 75, 83, 98) \)</p>
+	</details>
+</div>
+
+<h4 id="app">Latihan Aplikasi</h4>
+
+<div class="unit" id="app1">
+	<p class="app">Dalam <a href="https://www.randomservices.org/random/apps/Histogram.html" class="ancillary">aplikasi histogram</a>, buat satu distribusi terpisah yang memuat sedikitnya 30 nilai untuk setiap jenis di bawah. Catat ringkasan lima angkanya.</p>
+	<ol class="sub">
+		<li>Distribusi seragam.</li>
+		<li>Distribusi simetris unimodal.</li>
+		<li>Distribusi unimodal yang menceng ke kanan.</li>
+		<li>Distribusi unimodal yang menceng ke kiri.</li>
+		<li>Distribusi simetris bimodal.</li>
+		<li>Distribusi berbentuk \(u\).</li>
+	</ol>
+</div>
+
+<div class="unit" id="app2">
+	<p class="app">Dalam <a href="https://www.randomservices.org/random/apps/ErrorFunction.html" class="ancillary">aplikasi fungsi galat</a>, mulailah dengan suatu distribusi lalu tambahkan titik-titik berikut. Catat pengaruhnya terhadap ringkasan lima angka:</p>
+	<ol class="sub">
+		<li>Tambahkan satu titik di bawah \(x_{(1)}\).</li>
+		<li>Tambahkan satu titik di antara \(x_{(1)}\) dan \(q_1\).</li>
+		<li>Tambahkan satu titik di antara \(q_1\) dan \(q_2\).</li>
+		<li>Tambahkan satu titik di antara \(q_2\) dan \(q_3\).</li>
+		<li>Tambahkan satu titik di antara \(q_3\) dan \(x_{(n)}\).</li>
+		<li>Tambahkan satu titik di atas \(x_{(n)}\).</li>
+	</ol>
+</div>
+
+<p>Dalam <a href="#app2" class="ref"></a>, Anda mungkin memperhatikan bahwa ketika satu titik ditambahkan ke distribusi, satu atau beberapa dari kelima statistik tidak berubah. Secara umum, kuantil relatif tidak peka terhadap perubahan data.</p>
+
+<h4 id="uni">Distribusi Seragam</h4>
+
+<p>Ingat bahwa <a href="https://www.randomservices.org/random/dist/Continuous.html#uni">distribusi seragam baku</a> adalah distribusi seragam pada interval \([0, 1]\).</p>
+
+<div class="unit" id="uni1">
+	<p class="math">Misalkan \(\bs{X}\) adalah sampel acak berukuran \(n\) dari distribusi seragam baku. Untuk \( k \in \{1, 2, \ldots, n\} \), \(X_{(k)}\) memiliki <a href="https://www.randomservices.org/random/special/Beta.html">distribusi beta</a> dengan parameter kiri \(k\) dan parameter kanan \(n - k + 1\). Fungsi densitas probabilitas \( f_k \) diberikan oleh
+	\[f_k(x) = \frac{n!}{(k - 1)! (n - k)!} x^{k-1} (1 - x)^{n-k}, \quad 0 \le x \le 1\]</p>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Hasil ini langsung mengikuti <a href="#dst4" class="ref"></a> karena \(f(x) = 1\) dan \(F(x) = x\) untuk \(0 \le x \le 1\). Dari bentuk \(f_k\), distribusinya dapat dikenali sebagai distribusi beta dengan parameter kiri \(k\) dan parameter kanan \(n - k + 1\).</p>
+	</details>
+</div>
+
+<div class="unit" id="uni2">
+	<p class="app">Dalam <a href="https://www.randomservices.org/random/apps/OrderStatistic.html" class="ancillary">eksperimen statistik terurut</a>, pilih distribusi seragam baku dan \(n = 5\). Ubah \(k\) dari 1 hingga 5 dan perhatikan bentuk fungsi densitas probabilitas \(X_{(k)}\). Untuk setiap nilai \(k\), jalankan simulasi 1.000 kali dan bandingkan fungsi densitas empiris dengan fungsi densitas probabilitas teoretis.</p>
+</div>
+
+<p>Hasil untuk distribusi seragam baku mudah diperluas ke distribusi seragam umum pada suatu interval.</p>
+
+<div class="unit" id="uni3">
+	<p class="math">Misalkan \( \bs{X} \) adalah sampel acak berukuran \( n \) dari distribusi seragam pada interval \( [a, a + h] \), dengan \( a \in \R \) dan \( h \in (0, \infty) \). Untuk \( k \in \{1, 2, \ldots, n\} \), \( X_{(k)} \) memiliki distribusi beta dengan parameter kiri \( k \), parameter kanan \( n - k + 1 \), parameter lokasi \( a \), dan parameter skala \( h \). Secara khusus,</p>
+	<ol class="sub">
+		<li>\( \E\left(X_{(k)}\right) = a + h \frac{k}{n + 1} \)</li>
+		<li>\( \var\left(X_{(k)}\right) =  h^2 \frac{k (n - k + 1)}{(n + 1)^2 (n + 2)}\)</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Misalkan \( \bs{U} = (U_1, U_2, \ldots, U_n) \) adalah sampel acak berukuran \( n \) dari distribusi seragam baku, dan tetapkan \( X_i = a + h U_i \) untuk \( i \in \{1, 2, \ldots, n\} \). Maka \( \bs{X} = (X_1, X_2, \ldots, X_n) \) adalah sampel acak berukuran \( n \) dari distribusi seragam pada \( [a, a + h] \), dan \( X_{(k)} = a + h U_{(k)} \). Jadi, distribusi \( X_{(k)} \) mengikuti hasil sebelumnya. Bagian (a) dan (b) mengikuti hasil baku untuk distribusi beta.</p>
+	</details>
+</div>
+
+<p>Kita kembali ke distribusi seragam baku dan meninjau rentang sampel acak.</p>
+
+<div class="unit" id="uni4">
+	<p class="math">Misalkan \(\bs{X}\) adalah sampel acak berukuran \(n \ge 2\) dari distribusi seragam baku. Rentang sampel \( R \) memiliki distribusi beta dengan parameter kiri \( n - 1 \) dan parameter kanan 2. Fungsi densitas probabilitas \( g \) diberikan oleh
+	\[ g(r) = n (n - 1) r^{n-2} (1 - r), \quad 0 \le r \le 1 \]</p>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Dari <a href="#jnt2" class="ref"></a>, fungsi densitas probabilitas bersama \((X_{(1)}, X_{(n)})\) adalah \(f_{1, n}(x, y) = n (n - 1) (y - x)^{n - 2}\) untuk \(0 \le x \le y \le 1\). Karena itu, untuk \(r \in [0, 1]\),
+		\[ \P(R \gt r) = \P(X_{(n)} - X_{(1)} \gt r) = \int_0^{1-r} \int_{x+r}^1 n (n - 1) (y - x)^{n-2} \, dy \, dx = (n - 1) r^n - n r^{n-1} + 1 \]
+		Dengan demikian, fungsi distribusi \(R\) adalah \(G(r) = n r^{n-1} - (n - 1)r^n\) untuk \(0 \le r \le 1\). Mengambil turunan terhadap \(r\) dan menyederhanakannya memberikan fungsi densitas \(g(r) = n (n - 1) r^{n-2} (1 - r)\) untuk \(0 \le r \le 1\). Dari bentuk \(g\), distribusi ini adalah distribusi beta dengan parameter kiri \(n - 1\) dan parameter kanan 2.</p>
+	</details>
+</div>
+
+<p>Sekali lagi, hasil ini mudah diperluas ke distribusi seragam umum.</p>
+
+<div class="unit" id="uni5">
+	<p class="math">Misalkan \( \bs{X} = (X_1, X_2, \ldots, X_n) \) adalah sampel acak berukuran \( n \ge 2 \) dari distribusi seragam pada \( [a, a + h] \), dengan \( a \in \R \) dan \( h \in (0, \infty) \). Rentang sampel \( R = X_{(n)} - X_{(1)} \) memiliki distribusi beta dengan parameter kiri \( n - 1 \), parameter kanan \( 2 \), dan parameter skala \( h \). Secara khusus,</p>
+	<ol class="sub">
+		<li>\( \E(R) = h \frac{n - 1}{n + 1} \)</li>
+		<li>\( \var(R) = h^2 \frac{2 (n - 1)}{(n + 1)^2 (n + 2)} \)</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Misalkan kembali \( \bs{U} = (U_1, U_2, \ldots, U_n) \) adalah sampel acak berukuran \( n \) dari distribusi seragam baku, dan tetapkan \( X_i = a + h U_i \) untuk \( i \in \{1, 2, \ldots, n\} \). Maka \( \bs{X} = (X_1, X_2, \ldots, X_n) \) adalah sampel acak berukuran \( n \) dari distribusi seragam pada \( [a, a + h] \), dan \( X_{(k)} = a + h U_{(k)} \). Karena itu, \( X_{(n)} - X_{(1)} = h(U_{(n)} - U_{(1)}) \), sehingga distribusi \( R \) mengikuti hasil sebelumnya. Bagian (a) dan (b) mengikuti hasil baku untuk distribusi beta.</p>
+	</details>
+</div>
+
+<p>Distribusi bersama statistik terurut untuk sampel dari distribusi seragam mudah diperoleh.</p>
+
+<div class="unit" id="uni6">
+	<p class="math">Misalkan \((X_1, X_2, \ldots, X_n)\) adalah sampel acak berukuran \(n\) dari distribusi seragam pada interval \([a, a + h]\), dengan \(a \in \R\) dan \( h \in (0, \infty) \). Maka \(\left(X_{(1)}, X_{(2)}, \ldots, X_{(n)}\right)\) berdistribusi seragam pada \(\left\{\bs{x} \in [a, a + h]^n: a \le x_1 \le x_2 \le \cdots \le x_n \le a + h\right\}\).</p>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Hasil ini langsung mengikuti fakta bahwa \((X_1, X_2, \ldots, X_n)\) berdistribusi seragam pada \([a, a + h]^n\). Dari <a href="#jnt3" class="ref"></a>, fungsi densitas probabilitas bersama statistik terurut adalah \(g(x_1, x_2, \ldots, x_n) = n! / h^n\) untuk \((x_1, x_2, \ldots, x_n) \in [a, a + h]^n\) dengan \(a \le x_1 \le x_2 \le \cdots \le x_n \le a + h\).</p>
+	</details>
+</div>
+
+<h4 id="exp">Distribusi Eksponensial</h4>
+
+<p>Ingat bahwa <a href="https://www.randomservices.org/random/poisson/Exponential.html">distribusi eksponensial</a> dengan parameter laju \(\lambda \gt 0\) memiliki fungsi densitas probabilitas
+\[ f(x) = \lambda e^{-\lambda x}, \quad 0 \le x \lt \infty \]
+Distribusi eksponensial banyak digunakan untuk memodelkan waktu kegagalan dan waktu acak lainnya dalam kondisi ideal tertentu. Secara khusus, waktu antarkedatangan dalam <a href="https://www.randomservices.org/random/poisson/index.html">proses Poisson</a> berdistribusi eksponensial.</p>
+
+<div class="unit" id="exp1">
+	<p class="math">Misalkan \(\bs{X}\) adalah sampel acak berukuran \(n\) dari distribusi eksponensial dengan parameter laju \(\lambda\). Fungsi densitas probabilitas dari statistik terurut ke-\(k\), \(X_{(k)}\), adalah
+	\[ f_k(x) = \frac{n!}{(k - 1)! (n - k)!} \lambda (1 - e^{-\lambda x})^{k-1} e^{-\lambda(n - k + 1)x}, \quad 0 \le x \lt \infty \]
+	Secara khusus, minimum \(X_{(1)}\) juga memiliki distribusi eksponensial, tetapi dengan parameter laju \(n \lambda\).</p>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Fungsi densitas probabilitas dari \(X_{(k)}\) mengikuti <a href="#dst4" class="ref"></a> karena \(F(x) = 1 - e^{-\lambda x}\) untuk \(0 \le x \lt \infty\). Dengan menetapkan \(k = 1\), diperoleh \(f_1(x) = n \lambda e^{-n \lambda x}\) untuk \(0 \le x \lt \infty\).</p>
+	</details>
+</div>
+
+<div class="unit" id="exp2">
+	<p class="app">Dalam <a href="https://www.randomservices.org/random/apps/OrderStatistic.html" class="ancillary">eksperimen statistik terurut</a>, pilih distribusi eksponensial baku dan \(n = 5\). Ubah \(k\) dari 1 hingga 5 dan perhatikan bentuk fungsi densitas probabilitas \(X_{(k)}\). Untuk setiap nilai \(k\), jalankan simulasi 1.000 kali dan bandingkan fungsi densitas empiris dengan fungsi densitas probabilitas teoretis.</p>
+</div>
+
+<div class="unit" id="exp3">
+	<p class="math">Misalkan kembali \(\bs{X}\) adalah sampel acak berukuran \(n \ge 2\) dari distribusi eksponensial dengan parameter laju \(\lambda\). Rentang sampel \(R\) memiliki distribusi yang sama dengan maksimum sampel acak berukuran \(n - 1\) dari distribusi eksponensial. Fungsi densitas probabilitasnya adalah
+	\[ h(t) = (n - 1) \lambda (1 - e^{-\lambda t})^{n - 2} e^{-\lambda t}, \quad 0 \le t \lt \infty  \]
+	<details>
+		<summary>Rincian:</summary>
+		<p>Menurut <a href="#jnt2" class="ref"></a>, \((X_{(1)}, X_{(n)})\) memiliki fungsi densitas probabilitas bersama \(f_{1, n}(x, y) = n (n - 1) \lambda^2 (e^{-\lambda x} - e^{-\lambda y})^{n-2} e^{-\lambda x} e^{-\lambda y}\) untuk \(0 \le x \le y \lt \infty\). Karena itu, untuk \(0 \le t \lt \infty\),
+		\[ \P(R \le t) = \P(X_{(n)} - X_{(1)} \le t) = \int_0^\infty \int_x^{x + t} n (n - 1) \lambda^2 (e^{-\lambda x} - e^{-\lambda y})^{n-2} e^{-\lambda x} e^{-\lambda y} \, dy \, dx \]
+		Dengan menyubstitusikan \(u = e^{-\lambda y}\), \(du = -\lambda e^{-\lambda y} \, dy\), ke dalam integral bagian dalam lalu menghitungnya, diperoleh
+		\[ \P(R \le t) =  \int_0^\infty n \lambda e^{-n \lambda x} (1 - e^{-\lambda t})^{n-1} \, dx = (1 - e^{-\lambda t})^{n-1}\]
+		Menurunkannya terhadap \(t\) memberikan fungsi densitas probabilitas. Dengan membandingkannya dengan <a href="#exp1" class="ref"></a>, terlihat bahwa ini adalah fungsi densitas probabilitas dari maksimum suatu sampel berukuran \(n - 1\) dari distribusi eksponensial.</p>
+	</details>
+</div>
+
+<div class="unit" id="exp4">
+	<p class="math">Misalkan kembali \(\bs{X}\) adalah sampel acak berukuran \(n\) dari distribusi eksponensial dengan parameter laju \(\lambda\). Fungsi densitas probabilitas bersama statistik terurut \((X_{(1)}, X_{(2)}, \ldots, X_{(n)})\) adalah
+	\[ g(x_1, x_2, \ldots, x_n) = n! \lambda^n e^{-\lambda(x_1 + x_2 + \cdots + x_n)}, \quad 0 \le x_1 \le x_2 \le \cdots \le x_n \lt \infty \]</p>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Hasil ini mengikuti <a href="#jnt3" class="ref"></a> dan aljabar sederhana.</p>
+	</details>
+</div>
+
+<h4 id="dce">Dadu</h4>
+
+<div class="unit" id="dce1">
+	<p class="math">Empat dadu seimbang dilempar. Tentukan fungsi massa probabilitas setiap statistik terurut.</p>
+	<details>
+		<summary>Rincian:</summary>
+		<table>
+			<tr>
+				<th>\(x\)</th>
+				<td>1</td>
+				<td>2</td>
+				<td>3</td>
+				<td>4</td>
+				<td>5</td>
+				<td>6</td>
+			</tr>
+			<tr>
+				<th>\(f_1(x)\)</th>
+				<td>\(\frac{671}{1296}\)</td>
+				<td>\(\frac{369}{1296}\)</td>
+				<td>\(\frac{175}{1296}\)</td>
+				<td>\(\frac{65}{1296}\)</td>
+				<td>\(\frac{15}{1296}\)</td>
+				<td>\(\frac{1}{1296}\)</td>
+			</tr>
+			<tr>
+				<th>\(f_2(x)\)</th>
+				<td>\(\frac{171}{1296}\)</td>
+				<td>\(\frac{357}{1296}\)</td>
+				<td>\(\frac{363}{1296}\)</td>
+				<td>\(\frac{261}{1296}\)</td>
+				<td>\(\frac{123}{1296}\)</td>
+				<td>\(\frac{21}{1296}\)</td>
+			</tr>
+			<tr>
+				<th>\(f_3(x)\)</th>
+				<td>\(\frac{21}{1296}\)</td>
+				<td>\(\frac{123}{1296}\)</td>
+				<td>\(\frac{261}{1296}\)</td>
+				<td>\(\frac{363}{1296}\)</td>
+				<td>\(\frac{357}{1296}\)</td>
+				<td>\(\frac{171}{1296}\)</td>
+			</tr>
+			<tr>
+				<th>\(f_4(x)\)</th>
+				<td>\(\frac{1}{1296}\)</td>
+				<td>\(\frac{15}{1296}\)</td>
+				<td>\(\frac{65}{1296}\)</td>
+				<td>\(\frac{175}{1296}\)</td>
+				<td>\(\frac{369}{1296}\)</td>
+				<td>\(\frac{671}{1296}\)</td>
+			</tr>
+		</table>
+	</details>
+</div>
+
+<div class="unit" id="dce2">
+	<p class="app">Dalam <a href="https://www.randomservices.org/random/apps/Dice.html" class="ancillary">eksperimen dadu</a>, pilih statistik terurut dan distribusi dadu yang diberikan pada bagian (a)&ndash;(d). Naikkan banyaknya dadu dari 1 hingga 20 sambil memperhatikan bentuk fungsi massa probabilitas pada setiap tahap. Kemudian, dengan \(n = 4\), jalankan simulasi 1.000 kali dan bandingkan fungsi frekuensi relatif dengan fungsi massa probabilitas.</p>
+	<ol class="sub">
+		<li>Skor maksimum dengan dadu seimbang.</li>
+		<li>Skor minimum dengan dadu seimbang.</li>
+		<li>Skor maksimum dengan dadu pipih satu–enam (ace–six flat).</li>
+		<li>Skor minimum dengan dadu pipih satu–enam (ace–six flat).</li>
+	</ol>
+</div>
+
+<div class="unit" id="dce3">
+	<p class="math">Empat dadu seimbang dilempar. Tentukan fungsi massa probabilitas bersama keempat statistik terurut.</p>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Fungsi massa probabilitas bersama \(g\) didefinisikan pada \(\{(x_1, x_2, x_3, x_4) \in \{1, 2, 3, 4, 5, 6\}^4: x_1 \le x_2 \le x_3 \le x_4\}\).</p>
+		<ol class="sub">
+			<li>\(g(x_1, x_2, x_3, x_4) = \frac{1}{1296}\) jika semua koordinat sama (terdapat 6 vektor demikian).</li>
+			<li>\(g(x_1, x_2, x_3, x_4) = \frac{4}{1296}\) jika terdapat dua koordinat berbeda, satu nilai muncul tiga kali dan nilai lainnya sekali (terdapat 30 vektor demikian).</li>
+			<li>\(g(x_1, x_2, x_3, x_4) = \frac{6}{1296}\) jika terdapat dua koordinat berbeda dalam \((x_1, x_2, x_3, x_4)\), dan masing-masing nilai muncul dua kali (terdapat 15 vektor demikian).</li>
+			<li>\(g(x_1, x_2, x_3, x_4) = \frac{12}{1296}\) jika terdapat tiga koordinat berbeda, satu nilai muncul dua kali dan nilai lainnya masing-masing sekali (terdapat 60 vektor demikian).</li>
+			<li>\(g(x_1, x_2, x_3, x_4) = \frac{24}{1296}\) jika semua koordinat berbeda (terdapat 15 vektor demikian).</li>
+		</ol>
+	</details>
+</div>
+
+<div class="unit" id="dce4">
+	<p class="math">Empat dadu seimbang dilempar. Tentukan fungsi massa probabilitas rentang sampel.</p>
+	<details>
+		<summary>Rincian:</summary>
+		<p>\(R\) memiliki fungsi massa probabilitas \(h\) yang diberikan oleh \(h(0) = \frac{6}{1296}, \; h(1) = \frac{70}{1296}, \; h(2) = \frac{200}{1296}, \; h(3) = \frac{330}{1296}, \; h(4) = \frac{388}{1296}, \; h(5) = \frac{302}{1296}\).</p>
+	</details>
+</div>
+
+<h4 id="pps">Simulasi Plot Probabilitas</h4>
+
+<div class="unit" id="pps1">
+	<p class="app">Dalam <a href="https://www.randomservices.org/random/apps/ProbabilityPlot.html" class="ancillary">eksperimen plot probabilitas</a>, atur distribusi pengambilan sampel menjadi distribusi normal dengan rata-rata 5 dan simpangan baku 2. Atur ukuran sampel menjadi \(n = 20\). Untuk setiap distribusi uji berikut, jalankan eksperimen 50 kali dan perhatikan bentuk geometris plot probabilitas:</p>
+	<ol class="sub">
+		<li>Normal baku</li>
+		<li>Seragam pada interval \([0, 1]\)</li>
+		<li>Eksponensial dengan parameter 1</li>
+	</ol>
+</div>
+
+<div class="unit" id="pps2">
+	<p class="app">Dalam <a href="https://www.randomservices.org/random/apps/ProbabilityPlot.html" class="ancillary">eksperimen plot probabilitas</a>, atur distribusi pengambilan sampel menjadi distribusi seragam pada \([4, 10]\). Atur ukuran sampel menjadi \(n = 20\). Untuk setiap distribusi uji berikut, jalankan eksperimen 50 kali dan perhatikan bentuk geometris plot probabilitas:</p>
+	<ol class="sub">
+		<li>Normal baku</li>
+		<li>Seragam pada interval \([0, 1]\)</li>
+		<li>Eksponensial dengan parameter 1</li>
+	</ol>
+</div>
+
+<div class="unit" id="pps3">
+	<p class="app">Dalam <a href="https://www.randomservices.org/random/apps/ProbabilityPlot.html" class="ancillary">eksperimen plot probabilitas</a>, atur distribusi pengambilan sampel menjadi distribusi eksponensial dengan parameter 3. Atur ukuran sampel menjadi \(n = 20\). Untuk setiap distribusi uji berikut, jalankan eksperimen 50 kali dan perhatikan bentuk geometris plot probabilitas:</p>
+	<ol class="sub">
+		<li>Normal baku</li>
+		<li>Seragam pada interval \([0, 1]\)</li>
+		<li>Eksponensial dengan parameter 1</li>
+	</ol>
+</div>
+
+<h4 id="dat">Latihan Analisis Data</h4>
+
+<p>Gunakan perangkat lunak statistika untuk soal-soal dalam subbagian ini.</p>
+
+<div class="unit" id="dat1">
+	<p class="stat">Pertimbangkan variabel panjang mahkota bunga dan spesies dalam <a href="https://www.randomservices.org/random/data/Iris.html" class="ancillary">data iris Fisher</a>.</p>
+	<ol class="sub">
+		<li>Klasifikasikan variabel-variabel tersebut menurut jenis dan tingkat pengukurannya.</li>
+		<li>Hitung ringkasan lima angka dan gambarkan diagram kotak untuk panjang mahkota bunga.</li>
+		<li>Hitung ringkasan lima angka dan gambarkan diagram kotak untuk panjang mahkota bunga menurut spesies.</li>
+		<li>Gambarkan plot probabilitas normal untuk panjang mahkota bunga.</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<ol class="sub">
+			<li>panjang mahkota bunga: kontinu, rasio; spesies: diskret, nominal</li>
+			<li>\((10, 16, 44, 51, 69)\)</li>
+			<li>spesies 0: \((10, 14, 15, 15.75, 19)\); spesies 1: \((45, 51, 55.5, 58.75, 69)\); spesies 2: \((30, 40, 44, 47, 56)\)</li>
+		</ol>
+	</details>
+</div>
+
+<div class="unit" id="dat2">
+	<p class="stat">Pertimbangkan variabel erosi dalam <a href="https://www.randomservices.org/random/data/Challenger.html" class="ancillary">himpunan data Challenger</a>.</p>
+	<ol class="sub">
+		<li>Klasifikasikan variabel tersebut menurut jenis dan tingkat pengukurannya.</li>
+		<li>Hitung ringkasan lima angka dan gambarkan diagram kotaknya.</li>
+		<li>Tentukan semua pencilan.</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<ol class="sub">
+			<li>kontinu, rasio</li>
+			<li>\((0, 0, 0, 0, 53)\)</li>
+			<li>Semua nilai positif, yaitu 28, 40, 48, dan 53, merupakan pencilan.</li>
+		</ol>
+	</details>
+</div>
+
+<div class="unit" id="dat3">
+	<p class="math">Diagram batang-daun untuk <a href="https://www.randomservices.org/random/data/Michelson.html" class="ancillary">data kecepatan cahaya Michelson</a> diberikan di bawah ini. Pada contoh ini, digit terakhir, yang selalu 0, dihilangkan agar lebih ringkas. Perhatikan pula bahwa setiap batang memiliki dua baris daun: baris pertama untuk daun 0 sampai 4, yakni sebenarnya 00 sampai 40, dan baris kedua untuk daun 5 sampai 9, yakni sebenarnya 50 sampai 90. Dengan demikian, nilai minimumnya adalah 620, sedangkan bilangan pada baris kedua untuk batang 7 adalah 750, 760, 760, dan seterusnya. Catatan edisi: tabel sumber menghilangkan 28 daun pada paruh atas batang 8, yaitu 5, 5, 5, 5, 5, 5, 5, 5, 6, 6, 6, 7, 7, 7, 7, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 9, 9, 9. Untuk memeriksa data lengkap dan melakukan perhitungan, gunakan himpunan data Michelson resmi yang ditautkan pada awal paragraf ini.</p>
+	<table class="stm">
+		<tr>
+			<th>6</th>
+			<td>2</td>
+		</tr>
+		<tr>
+			<th>6</th>
+			<td>5</td>
+		</tr>
+		<tr>
+			<th>7</th>
+			<td>2</td>
+			<td>2</td>
+			<td>2</td>
+			<td>4</td>
+			<td>4</td>
+			<td>4</td>
+		</tr>
+		<tr>
+			<th>7</th>
+			<td>5</td>
+			<td>6</td>
+			<td>6</td>
+			<td>6</td>
+			<td>6</td>
+			<td>6</td>
+			<td>7</td>
+			<td>8</td>
+			<td>8</td>
+			<td>9</td>
+			<td>9</td>
+			<td>9</td>
+		</tr>
+		<tr>
+			<th>8</th>
+			<td>0</td>
+			<td>0</td>
+			<td>0</td>
+			<td>0</td>
+			<td>0</td>
+			<td>1</td>
+			<td>1</td>
+			<td>1</td>
+			<td>1</td>
+			<td>1</td>
+			<td>1</td>
+			<td>1</td>
+			<td>1</td>
+			<td>1</td>
+			<td>1</td>
+			<td>2</td>
+			<td>2</td>
+			<td>3</td>
+			<td>3</td>
+			<td>4</td>
+			<td>4</td>
+			<td>4</td>
+			<td>4</td>
+			<td>4</td>
+			<td>4</td>
+			<td>4</td>
+			<td>4</td>
+		</tr>
+		<tr>
+			<th>9</th>
+			<td>0</td>
+			<td>0</td>
+			<td>1</td>
+			<td>1</td>
+			<td>2</td>
+			<td>3</td>
+			<td>3</td>
+			<td>4</td>
+			<td>4</td>
+			<td>4</td>
+		</tr>
+		<tr>
+			<th>9 </th>
+			<td>5</td>
+			<td>5</td>
+			<td>5</td>
+			<td>6</td>
+			<td>6</td>
+			<td>6</td>
+			<td>6</td>
+			<td>7</td>
+			<td>8</td>
+			<td>8</td>
+			<td>8</td>
+		</tr>
+		<tr>
+			<th>10</th>
+			<td>0</td>
+			<td>0</td>
+			<td>0</td>
+		</tr>
+		<tr>
+			<th>10</th>
+			<td>7</td>
+		</tr>
+	</table>
+	<ol class="sub">
+		<li>Klasifikasikan variabel tersebut menurut jenis dan tingkat pengukurannya.</li>
+		<li>Hitung ringkasan lima angka dan gambarkan diagram kotaknya.</li>
+		<li>Hitung ringkasan lima angka untuk kecepatan dalam \(\text{km}/\text{s}\). Transformasinya adalah \(y = x + 299\,000\).</li>
+		<li>Gambarkan plot probabilitas normalnya.</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<ol class="sub">
+			<li>kontinu, interval</li>
+			<li>\((620, 807.5, 850, 892.5, 1070)\)</li>
+			<li>\((299\,620, 299\,807.5, 299\,850, 299\,892.5, 300\,070)\)</li>
+		</ol>
+	</details>
+</div>
+
+<div class="unit" id="dat4">
+	<p class="stat">Pertimbangkan <a href="https://www.randomservices.org/random/data/Short.html" class="ancillary">data paralaks Matahari Short</a>.</p>
+	<ol class="sub">
+		<li>Klasifikasikan variabel tersebut menurut jenis dan tingkat pengukurannya.</li>
+		<li>Hitung ringkasan lima angka dan gambarkan diagram kotaknya.</li>
+		<li>Hitung ringkasan lima angka dan gambarkan diagram kotaknya jika variabel tersebut dikonversi ke derajat. Satu derajat sama dengan 3.600 detik busur.</li>
+		<li>Hitung ringkasan lima angka dan gambarkan diagram kotaknya jika variabel tersebut dikonversi ke radian. Satu derajat sama dengan \(\pi/180\) radian.</li>
+		<li>Gambarkan plot probabilitas normalnya.</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<ol class="sub">
+			<li>kontinu, rasio</li>
+			<li>\((5.76, 8.34, 8.50, 9.02, 10.57)\)</li>
+			<li>\((0.00160, 0.00232, 0.00236, 0.00251, 0.00294)\)</li>
+			<li>\((0.0000278, 0.0000404, 0.0000412, 0.0000437, 0.0000512)\)</li>
+		</ol>
+	</details>
+</div>
+
+<div class="unit" id="dat5">
+	<p class="stat">Pertimbangkan <a href="https://www.randomservices.org/random/data/Cavendish.html" class="ancillary">data massa jenis Bumi Cavendish</a>.</p>
+	<ol class="sub">
+		<li>Klasifikasikan variabel tersebut menurut jenis dan tingkat pengukurannya.</li>
+		<li>Hitung ringkasan lima angka dan gambarkan diagram kotaknya.</li>
+		<li>Gambarkan plot probabilitas normalnya.</li>
+	</ol>
+	<details>
+	<summary>Rincian:</summary>
+		<ol class="sub">
+			<li>kontinu, rasio</li>
+			<li>\((4.88, 5.30, 5.46, 5.61, 5.85)\)</li>
+		</ol>
+	</details>
+</div>
+
+<div class="unit" id="dat6">
+	<p class="stat">Pertimbangkan <a href="https://www.randomservices.org/random/data/MM.html" class="ancillary">data M&amp;M</a>.</p>
+	<ol class="sub">
+		<li>Klasifikasikan variabel-variabel tersebut menurut jenis dan tingkat pengukurannya.</li>
+		<li>Hitung ringkasan lima angka dan gambarkan diagram kotak untuk banyaknya permen pada setiap warna.</li>
+		<li>Susun diagram batang-daun untuk jumlah seluruh permen.</li>
+		<li>Hitung ringkasan lima angka dan gambarkan diagram kotak untuk jumlah seluruh permen.</li>
+		<li>Hitung ringkasan lima angka dan gambarkan diagram kotak untuk berat bersih.</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<ol class="sub">
+			<li>banyaknya permen pada setiap warna: diskret, rasio; berat bersih: kontinu, rasio</li>
+			<li>merah: \((3, 6.5, 9, 12, 20)\); hijau: \((2, 6, 7, 9, 17)\); biru: \((1, 4, 6.5, 9.75, 19)\); jingga: \((0, 4, 6, 9, 13)\); kuning: \((3, 8.25, 13.5, 18, 26)\); cokelat: \((4, 8, 12.5, 17.75, 20)\)</li>
+			<li>
+				<table class="stm">
+					<tr>
+						<th>5</th>
+						<td>0</td>
+					</tr>
+					<tr>
+						<th>5</th>
+						<td>3</td>
+					</tr>
+					<tr>
+						<th>5</th>
+						<td>4</td>
+						<td>5</td>
+						<td>5</td>
+						<td>5</td>
+						<td>5</td>
+					</tr>
+					<tr>
+						<th>5</th>
+						<td>6</td>
+						<td>6</td>
+						<td>6</td>
+						<td>6</td>
+						<td>7</td>
+						<td>7</td>
+						<td>7</td>
+					</tr>
+					<tr>
+						<th>5</th>
+						<td>8</td>
+						<td>8</td>
+						<td>8</td>
+						<td>8</td>
+						<td>8</td>
+						<td>8</td>
+						<td>8</td>
+						<td>8</td>
+						<td>8</td>
+						<td>9</td>
+						<td>9</td>
+						<td>9</td>
+					</tr>
+					<tr>
+						<th>6</th>
+						<td>0</td>
+						<td>0</td>
+						<td>1</td>
+						<td>1</td>
+					</tr>
+				</table>
+			</li>
+			<li>\((50, 56, 58, 58, 61)\)</li>
+			<li>\((46.22, 48.2925, 49.07, 50.175, 52.06)\)</li>
+		</ol>
+	</details>
+</div>
+
+<div class="unit" id="dat7">
+	<p class="stat">Pertimbangkan variabel berat tubuh, spesies, dan jenis kelamin dalam <a href="https://www.randomservices.org/random/data/Cicada.html" class="ancillary">data Cicada</a>.</p>
+	<ol class="sub">
+		<li>Klasifikasikan variabel-variabel tersebut menurut jenis dan tingkat pengukurannya.</li>
+		<li>Hitung ringkasan lima angka dan gambarkan diagram kotak untuk berat tubuh.</li>
+		<li>Hitung ringkasan lima angka dan gambarkan diagram kotak untuk berat tubuh menurut spesies.</li>
+		<li>Hitung ringkasan lima angka dan gambarkan diagram kotak untuk berat tubuh menurut jenis kelamin.</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<ol class="sub">
+			<li>berat tubuh: kontinu, rasio; spesies: diskret, nominal; jenis kelamin: diskret, nominal</li>
+			<li>\((0.08, 0.1375, 0.17, 0.22, 0.39)\)</li>
+			<li>spesies 0: \((0.08, 0.13, 0.16, 0.21, 0.27)\); spesies 1: \((0.08, 0.1425, 0.18, 0.22, 0.31)\); spesies 2: \((0.12, 0.1325, 0.215, 0.2825, 0.39)\)</li>
+			<li>betina: \((0.08, 0.17, 0.21, 0.245, 0.31)\); jantan: \((0.08, 0.12, 0.14, 0.16, 0.39)\)</li>
+		</ol>
+	</details>
+</div>
+
+<div class="unit" id="dat8">
+	<p class="stat">Pertimbangkan <a href="https://www.randomservices.org/random/data/Pearson.html" class="ancillary">data tinggi badan Pearson</a>.</p>
+	<ol class="sub">
+		<li>Klasifikasikan variabel-variabel tersebut menurut jenis dan tingkat pengukurannya.</li>
+		<li>Hitung ringkasan lima angka dan sketsakan diagram kotak untuk tinggi badan ayah.</li>
+		<li>Hitung ringkasan lima angka dan sketsakan diagram kotak untuk tinggi badan anak laki-laki.</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<ol class="sub">
+			<li>kontinu, rasio</li>
+			<li>\((59.0, 65.8, 67.8, 69.6, 75.4)\)</li>
+			<li>\((58.5, 66.9, 68.6, 70.5, 78.4)\)</li>
+		</ol>
+	</details>
+</div>
+
+<footer>
+	<ol class="map">
+		<li class="parent"><a href="https://www.randomservices.org/random/index.html">Random</a></li>
+		<li class="parent"><a href="index.html">5. Sampel Acak</a></li>
+		<li class="child"><a href="Introduction.html" title="Pendahuluan">1</a></li>
+		<li class="child"><a href="Mean.html" title="Rata-Rata Sampel">2</a></li>
+		<li class="child"><a href="LLN.html" title="Hukum Bilangan Besar">3</a></li>
+		<li class="child"><a href="CLT.html" title="Teorema Limit Pusat">4</a></li>
+		<li class="child"><a href="Variance.html" title="Varians Sampel">5</a></li>
+		<li class="current">6</li>
+		<li class="child"><a href="https://www.randomservices.org/random/sample/Covariance.html" title="Korelasi dan Regresi Sampel">7</a></li>
+		<li class="child"><a href="https://www.randomservices.org/random/sample/Normal.html" title="Sifat Khusus Sampel Normal">8</a></li>
+		<li class="details"><button type="button" title="Perluas Rincian" onclick="expandDetails(true);"><img src="../icons/Plus.svg" alt="Perluas"></button></li>
+		<li class="details"><button type="button" title="Ciutkan Rincian" onclick="expandDetails(false);"><img src="../icons/Minus.svg" alt="Ciutkan"></button></li>
+	</ol>
+	<ul class="map">
+		<li class="sister"><a href="https://www.randomservices.org/random/apps/index.html" class="ancillary">Aplikasi</a></li>
+		<li class="sister"><a href="https://www.randomservices.org/random/data/index.html" class="ancillary">Himpunan Data</a></li>
+		<li class="child"><a href="https://www.randomservices.org/random/biographies/index.html" class="ancillary">Biografi</a></li>
+	</ul>
+	<section class="edition-notice" data-o006-edition-notice="v1">
+		<p><strong>Pemberitahuan edisi.</strong> Terjemahan Bahasa Indonesia ini mengadaptasi <a href="https://www.randomservices.org/random/">Random: Probabilitas, Statistika Matematis, dan Proses Stokastik</a> karya Kyle Siegrist. Perubahan pada halaman ini mencakup penerjemahan, penambahan ID stabil, pengalihan tautan inti yang belum diterjemahkan ke sumber resmi, pengubahan tautan pelengkap menjadi tautan HTTPS resmi, serta perbaikan terverifikasi pada nomor halaman, definisi nilai tengah rentang, syarat titik ujung kuantil, notasi dan tanda kurung, daerah dukung distribusi bersama, hasil rentang dadu, satuan, rujukan dan ringkasan data, serta kesalahan ketik. Tabel batang-daun Michelson dipertahankan dengan catatan eksplisit mengenai 28 daun yang hilang dari sumber.</p>
+		<p>Situs asal menyatakan <a href="https://creativecommons.org/licenses/by/2.0/">CC BY 2.0</a>, sedangkan halaman <a href="https://www.randomservices.org/random/Credits.html">Kredit</a> menautkan <a href="https://creativecommons.org/licenses/by/1.0/">CC BY 1.0</a>; perbedaan ini dipertahankan. Edisi independen ini tidak didukung maupun disahkan oleh Kyle Siegrist atau Random Services. Tautan ke aplikasi, data, dan biografi pihak ketiga tidak menyatakan hak untuk mendistribusikan ulang materi tersebut.</p>
+	</section>
+</footer>
+
+<script>getReferences();</script>
+
+</body>
+</html>

@@ -32,6 +32,7 @@ PAIRS = (
     PurePosixPath("random/sample/LLN.html"),
     PurePosixPath("random/sample/CLT.html"),
     PurePosixPath("random/sample/Variance.html"),
+    PurePosixPath("random/sample/OrderStatistics.html"),
 )
 
 # This is an exact page/original-href allowlist. There is deliberately no URL
@@ -56,7 +57,6 @@ HREF_DELTA_ALLOWLIST: dict[PurePosixPath, dict[str, str]] = {
         "../markov/index.html": "https://www.randomservices.org/random/markov/index.html",
         "../martingales/index.html": "https://www.randomservices.org/random/martingales/index.html",
         "../brown/index.html": "https://www.randomservices.org/random/brown/index.html",
-        "OrderStatistics.html": "https://www.randomservices.org/random/sample/OrderStatistics.html",
         "Covariance.html": "https://www.randomservices.org/random/sample/Covariance.html",
         "Normal.html": "https://www.randomservices.org/random/sample/Normal.html",
         "JavaScript:openAncillary('../apps/Histogram.html')": "https://www.randomservices.org/random/apps/Histogram.html",
@@ -80,7 +80,6 @@ HREF_DELTA_ALLOWLIST: dict[PurePosixPath, dict[str, str]] = {
     },
     PurePosixPath("random/sample/Introduction.html"): {
         "../index.html": "https://www.randomservices.org/random/index.html",
-        "OrderStatistics.html": "https://www.randomservices.org/random/sample/OrderStatistics.html",
         "Covariance.html": "https://www.randomservices.org/random/sample/Covariance.html",
         "Normal.html": "https://www.randomservices.org/random/sample/Normal.html",
         "JavaScript:openAncillary('../data/index.html')": "https://www.randomservices.org/random/data/index.html",
@@ -120,7 +119,6 @@ HREF_DELTA_ALLOWLIST: dict[PurePosixPath, dict[str, str]] = {
     },
     PurePosixPath("random/sample/Mean.html"): {
         "../index.html": "https://www.randomservices.org/random/index.html",
-        "OrderStatistics.html": "https://www.randomservices.org/random/sample/OrderStatistics.html",
         "Covariance.html": "https://www.randomservices.org/random/sample/Covariance.html",
         "Normal.html": "https://www.randomservices.org/random/sample/Normal.html",
         "../prob/Probability.html": "https://www.randomservices.org/random/prob/Probability.html",
@@ -144,7 +142,6 @@ HREF_DELTA_ALLOWLIST: dict[PurePosixPath, dict[str, str]] = {
     },
     PurePosixPath("random/sample/LLN.html"): {
         "../index.html": "https://www.randomservices.org/random/index.html",
-        "OrderStatistics.html": "https://www.randomservices.org/random/sample/OrderStatistics.html",
         "Covariance.html": "https://www.randomservices.org/random/sample/Covariance.html",
         "Normal.html": "https://www.randomservices.org/random/sample/Normal.html",
         "../prob/Experiments.html": "https://www.randomservices.org/random/prob/Experiments.html",
@@ -180,7 +177,6 @@ HREF_DELTA_ALLOWLIST: dict[PurePosixPath, dict[str, str]] = {
     },
     PurePosixPath("random/sample/CLT.html"): {
         "../index.html": "https://www.randomservices.org/random/index.html",
-        "OrderStatistics.html": "https://www.randomservices.org/random/sample/OrderStatistics.html",
         "Covariance.html": "https://www.randomservices.org/random/sample/Covariance.html",
         "Normal.html": "https://www.randomservices.org/random/sample/Normal.html",
         "../prob/Independence.html": "https://www.randomservices.org/random/prob/Independence.html",
@@ -235,7 +231,6 @@ HREF_DELTA_ALLOWLIST: dict[PurePosixPath, dict[str, str]] = {
     },
     PurePosixPath("random/sample/Variance.html"): {
         "../index.html": "https://www.randomservices.org/random/index.html",
-        "OrderStatistics.html": "https://www.randomservices.org/random/sample/OrderStatistics.html",
         "Covariance.html": "https://www.randomservices.org/random/sample/Covariance.html",
         "Normal.html": "https://www.randomservices.org/random/sample/Normal.html",
         "../dist/Discrete.html#uni": "https://www.randomservices.org/random/dist/Discrete.html#uni",
@@ -250,6 +245,46 @@ HREF_DELTA_ALLOWLIST: dict[PurePosixPath, dict[str, str]] = {
         "JavaScript:openAncillary('../apps/Gamma.html')": "https://www.randomservices.org/random/apps/Gamma.html",
         "../special/Beta.html": "https://www.randomservices.org/random/special/Beta.html",
         "../poisson/Exponential.html": "https://www.randomservices.org/random/poisson/Exponential.html",
+        "JavaScript:openAncillary('../data/Fisher.html')": "https://www.randomservices.org/random/data/Iris.html",
+        "JavaScript:openAncillary('../data/Challenger.html')": "https://www.randomservices.org/random/data/Challenger.html",
+        "JavaScript:openAncillary('../data/Michelson.html')": "https://www.randomservices.org/random/data/Michelson.html",
+        "JavaScript:openAncillary('../data/Short.html')": "https://www.randomservices.org/random/data/Short.html",
+        "JavaScript:openAncillary('../data/Cavendish.html')": "https://www.randomservices.org/random/data/Cavendish.html",
+        "JavaScript:openAncillary('../data/MM.html')": "https://www.randomservices.org/random/data/MM.html",
+        "JavaScript:openAncillary('../data/Cicada.html')": "https://www.randomservices.org/random/data/Cicada.html",
+        "JavaScript:openAncillary('../data/Pearson.html')": "https://www.randomservices.org/random/data/Pearson.html",
+        "JavaScript:openAncillary('../apps/index.html')": "https://www.randomservices.org/random/apps/index.html",
+        "JavaScript:openAncillary('../data/index.html')": "https://www.randomservices.org/random/data/index.html",
+        "JavaScript:openAncillary('../biographies/index.html')": "https://www.randomservices.org/random/biographies/index.html",
+    },
+    PurePosixPath("random/sample/OrderStatistics.html"): {
+        "../index.html": "https://www.randomservices.org/random/index.html",
+        "Covariance.html": "https://www.randomservices.org/random/sample/Covariance.html",
+        "Normal.html": "https://www.randomservices.org/random/sample/Normal.html",
+        "../dist/CDF.html": "https://www.randomservices.org/random/dist/CDF.html",
+        "../dist/Discrete.html#uni": "https://www.randomservices.org/random/dist/Discrete.html#uni",
+        "../dist/CDF.html#qnt": "https://www.randomservices.org/random/dist/CDF.html#qnt",
+        "../expect/Properties2.html#jen": "https://www.randomservices.org/random/expect/Properties2.html#jen",
+        "../prob/Experiments.html": "https://www.randomservices.org/random/prob/Experiments.html",
+        "../prob/Probability.html": "https://www.randomservices.org/random/prob/Probability.html",
+        "../prob/Independence.html": "https://www.randomservices.org/random/prob/Independence.html",
+        "../bernoulli/index.html": "https://www.randomservices.org/random/bernoulli/index.html",
+        "../bernoulli/Binomial.html": "https://www.randomservices.org/random/bernoulli/Binomial.html",
+        "../dist/Continuous.html": "https://www.randomservices.org/random/dist/Continuous.html",
+        "../dist/Transformations.html#cov": "https://www.randomservices.org/random/dist/Transformations.html#cov",
+        "../special/LocationScale.html": "https://www.randomservices.org/random/special/LocationScale.html",
+        "../special/Normal.html": "https://www.randomservices.org/random/special/Normal.html",
+        "../poisson/Exponential.html": "https://www.randomservices.org/random/poisson/Exponential.html",
+        "../dist/Continuous.html#uni": "https://www.randomservices.org/random/dist/Continuous.html#uni",
+        "../hypothesis/ChiSquare.html#fit": "https://www.randomservices.org/random/hypothesis/ChiSquare.html#fit",
+        "../hypothesis/index.html": "https://www.randomservices.org/random/hypothesis/index.html",
+        "JavaScript:openAncillary('../apps/Histogram.html')": "https://www.randomservices.org/random/apps/Histogram.html",
+        "JavaScript:openAncillary('../apps/ErrorFunction.html')": "https://www.randomservices.org/random/apps/ErrorFunction.html",
+        "../special/Beta.html": "https://www.randomservices.org/random/special/Beta.html",
+        "JavaScript:openAncillary('../apps/OrderStatistic.html')": "https://www.randomservices.org/random/apps/OrderStatistic.html",
+        "../poisson/index.html": "https://www.randomservices.org/random/poisson/index.html",
+        "JavaScript:openAncillary('../apps/Dice.html')": "https://www.randomservices.org/random/apps/Dice.html",
+        "JavaScript:openAncillary('../apps/ProbabilityPlot.html')": "https://www.randomservices.org/random/apps/ProbabilityPlot.html",
         "JavaScript:openAncillary('../data/Fisher.html')": "https://www.randomservices.org/random/data/Iris.html",
         "JavaScript:openAncillary('../data/Challenger.html')": "https://www.randomservices.org/random/data/Challenger.html",
         "JavaScript:openAncillary('../data/Michelson.html')": "https://www.randomservices.org/random/data/Michelson.html",
@@ -302,6 +337,11 @@ CORRECTION_DELTAS = {
         "JavaScript:openAncillary('../data/Fisher.html')",
         "https://www.randomservices.org/random/data/Iris.html",
     ),
+    (
+        PurePosixPath("random/sample/OrderStatistics.html"),
+        "JavaScript:openAncillary('../data/Fisher.html')",
+        "https://www.randomservices.org/random/data/Iris.html",
+    ),
 }
 
 NOTICE_MARKUP_SHA256 = {
@@ -311,6 +351,7 @@ NOTICE_MARKUP_SHA256 = {
     PurePosixPath("random/sample/LLN.html"): "08fb4fa43d51a1d0882f780de159199be12bfbb4e47ced1c478dec73113d1722",
     PurePosixPath("random/sample/CLT.html"): "9c1477ecc143e8a9bf20f6e0b6239b07d2dad564330df271690796289fa94ac0",
     PurePosixPath("random/sample/Variance.html"): "d1884c02cc756c0d44493d883eddf398dde3ad6f334691ccb3e33c5741b4504a",
+    PurePosixPath("random/sample/OrderStatistics.html"): "3951beb5dc62b6796a5fda4afe5472c0b25a516294fb7e3dcc4a40764d0d726e",
 }
 NOTICE_LINKS = (
     "https://www.randomservices.org/random/",
@@ -515,7 +556,7 @@ def validate_allowlist() -> None:
         if (rel, original, target) in CORRECTION_DELTAS
     }
     if actual_corrections != CORRECTION_DELTAS:
-        fail("the four controlled filename/case corrections are not exactly allowlisted")
+        fail("the controlled filename/case corrections are not exactly allowlisted")
     for change in build_pipeline.TRANSPORT_HARDENING:
         rel = PurePosixPath(change["page"])
         if HREF_DELTA_ALLOWLIST.get(rel, {}).get(change["original_href"]) != change["target_href"]:
@@ -916,6 +957,7 @@ def check_mathjax_runtime() -> dict[str, Any]:
         "random/sample/LLN.html",
         "random/sample/CLT.html",
         "random/sample/Variance.html",
+        "random/sample/OrderStatistics.html",
     ]
     if script_pages != expected_script_pages:
         fail(f"MathJax bundle reference pages changed: {script_pages}")
@@ -941,19 +983,23 @@ def check_readable_reflow() -> dict[str, Any]:
         fail("reader Screen.css is not the exact authority bytes plus readable-layout appendix")
     css = build_pipeline.READABLE_REFLOW_CSS.decode("utf-8")
     required = (
-        "O006 id-ID readable layout v1",
+        "O006 id-ID readable layout v3",
         "min-width: 801px",
         "max-width: 72rem",
         "margin: 1rem auto",
         "max-width: 800px",
         "margin: 0.75rem",
+        "table {",
+        'mjx-container[display="true"]',
+        'mjx-assistive-mml[display="block"]',
+        "clip-path: inset(50%)",
         "overflow-x: auto",
     )
     missing = [token for token in required if token not in css]
     if missing:
         fail(f"readable-layout invariant missing from CSS appendix: {missing}")
     return {
-        "version": "o006-id-readable-layout-v1",
+        "version": "o006-id-readable-layout-v3",
         "reader_relative_path": rel.as_posix(),
         "authority_bytes": len(authority_data),
         "authority_sha256": sha256_bytes(authority_data),
@@ -1091,6 +1137,18 @@ def run(*, check_only: bool = False) -> dict[str, Any]:
         or variance["ids"] != 64
     ):
         fail(f"Variance census changed: {variance}")
+    order_statistics = results["random/sample/OrderStatistics.html"]
+    if (
+        order_statistics["elements"] != 846
+        or order_statistics["hierarchy_sha256"]
+        != "defd30f9442dfee7bcfde3f71e15567a96bce8c91132b75240cb23f2c2adc76c"
+        or order_statistics["raw_script_style_blocks"] != 4
+        or order_statistics["units"] != 51
+        or order_statistics["details"] != 34
+        or order_statistics["math_spans"] != 569
+        or order_statistics["ids"] != 73
+    ):
+        fail(f"OrderStatistics census changed: {order_statistics}")
     reference_counts = check_reader_references()
     mathjax_runtime = check_mathjax_runtime()
     readable_reflow = check_readable_reflow()
