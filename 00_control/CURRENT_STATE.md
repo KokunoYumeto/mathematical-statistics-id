@@ -363,8 +363,12 @@ identities. Fresh live desktop/mobile inspection rendered all 432 MathJax
 containers, found centered page-filling geometry and zero page-level overflow,
 and exercised all 15 disclosure controls in both directions with an empty
 warning/error console. Exact evidence is in
-`CHECKPOINT_2026-08-22_ELEVEN_PAGE.md`. The exact narrow content commit and
-the single bounded GitHub attempt remain to be recorded.
+`CHECKPOINT_2026-08-22_ELEVEN_PAGE.md`. The exact narrow content commit is
+`d3da33e76d1f44ce77681e2588204296e3415b07` (tree
+`e8de31f98d918f8bf394bebd3527751da6cf0f46`). The single bounded push at
+2026-08-22T17:02:32.3706667+02:00 returned GitHub's explicit
+account-suspended HTTP 403 response; no credential was read or retried. The
+commit remains preserved locally.
 
 ## Rights boundary
 

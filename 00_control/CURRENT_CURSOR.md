@@ -34,11 +34,14 @@
   380-element hierarchy and 432 TeX spans, binds 2,931 translated backend
   entities, passes two deterministic backend/build/QA replays, and passes new
   live desktop/mobile centered reflow checks with all 432 MathJax containers,
-  no page-level overflow, and functional 15/15 disclosure controls. Exact
-  commit and the single bounded GitHub boundary attempt remain to be recorded.
+  no page-level overflow, and functional 15/15 disclosure controls. The exact
+  content commit is `d3da33e76d1f44ce77681e2588204296e3415b07` (tree
+  `e8de31f98d918f8bf394bebd3527751da6cf0f46`). The single bounded push at
+  2026-08-22T17:02:32.3706667+02:00 returned GitHub's explicit
+  account-suspended HTTP 403 response; no credential was read or retried.
 
 Resume by reading this file, `CURRENT_STATE.md`, the freeze receipt, and the
 last row of `TRANSLATION_LEDGER.csv`. Continue with
 `random/point/Moments.html`; perform only one bounded GitHub current-state
-recheck for the eleven-page boundary, then do not loop on that external
-surface. Do not restart source selection or repeat the completed pages.
+recheck at each future substantial boundary, not again for this one. Do not
+restart source selection or repeat the completed pages.

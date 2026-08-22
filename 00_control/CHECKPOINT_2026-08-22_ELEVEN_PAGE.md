@@ -136,13 +136,18 @@ the temporary HTTP server was stopped.
 
 ## Commit and publication
 
-- Boundary content commit: pending exact narrow commit.
-- GitHub availability/push: pending the single bounded boundary attempt.
+- Boundary content commit:
+  `d3da33e76d1f44ce77681e2588204296e3415b07`; tree
+  `e8de31f98d918f8bf394bebd3527751da6cf0f46`.
+- At 2026-08-22T17:02:32.3706667+02:00, the single bounded
+  `git push origin main` attempt returned exit 128 and GitHub's explicit
+  account-suspended HTTP 403 response. No credential was read or retried, and
+  this external surface is not polled again for this boundary. The exact
+  content commit remains preserved locally.
 - No upstream message was sent.
 
 ## Resume
 
-After recording the commit and one bounded publication result, continue
-immediately with random/point/Moments.html (ordinal 12). Do not repeat
+Continue immediately with random/point/Moments.html (ordinal 12). Do not repeat
 ordinal 11, restart source selection, or blend this edition with the separate
 Penn State C140 component.
