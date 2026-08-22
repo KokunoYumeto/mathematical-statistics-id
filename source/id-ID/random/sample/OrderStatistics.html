@@ -239,10 +239,10 @@ Dengan definisi ini, mudah dilihat bahwa kuantil berorde \(p \in (0, 1)\) adalah
 	</details>
 </div>
 
-<p>Jika distribusi yang mendasarinya kontinu, kita dapat memberikan rumus sederhana bagi fungsi densitas probabilitas statistik terurut.</p>
+<p>Jika distribusi yang mendasarinya kontinu, kita dapat memberikan rumus sederhana bagi fungsi kepadatan probabilitas statistik terurut.</p>
 
 <div class="unit" id="dst4">
-	<p class="math">Misalkan sekarang \(X\) memiliki <a href="https://www.randomservices.org/random/dist/Continuous.html">distribusi kontinu</a> dengan fungsi densitas probabilitas \( f \). Maka \(X_{(k)}\) memiliki distribusi kontinu dengan fungsi densitas probabilitas \( f_k \) yang diberikan oleh
+	<p class="math">Misalkan sekarang \(X\) memiliki <a href="https://www.randomservices.org/random/dist/Continuous.html">distribusi kontinu</a> dengan fungsi kepadatan probabilitas \( f \). Maka \(X_{(k)}\) memiliki distribusi kontinu dengan fungsi kepadatan probabilitas \( f_k \) yang diberikan oleh
 	\[ f_k(x) = \frac{n!}{(k - 1)! (n - k)!} \left[F(x)\right]^{k-1} \left[1 - F(x)\right]^{n-k} f(x), \quad x \in \R\]</p>
 	<details>
 		<summary>Rincian:</summary>
@@ -264,7 +264,7 @@ Dengan definisi ini, mudah dilihat bahwa kuantil berorde \(p \in (0, 1)\) adalah
 <p>Berikut adalah kasus khusus untuk statistik terurut ekstrem.</p>
 
 <div class="unit" id="dst5">
-	<p class="math">Fungsi densitas probabilitas \( f_1 \) dari \( X_{(1)} \) dan \( f_n \) dari \( X_{(n)} \) diberikan oleh</p>
+	<p class="math">Fungsi kepadatan probabilitas \( f_1 \) dari \( X_{(1)} \) dan \( f_n \) dari \( X_{(n)} \) diberikan oleh</p>
 	<ol class="sub">
 		<li>\(f_1(x) = n \left[1 - F(x)\right]^{n-1} f(x)\) untuk \(x \in \R\)</li>
 		<li>\(f_n(x) = n \left[F(x)\right]^{n-1} f(x)\) untuk \(x \in \R\)</li>
@@ -273,10 +273,10 @@ Dengan definisi ini, mudah dilihat bahwa kuantil berorde \(p \in (0, 1)\) adalah
 
 <h4 id="jnt">Distribusi Bersama</h4>
 
-<p>Kita kembali mengasumsikan bahwa \(X\) memiliki distribusi kontinu dengan fungsi distribusi \( F \) dan fungsi densitas probabilitas \( f \).</p>
+<p>Kita kembali mengasumsikan bahwa \(X\) memiliki distribusi kontinu dengan fungsi distribusi \( F \) dan fungsi kepadatan probabilitas \( f \).</p>
 
 <div class="unit" id="jnt1">
-	<p class="math">Misalkan \(j, k \in \{1, 2, \ldots, n\}\) dengan \(j \lt k\). Fungsi densitas probabilitas bersama \( f_{j,k} \) dari \(\left(X_{(j)}, X_{(k)}\right)\) diberikan oleh</p>
+	<p class="math">Misalkan \(j, k \in \{1, 2, \ldots, n\}\) dengan \(j \lt k\). Fungsi kepadatan probabilitas bersama \( f_{j,k} \) dari \(\left(X_{(j)}, X_{(k)}\right)\) diberikan oleh</p>
 	\[ f_{j,k}(x, y) = \frac{n!}{(j - 1)! (k - j - 1)! (n - k)!} \left[F(x)\right]^{j-1} \left[F(y) - F(x)\right]^{k - j - 1} \left[1 - F(y)\right]^{n-k} f(x) f(y); \quad x, \, y \in \R, x \lt y \]
 	<details>
 		<summary>Rincian:</summary>
@@ -290,7 +290,7 @@ Dengan definisi ini, mudah dilihat bahwa kuantil berorde \(p \in (0, 1)\) adalah
 <p>Dari distribusi bersama dua statistik terurut, setidaknya secara prinsip, kita dapat menentukan distribusi berbagai statistik lain: rentang sampel \(R\); kuantil sampel \(X_{[p]}\) untuk \(p \in [0, 1]\), khususnya kuartil sampel \(Q_1\), \(Q_2\), \(Q_3\); serta rentang antarkuartil IQR. Distribusi bersama statistik terurut ekstrem \((X_{(1)}, X_{(n)})\) merupakan kasus yang sangat penting.</p>
 
 <div class="unit" id="jnt2">
-	<p class="math">Untuk ukuran sampel sedikitnya dua, fungsi densitas probabilitas bersama \( f_{1,n} \) dari \(\left(X_{(1)}, X_{(n)}\right)\) diberikan oleh
+	<p class="math">Untuk ukuran sampel sedikitnya dua, fungsi kepadatan probabilitas bersama \( f_{1,n} \) dari \(\left(X_{(1)}, X_{(n)}\right)\) diberikan oleh
 	\[ f_{1,n}(x, y) = n (n - 1) \left[F(y) - F(x)\right]^{n-2} f(x) f(y); \quad x, \, y \in \R,  x \lt y \]</p>
 	<details>
 		<summary>Rincian:</summary>
@@ -298,15 +298,15 @@ Dengan definisi ini, mudah dilihat bahwa kuantil berorde \(p \in (0, 1)\) adalah
 	</details>
 </div>
 
-<p>Argumen serupa dapat digunakan untuk memperoleh fungsi densitas probabilitas bersama untuk sembarang banyak statistik terurut. Tentu saja, kita terutama tertarik pada fungsi densitas probabilitas bersama dari <em>semua</em> statistik terurut. Ternyata fungsi densitas tersebut memiliki bentuk yang sangat sederhana.</p>
+<p>Argumen serupa dapat digunakan untuk memperoleh fungsi kepadatan probabilitas bersama untuk sembarang banyak statistik terurut. Tentu saja, kita terutama tertarik pada fungsi kepadatan probabilitas bersama dari <em>semua</em> statistik terurut. Ternyata fungsi kepadatan tersebut memiliki bentuk yang sangat sederhana.</p>
 
 <div class="unit" id="jnt3">
-	<p class="math">\(\left(X_{(1)}, X_{(2)}, \ldots, X_{(n)}\right)\) memiliki fungsi densitas probabilitas bersama \( g \) yang diberikan oleh
+	<p class="math">\(\left(X_{(1)}, X_{(2)}, \ldots, X_{(n)}\right)\) memiliki fungsi kepadatan probabilitas bersama \( g \) yang diberikan oleh
 	\[ g(x_1, x_2, \ldots, x_n) = n! f(x_1) \, f(x_2) \, \cdots \, f(x_n), \quad x_1 \lt x_2 \lt \cdots \lt x_n \]</p>
 	<details>
 		<summary>Rincian:</summary>
 		<p>Untuk setiap permutasi \(\bs{i} = (i_1, i_2, \ldots, i_n)\) dari \((1, 2, \ldots, n)\), misalkan \(S_\bs{i} = \{\bs{x} \in \R^n: x_{i_1} \lt x_{i_2} \lt \cdots \lt x_{i_n}\}\). Pada \(S_\bs{i}\), pemetaan \((x_1, x_2, \ldots, x_n) \mapsto (x_{i_1}, x_{i_2}, \ldots, x_{i_n})\) bersifat satu-ke-satu, memiliki turunan parsial pertama yang kontinu, dan memiliki Jacobian 1. Himpunan-himpunan \(S_\bs{i}\), ketika \(\bs{i}\) merentang seluruh \(n!\) permutasi \((1, 2, \ldots, n)\), saling lepas. Probabilitas bahwa \((X_1, X_2, \ldots, X_n)\) tidak berada dalam salah satu himpunan tersebut adalah 0. Hasilnya kini mengikuti rumus <a href="https://www.randomservices.org/random/dist/Transformations.html#cov">perubahan variabel</a> multivariat.</p>
-		<p>Sekali lagi, terdapat argumen heuristik sederhana. Untuk setiap \(\bs{x} \in \R^n\) dengan \(x_1 \lt x_2 \lt \cdots \lt x_n\), ada \(n!\) permutasi koordinat \(\bs{x}\). Densitas probabilitas \((X_1, X_2, \ldots, X_n)\) pada setiap titik itu ialah \(f(x_1) \, f(x_2) \, \cdots \, f(x_n)\). Jadi, densitas probabilitas \((X_{(1)}, X_{(2)}, \ldots, X_{(n)})\) pada \(\bs{x}\) adalah \(n!\) kali hasil kali tersebut.</p>
+		<p>Sekali lagi, terdapat argumen heuristik sederhana. Untuk setiap \(\bs{x} \in \R^n\) dengan \(x_1 \lt x_2 \lt \cdots \lt x_n\), ada \(n!\) permutasi koordinat \(\bs{x}\). Kepadatan probabilitas \((X_1, X_2, \ldots, X_n)\) pada setiap titik itu ialah \(f(x_1) \, f(x_2) \, \cdots \, f(x_n)\). Jadi, kepadatan probabilitas \((X_{(1)}, X_{(2)}, \ldots, X_{(n)})\) pada \(\bs{x}\) adalah \(n!\) kali hasil kali tersebut.</p>
 	</details>
 </div>
 
@@ -521,7 +521,7 @@ Dengan definisi ini, mudah dilihat bahwa kuantil berorde \(p \in (0, 1)\) adalah
 <p>Ingat bahwa <a href="https://www.randomservices.org/random/dist/Continuous.html#uni">distribusi seragam baku</a> adalah distribusi seragam pada interval \([0, 1]\).</p>
 
 <div class="unit" id="uni1">
-	<p class="math">Misalkan \(\bs{X}\) adalah sampel acak berukuran \(n\) dari distribusi seragam baku. Untuk \( k \in \{1, 2, \ldots, n\} \), \(X_{(k)}\) memiliki <a href="https://www.randomservices.org/random/special/Beta.html">distribusi beta</a> dengan parameter kiri \(k\) dan parameter kanan \(n - k + 1\). Fungsi densitas probabilitas \( f_k \) diberikan oleh
+	<p class="math">Misalkan \(\bs{X}\) adalah sampel acak berukuran \(n\) dari distribusi seragam baku. Untuk \( k \in \{1, 2, \ldots, n\} \), \(X_{(k)}\) memiliki <a href="https://www.randomservices.org/random/special/Beta.html">distribusi beta</a> dengan parameter kiri \(k\) dan parameter kanan \(n - k + 1\). Fungsi kepadatan probabilitas \( f_k \) diberikan oleh
 	\[f_k(x) = \frac{n!}{(k - 1)! (n - k)!} x^{k-1} (1 - x)^{n-k}, \quad 0 \le x \le 1\]</p>
 	<details>
 		<summary>Rincian:</summary>
@@ -530,7 +530,7 @@ Dengan definisi ini, mudah dilihat bahwa kuantil berorde \(p \in (0, 1)\) adalah
 </div>
 
 <div class="unit" id="uni2">
-	<p class="app">Dalam <a href="https://www.randomservices.org/random/apps/OrderStatistic.html" class="ancillary">eksperimen statistik terurut</a>, pilih distribusi seragam baku dan \(n = 5\). Ubah \(k\) dari 1 hingga 5 dan perhatikan bentuk fungsi densitas probabilitas \(X_{(k)}\). Untuk setiap nilai \(k\), jalankan simulasi 1.000 kali dan bandingkan fungsi densitas empiris dengan fungsi densitas probabilitas teoretis.</p>
+	<p class="app">Dalam <a href="https://www.randomservices.org/random/apps/OrderStatistic.html" class="ancillary">eksperimen statistik terurut</a>, pilih distribusi seragam baku dan \(n = 5\). Ubah \(k\) dari 1 hingga 5 dan perhatikan bentuk fungsi kepadatan probabilitas \(X_{(k)}\). Untuk setiap nilai \(k\), jalankan simulasi 1.000 kali dan bandingkan fungsi kepadatan empiris dengan fungsi kepadatan probabilitas teoretis.</p>
 </div>
 
 <p>Hasil untuk distribusi seragam baku mudah diperluas ke distribusi seragam umum pada suatu interval.</p>
@@ -550,13 +550,13 @@ Dengan definisi ini, mudah dilihat bahwa kuantil berorde \(p \in (0, 1)\) adalah
 <p>Kita kembali ke distribusi seragam baku dan meninjau rentang sampel acak.</p>
 
 <div class="unit" id="uni4">
-	<p class="math">Misalkan \(\bs{X}\) adalah sampel acak berukuran \(n \ge 2\) dari distribusi seragam baku. Rentang sampel \( R \) memiliki distribusi beta dengan parameter kiri \( n - 1 \) dan parameter kanan 2. Fungsi densitas probabilitas \( g \) diberikan oleh
+	<p class="math">Misalkan \(\bs{X}\) adalah sampel acak berukuran \(n \ge 2\) dari distribusi seragam baku. Rentang sampel \( R \) memiliki distribusi beta dengan parameter kiri \( n - 1 \) dan parameter kanan 2. Fungsi kepadatan probabilitas \( g \) diberikan oleh
 	\[ g(r) = n (n - 1) r^{n-2} (1 - r), \quad 0 \le r \le 1 \]</p>
 	<details>
 		<summary>Rincian:</summary>
-		<p>Dari <a href="#jnt2" class="ref"></a>, fungsi densitas probabilitas bersama \((X_{(1)}, X_{(n)})\) adalah \(f_{1, n}(x, y) = n (n - 1) (y - x)^{n - 2}\) untuk \(0 \le x \le y \le 1\). Karena itu, untuk \(r \in [0, 1]\),
+		<p>Dari <a href="#jnt2" class="ref"></a>, fungsi kepadatan probabilitas bersama \((X_{(1)}, X_{(n)})\) adalah \(f_{1, n}(x, y) = n (n - 1) (y - x)^{n - 2}\) untuk \(0 \le x \le y \le 1\). Karena itu, untuk \(r \in [0, 1]\),
 		\[ \P(R \gt r) = \P(X_{(n)} - X_{(1)} \gt r) = \int_0^{1-r} \int_{x+r}^1 n (n - 1) (y - x)^{n-2} \, dy \, dx = (n - 1) r^n - n r^{n-1} + 1 \]
-		Dengan demikian, fungsi distribusi \(R\) adalah \(G(r) = n r^{n-1} - (n - 1)r^n\) untuk \(0 \le r \le 1\). Mengambil turunan terhadap \(r\) dan menyederhanakannya memberikan fungsi densitas \(g(r) = n (n - 1) r^{n-2} (1 - r)\) untuk \(0 \le r \le 1\). Dari bentuk \(g\), distribusi ini adalah distribusi beta dengan parameter kiri \(n - 1\) dan parameter kanan 2.</p>
+		Dengan demikian, fungsi distribusi \(R\) adalah \(G(r) = n r^{n-1} - (n - 1)r^n\) untuk \(0 \le r \le 1\). Mengambil turunan terhadap \(r\) dan menyederhanakannya memberikan fungsi kepadatan \(g(r) = n (n - 1) r^{n-2} (1 - r)\) untuk \(0 \le r \le 1\). Dari bentuk \(g\), distribusi ini adalah distribusi beta dengan parameter kiri \(n - 1\) dan parameter kanan 2.</p>
 	</details>
 </div>
 
@@ -580,45 +580,45 @@ Dengan definisi ini, mudah dilihat bahwa kuantil berorde \(p \in (0, 1)\) adalah
 	<p class="math">Misalkan \((X_1, X_2, \ldots, X_n)\) adalah sampel acak berukuran \(n\) dari distribusi seragam pada interval \([a, a + h]\), dengan \(a \in \R\) dan \( h \in (0, \infty) \). Maka \(\left(X_{(1)}, X_{(2)}, \ldots, X_{(n)}\right)\) berdistribusi seragam pada \(\left\{\bs{x} \in [a, a + h]^n: a \le x_1 \le x_2 \le \cdots \le x_n \le a + h\right\}\).</p>
 	<details>
 		<summary>Rincian:</summary>
-		<p>Hasil ini langsung mengikuti fakta bahwa \((X_1, X_2, \ldots, X_n)\) berdistribusi seragam pada \([a, a + h]^n\). Dari <a href="#jnt3" class="ref"></a>, fungsi densitas probabilitas bersama statistik terurut adalah \(g(x_1, x_2, \ldots, x_n) = n! / h^n\) untuk \((x_1, x_2, \ldots, x_n) \in [a, a + h]^n\) dengan \(a \le x_1 \le x_2 \le \cdots \le x_n \le a + h\).</p>
+		<p>Hasil ini langsung mengikuti fakta bahwa \((X_1, X_2, \ldots, X_n)\) berdistribusi seragam pada \([a, a + h]^n\). Dari <a href="#jnt3" class="ref"></a>, fungsi kepadatan probabilitas bersama statistik terurut adalah \(g(x_1, x_2, \ldots, x_n) = n! / h^n\) untuk \((x_1, x_2, \ldots, x_n) \in [a, a + h]^n\) dengan \(a \le x_1 \le x_2 \le \cdots \le x_n \le a + h\).</p>
 	</details>
 </div>
 
 <h4 id="exp">Distribusi Eksponensial</h4>
 
-<p>Ingat bahwa <a href="https://www.randomservices.org/random/poisson/Exponential.html">distribusi eksponensial</a> dengan parameter laju \(\lambda \gt 0\) memiliki fungsi densitas probabilitas
+<p>Ingat bahwa <a href="https://www.randomservices.org/random/poisson/Exponential.html">distribusi eksponensial</a> dengan parameter laju \(\lambda \gt 0\) memiliki fungsi kepadatan probabilitas
 \[ f(x) = \lambda e^{-\lambda x}, \quad 0 \le x \lt \infty \]
 Distribusi eksponensial banyak digunakan untuk memodelkan waktu kegagalan dan waktu acak lainnya dalam kondisi ideal tertentu. Secara khusus, waktu antarkedatangan dalam <a href="https://www.randomservices.org/random/poisson/index.html">proses Poisson</a> berdistribusi eksponensial.</p>
 
 <div class="unit" id="exp1">
-	<p class="math">Misalkan \(\bs{X}\) adalah sampel acak berukuran \(n\) dari distribusi eksponensial dengan parameter laju \(\lambda\). Fungsi densitas probabilitas dari statistik terurut ke-\(k\), \(X_{(k)}\), adalah
+	<p class="math">Misalkan \(\bs{X}\) adalah sampel acak berukuran \(n\) dari distribusi eksponensial dengan parameter laju \(\lambda\). Fungsi kepadatan probabilitas dari statistik terurut ke-\(k\), \(X_{(k)}\), adalah
 	\[ f_k(x) = \frac{n!}{(k - 1)! (n - k)!} \lambda (1 - e^{-\lambda x})^{k-1} e^{-\lambda(n - k + 1)x}, \quad 0 \le x \lt \infty \]
 	Secara khusus, minimum \(X_{(1)}\) juga memiliki distribusi eksponensial, tetapi dengan parameter laju \(n \lambda\).</p>
 	<details>
 		<summary>Rincian:</summary>
-		<p>Fungsi densitas probabilitas dari \(X_{(k)}\) mengikuti <a href="#dst4" class="ref"></a> karena \(F(x) = 1 - e^{-\lambda x}\) untuk \(0 \le x \lt \infty\). Dengan menetapkan \(k = 1\), diperoleh \(f_1(x) = n \lambda e^{-n \lambda x}\) untuk \(0 \le x \lt \infty\).</p>
+		<p>Fungsi kepadatan probabilitas dari \(X_{(k)}\) mengikuti <a href="#dst4" class="ref"></a> karena \(F(x) = 1 - e^{-\lambda x}\) untuk \(0 \le x \lt \infty\). Dengan menetapkan \(k = 1\), diperoleh \(f_1(x) = n \lambda e^{-n \lambda x}\) untuk \(0 \le x \lt \infty\).</p>
 	</details>
 </div>
 
 <div class="unit" id="exp2">
-	<p class="app">Dalam <a href="https://www.randomservices.org/random/apps/OrderStatistic.html" class="ancillary">eksperimen statistik terurut</a>, pilih distribusi eksponensial baku dan \(n = 5\). Ubah \(k\) dari 1 hingga 5 dan perhatikan bentuk fungsi densitas probabilitas \(X_{(k)}\). Untuk setiap nilai \(k\), jalankan simulasi 1.000 kali dan bandingkan fungsi densitas empiris dengan fungsi densitas probabilitas teoretis.</p>
+	<p class="app">Dalam <a href="https://www.randomservices.org/random/apps/OrderStatistic.html" class="ancillary">eksperimen statistik terurut</a>, pilih distribusi eksponensial baku dan \(n = 5\). Ubah \(k\) dari 1 hingga 5 dan perhatikan bentuk fungsi kepadatan probabilitas \(X_{(k)}\). Untuk setiap nilai \(k\), jalankan simulasi 1.000 kali dan bandingkan fungsi kepadatan empiris dengan fungsi kepadatan probabilitas teoretis.</p>
 </div>
 
 <div class="unit" id="exp3">
-	<p class="math">Misalkan kembali \(\bs{X}\) adalah sampel acak berukuran \(n \ge 2\) dari distribusi eksponensial dengan parameter laju \(\lambda\). Rentang sampel \(R\) memiliki distribusi yang sama dengan maksimum sampel acak berukuran \(n - 1\) dari distribusi eksponensial. Fungsi densitas probabilitasnya adalah
+	<p class="math">Misalkan kembali \(\bs{X}\) adalah sampel acak berukuran \(n \ge 2\) dari distribusi eksponensial dengan parameter laju \(\lambda\). Rentang sampel \(R\) memiliki distribusi yang sama dengan maksimum sampel acak berukuran \(n - 1\) dari distribusi eksponensial. Fungsi kepadatan probabilitasnya adalah
 	\[ h(t) = (n - 1) \lambda (1 - e^{-\lambda t})^{n - 2} e^{-\lambda t}, \quad 0 \le t \lt \infty  \]
 	<details>
 		<summary>Rincian:</summary>
-		<p>Menurut <a href="#jnt2" class="ref"></a>, \((X_{(1)}, X_{(n)})\) memiliki fungsi densitas probabilitas bersama \(f_{1, n}(x, y) = n (n - 1) \lambda^2 (e^{-\lambda x} - e^{-\lambda y})^{n-2} e^{-\lambda x} e^{-\lambda y}\) untuk \(0 \le x \le y \lt \infty\). Karena itu, untuk \(0 \le t \lt \infty\),
+		<p>Menurut <a href="#jnt2" class="ref"></a>, \((X_{(1)}, X_{(n)})\) memiliki fungsi kepadatan probabilitas bersama \(f_{1, n}(x, y) = n (n - 1) \lambda^2 (e^{-\lambda x} - e^{-\lambda y})^{n-2} e^{-\lambda x} e^{-\lambda y}\) untuk \(0 \le x \le y \lt \infty\). Karena itu, untuk \(0 \le t \lt \infty\),
 		\[ \P(R \le t) = \P(X_{(n)} - X_{(1)} \le t) = \int_0^\infty \int_x^{x + t} n (n - 1) \lambda^2 (e^{-\lambda x} - e^{-\lambda y})^{n-2} e^{-\lambda x} e^{-\lambda y} \, dy \, dx \]
 		Dengan menyubstitusikan \(u = e^{-\lambda y}\), \(du = -\lambda e^{-\lambda y} \, dy\), ke dalam integral bagian dalam lalu menghitungnya, diperoleh
 		\[ \P(R \le t) =  \int_0^\infty n \lambda e^{-n \lambda x} (1 - e^{-\lambda t})^{n-1} \, dx = (1 - e^{-\lambda t})^{n-1}\]
-		Menurunkannya terhadap \(t\) memberikan fungsi densitas probabilitas. Dengan membandingkannya dengan <a href="#exp1" class="ref"></a>, terlihat bahwa ini adalah fungsi densitas probabilitas dari maksimum suatu sampel berukuran \(n - 1\) dari distribusi eksponensial.</p>
+		Menurunkannya terhadap \(t\) memberikan fungsi kepadatan probabilitas. Dengan membandingkannya dengan <a href="#exp1" class="ref"></a>, terlihat bahwa ini adalah fungsi kepadatan probabilitas dari maksimum suatu sampel berukuran \(n - 1\) dari distribusi eksponensial.</p>
 	</details>
 </div>
 
 <div class="unit" id="exp4">
-	<p class="math">Misalkan kembali \(\bs{X}\) adalah sampel acak berukuran \(n\) dari distribusi eksponensial dengan parameter laju \(\lambda\). Fungsi densitas probabilitas bersama statistik terurut \((X_{(1)}, X_{(2)}, \ldots, X_{(n)})\) adalah
+	<p class="math">Misalkan kembali \(\bs{X}\) adalah sampel acak berukuran \(n\) dari distribusi eksponensial dengan parameter laju \(\lambda\). Fungsi kepadatan probabilitas bersama statistik terurut \((X_{(1)}, X_{(2)}, \ldots, X_{(n)})\) adalah
 	\[ g(x_1, x_2, \ldots, x_n) = n! \lambda^n e^{-\lambda(x_1 + x_2 + \cdots + x_n)}, \quad 0 \le x_1 \le x_2 \le \cdots \le x_n \lt \infty \]</p>
 	<details>
 		<summary>Rincian:</summary>
@@ -718,7 +718,7 @@ Distribusi eksponensial banyak digunakan untuk memodelkan waktu kegagalan dan wa
 <h4 id="pps">Simulasi Plot Probabilitas</h4>
 
 <div class="unit" id="pps1">
-	<p class="app">Dalam <a href="https://www.randomservices.org/random/apps/ProbabilityPlot.html" class="ancillary">eksperimen plot probabilitas</a>, atur distribusi pengambilan sampel menjadi distribusi normal dengan rata-rata 5 dan simpangan baku 2. Atur ukuran sampel menjadi \(n = 20\). Untuk setiap distribusi uji berikut, jalankan eksperimen 50 kali dan perhatikan bentuk geometris plot probabilitas:</p>
+	<p class="app">Dalam <a href="https://www.randomservices.org/random/apps/ProbabilityPlot.html" class="ancillary">eksperimen plot probabilitas</a>, atur distribusi asal sampel menjadi distribusi normal dengan rata-rata 5 dan simpangan baku 2. Atur ukuran sampel menjadi \(n = 20\). Untuk setiap distribusi uji berikut, jalankan eksperimen 50 kali dan perhatikan bentuk geometris plot probabilitas:</p>
 	<ol class="sub">
 		<li>Normal baku</li>
 		<li>Seragam pada interval \([0, 1]\)</li>
@@ -727,7 +727,7 @@ Distribusi eksponensial banyak digunakan untuk memodelkan waktu kegagalan dan wa
 </div>
 
 <div class="unit" id="pps2">
-	<p class="app">Dalam <a href="https://www.randomservices.org/random/apps/ProbabilityPlot.html" class="ancillary">eksperimen plot probabilitas</a>, atur distribusi pengambilan sampel menjadi distribusi seragam pada \([4, 10]\). Atur ukuran sampel menjadi \(n = 20\). Untuk setiap distribusi uji berikut, jalankan eksperimen 50 kali dan perhatikan bentuk geometris plot probabilitas:</p>
+	<p class="app">Dalam <a href="https://www.randomservices.org/random/apps/ProbabilityPlot.html" class="ancillary">eksperimen plot probabilitas</a>, atur distribusi asal sampel menjadi distribusi seragam pada \([4, 10]\). Atur ukuran sampel menjadi \(n = 20\). Untuk setiap distribusi uji berikut, jalankan eksperimen 50 kali dan perhatikan bentuk geometris plot probabilitas:</p>
 	<ol class="sub">
 		<li>Normal baku</li>
 		<li>Seragam pada interval \([0, 1]\)</li>
@@ -736,7 +736,7 @@ Distribusi eksponensial banyak digunakan untuk memodelkan waktu kegagalan dan wa
 </div>
 
 <div class="unit" id="pps3">
-	<p class="app">Dalam <a href="https://www.randomservices.org/random/apps/ProbabilityPlot.html" class="ancillary">eksperimen plot probabilitas</a>, atur distribusi pengambilan sampel menjadi distribusi eksponensial dengan parameter 3. Atur ukuran sampel menjadi \(n = 20\). Untuk setiap distribusi uji berikut, jalankan eksperimen 50 kali dan perhatikan bentuk geometris plot probabilitas:</p>
+	<p class="app">Dalam <a href="https://www.randomservices.org/random/apps/ProbabilityPlot.html" class="ancillary">eksperimen plot probabilitas</a>, atur distribusi asal sampel menjadi distribusi eksponensial dengan parameter 3. Atur ukuran sampel menjadi \(n = 20\). Untuk setiap distribusi uji berikut, jalankan eksperimen 50 kali dan perhatikan bentuk geometris plot probabilitas:</p>
 	<ol class="sub">
 		<li>Normal baku</li>
 		<li>Seragam pada interval \([0, 1]\)</li>

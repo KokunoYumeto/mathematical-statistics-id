@@ -1,0 +1,48 @@
+{
+  "schema": "o006.random.figshare-publication-receipt.v1",
+  "checked_at": "2026-08-22T20:07:30.4025972+02:00",
+  "result": "published-metadata-pointer-and-publicly-verified",
+  "article": {
+    "id": "33314784",
+    "doi": "10.6084/m9.figshare.33314784.v1",
+    "url": "https://figshare.com/articles/online_resource/Statistika_Matematis_Edisi_Bahasa_Indonesia_id-ID_Checkpoint_13_dari_29_Tautan_Metadata_Belum_Lengkap_/33314784",
+    "title": "Statistika Matematis — Edisi Bahasa Indonesia (id-ID): Checkpoint 13 dari 29 (Tautan Metadata; Belum Lengkap)",
+    "defined_type": "online resource",
+    "license": "CC0",
+    "file_count": 0,
+    "published_date": "2026-08-22T18:06:51Z"
+  },
+  "project": {
+    "id": "280296",
+    "url": "https://figshare.com/projects/Open_and_Share-Alike_Educational_Materials_Translations/280296",
+    "contains_article": true
+  },
+  "collection": {
+    "id": "8668413",
+    "doi": "10.6084/m9.figshare.c.8668413.v14",
+    "concept_doi": "10.6084/m9.figshare.c.8668413",
+    "contains_article": true
+  },
+  "linked_release": {
+    "zenodo_record_id": "22059764",
+    "zenodo_version_doi": "10.5281/zenodo.22059764",
+    "zenodo_concept_doi": "10.5281/zenodo.22059763",
+    "scope": "13 of 29 core pages; incomplete edition",
+    "public_file_count": 5,
+    "public_total_bytes": 2647370
+  },
+  "rights_boundary": "CC0 applies only to this Figshare metadata/link item. No edition bytes were copied because the Zenodo checkpoint is a mixed-rights collection and Figshare offers no single exact aggregate licence.",
+  "public_readback": {
+    "method": "Two credential-free Figshare public API passes after publication; article, project membership, collection membership, exact title, type, CC0 status, zero-file inventory, rights text, and both Zenodo DOI references were re-read.",
+    "all_checks_pass": true
+  },
+  "script": {
+    "path": "scripts/publish_figshare_metadata_checkpoint.py",
+    "bytes": 13178,
+    "sha256": "395e8b885ac5115d1d80f83ff6cc932cd9d595d5afaac7bebe13a2c62c4ebb32",
+    "replay": "python scripts/publish_figshare_metadata_checkpoint.py --check-only"
+  },
+  "credential_handling": "The Figshare token was read only at runtime and sent through curl stdin configuration; it was not copied into a URL, command argument, receipt, log, repository file, stdout, or stderr.",
+  "github_status": "No GitHub request was made; the publishing account remains suspended while support reviews the VPN-triggered security event.",
+  "upstream_contact": "none"
+}

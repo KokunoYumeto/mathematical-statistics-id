@@ -7,24 +7,28 @@ Statistics, and Stochastic Processes*. Edisi lengkap ini tetap diproduksi
 sebagai sumber terbuka tersendiri; edisi ini bukan satu-satunya tulang punggung
 naratif untuk kursus C140 yang dikonfigurasi secara terpisah.
 
-Status pembaca: **14 dari 29 halaman sumber inti telah diterjemahkan**, secara
-berurutan dari indeks Sampel Acak sampai `point/Bayes.html`.
+Provenans terjemahan: OpenAI Codex gpt-5.6-sol, Ultra. Semua kredit karya
+sumber, penulis, dan kontributor manusia tetap dipertahankan secara terpisah.
+
+Status pembaca: **15 dari 29 halaman sumber inti telah diterjemahkan**, secara
+berurutan dari indeks Sampel Acak sampai `point/Unbiased.html`.
 Korpus belum selesai; repositori ini tidak mengklaim kelengkapan dini.
 
-Checkpoint empat belas halaman lulus dua pemutaran ulang build dan QA
-deterministik: 44 berkas pembaca, 428 unit instruksional, 290 pengungkapan
-jawaban/rincian, dan 633 wadah MathJax pada halaman Penduga Bayes. Pemeriksaan
+Checkpoint lima belas halaman lulus dua pemutaran ulang build dan QA
+deterministik: 45 berkas pembaca, 466 unit instruksional, 300 pengungkapan
+jawaban/rincian, dan 247 wadah MathJax pada halaman Penduga Tak Bias Terbaik.
+Pemeriksaan
 desktop/seluler menemukan tata letak yang terpusat dan memenuhi halaman, tanpa
 galat konsol, TeX mentah, gambar hilang, atau luapan horizontal halaman. PDF
-pembaca langsung berisi 173 halaman A4 dan seluruh rincian yang diperluas.
-Produksi berikutnya berlanjut dari `point/Unbiased.html`.
+pembaca langsung berisi 182 halaman A4 dan seluruh rincian yang diperluas.
+Produksi berikutnya berlanjut dari `point/Sufficient.html`.
 
-- Arsip Zenodo checkpoint 13/29: <https://doi.org/10.5281/zenodo.22059764>
+- Arsip Zenodo checkpoint 14/29: <https://doi.org/10.5281/zenodo.22061677>
 - DOI konsep semua versi: <https://doi.org/10.5281/zenodo.22059763>
 - Pembaca web: <https://kokunoyumeto.github.io/mathematical-statistics-id/>
 - Sumber, riwayat, dan rilis PDF GitHub:
   <https://github.com/KokunoYumeto/mathematical-statistics-id>
-- Rilis PDF checkpoint 14/29:
+- Rilis PDF publik terakhir (checkpoint 14/29; checkpoint 15 sedang diterbitkan):
   <https://github.com/KokunoYumeto/mathematical-statistics-id/releases/tag/v2026.08.22.14>
 - Karya sumber resmi: <https://www.randomservices.org/random/>
 

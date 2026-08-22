@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="id-ID">
+
+<head>
+	<meta charset="utf-8">
+	<title>Penduga Tak Bias Terbaik</title>
+	<meta name="author" content="Kyle Siegrist">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="keywords" content="probabilitas, statistika, pendugaan titik, penduga tak bias, galat kuadrat rata-rata, penduga tak bias terbaik, batas bawah Cramer-Rao, penduga linear tak bias terbaik, distribusi Bernoulli, distribusi Poisson, distribusi normal, distribusi gamma, distribusi beta, distribusi seragam">
+	<link rel="icon" href="../icons/Icon.svg" type="image/svg">
+	<link rel="stylesheet" href="../Screen.css" type="text/css" media="screen">
+	<script src="../Basic.js"></script>
+	<script src="../../MathJax/tex-svg.js" id="MathJax-script" async></script>
+</head>
+
+<body>
+
+<div class="latex">
+	\(\newcommand{\R}{\mathbb{R}}\)
+	\(\newcommand{\N}{\mathbb{N}}\)
+	\(\newcommand{\Z}{\mathbb{Z}}\)
+	\(\newcommand{\E}{\mathbb{E}}\)
+	\(\newcommand{\P}{\mathbb{P}}\)
+	\(\newcommand{\var}{\text{var}}\)
+	\(\newcommand{\sd}{\text{sd}}\)
+	\(\newcommand{\cov}{\text{cov}}\)
+	\(\newcommand{\cor}{\text{cor}}\)
+	\(\newcommand{\bias}{\text{bias}}\)
+	\(\newcommand{\MSE}{\text{MSE}}\)
+	\(\newcommand{\bs}{\boldsymbol}\)
+</div>
+
+<header>
+	<ol class="map">
+		<li class="parent"><a href="https://www.randomservices.org/random/index.html">Random</a></li>
+		<li class="parent"><a href="index.html">6. Pendugaan Titik</a></li>
+		<li class="child"><a href="Estimators.html" title="Penduga">1</a></li>
+		<li class="child"><a href="Moments.html" title="Metode Momen">2</a></li>
+		<li class="child"><a href="Likelihood.html" title="Kemungkinan Maksimum">3</a></li>
+		<li class="child"><a href="Bayes.html" title="Penduga Bayes">4</a></li>
+		<li class="current">5</li>
+		<li class="child"><a href="https://www.randomservices.org/random/point/Sufficient.html" title="Statistik Cukup, Lengkap, dan Ancillary">6</a></li>
+		<li class="details"><button type="button" title="Perluas Rincian" onclick="expandDetails(true);"><img src="../icons/Plus.svg" alt="Perluas"></button></li>
+		<li class="details"><button type="button" title="Ciutkan Rincian" onclick="expandDetails(false);"><img src="../icons/Minus.svg" alt="Ciutkan"></button></li>
+	</ol>
+	<h2 id="o006.random.point.unbiased.page">5. Penduga Tak Bias Terbaik</h2>
+</header>
+
+<h3 id="the">Teori Dasar</h3>
+
+<p>Tinjau kembali model statistika dasar: sebuah <a href="https://www.randomservices.org/random/prob/Experiments.html">eksperimen acak</a> menghasilkan <a href="https://www.randomservices.org/random/prob/Probability.html">variabel acak</a> teramati \(\bs{X}\) yang nilainya berada dalam himpunan \(S\). Eksperimen tersebut biasanya mengambil sampel \(n\) objek dari suatu populasi lalu mencatat satu atau beberapa pengukuran untuk setiap objek. Dalam hal ini, variabel acak teramati berbentuk
+\[ \bs{X} = (X_1, X_2, \ldots, X_n) \]
+dengan \(X_i\) sebagai vektor pengukuran untuk objek ke-\(i\).</p>
+
+<p>Andaikan \(\theta\) merupakan parameter riil distribusi \(\bs{X}\), dengan nilai dalam himpunan parameter \(T\). Misalkan \(f_\theta\) menyatakan <a href="https://www.randomservices.org/random/dist/index.html">fungsi kepadatan probabilitas</a> bagi \(\bs{X}\) untuk \(\theta \in T\). Perhatikan bahwa operator <a href="https://www.randomservices.org/random/expect/Properties.html">nilai harapan</a>, <a href="https://www.randomservices.org/random/expect/Variance.html">varians</a>, dan <a href="https://www.randomservices.org/random/expect/Covariance.html">kovarians</a> juga bergantung pada \(\theta\), meskipun subskripnya kadang dihilangkan agar notasi tidak terlalu rumit.</p>
+
+<h4 id="dfn">Definisi</h4>
+
+<p>Andaikan sekarang \(\lambda = \lambda(\theta)\) merupakan parameter sasaran yang diturunkan dari \(\theta\). (Tentu saja, \(\lambda\) dapat sama dengan \(\theta\), tetapi secara umum dapat pula berupa fungsi dari \(\theta\).) Pada bagian ini kita membahas masalah umum untuk mencari <a href="Estimators.html">penduga</a> terbaik bagi \(\lambda\) di antara suatu kelas penduga tak bias. Ingat bahwa jika \(U\) merupakan penduga tak bias bagi \(\lambda\), maka \(\var_\theta(U)\) adalah galat kuadrat rata-ratanya. Galat kuadrat rata-rata menjadi ukuran mutu penduga tak bias, sehingga definisi berikut bersifat alami.</p>
+
+<div class="unit" id="dfn1">
+	<p class="dfn">Andaikan \(U\) dan \(V\) merupakan penduga tak bias bagi \(\lambda\).</p>
+	<ol class="sub">
+		<li>Jika \(\var_\theta(U) \le \var_\theta(V)\) untuk setiap \(\theta \in T \), maka \(U\) merupakan penduga yang <dfn>lebih baik secara seragam</dfn> daripada \(V\).</li>
+		<li>Jika \(U\) lebih baik secara seragam daripada setiap penduga tak bias lain bagi \(\lambda\), maka \(U\) merupakan <dfn>Penduga Tak Bias dengan Varians Minimum Seragam</dfn> (<dfn>UMVUE</dfn>) bagi \(\lambda\).</li>
+	</ol>
+</div>
+
+<p>Untuk penduga tak bias \( U \) dan \( V \) bagi \( \lambda \), varians \(U\) mungkin lebih kecil pada sebagian nilai \(\theta\), sedangkan varians \(V\) lebih kecil pada nilai \(\theta\) lainnya. Dalam keadaan itu tidak satu pun lebih baik secara seragam daripada yang lain. Penduga tak bias bervarians minimum adalah mutu terbaik yang dapat kita harapkan.</p>
+
+<h4 id="crb">Batas Bawah Cram&eacute;r-Rao</h4>
+
+<p>Kita akan menunjukkan bahwa, dengan syarat regularitas yang dinyatakan di bawah, varians setiap penduga tak bias bagi parameter \(\lambda\) mempunyai batas bawah. Jadi, jika suatu penduga mencapai batas itu untuk setiap \(\theta\), penduga tersebut harus merupakan UMVUE bagi \(\lambda\). Turunan <a href="Likelihood.html">fungsi log-kemungkinan</a>, yang kadang disebut <dfn>skor</dfn>, berperan utama dalam analisis ini. Negatif turunan keduanya berperan lebih kecil, tetapi tetap penting. Kita beri nama kedua fungsi tersebut agar pembahasan lebih ringkas.</p>
+
+<div class="unit" id="crb1">
+	<p class="dfn">Untuk \(\bs{x} \in S\) dan \(\theta \in T\), definisikan
+	\begin{align}
+		L_1(\bs{x}, \theta) &amp; = \frac{d}{d \theta} \ln\left[f_\theta(\bs{x})\right] \\
+		L_2(\bs{x}, \theta) &amp; = -\frac{d}{d \theta} L_1(\bs{x}, \theta) = -\frac{d^2}{d \theta^2} \ln\left[f_\theta(\bs{x})\right]
+	\end{align}</p>
+</div>
+
+<p>Pada sisa subbagian ini, kita meninjau statistik \(h(\bs{X})\) dengan \(h: S \to \R\) (jadi, khususnya, \(h\) tidak bergantung pada \(\theta\)). Kita memerlukan asumsi pokok berikut.</p>
+
+<div class="unit" id="crb2">
+	<p class="dfn">Kita hanya meninjau statistik \( h(\bs{X}) \) yang memenuhi \(\E_\theta\left[h^2(\bs{X})\right] \lt \infty\) untuk \(\theta \in T\). Kita juga mengasumsikan bahwa
+	\[ \frac{d}{d \theta} \E_\theta\left[h(\bs{X})\right] = \E_\theta\left[h(\bs{X}) L_1(\bs{X}, \theta)\right] \]
+	Artinya, operator turunan \(d / d\theta\) boleh dipertukarkan dengan operator nilai harapan \(\E_\theta\).</p>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Perhatikan terlebih dahulu bahwa
+		\[\frac{d}{d \theta} \E_\theta\left[h(\bs{X})\right]= \frac{d}{d \theta} \int_S h(\bs{x}) f_\theta(\bs{x}) \, d \bs{x}\]
+		Di sisi lain,
+		\begin{align}
+			\E_\theta\left[h(\bs{X}) L_1(\bs{X}, \theta)\right] &amp; = \E_\theta\left[h(\bs{X}) \frac{d}{d \theta} \ln\left[f_\theta(\bs{X})\right] \right] = \int_S h(\bs{x}) \frac{d}{d \theta} \ln\left[f_\theta(\bs{x})\right] f_\theta(\bs{x}) \, d \bs{x} \\
+			&amp; = \int_S h(\bs{x}) \frac{\frac{d}{d \theta} f_\theta(\bs{x})}{f_\theta(\bs{x})} f_\theta(\bs{x}) \, d \bs{x} = \int_S h(\bs{x}) \frac{d}{d \theta} f_\theta(\bs{x}) \, d \bs{x} = \int_S \frac{d}{d \theta}\left[h(\bs{x}) f_\theta(\bs{x})\right] \, d \bs{x}
+		\end{align}
+		Jadi, kedua ungkapan itu sama tepat ketika operator turunan dan integral boleh dipertukarkan.</p>
+	</details>
+</div>
+
+<p>Secara umum, pertukaran dalam asumsi pokok di atas dapat dijamin apabila \(f_\theta(\bs{x})\) terdiferensialkan terhadap \(\theta\) dan, pada suatu lingkungan setiap nilai parameter, nilai mutlak hasil kali fungsi statistik dengan turunan tersebut didominasi oleh fungsi terintegralkan. Kekontinuan bersama terhadap \(\bs{x}\) dan \(\theta\) membantu memeriksa syarat itu. Himpunan dukungan \(\left\{\bs{x} \in S: f_\theta(\bs{x}) \gt 0 \right\}\) juga tidak boleh bergantung pada \(\theta\). Kekontinuan saja tidak menggantikan syarat dominasi. Untuk memakai bentuk batas yang membagi dengan informasi Fisher, informasi tersebut juga harus positif dan berhingga.</p>
+
+<div class="unit" id="crb3">
+	<p class="math">\(\E_\theta\left[L_1(\bs{X}, \theta)\right] = 0\) untuk \(\theta \in T\).</p>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Hasil ini mengikuti asumsi <a href="#crb2" class="ref"></a> dengan mengambil \(h(\bs{x}) = 1\) untuk \(\bs{x} \in S\).</p>
+	</details>
+</div>
+
+<div class="unit" id="crb4">
+	<p class="math">Jika \(h(\bs{X})\) merupakan statistik, maka</p>
+	\[ \cov_\theta\left[h(\bs{X}), L_1(\bs{X}, \theta)\right] = \frac{d}{d \theta} \E_\theta\left[h(\bs{X})\right] \]
+	<details>
+		<summary>Rincian:</summary>
+		<p>Pertama, kovarians tersebut sama dengan nilai harapan hasil kali kedua variabel karena variabel kedua mempunyai rata-rata 0 menurut <a href="#crb3" class="ref"></a>. Hasilnya kemudian mengikuti asumsi <a href="#crb2" class="ref"></a>.</p>
+	</details>
+</div>
+
+<div class="unit" id="crb5">
+	<p class="math">\(\var_\theta\left[L_1(\bs{X}, \theta)\right] = \E_\theta\left[L_1^2(\bs{X}, \theta)\right]\)</p>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Hasil ini berlaku karena \(L_1(\bs{X}, \theta)\) mempunyai rata-rata 0 menurut <a href="#crb3" class="ref"></a>.</p>
+	</details>
+</div>
+
+<p>Teorema berikut memberikan <dfn>batas bawah Cram&eacute;r-Rao</dfn> umum untuk varians suatu statistik. Batas ini dinamai menurut <a href="https://www.randomservices.org/random/biographies/Cramer.html" class="ancillary">Harold Cram&eacute;r</a> dan <a href="https://www.randomservices.org/random/biographies/Rao.html" class="ancillary">CR Rao</a>.</p>
+
+<div class="unit" id="crb6">
+	<p class="math">Jika \(h(\bs{X})\) merupakan statistik, maka
+	\[ \var_\theta\left[h(\bs{X})\right] \ge \frac{\left[\frac{d}{d \theta} \E_\theta\left[h(\bs{X})\right] \right]^2}{\E_\theta\left[L_1^2(\bs{X}, \theta)\right]} \]</p>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Dari <a href="https://www.randomservices.org/random/expect/Covariance.html#blp6">ketaksamaan korelasi</a>,
+		\[\cov_\theta^2\left[h(\bs{X}), L_1(\bs{X}, \theta)\right] \le \var_\theta\left[h(\bs{X})\right] \var_\theta\left[L_1(\bs{X}, \theta)\right]\]
+		Hasilnya sekarang mengikuti teorema <a href="#crb4" class="ref"></a> dan <a href="#crb5" class="ref"></a>.</p>
+	</details>
+</div>
+
+<p>Sekarang kita dapat memberikan bentuk pertama batas bawah Cram&eacute;r-Rao bagi penduga tak bias suatu parameter.</p>
+
+<div class="unit" id="crb7">
+	<p class="math">Andaikan \(\lambda(\theta)\) merupakan parameter sasaran dan \(h(\bs{X})\) merupakan penduga tak bias bagi \(\lambda\). Maka
+	\[ \var_\theta\left[h(\bs{X})\right] \ge \frac{\left[d\lambda / d\theta\right]^2}{\E_\theta\left[L_1^2(\bs{X}, \theta)\right]} \]</p>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Hasil ini langsung mengikuti <a href="#crb6" class="ref"></a> karena \(\E_\theta\left[h(\bs{X})\right] = \lambda\) untuk \(\theta \in T\).</p>
+	</details>
+</div>
+
+<p>Penduga bagi \(\lambda\) yang mencapai batas bawah Cram&eacute;r-Rao untuk setiap nilai parameter merupakan penduga tak bias dengan varians minimum seragam (UMVUE) bagi \(\lambda\).</p>
+
+	<div class="unit" id="crb8">
+	<p class="math">Pada setiap nilai parameter yang tetap, kesamaan dalam <a href="#crb7" class="ref"></a> berlaku tepat ketika \(h(\bs{X})\) dapat ditulis memakai suatu fungsi \(u(\theta)\) sebagai berikut, dengan probabilitas 1. Jika hubungan berikut berlaku untuk setiap nilai parameter, batas tercapai di seluruh ruang parameter dan penduga tersebut merupakan UMVUE:
+	\[ h(\bs{X}) = \lambda(\theta) + u(\theta) L_1(\bs{X}, \theta) \]</p>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Kesamaan dalam ketaksamaan korelasi berlaku tepat ketika kedua variabel acak merupakan transformasi linear satu sama lain. Ingat pula bahwa \(L_1(\bs{X}, \theta)\) mempunyai rata-rata 0.</p>
+	</details>
+</div>
+
+<p>Kuantitas \(\E_\theta\left[L_1^2(\bs{X}, \theta)\right]\) yang muncul pada penyebut batas bawah dalam teorema <a href="#crb7" class="ref"></a> dan <a href="#crb6" class="ref"></a> disebut <dfn>bilangan informasi Fisher</dfn> bagi \(\bs{X}\), dinamai menurut <a href="https://www.randomservices.org/random/biographies/Fisher.html" class="ancillary">Sir Ronald Fisher</a>. Teorema berikut memberikan bentuk alternatif bilangan informasi Fisher yang biasanya lebih mudah dihitung.</p>
+
+<div class="unit" id="crb9">
+	<p class="math">Jika turunan yang diperlukan ada dan pertukaran operator yang diperlukan sah, maka
+	\[ \E_\theta\left[L_1^2(\bs{X}, \theta)\right] = \E_\theta\left[L_2(\bs{X}, \theta)\right] \]</p>
+</div>
+
+<p>Teorema berikut memberikan bentuk kedua batas bawah Cram&eacute;r-Rao bagi penduga tak bias suatu parameter.</p>
+
+<div class="unit" id="crb10">
+	<p class="math">Jika \(\lambda(\theta)\) merupakan parameter sasaran dan \(h(\bs{X})\) merupakan penduga tak bias bagi \(\lambda\), maka</p>
+	\[ \var_\theta\left[h(\bs{X})\right] \ge \frac{\left[d\lambda / d\theta\right]^2}{\E_\theta\left[L_2(\bs{X}, \theta)\right]} \]
+	<details>
+		<summary>Rincian:</summary>
+		<p>Hasil ini mengikuti teorema <a href="#crb7" class="ref"></a> dan <a href="#crb9" class="ref"></a>.</p>
+	</details>
+</div>
+
+<h4 id="sam">Sampel Acak</h4>
+
+<p>Andaikan sekarang \(\bs{X} = (X_1, X_2, \ldots, X_n)\) merupakan <a href="../sample/Introduction.html">sampel acak</a> berukuran \(n\) dari distribusi variabel acak \(X\) yang mempunyai fungsi kepadatan probabilitas \(g_\theta\) dan bernilai dalam himpunan \(R\). Jadi, \(S = R^n\). Kita memakai huruf kecil untuk turunan fungsi log-kemungkinan satu pengamatan \(X\) dan negatif turunan kedua fungsi log-kemungkinan \(X\).</p>
+
+<div class="unit" id="sam1">
+	<p class="dfn">Untuk \(x \in R\) dan \(\theta \in T\), definisikan
+	\begin{align}
+		l(x, \theta) &amp; = \frac{d}{d\theta} \ln\left[g_\theta(x)\right] \\
+		l_2(x, \theta) &amp; = -\frac{d^2}{d\theta^2} \ln\left[g_\theta(x)\right]
+	\end{align}</p>
+</div>
+
+<div class="unit" id="sam2">
+	<p class="math">\(L_1^2\) dapat ditulis dalam \(l^2\), sedangkan \(L_2\) dapat ditulis dalam \(l_2\):</p>
+	<ol class="sub">
+		<li>\(\E_\theta\left[L_1^2(\bs{X}, \theta)\right] = n \E_\theta\left[l^2(X, \theta)\right]\)</li>
+		<li>\(\E_\theta\left[L_2(\bs{X}, \theta)\right] = n \E_\theta\left[l_2(X, \theta)\right]\)</li>
+	</ol>
+</div>
+
+<p>Teorema berikut memberikan bentuk kedua batas bawah Cram&eacute;r-Rao umum bagi varians suatu statistik, yang dikhususkan untuk sampel acak.</p>
+
+<div class="unit" id="sam3">
+	<p class="math">Jika \( h(\bs{X}) \) merupakan statistik, maka</p>
+	\[ \var_\theta\left[h(\bs{X})\right] \ge \frac{\left[\frac{d}{d\theta} \E_\theta\left[h(\bs{X})\right] \right]^2}{n \E_\theta\left[l^2(X, \theta)\right]} \]
+</div>
+
+<p>Teorema berikut memberikan bentuk ketiga batas bawah Cram&eacute;r-Rao bagi penduga tak bias suatu parameter, yang dikhususkan untuk sampel acak.</p>
+
+<div class="unit" id="sam4">
+	<p class="math">Andaikan \(\lambda(\theta)\) merupakan parameter sasaran dan \(h(\bs{X})\) merupakan penduga tak bias bagi \(\lambda\). Maka
+	\[ \var_\theta\left[h(\bs{X})\right] \ge \frac{(d\lambda / d\theta)^2}{n \E_\theta\left[l^2(X, \theta)\right]} \]</p>
+</div>
+
+<p>Perhatikan bahwa batas bawah Cram&eacute;r-Rao berbanding terbalik dengan ukuran sampel \(n\). Bentuk berikut memberikan versi keempat batas bawah tersebut bagi penduga tak bias suatu parameter, sekali lagi khusus untuk sampel acak.</p>
+
+<div class="unit" id="sam5">
+	<p class="math">Jika turunan yang diperlukan ada dan pertukaran operator yang diperlukan sah, maka
+	\[ \var_\theta\left[h(\bs{X})\right] \ge \frac{\left[d\lambda / d\theta\right]^2}{n \E_\theta\left[l_2(X, \theta)\right]} \]</p>
+</div>
+
+<p>Ringkasnya, terdapat empat bentuk batas bawah Cram&eacute;r-Rao bagi varians penduga tak bias untuk \(\lambda\): <a href="#crb7" class="ref"></a> dan <a href="#crb10" class="ref"></a> untuk kasus umum, serta <a href="#sam4" class="ref"></a> dan <a href="#sam5" class="ref"></a> ketika \(\bs{X}\) merupakan sampel acak dari distribusi \(X\). Jika penduga tak bias bagi \(\lambda\) mencapai batas yang berlaku untuk setiap nilai parameter, penduga itu merupakan UMVUE.</p>
+
+<h3 id="exa">Contoh dan Kasus Khusus</h3>
+
+<p>Kita akan menerapkan hasil di atas pada beberapa keluarga distribusi parametrik. Mula-mula, ingat kembali notasi baku berikut. Andaikan \(\bs{X} = (X_1, X_2, \ldots, X_n)\) merupakan sampel acak berukuran \(n\) dari distribusi variabel acak bernilai riil \(X\) dengan rata-rata \(\mu\) dan varians \(\sigma^2\). <a href="../sample/Mean.html">Rata-rata sampel</a> adalah
+\[ M = \frac{1}{n} \sum_{i=1}^n X_i \]
+Ingat bahwa \(\E(M) = \mu\) dan \(\var(M) = \sigma^2 / n\). Varians sampel khusus ketika \(\mu\) diketahui dan varians sampel baku masing-masing adalah
+\begin{align}
+	W^2 &amp; = \frac{1}{n} \sum_{i=1}^n (X_i - \mu)^2 \\
+	S^2 &amp; = \frac{1}{n - 1} \sum_{i=1}^n (X_i - M)^2
+\end{align}</p>
+
+<h4 id="ber">Distribusi Bernoulli</h4>
+
+<p>Andaikan \(\bs{X} = (X_1, X_2, \ldots, X_n)\) merupakan sampel acak berukuran \(n\) dari <a href="https://www.randomservices.org/random/bernoulli/Introduction.html">distribusi Bernoulli</a> dengan parameter keberhasilan tak diketahui \(p \in (0, 1)\). Dalam bahasa keandalan yang lazim, \(X_i = 1\) berarti berhasil pada percobaan ke-\(i\) dan \(X_i = 0\) berarti gagal pada percobaan ke-\(i\); distribusi ini dinamai menurut <a href="https://www.randomservices.org/random/biographies/Bernoulli.html" class="ancillary">Jacob Bernoulli</a>. Ingat bahwa fungsi kepadatan probabilitas Bernoulli adalah
+\[ g_p(x) = p^x (1 - p)^{1-x}, \quad x \in \{0, 1\} \]
+Asumsi <a href="#crb2" class="ref"></a> terpenuhi. Ingat pula bahwa rata-rata distribusi Bernoulli adalah \(p\), sedangkan variansnya \(p (1 - p)\).</p>
+
+<div class="unit" id="ber1">
+	<p class="math">\(p (1 - p) / n\) merupakan batas bawah Cram&eacute;r-Rao <a href="#sam5" class="ref"></a> bagi varians penduga tak bias untuk \(p\).</p>
+</div>
+
+<div class="unit" id="ber2">
+	<p class="math">Rata-rata sampel \(M\) (yaitu proporsi keberhasilan) mencapai batas dalam <a href="#ber1" class="ref"></a>, sehingga merupakan UMVUE bagi \(p\).</p>
+</div>
+
+<h4 id="poi">Distribusi Poisson</h4>
+
+<p>Andaikan \(\bs{X} = (X_1, X_2, \ldots, X_n)\) merupakan sampel acak berukuran \(n\) dari <a href="https://www.randomservices.org/random/poisson/Poisson.html">distribusi Poisson</a> dengan parameter \(\theta \in (0, \infty)\). Distribusi ini sering dipakai untuk memodelkan banyaknya <q>titik acak</q> dalam suatu wilayah waktu atau ruang, khususnya dalam konteks <a href="https://www.randomservices.org/random/poisson/index.html">proses Poisson</a>. Distribusi Poisson dinamai menurut <a href="https://www.randomservices.org/random/biographies/Poisson.html" class="ancillary">Simeon Poisson</a> dan mempunyai fungsi kepadatan probabilitas
+\[ g_\theta(x) = e^{-\theta} \frac{\theta^x}{x!}, \quad x \in \N \]
+Asumsi <a href="#crb2" class="ref"></a> terpenuhi. Ingat pula bahwa rata-rata dan varians distribusi tersebut sama-sama \(\theta\).</p>
+
+<div class="unit" id="poi1">
+	<p class="math">\(\theta / n\) merupakan batas bawah Cram&eacute;r-Rao <a href="#sam5" class="ref"></a> bagi varians penduga tak bias untuk \(\theta\).</p>
+</div>
+
+<div class="unit" id="poi2">
+	<p class="math">Rata-rata sampel \(M\) mencapai batas dalam <a href="#poi1" class="ref"></a>, sehingga merupakan UMVUE bagi \(\theta\).</p>
+</div>
+
+<h4 id="nor">Distribusi Normal</h4>
+
+<p>Andaikan \(\bs{X} = (X_1, X_2, \ldots, X_n)\) merupakan sampel acak berukuran \(n\) dari <a href="https://www.randomservices.org/random/special/Normal.html">distribusi normal</a> dengan rata-rata \(\mu \in \R\) dan varians \(\sigma^2 \in (0, \infty)\). Distribusi normal sangat penting dalam statistika, antara lain karena <a href="../sample/CLT.html">teorema limit pusat</a>. Distribusi ini banyak dipakai untuk memodelkan besaran fisik yang dipengaruhi banyak galat acak kecil dan mempunyai fungsi kepadatan probabilitas
+\[ g_{\mu,\sigma^2}(x) = \frac{1}{\sqrt{2 \, \pi} \sigma} \exp\left[-\frac{1}{2}\left[\frac{x - \mu}{\sigma}\right]^2 \right], \quad x \in \R\]</p>
+
+<p>Asumsi <a href="#crb2" class="ref"></a> terpenuhi untuk kedua parameter. Pendugaan rata-rata dan varians secara bersama memakai matriks informasi Fisher; pada model normal, informasi silang keduanya nol sehingga unsur diagonal invers matriks menghasilkan batas skalar yang sama seperti yang ditampilkan di bawah. Ingat pula bahwa momen pusat keempat adalah \(\E\left[(X - \mu)^4\right] = 3 \, \sigma^4\).</p>
+
+<div class="unit" id="nor1">
+	<p class="math">\(\sigma^2 / n\) merupakan batas bawah Cram&eacute;r-Rao <a href="#sam5" class="ref"></a> bagi varians penduga tak bias untuk \(\mu\).</p>
+</div>
+
+<div class="unit" id="nor2">
+	<p class="math">Rata-rata sampel \(M\) mencapai batas dalam <a href="#nor1" class="ref"></a>, sehingga merupakan UMVUE bagi \(\mu\).</p>
+</div>
+
+<div class="unit" id="nor3">
+	<p class="math">\(\frac{2 \sigma^4}{n}\) merupakan batas bawah Cram&eacute;r-Rao <a href="#sam5" class="ref"></a> bagi varians penduga tak bias untuk \(\sigma^2\).</p>
+</div>
+
+<div class="unit" id="nor4">
+	<p class="math"><a href="../sample/Variance.html">Varians sampel</a> \(S^2\) mempunyai varians \(\frac{2 \sigma^4}{n-1}\), sehingga tidak mencapai batas dalam <a href="#nor3" class="ref"></a>.</p>
+</div>
+
+<div class="unit" id="nor5">
+	<p class="math">Jika \(\mu\) diketahui, varians sampel khusus \(W^2\) mencapai batas dalam <a href="#nor3" class="ref"></a>, sehingga merupakan UMVUE bagi \(\sigma^2\).</p>
+</div>
+
+<div class="unit" id="nor6">
+	<p class="math">Jika \(\mu\) tidak diketahui, tidak ada penduga tak bias bagi \(\sigma^2\) yang mencapai batas bawah Cram&eacute;r-Rao dalam <a href="#nor3" class="ref"></a>.</p>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Hasil ini mengikuti syarat kesamaan dalam ketaksamaan Cram&eacute;r-Rao pada <a href="#crb8" class="ref"></a>.</p>
+	</details>
+</div>
+
+<h4 id="gam">Distribusi Gamma</h4>
+
+<p>Andaikan \(\bs{X} = (X_1, X_2, \ldots, X_n)\) merupakan sampel acak berukuran \(n\) dari <a href="https://www.randomservices.org/random/special/Gamma.html">distribusi gamma</a> dengan parameter bentuk diketahui \(k \gt 0\) dan parameter skala tak diketahui \(b \gt 0\). Distribusi gamma sering dipakai untuk memodelkan waktu acak dan jenis variabel acak positif tertentu lainnya. Fungsi kepadatan probabilitasnya adalah
+\[ g_b(x) = \frac{1}{\Gamma(k) b^k} x^{k-1} e^{-x/b}, \quad x \in (0, \infty) \]
+Asumsi dalam <a href="#crb2" class="ref"></a> terpenuhi terhadap \(b\). Selain itu, rata-rata dan varians distribusi gamma masing-masing adalah \(k b\) dan \(k b^2\).</p>
+
+<div class="unit" id="gam1">
+	<p class="math">\(\frac{b^2}{n k}\) merupakan batas bawah Cram&eacute;r-Rao <a href="#sam5" class="ref"></a> bagi varians penduga tak bias untuk \(b\).</p>
+</div>
+
+<div class="unit" id="gam2">
+<p class="math">\(\frac{M}{k}\) mencapai batas dalam <a href="#gam1" class="ref"></a>, sehingga merupakan UMVUE bagi \(b\).</p>
+</div>
+
+<h4 id="bet">Distribusi Beta</h4>
+
+<p>Andaikan \(\bs{X} = (X_1, X_2, \ldots, X_n)\) merupakan sampel acak berukuran \(n\) dari <a href="https://www.randomservices.org/random/special/Beta.html">distribusi beta</a> dengan parameter kiri \(a \gt 0\) dan parameter kanan \(b = 1\). Distribusi beta banyak dipakai untuk memodelkan proporsi acak dan variabel acak lain yang nilainya berada dalam interval terbatas. Dalam kasus khusus ini, fungsi kepadatan probabilitas satu pengamatan dari distribusi asal sampel adalah
+\[ g_a(x) = a \, x^{a-1}, \quad x \in (0, 1) \]
+Asumsi <a href="#crb2" class="ref"></a> terpenuhi terhadap \(a\).</p>
+
+<div class="unit" id="bet1">
+	<p class="math">Rata-rata dan varians distribusi tersebut adalah</p>
+	<ol class="sub">
+		<li>\(\mu = \frac{a}{a+1}\)</li>
+		<li>\(\sigma^2 = \frac{a}{(a + 1)^2 (a + 2)}\)</li>
+	</ol>
+</div>
+
+<div class="unit" id="bet2">
+	<p class="math">Batas bawah Cram&eacute;r-Rao <a href="#sam5" class="ref"></a> bagi varians penduga tak bias untuk \(\mu\) adalah \(\frac{a^2}{n \, (a + 1)^4}\).</p>
+</div>
+
+<div class="unit" id="bet3">
+	<p class="math">Rata-rata sampel \(M\) tidak mencapai batas bawah Cram&eacute;r-Rao dalam <a href="#bet2" class="ref"></a>. Untuk ukuran sampel satu, penduga tersebut sama dengan pengamatan tunggal dan merupakan UMVUE bagi \(\mu\). Untuk ukuran sampel sekurang-kurangnya dua, penduga itu bukan UMVUE: negatif jumlah logaritma pengamatan merupakan statistik cukup dan lengkap, dan pengondisian rata-rata sampel pada statistik itu menurut Rao–Blackwell menurunkan varians secara ketat.</p>
+</div>
+
+<h4 id="uni">Distribusi Seragam</h4>
+
+<p>Andaikan \(\bs{X} = (X_1, X_2, \ldots, X_n)\) merupakan sampel acak berukuran \(n\) dari <a href="https://www.randomservices.org/random/special/UniformContinuous.html">distribusi seragam</a> pada \([0, a]\), dengan \(a \gt 0\) sebagai parameter tak diketahui. Jadi, fungsi kepadatan probabilitas satu pengamatan dari distribusi asal sampel adalah
+\[ g_a(x) = \frac{1}{a}, \quad x \in [0, a] \]</p>
+
+<div class="unit" id="uni1">
+	<p class="math">Asumsi <a href="#crb2" class="ref"></a> <em>tidak</em> terpenuhi.</p>
+</div>
+
+<div class="unit" id="uni2">
+	<p class="math">Substitusi formal ke ungkapan berbasis skor dalam <a href="#sam4" class="ref"></a> bagi penduga tak bias untuk \(a\) menghasilkan \(\frac{a^2}{n}\). Substitusi formal ke bentuk berbasis turunan kedua menghasilkan negatif dari nilai tersebut. Namun, kedua nilai itu bukan batas bawah Cram&eacute;r-Rao yang sah karena teoremanya tidak berlaku, sebagaimana dinyatakan dalam <a href="#uni1" class="ref"></a>.</p>
+</div>
+
+<div class="unit" id="uni3">
+	<p class="math">Dari bagian tentang <a href="Likelihood.html#uni">penduga kemungkinan maksimum</a>, ingat bahwa \(V = \frac{n+1}{n} \max\{X_1, X_2, \ldots, X_n\}\) tak bias dan mempunyai varians \(\frac{a^2}{n (n + 2)}\). Varians ini lebih kecil daripada nilai formal dalam <a href="#uni2" class="ref"></a>; hal itu menegaskan kegagalan syarat regularitas, bukan pelanggaran suatu batas bawah yang sah.</p>
+</div>
+
+<p>Asumsi <a href="#crb2" class="ref"></a> gagal karena himpunan dukungan \(\left\{x \in \R: g_a(x) \gt 0\right\}\) bergantung pada parameter \(a\).</p>
+
+<h3 id="blu">Penduga Linear Tak Bias Terbaik</h3>
+
+<p>Sekarang kita meninjau masalah yang agak khusus, tetapi tetap sesuai dengan tema umum bagian ini. Andaikan \(\bs{X} = (X_1, X_2, \ldots, X_n)\) merupakan barisan variabel acak teramati bernilai riil yang saling tak berkorelasi dan mempunyai rata-rata tak diketahui yang sama, \(\mu \in \R\), tetapi simpangan bakunya dapat berbeda. Misalkan \(\bs{\sigma} = (\sigma_1, \sigma_2, \ldots, \sigma_n)\), dengan \(\sigma_i = \sd(X_i)\) untuk \(i \in \{1, 2, \ldots, n\}\). Jika salah satu simpangan baku nol, variabel hasil yang bersesuaian sama dengan rata-rata itu hampir pasti dan sudah menjadi penduga tepat; bobot invers-varians di bawah tidak terdefinisi. Karena itu, rumus berikut mengasumsikan semua simpangan baku positif.</p>
+
+<p>Kita meninjau penduga bagi \(\mu\) yang merupakan fungsi linear dari variabel hasil. Secara khusus, penduganya berbentuk berikut, dengan vektor koefisien \(\bs{c} = (c_1, c_2, \ldots, c_n)\) yang harus ditentukan:
+\[ Y = \sum_{i=1}^n c_i X_i \]</p>
+
+<div class="unit" id="blu1">
+	<p class="math">\(Y\) tak bias tepat ketika \(\sum_{i=1}^n c_i = 1\).</p>
+</div>
+
+<div class="unit" id="blu2">
+	<p class="math">Varians \(Y\) adalah
+	\[ \var(Y) = \sum_{i=1}^n c_i^2 \sigma_i^2 \]</p>
+</div>
+
+<div class="unit" id="blu3">
+	<p class="math">Dengan kendala tak bias, varians diminimumkan ketika
+	\[ c_j = \frac{1 / \sigma_j^2}{\sum_{i=1}^n 1 / \sigma_i^2}, \quad j \in \{1, 2, \ldots, n\} \]</p>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Gunakan metode pengali Lagrange (dinamai menurut <a href="https://www.randomservices.org/random/biographies/Lagrange.html" class="ancillary">Joseph-Louis Lagrange</a>).</p>
+	</details>
+</div>
+
+<p>Latihan <a href="#blu3" class="ref"></a> menunjukkan cara membentuk <dfn>Penduga Linear Tak Bias Terbaik</dfn> (<dfn>BLUE</dfn>) bagi \(\mu\) jika vektor simpangan baku positif \(\bs{\sigma}\) diketahui.</p>
+
+<p>Andaikan sekarang \(\sigma_i = \sigma\) untuk \(i \in \{1, 2, \ldots, n\}\), sehingga semua variabel hasil mempunyai simpangan baku yang sama. Hal ini khususnya berlaku jika variabel hasil membentuk sampel acak berukuran \(n\) dari distribusi dengan rata-rata \(\mu\) dan simpangan baku \(\sigma\).</p>
+
+<div class="unit" id="blu4">
+	<p class="math">Dalam kasus ini, varians diminimumkan ketika \(c_i = 1 / n\) untuk setiap \(i\), sehingga \(Y = M\), yaitu rata-rata sampel.</p>
+</div>
+
+<p>Latihan <a href="#blu4" class="ref"></a> menunjukkan bahwa rata-rata sampel \(M\) merupakan penduga linear tak bias terbaik bagi \(\mu\) ketika semua simpangan baku sama; selain itu, nilai simpangan baku tersebut tidak perlu diketahui.</p>
+
+<footer>
+	<ol class="map">
+		<li class="parent"><a href="https://www.randomservices.org/random/index.html">Random</a></li>
+		<li class="parent"><a href="index.html">6. Pendugaan Titik</a></li>
+		<li class="child"><a href="Estimators.html" title="Penduga">1</a></li>
+		<li class="child"><a href="Moments.html" title="Metode Momen">2</a></li>
+		<li class="child"><a href="Likelihood.html" title="Kemungkinan Maksimum">3</a></li>
+		<li class="child"><a href="Bayes.html" title="Penduga Bayes">4</a></li>
+		<li class="current">5</li>
+		<li class="child"><a href="https://www.randomservices.org/random/point/Sufficient.html" title="Statistik Cukup, Lengkap, dan Ancillary">6</a></li>
+		<li class="details"><button type="button" title="Perluas Rincian" onclick="expandDetails(true);"><img src="../icons/Plus.svg" alt="Perluas"></button></li>
+		<li class="details"><button type="button" title="Ciutkan Rincian" onclick="expandDetails(false);"><img src="../icons/Minus.svg" alt="Ciutkan"></button></li>
+	</ol>
+	<ul class="map">
+		<li class="sister"><a href="https://www.randomservices.org/random/apps/index.html" class="ancillary">Aplikasi</a></li>
+		<li class="sister"><a href="https://www.randomservices.org/random/data/index.html" class="ancillary">Himpunan Data</a></li>
+		<li class="child"><a href="https://www.randomservices.org/random/biographies/index.html" class="ancillary">Biografi</a></li>
+	</ul>
+    <section class="edition-notice" data-o006-edition-notice="v1">
+        <p><strong>Pemberitahuan edisi.</strong> Terjemahan Bahasa Indonesia ini mengadaptasi <a href="https://www.randomservices.org/random/">Random: Probabilitas, Statistika Matematis, dan Proses Stokastik</a> karya Kyle Siegrist. Perubahan pada halaman ini mencakup penerjemahan, penambahan ID stabil, pengalihan tautan inti yang telah diterjemahkan ke edisi lokal, pengalihan tautan inti yang belum diterjemahkan ke sumber resmi, pengubahan tautan pelengkap menjadi tautan HTTPS resmi, serta koreksi terbatas terhadap kekeliruan matematis dan data yang dicatat dalam daftar koreksi edisi.</p>
+        <p>Situs asal menyatakan <a href="https://creativecommons.org/licenses/by/2.0/">CC BY 2.0</a>, sedangkan halaman <a href="https://www.randomservices.org/random/Credits.html">Kredit</a> menautkan <a href="https://creativecommons.org/licenses/by/1.0/">CC BY 1.0</a>; perbedaan ini dipertahankan. Edisi independen ini tidak didukung maupun disahkan oleh Kyle Siegrist atau Random Services. Tautan ke aplikasi, data, dan biografi pihak ketiga tidak menyatakan hak untuk mendistribusikan ulang materi tersebut.</p>
+    </section>
+</footer>
+
+<script>getReferences();</script>
+
+</body>
+</html>

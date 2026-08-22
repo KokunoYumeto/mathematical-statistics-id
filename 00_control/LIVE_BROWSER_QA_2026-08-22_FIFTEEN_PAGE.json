@@ -1,0 +1,58 @@
+{
+  "schema": "o006.random.live-browser-qa.v1",
+  "checked_at": "2026-08-22T23:39:00+02:00",
+  "result": "pass",
+  "boundary": {
+    "status": "partial-15-of-29",
+    "page": "random/point/Unbiased.html",
+    "target_sha256": "3bbe9f00642b1095c120fc940b5aa6c026a62a8c757edc81f0fc334b9b6b86ba",
+    "reader_manifest_sha256": "d6f51461a9db39f53f832912fbe4c865059177094564ca5a6d0b30cc3c1740aa"
+  },
+  "desktop": {
+    "viewport": {"width": 1280, "height": 720},
+    "main_left_gap_px": 56,
+    "main_right_gap_px": 72,
+    "main_width_px": 1152,
+    "mathjax_containers": 247,
+    "details": 10,
+    "expanded_by_control": 10,
+    "collapsed_by_control": 10,
+    "images": 4,
+    "incomplete_images": 0,
+    "raw_tex_visible": false,
+    "page_overflow_px": 0,
+    "body_overflow_px": 0,
+    "uncontained_wide_elements": 0
+  },
+  "mobile": {
+    "viewport": {"width": 390, "height": 844},
+    "main_left_gap_px": 12,
+    "main_right_gap_px": 27,
+    "main_width_px": 351,
+    "mathjax_containers": 247,
+    "details": 10,
+    "images": 4,
+    "incomplete_images": 0,
+    "raw_tex_visible": false,
+    "page_overflow_px": 0,
+    "body_overflow_px": 0,
+    "wide_descendants_in_scroll_or_clip_containers": 75,
+    "uncontained_wide_elements": 0
+  },
+  "edition_metadata": {
+    "root_title": "Statistika Matematis — Bahasa Indonesia",
+    "root_lang": "id-ID",
+    "exact_model_provenance_present": true,
+    "source_author_credit_present": true
+  },
+  "console_warning_or_error_count": 0,
+  "method": "Fresh local credential-free render from build/html-id in the in-app browser. Desktop and mobile geometry, MathJax, images, raw TeX, overflow containment, and all ten disclosure controls were checked. The reader root was separately checked for exact additive model provenance and source-author credit. Temporary viewport override was reset; the task-owned tab and bounded local server were closed.",
+  "pdf_relationship": {
+    "path": "output/pdf/statistika-matematis-id-reader.pdf",
+    "physical_pages": 182,
+    "bytes": 76775084,
+    "sha256": "7c4898505962f6978eb064c605a77fca9ccbcd3ba7f9238f9cf0d8ae974662ef",
+    "visual_qa_receipt_sha256": "cf7b1c869b2f9848725800f19a5cfad3d39554430824627ba5859c71eb332f0b",
+    "note": "The consolidated PDF contains all fifteen translated documents with disclosure content expanded. All 182 pages were rendered and reviewed; the HTML reader remains the accessibility-first surface."
+  }
+}

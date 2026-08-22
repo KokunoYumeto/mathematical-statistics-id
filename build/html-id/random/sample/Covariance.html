@@ -6,7 +6,7 @@
 	<title>Korelasi dan Regresi Sampel</title>
 	<meta name="author" content="Kyle Siegrist">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="keywords" content="probabilitas, statistika, sampel acak, kovarians sampel, korelasi sampel, regresi linear, diagram pencar, penaksir takbias">
+	<meta name="keywords" content="probabilitas, statistika, sampel acak, kovarians sampel, korelasi sampel, regresi linear, diagram pencar, penduga tak bias">
 	<link rel="icon" href="../icons/Icon.svg" type="image/svg">
 	<link rel="stylesheet" href="../Screen.css" type="text/css" media="screen">
 	<script src="../Basic.js"></script>
@@ -93,7 +93,7 @@ dan <a href="Variance.html">varians sampel</a> adalah
 	<img src="ScatterPlotMeans.png" alt="Diagram pencar dengan rata-rata">
 </figure>
 
-<p>Anda mungkin bertanya-tanya mengapa kita merata-ratakan hasil kali simpangan dengan membagi oleh \(n - 1\), bukan \(n\). Penjelasan utamanya ialah bahwa dalam model probabilitas di <a href="#prb" class="ref"></a>, pilihan ini membuat kovarians sampel menjadi penaksir takbias bagi kovarians distribusi. Pemilihan pembagi ini juga dapat dipahami secara tepat melalui <dfn>derajat kebebasan</dfn>, seperti pada <a href="Variance.html">varians sampel</a>. Kedua vektor data mula-mula memiliki \(2 n\) koordinat. Pemusatan dengan rata-rata \(m(\bs{x})\) dan \(m(\bs{y})\) mengenakan satu kendala jumlah-nol pada setiap vektor, sehingga pasangan vektor berpusat memiliki \(2 n - 2\) derajat kebebasan. Setiap vektor berpusat berada dalam subruang berdimensi \(n - 1\), dan kovarians adalah hasil kali dalam kedua vektor tersebut yang dinormalisasi dengan \(n - 1\); tidak ada pengurangan derajat kebebasan tambahan ketika hasil kali komponennya dihitung. Namun, dari sudut pandang yang murni deskriptif, membagi oleh \(n\) juga masuk akal.</p>
+<p>Anda mungkin bertanya-tanya mengapa kita merata-ratakan hasil kali simpangan dengan membagi oleh \(n - 1\), bukan \(n\). Penjelasan utamanya ialah bahwa dalam model probabilitas di <a href="#prb" class="ref"></a>, pilihan ini membuat kovarians sampel menjadi penduga tak bias bagi kovarians distribusi. Pemilihan pembagi ini juga dapat dipahami secara tepat melalui <dfn>derajat kebebasan</dfn>, seperti pada <a href="Variance.html">varians sampel</a>. Kedua vektor data mula-mula memiliki \(2 n\) koordinat. Pemusatan dengan rata-rata \(m(\bs{x})\) dan \(m(\bs{y})\) mengenakan satu kendala jumlah-nol pada setiap vektor, sehingga pasangan vektor berpusat memiliki \(2 n - 2\) derajat kebebasan. Setiap vektor berpusat berada dalam subruang berdimensi \(n - 1\), dan kovarians adalah hasil kali dalam kedua vektor tersebut yang dinormalisasi dengan \(n - 1\); tidak ada pengurangan derajat kebebasan tambahan ketika hasil kali komponennya dihitung. Namun, dari sudut pandang yang murni deskriptif, membagi oleh \(n\) juga masuk akal.</p>
 
 <p>Ingat bahwa terdapat distribusi probabilitas alami yang berkaitan dengan data, yaitu distribusi empiris yang memberikan probabilitas \(\frac{1}{n}\) kepada setiap titik data \((x_i, y_i)\). (Jadi, jika titik-titik ini berbeda, distribusi tersebut adalah <a href="https://www.randomservices.org/random/dist/Discrete.html#uni">distribusi seragam diskret</a> pada data.) Rata-rata sampel tidak lain adalah <a href="https://www.randomservices.org/random/expect/Properties.html">nilai harapan</a> distribusi bivariat ini, dan kecuali suatu faktor konstan (pembagian oleh \(n - 1\), bukan \(n\)), varians sampel tidak lain adalah <a href="https://www.randomservices.org/random/expect/Variance.html">varians</a> distribusi bivariat ini. Demikian pula, kecuali suatu faktor konstan (sekali lagi pembagian oleh \(n - 1\), bukan \(n\)), kovarians sampel adalah <a href="https://www.randomservices.org/random/expect/Covariance.html">kovarians</a> distribusi bivariat dan korelasi sampel adalah korelasi distribusi bivariat. Semua hasil berikut dalam pembahasan statistika deskriptif sebenarnya merupakan kasus khusus dari hasil yang lebih umum untuk distribusi probabilitas.</p>
 
@@ -410,7 +410,7 @@ Perhatikan bahwa nilai prediksi \(\hat{y}_i\) dan residu \(d_i\) adalah <em>stat
 \[ \rho = \cor(X, Y) = \frac{\cov(X, Y)}{\sd(X) \, \sd(Y)} = \frac{\delta}{\sigma \, \tau} \]
 Kita juga memerlukan beberapa momen berorde lebih tinggi. Misalkan \(\sigma_4 = \E\left[(X - \mu)^4\right]\), \(\tau_4 = \E\left[(Y - \nu)^4\right]\), dan \(\delta_2 = \E\left[(X - \mu)^2 (Y - \nu)^2\right]\). Kita mengasumsikan bahwa semua momen tersebut berhingga dan bahwa kedua simpangan baku distribusi positif.</p>
 
-<p>Sekarang misalkan kita menjalankan eksperimen dasar sebanyak \(n\) kali. Ini menghasilkan eksperimen majemuk dengan urutan vektor acak <a href="https://www.randomservices.org/random/prob/Independence.html">independen</a> \(\left((X_1, Y_1), (X_2, Y_2), \ldots, (X_n, Y_n)\right)\), yang masing-masing memiliki distribusi yang sama dengan \((X, Y)\). Dalam istilah statistika, ini adalah <a href="Introduction.html">sampel acak</a> berukuran \(n\) dari distribusi \((X, Y)\). Statistik yang dibahas dalam <a href="#des">subbagian sebelumnya</a> terdefinisi dengan baik, tetapi kini semuanya merupakan variabel acak. Kita menggunakan notasi yang telah ditetapkan sebelumnya, kecuali bahwa sesuai konvensi biasa, variabel acak dilambangkan dengan huruf kapital. Tentu saja, sifat dan hubungan deterministik yang ditetapkan pada subbagian sebelumnya tetap berlaku. Perhatikan bahwa \(\bs{X} = (X_1, X_2, \ldots, X_n)\) adalah sampel acak berukuran \(n\) dari distribusi \(X\), dan \(\bs{Y} = (Y_1, Y_2, \ldots, Y_n)\) adalah sampel acak berukuran \(n\) dari distribusi \(Y\). Tujuan utama subbagian ini ialah mempelajari hubungan antara berbagai statistik dari \(\bs{X}\) dan \(\bs{Y}\), serta statistik yang merupakan penaksir alami bagi kovarians dan korelasi distribusi.</p>
+<p>Sekarang misalkan kita menjalankan eksperimen dasar sebanyak \(n\) kali. Ini menghasilkan eksperimen majemuk dengan urutan vektor acak <a href="https://www.randomservices.org/random/prob/Independence.html">independen</a> \(\left((X_1, Y_1), (X_2, Y_2), \ldots, (X_n, Y_n)\right)\), yang masing-masing memiliki distribusi yang sama dengan \((X, Y)\). Dalam istilah statistika, ini adalah <a href="Introduction.html">sampel acak</a> berukuran \(n\) dari distribusi \((X, Y)\). Statistik yang dibahas dalam <a href="#des">subbagian sebelumnya</a> terdefinisi dengan baik, tetapi kini semuanya merupakan variabel acak. Kita menggunakan notasi yang telah ditetapkan sebelumnya, kecuali bahwa sesuai konvensi biasa, variabel acak dilambangkan dengan huruf kapital. Tentu saja, sifat dan hubungan deterministik yang ditetapkan pada subbagian sebelumnya tetap berlaku. Perhatikan bahwa \(\bs{X} = (X_1, X_2, \ldots, X_n)\) adalah sampel acak berukuran \(n\) dari distribusi \(X\), dan \(\bs{Y} = (Y_1, Y_2, \ldots, Y_n)\) adalah sampel acak berukuran \(n\) dari distribusi \(Y\). Tujuan utama subbagian ini ialah mempelajari hubungan antara berbagai statistik dari \(\bs{X}\) dan \(\bs{Y}\), serta statistik yang merupakan penduga alami bagi kovarians dan korelasi distribusi.</p>
 
 <h4 id="men">Rata-Rata Sampel</h4>
 
@@ -433,7 +433,7 @@ Dari bagian mengenai <a href="LLN.html">hukum bilangan besar</a> dan <a href="CL
 	</details>
 </div>
 
-<p>Perhatikan bahwa korelasi antara rata-rata sampel sama dengan korelasi distribusi pengambilan sampel yang mendasarinya. Secara khusus, korelasi tersebut tidak bergantung pada ukuran sampel \(n\).</p>
+<p>Perhatikan bahwa korelasi antara rata-rata sampel sama dengan korelasi distribusi asal sampel yang mendasarinya. Secara khusus, korelasi tersebut tidak bergantung pada ukuran sampel \(n\).</p>
 
 <h4 id="var">Varians Sampel</h4>
 
@@ -491,7 +491,7 @@ Sekali lagi, kita telah mempelajari statistik ini secara individual, sehingga se
 <p>Pertama, misalkan rata-rata distribusi \(\mu\) dan \(\nu\) diketahui. Seperti disebutkan sebelumnya, asumsi ini hampir selalu tidak realistis, tetapi tetap merupakan titik awal yang baik karena analisisnya sangat sederhana dan hasil yang diperoleh akan berguna di bawah.</p>
 
 <div class="unit" id="o006.random.sample.covariance.unit.special-sample-covariance-definition">
-	<p class="dfn">Penaksir alami bagi kovarians distribusi \(\delta = \cov(X, Y)\) ketika rata-rata distribusi diketahui adalah <dfn>kovarians sampel khusus</dfn>
+	<p class="dfn">Penduga alami bagi kovarians distribusi \(\delta = \cov(X, Y)\) ketika rata-rata distribusi diketahui adalah <dfn>kovarians sampel khusus</dfn>
 	\[ W(\bs{X}, \bs{Y}) = \frac{1}{n} \sum_{i=1}^n (X_i - \mu)(Y_i - \nu) \]</p>
 </div>
 
@@ -511,9 +511,9 @@ Sekali lagi, kita telah mempelajari statistik ini secara individual, sehingga se
 	</details>
 </div>
 
-<p>Sebagai penaksir \(\delta\), bagian (a) berarti bahwa \(W(\bs{X}, \bs{Y})\) bersifat <dfn>takbias</dfn>, sedangkan bagian (c), bersama dengan varians pada bagian (b), menunjukkan bahwa \(W(\bs{X}, \bs{Y})\) bersifat <dfn>konsisten</dfn>.</p>
+<p>Sebagai penduga \(\delta\), bagian (a) berarti bahwa \(W(\bs{X}, \bs{Y})\) bersifat <dfn>tak bias</dfn>, sedangkan bagian (c), bersama dengan varians pada bagian (b), menunjukkan bahwa \(W(\bs{X}, \bs{Y})\) bersifat <dfn>konsisten</dfn>.</p>
 
-<p>Sekarang pertimbangkan asumsi yang lebih realistis bahwa rata-rata distribusi \(\mu\) dan \(\nu\) tidak diketahui. Pendekatan alami dalam kasus ini ialah merata-ratakan \([X_i - M(\bs{X})][Y_i - M(\bs{Y})]\) terhadap \(i \in \{1, 2, \ldots, n\}\). Namun, alih-alih membagi rata-rata kita dengan \(n\), kita harus membaginya dengan konstanta yang menghasilkan penaksir takbias bagi \(\delta\). Seperti ditunjukkan di <a href="#prbcov2" class="ref"></a>, konstanta tersebut adalah \(n - 1\), sehingga diperoleh definisi berikut:</p>
+<p>Sekarang pertimbangkan asumsi yang lebih realistis bahwa rata-rata distribusi \(\mu\) dan \(\nu\) tidak diketahui. Pendekatan alami dalam kasus ini ialah merata-ratakan \([X_i - M(\bs{X})][Y_i - M(\bs{Y})]\) terhadap \(i \in \{1, 2, \ldots, n\}\). Namun, alih-alih membagi rata-rata kita dengan \(n\), kita harus membaginya dengan konstanta yang menghasilkan penduga tak bias bagi \(\delta\). Seperti ditunjukkan di <a href="#prbcov2" class="ref"></a>, konstanta tersebut adalah \(n - 1\), sehingga diperoleh definisi berikut:</p>
 
 <div class="unit" id="o006.random.sample.covariance.unit.sample-covariance-correlation-definition-probability">
 	<p class="dfn">Untuk ukuran sampel sedikitnya dua, <dfn>kovarians sampel</dfn> standar adalah
@@ -529,7 +529,7 @@ Sekali lagi, kita telah mempelajari statistik ini secara individual, sehingga se
 		<summary>Rincian:</summary>
 		<p>Dengan mengembangkan seperti di atas, kita memperoleh
 		\[ \sum_{i=1}^n[X_i - M(\bs{X})][Y_i - M(\bs{Y})] = \sum_{i=1}^n X_i Y_i - n M(\bs{X})M(\bs{Y}) \]
-		Namun, \(\E(X_i Y_i) = \cov(X_i, Y_i) + \E(X_i) \E(Y_i) = \delta + \mu \nu\). Demikian pula, berdasarkan kovarians rata-rata sampel dan sifat takbias, \(\E[M(\bs{X}) M(\bs{Y})] = \cov[M(\bs{X}), M(\bs{Y})] + \E[M(\bs{X})] \E[M(\bs{Y})] = \delta / n + \mu \nu\). Jadi, dengan mengambil nilai harapan pada persamaan yang ditampilkan di atas, diperoleh
+		Namun, \(\E(X_i Y_i) = \cov(X_i, Y_i) + \E(X_i) \E(Y_i) = \delta + \mu \nu\). Demikian pula, berdasarkan kovarians rata-rata sampel dan sifat tak bias, \(\E[M(\bs{X}) M(\bs{Y})] = \cov[M(\bs{X}), M(\bs{Y})] + \E[M(\bs{X})] \E[M(\bs{Y})] = \delta / n + \mu \nu\). Jadi, dengan mengambil nilai harapan pada persamaan yang ditampilkan di atas, diperoleh
 		\[ \E\left(\sum_{i=1}^n [X_i - M(\bs{X})][Y_i - M(\bs{Y})]\right) = n ( \delta + \mu \nu) - n (\delta / n + \mu \nu) = (n - 1) \delta \]</p>
 	</details>
 </div>
@@ -544,7 +544,7 @@ Sekali lagi, kita telah mempelajari statistik ini secara individual, sehingga se
 	</details>
 </div>
 
-<p>Karena korelasi sampel \(R(\bs{X}, \bs{Y})\) merupakan fungsi nonlinear dari kovarians sampel dan simpangan baku sampel, secara umum statistik ini bukan penaksir takbias bagi korelasi distribusi \(\rho\). Dalam kebanyakan kasus, bahkan rata-rata dan varians \(R(\bs{X}, \bs{Y})\) akan sulit dihitung. Meskipun demikian, kita dapat menunjukkan konvergensi korelasi sampel menuju korelasi distribusi.</p>
+<p>Karena korelasi sampel \(R(\bs{X}, \bs{Y})\) merupakan fungsi nonlinear dari kovarians sampel dan simpangan baku sampel, secara umum statistik ini bukan penduga tak bias bagi korelasi distribusi \(\rho\). Dalam kebanyakan kasus, bahkan rata-rata dan varians \(R(\bs{X}, \bs{Y})\) akan sulit dihitung. Meskipun demikian, kita dapat menunjukkan konvergensi korelasi sampel menuju korelasi distribusi.</p>
 
 <div class="unit" id="prbcov4">
 	<p class="math">\(R(\bs{X}, \bs{Y}) \to \rho\) ketika \(n \to \infty\) dengan probabilitas 1.</p>
@@ -589,7 +589,7 @@ Sekali lagi, kita telah mempelajari statistik ini secara individual, sehingga se
 </div>
 
 <div class="unit" id="prbcov7">
-	<p class="math">\(\var[S(\bs{X}, \bs{Y})] \to 0\) ketika \(n \to \infty\), sehingga kovarians sampel merupakan penaksir <dfn>konsisten</dfn> bagi kovarians distribusi.</p>
+	<p class="math">\(\var[S(\bs{X}, \bs{Y})] \to 0\) ketika \(n \to \infty\), sehingga kovarians sampel merupakan penduga <dfn>konsisten</dfn> bagi kovarians distribusi.</p>
 </div>
 
 <h4 id="prbreg">Regresi</h4>
@@ -620,7 +620,7 @@ Selain itu, nilai minimum galat kuadrat rata-ratanya adalah \(\E\{[Y - L(Y \mid 
 	<img src="SampleLinearPredictor.png" alt="Garis regresi distribusi dan sampel">
 </figure>
 
-<p>Fakta bahwa garis regresi sampel dan galat kuadrat rata-rata sepenuhnya analog dengan garis regresi distribusi dan galat kuadrat rata-rata merupakan hal yang elegan dan meyakinkan secara matematis. Sekali lagi, koefisien garis regresi sampel dapat dipandang sebagai penaksir bagi koefisien yang bersesuaian pada garis regresi distribusi.</p>
+<p>Fakta bahwa garis regresi sampel dan galat kuadrat rata-rata sepenuhnya analog dengan garis regresi distribusi dan galat kuadrat rata-rata merupakan hal yang elegan dan meyakinkan secara matematis. Sekali lagi, koefisien garis regresi sampel dapat dipandang sebagai penduga bagi koefisien yang bersesuaian pada garis regresi distribusi.</p>
 
 <div class="unit" id="prbreg1">
 	<p class="math">Dengan mengasumsikan bahwa varians distribusi prediktor positif, koefisien garis regresi sampel konvergen menuju koefisien garis regresi distribusi dengan probabilitas 1.</p>

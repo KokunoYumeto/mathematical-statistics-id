@@ -21,7 +21,7 @@ EXPECTED_SOURCE_LINES = 120
 LINE_REPLACEMENTS: dict[int, str] = {
     2: r'''<html lang="id-ID">''',
     6: r'''	<title>Pendugaan Titik</title>''',
-    9: r'''	<meta name="keywords" content="probabilitas, statistika, pendugaan titik, metode momen, metode kemungkinan maksimum, penduga tak bias, penduga Bayes, statistik cukup, statistik lengkap, statistik ancilar">''',
+    9: r'''	<meta name="keywords" content="probabilitas, statistika, pendugaan titik, metode momen, metode kemungkinan maksimum, penduga tak bias, penduga Bayes, statistik cukup, statistik lengkap, statistik ancillary">''',
     23: r'''		<li class="child"><a href="../foundations/index.html" title="Dasar-Dasar">0</a></li>''',
     24: r'''		<li class="child"><a href="../prob/index.html" title="Ruang Probabilitas">1</a></li>''',
     25: r'''		<li class="child"><a href="../dist/index.html" title="Distribusi">2</a></li>''',
@@ -100,6 +100,7 @@ LOCAL_URLS = {
     "https://www.randomservices.org/random/point/Moments.html": "Moments.html",
     "https://www.randomservices.org/random/point/Likelihood.html": "Likelihood.html",
     "https://www.randomservices.org/random/point/Bayes.html": "Bayes.html",
+    "https://www.randomservices.org/random/point/Unbiased.html": "Unbiased.html",
 }
 
 

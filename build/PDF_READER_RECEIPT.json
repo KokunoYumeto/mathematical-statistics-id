@@ -1,10 +1,11 @@
 {
   "schema": "o006.random.pdf-reader-receipt.v1",
-  "status": "partial-14-of-29",
-  "source_documents": 14,
-  "physical_pages": 173,
-  "bytes": 73828250,
-  "sha256": "0b6dfa8384eec9a73cb8a489fd2e47c9052eaf33a899b04a21641a8300d3b5af",
+  "translation_provenance": "OpenAI Codex gpt-5.6-sol, Ultra",
+  "status": "partial-15-of-29",
+  "source_documents": 15,
+  "physical_pages": 182,
+  "bytes": 76775084,
+  "sha256": "7c4898505962f6978eb064c605a77fca9ccbcd3ba7f9238f9cf0d8ae974662ef",
   "filename": "statistika-matematis-id-reader.pdf",
   "front_matter_pages": 2,
   "documents": [
@@ -25,7 +26,7 @@
       "documentScrollWidth": 1280,
       "wideElements": [],
       "pdf_pages": 3,
-      "sha256": "3100057464401d71382519ff36494c4735d9426655a80c0169e1ae74735a751c"
+      "sha256": "eec2a7dc20ca6e075a38399f5867934ecf8e28d91e18a897195872a5b80b0fea"
     },
     {
       "ordinal": 2,
@@ -44,14 +45,14 @@
       "documentScrollWidth": 1280,
       "wideElements": [],
       "pdf_pages": 8,
-      "sha256": "f7d0ed0b131c400211e5ba2e95f589b3200428080492f464eb1c3db6cf57dd29"
+      "sha256": "8478da851b057542f77d89cddcf869196c6f4e0f062d73df8a1cfd3ed02775f6"
     },
     {
       "ordinal": 3,
       "relativePath": "random/sample/Mean.html",
       "label": "Rata-rata Sampel",
       "filename": "03-Mean.pdf",
-      "bytes": 714314,
+      "bytes": 714305,
       "title": "Rata-Rata Sampel",
       "mathContainers": 366,
       "details": 23,
@@ -62,15 +63,15 @@
       "viewportWidth": 1280,
       "documentScrollWidth": 1280,
       "wideElements": [],
-      "pdf_pages": 13,
-      "sha256": "c466e4ccac52473a0a7ae1073a7ba9d33aecadac1aa217fefde3d9622d73dcf8"
+      "pdf_pages": 14,
+      "sha256": "a953d23a2d10ae8be14b492451a5271fe2d64688cc262f90834ca67b81d154cd"
     },
     {
       "ordinal": 4,
       "relativePath": "random/sample/LLN.html",
       "label": "Hukum Bilangan Besar",
       "filename": "04-LLN.pdf",
-      "bytes": 676648,
+      "bytes": 676288,
       "title": "Hukum Bilangan Besar",
       "mathContainers": 268,
       "details": 13,
@@ -82,14 +83,14 @@
       "documentScrollWidth": 1280,
       "wideElements": [],
       "pdf_pages": 9,
-      "sha256": "b76d03582d345455317e8916949d6c175d31c8dae1cf9e07b808a7ab68f41f04"
+      "sha256": "b20dcc979b0fb5dce94d40822e949511f801dc238ff7726a5fc51495e13db3a7"
     },
     {
       "ordinal": 5,
       "relativePath": "random/sample/CLT.html",
       "label": "Teorema Limit Pusat",
       "filename": "05-CLT.pdf",
-      "bytes": 759241,
+      "bytes": 759361,
       "title": "Teorema Limit Pusat",
       "mathContainers": 394,
       "details": 21,
@@ -101,14 +102,14 @@
       "documentScrollWidth": 1280,
       "wideElements": [],
       "pdf_pages": 12,
-      "sha256": "b72ed9bc7e387256ca34f000cd23638b319485de279dc13c5f2805f8d9ce2c87"
+      "sha256": "5abdd750d8280f61abfb345f36fd9a48ae684dc6889198d12432853f484c9589"
     },
     {
       "ordinal": 6,
       "relativePath": "random/sample/Variance.html",
       "label": "Varians Sampel",
       "filename": "06-Variance.pdf",
-      "bytes": 1101382,
+      "bytes": 1101393,
       "title": "Varians Sampel",
       "mathContainers": 586,
       "details": 39,
@@ -120,14 +121,14 @@
       "documentScrollWidth": 1280,
       "wideElements": [],
       "pdf_pages": 18,
-      "sha256": "8bfc0eefc428cf4158c10c70a09f4889141b9eea6f83828ae1264980f5f0e7cd"
+      "sha256": "5ce2605fbe37e3db27249a68f6a6e5e1d4e51ac103aaad1279984fa1af6547ad"
     },
     {
       "ordinal": 7,
       "relativePath": "random/sample/OrderStatistics.html",
       "label": "Statistik Urutan",
       "filename": "07-OrderStatistics.pdf",
-      "bytes": 1236220,
+      "bytes": 1236328,
       "title": "Statistik Terurut",
       "mathContainers": 569,
       "details": 34,
@@ -139,14 +140,14 @@
       "documentScrollWidth": 1280,
       "wideElements": [],
       "pdf_pages": 17,
-      "sha256": "cea0e4223e244e87ffb0ef4011486041f4202592d9e871ade723ef916bfdf9d9"
+      "sha256": "1b9d1c3077b9a7e7a4f682ae40afd86ba042b76c59896894f6563961ec06bffe"
     },
     {
       "ordinal": 8,
       "relativePath": "random/sample/Covariance.html",
       "label": "Kovarians dan Korelasi Sampel",
       "filename": "08-Covariance.pdf",
-      "bytes": 1665729,
+      "bytes": 1665687,
       "title": "Korelasi dan Regresi Sampel",
       "mathContainers": 802,
       "details": 34,
@@ -158,14 +159,14 @@
       "documentScrollWidth": 1280,
       "wideElements": [],
       "pdf_pages": 23,
-      "sha256": "b7a839e4783358f5f12fd88f8963735a2903a342925366f1b872d1800e1c1d18"
+      "sha256": "bce54ca62e9b79e1b9077a102bbf56225994db23dd4985a733488b2dee3a27eb"
     },
     {
       "ordinal": 9,
       "relativePath": "random/sample/Normal.html",
       "label": "Sampel Normal",
       "filename": "09-Normal.pdf",
-      "bytes": 697428,
+      "bytes": 697717,
       "title": "Sifat Khusus Sampel Normal",
       "mathContainers": 381,
       "details": 21,
@@ -177,14 +178,14 @@
       "documentScrollWidth": 1283,
       "wideElements": [],
       "pdf_pages": 11,
-      "sha256": "f1676bed6c3f63f70c672860fc130bb2e5212f8d754359bd2f11d17fa245ccdc"
+      "sha256": "89f09a266a7bc299c5a780d29bab19194b033c3bd69a8d3e4997e831abcc2d3f"
     },
     {
       "ordinal": 10,
       "relativePath": "random/point/index.html",
       "label": "6. Pendugaan Titik",
       "filename": "10-index.pdf",
-      "bytes": 139869,
+      "bytes": 139851,
       "title": "Pendugaan Titik",
       "mathContainers": 0,
       "details": 0,
@@ -196,14 +197,14 @@
       "documentScrollWidth": 1280,
       "wideElements": [],
       "pdf_pages": 2,
-      "sha256": "b3faa2a64a1f5794559b6d65cbb6096d311261b0a68a9818e62838131b0c8bed"
+      "sha256": "c05dddd4646bbf9ed1e0bbf79ed20ff3d9a4aca26d4a69872668998eb33bee53"
     },
     {
       "ordinal": 11,
       "relativePath": "random/point/Estimators.html",
       "label": "Penduga",
       "filename": "11-Estimators.pdf",
-      "bytes": 757965,
+      "bytes": 757919,
       "title": "Penduga",
       "mathContainers": 432,
       "details": 15,
@@ -215,14 +216,14 @@
       "documentScrollWidth": 1280,
       "wideElements": [],
       "pdf_pages": 10,
-      "sha256": "eeeed216f3e21167fb6c0ad71e02bcc44e375ce439689d8e61d93a2b989206a8"
+      "sha256": "cec9f93b984c0ef29d806630a6cace20ce0a5597077635beeb5377abca67413a"
     },
     {
       "ordinal": 12,
       "relativePath": "random/point/Moments.html",
       "label": "Metode Momen",
       "filename": "12-Moments.pdf",
-      "bytes": 1068400,
+      "bytes": 1068364,
       "title": "Metode Momen",
       "mathContainers": 652,
       "details": 29,
@@ -234,14 +235,14 @@
       "documentScrollWidth": 1280,
       "wideElements": [],
       "pdf_pages": 15,
-      "sha256": "40117496a1400d75da6e5afda55aa443e10798d93414f0e75906e3645497199a"
+      "sha256": "6d67379dd2ed9baf9fe01964f7a0da0f7c2c3647b013608c0c0cc8d0004b9312"
     },
     {
       "ordinal": 13,
       "relativePath": "random/point/Likelihood.html",
       "label": "Kemungkinan Maksimum",
       "filename": "13-Likelihood.pdf",
-      "bytes": 1313390,
+      "bytes": 1313354,
       "title": "Kemungkinan Maksimum",
       "mathContainers": 592,
       "details": 22,
@@ -253,14 +254,14 @@
       "documentScrollWidth": 1280,
       "wideElements": [],
       "pdf_pages": 15,
-      "sha256": "02d04799b7a7a43f8173eb28ed13a56cec55c2edc72a17b52d9f5a56114a25bc"
+      "sha256": "1d040ab2628844eff6d668a25feace5e0198475fb994146941a32482efdf076c"
     },
     {
       "ordinal": 14,
       "relativePath": "random/point/Bayes.html",
       "label": "Pendugaan Bayes",
       "filename": "14-Bayes.pdf",
-      "bytes": 1254375,
+      "bytes": 1254335,
       "title": "Penduga Bayes",
       "mathContainers": 633,
       "details": 23,
@@ -272,17 +273,36 @@
       "documentScrollWidth": 1280,
       "wideElements": [],
       "pdf_pages": 15,
-      "sha256": "32606705938f55a891b6c61d72bb96a1f686e4fcad330cbbd378b887f0a28f8b"
+      "sha256": "76a87ba06b5ecdaf8572e07a00d00a1c213a2f3ef129312732a3375c6a5f51c0"
+    },
+    {
+      "ordinal": 15,
+      "relativePath": "random/point/Unbiased.html",
+      "label": "Penduga Tak Bias Terbaik",
+      "filename": "15-Unbiased.pdf",
+      "bytes": 555102,
+      "title": "Penduga Tak Bias Terbaik",
+      "mathContainers": 247,
+      "details": 10,
+      "openDetails": 10,
+      "incompleteImages": 0,
+      "rawTex": false,
+      "pageOverflow": false,
+      "viewportWidth": 1280,
+      "documentScrollWidth": 1280,
+      "wideElements": [],
+      "pdf_pages": 8,
+      "sha256": "e6a5683e3cc6b012024264fb101a8f7fa7d7eeaf86ee3ea8b45bda148e9c63fe"
     }
   ],
   "browser_version": "151.0.7922.173",
   "browser_executable_sha256": "bd88b26777496cef22fc09860164da7cba4a5c77e1dcbf5ad3a3967aa457d715",
   "regular_font_sha256": "b3658eadae55e682b5f69eb64c439c1ecc8f196c0bb8d4756d145d13bc86476a",
   "bold_font_sha256": "e8f4e3baf6cc35fed6fcce3a540e8b39e8f6cda1d22a28f2ec8f526fef7a43f5",
-  "renderer_sha256": "342ce194e332a8969f0a7764ad3221b4ef552d623a90d114750fd91efc2e7426",
-  "builder_sha256": "5906138ae8f029fbf833496028baa9dfb82dcb72542fcbe47a94f7e33043bf0b",
-  "reader_manifest_sha256": "7f00470344a634c3cffe0eb3893690a10784f0894baca9a3fb1bc68418d5dae2",
-  "reader_build_receipt_sha256": "0ba486440adbc5f32bb1d04218f2e0b015859735071e0a670e296ca077ff3840",
-  "reader_qa_receipt_sha256": "70c23cd031da831b2470e5f7b46beaeef9af499451b4096f7fd16a2123ef93a8",
+  "renderer_sha256": "5434cc4641dbe7ab2114d1028a7c1c90c24d10eefdc24a9862fda4739dddef8f",
+  "builder_sha256": "5e49ec1329deff04cbd0869437e383fa1bb1d9aa4563a31799ecbd7b9f94939f",
+  "reader_manifest_sha256": "d6f51461a9db39f53f832912fbe4c865059177094564ca5a6d0b30cc3c1740aa",
+  "reader_build_receipt_sha256": "80cccbfe818a9f912bc183deb2f41448ebaa1d91756ad003b87a96eda5dcdd64",
+  "reader_qa_receipt_sha256": "3031b412ce7eb275f2c0ad7129799a76506c86b50b34dc439d34d4d0d71ac0b0",
   "license_path": "LICENSE.md"
 }

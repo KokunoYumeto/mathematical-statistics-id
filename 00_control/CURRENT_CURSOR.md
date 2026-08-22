@@ -7,30 +7,40 @@
   `d36e0f8bf9fa44a38a7504f9688a08af6787d88ede99298316a3e022b6f799f5`
 - Ordered core: the `core_paths` array in
   `authority/SOURCE_FREEZE_RECEIPT.json`.
-- Last completed source page: `random/point/Bayes.html` (core ordinal 14 of
-  29); target SHA-256
-  `d292d76240f67b06e4ba2140a0cb95dcc9d674644158131a047a7f23ec755ca8`.
-- Next contiguous source page: `random/point/Unbiased.html` (core ordinal 15);
-  authority 28,635 bytes, SHA-256
-  `0d9765c5c7b5b8a54b29fc45c3a435d20e2a9200e027609658345087dedcd531`.
-- Latest HTML reader: 14 translated pages; 44 files; 2,471,964 bytes;
+- Last completed source page: `random/point/Unbiased.html` (core ordinal 15 of
+  29); target 31,784 bytes, SHA-256
+  `3bbe9f00642b1095c120fc940b5aa6c026a62a8c757edc81f0fc334b9b6b86ba`.
+- Next contiguous source page: `random/point/Sufficient.html` (core ordinal
+  16); authority 57,507 bytes, SHA-256
+  `4d7402f2a960ea2b4232e57e4ee5992ac29801b9269f300f17f8e83074d5a0e4`.
+- Latest HTML reader: 15 translated pages; 45 files; 2,503,889 bytes;
   manifest SHA-256
-  `7f00470344a634c3cffe0eb3893690a10784f0894baca9a3fb1bc68418d5dae2`.
+  `d6f51461a9db39f53f832912fbe4c865059177094564ca5a6d0b30cc3c1740aa`.
 - Latest deterministic HTML QA receipt SHA-256:
-  `70c23cd031da831b2470e5f7b46beaeef9af499451b4096f7fd16a2123ef93a8`.
-- Backend: 6,567 entities / 9,035 relations; 3,777 translated bindings;
+  `3031b412ce7eb275f2c0ad7129799a76506c86b50b34dc439d34d4d0d71ac0b0`.
+- Backend: 6,567 entities / 9,035 relations; 4,012 translated bindings;
   receipt SHA-256
-  `ee7f0e7e0b4d2bc57df3ed4c62da3baa089b9191663b3d5cd257c3fb94620179`.
-- Reader-first PDF: 173 A4 pages / 73,828,250 bytes; SHA-256
-  `0b6dfa8384eec9a73cb8a489fd2e47c9052eaf33a899b04a21641a8300d3b5af`.
-  Its corrected document map follows the frozen Covariance-then-Normal order;
-  all 173 pages were rerendered and visually reviewed. PDF receipt SHA-256:
-  `f61556e31c1c875b1a21b32d1c5dca94dd4dd37efd1a274042590c9f2410d1aa`;
+  `26ae6fe8e9b1a02ad7c65b9b93bed53d85ae62c56124bd13cc416fdccaf0a6a5`.
+- Terminology QA: no qualifying Indonesian mathematical-statistics arXiv TeX
+  source was found; the permitted Universitas Lampung PDF fallback and bounded
+  institutional comparators were inspected directly. Decisions, exact URLs,
+  hashes, evidence, aliases, and propagation are in
+  `TERMINOLOGY_QA_2026-08-22.md` (SHA-256
+  `46ce8b83bcd730e832bdc904c209eae754d5f6e97a95b1ec0f87c842c0bf4832`)
+  and `TERMINOLOGY_GLOSSARY_ID_ID.csv` (SHA-256
+  `4ac64a2fa99f90c019c865adb03a1f3852c99954474c4fefa8d28938dc19d93c`).
+  Two full backend/build/QA replays are byte-identical. The exact additive
+  provenance string is `OpenAI Codex gpt-5.6-sol, Ultra`; source-author and
+  human-contributor credits remain intact.
+- Reader-first PDF: 182 A4 pages / 76,775,084 bytes; SHA-256
+  `7c4898505962f6978eb064c605a77fca9ccbcd3ba7f9238f9cf0d8ae974662ef`.
+  All 182 pages were rerendered and visually reviewed. PDF receipt SHA-256:
+  `69995c86f5b69696e39f21ad31696517dac1d56ea8afd212efe7eb7f8c9d2029`;
   visual-QA receipt SHA-256:
-  `6d4fc0ef3ce02647af4bd2bb93725e8008a3b09f4e5d1d711e5b0fb251731bd2`.
+  `cf7b1c869b2f9848725800f19a5cfad3d39554430824627ba5859c71eb332f0b`.
 - Exact local checkpoint:
-  `CHECKPOINT_2026-08-22_FOURTEEN_PAGE.md` and
-  `LIVE_BROWSER_QA_2026-08-22_FOURTEEN_PAGE.json`.
+  `CHECKPOINT_2026-08-22_FIFTEEN_PAGE.md` and
+  `LIVE_BROWSER_QA_2026-08-22_FIFTEEN_PAGE.json`.
 - GitHub account and repository access are restored. The fourteen-page
   checkpoint is public at commit
   `394b3380dd654af6b133448bcaa999b3d875afa3`; workflow `32593666231` / job
@@ -39,18 +49,21 @@
   `v2026.08.22.14` exposes the byte-verified 173-page PDF. Sanitized evidence:
   `GITHUB_PUBLICATION_RECEIPT_2026-08-22_FOURTEEN_PAGE.json`.
 - Zenodo lineage is concept `22059763` / concept DOI
-  `10.5281/zenodo.22059763`; current immutable v13 is record `22059764` / DOI
-  `10.5281/zenodo.22059764`. Create v14 only through the existing record's
-  `newversion` action, replace inherited v13 files in the new draft, publish,
-  and anonymously read every byte back.
-- Figshare article `33314784` is a public CC0 metadata pointer with no files.
-  Both license inventories lack Other/custom/mixed rights. Do not upload the
-  mixed-rights reader under CC0 or a false CC BY 4.0 license; update the same
-  pointer to the v14 Zenodo DOI after publication.
+  `10.5281/zenodo.22059763`; current immutable v14 is record `22061677` / DOI
+  `10.5281/zenodo.22061677`. Anonymous streamed readback matches all seven
+  files / 76,411,559 bytes, and the owned lineage has two submitted versions
+  and zero drafts. Evidence:
+  `ZENODO_PUBLICATION_RECEIPT_2026-08-22_FOURTEEN_PAGE.json`.
+- Figshare article `33314784`, DOI `10.6084/m9.figshare.33314784.v2`, is the
+  public zero-file CC0 metadata pointer to Zenodo v14 and belongs to project
+  `280296`. The current collection deliberately excludes link-only items.
+  Both licence inventories lack Other/custom/mixed rights, so never upload the
+  mixed-rights reader under CC0 or a false CC BY 4.0 licence. Evidence:
+  `FIGSHARE_PUBLICATION_RECEIPT_2026-08-22_FOURTEEN_PAGE.json`.
 
 Resume by reading this file, `CURRENT_STATE.md`, the freeze receipt, the final
-row of `TRANSLATION_LEDGER.csv`, and the fourteen-page checkpoint. Finish the
-current Zenodo/Figshare-pointer release transaction, record anonymous readback
-receipts, and then continue with ordinal 15
-`random/point/Unbiased.html`. Do not restart source selection, duplicate a DOI
-lineage, contact upstream, or repeat completed pages.
+row of `TRANSLATION_LEDGER.csv`, the terminology QA/glossary, and the
+fifteen-page checkpoint. Publish the verified fifteen-page boundary in the
+existing lineages, anonymously read it back, then continue with ordinal 16
+`random/point/Sufficient.html`. Do not restart source selection, duplicate a
+DOI lineage, contact upstream, or repeat completed pages.

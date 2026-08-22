@@ -1,0 +1,68 @@
+{
+  "schema": "o006.random.zenodo-publication-receipt.v1",
+  "checked_at": "2026-08-22T22:21:21.5835305+02:00",
+  "result": "published-and-anonymously-byte-verified",
+  "record": {
+    "id": "22061677",
+    "doi": "10.5281/zenodo.22061677",
+    "concept_record_id": "22059763",
+    "concept_doi": "10.5281/zenodo.22059763",
+    "version": "2026.08.22.14",
+    "scope": "14 of 29 core pages; incomplete edition",
+    "public_versions": 2,
+    "unsubmitted_drafts": 0
+  },
+  "inventory": {
+    "file_count": 7,
+    "total_bytes": 76411559,
+    "files": [
+      {
+        "name": "00_statistika-matematis-id-reader-2026.08.22.14.pdf",
+        "bytes": 73828250,
+        "sha256": "0b6dfa8384eec9a73cb8a489fd2e47c9052eaf33a899b04a21641a8300d3b5af"
+      },
+      {
+        "name": "10_mathematical-statistics-id-2026.08.22.14-reader-html.zip",
+        "bytes": 894415,
+        "sha256": "0f3c64717683584b29a910f8848a39ba6ab19ad7ed0535bc07a993b46a4c7309"
+      },
+      {
+        "name": "20_mathematical-statistics-id-2026.08.22.14-source-provenance.zip",
+        "bytes": 649363,
+        "sha256": "b202bb9801e0d9253b1954f3296f38c6289a0323b8c0821b24c12d5464233662"
+      },
+      {
+        "name": "30_mathematical-statistics-id-2026.08.22.14-modular-backend.zip",
+        "bytes": 1006771,
+        "sha256": "2a38822a6d166556c9ffafe70284ae6a78c7f6ff6c35083db91565eb5b796a53"
+      },
+      {
+        "name": "40_LICENSE.md",
+        "bytes": 1993,
+        "sha256": "ec8972beaaa01d436dbc921f74d5188c6f5f0d0c83fd899e752702c309eaa3e7"
+      },
+      {
+        "name": "50_mathematical-statistics-id-2026.08.22.14-release-manifest.json",
+        "bytes": 30049,
+        "sha256": "a9a2d88460e22e98203e7f7d55fada1d2d1c624a87478f2b3c9b01f75c700f01"
+      },
+      {
+        "name": "SHA256SUMS.txt",
+        "bytes": 718,
+        "sha256": "5e51935b9fa921a16976e1557eb07d60ea8adf6ec2749ef61aaebb8f22e34693"
+      }
+    ]
+  },
+  "public_readback": {
+    "method": "Credential-free Zenodo records API and complete streamed download of every public file; each byte count and SHA-256 was compared with the frozen local release inventory.",
+    "all_checks_pass": true
+  },
+  "script": {
+    "path": "scripts/publish_zenodo_checkpoint_v14.py",
+    "bytes": 17724,
+    "sha256": "d43fcc48edc4d751d80f7ec4c34e51f49e69b9ab524a2e236392533f37ebcdfd",
+    "replay": "python scripts/publish_zenodo_checkpoint_v14.py --verify-published"
+  },
+  "credential_handling": "The Zenodo credential was read only at runtime, was not exposed in output or persisted in this receipt, and was used only to verify that the owned lineage has two submitted versions and zero drafts.",
+  "upstream_contact": "none"
+}

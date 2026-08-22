@@ -16,7 +16,7 @@ from pypdf import PdfReader
 
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_PDF = ROOT / "output" / "pdf" / "statistika-matematis-id-reader.pdf"
-DEFAULT_IMAGES = ROOT / "tmp" / "pdf-qa-14"
+DEFAULT_IMAGES = ROOT / "tmp" / "pdfs" / "pdf-qa-15"
 RECEIPT = ROOT / "build" / "PDF_VISUAL_QA_RECEIPT.json"
 
 
@@ -48,8 +48,8 @@ def main() -> None:
     reader = PdfReader(args.pdf)
     if reader.is_encrypted:
         raise RuntimeError("reader PDF is unexpectedly encrypted")
-    if len(reader.pages) != 173:
-        raise RuntimeError(f"expected 173 PDF pages, found {len(reader.pages)}")
+    if len(reader.pages) != 182:
+        raise RuntimeError(f"expected 182 PDF pages, found {len(reader.pages)}")
     page_sizes = {
         (round(float(page.mediabox.width), 3), round(float(page.mediabox.height), 3))
         for page in reader.pages
@@ -80,8 +80,8 @@ def main() -> None:
     if min(extracted_lengths) < 20:
         raise RuntimeError("one or more PDF pages have effectively empty extracted text")
     outline_count = len(flatten_outline(reader.outline))
-    if outline_count < 16:
-        raise RuntimeError(f"expected cover, contents, and 14 document outline entries; found {outline_count}")
+    if outline_count < 17:
+        raise RuntimeError(f"expected cover, contents, and 15 document outline entries; found {outline_count}")
 
     images = sorted(args.images.glob("page-*.png"))
     if len(images) != len(reader.pages):
@@ -110,8 +110,8 @@ def main() -> None:
     if edge_ink_pages:
         raise RuntimeError(f"possible clipping at page edge: {edge_ink_pages}")
     contacts = sorted((args.images / "contact-sheets").glob("contact-*.png"))
-    if args.manual_contact_sheets_reviewed and len(contacts) != 9:
-        raise RuntimeError("manual contact-sheet review requested but the nine-sheet set is incomplete")
+    if args.manual_contact_sheets_reviewed and len(contacts) != 10:
+        raise RuntimeError("manual contact-sheet review requested but the ten-sheet set is incomplete")
 
     result = {
         "schema": "o006.random.pdf-visual-qa-receipt.v1",
@@ -138,8 +138,8 @@ def main() -> None:
         },
         "manual_visual_review": {
             "contact_sheets": len(contacts),
-            "all_173_pages_reviewed_in_contact_sheets": bool(args.manual_contact_sheets_reviewed),
-            "full_resolution_spot_checks": [1, 2, 100, 160, 173],
+            "all_182_pages_reviewed_in_contact_sheets": bool(args.manual_contact_sheets_reviewed),
+            "full_resolution_spot_checks": [1, 2, 107, 160, 175, 182],
             "observed_defects": 0,
             "known_limit": "The consolidated PDF is not tagged after deterministic merge; the offline HTML reader remains the accessibility-first surface.",
         },

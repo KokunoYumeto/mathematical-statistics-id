@@ -177,8 +177,8 @@
       "replacements": 1
     },
     {
-      "new": "Untuk ukuran sampel sekurang-kurangnya dua, jika \\(\\mu\\) dan \\(\\nu\\) tidak diketahui (sekali lagi, seperti yang biasanya terjadi), penaksir yang wajar",
-      "old": "Jika \\(\\mu\\) dan \\(\\nu\\) tidak diketahui (sekali lagi, ini biasanya merupakan keadaan yang terjadi), penaksir yang wajar",
+      "new": "Untuk ukuran sampel sekurang-kurangnya dua, jika \\(\\mu\\) dan \\(\\nu\\) tidak diketahui (sekali lagi, seperti yang biasanya terjadi), penduga yang wajar",
+      "old": "Jika \\(\\mu\\) dan \\(\\nu\\) tidak diketahui (sekali lagi, ini biasanya merupakan keadaan yang terjadi), penduga yang wajar",
       "page": "random/sample/Normal.html",
       "reason": "the standard sample covariance divides by n-minus-one",
       "replacements": 1
@@ -301,15 +301,106 @@
       "page": "random/point/Moments.html",
       "reason": "distinguish raw real moment estimates from constrained integer-valued parameter estimates",
       "replacements": 1
+    },
+    {
+      "new": "nilai mutlak hasil kali fungsi statistik dengan turunan tersebut didominasi oleh fungsi terintegralkan",
+      "old": "turunannya didominasi oleh fungsi terintegralkan pada suatu lingkungan setiap nilai parameter",
+      "page": "random/point/Unbiased.html",
+      "reason": "differentiate under the integral only under a local integrable-domination condition",
+      "replacements": 1
+    },
+    {
+      "new": "Kekontinuan saja tidak menggantikan syarat dominasi. Untuk memakai bentuk batas yang membagi dengan informasi Fisher, informasi tersebut juga harus positif dan berhingga.",
+      "old": "Kekontinuan saja cukup untuk menggantikan syarat dominasi.",
+      "page": "random/point/Unbiased.html",
+      "reason": "state both the domination requirement and the finite positive information denominator",
+      "replacements": 1
+    },
+    {
+      "new": "untuk setiap nilai parameter merupakan penduga tak bias dengan varians minimum seragam",
+      "old": "untuk suatu nilai parameter merupakan penduga tak bias dengan varians minimum seragam",
+      "page": "random/point/Unbiased.html",
+      "reason": "attaining a pointwise bound implies UMVUE only when attainment holds across the parameter set",
+      "replacements": 1
+    },
+    {
+      "new": "Pada setiap nilai parameter yang tetap, kesamaan",
+      "old": "Kesamaan tersebut langsung membuat penduga menjadi UMVUE.",
+      "page": "random/point/Unbiased.html",
+      "reason": "state the equality characterization pointwise before drawing a uniform conclusion",
+      "replacements": 1
+    },
+    {
+      "new": "Jika hubungan berikut berlaku untuk setiap nilai parameter, batas tercapai di seluruh ruang parameter dan penduga tersebut merupakan UMVUE:",
+      "old": "Jika hubungan berikut berlaku pada satu nilai parameter, penduga tersebut merupakan UMVUE:",
+      "page": "random/point/Unbiased.html",
+      "reason": "require equality across the full parameter set before concluding UMVUE",
+      "replacements": 1
+    },
+    {
+      "new": "Pendugaan rata-rata dan varians secara bersama memakai matriks informasi Fisher; pada model normal, informasi silang keduanya nol sehingga unsur diagonal invers matriks menghasilkan batas skalar yang sama seperti yang ditampilkan di bawah.",
+      "old": "Untuk pendugaan rata-rata dan varians secara bersama, rumus skalar yang sama berlaku langsung.",
+      "page": "random/point/Unbiased.html",
+      "reason": "qualify the scalar normal bounds with the diagonal joint Fisher-information calculation",
+      "replacements": 1
+    },
+    {
+      "new": "fungsi kepadatan probabilitas satu pengamatan dari distribusi asal sampel adalah",
+      "old": "fungsi kepadatan probabilitas untuk satu pengamatan X dari distribusi yang disampel adalah",
+      "page": "random/point/Unbiased.html",
+      "reason": "identify g_a as the one-observation density in both beta and uniform models",
+      "replacements": 2
+    },
+    {
+      "new": "Untuk ukuran sampel satu, penduga tersebut sama dengan pengamatan tunggal dan merupakan UMVUE",
+      "old": "Rata-rata sampel bukan UMVUE untuk setiap ukuran sampel.",
+      "page": "random/point/Unbiased.html",
+      "reason": "record the n-equals-one beta exception to the source's invalid nonattainment inference",
+      "replacements": 1
+    },
+    {
+      "new": "Untuk ukuran sampel sekurang-kurangnya dua, penduga itu bukan UMVUE",
+      "old": "Tidak tercapainya batas itu sendiri membuktikan bahwa penduga bukan UMVUE.",
+      "page": "random/point/Unbiased.html",
+      "reason": "state the separately justified strict Rao-Blackwell conclusion for beta samples of size at least two",
+      "replacements": 1
+    },
+    {
+      "new": "Substitusi formal ke bentuk berbasis turunan kedua menghasilkan negatif dari nilai tersebut. Namun, kedua nilai itu bukan batas bawah",
+      "old": "Namun, nilai itu bukan batas bawah",
+      "page": "random/point/Unbiased.html",
+      "reason": "label the support-dependent uniform substitution as formal rather than a valid Cramer-Rao bound",
+      "replacements": 1
+    },
+    {
+      "new": "hal itu menegaskan kegagalan syarat regularitas, bukan pelanggaran suatu batas bawah yang sah.",
+      "old": "hal itu melanggar batas bawah Cram&eacute;r–Rao.",
+      "page": "random/point/Unbiased.html",
+      "reason": "interpret the smaller uniform-estimator variance as failed regularity, not a contradicted bound",
+      "replacements": 1
+    },
+    {
+      "new": "Jika salah satu simpangan baku nol, variabel hasil yang bersesuaian sama dengan rata-rata itu hampir pasti dan sudah menjadi penduga tepat; bobot invers-varians di bawah tidak terdefinisi. Karena itu, rumus berikut mengasumsikan semua simpangan baku positif.</p>",
+      "old": "tetapi simpangan bakunya dapat berbeda.</p>",
+      "page": "random/point/Unbiased.html",
+      "reason": "separate the exact zero-variance case before imposing positivity for inverse-variance BLUE weights",
+      "replacements": 1
+    },
+    {
+      "new": "jika vektor simpangan baku positif \\(\\bs{\\sigma}\\) diketahui.",
+      "old": "jika vektor simpangan baku \\(\\bs{\\sigma}\\) diketahui.",
+      "page": "random/point/Unbiased.html",
+      "reason": "carry the positive-standard-deviation domain into the BLUE summary",
+      "replacements": 1
     }
   ],
   "build": {
-    "reader_file_count": 44,
-    "reader_manifest_sha256": "7f00470344a634c3cffe0eb3893690a10784f0894baca9a3fb1bc68418d5dae2",
-    "reader_total_bytes": 2471964,
-    "receipt_bytes": 156447,
+    "reader_file_count": 45,
+    "reader_manifest_sha256": "d6f51461a9db39f53f832912fbe4c865059177094564ca5a6d0b30cc3c1740aa",
+    "reader_total_bytes": 2503889,
+    "receipt_bytes": 166383,
     "receipt_path": "build/FIRST_UNIT_BUILD_RECEIPT.json",
-    "receipt_sha256": "0ba486440adbc5f32bb1d04218f2e0b015859735071e0a670e296ca077ff3840"
+    "receipt_sha256": "80cccbfe818a9f912bc183deb2f41448ebaa1d91756ad003b87a96eda5dcdd64"
   },
   "math_text_localizations": [
     {
@@ -369,7 +460,7 @@
     "official_tag": "3.1.2",
     "reader_relative_path": "MathJax/input/tex/extensions/boldsymbol.js",
     "runtime_file_count": 1,
-    "script_page_references": 12,
+    "script_page_references": 13,
     "script_pages": [
       "random/sample/Introduction.html",
       "random/sample/Mean.html",
@@ -382,41 +473,42 @@
       "random/point/Estimators.html",
       "random/point/Moments.html",
       "random/point/Likelihood.html",
-      "random/point/Bayes.html"
+      "random/point/Bayes.html",
+      "random/point/Unbiased.html"
     ],
     "sha256": "716cf8735d00abfb1627f8adbbf4aeb915ac9b5c55d47aeaf276e73dac6a2aa1"
   },
   "pass_counts": {
-    "bounded_text_correction_categories": 44,
+    "bounded_text_correction_categories": 57,
     "controlled_filename_case_corrections": 6,
     "css_files": 1,
     "css_refs": 11,
-    "details": 290,
-    "external_https_anchors": 645,
+    "details": 300,
+    "external_https_anchors": 667,
     "external_https_metadata_links": 4,
-    "fragments": 136,
-    "href_delta_entries": 441,
-    "href_delta_occurrences": 591,
-    "html_pages": 16,
-    "ids": 644,
-    "local_refs": 516,
-    "math_spans": 5750,
+    "fragments": 180,
+    "href_delta_entries": 470,
+    "href_delta_occurrences": 618,
+    "html_pages": 17,
+    "ids": 696,
+    "local_refs": 593,
+    "math_spans": 5993,
     "math_text_localization_categories": 7,
     "math_text_localization_replacements": 12,
     "mathjax_runtime_files": 1,
-    "occurrence_specific_href_deltas": 5,
-    "protected_math_correction_categories": 216,
-    "protected_math_replacements": 211,
-    "raw_math_environments": 26,
-    "raw_script_style_blocks": 39,
+    "occurrence_specific_href_deltas": 14,
+    "protected_math_correction_categories": 222,
+    "protected_math_replacements": 217,
+    "raw_math_environments": 30,
+    "raw_script_style_blocks": 42,
     "readable_layout_css_appends": 1,
-    "reader_bytes": 2471964,
-    "reader_files": 44,
-    "source_elements": 6550,
+    "reader_bytes": 2503889,
+    "reader_files": 45,
+    "source_elements": 6856,
     "svg_files": 10,
-    "translated_pages": 14,
+    "translated_pages": 15,
     "transport_hardening_deltas": 14,
-    "units": 428
+    "units": 466
   },
   "protected_math_corrections": [
     {
@@ -566,7 +658,7 @@
       "surface": "math_span"
     },
     {
-      "new": "<p class=\"app\">Dalam <a href=\"https://www.randomservices.org/random/apps/SpecialSimulator.html\" class=\"ancillary\">simulator distribusi khusus</a>, pilih distribusi gamma. Variasikan parameter \\((k, b)\\), lalu perhatikan bentuk fungsi densitas probabilitasnya. Dengan \\(k = 10\\) dan berbagai nilai \\(b\\), jalankan eksperimen 1.000 kali dan bandingkan fungsi densitas empiris dengan fungsi densitas probabilitas sebenarnya.</p>",
+      "new": "<p class=\"app\">Dalam <a href=\"https://www.randomservices.org/random/apps/SpecialSimulator.html\" class=\"ancillary\">simulator distribusi khusus</a>, pilih distribusi gamma. Variasikan parameter \\((k, b)\\), lalu perhatikan bentuk fungsi kepadatan probabilitasnya. Dengan \\(k = 10\\) dan berbagai nilai \\(b\\), jalankan eksperimen 1.000 kali dan bandingkan fungsi kepadatan empiris dengan fungsi kepadatan probabilitas sebenarnya.</p>",
       "old": "<p class=\"app\">In the <a href=\"JavaScript:openAncillary('../apps/SpecialSimulator.html')\" class=\"ancillary\">special distribution simulator</a>, select the gamma distribution. Vary and \\(b\\) and note the shape of the probability density function. With \\(k = 10\\) and various values of \\(b\\), run the experiment 1000 times and compare the empirical density function to the true probability density function.</p>",
       "page": "random/sample/CLT.html",
       "reason": "restore the omitted gamma shape parameter in the simulator instruction",
@@ -2652,6 +2744,70 @@
       "reason": "restore the indexed success count in the complementary raw event",
       "replacements": 1,
       "surface": "raw_math_environment"
+    },
+    {
+      "new": "\\E_\\theta\\left[h(\\bs{X})\\right]",
+      "old": "\\E\\left[h(\\bs{X})\\right]",
+      "page": "random/point/Unbiased.html",
+      "reason": "retain the theta subscript on the expectation differentiated under the model",
+      "replacements": 1,
+      "span_index": 68,
+      "span_new": "\\E_\\theta\\left[h(\\bs{X})\\right]",
+      "span_old": "\\E\\left[h(\\bs{X})\\right]",
+      "surface": "math_span"
+    },
+    {
+      "new": "\\E_\\theta\\left[L_1^2(\\bs{X}, \\theta)\\right]",
+      "old": "\\E_\\theta\\left[L^2(\\bs{X}, \\theta)\\right]",
+      "page": "random/point/Unbiased.html",
+      "reason": "identify the squared score rather than an undefined unsubscripted L",
+      "replacements": 1,
+      "span_index": 98,
+      "span_new": "\\E_\\theta\\left[L_1^2(\\bs{X}, \\theta)\\right]",
+      "span_old": "\\E_\\theta\\left[L^2(\\bs{X}, \\theta)\\right]",
+      "surface": "math_span"
+    },
+    {
+      "new": "\\(L_1^2\\)",
+      "old": "\\(L^2\\)",
+      "page": "random/point/Unbiased.html",
+      "reason": "identify the squared full-sample score in the random-sample decomposition",
+      "replacements": 1,
+      "span_index": 115,
+      "span_new": "\\(L_1^2\\)",
+      "span_old": "\\(L^2\\)",
+      "surface": "math_span"
+    },
+    {
+      "new": "\\E_\\theta\\left[L_1^2(\\bs{X}, \\theta)\\right]",
+      "old": "\\E_\\theta\\left[L^2(\\bs{X}, \\theta)\\right]",
+      "page": "random/point/Unbiased.html",
+      "reason": "identify the squared full-sample score in the Fisher-information identity",
+      "replacements": 1,
+      "span_index": 119,
+      "span_new": "\\E_\\theta\\left[L_1^2(\\bs{X}, \\theta)\\right]",
+      "span_old": "\\E_\\theta\\left[L^2(\\bs{X}, \\theta)\\right]",
+      "surface": "math_span"
+    },
+    {
+      "new": "\\exp\\left[-\\frac{1}{2}\\left[\\frac{x - \\mu}{\\sigma}\\right]^2 \\right]",
+      "old": "\\exp\\left[-\\left[\\frac{x - \\mu}{\\sigma}\\right]^2 \\right]",
+      "page": "random/point/Unbiased.html",
+      "reason": "restore the missing one-half factor in the normal density exponent",
+      "replacements": 1,
+      "span_index": 169,
+      "span_new": "\\exp\\left[-\\frac{1}{2}\\left[\\frac{x - \\mu}{\\sigma}\\right]^2 \\right]",
+      "span_old": "\\exp\\left[-\\left[\\frac{x - \\mu}{\\sigma}\\right]^2 \\right]",
+      "surface": "math_span"
+    },
+    {
+      "environment_index": 2,
+      "new": "\\int_S \\frac{d}{d \\theta}\\left[h(\\bs{x}) f_\\theta(\\bs{x})\\right] \\, d \\bs{x}",
+      "old": "\\int_S \\frac{d}{d \\theta} h(\\bs{x}) f_\\theta(\\bs{x}) \\, d \\bs{x}",
+      "page": "random/point/Unbiased.html",
+      "reason": "differentiate the bracketed product under the integral rather than h alone",
+      "replacements": 1,
+      "surface": "raw_math_environment"
     }
   ],
   "readable_reflow": {
@@ -2678,8 +2834,8 @@
       },
       "elements": 352,
       "hierarchy_sha256": "84a3f8750b133d3dd77e245ebc56e7a65501e967f038b20f36e1783fa0eb5dca",
-      "href_delta_entries": 32,
-      "href_delta_occurrences": 41,
+      "href_delta_entries": 31,
+      "href_delta_occurrences": 39,
       "ids": 46,
       "math_spans": 625,
       "math_text_localization_replacements": 0,
@@ -2688,13 +2844,13 @@
       "raw_math_environments": 8,
       "raw_math_sha256": "79b1d8a41e9d948317bee4c8754a19f61308da4f1b6395812df41c036188a67a",
       "raw_script_style_blocks": 3,
-      "reader_bytes": 56719,
-      "reader_sha256": "d292d76240f67b06e4ba2140a0cb95dcc9d674644158131a047a7f23ec755ca8",
+      "reader_bytes": 56631,
+      "reader_sha256": "c9adf585c3b1b08d635c7b7420350be6e2d08a2b8fd13b9d0f812b790c3b403b",
       "reader_target_byte_identical": true,
       "source_bytes": 49645,
       "source_sha256": "96904b1fd4ab905bbffa62bd5cc0d965b3c969e543a983124e968718ed25d550",
-      "target_bytes": 56719,
-      "target_sha256": "d292d76240f67b06e4ba2140a0cb95dcc9d674644158131a047a7f23ec755ca8",
+      "target_bytes": 56631,
+      "target_sha256": "c9adf585c3b1b08d635c7b7420350be6e2d08a2b8fd13b9d0f812b790c3b403b",
       "units": 31
     },
     "random/point/Estimators.html": {
@@ -2706,8 +2862,8 @@
       },
       "elements": 380,
       "hierarchy_sha256": "f9204e02fa8699e0c30dee79161ce37a7a96f2fc75abd90f63d67b03b4c23bb2",
-      "href_delta_entries": 31,
-      "href_delta_occurrences": 35,
+      "href_delta_entries": 30,
+      "href_delta_occurrences": 33,
       "ids": 51,
       "math_spans": 432,
       "math_text_localization_replacements": 0,
@@ -2716,13 +2872,13 @@
       "raw_math_environments": 0,
       "raw_math_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "raw_script_style_blocks": 3,
-      "reader_bytes": 44176,
-      "reader_sha256": "92df36faf79f6708926bc11e2ff5fc12ab58d3766d9c0db90f177eecdd1f076b",
+      "reader_bytes": 44078,
+      "reader_sha256": "5824377bf9520b01cebe4162c6911bce913d1d233e950e5f8bbd0cdbfe6f6956",
       "reader_target_byte_identical": true,
       "source_bytes": 37864,
       "source_sha256": "10914ffca9034209da0111918cfb534d60982bde0bba142a11d61d43114c6e2a",
-      "target_bytes": 44176,
-      "target_sha256": "92df36faf79f6708926bc11e2ff5fc12ab58d3766d9c0db90f177eecdd1f076b",
+      "target_bytes": 44078,
+      "target_sha256": "5824377bf9520b01cebe4162c6911bce913d1d233e950e5f8bbd0cdbfe6f6956",
       "units": 33
     },
     "random/point/Likelihood.html": {
@@ -2734,8 +2890,8 @@
       },
       "elements": 397,
       "hierarchy_sha256": "a18199fa53fb52e2c12f46fa5fc93ab06b5d76cda4f3a4d127461901dc9f153a",
-      "href_delta_entries": 32,
-      "href_delta_occurrences": 38,
+      "href_delta_entries": 31,
+      "href_delta_occurrences": 36,
       "ids": 53,
       "math_spans": 589,
       "math_text_localization_replacements": 1,
@@ -2744,13 +2900,13 @@
       "raw_math_environments": 3,
       "raw_math_sha256": "3014fc96a21960100677941262c3d752abf7d4132233804df95fe2be5da09a19",
       "raw_script_style_blocks": 3,
-      "reader_bytes": 58207,
-      "reader_sha256": "41fded9b3178b4ccbfd5f68769b9cb0168449a908b1d86b3d58370a663320ec8",
+      "reader_bytes": 58119,
+      "reader_sha256": "0ce65a668819cd43d9b8391a911c6600ca4c2227117441078fffd4c72b398d13",
       "reader_target_byte_identical": true,
       "source_bytes": 49551,
       "source_sha256": "f8c94e3de84f7a025fd32395169938f37e7fd7958d5a8be9d56b54ed307d6ffd",
-      "target_bytes": 58207,
-      "target_sha256": "41fded9b3178b4ccbfd5f68769b9cb0168449a908b1d86b3d58370a663320ec8",
+      "target_bytes": 58119,
+      "target_sha256": "0ce65a668819cd43d9b8391a911c6600ca4c2227117441078fffd4c72b398d13",
       "units": 35
     },
     "random/point/Moments.html": {
@@ -2762,8 +2918,8 @@
       },
       "elements": 440,
       "hierarchy_sha256": "8852c8962c89ef48248ba8c192af3a19d7744869de6a82c625c5280100a1bf90",
-      "href_delta_entries": 35,
-      "href_delta_occurrences": 44,
+      "href_delta_entries": 34,
+      "href_delta_occurrences": 42,
       "ids": 54,
       "math_spans": 649,
       "math_text_localization_replacements": 0,
@@ -2772,14 +2928,42 @@
       "raw_math_environments": 3,
       "raw_math_sha256": "02425a791c39bcff22d4f583170dd19afc20b5afa0e6e30f3596cf506de5625e",
       "raw_script_style_blocks": 3,
-      "reader_bytes": 57325,
-      "reader_sha256": "594b4c6e7fd564ccf5e3d10373ef00d0ac3998c1cfe5d2bb4114216be394d02e",
+      "reader_bytes": 57237,
+      "reader_sha256": "e961188a1410c2ed23ac22efe0dd39d4284706dc571d9fe4126a591ff01afe12",
       "reader_target_byte_identical": true,
       "source_bytes": 48492,
       "source_sha256": "43755b5bee6179fca8d7c1c964e7c6a9bb1a9de6f3916130100c69e666a3194e",
-      "target_bytes": 57325,
-      "target_sha256": "594b4c6e7fd564ccf5e3d10373ef00d0ac3998c1cfe5d2bb4114216be394d02e",
+      "target_bytes": 57237,
+      "target_sha256": "e961188a1410c2ed23ac22efe0dd39d4284706dc571d9fe4126a591ff01afe12",
       "units": 37
+    },
+    "random/point/Unbiased.html": {
+      "details": 10,
+      "edition_notice": {
+        "bytes": 1172,
+        "links": 4,
+        "sha256": "eafff6cf003edc517cbc99727456b283de19cff49e07d20b10fea57dca0f8a3d"
+      },
+      "elements": 306,
+      "hierarchy_sha256": "1e14318d47c2a1c0c10f92651073868420f2acb258a06e4edf5158fe489ce9b1",
+      "href_delta_entries": 34,
+      "href_delta_occurrences": 36,
+      "ids": 52,
+      "math_spans": 243,
+      "math_text_localization_replacements": 0,
+      "occurrence_specific_href_deltas": 9,
+      "protected_math_replacements": 6,
+      "raw_math_environments": 4,
+      "raw_math_sha256": "7df75b42a511a5178054596d5ecfcd8dce66f20013732a9e1c114fd2d3cabc5b",
+      "raw_script_style_blocks": 3,
+      "reader_bytes": 31784,
+      "reader_sha256": "3bbe9f00642b1095c120fc940b5aa6c026a62a8c757edc81f0fc334b9b6b86ba",
+      "reader_target_byte_identical": true,
+      "source_bytes": 28635,
+      "source_sha256": "0d9765c5c7b5b8a54b29fc45c3a435d20e2a9200e027609658345087dedcd531",
+      "target_bytes": 31784,
+      "target_sha256": "3bbe9f00642b1095c120fc940b5aa6c026a62a8c757edc81f0fc334b9b6b86ba",
+      "units": 38
     },
     "random/point/index.html": {
       "details": 0,
@@ -2790,8 +2974,8 @@
       },
       "elements": 155,
       "hierarchy_sha256": "6b6d12100e8f69215ad341e2edb91332b75b38265422cd81ac250fe4aaa2fed0",
-      "href_delta_entries": 36,
-      "href_delta_occurrences": 55,
+      "href_delta_entries": 35,
+      "href_delta_occurrences": 54,
       "ids": 6,
       "math_spans": 0,
       "math_text_localization_replacements": 0,
@@ -2800,13 +2984,13 @@
       "raw_math_environments": 0,
       "raw_math_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "raw_script_style_blocks": 1,
-      "reader_bytes": 11179,
-      "reader_sha256": "6aca87eee9087266a30493204e778aca152161a4cc203ab4a4b3c92ad0205b6a",
+      "reader_bytes": 11137,
+      "reader_sha256": "7e24bd1c6d46583529f159b17b868df2f8a873f72df819726cd536251d48cebb",
       "reader_target_byte_identical": true,
       "source_bytes": 8311,
       "source_sha256": "b0e3e9e5f55bfd4ebac0047dafff725628d6a0ca6e638d7a2847095b311d637c",
-      "target_bytes": 11179,
-      "target_sha256": "6aca87eee9087266a30493204e778aca152161a4cc203ab4a4b3c92ad0205b6a",
+      "target_bytes": 11137,
+      "target_sha256": "7e24bd1c6d46583529f159b17b868df2f8a873f72df819726cd536251d48cebb",
       "units": 0
     },
     "random/sample/CLT.html": {
@@ -2828,13 +3012,13 @@
       "raw_math_environments": 0,
       "raw_math_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "raw_script_style_blocks": 3,
-      "reader_bytes": 46128,
-      "reader_sha256": "10d28d9d12e4d2df32044e81222e479dd1788ec4903bebe40322896c026d20e3",
+      "reader_bytes": 46158,
+      "reader_sha256": "a14208c4431c5791e16a89eab6c5ffa6c4d3e5067dfc2a37bab4942a4a32c54a",
       "reader_target_byte_identical": true,
       "source_bytes": 40239,
       "source_sha256": "ee6dc9f8e9feb14f19f96a0206c3289a4aedfc014f5e3dabf79422e1dc29f9e3",
-      "target_bytes": 46128,
-      "target_sha256": "10d28d9d12e4d2df32044e81222e479dd1788ec4903bebe40322896c026d20e3",
+      "target_bytes": 46158,
+      "target_sha256": "a14208c4431c5791e16a89eab6c5ffa6c4d3e5067dfc2a37bab4942a4a32c54a",
       "units": 38
     },
     "random/sample/Covariance.html": {
@@ -2856,13 +3040,13 @@
       "raw_math_environments": 7,
       "raw_math_sha256": "3d9638b5e2dc9afe0485e6bb4e3131130c7586646486d7b8e8e9a2f936201799",
       "raw_script_style_blocks": 3,
-      "reader_bytes": 80842,
-      "reader_sha256": "f66fe02402dbe33914a86a8e0796c7c8d9d292744168c8796091fc2bc561e11d",
+      "reader_bytes": 80832,
+      "reader_sha256": "4e6fcf5c80bbe47c86d5c691b664d6cdf8166433475dc76e9749a04b57dbdf3c",
       "reader_target_byte_identical": true,
       "source_bytes": 75623,
       "source_sha256": "1009a5a6a129ee5592aed6c2b914973ae82bb7e7685c477c4c205dbe47fd7072",
-      "target_bytes": 80842,
-      "target_sha256": "f66fe02402dbe33914a86a8e0796c7c8d9d292744168c8796091fc2bc561e11d",
+      "target_bytes": 80832,
+      "target_sha256": "4e6fcf5c80bbe47c86d5c691b664d6cdf8166433475dc76e9749a04b57dbdf3c",
       "units": 58
     },
     "random/sample/Introduction.html": {
@@ -2896,9 +3080,9 @@
     "random/sample/LLN.html": {
       "details": 13,
       "edition_notice": {
-        "bytes": 1142,
+        "bytes": 1143,
         "links": 4,
-        "sha256": "08fb4fa43d51a1d0882f780de159199be12bfbb4e47ced1c478dec73113d1722"
+        "sha256": "eeeac67515ebb62fe5c8f27cf428698ef9c3ec6c64628f0d3d160d98d81237c3"
       },
       "elements": 305,
       "hierarchy_sha256": "5c0d5dbd8f5ce20bd12602452d97e7e74779ee36a0186126919674afc4789a07",
@@ -2912,13 +3096,13 @@
       "raw_math_environments": 0,
       "raw_math_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "raw_script_style_blocks": 3,
-      "reader_bytes": 34785,
-      "reader_sha256": "d712ac4ed7c26757d6a13d873b0bf003c8cf487270b2f90fe6c074008ef372c0",
+      "reader_bytes": 34798,
+      "reader_sha256": "0cdc62ab382ed056df3d779a69fcda2aca37e9a07f53d306df93708d39130b82",
       "reader_target_byte_identical": true,
       "source_bytes": 30754,
       "source_sha256": "8662dfc55683fa40c79a5d453a450730e2ba151716a20eb61a2db307c33f5e85",
-      "target_bytes": 34785,
-      "target_sha256": "d712ac4ed7c26757d6a13d873b0bf003c8cf487270b2f90fe6c074008ef372c0",
+      "target_bytes": 34798,
+      "target_sha256": "0cdc62ab382ed056df3d779a69fcda2aca37e9a07f53d306df93708d39130b82",
       "units": 21
     },
     "random/sample/Mean.html": {
@@ -2940,13 +3124,13 @@
       "raw_math_environments": 1,
       "raw_math_sha256": "e959cd196a4fb44a7282debfd749e1705c6795572eb665f98400c9f248cc96fc",
       "raw_script_style_blocks": 3,
-      "reader_bytes": 45871,
-      "reader_sha256": "f21bd99cfcd9b6609526966b27e59cd4c1600caf825ec7d428f0e1e63b3a703a",
+      "reader_bytes": 45916,
+      "reader_sha256": "bee0af18dda05972b15fa32129aa4fdf8754b7a9ed6f5048f18c35b5f513ab7a",
       "reader_target_byte_identical": true,
       "source_bytes": 42746,
       "source_sha256": "e21a3da7773a6f7f925b4cb0c583d5331abb1656fe01ed952c8d42b26f238cab",
-      "target_bytes": 45871,
-      "target_sha256": "f21bd99cfcd9b6609526966b27e59cd4c1600caf825ec7d428f0e1e63b3a703a",
+      "target_bytes": 45916,
+      "target_sha256": "bee0af18dda05972b15fa32129aa4fdf8754b7a9ed6f5048f18c35b5f513ab7a",
       "units": 26
     },
     "random/sample/Normal.html": {
@@ -2968,13 +3152,13 @@
       "raw_math_environments": 1,
       "raw_math_sha256": "6079eb3817a489bd32ae3cb11d91e01989f4ed18eacacb6642cb70a23233b5e1",
       "raw_script_style_blocks": 3,
-      "reader_bytes": 38857,
-      "reader_sha256": "846c53efe49d203e5358f8f170d71bf705db9bff00a951318ae229cbc17338c5",
+      "reader_bytes": 38885,
+      "reader_sha256": "8a799fcf11df71a1c0dfc681915d7cd6b199247a2d458c5e69c4f428577aa0c4",
       "reader_target_byte_identical": true,
       "source_bytes": 35940,
       "source_sha256": "d9a62017ae3a8488aedac3eceedb15d8b68243ae60894104ab88564ace25ff79",
-      "target_bytes": 38857,
-      "target_sha256": "846c53efe49d203e5358f8f170d71bf705db9bff00a951318ae229cbc17338c5",
+      "target_bytes": 38885,
+      "target_sha256": "8a799fcf11df71a1c0dfc681915d7cd6b199247a2d458c5e69c4f428577aa0c4",
       "units": 29
     },
     "random/sample/OrderStatistics.html": {
@@ -2996,13 +3180,13 @@
       "raw_math_environments": 0,
       "raw_math_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "raw_script_style_blocks": 4,
-      "reader_bytes": 68830,
-      "reader_sha256": "a36e792a8d53d12a5c5783cacbac478d4563f86e224d07abba8fb5682f2812ce",
+      "reader_bytes": 68841,
+      "reader_sha256": "c0ae4f4dcdab4171a796db364f454d8d4bd0b1b525ea825681a6cc81bb6c5dcc",
       "reader_target_byte_identical": true,
       "source_bytes": 63965,
       "source_sha256": "19ff485c600d4294e888c1b3d05ff7eb9196449f958d3325fd72b416aca56d63",
-      "target_bytes": 68830,
-      "target_sha256": "a36e792a8d53d12a5c5783cacbac478d4563f86e224d07abba8fb5682f2812ce",
+      "target_bytes": 68841,
+      "target_sha256": "c0ae4f4dcdab4171a796db364f454d8d4bd0b1b525ea825681a6cc81bb6c5dcc",
       "units": 51
     },
     "random/sample/Variance.html": {
@@ -3024,13 +3208,13 @@
       "raw_math_environments": 3,
       "raw_math_sha256": "4faf57a0623469bd7eaf72cc5904ebeabe2c53ba2a728ca57c1f4bc73d2062ae",
       "raw_script_style_blocks": 3,
-      "reader_bytes": 59529,
-      "reader_sha256": "651b09ef4f59b4a8c3ace0ce8315d9e6bff278e9f5d0e0b76e156fa67a4af70b",
+      "reader_bytes": 59540,
+      "reader_sha256": "8fe6580df746676dff827cd57b4507941d2c2046c5a417bb4b1b722554910ac4",
       "reader_target_byte_identical": true,
       "source_bytes": 55878,
       "source_sha256": "452e2841007fad173229a9bb069a4acdda8e0d0bc6c1632f7239ef585248b0c6",
-      "target_bytes": 59529,
-      "target_sha256": "651b09ef4f59b4a8c3ace0ce8315d9e6bff278e9f5d0e0b76e156fa67a4af70b",
+      "target_bytes": 59540,
+      "target_sha256": "8fe6580df746676dff827cd57b4507941d2c2046c5a417bb4b1b722554910ac4",
       "units": 47
     },
     "random/sample/index.html": {
@@ -3065,14 +3249,14 @@
   "schema": "o006.random.first-unit-qa.v1",
   "scripts": {
     "build": {
-      "bytes": 110564,
+      "bytes": 122314,
       "path": "scripts/build_first_unit.py",
-      "sha256": "f9fa9346e2eec31b48b61bc016d065c3c5d085a6c064dc1542e760a8fc9267c6"
+      "sha256": "d9110d9277b885e50f8f77a878c117116b0e2f99c30b766e0909c5b28fde9c10"
     },
     "qa": {
-      "bytes": 97102,
+      "bytes": 101858,
       "path": "scripts/qa_first_unit.py",
-      "sha256": "116dcc99f9b971ee97293ecb02bc1cf253a46000822669cef23890190b5b0402"
+      "sha256": "737c1f1709090cd6f7be87d496cd21519a9e4ed65206e334fb2239f8bd9f457b"
     }
   },
   "transport_hardening": [

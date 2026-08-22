@@ -5,8 +5,8 @@ Updated: 2026-08-22
 ## Status
 
 Edition source admitted; exact authority and component-rights freezes complete; the
-first fourteen contiguous Indonesian pages and the full 29-page machine backend
-are locally verified. Every entity on those fourteen pages is now bound to its target
+first fifteen contiguous Indonesian pages and the full 29-page machine backend
+are locally verified. Every entity on those fifteen pages is now bound to its target
 path, locale, byte count, and SHA-256. The repository was public before the
 publishing account was suspended; the repaired
 three- and four-page Pages checkpoints remain historical evidence. The
@@ -76,7 +76,20 @@ rerendered and reviewed after correcting its initial Covariance/Normal order
 swap. GitHub access is restored; publication and anonymous readback of this
 fourteen-page boundary are the immediate release transaction.
 
-Ordinal 15, `random/point/Unbiased.html`, is the next contiguous production
+The fifteen-page boundary completes `random/point/Unbiased.html`. It passed an
+independent language/mathematics recheck, exact 306-element topology, 243
+delimited TeX spans, four raw math environments, backend/build/QA, two
+byte-identical deterministic replays, and fresh desktop/mobile rendering. All
+247 MathJax containers fit the centered desktop and fluid mobile reader; all
+ten disclosures open and close; four images are complete; and no raw TeX,
+page-level overflow, uncontained wide surface, or console warning/error
+remains. The reader-first PDF is 182 A4 pages / 76,775,084 bytes. All 182 pages
+were rerendered and visually reviewed with no observed defect. The terminology
+and model-provenance gate is incorporated into this new PDF. Publication into
+the existing GitHub, Zenodo, and Figshare-pointer lineages is the immediate
+release transaction.
+
+Ordinal 16, `random/point/Sufficient.html`, is the next contiguous production
 page. Do not skip to the separate Penn State component or repeat completed
 Random pages.
 
@@ -118,11 +131,11 @@ does not invalidate or truncate the 29-page Random edition, and prior work on
 that edition was not evidence for the curricular choice.
 
 The exact coordinator manifest is
-`C:\Users\Floris\Documents\interlanguage\outputs\01a01ec1-e685-70d0-b022-211396334723\curriculum_logbook\26_O006_PSU_14_DOCUMENT_MANIFEST_20260821.csv`
+`%USERPROFILE%\Documents\interlanguage\outputs\01a01ec1-e685-70d0-b022-211396334723\curriculum_logbook\26_O006_PSU_14_DOCUMENT_MANIFEST_20260821.csv`
 (2,130 bytes; SHA-256
 `d944524e9afb5d6dabba3bd0968b159397d7014a6e736f002f4db0ee2420ce91`).
-Floris's canonical instruction is
-`C:\Users\Floris\Documents\Obsidian notes\Untitled 1693.md` (10,476 bytes;
+The user's canonical instruction is
+`%USERPROFILE%\Documents\Obsidian notes\Untitled 1693.md` (10,476 bytes;
 SHA-256 `cf913e8cb4d487f4c6958c079b372ccbb2fb5929dd483068441e80cefd6794f2`).
 The executable separation and terminal conditions are recorded in
 `C140_CONFIGURED_ARCHITECTURE_2026-08-21.md`.
@@ -532,12 +545,54 @@ and Pages deployment. Credential-free readback matched all 44 Pages files /
 2,471,964 bytes, eight critical raw-commit files / 10,586,317 bytes, and the
 73,828,250-byte PDF prerelease asset. Public desktop/mobile browser checks also
 pass. Exact evidence is
-`GITHUB_PUBLICATION_RECEIPT_2026-08-22_FOURTEEN_PAGE.json`. Zenodo concept DOI
-`10.5281/zenodo.22059763` is
-the sole release lineage and must advance through its latest record's
-`newversion` action. Figshare item `33314784` remains an honest public CC0
-metadata pointer: its authenticated license inventory still has no
-Other/custom/mixed-rights option, so no edition bytes may be mislabeled there.
+`GITHUB_PUBLICATION_RECEIPT_2026-08-22_FOURTEEN_PAGE.json`. Zenodo v14 is now
+immutable record `22061677`, DOI `10.5281/zenodo.22061677`, in sole concept
+lineage `10.5281/zenodo.22059763`. Credential-free streamed readback matches all
+seven files / 76,411,559 bytes; the owned lineage has two submitted versions
+and zero drafts. Figshare item `33314784`, DOI
+`10.6084/m9.figshare.33314784.v2`, is the matching public zero-file CC0
+metadata pointer. Its licence inventory still has no Other/custom/mixed-rights
+option, so no edition bytes are mislabeled there. Sanitized evidence is in the
+fourteen-page Zenodo and Figshare receipts.
+
+## Fifteen-page verified checkpoint
+
+Core ordinals 1–15 are complete through `random/point/Unbiased.html`. The
+immutable authority for the new page is 28,635 bytes, SHA-256
+`0d9765c5c7b5b8a54b29fc45c3a435d20e2a9200e027609658345087dedcd531`;
+the id-ID target is 31,784 bytes, SHA-256
+`3bbe9f00642b1095c120fc940b5aa6c026a62a8c757edc81f0fc334b9b6b86ba`.
+The page has 38 units, ten disclosures, 52 IDs, 243 delimited TeX spans, and
+four raw math environments. The declared regularity, Cramér-Rao, UMVUE,
+normal-information, uniform-support, and BLUE repairs are target-only and were
+independently rechecked. `ADVERSE_LEDGER.jsonl` runs through `O006-ADV-0183`.
+
+The reader is 45 files / 2,503,889 bytes; canonical manifest SHA-256 is
+`d6f51461a9db39f53f832912fbe4c865059177094564ca5a6d0b30cc3c1740aa`.
+Build-receipt SHA-256 is
+`80cccbfe818a9f912bc183deb2f41448ebaa1d91756ad003b87a96eda5dcdd64`;
+QA-receipt SHA-256 is
+`3031b412ce7eb275f2c0ad7129799a76506c86b50b34dc439d34d4d0d71ac0b0`.
+The backend still has 6,567 entities / 9,035 relations and now binds 4,012
+translated entities. Two complete check-only sequences reproduced all relevant
+bytes exactly.
+
+Fresh desktop/mobile reader QA rendered 247 MathJax containers, exercised all
+ten disclosures in both directions, and found no missing image, raw TeX,
+page-level overflow, uncontained wide surface, or warning/error log. The root
+reader exposes the exact additive provenance
+`OpenAI Codex gpt-5.6-sol, Ultra` alongside intact source-author credit. Exact
+evidence is `CHECKPOINT_2026-08-22_FIFTEEN_PAGE.md` and
+`LIVE_BROWSER_QA_2026-08-22_FIFTEEN_PAGE.json`.
+
+The reader-first PDF contains all fifteen documents in 182 A4 pages / 76,775,084
+bytes, SHA-256
+`7c4898505962f6978eb064c605a77fca9ccbcd3ba7f9238f9cf0d8ae974662ef`.
+Automated QA found 234 outline entries, 1,011 external URI annotations, no
+local/loopback URI, no encryption, no blank page, and no edge-clipping
+candidate. All 182 pages were reviewed in ten contact sheets and six
+full-resolution spot checks; no visual defect was observed. Publication and
+anonymous public-byte verification are pending in the existing lineages.
 
 ## Rights boundary
 
@@ -552,7 +607,7 @@ the site-wide notice; they must be cleared, replaced, or linked externally.
 
 ## Known upstream defects (do not silently alter authority)
 
-`ADVERSE_LEDGER.jsonl` runs through `O006-ADV-0171`. CLT repairs include the
+`ADVERSE_LEDGER.jsonl` runs through `O006-ADV-0183`. CLT repairs include the
 zero-origin condition, correlation domain/formula/citation, the rigorous
 characteristic-function proof, continuity notation, dice answer, chi-square
 definition, negative-binomial support/domain/answer mapping, and determinate
@@ -612,14 +667,52 @@ convergence statement, and the exact domain on which the maximum-likelihood
 comparison is made. All changes are target-only; the 49,645-byte authority
 remains unchanged.
 
+Unbiased repairs and qualifications cover differentiation under the integral,
+local domination and Fisher-information domains, pointwise versus global
+Cramér-Rao equality, undefined score symbols, occurrence-specific internal
+references, the normal density normalizer and nuisance-parameter information
+matrix, source-distribution terminology, the beta-family UMVUE inference, the
+invalid formal uniform-model bounds, inverse-variance BLUE boundary cases, and
+determinate spelling/markup defects. All changes are target-only; the
+28,635-byte authority remains unchanged.
+
 ## Next work
 
-1. Publish and anonymously verify the fourteen-page checkpoint as v14 in the
-   existing Zenodo concept. Update
-   the existing Figshare CC0 metadata pointer to that Zenodo version without
-   uploading mixed-rights bytes under a false machine license.
-2. Continue immediately through all 15 remaining source pages, beginning with
-   `random/point/Unbiased.html` (core ordinal 15), while growing the same
+### Terminology and model-provenance gate completed before ordinal 15
+
+A bounded arXiv search found no source satisfying all three requirements:
+Indonesian prose, mathematical-statistics/inference content, and downloadable
+TeX. The permitted fallback is Annisa Widya Ramadhani's 2022 Universitas
+Lampung Bayesian-estimation thesis (50 pages / 3,807,548 bytes / SHA-256
+`be841f0f1429828251a9bb37d0bb58714cc59129da2905d94c68b5f39e04c884`),
+supplemented only by bounded institutional comparators. The exact search,
+near-misses, source identities, page evidence, hashes, decisions, and aliases
+are durable in `TERMINOLOGY_QA_2026-08-22.md` and
+`TERMINOLOGY_GLOSSARY_ID_ID.csv`.
+
+Visible prose was normalized to `penduga`, `tak bias`, `fungsi kepadatan
+probabilitas`, `kepadatan empiris`, and `interval kepercayaan`. Nine ambiguous
+source uses of *sampling distribution* were proved from the English authority
+to mean the underlying population/data distribution and are now `distribusi
+asal sampel`; `distribusi sampling` is reserved for the distribution of a
+statistic or estimator. `Fungsi kemungkinan (likelihood)` is retained because
+institutional usage genuinely varies. Stable IDs, formulas, URLs, CSS classes,
+source-author credit, and human-contributor credit were not rewritten.
+
+The exact provenance string `OpenAI Codex gpt-5.6-sol, Ultra` is additive in
+repository, generated-reader, build, backend, and PDF metadata. The current
+reader is 45 files / 2,503,889 bytes with manifest SHA-256
+`d6f51461a9db39f53f832912fbe4c865059177094564ca5a6d0b30cc3c1740aa`;
+the QA receipt is
+`3031b412ce7eb275f2c0ad7129799a76506c86b50b34dc439d34d4d0d71ac0b0`.
+Two complete backend/build/QA check-only sequences reproduced these identities.
+The new 182-page PDF carries the normalized terminology and exact provenance.
+
+1. Publish the verified fifteen-page boundary into the existing GitHub and
+   Zenodo lineages, update the existing Figshare metadata pointer, and
+   anonymously read all public bytes back.
+2. Continue immediately through all 14 remaining source pages, beginning with
+   `random/point/Sufficient.html` (core ordinal 16), while growing the same
    deterministic reader and stable-ID backend.
 3. Maintain later substantial verified checkpoints as new versions in the
    same Zenodo concept lineage and as fast-forward GitHub releases.

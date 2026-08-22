@@ -1570,6 +1570,7 @@ def build(root: Path) -> tuple[dict[PurePosixPath, bytes], dict[str, Any]]:
             "source_manifest_path": str(MANIFEST_REL),
             "source_manifest_sha256": freeze_receipt["source_manifest_sha256"],
         },
+        "translation_provenance": "OpenAI Codex gpt-5.6-sol, Ultra",
         "translation_binding": {
             "documents": {
                 "total": len(sources),

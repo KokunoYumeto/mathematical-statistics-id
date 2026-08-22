@@ -1,0 +1,48 @@
+{
+  "schema": "o006.random.figshare-publication-receipt.v1",
+  "checked_at": "2026-08-22T22:21:21.5835305+02:00",
+  "result": "published-metadata-pointer-and-publicly-verified",
+  "article": {
+    "id": "33314784",
+    "doi": "10.6084/m9.figshare.33314784.v2",
+    "url": "https://figshare.com/articles/online_resource/Statistika_Matematis_Edisi_Bahasa_Indonesia_id-ID_Checkpoint_13_dari_29_Tautan_Metadata_Belum_Lengkap_/33314784",
+    "title": "Statistika Matematis — Edisi Bahasa Indonesia (id-ID): Checkpoint 14 dari 29 (Tautan Metadata; Belum Lengkap)",
+    "defined_type": "online resource",
+    "license": "CC0",
+    "file_count": 0,
+    "version": 2
+  },
+  "project": {
+    "id": "280296",
+    "url": "https://figshare.com/projects/Open_and_Share-Alike_Educational_Materials_Translations/280296",
+    "contains_article": true
+  },
+  "collection": {
+    "id": "8668413",
+    "doi": "10.6084/m9.figshare.c.8668413.v39",
+    "contains_article": false,
+    "disposition": "The active collection is reader-PDF-bearing and excludes link-only records. Do not re-add this metadata-only pointer until an honestly licensed file-bearing Figshare version exists."
+  },
+  "linked_release": {
+    "zenodo_record_id": "22061677",
+    "zenodo_version_doi": "10.5281/zenodo.22061677",
+    "zenodo_concept_doi": "10.5281/zenodo.22059763",
+    "scope": "14 of 29 core pages; incomplete edition",
+    "public_file_count": 7,
+    "public_total_bytes": 76411559,
+    "reader_pdf_pages": 173
+  },
+  "rights_boundary": "CC0 applies only to this zero-file Figshare metadata/link item. No mixed-rights edition bytes were uploaded under a false aggregate license.",
+  "public_readback": {
+    "method": "Credential-free Figshare public API readback of article, project membership, collection disposition, exact title, type, CC0 status, zero-file inventory, and Zenodo references.",
+    "all_checks_pass": true
+  },
+  "script": {
+    "path": "scripts/publish_figshare_metadata_checkpoint.py",
+    "bytes": 12374,
+    "sha256": "0a0d6db049d7b9325e214b06a7cdf1297bb8816724fe7f24f0703f47894e5f66",
+    "replay": "python scripts/publish_figshare_metadata_checkpoint.py --check-only"
+  },
+  "credential_handling": "No credential was used for this public readback.",
+  "upstream_contact": "none"
+}

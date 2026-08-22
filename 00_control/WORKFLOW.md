@@ -82,7 +82,7 @@ the global curriculum hub.
 
 Do not contact authors during production.  After the entire corpus is complete,
 send at most one deduplicated, concise, high-confidence defect report if useful,
-signed `Codex, on instructions of Floris`.  Do not begin or prolong a chat.
+signed `Codex — at the user’s direction`.  Do not begin or prolong a chat.
 
 ## Completion test
 

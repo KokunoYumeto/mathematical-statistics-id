@@ -6,7 +6,7 @@
 	<title>Rata-Rata Sampel</title>
 	<meta name="author" content="Kyle Siegrist">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="keywords" content="probabilitas, statistika, sampel acak, rata-rata sampel, probabilitas empiris, fungsi distribusi empiris, fungsi densitas empiris, histogram">
+	<meta name="keywords" content="probabilitas, statistika, sampel acak, rata-rata sampel, probabilitas empiris, fungsi distribusi empiris, fungsi kepadatan empiris, histogram">
 	<link rel="icon" href="../icons/Icon.svg" type="image/svg">
 	<link rel="stylesheet" href="../Screen.css" type="text/css" media="screen">
 	<script src="../Basic.js"></script>
@@ -144,17 +144,17 @@ Perhatikan bahwa untuk \(A\) tetap, \(p(A)\) itu sendiri merupakan rata-rata sam
 
 <p>Jika variabel yang mendasarinya bernilai riil, jelas bahwa rata-rata sampel hanyalah rata-rata distribusi empiris. Dengan demikian, rata-rata sampel memenuhi <em>semua</em> <a href="https://www.randomservices.org/random/expect/Properties.html">sifat nilai harapan</a>, bukan hanya sifat linear dalam <a href="#prp2" class="ref"></a> dan sifat menaik dalam <a href="#prp3" class="ref"></a> yang diberikan di atas. Sifat-sifat tersebut merupakan sifat yang paling penting sehingga diulangi untuk penekanan.</p>
 
-<h4 id="den">Densitas Empiris</h4>
+<h4 id="den">Kepadatan Empiris</h4>
 
 <p>Misalkan sekarang variabel populasi \(x\) mengambil nilai dalam himpunan \(S \subseteq \R^d\) untuk suatu \(d \in \N_+\). Ingat bahwa <dfn>ukuran baku</dfn> pada \(\R^d\) diberikan oleh
 \[ \lambda_d(A) = \int_A 1 \, dx, \quad A \subseteq \R^d \]
-Secara khusus, \(\lambda_1(A)\) adalah panjang \(A\), untuk \(A \subseteq \R\); \(\lambda_2(A)\) adalah luas \(A\), untuk \(A \subseteq \R^2\); dan \(\lambda_3(A)\) adalah volume \(A\), untuk \(A \subseteq \R^3\). Misalkan \(x\) merupakan variabel kontinu dalam arti bahwa \(\lambda_d(S) \gt 0\). Biasanya, \(S\) merupakan interval jika \(d = 1\) dan hasil kali Kartesius dari interval-interval jika \(d \gt 1\). Sekarang, untuk \(A \subseteq S\) dengan \(\lambda_d(A) \gt 0\), <dfn>densitas empiris</dfn> \(A\) yang bersesuaian dengan \(\bs{x}\) adalah
+Secara khusus, \(\lambda_1(A)\) adalah panjang \(A\), untuk \(A \subseteq \R\); \(\lambda_2(A)\) adalah luas \(A\), untuk \(A \subseteq \R^2\); dan \(\lambda_3(A)\) adalah volume \(A\), untuk \(A \subseteq \R^3\). Misalkan \(x\) merupakan variabel kontinu dalam arti bahwa \(\lambda_d(S) \gt 0\). Biasanya, \(S\) merupakan interval jika \(d = 1\) dan hasil kali Kartesius dari interval-interval jika \(d \gt 1\). Sekarang, untuk \(A \subseteq S\) dengan \(\lambda_d(A) \gt 0\), <dfn>kepadatan empiris</dfn> \(A\) yang bersesuaian dengan \(\bs{x}\) adalah
 \[ D(A) = \frac{p(A)}{\lambda_d(A)} = \frac{1}{n \, \lambda_d(A)} \sum_{i=1}^n \bs{1}(x_i \in A) \]
-Dengan demikian, densitas empiris \(A\) adalah proporsi nilai data dalam \(A\) dibagi ukuran \(A\). Pada gambar di bawah (yang bersesuaian dengan \(d = 2\)), jika luas \(A\), misalnya, adalah 5, maka \(D(A) = 4/75\). </p>
+Dengan demikian, kepadatan empiris \(A\) adalah proporsi nilai data dalam \(A\) dibagi ukuran \(A\). Pada gambar di bawah (yang bersesuaian dengan \(d = 2\)), jika luas \(A\), misalnya, adalah 5, maka \(D(A) = 4/75\). </p>
 
 <figure>
-	<figcaption>Densitas empiris \( A \)</figcaption>
-	<img src="EmpiricalPDF.png" alt="Densitas empiris A">
+	<figcaption>Kepadatan empiris \( A \)</figcaption>
+	<img src="EmpiricalPDF.png" alt="Kepadatan empiris A">
 </figure>
 
 <h4 id="cdf">Fungsi Distribusi Empiris</h4>
@@ -176,19 +176,19 @@ Dengan demikian, densitas empiris \(A\) adalah proporsi nilai data dalam \(A\) d
 
 <p>Sesuai dengan sifatnya, \(F\) disebut <dfn>fungsi distribusi empiris</dfn> yang terkait dengan \(\bs{x}\), dan hanyalah fungsi distribusi dari distribusi empiris dalam <a href="#emp" class="ref"></a> yang bersesuaian dengan \(\bs{x}\). Jika kita mengetahui ukuran sampel \(n\) dan fungsi distribusi empiris \(F\), kita dapat memulihkan data kecuali urutan pengamatannya. Nilai-nilai data yang berbeda adalah titik-titik tempat \(F\) melompat, dan banyaknya nilai data pada titik semacam itu adalah besar lompatan dikalikan ukuran sampel \(n\).</p>
 
-<h4 id="pmf">Fungsi Densitas Empiris Diskret</h4>
+<h4 id="pmf">Fungsi Kepadatan Empiris Diskret</h4>
 
 <p>Misalkan sekarang \(\bs{x} = (x_1, x_2, \ldots, x_n)\) merupakan sampel berukuran \(n\) dari suatu variabel diskret yang mengambil nilai dalam himpunan terhitung \(S\). Untuk \(x \in S\), misalkan \(f(x)\) merupakan frekuensi relatif dalam <a href="#emp" class="ref"></a> (probabilitas empiris) dari \(x\) yang bersesuaian dengan himpunan data \(\bs{x}\). Jadi, untuk setiap \(x \in S\), \(f(x)\) merupakan rata-rata sampel dari data \(\{\bs{1}(x_i = x): i \in \{1, 2, \ldots, n\}\}\):
 \[ f(x) = p(\{x\}) = \frac{1}{n} \sum_{i=1}^n \bs{1}(x_i = x) \]
 Pada gambar di bawah, titik-titik tersebut adalah nilai-nilai yang mungkin dari variabel yang mendasarinya. Titik merah menyatakan data, dan angka-angka menunjukkan nilai yang berulang. Titik biru adalah nilai variabel yang mungkin tetapi kebetulan tidak muncul dalam data. Jadi, ukuran sampelnya adalah 12, dan untuk nilai \(x\) yang muncul 3 kali, kita mempunyai \(f(x) = 3/12\).</p>
 
 <figure>
-	<figcaption>Fungsi densitas probabilitas diskret</figcaption>
-	<img src="DiscreteDistribution.png" alt="Fungsi densitas probabilitas diskret">
+	<figcaption>Fungsi kepadatan probabilitas diskret</figcaption>
+	<img src="DiscreteDistribution.png" alt="Fungsi kepadatan probabilitas diskret">
 </figure>
 
 <div class="unit" id="pmf1">
-	<p class="math">\(f\) merupakan <a href="https://www.randomservices.org/random/dist/Discrete.html">fungsi densitas probabilitas diskret</a>:</p>
+	<p class="math">\(f\) merupakan <a href="https://www.randomservices.org/random/dist/Discrete.html">fungsi kepadatan probabilitas diskret</a>:</p>
 	<ol class="sub">
 		<li>\(f(x) \ge 0\) untuk \(x \in S\)</li>
 		<li>\(\sum_{x \in S} f(x) = 1\)</li>
@@ -200,10 +200,10 @@ Pada gambar di bawah, titik-titik tersebut adalah nilai-nilai yang mungkin dari 
 	</details>
 </div>
 
-<p>Sesuai dengan sifatnya, \(f\) disebut <dfn>fungsi densitas probabilitas empiris</dfn> atau <dfn>fungsi frekuensi relatif</dfn> yang terkait dengan \(\bs{x}\), dan hanyalah fungsi densitas probabilitas dari distribusi empiris dalam <a href="#emp" class="ref"></a> yang bersesuaian dengan \(\bs{x}\). Jika kita mengetahui fungsi densitas probabilitas empiris \(f\) dan ukuran sampel \(n\), kita dapat memulihkan himpunan data tersebut kecuali urutan pengamatannya.</p>
+<p>Sesuai dengan sifatnya, \(f\) disebut <dfn>fungsi kepadatan probabilitas empiris</dfn> atau <dfn>fungsi frekuensi relatif</dfn> yang terkait dengan \(\bs{x}\), dan hanyalah fungsi kepadatan probabilitas dari distribusi empiris dalam <a href="#emp" class="ref"></a> yang bersesuaian dengan \(\bs{x}\). Jika kita mengetahui fungsi kepadatan probabilitas empiris \(f\) dan ukuran sampel \(n\), kita dapat memulihkan himpunan data tersebut kecuali urutan pengamatannya.</p>
 
 <div class="unit" id="pmf2">
-	<p class="math">Jika variabel populasi yang mendasarinya bernilai riil, rata-rata sampel merupakan nilai harapan yang dihitung terhadap fungsi densitas empiris. Artinya,
+	<p class="math">Jika variabel populasi yang mendasarinya bernilai riil, rata-rata sampel merupakan nilai harapan yang dihitung terhadap fungsi kepadatan empiris. Artinya,
 	\[ \frac{1}{n} \sum_{i=1}^n x_i = \sum_{x \in S} x \, f(x) \]</p>
 	<details>
 		<summary>Rincian:</summary>
@@ -214,13 +214,13 @@ Pada gambar di bawah, titik-titik tersebut adalah nilai-nilai yang mungkin dari 
 
 <p>Seperti telah kita catat, jika variabel populasi bernilai riil, rata-rata sampel merupakan rata-rata distribusi empiris.</p>
 
-<h4 id="pdf">Fungsi Densitas Empiris Kontinu</h4>
+<h4 id="pdf">Fungsi Kepadatan Empiris Kontinu</h4>
 
-<p>Misalkan sekarang \(\bs{x} = (x_1, x_2, \ldots, x_n)\) merupakan sampel berukuran \(n\) dari suatu variabel kontinu yang mengambil nilai dalam himpunan \(S \subseteq \R^d\). Misalkan \(\mathscr{A} = \{A_j: j \in J\}\) merupakan partisi \(S\) berupa koleksi terhitung dari himpunan-himpunan bagian yang masing-masing memiliki ukuran positif dan berhingga. Ingat bahwa istilah <em>partisi</em> berarti himpunan-himpunan bagian tersebut saling lepas berpasangan dan gabungannya adalah \(S\). Misalkan \(f\) merupakan fungsi pada \(S\) yang didefinisikan dengan aturan bahwa \(f(x)\) adalah densitas empiris dalam <a href="#den" class="ref"></a> dari \(A_j\), yang bersesuaian dengan himpunan data \(\bs{x}\), untuk setiap \(x \in A_j\). Dengan demikian, \(f\) konstan pada setiap himpunan partisi:
+<p>Misalkan sekarang \(\bs{x} = (x_1, x_2, \ldots, x_n)\) merupakan sampel berukuran \(n\) dari suatu variabel kontinu yang mengambil nilai dalam himpunan \(S \subseteq \R^d\). Misalkan \(\mathscr{A} = \{A_j: j \in J\}\) merupakan partisi \(S\) berupa koleksi terhitung dari himpunan-himpunan bagian yang masing-masing memiliki ukuran positif dan berhingga. Ingat bahwa istilah <em>partisi</em> berarti himpunan-himpunan bagian tersebut saling lepas berpasangan dan gabungannya adalah \(S\). Misalkan \(f\) merupakan fungsi pada \(S\) yang didefinisikan dengan aturan bahwa \(f(x)\) adalah kepadatan empiris dalam <a href="#den" class="ref"></a> dari \(A_j\), yang bersesuaian dengan himpunan data \(\bs{x}\), untuk setiap \(x \in A_j\). Dengan demikian, \(f\) konstan pada setiap himpunan partisi:
 \[ f(x) = D(A_j) = \frac{p(A_j)}{\lambda_d(A_j)} = \frac{1}{n \lambda_d(A_j)} \sum_{i=1}^n \bs{1}(x_i \in A_j), \quad x \in A_j \]</p>
 
 <div class="unit" id="pdf1">
-	<p class="math">\(f\) merupakan <a href="https://www.randomservices.org/random/dist/Continuous.html">fungsi densitas probabilitas kontinu</a>.</p>
+	<p class="math">\(f\) merupakan <a href="https://www.randomservices.org/random/dist/Continuous.html">fungsi kepadatan probabilitas kontinu</a>.</p>
 	<ol class="sub">
 		<li>\(f(x) \ge 0\) untuk \(x \in S\)</li>
 		<li>\(\int_S f(x) \, dx = 1\)</li>
@@ -232,14 +232,14 @@ Pada gambar di bawah, titik-titik tersebut adalah nilai-nilai yang mungkin dari 
 	</details>
 </div>
 
-<p>Fungsi \(f\) disebut <dfn>fungsi densitas probabilitas empiris</dfn> yang terkait dengan data \(\bs{x}\) dan partisi \(\mathscr{A}\). Untuk distribusi probabilitas yang didefinisikan oleh \(f\), probabilitas empiris \(p(A_j)\) didistribusikan secara seragam pada \(A_j\) untuk setiap \(j \in J\). Pada gambar di bawah, titik merah menyatakan data dan garis hitam mendefinisikan partisi \(S\) menjadi 9 persegi panjang. Untuk himpunan partisi \(A\) di kanan atas, distribusi empiris akan mendistribusikan probabilitas \(3/15 = 1/5\) secara seragam pada \(A\). Jika luas \(A\), misalnya, adalah 4, maka \(f(x) = 1/20 \) untuk \(x \in A\).</p>
+<p>Fungsi \(f\) disebut <dfn>fungsi kepadatan probabilitas empiris</dfn> yang terkait dengan data \(\bs{x}\) dan partisi \(\mathscr{A}\). Untuk distribusi probabilitas yang didefinisikan oleh \(f\), probabilitas empiris \(p(A_j)\) didistribusikan secara seragam pada \(A_j\) untuk setiap \(j \in J\). Pada gambar di bawah, titik merah menyatakan data dan garis hitam mendefinisikan partisi \(S\) menjadi 9 persegi panjang. Untuk himpunan partisi \(A\) di kanan atas, distribusi empiris akan mendistribusikan probabilitas \(3/15 = 1/5\) secara seragam pada \(A\). Jika luas \(A\), misalnya, adalah 4, maka \(f(x) = 1/20 \) untuk \(x \in A\).</p>
 
 <figure>
-	<figcaption>Fungsi densitas probabilitas empiris</figcaption>
-	<img src="ContinuousDistribution.png" alt="Fungsi densitas probabilitas empiris">
+	<figcaption>Fungsi kepadatan probabilitas empiris</figcaption>
+	<img src="ContinuousDistribution.png" alt="Fungsi kepadatan probabilitas empiris">
 </figure>
 
-<p>Berbeda dengan kasus diskret, kita tidak dapat memulihkan data dari fungsi densitas probabilitas empiris. Jika kita mengetahui ukuran sampel, tentu kita dapat menentukan banyaknya titik data dalam \(A_j\) untuk setiap \(j\), tetapi tidak dapat menentukan lokasi persis titik-titik tersebut dalam \(A_j\). Karena alasan ini, rata-rata fungsi densitas probabilitas empiris pada umumnya tidak sama dengan rata-rata sampel ketika variabel yang mendasarinya bernilai riil.</p>
+<p>Berbeda dengan kasus diskret, kita tidak dapat memulihkan data dari fungsi kepadatan probabilitas empiris. Jika kita mengetahui ukuran sampel, tentu kita dapat menentukan banyaknya titik data dalam \(A_j\) untuk setiap \(j\), tetapi tidak dapat menentukan lokasi persis titik-titik tersebut dalam \(A_j\). Karena alasan ini, rata-rata fungsi kepadatan probabilitas empiris pada umumnya tidak sama dengan rata-rata sampel ketika variabel yang mendasarinya bernilai riil.</p>
 
 <h4 id="his">Histogram</h4>
 
@@ -248,14 +248,14 @@ Pada gambar di bawah, titik-titik tersebut adalah nilai-nilai yang mungkin dari 
 <ul>
 	<li>Pemetaan yang memetakan setiap kelas ke frekuensinya disebut <dfn>distribusi frekuensi</dfn> untuk himpunan data dan partisi yang diberikan.</li>
 	<li>Pemetaan yang memetakan setiap kelas ke frekuensi relatifnya disebut <dfn>distribusi frekuensi relatif</dfn> untuk himpunan data dan partisi yang diberikan.</li>
-	<li>Dalam kasus variabel kontinu, pemetaan yang memetakan setiap kelas ke densitasnya disebut <dfn>distribusi densitas</dfn> untuk himpunan data dan partisi yang diberikan.</li>
+	<li>Dalam kasus variabel kontinu, pemetaan yang memetakan setiap kelas ke kepadatannya disebut <dfn>distribusi kepadatan</dfn> untuk himpunan data dan partisi yang diberikan.</li>
 </ul>
 
-<p>Dalam dimensi 1 atau 2, diagram batang dari salah satu distribusi tersebut disebut <dfn>histogram</dfn>. Histogram distribusi frekuensi dan histogram distribusi frekuensi relatif yang bersesuaian tampak sama, kecuali perubahan skala pada sumbu vertikal. Jika semua kelas berukuran sama, histogram dari distribusi densitas yang bersesuaian juga tampak sama, sekali lagi kecuali perubahan skala pada sumbu vertikal. Jika variabel yang mendasarinya bernilai riil, kelas-kelas biasanya berupa interval (diskret atau kontinu), dan titik tengah interval-interval ini kadang-kadang disebut <dfn>titik tengah kelas</dfn>.</p>
+<p>Dalam dimensi 1 atau 2, diagram batang dari salah satu distribusi tersebut disebut <dfn>histogram</dfn>. Histogram distribusi frekuensi dan histogram distribusi frekuensi relatif yang bersesuaian tampak sama, kecuali perubahan skala pada sumbu vertikal. Jika semua kelas berukuran sama, histogram dari distribusi kepadatan yang bersesuaian juga tampak sama, sekali lagi kecuali perubahan skala pada sumbu vertikal. Jika variabel yang mendasarinya bernilai riil, kelas-kelas biasanya berupa interval (diskret atau kontinu), dan titik tengah interval-interval ini kadang-kadang disebut <dfn>titik tengah kelas</dfn>.</p>
 
 <figure>
-	<figcaption>Histogram densitas</figcaption>
-	<img src="Histogram.png" alt="Histogram densitas">
+	<figcaption>Histogram kepadatan</figcaption>
+	<img src="Histogram.png" alt="Histogram kepadatan">
 </figure>
 
 <p>Seluruh tujuan pembentukan partisi dan pembuatan grafik salah satu distribusi empiris yang bersesuaian dengan partisi tersebut adalah untuk merangkum dan menyajikan data secara bermakna. Karena itu, terdapat beberapa pedoman umum dalam memilih kelas:</p>
@@ -265,7 +265,7 @@ Pada gambar di bawah, titik-titik tersebut adalah nilai-nilai yang mungkin dari 
 	<li>Jika mungkin, kelas-kelas sebaiknya berukuran sama.</li>
 </ol>
 
-<p>Untuk distribusi yang sangat menceng, kelas-kelas dengan ukuran berbeda merupakan pilihan yang tepat agar tidak terbentuk banyak kelas dengan frekuensi sangat kecil. Untuk variabel kontinu dengan ukuran kelas yang berbeda-beda, histogram densitas harus digunakan sebagai pengganti histogram frekuensi atau frekuensi relatif; jika tidak, grafik tersebut menyesatkan secara visual dan bahkan salah secara matematis.</p>
+<p>Untuk distribusi yang sangat menceng, kelas-kelas dengan ukuran berbeda merupakan pilihan yang tepat agar tidak terbentuk banyak kelas dengan frekuensi sangat kecil. Untuk variabel kontinu dengan ukuran kelas yang berbeda-beda, histogram kepadatan harus digunakan sebagai pengganti histogram frekuensi atau frekuensi relatif; jika tidak, grafik tersebut menyesatkan secara visual dan bahkan salah secara matematis.</p>
 
 <p>Penting untuk disadari bahwa data frekuensi tidak terelakkan untuk variabel kontinu. Sebagai contoh, misalkan variabel kita menyatakan berat sekantong M&amp;M (dalam gram) dan alat ukur kita (sebuah timbangan) memiliki ketelitian 0.01 gram. Jika berat satu kantong terukur 50.32, sebenarnya kita mengatakan bahwa berat tersebut berada dalam interval \([50.315, 50.325)\) (atau mungkin interval lain, bergantung pada cara kerja alat ukur). Demikian pula, ketika dua kantong memiliki berat <em>terukur</em> yang sama, kesamaan semu tersebut sesungguhnya hanyalah akibat ketidaktelitian alat ukur; berat kedua kantong itu hampir pasti <em>tidak</em> persis sama. Jadi, dua kantong dengan berat terukur yang sama sebenarnya memberikan hitungan frekuensi 2 untuk suatu interval tertentu.</p>
 
@@ -369,7 +369,7 @@ Aproksimasi ini didasarkan pada harapan bahwa rata-rata nilai data dalam setiap 
 		<li>Klasifikasikan \(x\) menurut jenis dan tingkat pengukurannya.</li>
 		<li>Sketsakan diagram titiknya.</li>
 		<li>Hitung rata-rata sampel \(m\) berdasarkan definisinya dan tunjukkan letaknya pada diagram titik.</li>
-		<li>Tentukan fungsi densitas empiris \(f\) dan sketsakan grafiknya.</li>
+		<li>Tentukan fungsi kepadatan empiris \(f\) dan sketsakan grafiknya.</li>
 		<li>Hitung rata-rata sampel \(m\) menggunakan \(f\).</li>
 		<li>Tentukan fungsi distribusi empiris \(F\) dan sketsakan grafiknya.</li>
 	</ol>
@@ -386,7 +386,7 @@ Aproksimasi ini didasarkan pada harapan bahwa rata-rata nilai data dalam setiap 
 </div>
 
 <div class="unit" id="cmp2">
-	<p class="math">Misalkan suatu sampel berukuran 12 dari variabel diskret \(x\) memiliki fungsi densitas empiris yang diberikan oleh \(f(-2) = 1/12\), \(f(-1) = 1/4\), \(f(0) = 1/3\), \(f(1) = 1/6\), \(f(2) = 1/6\).</p>
+	<p class="math">Misalkan suatu sampel berukuran 12 dari variabel diskret \(x\) memiliki fungsi kepadatan empiris yang diberikan oleh \(f(-2) = 1/12\), \(f(-1) = 1/4\), \(f(0) = 1/3\), \(f(1) = 1/6\), \(f(2) = 1/6\).</p>
 	<ol class="sub">
 		<li>Sketsakan grafik \(f\).</li>
 		<li>Hitung rata-rata sampel \(m\) menggunakan \(f\).</li>
@@ -411,7 +411,7 @@ Aproksimasi ini didasarkan pada harapan bahwa rata-rata nilai data dalam setiap 
 				<th>Kelas</th>
 				<th>Frekuensi</th>
 				<th>Frekuensi Relatif</th>
-				<th>Densitas</th>
+				<th>Kepadatan</th>
 				<th>Frekuensi Kumulatif</th>
 				<th>Frekuensi Relatif Kumulatif</th>
 				<th>Titik Tengah</th>
@@ -469,7 +469,7 @@ Aproksimasi ini didasarkan pada harapan bahwa rata-rata nilai data dalam setiap 
 	</table>
 	<ol class="sub">
 		<li>Lengkapi tabel tersebut</li>
-		<li>Sketsakan histogram densitas</li>
+		<li>Sketsakan histogram kepadatan</li>
 		<li>Sketsakan ogive frekuensi relatif kumulatif.</li>
 		<li>Hitung suatu aproksimasi untuk rata-rata</li>
 	</ol>
@@ -483,7 +483,7 @@ Aproksimasi ini didasarkan pada harapan bahwa rata-rata nilai data dalam setiap 
 							<th>Kelas</th>
 							<th>Frekuensi</th>
 							<th>Frekuensi Relatif</th>
-							<th>Densitas</th>
+							<th>Kepadatan</th>
 							<th>Frekuensi Kumulatif</th>
 							<th>Frekuensi Relatif Kumulatif</th>
 							<th>Titik Tengah</th>
@@ -571,8 +571,8 @@ Aproksimasi ini didasarkan pada harapan bahwa rata-rata nilai data dalam setiap 
 	<p class="stat">Perhatikan variabel panjang mahkota dan spesies dalam <a href="https://www.randomservices.org/random/data/Iris.html" class="ancillary">data iris Fisher</a>. </p>
 	<ol class="sub">
 		<li>Klasifikasikan variabel-variabel tersebut menurut jenis dan tingkat pengukurannya.</li>
-		<li>Hitung rata-rata sampel dan buat histogram densitas untuk panjang mahkota.</li>
-		<li>Hitung rata-rata sampel dan buat histogram densitas untuk panjang mahkota menurut spesies.</li>
+		<li>Hitung rata-rata sampel dan buat histogram kepadatan untuk panjang mahkota.</li>
+		<li>Hitung rata-rata sampel dan buat histogram kepadatan untuk panjang mahkota menurut spesies.</li>
 	</ol>
 	<details>
 		<summary>Rincian:</summary>
@@ -589,7 +589,7 @@ Aproksimasi ini didasarkan pada harapan bahwa rata-rata nilai data dalam setiap 
 	<ol class="sub">
 		<li>Klasifikasikan variabel tersebut menurut jenis dan tingkat pengukurannya.</li>
 		<li>Hitung rata-ratanya</li>
-		<li>Buat histogram densitas dengan kelas-kelas \([0, 5)\), \([5, 40)\), \([40, 50)\), \([50, 60)\).</li>
+		<li>Buat histogram kepadatan dengan kelas-kelas \([0, 5)\), \([5, 40)\), \([40, 50)\), \([50, 60)\).</li>
 	</ol>
 	<details>
 		<summary>Rincian:</summary>
@@ -604,7 +604,7 @@ Aproksimasi ini didasarkan pada harapan bahwa rata-rata nilai data dalam setiap 
 	<p class="stat">Perhatikan <a href="https://www.randomservices.org/random/data/Michelson.html" class="ancillary">data kelajuan cahaya Michelson</a>.</p>
 	<ol class="sub">
 		<li>Klasifikasikan variabel tersebut menurut jenis dan tingkat pengukurannya.</li>
-		<li>Buat histogram densitas.</li>
+		<li>Buat histogram kepadatan.</li>
 		<li>Hitung rata-rata sampel.</li>
 		<li>Tentukan rata-rata sampel jika variabel dikonversi ke \(\text{km}/\text{hr}\). Transformasinya adalah \(y = x + 299\,000\)</li>
 	</ol>
@@ -622,7 +622,7 @@ Aproksimasi ini didasarkan pada harapan bahwa rata-rata nilai data dalam setiap 
 	<p class="stat">Perhatikan <a href="https://www.randomservices.org/random/data/Short.html" class="ancillary">data paralaks Matahari Short</a>.</p>
 	<ol class="sub">
 		<li>Klasifikasikan variabel tersebut menurut jenis dan tingkat pengukurannya.</li>
-		<li>Buat histogram densitas.</li>
+		<li>Buat histogram kepadatan.</li>
 		<li>Hitung rata-rata sampel.</li>
 		<li>Tentukan rata-rata sampel jika variabel dikonversi ke derajat. Terdapat 3600 detik busur dalam satu derajat.</li>
 		<li>Tentukan rata-rata sampel jika variabel dikonversi ke radian. Terdapat \(\pi/180\) radian dalam satu derajat.</li>
@@ -643,7 +643,7 @@ Aproksimasi ini didasarkan pada harapan bahwa rata-rata nilai data dalam setiap 
 	<ol class="sub">
 		<li>Klasifikasikan variabel tersebut menurut jenis dan tingkat pengukurannya.</li>
 		<li>Hitung rata-rata sampel.</li>
-		<li>Buat histogram densitas.</li>
+		<li>Buat histogram kepadatan.</li>
 	</ol>
 	<details>
 		<summary>Rincian:</summary>
@@ -661,7 +661,7 @@ Aproksimasi ini didasarkan pada harapan bahwa rata-rata nilai data dalam setiap 
 		<li>Hitung rata-rata sampel untuk setiap variabel hitungan warna.</li>
 		<li>Hitung rata-rata sampel untuk jumlah permen seluruhnya dengan menggunakan hasil dari (b).</li>
 		<li>Buat histogram frekuensi relatif untuk jumlah permen seluruhnya.</li>
-		<li>Hitung rata-rata sampel dan buat histogram densitas untuk berat bersih.</li>
+		<li>Hitung rata-rata sampel dan buat histogram kepadatan untuk berat bersih.</li>
 	</ol>
 	<details>
 		<summary>Rincian:</summary>
@@ -680,9 +680,9 @@ Aproksimasi ini didasarkan pada harapan bahwa rata-rata nilai data dalam setiap 
 		<li>Klasifikasikan variabel-variabel tersebut menurut jenis dan tingkat pengukurannya.</li>
 		<li>Hitung fungsi frekuensi relatif untuk spesies dan buat grafiknya.</li>
 		<li>Hitung fungsi frekuensi relatif untuk jenis kelamin dan buat grafiknya.</li>
-		<li>Hitung rata-rata sampel dan buat histogram densitas untuk berat tubuh.</li>
-		<li>Hitung rata-rata sampel dan buat histogram densitas untuk berat tubuh menurut spesies.</li>
-		<li>Hitung rata-rata sampel dan buat histogram densitas untuk berat tubuh menurut jenis kelamin.</li>
+		<li>Hitung rata-rata sampel dan buat histogram kepadatan untuk berat tubuh.</li>
+		<li>Hitung rata-rata sampel dan buat histogram kepadatan untuk berat tubuh menurut spesies.</li>
+		<li>Hitung rata-rata sampel dan buat histogram kepadatan untuk berat tubuh menurut jenis kelamin.</li>
 	</ol>
 	<details>
 		<summary>Rincian:</summary>
@@ -701,8 +701,8 @@ Aproksimasi ini didasarkan pada harapan bahwa rata-rata nilai data dalam setiap 
 	<p class="stat">Perhatikan <a href="https://www.randomservices.org/random/data/Pearson.html" class="ancillary">data tinggi Pearson</a>. </p>
 	<ol class="sub">
 		<li>Klasifikasikan variabel-variabel tersebut menurut jenis dan tingkat pengukurannya.</li>
-		<li>Hitung rata-rata sampel dan buat histogram densitas untuk tinggi ayah.</li>
-		<li>Hitung rata-rata sampel dan buat histogram densitas untuk tinggi anak laki-laki.</li>
+		<li>Hitung rata-rata sampel dan buat histogram kepadatan untuk tinggi ayah.</li>
+		<li>Hitung rata-rata sampel dan buat histogram kepadatan untuk tinggi anak laki-laki.</li>
 	</ol>
 	<details>
 		<summary>Rincian:</summary>

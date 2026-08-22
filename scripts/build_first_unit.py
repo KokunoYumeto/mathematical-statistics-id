@@ -36,6 +36,7 @@ RUNTIME_RECEIPT = RUNTIME_ROOT / "RUNTIME_RECEIPT.json"
 RUNTIME_READER_PATH = PurePosixPath("MathJax/input/tex/extensions/boldsymbol.js")
 RUNTIME_BYTES = 4709
 RUNTIME_SHA256 = "716cf8735d00abfb1627f8adbbf4aeb915ac9b5c55d47aeaf276e73dac6a2aa1"
+TRANSLATION_PROVENANCE = "OpenAI Codex gpt-5.6-sol, Ultra"
 
 SOURCE_MANIFEST_HEADER = (
     "relative_path",
@@ -75,6 +76,7 @@ TARGETS = (
     PurePosixPath("random/point/Moments.html"),
     PurePosixPath("random/point/Likelihood.html"),
     PurePosixPath("random/point/Bayes.html"),
+    PurePosixPath("random/point/Unbiased.html"),
 )
 
 # Screen.css references all of these local assets. Keeping the complete exact set
@@ -406,8 +408,8 @@ BOUNDED_TEXT_CORRECTIONS = (
     },
     {
         "page": "random/sample/Normal.html",
-        "old": "Jika \\(\\mu\\) dan \\(\\nu\\) tidak diketahui (sekali lagi, ini biasanya merupakan keadaan yang terjadi), penaksir yang wajar",
-        "new": "Untuk ukuran sampel sekurang-kurangnya dua, jika \\(\\mu\\) dan \\(\\nu\\) tidak diketahui (sekali lagi, seperti yang biasanya terjadi), penaksir yang wajar",
+        "old": "Jika \\(\\mu\\) dan \\(\\nu\\) tidak diketahui (sekali lagi, ini biasanya merupakan keadaan yang terjadi), penduga yang wajar",
+        "new": "Untuk ukuran sampel sekurang-kurangnya dua, jika \\(\\mu\\) dan \\(\\nu\\) tidak diketahui (sekali lagi, seperti yang biasanya terjadi), penduga yang wajar",
         "replacements": 1,
         "reason": "the standard sample covariance divides by n-minus-one",
     },
@@ -532,6 +534,127 @@ BOUNDED_TEXT_CORRECTIONS += (
         "new": r"        <p>Semua hasil ini langsung mengikuti fakta bahwa \( \E(X) = \P(X = 1) = r / N \). Penduga bagi parameter bilangan bulat di atas adalah nilai mentah real dari metode momen; jika hasilnya harus berada dalam ruang parameter bilangan bulat, diperlukan aturan proyeksi atau pembulatan terkendala yang dinyatakan secara terpisah.</p>",
         "replacements": 1,
         "reason": "distinguish raw real moment estimates from constrained integer-valued parameter estimates",
+    },
+)
+
+BOUNDED_TEXT_CORRECTIONS += (
+    {
+        "page": "random/point/Unbiased.html",
+        "old": "turunannya didominasi oleh fungsi terintegralkan pada suatu lingkungan setiap nilai parameter",
+        "new": "nilai mutlak hasil kali fungsi statistik dengan turunan tersebut didominasi oleh fungsi terintegralkan",
+        "replacements": 1,
+        "reason": "differentiate under the integral only under a local integrable-domination condition",
+    },
+    {
+        "page": "random/point/Unbiased.html",
+        "old": "Kekontinuan saja cukup untuk menggantikan syarat dominasi.",
+        "new": "Kekontinuan saja tidak menggantikan syarat dominasi. Untuk memakai bentuk batas yang membagi dengan informasi Fisher, informasi tersebut juga harus positif dan berhingga.",
+        "replacements": 1,
+        "reason": "state both the domination requirement and the finite positive information denominator",
+    },
+    {
+        "page": "random/point/Unbiased.html",
+        "old": "untuk suatu nilai parameter merupakan penduga tak bias dengan varians minimum seragam",
+        "new": "untuk setiap nilai parameter merupakan penduga tak bias dengan varians minimum seragam",
+        "replacements": 1,
+        "reason": "attaining a pointwise bound implies UMVUE only when attainment holds across the parameter set",
+    },
+    {
+        "page": "random/point/Unbiased.html",
+        "old": "Kesamaan tersebut langsung membuat penduga menjadi UMVUE.",
+        "new": "Pada setiap nilai parameter yang tetap, kesamaan",
+        "replacements": 1,
+        "reason": "state the equality characterization pointwise before drawing a uniform conclusion",
+    },
+    {
+        "page": "random/point/Unbiased.html",
+        "old": "Jika hubungan berikut berlaku pada satu nilai parameter, penduga tersebut merupakan UMVUE:",
+        "new": "Jika hubungan berikut berlaku untuk setiap nilai parameter, batas tercapai di seluruh ruang parameter dan penduga tersebut merupakan UMVUE:",
+        "replacements": 1,
+        "reason": "require equality across the full parameter set before concluding UMVUE",
+    },
+    {
+        "page": "random/point/Unbiased.html",
+        "old": "Untuk pendugaan rata-rata dan varians secara bersama, rumus skalar yang sama berlaku langsung.",
+        "new": "Pendugaan rata-rata dan varians secara bersama memakai matriks informasi Fisher; pada model normal, informasi silang keduanya nol sehingga unsur diagonal invers matriks menghasilkan batas skalar yang sama seperti yang ditampilkan di bawah.",
+        "replacements": 1,
+        "reason": "qualify the scalar normal bounds with the diagonal joint Fisher-information calculation",
+    },
+    {
+        "page": "random/point/Unbiased.html",
+        "old": "fungsi kepadatan probabilitas untuk satu pengamatan X dari distribusi yang disampel adalah",
+        "new": "fungsi kepadatan probabilitas satu pengamatan dari distribusi asal sampel adalah",
+        "replacements": 2,
+        "reason": "identify g_a as the one-observation density in both beta and uniform models",
+    },
+    {
+        "page": "random/point/Unbiased.html",
+        "old": "Rata-rata sampel bukan UMVUE untuk setiap ukuran sampel.",
+        "new": "Untuk ukuran sampel satu, penduga tersebut sama dengan pengamatan tunggal dan merupakan UMVUE",
+        "replacements": 1,
+        "reason": "record the n-equals-one beta exception to the source's invalid nonattainment inference",
+    },
+    {
+        "page": "random/point/Unbiased.html",
+        "old": "Tidak tercapainya batas itu sendiri membuktikan bahwa penduga bukan UMVUE.",
+        "new": "Untuk ukuran sampel sekurang-kurangnya dua, penduga itu bukan UMVUE",
+        "replacements": 1,
+        "reason": "state the separately justified strict Rao-Blackwell conclusion for beta samples of size at least two",
+    },
+    {
+        "page": "random/point/Unbiased.html",
+        "old": "Namun, nilai itu bukan batas bawah",
+        "new": "Substitusi formal ke bentuk berbasis turunan kedua menghasilkan negatif dari nilai tersebut. Namun, kedua nilai itu bukan batas bawah",
+        "replacements": 1,
+        "reason": "label the support-dependent uniform substitution as formal rather than a valid Cramer-Rao bound",
+    },
+    {
+        "page": "random/point/Unbiased.html",
+        "old": "hal itu melanggar batas bawah Cram&eacute;r–Rao.",
+        "new": "hal itu menegaskan kegagalan syarat regularitas, bukan pelanggaran suatu batas bawah yang sah.",
+        "replacements": 1,
+        "reason": "interpret the smaller uniform-estimator variance as failed regularity, not a contradicted bound",
+    },
+    {
+        "page": "random/point/Unbiased.html",
+        "old": "tetapi simpangan bakunya dapat berbeda.</p>",
+        "new": "Jika salah satu simpangan baku nol, variabel hasil yang bersesuaian sama dengan rata-rata itu hampir pasti dan sudah menjadi penduga tepat; bobot invers-varians di bawah tidak terdefinisi. Karena itu, rumus berikut mengasumsikan semua simpangan baku positif.</p>",
+        "replacements": 1,
+        "reason": "separate the exact zero-variance case before imposing positivity for inverse-variance BLUE weights",
+    },
+    {
+        "page": "random/point/Unbiased.html",
+        "old": r"jika vektor simpangan baku \(\bs{\sigma}\) diketahui.",
+        "new": r"jika vektor simpangan baku positif \(\bs{\sigma}\) diketahui.",
+        "replacements": 1,
+        "reason": "carry the positive-standard-deviation domain into the BLUE summary",
+    },
+)
+
+BOUNDED_REFERENCE_CORRECTIONS = (
+    {
+        "page": "random/point/Unbiased.html",
+        "old": 'href="#crb3"',
+        "new": 'href="#crb2"',
+        "replacements": 7,
+        "surface": "internal_reference",
+        "reason": "the seven distribution checks invoke assumption crb2 rather than consequence crb3",
+    },
+    {
+        "page": "random/point/Unbiased.html",
+        "old": 'href="#crb8"',
+        "new": 'href="#crb6"',
+        "replacements": 1,
+        "surface": "internal_reference",
+        "reason": "the Fisher-information denominator occurs in the general bound crb6, not the equality theorem crb8",
+    },
+    {
+        "page": "random/point/Unbiased.html",
+        "old": 'href="#sam5"',
+        "new": 'href="#sam4"',
+        "replacements": 1,
+        "surface": "internal_reference",
+        "reason": "the formal uniform substitution is made in the score-based random-sample bound sam4",
     },
 )
 
@@ -685,7 +808,7 @@ PROTECTED_MATH_CORRECTIONS = (
     {
         "page": "random/sample/CLT.html",
         "old": r'''<p class="app">In the <a href="JavaScript:openAncillary('../apps/SpecialSimulator.html')" class="ancillary">special distribution simulator</a>, select the gamma distribution. Vary and \(b\) and note the shape of the probability density function. With \(k = 10\) and various values of \(b\), run the experiment 1000 times and compare the empirical density function to the true probability density function.</p>''',
-        "new": r'''<p class="app">Dalam <a href="https://www.randomservices.org/random/apps/SpecialSimulator.html" class="ancillary">simulator distribusi khusus</a>, pilih distribusi gamma. Variasikan parameter \((k, b)\), lalu perhatikan bentuk fungsi densitas probabilitasnya. Dengan \(k = 10\) dan berbagai nilai \(b\), jalankan eksperimen 1.000 kali dan bandingkan fungsi densitas empiris dengan fungsi densitas probabilitas sebenarnya.</p>''',
+        "new": r'''<p class="app">Dalam <a href="https://www.randomservices.org/random/apps/SpecialSimulator.html" class="ancillary">simulator distribusi khusus</a>, pilih distribusi gamma. Variasikan parameter \((k, b)\), lalu perhatikan bentuk fungsi kepadatan probabilitasnya. Dengan \(k = 10\) dan berbagai nilai \(b\), jalankan eksperimen 1.000 kali dan bandingkan fungsi kepadatan empiris dengan fungsi kepadatan probabilitas sebenarnya.</p>''',
         "span_old": r"\(b\)",
         "span_new": r"\((k, b)\)",
         "span_index": 202,
@@ -1709,6 +1832,66 @@ PROTECTED_MATH_CORRECTIONS += (
     },
 )
 
+UNBIASED_MATH_CORRECTIONS = (
+    (
+        68,
+        r"\E\left[h(\bs{X})\right]",
+        r"\E_\theta\left[h(\bs{X})\right]",
+        "retain the theta subscript on the expectation differentiated under the model",
+    ),
+    (
+        98,
+        r"\E_\theta\left[L^2(\bs{X}, \theta)\right]",
+        r"\E_\theta\left[L_1^2(\bs{X}, \theta)\right]",
+        "identify the squared score rather than an undefined unsubscripted L",
+    ),
+    (
+        115,
+        r"\(L^2\)",
+        r"\(L_1^2\)",
+        "identify the squared full-sample score in the random-sample decomposition",
+    ),
+    (
+        119,
+        r"\E_\theta\left[L^2(\bs{X}, \theta)\right]",
+        r"\E_\theta\left[L_1^2(\bs{X}, \theta)\right]",
+        "identify the squared full-sample score in the Fisher-information identity",
+    ),
+    (
+        169,
+        r"\exp\left[-\left[\frac{x - \mu}{\sigma}\right]^2 \right]",
+        r"\exp\left[-\frac{1}{2}\left[\frac{x - \mu}{\sigma}\right]^2 \right]",
+        "restore the missing one-half factor in the normal density exponent",
+    ),
+)
+
+PROTECTED_MATH_CORRECTIONS += tuple(
+    {
+        "page": "random/point/Unbiased.html",
+        "old": old,
+        "new": new,
+        "span_old": old,
+        "span_new": new,
+        "span_index": span_index,
+        "replacements": 1,
+        "surface": "math_span",
+        "reason": reason,
+    }
+    for span_index, old, new, reason in UNBIASED_MATH_CORRECTIONS
+)
+
+PROTECTED_MATH_CORRECTIONS += (
+    {
+        "page": "random/point/Unbiased.html",
+        "old": r"\int_S \frac{d}{d \theta} h(\bs{x}) f_\theta(\bs{x}) \, d \bs{x}",
+        "new": r"\int_S \frac{d}{d \theta}\left[h(\bs{x}) f_\theta(\bs{x})\right] \, d \bs{x}",
+        "replacements": 1,
+        "surface": "raw_math_environment",
+        "environment_index": 2,
+        "reason": "differentiate the bracketed product under the integral rather than h alone",
+    },
+)
+
 # Reader-facing language inside TeX \text{...} remains protected mathematics:
 # these exact substitutions localize words while leaving every operator,
 # identifier, delimiter, and formula position unchanged.
@@ -1912,12 +2095,15 @@ def root_index() -> bytes:
         "<!doctype html>\n"
         '<html lang="id-ID"><head><meta charset="utf-8">\n'
         '<meta name="viewport" content="width=device-width, initial-scale=1">\n'
+        f'<meta name="translation-provenance" content="{TRANSLATION_PROVENANCE}">\n'
         "<title>Statistika Matematis — Bahasa Indonesia</title></head>\n"
         '<body><main><h1>Statistika Matematis</h1>\n'
         '<p><a href="random/sample/index.html">Mulai membaca: Sampel Acak</a></p>\n'
         "<p>Edisi Bahasa Indonesia independen berdasarkan "
         '<a href="https://www.randomservices.org/random/">Random</a> karya Kyle Siegrist. '
         "Terjemahan ini tidak didukung atau disahkan oleh penulis sumber.</p>\n"
+        f"<p>Provenans terjemahan: {TRANSLATION_PROVENANCE}. Kredit karya sumber "
+        "dan kontributor manusia tetap dipertahankan.</p>\n"
         "</main></body></html>\n"
     ).encode("utf-8")
 
@@ -1926,12 +2112,15 @@ def licences_index() -> bytes:
     return (
         "<!doctype html>\n"
         '<html lang="id-ID"><head><meta charset="utf-8">'
+        f'<meta name="translation-provenance" content="{TRANSLATION_PROVENANCE}">'
         "<title>Atribusi dan Lisensi</title></head><body><main>\n"
         "<h1>Atribusi dan Lisensi</h1>\n"
         "<p>Sumber utama: Kyle Siegrist, <cite>Random: Probability, Mathematical "
         "Statistics, and Stochastic Processes</cite>. Terjemahan dan perubahan "
         "struktur akses dibuat secara independen; penulis sumber tidak mendukung "
         "atau mengesahkan edisi ini.</p>\n"
+        f"<p>Provenans terjemahan: {TRANSLATION_PROVENANCE}. Catatan ini tidak "
+        "menggantikan kredit sumber atau kontributor manusia.</p>\n"
         '<p><a href="https://www.randomservices.org/random/">Karya sumber</a>. '
         'Laman utama menautkan <a href="https://creativecommons.org/licenses/by/2.0/">CC BY 2.0</a>; '
         '<a href="https://www.randomservices.org/random/Credits.html">laman kredit</a> '
@@ -2129,6 +2318,13 @@ def _math_spans(text: str) -> list[str]:
     return spans
 
 
+def _raw_align_environments(text: str) -> list[str]:
+    """Extract undelimited align/align* environments in source order."""
+
+    pattern = re.compile(r"\\begin\{(align\*?)\}.*?\\end\{\1\}", re.DOTALL)
+    return [match.group(0) for match in pattern.finditer(text)]
+
+
 def _validate_target_corrections(
     authority_data: dict[str, bytes], target_data: dict[str, bytes]
 ) -> None:
@@ -2144,6 +2340,21 @@ def _validate_target_corrections(
             raise RuntimeError(f"stale bounded prose remains in {change['page']}: {change['old']}")
         if text.count(change["new"]) != change["replacements"]:
             raise RuntimeError(f"bounded prose correction count changed in {change['page']}: {change['new']}")
+    for change in BOUNDED_REFERENCE_CORRECTIONS:
+        source_text = authority_data[change["page"]].decode("utf-8")
+        target_text = target_data[change["page"]].decode("utf-8")
+        replacements = int(change["replacements"])
+        target_additions = int(change.get("target_additions", 0))
+        if target_text.count(change["old"]) != source_text.count(change["old"]) - replacements:
+            raise RuntimeError(
+                f"bounded source-reference repair count changed in {change['page']}: {change['old']}"
+            )
+        if target_text.count(change["new"]) != (
+            source_text.count(change["new"]) + replacements + target_additions
+        ):
+            raise RuntimeError(
+                f"bounded target-reference repair count changed in {change['page']}: {change['new']}"
+            )
     for change in PROTECTED_MATH_CORRECTIONS:
         source_text = authority_data[change["page"]].decode("utf-8")
         target_text = target_data[change["page"]].decode("utf-8")
@@ -2171,6 +2382,39 @@ def _validate_target_corrections(
             if target_spans[index].count(new) != expected_new:
                 raise RuntimeError(
                     f"protected source-correction span count changed in {change['page']}: {new}"
+                )
+            continue
+        environment_index = change.get("environment_index")
+        if change["surface"] == "raw_math_environment" and environment_index is not None:
+            source_environments = _raw_align_environments(source_text)
+            target_environments = _raw_align_environments(target_text)
+            index = int(environment_index) - 1
+            if (
+                index < 0
+                or index >= len(source_environments)
+                or index >= len(target_environments)
+            ):
+                raise RuntimeError(
+                    "protected raw-math environment index changed in "
+                    f"{change['page']}: {environment_index}"
+                )
+            old = change["old"]
+            new = change["new"]
+            if source_environments[index].count(old) != replacements:
+                raise RuntimeError(
+                    "protected raw-math authority environment changed in "
+                    f"{change['page']}: {old}"
+                )
+            if target_environments[index].count(old) != 0:
+                raise RuntimeError(
+                    "stale protected raw-math defect remains in "
+                    f"{change['page']} environment {environment_index}: {old}"
+                )
+            expected_new = source_environments[index].count(new) + replacements
+            if target_environments[index].count(new) != expected_new:
+                raise RuntimeError(
+                    "protected raw-math correction count changed in "
+                    f"{change['page']}: {new}"
                 )
             continue
         if source_text.count(change["old"]) != replacements:
@@ -2348,6 +2592,7 @@ def expected_receipt(
 ) -> dict[str, Any]:
     return {
         "schema": "o006.random.first-unit-build.v1",
+        "translation_provenance": TRANSLATION_PROVENANCE,
         "frozen_manifests": evidence["frozen_manifests"],
         "inputs": {
             "authority": evidence["authority_inputs"],
@@ -2357,6 +2602,7 @@ def expected_receipt(
             "generated": evidence["generated_inputs"],
         },
         "bounded_text_corrections": list(BOUNDED_TEXT_CORRECTIONS),
+        "bounded_reference_corrections": list(BOUNDED_REFERENCE_CORRECTIONS),
         "protected_math_corrections": list(PROTECTED_MATH_CORRECTIONS),
         "transport_hardening": list(TRANSPORT_HARDENING),
         "reader_customizations": evidence["reader_customizations"],

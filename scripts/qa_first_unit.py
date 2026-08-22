@@ -40,6 +40,7 @@ PAIRS = (
     PurePosixPath("random/point/Moments.html"),
     PurePosixPath("random/point/Likelihood.html"),
     PurePosixPath("random/point/Bayes.html"),
+    PurePosixPath("random/point/Unbiased.html"),
 )
 
 # This is an exact page/original-href allowlist. There is deliberately no URL
@@ -351,7 +352,6 @@ HREF_DELTA_ALLOWLIST: dict[PurePosixPath, dict[str, str]] = {
         "../markov/index.html": "https://www.randomservices.org/random/markov/index.html",
         "../martingales/index.html": "https://www.randomservices.org/random/martingales/index.html",
         "../brown/index.html": "https://www.randomservices.org/random/brown/index.html",
-        "Unbiased.html": "https://www.randomservices.org/random/point/Unbiased.html",
         "Sufficient.html": "https://www.randomservices.org/random/point/Sufficient.html",
         "JavaScript:openAncillary('../apps/NormalEstimate.html')": "https://www.randomservices.org/random/apps/NormalEstimate.html",
         "JavaScript:openAncillary('../apps/UniformEstimate.html')": "https://www.randomservices.org/random/apps/UniformEstimate.html",
@@ -402,11 +402,9 @@ HREF_DELTA_ALLOWLIST: dict[PurePosixPath, dict[str, str]] = {
         "JavaScript:openAncillary('../data/Short.html')": "https://www.randomservices.org/random/data/Short.html",
         "JavaScript:openAncillary('../data/index.html')": "https://www.randomservices.org/random/data/index.html",
         "Sufficient.html": "https://www.randomservices.org/random/point/Sufficient.html",
-        "Unbiased.html": "https://www.randomservices.org/random/point/Unbiased.html",
     },
     PurePosixPath("random/point/Moments.html"): {
         "../index.html": "https://www.randomservices.org/random/index.html",
-        "Unbiased.html": "https://www.randomservices.org/random/point/Unbiased.html",
         "Sufficient.html": "https://www.randomservices.org/random/point/Sufficient.html",
         "../prob/Experiments.html": "https://www.randomservices.org/random/prob/Experiments.html",
         "../prob/Probability.html": "https://www.randomservices.org/random/prob/Probability.html",
@@ -462,7 +460,6 @@ HREF_DELTA_ALLOWLIST: dict[PurePosixPath, dict[str, str]] = {
         "../urn/OrderStatistics.html": "https://www.randomservices.org/random/urn/OrderStatistics.html",
         "../urn/Hypergeometric.html": "https://www.randomservices.org/random/urn/Hypergeometric.html",
         "../urn/index.html": "https://www.randomservices.org/random/urn/index.html",
-        "Unbiased.html": "https://www.randomservices.org/random/point/Unbiased.html",
         "Sufficient.html": "https://www.randomservices.org/random/point/Sufficient.html",
         "JavaScript:openAncillary('../apps/NormalEstimate.html')": "https://www.randomservices.org/random/apps/NormalEstimate.html",
         "JavaScript:openAncillary('../apps/GammaEstimate.html')": "https://www.randomservices.org/random/apps/GammaEstimate.html",
@@ -477,7 +474,6 @@ HREF_DELTA_ALLOWLIST: dict[PurePosixPath, dict[str, str]] = {
     },
     PurePosixPath("random/point/Bayes.html"): {
         "../index.html": "https://www.randomservices.org/random/index.html",
-        "Unbiased.html": "https://www.randomservices.org/random/point/Unbiased.html",
         "Sufficient.html": "https://www.randomservices.org/random/point/Sufficient.html",
         "../prob/Probability.html": "https://www.randomservices.org/random/prob/Probability.html",
         "../prob/Experiments.html": "https://www.randomservices.org/random/prob/Experiments.html",
@@ -509,10 +505,38 @@ HREF_DELTA_ALLOWLIST: dict[PurePosixPath, dict[str, str]] = {
         "JavaScript:openAncillary('../data/index.html')": "https://www.randomservices.org/random/data/index.html",
         "JavaScript:openAncillary('../biographies/index.html')": "https://www.randomservices.org/random/biographies/index.html",
     },
+    PurePosixPath("random/point/Unbiased.html"): {
+        "../index.html": "https://www.randomservices.org/random/index.html",
+        "Sufficient.html": "https://www.randomservices.org/random/point/Sufficient.html",
+        "../prob/Experiments.html": "https://www.randomservices.org/random/prob/Experiments.html",
+        "../prob/Probability.html": "https://www.randomservices.org/random/prob/Probability.html",
+        "../dist/index.html": "https://www.randomservices.org/random/dist/index.html",
+        "../expect/Properties.html": "https://www.randomservices.org/random/expect/Properties.html",
+        "../expect/Variance.html": "https://www.randomservices.org/random/expect/Variance.html",
+        "../expect/Covariance.html": "https://www.randomservices.org/random/expect/Covariance.html",
+        "JavaScript:openAncillary('../biographies/Cramer.html')": "https://www.randomservices.org/random/biographies/Cramer.html",
+        "JavaScript:openAncillary('../biographies/Rao.html')": "https://www.randomservices.org/random/biographies/Rao.html",
+        "../expect/Covariance.html#blp6": "https://www.randomservices.org/random/expect/Covariance.html#blp6",
+        "JavaScript:openAncillary('../biographies/Fisher.html')": "https://www.randomservices.org/random/biographies/Fisher.html",
+        "../bernoulli/Introduction.html": "https://www.randomservices.org/random/bernoulli/Introduction.html",
+        "JavaScript:openAncillary('../biographies/Bernoulli.html')": "https://www.randomservices.org/random/biographies/Bernoulli.html",
+        "../poisson/Poisson.html": "https://www.randomservices.org/random/poisson/Poisson.html",
+        "../poisson/index.html": "https://www.randomservices.org/random/poisson/index.html",
+        "JavaScript:openAncillary('../biographies/Poisson.html')": "https://www.randomservices.org/random/biographies/Poisson.html",
+        "../special/Normal.html": "https://www.randomservices.org/random/special/Normal.html",
+        "../special/Gamma.html": "https://www.randomservices.org/random/special/Gamma.html",
+        "../special/Beta.html": "https://www.randomservices.org/random/special/Beta.html",
+        "../special/UniformContinuous.html": "https://www.randomservices.org/random/special/UniformContinuous.html",
+        "JavaScript:openAncillary('../biographies/Lagrange.html')": "https://www.randomservices.org/random/biographies/Lagrange.html",
+        "JavaScript:openAncillary('../apps/index.html')": "https://www.randomservices.org/random/apps/index.html",
+        "JavaScript:openAncillary('../data/index.html')": "https://www.randomservices.org/random/data/index.html",
+        "JavaScript:openAncillary('../biographies/index.html')": "https://www.randomservices.org/random/biographies/index.html",
+    },
 }
 
-# Three source defects require occurrence-specific href deltas because one
-# source href (#spe1) also has a separate correct occurrence on the same page.
+# Source defects require occurrence-specific href deltas because each original
+# href also has one or more correct occurrences on the same page. Nine of the
+# fourteen bounded repairs below are on the admitted Unbiased page.
 # The element indices are over the source/target element streams after removal
 # of the separately validated edition notice.
 HREF_ELEMENT_DELTAS: dict[
@@ -523,6 +547,15 @@ HREF_ELEMENT_DELTAS: dict[
     (PurePosixPath("random/sample/Variance.html"), 614): ("#prb4", "#prb3"),
     (PurePosixPath("random/sample/Covariance.html"), 233): ("#reg4", "#reg2"),
     (PurePosixPath("random/sample/Covariance.html"), 272): ("Covariance.html", "#des"),
+    (PurePosixPath("random/point/Unbiased.html"), 119): ("#crb8", "#crb6"),
+    (PurePosixPath("random/point/Unbiased.html"), 163): ("#crb3", "#crb2"),
+    (PurePosixPath("random/point/Unbiased.html"), 176): ("#crb3", "#crb2"),
+    (PurePosixPath("random/point/Unbiased.html"), 188): ("#crb3", "#crb2"),
+    (PurePosixPath("random/point/Unbiased.html"), 215): ("#crb3", "#crb2"),
+    (PurePosixPath("random/point/Unbiased.html"), 225): ("#crb3", "#crb2"),
+    (PurePosixPath("random/point/Unbiased.html"), 242): ("#crb3", "#crb2"),
+    (PurePosixPath("random/point/Unbiased.html"), 246): ("#sam5", "#sam4"),
+    (PurePosixPath("random/point/Unbiased.html"), 253): ("#crb3", "#crb2"),
 }
 
 CORRECTION_DELTAS = {
@@ -562,7 +595,7 @@ NOTICE_MARKUP_SHA256 = {
     PurePosixPath("random/sample/index.html"): "dc2b63db3864d3b2d9d2937269badca5ba6cbac0046482c03385aca0cb7bd255",
     PurePosixPath("random/sample/Introduction.html"): "64ad3ed4c57ffe8c0c91fae7047ba7d57399538bef9f7beae730e1fa4f4fa931",
     PurePosixPath("random/sample/Mean.html"): "b5dbee259ec1dd62c84f5d776320e15142359cc401afa413f9a2524f906fb275",
-    PurePosixPath("random/sample/LLN.html"): "08fb4fa43d51a1d0882f780de159199be12bfbb4e47ced1c478dec73113d1722",
+    PurePosixPath("random/sample/LLN.html"): "eeeac67515ebb62fe5c8f27cf428698ef9c3ec6c64628f0d3d160d98d81237c3",
     PurePosixPath("random/sample/CLT.html"): "9c1477ecc143e8a9bf20f6e0b6239b07d2dad564330df271690796289fa94ac0",
     PurePosixPath("random/sample/Variance.html"): "d1884c02cc756c0d44493d883eddf398dde3ad6f334691ccb3e33c5741b4504a",
     PurePosixPath("random/sample/OrderStatistics.html"): "3951beb5dc62b6796a5fda4afe5472c0b25a516294fb7e3dcc4a40764d0d726e",
@@ -573,6 +606,7 @@ NOTICE_MARKUP_SHA256 = {
     PurePosixPath("random/point/Moments.html"): "eafff6cf003edc517cbc99727456b283de19cff49e07d20b10fea57dca0f8a3d",
     PurePosixPath("random/point/Likelihood.html"): "eafff6cf003edc517cbc99727456b283de19cff49e07d20b10fea57dca0f8a3d",
     PurePosixPath("random/point/Bayes.html"): "eafff6cf003edc517cbc99727456b283de19cff49e07d20b10fea57dca0f8a3d",
+    PurePosixPath("random/point/Unbiased.html"): "eafff6cf003edc517cbc99727456b283de19cff49e07d20b10fea57dca0f8a3d",
 }
 NOTICE_LINKS = (
     "https://www.randomservices.org/random/",
@@ -792,6 +826,8 @@ def element_stream(parsed: BeautifulSoup) -> list[Tag]:
 def validate_allowlist() -> None:
     if set(HREF_DELTA_ALLOWLIST) != set(PAIRS):
         fail("href-delta allowlist page set differs from the first-unit page set")
+    if set(NOTICE_MARKUP_SHA256) != set(PAIRS):
+        fail("edition-notice hash page set differs from the first-unit page set")
     for rel, mapping in HREF_DELTA_ALLOWLIST.items():
         if len(mapping) != len(set(mapping)):
             fail(f"duplicate href-delta key for {rel}")
@@ -856,7 +892,10 @@ def validate_notice(notice: Tag, rel: PurePosixPath) -> dict[str, Any]:
         if text.count(token) != expected_count:
             fail(f"{rel}: edition-notice token count differs for {token!r}")
     markup = notice.decode(formatter="minimal").encode("utf-8")
-    if sha256_bytes(markup) != NOTICE_MARKUP_SHA256[rel]:
+    expected_sha256 = NOTICE_MARKUP_SHA256[rel]
+    if expected_sha256 == "PENDING_UNBIASED_NOTICE_MARKUP_SHA256":
+        fail(f"{rel}: edition-notice hash is pending target generation")
+    if sha256_bytes(markup) != expected_sha256:
         fail(f"{rel}: edition-notice bounded markup differs")
     return {"bytes": len(markup), "sha256": sha256_bytes(markup), "links": len(links)}
 
@@ -899,7 +938,10 @@ def compare_pair(rel: PurePosixPath) -> dict[str, Any]:
     source_raw_math = [match.group(0) for match in RAW_MATH_ENV_RE.finditer(source_text)]
     target_raw_math = [match.group(0) for match in RAW_MATH_ENV_RE.finditer(target_text)]
     raw_math_replacements = 0
-    if rel == PurePosixPath("random/point/Bayes.html"):
+    if rel in {
+        PurePosixPath("random/point/Bayes.html"),
+        PurePosixPath("random/point/Unbiased.html"),
+    }:
         expected_raw_math, raw_math_replacements = normalize_authority_raw_math(
             rel, source_raw_math
         )
@@ -1233,6 +1275,7 @@ def check_mathjax_runtime() -> dict[str, Any]:
         "random/point/Moments.html",
         "random/point/Likelihood.html",
         "random/point/Bayes.html",
+        "random/point/Unbiased.html",
     ]
     if script_pages != expected_script_pages:
         fail(f"MathJax bundle reference pages changed: {script_pages}")
@@ -1473,8 +1516,8 @@ def run(*, check_only: bool = False) -> dict[str, Any]:
         or moments["details"] != 29
         or moments["math_spans"] != 649
         or moments["ids"] != 54
-        or moments["href_delta_entries"] != 35
-        or moments["href_delta_occurrences"] != 44
+        or moments["href_delta_entries"] != 34
+        or moments["href_delta_occurrences"] != 42
         or moments["protected_math_replacements"] != 12
     ):
         fail(f"Moments census changed: {moments}")
@@ -1488,8 +1531,8 @@ def run(*, check_only: bool = False) -> dict[str, Any]:
         or likelihood["details"] != 22
         or likelihood["math_spans"] != 589
         or likelihood["ids"] != 53
-        or likelihood["href_delta_entries"] != 32
-        or likelihood["href_delta_occurrences"] != 38
+        or likelihood["href_delta_entries"] != 31
+        or likelihood["href_delta_occurrences"] != 36
         or likelihood["protected_math_replacements"] != 36
         or likelihood["math_text_localization_replacements"] != 1
     ):
@@ -1505,11 +1548,34 @@ def run(*, check_only: bool = False) -> dict[str, Any]:
         or bayes["details"] != 23
         or bayes["math_spans"] != 625
         or bayes["ids"] != 46
-        or bayes["href_delta_entries"] != 32
-        or bayes["href_delta_occurrences"] != 41
+        or bayes["href_delta_entries"] != 31
+        or bayes["href_delta_occurrences"] != 39
         or bayes["protected_math_replacements"] != 17
     ):
         fail(f"Bayes census changed: {bayes}")
+    unbiased = results["random/point/Unbiased.html"]
+    if (
+        unbiased["source_bytes"] != 28635
+        or unbiased["source_sha256"]
+        != "0d9765c5c7b5b8a54b29fc45c3a435d20e2a9200e027609658345087dedcd531"
+        or unbiased["elements"] != 306
+        or unbiased["hierarchy_sha256"]
+        != "1e14318d47c2a1c0c10f92651073868420f2acb258a06e4edf5158fe489ce9b1"
+        or unbiased["raw_script_style_blocks"] != 3
+        or unbiased["raw_math_environments"] != 4
+        or unbiased["raw_math_sha256"]
+        != "7df75b42a511a5178054596d5ecfcd8dce66f20013732a9e1c114fd2d3cabc5b"
+        or unbiased["units"] != 38
+        or unbiased["details"] != 10
+        or unbiased["math_spans"] != 243
+        or unbiased["ids"] != 52
+        or unbiased["href_delta_entries"] != 34
+        or unbiased["href_delta_occurrences"] != 36
+        or unbiased["occurrence_specific_href_deltas"] != 9
+        or unbiased["protected_math_replacements"] != 6
+        or unbiased["math_text_localization_replacements"] != 0
+    ):
+        fail(f"Unbiased census changed: {unbiased}")
     reference_counts = check_reader_references()
     mathjax_runtime = check_mathjax_runtime()
     readable_reflow = check_readable_reflow()

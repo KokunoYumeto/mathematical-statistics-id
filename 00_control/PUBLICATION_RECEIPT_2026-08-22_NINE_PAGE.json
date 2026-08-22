@@ -57,7 +57,7 @@
     "public_browser_title": "Site not found · GitHub Pages",
     "authenticated_api_message": "Sorry. Your account was suspended",
     "credential_inventory": {
-      "path": "C:/Users/Floris/Downloads/Github Tokens.md",
+      "path": "%USERPROFILE%/Downloads/Github Tokens.md",
       "credentials_tested": 2,
       "credential_1_result": "HTTP 403 account suspended",
       "credential_2_result": "HTTP 401 bad credentials",

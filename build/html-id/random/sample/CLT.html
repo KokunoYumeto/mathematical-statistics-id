@@ -52,7 +52,7 @@
 
 <h4 id="dfn">Definisi</h4>
 
-<p>Misalkan \(\bs{X} = (X_1, X_2, \ldots)\) merupakan barisan <a href="https://www.randomservices.org/random/prob/Independence.html">independen</a> dari <a href="https://www.randomservices.org/random/prob/Events.html">variabel acak</a> bernilai riil dan berdistribusi identik, dengan <a href="https://www.randomservices.org/random/dist/Discrete.html">fungsi densitas probabilitas</a> bersama \(f\), <a href="https://www.randomservices.org/random/expect/Properties.html">rata-rata</a> \(\mu\), dan <a href="https://www.randomservices.org/random/expect/Variance.html">varians</a> \(\sigma^2\). Kita mengasumsikan bahwa \(0 \lt \sigma \lt \infty\), sehingga variabel-variabel acak tersebut benar-benar bersifat <em>acak</em>, bukan konstanta. Misalkan
+<p>Misalkan \(\bs{X} = (X_1, X_2, \ldots)\) merupakan barisan <a href="https://www.randomservices.org/random/prob/Independence.html">independen</a> dari <a href="https://www.randomservices.org/random/prob/Events.html">variabel acak</a> bernilai riil dan berdistribusi identik, dengan <a href="https://www.randomservices.org/random/dist/Discrete.html">fungsi kepadatan probabilitas</a> bersama \(f\), <a href="https://www.randomservices.org/random/expect/Properties.html">rata-rata</a> \(\mu\), dan <a href="https://www.randomservices.org/random/expect/Variance.html">varians</a> \(\sigma^2\). Kita mengasumsikan bahwa \(0 \lt \sigma \lt \infty\), sehingga variabel-variabel acak tersebut benar-benar bersifat <em>acak</em>, bukan konstanta. Misalkan
 \[ Y_n = \sum_{i=1}^n X_i, \quad n \in \N \]
 Perhatikan bahwa menurut konvensi, \(Y_0 = 0\), karena penjumlahannya dilakukan atas himpunan indeks kosong. Proses acak \(\bs{Y} = (Y_0, Y_1, Y_2, \ldots)\) disebut <dfn>proses jumlah parsial</dfn> yang berasosiasi dengan \(\bs{X}\). Jenis-jenis khusus proses jumlah parsial telah dibahas di berbagai bagian buku ini; secara khusus, lihat</p>
 
@@ -139,17 +139,17 @@ Menurut <a href="LLN.html">hukum bilangan besar</a>, \(M_n \to \mu\) ketika \(n 
 <h4 id="dis">Distribusi</h4>
 
 <div class="unit" id="dis1">
-	<p class="math">Misalkan \(X\) memiliki <a href="https://www.randomservices.org/random/dist/Discrete.html">distribusi diskret</a> atau <a href="https://www.randomservices.org/random/dist/Continuous.html">distribusi kontinu</a> dengan fungsi densitas probabilitas \(f\). Maka fungsi densitas probabilitas \(Y_n\) adalah \(f^{*n} = f * f * \cdots * f\), yaitu <a href="https://www.randomservices.org/random/dist/Transformations.html#sum">pangkat konvolusi</a> dari \(f\) berorde \(n\).</p>
+	<p class="math">Misalkan \(X\) memiliki <a href="https://www.randomservices.org/random/dist/Discrete.html">distribusi diskret</a> atau <a href="https://www.randomservices.org/random/dist/Continuous.html">distribusi kontinu</a> dengan fungsi kepadatan probabilitas \(f\). Maka fungsi kepadatan probabilitas \(Y_n\) adalah \(f^{*n} = f * f * \cdots * f\), yaitu <a href="https://www.randomservices.org/random/dist/Transformations.html#sum">pangkat konvolusi</a> dari \(f\) berorde \(n\).</p>
 	<details>
 		<summary>Rincian:</summary>
-		<p>Hasil ini mengikuti dari sifat dasar fungsi densitas probabilitas: fungsi densitas probabilitas jumlah variabel-variabel independen merupakan konvolusi fungsi densitas probabilitas suku-sukunya.</p>
+		<p>Hasil ini mengikuti dari sifat dasar fungsi kepadatan probabilitas: fungsi kepadatan probabilitas jumlah variabel-variabel independen merupakan konvolusi fungsi kepadatan probabilitas suku-sukunya.</p>
 	</details>
 </div>
 
 <p>Secara lebih umum, kita dapat menggunakan sifat stasioneritas dan independensi untuk memperoleh distribusi gabungan proses jumlah parsial:</p>
 
 <div class="unit" id="o006.random.sample.clt.unit.partial-sum-joint-density">
-	<p class="math">Jika \(n_1 \lt n_2 \lt \cdots \lt n_k\), maka \((Y_{n_1}, Y_{n_2}, \ldots, Y_{n_k})\) memiliki fungsi densitas probabilitas gabungan
+	<p class="math">Jika \(n_1 \lt n_2 \lt \cdots \lt n_k\), maka \((Y_{n_1}, Y_{n_2}, \ldots, Y_{n_k})\) memiliki fungsi kepadatan probabilitas gabungan
 	\[ f_{n_1, n_2, \ldots, n_k}(y_1, y_2, \ldots, y_k) = f^{*n_1}(y_1) f^{*(n_2 - n_1)}(y_2 - y_1) \cdots f^{*(n_k - n_{k-1})}(y_k - y_{k-1}), \quad (y_1, y_2, \ldots, y_k) \in \R^k \]</p>
 	<details>
 		<summary>Rincian:</summary>
@@ -174,7 +174,7 @@ Menurut <a href="LLN.html">hukum bilangan besar</a>, \(M_n \to \mu\) ketika \(n 
 	</details>
 </div>
 
-<p>Pernyataan tepat teorema limit pusat ialah bahwa distribusi skor baku \(Z_n\) <a href="https://www.randomservices.org/random/dist/Convergence.html">konvergen</a> ke distribusi normal baku ketika \(n \to \infty\). Ingat bahwa <a href="https://www.randomservices.org/random/special/Normal.html">distribusi normal baku</a> memiliki fungsi densitas probabilitas
+<p>Pernyataan tepat teorema limit pusat ialah bahwa distribusi skor baku \(Z_n\) <a href="https://www.randomservices.org/random/dist/Convergence.html">konvergen</a> ke distribusi normal baku ketika \(n \to \infty\). Ingat bahwa <a href="https://www.randomservices.org/random/special/Normal.html">distribusi normal baku</a> memiliki fungsi kepadatan probabilitas
 \[ \phi(z) = \frac{1}{\sqrt{2 \pi}} e^{-\frac{1}{2} z^2}, \quad z \in \R \]
 Sebuah kasus khusus teorema limit pusat (untuk percobaan Bernoulli) berasal dari <a href="https://www.randomservices.org/random/biographies/DeMoivre.html" class="ancillary">Abraham De Moivre</a>. Istilah <em>teorema limit pusat</em> dicetuskan oleh <a href="https://www.randomservices.org/random/biographies/Polya.html" class="ancillary">George P&oacute;lya</a> pada tahun 1920. Menurut definisi konvergensi dalam distribusi, teorema limit pusat menyatakan bahwa \(F_n(z) \to \Phi(z)\) ketika \(n \to \infty\) untuk setiap \(z \in \R\), dengan \(F_n\) merupakan <a href="https://www.randomservices.org/random/dist/CDF.html">fungsi distribusi</a> dari \(Z_n\), sedangkan \(\Phi\) merupakan fungsi distribusi normal baku:
 \[ \Phi(z) = \int_{-\infty}^z \phi(x) \, dx = \int_{-\infty}^z \frac{1}{\sqrt{2 \pi}} e^{-\frac{1}{2} x^2} \, dx, \quad z \in \R \]
@@ -226,11 +226,11 @@ Ingat bahwa \(t \mapsto e^{-\frac{1}{2}t^2}\) merupakan fungsi karakteristik dis
 <p>Variabel acak \(Y\) dalam <a href="#irwin" class="ref"></a> memiliki <a href="https://www.randomservices.org/random/special/IrwinHall.html">distribusi Irwin&ndash;Hall</a> berorde 30, yang dinamai menurut Joseph Irwin dan Philip Hall.</p>
 
 <div class="unit" id="o006.random.sample.clt.unit.simulation.irwin-hall">
-	<p class="app">Dalam <a href="https://www.randomservices.org/random/apps/SpecialSimulator.html" class="ancillary">simulator distribusi khusus</a>, pilih distribusi Irwin&ndash;Hall. Variasikan \(n\) dari 1 hingga 10 dan perhatikan bentuk fungsi densitas probabilitasnya. Dengan \(n = 10\), jalankan eksperimen 1.000 kali dan bandingkan fungsi densitas empiris dengan fungsi densitas probabilitas sebenarnya.</p>
+	<p class="app">Dalam <a href="https://www.randomservices.org/random/apps/SpecialSimulator.html" class="ancillary">simulator distribusi khusus</a>, pilih distribusi Irwin&ndash;Hall. Variasikan \(n\) dari 1 hingga 10 dan perhatikan bentuk fungsi kepadatan probabilitasnya. Dengan \(n = 10\), jalankan eksperimen 1.000 kali dan bandingkan fungsi kepadatan empiris dengan fungsi kepadatan probabilitas sebenarnya.</p>
 </div>
 
 <div class="unit" id="o006.random.sample.clt.unit.exercise.pareto-normal-approximation">
-	<p class="math">Misalkan \(M\) menyatakan rata-rata sampel dari suatu sampel acak berukuran 50 yang berasal dari distribusi dengan fungsi densitas probabilitas \(f(x) = \frac{3}{x^4}\) untuk \(1 \le x \lt \infty\). Distribusi ini merupakan <dfn>distribusi Pareto</dfn>, yang dinamai menurut <a href="https://www.randomservices.org/random/biographies/Pareto.html" class="ancillary">Vilfredo Pareto</a>. Tentukan aproksimasi normal untuk masing-masing hal berikut:</p>
+	<p class="math">Misalkan \(M\) menyatakan rata-rata sampel dari suatu sampel acak berukuran 50 yang berasal dari distribusi dengan fungsi kepadatan probabilitas \(f(x) = \frac{3}{x^4}\) untuk \(1 \le x \lt \infty\). Distribusi ini merupakan <dfn>distribusi Pareto</dfn>, yang dinamai menurut <a href="https://www.randomservices.org/random/biographies/Pareto.html" class="ancillary">Vilfredo Pareto</a>. Tentukan aproksimasi normal untuk masing-masing hal berikut:</p>
 	<ol class="sub">
 		<li>\(\P(M \gt 1.6)\)</li>
 		<li>Persentil ke-60 dari \(M\)</li>
@@ -276,7 +276,7 @@ Ingat bahwa \(t \mapsto e^{-\frac{1}{2}t^2}\) merupakan fungsi karakteristik dis
 
 <h4 id="gam">Aproksimasi Normal untuk Distribusi Gamma</h4>
 
-<p>Ingat bahwa <a href="https://www.randomservices.org/random/special/Gamma.html">distribusi gamma</a> dengan parameter bentuk \(k \in (0, \infty)\) dan parameter skala \(b \in (0, \infty)\) merupakan distribusi kontinu pada \( (0, \infty) \) dengan fungsi densitas probabilitas \( f \) yang diberikan oleh
+<p>Ingat bahwa <a href="https://www.randomservices.org/random/special/Gamma.html">distribusi gamma</a> dengan parameter bentuk \(k \in (0, \infty)\) dan parameter skala \(b \in (0, \infty)\) merupakan distribusi kontinu pada \( (0, \infty) \) dengan fungsi kepadatan probabilitas \( f \) yang diberikan oleh
 \[ f(x) = \frac{1}{\Gamma(k) b^k} x^{k-1} e^{-x/b}, \quad x \in (0, \infty) \]
 Rata-ratanya adalah \( k b \) dan variansnya adalah \( k b ^2 \). Distribusi gamma banyak digunakan untuk memodelkan waktu acak dan variabel acak positif lainnya. Dalam konteks <a href="https://www.randomservices.org/random/poisson/index.html">model Poisson</a> (dengan \(k \in \N_+\)), distribusi gamma juga dikenal sebagai <a href="https://www.randomservices.org/random/poisson/Gamma.html">distribusi Erlang</a>, yang dinamai menurut <a href="https://www.randomservices.org/random/biographies/Erlang.html" class="ancillary">Agner Erlang</a>. Misalkan sekarang \(Y_k\) memiliki distribusi gamma (Erlang) dengan parameter bentuk \(k \in \N_+\) dan parameter skala \(b \gt 0\). Maka
 \[ Y_k = \sum_{i=1}^k X_i \]
@@ -288,7 +288,7 @@ dengan \((X_1, X_2, \ldots)\) merupakan barisan variabel independen yang masing-
 </div>
 
 <div class="unit" id="o006.random.sample.clt.unit.simulation.gamma">
-	<p class="app">Dalam <a href="https://www.randomservices.org/random/apps/SpecialSimulator.html" class="ancillary">simulator distribusi khusus</a>, pilih distribusi gamma. Variasikan parameter \((k, b)\), lalu perhatikan bentuk fungsi densitas probabilitasnya. Dengan \(k = 10\) dan berbagai nilai \(b\), jalankan eksperimen 1.000 kali dan bandingkan fungsi densitas empiris dengan fungsi densitas probabilitas sebenarnya.</p>
+	<p class="app">Dalam <a href="https://www.randomservices.org/random/apps/SpecialSimulator.html" class="ancillary">simulator distribusi khusus</a>, pilih distribusi gamma. Variasikan parameter \((k, b)\), lalu perhatikan bentuk fungsi kepadatan probabilitasnya. Dengan \(k = 10\) dan berbagai nilai \(b\), jalankan eksperimen 1.000 kali dan bandingkan fungsi kepadatan empiris dengan fungsi kepadatan probabilitas sebenarnya.</p>
 </div>
 
 <div class="unit" id="o006.random.sample.clt.unit.exercise.gamma-normal-approximation">
@@ -308,7 +308,7 @@ dengan \((X_1, X_2, \ldots)\) merupakan barisan variabel independen yang masing-
 
 <h4 id="chi">Aproksimasi Normal untuk Distribusi Khi-Kuadrat</h4>
 
-<p>Ingat bahwa <a href="https://www.randomservices.org/random/special/ChiSquare.html">distribusi khi-kuadrat</a> dengan \(n \in (0, \infty)\) derajat kebebasan merupakan kasus khusus distribusi gamma, dengan parameter bentuk \(k = n / 2\) dan parameter skala \(b = 2\). Dengan demikian, distribusi khi-kuadrat dengan \(n\) derajat kebebasan memiliki fungsi densitas probabilitas
+<p>Ingat bahwa <a href="https://www.randomservices.org/random/special/ChiSquare.html">distribusi khi-kuadrat</a> dengan \(n \in (0, \infty)\) derajat kebebasan merupakan kasus khusus distribusi gamma, dengan parameter bentuk \(k = n / 2\) dan parameter skala \(b = 2\). Dengan demikian, distribusi khi-kuadrat dengan \(n\) derajat kebebasan memiliki fungsi kepadatan probabilitas
 \[ f(x) = \frac{1}{\Gamma(n/2) 2^{n/2}} x^{n/2 - 1}e^{-x/2}, \quad 0 \lt x \lt \infty \]
 Jika \( n \) merupakan bilangan bulat positif, distribusi khi-kuadrat mengatur jumlah kuadrat dari \( n \) variabel normal baku yang independen. Oleh sebab itu, distribusi ini merupakan salah satu distribusi terpenting dalam statistika. Dari pembahasan sebelumnya mengenai distribusi gamma, diperoleh bahwa jika \(n\) besar, distribusi khi-kuadrat dapat diaproksimasi dengan distribusi normal yang memiliki rata-rata \(n\) dan varians \(2 n\). Berikut pernyataan tepatnya:</p>
 
@@ -318,7 +318,7 @@ Jika \( n \) merupakan bilangan bulat positif, distribusi khi-kuadrat mengatur j
 </div>
 
 <div class="unit" id="o006.random.sample.clt.unit.simulation.chi-square">
-	<p class="app">Dalam <a href="https://www.randomservices.org/random/apps/SpecialSimulator.html" class="ancillary">simulator distribusi khusus</a>, pilih distribusi khi-kuadrat. Variasikan \(n\) dan perhatikan bentuk fungsi densitas probabilitasnya. Dengan \(n = 20\), jalankan eksperimen 1.000 kali dan bandingkan fungsi densitas empiris dengan fungsi densitas probabilitas.</p>
+	<p class="app">Dalam <a href="https://www.randomservices.org/random/apps/SpecialSimulator.html" class="ancillary">simulator distribusi khusus</a>, pilih distribusi khi-kuadrat. Variasikan \(n\) dan perhatikan bentuk fungsi kepadatan probabilitasnya. Dengan \(n = 20\), jalankan eksperimen 1.000 kali dan bandingkan fungsi kepadatan empiris dengan fungsi kepadatan probabilitas.</p>
 </div>
 
 <div class="unit" id="o006.random.sample.clt.unit.exercise.chi-square-normal-approximation">
@@ -340,7 +340,7 @@ Jika \( n \) merupakan bilangan bulat positif, distribusi khi-kuadrat mengatur j
 
 <p>Ingat bahwa <a href="https://www.randomservices.org/random/bernoulli/index.html">barisan percobaan Bernoulli</a>, yang dinamai menurut <a href="https://www.randomservices.org/random/biographies/Bernoulli.html" class="ancillary">Jacob Bernoulli</a>, merupakan barisan \( (X_1, X_2, \ldots) \) variabel indikator independen dan berdistribusi identik, dengan \(\P(X_i = 1) = p\) untuk setiap \(i\), sedangkan \(p \in (0, 1)\) merupakan parameternya. Dalam istilah keandalan yang lazim, \(X_i\) merupakan hasil percobaan ke-\(i\), dengan 1 berarti berhasil dan 0 berarti gagal. Rata-rata bersamanya adalah \(p\) dan varians bersamanya adalah \(p (1 - p)\).</p>
 
-<p>Misalkan \(Y_n = \sum_{i=1}^n X_i\), sehingga \(Y_n\) merupakan banyaknya keberhasilan dalam \(n\) percobaan pertama. Ingat bahwa \(Y_n\) memiliki <a href="https://www.randomservices.org/random/bernoulli/Binomial.html">distribusi binomial</a> dengan parameter \(n\) dan \(p\), serta memiliki fungsi densitas probabilitas
+<p>Misalkan \(Y_n = \sum_{i=1}^n X_i\), sehingga \(Y_n\) merupakan banyaknya keberhasilan dalam \(n\) percobaan pertama. Ingat bahwa \(Y_n\) memiliki <a href="https://www.randomservices.org/random/bernoulli/Binomial.html">distribusi binomial</a> dengan parameter \(n\) dan \(p\), serta memiliki fungsi kepadatan probabilitas
 \[ f(k) = \binom{n}{k} p^k (1 - p)^{n-k}, \quad k \in \{0, 1, \ldots, n\} \]</p>
 
 <p>Dari teorema limit pusat diperoleh bahwa jika \(n\) besar, distribusi binomial dengan parameter \(n\) dan \(p\) dapat diaproksimasi dengan distribusi normal yang memiliki rata-rata \(n p\) dan varians \(n p (1 - p)\). Pedoman praktisnya ialah bahwa \(n\) harus cukup besar sehingga \(n p \ge 5\) dan \(n (1 - p) \ge 5\). (Syarat pertama merupakan syarat penting ketika \(p \lt \frac{1}{2}\), sedangkan syarat kedua merupakan syarat penting ketika \(p \gt \frac{1}{2}\).) Berikut pernyataan tepatnya:</p>
@@ -351,7 +351,7 @@ Jika \( n \) merupakan bilangan bulat positif, distribusi khi-kuadrat mengatur j
 </div>
 
 <div class="unit" id="o006.random.sample.clt.unit.simulation.binomial">
-	<p class="app">Dalam <a href="https://www.randomservices.org/random/apps/BinomialTimeline.html" class="ancillary">eksperimen garis waktu binomial</a>, variasikan \(n\) dan \(p\), lalu perhatikan bentuk fungsi densitas probabilitasnya. Dengan \(n = 50\) dan \(p = 0.3\), jalankan simulasi 1.000 kali dan hitung hal-hal berikut:</p>
+	<p class="app">Dalam <a href="https://www.randomservices.org/random/apps/BinomialTimeline.html" class="ancillary">eksperimen garis waktu binomial</a>, variasikan \(n\) dan \(p\), lalu perhatikan bentuk fungsi kepadatan probabilitasnya. Dengan \(n = 50\) dan \(p = 0.3\), jalankan simulasi 1.000 kali dan hitung hal-hal berikut:</p>
 	<ol class="sub">
 		<li>\(\P(12 \le Y \le 16)\)</li>
 		<li>Frekuensi relatif kejadian \(\{12 \le Y \le 16\}\) (dari simulasi)</li>
@@ -374,7 +374,7 @@ Jika \( n \) merupakan bilangan bulat positif, distribusi khi-kuadrat mengatur j
 
 <h4 id="poi">Aproksimasi Normal untuk Distribusi Poisson</h4>
 
-<p>Ingat bahwa <a href="https://www.randomservices.org/random/poisson/Poisson.html">distribusi Poisson</a>, yang dinamai menurut <a href="https://www.randomservices.org/random/biographies/Poisson.html" class="ancillary">Simeon Poisson</a>, merupakan distribusi diskret pada \( \N \) dengan fungsi densitas probabilitas \( f \) yang diberikan oleh
+<p>Ingat bahwa <a href="https://www.randomservices.org/random/poisson/Poisson.html">distribusi Poisson</a>, yang dinamai menurut <a href="https://www.randomservices.org/random/biographies/Poisson.html" class="ancillary">Simeon Poisson</a>, merupakan distribusi diskret pada \( \N \) dengan fungsi kepadatan probabilitas \( f \) yang diberikan oleh
 \[ f(x) = e^{-\theta} \frac{\theta^x}{x!}, \quad x \in \N \]
 dengan \(\theta \gt 0\) sebagai parameter. Parameter tersebut sekaligus merupakan rata-rata dan varians distribusi. Distribusi Poisson banyak digunakan untuk memodelkan banyaknya <q>titik acak</q> dalam suatu wilayah waktu atau ruang, khususnya dalam konteks <a href="https://www.randomservices.org/random/poisson/index.html">proses Poisson</a>. Dalam konteks ini, parameternya sebanding dengan ukuran wilayah.</p>
 
@@ -403,12 +403,12 @@ dengan \((X_1, X_2, \ldots, X_n)\) merupakan barisan variabel independen yang ma
 </div>
 
 <div class="unit" id="o006.random.sample.clt.unit.simulation.poisson">
-	<p class="app">Dalam <a class="ancillary" href="https://www.randomservices.org/random/apps/Poisson.html">eksperimen Poisson</a>, variasikan parameter waktu dan laju \(t\) dan \(r\) (parameter distribusi Poisson dalam eksperimen merupakan hasil kali \(r t\)). Perhatikan bentuk fungsi densitas probabilitasnya. Dengan \(r = 5\) dan \(t = 4\), jalankan eksperimen 1.000 kali dan bandingkan fungsi densitas empiris dengan fungsi densitas probabilitas sebenarnya.</p>
+	<p class="app">Dalam <a class="ancillary" href="https://www.randomservices.org/random/apps/Poisson.html">eksperimen Poisson</a>, variasikan parameter waktu dan laju \(t\) dan \(r\) (parameter distribusi Poisson dalam eksperimen merupakan hasil kali \(r t\)). Perhatikan bentuk fungsi kepadatan probabilitasnya. Dengan \(r = 5\) dan \(t = 4\), jalankan eksperimen 1.000 kali dan bandingkan fungsi kepadatan empiris dengan fungsi kepadatan probabilitas sebenarnya.</p>
 </div>
 
 <h4 id="nbi">Aproksimasi Normal untuk Distribusi Binomial Negatif</h4>
 
-<p>Versi umum <a href="https://www.randomservices.org/random/bernoulli/NegativeBinomial.html">distribusi binomial negatif</a> merupakan distribusi diskret pada \( \N \), dengan parameter bentuk \( k \in (0, \infty) \) dan parameter keberhasilan \( p \in (0, 1) \). Fungsi densitas probabilitas \( f \) diberikan oleh
+<p>Versi umum <a href="https://www.randomservices.org/random/bernoulli/NegativeBinomial.html">distribusi binomial negatif</a> merupakan distribusi diskret pada \( \N \), dengan parameter bentuk \( k \in (0, \infty) \) dan parameter keberhasilan \( p \in (0, 1) \). Fungsi kepadatan probabilitas \( f \) diberikan oleh
 \[ f(n) = \binom{n + k - 1}{n} p^k (1 - p)^n, \quad n \in \N \]
 Rata-ratanya adalah \( k (1 - p) / p \) dan variansnya adalah \( k (1 - p) / p^2 \). Jika \( k \in \N_+ \), distribusi ini mengatur banyaknya kegagalan \( Y_k \) sebelum keberhasilan bernomor \( k \) dalam barisan <a href="https://www.randomservices.org/random/bernoulli/index.html">percobaan Bernoulli</a> dengan parameter keberhasilan \( p \). Jadi, dalam kasus ini,
 \[ Y_k = \sum_{i=1}^k X_i \]
@@ -423,7 +423,7 @@ dengan \((X_1, X_2, \ldots, X_k)\) merupakan barisan variabel independen yang ma
 \[ \frac{p V_k - k}{\sqrt{k (1 - p)}} = \frac{p Y_k - k(1 - p)}{\sqrt{k ( 1 - p)}} \]</p>
 
 <div class="unit" id="o006.random.sample.clt.unit.simulation.negative-binomial">
-	<p class="app">Dalam <a href="https://www.randomservices.org/random/apps/NegativeBinomial.html" class="ancillary">eksperimen binomial negatif</a>, variasikan \(k\) dan \(p\), lalu perhatikan bentuk fungsi densitas probabilitasnya. Dengan \(k = 5\) dan \(p = 0.4\), jalankan eksperimen 1.000 kali dan bandingkan fungsi densitas empiris dengan fungsi densitas probabilitas sebenarnya.</p>
+	<p class="app">Dalam <a href="https://www.randomservices.org/random/apps/NegativeBinomial.html" class="ancillary">eksperimen binomial negatif</a>, variasikan \(k\) dan \(p\), lalu perhatikan bentuk fungsi kepadatan probabilitasnya. Dengan \(k = 5\) dan \(p = 0.4\), jalankan eksperimen 1.000 kali dan bandingkan fungsi kepadatan empiris dengan fungsi kepadatan probabilitas sebenarnya.</p>
 </div>
 
 <div class="unit" id="o006.random.sample.clt.unit.exercise.negative-binomial-normal-approximation">

@@ -33,6 +33,7 @@ const documents = [
   [12, "random/point/Moments.html", "Metode Momen"],
   [13, "random/point/Likelihood.html", "Kemungkinan Maksimum"],
   [14, "random/point/Bayes.html", "Pendugaan Bayes"],
+  [15, "random/point/Unbiased.html", "Penduga Tak Bias Terbaik"],
 ];
 
 const printCss = String.raw`

@@ -6,7 +6,7 @@
 	<title>Hukum Bilangan Besar</title>
 	<meta name="author" content="Kyle Siegrist">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="keywords" content="probabilitas, statistika, sampel acak, hukum bilangan besar, probabilitas empiris, fungsi distribusi empiris, fungsi densitas empiris, estimator tak bias, galat kuadrat rata-rata">
+	<meta name="keywords" content="probabilitas, statistika, sampel acak, hukum bilangan besar, probabilitas empiris, fungsi distribusi empiris, fungsi kepadatan empiris, penduga tak bias, galat kuadrat rata-rata">
 	<link rel="icon" href="../icons/Icon.svg" type="image/svg">
 	<link rel="stylesheet" href="../Screen.css" type="text/css" media="screen">
 	<script src="../Basic.js"></script>
@@ -49,7 +49,7 @@
 
 <p>Misalkan sekarang variabel dasar \( X \) bernilai riil, dan misalkan \(\mu = \E(X)\) menyatakan <a href="https://www.randomservices.org/random/expect/Properties.html">nilai harapan</a> \(X\), sedangkan \(\sigma^2 = \var(X)\) menyatakan <a href="https://www.randomservices.org/random/expect/Variance.html">varians</a> \(X\) (diasumsikan berhingga). <dfn>Rata-rata sampel</dfn> adalah
 \[ M = \frac{1}{n} \sum_{i=1}^n X_i \]
-Sering kali rata-rata distribusi \(\mu\) tidak diketahui dan rata-rata sampel \(M\) digunakan sebagai <a href="../point/Estimators.html">estimator</a> untuk parameter yang tidak diketahui ini.</p>
+Sering kali rata-rata distribusi \(\mu\) tidak diketahui dan rata-rata sampel \(M\) digunakan sebagai <a href="../point/Estimators.html">penduga</a> untuk parameter yang tidak diketahui ini.</p>
 
 <h4 id="prp">Momen</h4>
 
@@ -70,7 +70,7 @@ Sering kali rata-rata distribusi \(\mu\) tidak diketahui dan rata-rata sampel \(
 	</details>
 </div>
 
-<p>Bagian (a) berarti bahwa rata-rata sampel \(M\) merupakan estimator <dfn>tak bias</dfn> untuk rata-rata distribusi \(\mu\). Oleh karena itu, varians \(M\) merupakan <dfn>galat kuadrat rata-rata</dfn> ketika \(M\) digunakan sebagai estimator \(\mu\). Perhatikan bahwa varians \(M\) merupakan fungsi menaik dari varians distribusi dan fungsi menurun dari ukuran sampel. Keduanya masuk akal secara intuitif jika kita memandang rata-rata sampel \(M\) sebagai estimator untuk rata-rata distribusi \(\mu\). Fakta bahwa galat kuadrat rata-rata (dalam hal ini, varians) menurun menuju 0 ketika ukuran sampel \(n\) meningkat menuju \(\infty\) berarti bahwa rata-rata sampel \(M\) merupakan estimator <dfn>konsisten</dfn> untuk rata-rata distribusi \(\mu\).</p>
+<p>Bagian (a) berarti bahwa rata-rata sampel \(M\) merupakan penduga <dfn>tak bias</dfn> untuk rata-rata distribusi \(\mu\). Oleh karena itu, varians \(M\) merupakan <dfn>galat kuadrat rata-rata</dfn> ketika \(M\) digunakan sebagai penduga \(\mu\). Perhatikan bahwa varians \(M\) merupakan fungsi menaik dari varians distribusi dan fungsi menurun dari ukuran sampel. Keduanya masuk akal secara intuitif jika kita memandang rata-rata sampel \(M\) sebagai penduga untuk rata-rata distribusi \(\mu\). Fakta bahwa galat kuadrat rata-rata (dalam hal ini, varians) menurun menuju 0 ketika ukuran sampel \(n\) meningkat menuju \(\infty\) berarti bahwa rata-rata sampel \(M\) merupakan penduga <dfn>konsisten</dfn> untuk rata-rata distribusi \(\mu\).</p>
 
 <p>Ingat bahwa \(X_i - M\) merupakan <dfn>simpangan</dfn> \(X_i\) dari \(M\), yaitu jarak berarah dari \(M\) ke \(X_i\). Teorema berikut menyatakan bahwa rata-rata sampel tidak berkorelasi dengan setiap simpangan. Hasil ini akan sangat penting untuk menunjukkan independensi antara rata-rata sampel dan <a href="Variance.html">varians sampel</a> ketika <a href="Normal.html">distribusi populasi yang menjadi sumber sampel bersifat normal.</a></p>
 
@@ -126,7 +126,7 @@ Dari hasil varians dalam <a href="#prp1" class="ref"></a>, perhatikan bahwa \(\v
 	</details>
 </div>
 
-<p>Pembuktian hukum kuat bilangan besar di atas mensyaratkan bahwa varians distribusi pengambilan sampel berhingga (perhatikan bahwa syarat ini sangat penting pada langkah pertama). Namun, terdapat pembuktian yang lebih baik yang hanya mensyaratkan bahwa \(\E\left(\left|X\right|\right) \lt \infty\). Sebuah pembuktian elegan yang menunjukkan bahwa \( M_n \to \mu \) ketika \( n \to \infty \) dengan probabilitas 1 dan <a href="https://www.randomservices.org/random/expect/Spaces.html#con">dalam rata-rata</a>, dengan menggunakan <a href="https://www.randomservices.org/random/martingales/Backwards.html#lln">martingal mundur</a>, diberikan dalam bab tentang <a href="https://www.randomservices.org/random/martingales/index.html">martingal</a>. Dalam beberapa paragraf berikut, kita menerapkan hukum bilangan besar pada beberapa statistik khusus yang dipelajari dalam bagian tentang <a href="Mean.html">rata-rata sampel</a>.</p>
+<p>Pembuktian hukum kuat bilangan besar di atas mensyaratkan bahwa varians distribusi asal sampel berhingga (perhatikan bahwa syarat ini sangat penting pada langkah pertama). Namun, terdapat pembuktian yang lebih baik yang hanya mensyaratkan bahwa \(\E\left(\left|X\right|\right) \lt \infty\). Sebuah pembuktian elegan yang menunjukkan bahwa \( M_n \to \mu \) ketika \( n \to \infty \) dengan probabilitas 1 dan <a href="https://www.randomservices.org/random/expect/Spaces.html#con">dalam rata-rata</a>, dengan menggunakan <a href="https://www.randomservices.org/random/martingales/Backwards.html#lln">martingal mundur</a>, diberikan dalam bab tentang <a href="https://www.randomservices.org/random/martingales/index.html">martingal</a>. Dalam beberapa paragraf berikut, kita menerapkan hukum bilangan besar pada beberapa statistik khusus yang dipelajari dalam bagian tentang <a href="Mean.html">rata-rata sampel</a>.</p>
 
 <h4 id="emp">Probabilitas Empiris</h4>
 
@@ -170,11 +170,11 @@ Tentu saja, \(F_n(x)\) merupakan variabel acak untuk setiap \(x \in \R\). Bahkan
 	</details>
 </div>
 
-<h4 id="pmf">Densitas Empiris untuk Variabel Diskret</h4>
+<h4 id="pmf">Kepadatan Empiris untuk Variabel Diskret</h4>
 
-<p>Misalkan sekarang \(X\) merupakan variabel acak untuk suatu eksperimen dasar dengan <a href="https://www.randomservices.org/random/dist/Discrete.html">distribusi diskret</a> pada himpunan terhitung \(S\). Ingat bahwa <a href="https://www.randomservices.org/random/dist/Discrete.html">fungsi densitas probabilitas</a> \(X\) adalah fungsi \(f\) yang diberikan oleh
+<p>Misalkan sekarang \(X\) merupakan variabel acak untuk suatu eksperimen dasar dengan <a href="https://www.randomservices.org/random/dist/Discrete.html">distribusi diskret</a> pada himpunan terhitung \(S\). Ingat bahwa <a href="https://www.randomservices.org/random/dist/Discrete.html">fungsi kepadatan probabilitas</a> \(X\) adalah fungsi \(f\) yang diberikan oleh
 \[ f(x) = \P(X = x), \quad x \in S \]
-Sekarang, misalkan kita mengulangi eksperimen dasar untuk membentuk barisan variabel acak independen \((X_1, X_2, \ldots)\), yang masing-masing memiliki distribusi yang sama dengan \(X\). Artinya, kita mengambil sampel dari distribusi \(X\). Misalkan \(f_n\) menyatakan <a href="Mean.html#pmf">fungsi densitas probabilitas empiris</a> yang bersesuaian dengan sampel \((X_1, X_2, \ldots, X_n)\):
+Sekarang, misalkan kita mengulangi eksperimen dasar untuk membentuk barisan variabel acak independen \((X_1, X_2, \ldots)\), yang masing-masing memiliki distribusi yang sama dengan \(X\). Artinya, kita mengambil sampel dari distribusi \(X\). Misalkan \(f_n\) menyatakan <a href="Mean.html#pmf">fungsi kepadatan probabilitas empiris</a> yang bersesuaian dengan sampel \((X_1, X_2, \ldots, X_n)\):
 \[ f_n(x) = \frac{1}{n} \sum_{i=1}^n \bs{1}(X_i = x), \quad x \in S \]
 Tentu saja, \(f_n(x)\) merupakan variabel acak untuk setiap \(x \in S\). Bahkan, jumlah \(\sum_{i=1}^n \bs{1}(X_i = x)\) memiliki distribusi binomial dengan parameter \(n\) dan \(f(x)\).</p>
 
@@ -194,22 +194,22 @@ Tentu saja, \(f_n(x)\) merupakan variabel acak untuk setiap \(x \in S\). Bahkan,
 <p>Ingat bahwa irisan terhitung dari kejadian-kejadian yang masing-masing berprobabilitas 1 tetap memiliki probabilitas 1. Jadi, dalam konteks teorema sebelumnya, sebenarnya kita mempunyai
 \[ \P\left[f_n(x) \to f(x) \text{ ketika } n \to \infty \text{ untuk setiap } x \in S\right] = 1 \]</p>
 
-<h4 id="pdf">Densitas Empiris untuk Variabel Kontinu</h4>
+<h4 id="pdf">Kepadatan Empiris untuk Variabel Kontinu</h4>
 
-<p>Misalkan sekarang \(X\) merupakan variabel acak untuk suatu eksperimen dasar, dengan <a href="https://www.randomservices.org/random/dist/Continuous.html">distribusi kontinu</a> pada \(S \subseteq \R^d\), dan misalkan \(X\) memiliki <a href="https://www.randomservices.org/random/dist/Continuous.html">fungsi densitas probabilitas</a> \(f\). Secara teknis, \(f\) merupakan fungsi densitas probabilitas terhadap ukuran (Lebesgue) baku \(\lambda_d\). Jadi, untuk setiap himpunan terukur, menurut definisi,
+<p>Misalkan sekarang \(X\) merupakan variabel acak untuk suatu eksperimen dasar, dengan <a href="https://www.randomservices.org/random/dist/Continuous.html">distribusi kontinu</a> pada \(S \subseteq \R^d\), dan misalkan \(X\) memiliki <a href="https://www.randomservices.org/random/dist/Continuous.html">fungsi kepadatan probabilitas</a> \(f\). Secara teknis, \(f\) merupakan fungsi kepadatan probabilitas terhadap ukuran (Lebesgue) baku \(\lambda_d\). Jadi, untuk setiap himpunan terukur, menurut definisi,
 \[ \P(X \in A) = \int_A f(x) \, dx, \quad A \subseteq S \]
-Kita kembali mengulangi eksperimen dasar untuk menghasilkan barisan variabel acak independen \((X_1, X_2, \ldots)\), yang masing-masing memiliki distribusi yang sama dengan \(X\). Artinya, kita mengambil sampel dari distribusi \(X\). Misalkan sekarang \(\mathscr{A} = \{A_j: j \in J\}\) merupakan partisi \(S\) berupa koleksi terhitung himpunan-himpunan bagian terukur, yang masing-masing memiliki ukuran positif dan berhingga. Misalkan \(f_n\) menyatakan <a href="Mean.html#pdf">fungsi densitas probabilitas empiris</a> yang bersesuaian dengan sampel \((X_1, X_2, \ldots, X_n)\) dan partisi \(\mathscr{A}\):
+Kita kembali mengulangi eksperimen dasar untuk menghasilkan barisan variabel acak independen \((X_1, X_2, \ldots)\), yang masing-masing memiliki distribusi yang sama dengan \(X\). Artinya, kita mengambil sampel dari distribusi \(X\). Misalkan sekarang \(\mathscr{A} = \{A_j: j \in J\}\) merupakan partisi \(S\) berupa koleksi terhitung himpunan-himpunan bagian terukur, yang masing-masing memiliki ukuran positif dan berhingga. Misalkan \(f_n\) menyatakan <a href="Mean.html#pdf">fungsi kepadatan probabilitas empiris</a> yang bersesuaian dengan sampel \((X_1, X_2, \ldots, X_n)\) dan partisi \(\mathscr{A}\):
 \[ f_n(x) = \frac{P_n(A_j)}{\lambda_d(A_j)} = \frac{1}{n \, \lambda_d(A_j)} \sum_{i=1}^n \bs{1}(X_i \in A_j); \quad j \in J, \; x \in A_j \]
 Tentu saja, \(f_n(x)\) merupakan variabel acak untuk setiap \(x \in S\). Untuk partisi tetap, \(\lambda_d(A_j)\) tetap bagi setiap \(j\); ketika ukuran sampel \(n\) meningkat, hukum bilangan besar memberikan, dengan probabilitas 1,
 \[ f_n(x) \to \frac{\P(X \in A_j)}{\lambda_d(A_j)} = \frac{1}{\lambda_d(A_j)} \int_{A_j} f(u) \, du \text{ ketika } n \to \infty, \quad j \in J, \; x \in A_j \]
-Jadi, limitnya adalah rata-rata fungsi densitas pada sel partisi, bukan selalu nilai fungsi densitas pada titik tersebut. Rata-rata sel tersebut mengaproksimasi nilai fungsi densitas pada titik itu apabila sel-selnya cukup halus dan fungsi densitas cukup teratur pada sel yang memuat titik tersebut, misalnya jika fungsi densitas kontinu di titik itu dan sel-selnya menyusut menuju titik itu.</p>
+Jadi, limitnya adalah rata-rata fungsi kepadatan pada sel partisi, bukan selalu nilai fungsi kepadatan pada titik tersebut. Rata-rata sel tersebut mengaproksimasi nilai fungsi kepadatan pada titik itu apabila sel-selnya cukup halus dan fungsi kepadatan cukup teratur pada sel yang memuat titik tersebut, misalnya jika fungsi kepadatan kontinu di titik itu dan sel-selnya menyusut menuju titik itu.</p>
 
 <h3 id="o006.random.sample.lln.exercises">Latihan</h3>
 
 <h4 id="sim">Latihan Simulasi</h4>
 
 <div class="unit" id="sim1">
-	<p class="app">Dalam <a href="https://www.randomservices.org/random/apps/Dice.html" class="ancillary">eksperimen dadu</a>, ingat bahwa skor-skor dadu membentuk sampel acak dari distribusi dadu yang ditentukan. Pilih variabel acak rata-rata, yaitu rata-rata sampel dari sampel skor dadu. Untuk setiap distribusi dadu, mulailah dengan 1 dadu dan tingkatkan ukuran sampel \(n\). Perhatikan bagaimana distribusi rata-rata sampel mulai menyerupai distribusi massa titik. Perhatikan pula bahwa rata-rata dari rata-rata sampel tetap sama, sedangkan simpangan bakunya menurun. Untuk beberapa nilai \(n\) dan beberapa distribusi dadu yang dipilih, jalankan simulasi 1.000 kali dan bandingkan fungsi frekuensi relatif rata-rata sampel dengan fungsi densitas probabilitas sebenarnya, serta bandingkan momen empiris rata-rata sampel dengan momen sebenarnya.</p>
+	<p class="app">Dalam <a href="https://www.randomservices.org/random/apps/Dice.html" class="ancillary">eksperimen dadu</a>, ingat bahwa skor-skor dadu membentuk sampel acak dari distribusi dadu yang ditentukan. Pilih variabel acak rata-rata, yaitu rata-rata sampel dari sampel skor dadu. Untuk setiap distribusi dadu, mulailah dengan 1 dadu dan tingkatkan ukuran sampel \(n\). Perhatikan bagaimana distribusi rata-rata sampel mulai menyerupai distribusi massa titik. Perhatikan pula bahwa rata-rata dari rata-rata sampel tetap sama, sedangkan simpangan bakunya menurun. Untuk beberapa nilai \(n\) dan beberapa distribusi dadu yang dipilih, jalankan simulasi 1.000 kali dan bandingkan fungsi frekuensi relatif rata-rata sampel dengan fungsi kepadatan probabilitas sebenarnya, serta bandingkan momen empiris rata-rata sampel dengan momen sebenarnya.</p>
 </div>
 
 <p>Beberapa aplikasi dalam proyek ini merupakan simulasi eksperimen acak dengan kejadian yang menjadi perhatian. Ketika menjalankan eksperimen, Anda melakukan pengulangan independen atas eksperimen tersebut. Dalam sebagian besar kasus, aplikasi menampilkan probabilitas teoretis kejadian dan komplemennya, baik secara grafis dengan warna biru maupun secara numerik dalam tabel. Ketika Anda menjalankan eksperimen, frekuensi relatif hasil simulasi ditampilkan secara grafis dengan warna merah dan juga secara numerik.</p>
@@ -222,34 +222,34 @@ Jadi, limitnya adalah rata-rata fungsi densitas pada sel partisi, bukan selalu n
 	<p class="app">Dalam simulasi <a href="https://www.randomservices.org/random/apps/Bertrand.html" class="ancillary">eksperimen Bertrand</a>, kejadian yang menjadi perhatian adalah bahwa suatu <q>tali busur acak</q> pada sebuah lingkaran lebih panjang daripada sisi segitiga sama sisi yang terinskripsi. Untuk setiap model, jalankan eksperimen 1.000 kali dan bandingkan frekuensi relatif kejadian dengan probabilitas sebenarnya.</p>
 </div>
 
-<p>Banyak aplikasi dalam proyek ini merupakan simulasi eksperimen yang menghasilkan variabel diskret. Ketika menjalankan simulasi, Anda melakukan pengulangan independen atas eksperimen tersebut. Dalam sebagian besar kasus, aplikasi menampilkan fungsi densitas probabilitas sebenarnya secara numerik dalam tabel dan secara visual sebagai diagram batang biru. Ketika Anda menjalankan simulasi, fungsi frekuensi relatif juga ditampilkan secara numerik dalam tabel dan secara visual sebagai diagram batang merah.</p>
+<p>Banyak aplikasi dalam proyek ini merupakan simulasi eksperimen yang menghasilkan variabel diskret. Ketika menjalankan simulasi, Anda melakukan pengulangan independen atas eksperimen tersebut. Dalam sebagian besar kasus, aplikasi menampilkan fungsi kepadatan probabilitas sebenarnya secara numerik dalam tabel dan secara visual sebagai diagram batang biru. Ketika Anda menjalankan simulasi, fungsi frekuensi relatif juga ditampilkan secara numerik dalam tabel dan secara visual sebagai diagram batang merah.</p>
 
 <div class="unit" id="sim4">
-	<p class="app">Dalam simulasi <a href="https://www.randomservices.org/random/apps/BinomialCoin.html" class="ancillary">eksperimen koin binomial</a>, pilih banyaknya kemunculan sisi kepala. Untuk beberapa nilai parameter yang dipilih, jalankan simulasi 1.000 kali dan bandingkan rata-rata sampel dengan rata-rata distribusi, serta bandingkan fungsi densitas empiris dengan fungsi densitas probabilitas.</p>
+	<p class="app">Dalam simulasi <a href="https://www.randomservices.org/random/apps/BinomialCoin.html" class="ancillary">eksperimen koin binomial</a>, pilih banyaknya kemunculan sisi kepala. Untuk beberapa nilai parameter yang dipilih, jalankan simulasi 1.000 kali dan bandingkan rata-rata sampel dengan rata-rata distribusi, serta bandingkan fungsi kepadatan empiris dengan fungsi kepadatan probabilitas.</p>
 </div>
 
 <div class="unit" id="sim5">
-	<p class="app">Dalam simulasi <a href="https://www.randomservices.org/random/apps/Match.html" class="ancillary">eksperimen pencocokan</a>, variabel acaknya adalah banyaknya kecocokan. Untuk beberapa nilai parameter yang dipilih, jalankan simulasi 1.000 kali dan bandingkan rata-rata sampel dengan rata-rata distribusi, serta bandingkan fungsi densitas empiris dengan fungsi densitas probabilitas.</p>
+	<p class="app">Dalam simulasi <a href="https://www.randomservices.org/random/apps/Match.html" class="ancillary">eksperimen pencocokan</a>, variabel acaknya adalah banyaknya kecocokan. Untuk beberapa nilai parameter yang dipilih, jalankan simulasi 1.000 kali dan bandingkan rata-rata sampel dengan rata-rata distribusi, serta bandingkan fungsi kepadatan empiris dengan fungsi kepadatan probabilitas.</p>
 </div>
 
 <div class="unit" id="sim6">
-	<p class="app">Dalam <a href="https://www.randomservices.org/random/apps/Poker.html" class="ancillary">eksperimen poker</a>, variabel acaknya adalah jenis kombinasi kartu. Jalankan simulasi 1.000 kali dan bandingkan fungsi densitas empiris dengan fungsi densitas probabilitas sebenarnya.</p>
+	<p class="app">Dalam <a href="https://www.randomservices.org/random/apps/Poker.html" class="ancillary">eksperimen poker</a>, variabel acaknya adalah jenis kombinasi kartu. Jalankan simulasi 1.000 kali dan bandingkan fungsi kepadatan empiris dengan fungsi kepadatan probabilitas sebenarnya.</p>
 </div>
 
-<p>Banyak aplikasi dalam proyek ini merupakan simulasi eksperimen yang menghasilkan variabel-variabel dengan distribusi kontinu. Ketika menjalankan simulasi, Anda melakukan pengulangan independen atas eksperimen tersebut. Dalam sebagian besar kasus, aplikasi menampilkan fungsi densitas probabilitas sebenarnya secara visual sebagai grafik biru. Ketika Anda menjalankan simulasi, fungsi densitas empiris berdasarkan suatu partisi juga ditampilkan secara visual sebagai diagram batang merah.</p>
+<p>Banyak aplikasi dalam proyek ini merupakan simulasi eksperimen yang menghasilkan variabel-variabel dengan distribusi kontinu. Ketika menjalankan simulasi, Anda melakukan pengulangan independen atas eksperimen tersebut. Dalam sebagian besar kasus, aplikasi menampilkan fungsi kepadatan probabilitas sebenarnya secara visual sebagai grafik biru. Ketika Anda menjalankan simulasi, fungsi kepadatan empiris berdasarkan suatu partisi juga ditampilkan secara visual sebagai diagram batang merah.</p>
 
 <div class="unit" id="sim7">
-	<p class="app">Dalam simulasi <a href="https://www.randomservices.org/random/apps/Gamma.html" class="ancillary">eksperimen gamma</a>, variabel acaknya menyatakan waktu kedatangan acak. Untuk beberapa nilai parameter yang dipilih, jalankan eksperimen 1.000 kali dan bandingkan rata-rata sampel dengan rata-rata distribusi, serta bandingkan fungsi densitas empiris dengan fungsi densitas probabilitas.</p>
+	<p class="app">Dalam simulasi <a href="https://www.randomservices.org/random/apps/Gamma.html" class="ancillary">eksperimen gamma</a>, variabel acaknya menyatakan waktu kedatangan acak. Untuk beberapa nilai parameter yang dipilih, jalankan eksperimen 1.000 kali dan bandingkan rata-rata sampel dengan rata-rata distribusi, serta bandingkan fungsi kepadatan empiris dengan fungsi kepadatan probabilitas.</p>
 </div>
 
 <div class="unit" id="sim8">
-	<p class="app">Dalam <a href="https://www.randomservices.org/random/apps/SpecialSimulator.html" class="ancillary">simulator distribusi khusus</a>, pilih <a href="https://www.randomservices.org/random/special/Normal.html">distribusi normal</a>. Untuk berbagai nilai parameter (rata-rata dan simpangan baku), jalankan eksperimen 1.000 kali dan bandingkan rata-rata sampel dengan rata-rata distribusi, serta bandingkan fungsi densitas empiris dengan fungsi densitas probabilitas.</p>
+	<p class="app">Dalam <a href="https://www.randomservices.org/random/apps/SpecialSimulator.html" class="ancillary">simulator distribusi khusus</a>, pilih <a href="https://www.randomservices.org/random/special/Normal.html">distribusi normal</a>. Untuk berbagai nilai parameter (rata-rata dan simpangan baku), jalankan eksperimen 1.000 kali dan bandingkan rata-rata sampel dengan rata-rata distribusi, serta bandingkan fungsi kepadatan empiris dengan fungsi kepadatan probabilitas.</p>
 </div>
 
 <h4 id="exe">Latihan Probabilitas</h4>
 
 <div class="unit" id="exe1">
-	<p class="math">Misalkan \(X\) memiliki fungsi densitas probabilitas \(f(x) = 12 x^2 (1 - x)\) untuk \(0 \le x \le 1\). Distribusi \(X\) merupakan anggota <a href="https://www.randomservices.org/random/special/Beta.html">keluarga beta</a>. Hitung setiap nilai berikut:</p>
+	<p class="math">Misalkan \(X\) memiliki fungsi kepadatan probabilitas \(f(x) = 12 x^2 (1 - x)\) untuk \(0 \le x \le 1\). Distribusi \(X\) merupakan anggota <a href="https://www.randomservices.org/random/special/Beta.html">keluarga beta</a>. Hitung setiap nilai berikut:</p>
 	<ol class="sub">
 		<li>\(\E(X)\)</li>
 		<li>\(\var(X)\)</li>
@@ -281,7 +281,7 @@ Jadi, limitnya adalah rata-rata fungsi densitas pada sel partisi, bukan selalu n
 </div>
 
 <div class="unit" id="exe3">
-	<p class="math">Misalkan \(X\) memiliki fungsi densitas probabilitas \(f(x) = \frac{3}{x^4}\) untuk \(1 \le x \lt \infty\). Distribusi \(X\) merupakan anggota <a href="https://www.randomservices.org/random/special/Pareto.html">keluarga Pareto</a>. Hitung setiap nilai berikut:</p>
+	<p class="math">Misalkan \(X\) memiliki fungsi kepadatan probabilitas \(f(x) = \frac{3}{x^4}\) untuk \(1 \le x \lt \infty\). Distribusi \(X\) merupakan anggota <a href="https://www.randomservices.org/random/special/Pareto.html">keluarga Pareto</a>. Hitung setiap nilai berikut:</p>
 	<ol class="sub">
 		<li>\(\E(X)\)</li>
 		<li>\(\var(X)\)</li>
@@ -315,7 +315,7 @@ Jadi, limitnya adalah rata-rata fungsi densitas pada sel partisi, bukan selalu n
 <div class="unit" id="exe5">
 	<p class="math">Ingat bahwa pada sebuah <dfn>dadu pipih satu-enam</dfn>, sisi 1 dan 6 masing-masing memiliki probabilitas \(\frac{1}{4}\), sedangkan sisi 2, 3, 4, dan 5 masing-masing memiliki probabilitas \(\frac{1}{8}\). Misalkan \(X\) menyatakan skor ketika sebuah dadu pipih satu-enam dilempar. Hitung setiap nilai berikut:</p>
 	<ol class="sub">
-		<li>Fungsi densitas probabilitas \(f(x)\) untuk \(x \in \{1, 2, 3, 4, 5, 6\}\)</li>
+		<li>Fungsi kepadatan probabilitas \(f(x)\) untuk \(x \in \{1, 2, 3, 4, 5, 6\}\)</li>
 		<li>Fungsi distribusi \(F(x)\) untuk \(x \in \{1, 2, 3, 4, 5, 6\}\)</li>
 		<li>\(\E(X)\)</li>
 		<li>\(\var(X)\)</li>
@@ -334,7 +334,7 @@ Jadi, limitnya adalah rata-rata fungsi densitas pada sel partisi, bukan selalu n
 <div class="unit" id="exe6">
 	<p class="math">Misalkan sekarang sebuah dadu pipih satu-enam dilempar \( n \) kali. Tentukan nilai harapan dan varians dari setiap variabel acak berikut:</p>
 	<ol class="sub">
-		<li>Fungsi densitas probabilitas empiris \(f_n(x)\) untuk \(x \in \{1, 2, 3, 4, 5, 6\}\)</li>
+		<li>Fungsi kepadatan probabilitas empiris \(f_n(x)\) untuk \(x \in \{1, 2, 3, 4, 5, 6\}\)</li>
 		<li>Fungsi distribusi empiris \(F_n(x)\) untuk \(x \in \{1, 2, 3, 4, 5, 6\}\)</li>
 		<li>Skor rata-rata \(M\)</li>
 	</ol>
@@ -371,7 +371,7 @@ Jadi, limitnya adalah rata-rata fungsi densitas pada sel partisi, bukan selalu n
 		<li class="child"><a href="https://www.randomservices.org/random/biographies/index.html" class="ancillary">Biografi</a></li>
 	</ul>
 	<section class="edition-notice" data-o006-edition-notice="v1">
-		<p><strong>Pemberitahuan edisi.</strong> Terjemahan Bahasa Indonesia ini mengadaptasi <a href="https://www.randomservices.org/random/">Random: Probabilitas, Statistika Matematis, dan Proses Stokastik</a> karya Kyle Siegrist. Perubahan pada halaman ini mencakup penerjemahan, penambahan ID stabil, pengalihan tautan inti yang belum diterjemahkan ke sumber resmi, pengubahan tautan pelengkap menjadi tautan HTTPS resmi, serta perbaikan terverifikasi pada bukti hukum kuat, limit densitas empiris, notasi dan pemetaan jawaban latihan, dan keterangan keluaran simulasi.</p>
+		<p><strong>Pemberitahuan edisi.</strong> Terjemahan Bahasa Indonesia ini mengadaptasi <a href="https://www.randomservices.org/random/">Random: Probabilitas, Statistika Matematis, dan Proses Stokastik</a> karya Kyle Siegrist. Perubahan pada halaman ini mencakup penerjemahan, penambahan ID stabil, pengalihan tautan inti yang belum diterjemahkan ke sumber resmi, pengubahan tautan pelengkap menjadi tautan HTTPS resmi, serta perbaikan terverifikasi pada bukti hukum kuat, limit kepadatan empiris, notasi dan pemetaan jawaban latihan, dan keterangan keluaran simulasi.</p>
 		<p>Situs asal menyatakan <a href="https://creativecommons.org/licenses/by/2.0/">CC BY 2.0</a>, sedangkan halaman <a href="https://www.randomservices.org/random/Credits.html">Kredit</a> menautkan <a href="https://creativecommons.org/licenses/by/1.0/">CC BY 1.0</a>; perbedaan ini dipertahankan. Edisi independen ini tidak didukung maupun disahkan oleh Kyle Siegrist atau Random Services. Tautan ke data dan biografi pihak ketiga tidak menyatakan hak untuk mendistribusikan ulang materi tersebut.</p>
 	</section>
 </footer>

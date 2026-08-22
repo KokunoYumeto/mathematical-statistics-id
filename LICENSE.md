@@ -20,6 +20,10 @@ include translation into Bahasa Indonesia, stable identifiers, accessible
 offline-reader packaging, HTTPS/link corrections, and clearly logged source
 corrections.  Kyle Siegrist and Random Services do not endorse this edition.
 
+Translation provenance: OpenAI Codex gpt-5.6-sol, Ultra. This provenance note
+does not replace or diminish the source-author, edition, or human-contributor
+credits above.
+
 Component licences:
 
 - the bundled MathJax 3.1.2 runtime is Apache License 2.0; its exact licence is
@@ -33,4 +37,3 @@ Component licences:
 The exact URL, response-header, byte, hash, component-rights, and modification
 evidence is retained in `authority/`, `00_control/`, and the build receipts.
 There is no blanket licence covering every externally linked resource.
-

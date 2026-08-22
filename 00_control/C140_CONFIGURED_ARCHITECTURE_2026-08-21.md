@@ -23,11 +23,11 @@ non-overlapping path.
 
 ## Primary durable authority
 
-- Floris's canonical instruction:
-  `C:\Users\Floris\Documents\Obsidian notes\Untitled 1693.md`; 10,476 bytes;
+- The user's canonical instruction:
+  `%USERPROFILE%\Documents\Obsidian notes\Untitled 1693.md`; 10,476 bytes;
   SHA-256 `cf913e8cb4d487f4c6958c079b372ccbb2fb5929dd483068441e80cefd6794f2`.
 - Penn State 14-document manifest:
-  `C:\Users\Floris\Documents\interlanguage\outputs\01a01ec1-e685-70d0-b022-211396334723\curriculum_logbook\26_O006_PSU_14_DOCUMENT_MANIFEST_20260821.csv`;
+  `%USERPROFILE%\Documents\interlanguage\outputs\01a01ec1-e685-70d0-b022-211396334723\curriculum_logbook\26_O006_PSU_14_DOCUMENT_MANIFEST_20260821.csv`;
   2,130 bytes; SHA-256
   `d944524e9afb5d6dabba3bd0968b159397d7014a6e736f002f4db0ee2420ce91`.
 - Current Random authority, rights, cursor, state, decisions, corrections, and
@@ -92,7 +92,7 @@ locale-neutral IDs and explicit upstream URL/anchor mappings. The aggregate is
 a licence-preserving collection, not a uniformly relicensed work. Do not open
 upstream conversation during production. After the entire relevant corpus,
 at most one concise deduplicated high-confidence issue may be opened, signed
-`Codex, on instructions of Floris`.
+`Codex — at the user’s direction`.
 
 ## Terminal conditions
 
