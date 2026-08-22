@@ -71,6 +71,7 @@ TARGETS = (
     PurePosixPath("random/sample/Covariance.html"),
     PurePosixPath("random/sample/Normal.html"),
     PurePosixPath("random/point/index.html"),
+    PurePosixPath("random/point/Estimators.html"),
 )
 
 # Screen.css references all of these local assets. Keeping the complete exact set
@@ -1061,6 +1062,94 @@ PROTECTED_MATH_CORRECTIONS += tuple(
         "reason": reason,
     }
     for span_index, old, new, reason in NORMAL_MATH_CORRECTIONS
+)
+
+ESTIMATORS_MATH_CORRECTIONS = (
+    (
+        67,
+        r"\( \theta \in \Theta \)",
+        r"\( \theta \in T \)",
+        "quantify over the declared parameter space T rather than undefined Theta",
+    ),
+    (
+        69,
+        r"\(\bias(U) = E(U - \theta) = \E(U) - \theta \)",
+        r"\(\bias(U) = \E(U - \theta) = \E(U) - \theta \)",
+        "use the page's declared expectation macro consistently",
+    ),
+    (
+        117,
+        r"\(\bs{X} = (X_1, X_2, \ldots,)\)",
+        r"\(\bs{X} = (X_1, X_2, \ldots)\)",
+        "remove the stray comma after the sequence ellipsis",
+    ),
+    (
+        162,
+        r"\[ |\E(U_n - \theta)| \le \E(|U_n - \theta|) \le \sqrt{\E[(U_n - \theta)]^2} \to 0 \text{ as } n \to \infty \]",
+        r"\[ |\E(U_n - \theta)| \le \E(|U_n - \theta|) \le \sqrt{\E[(U_n - \theta)^2]} \to 0 \text{ ketika } n \to \infty \]",
+        "put the squared error inside the expectation and localize the connective",
+    ),
+    (
+        197,
+        r"\( (\P_n(A): n \in \N_+) \)",
+        r"\( (P_n(A): n \in \N_+) \)",
+        "use the empirical-probability notation defined earlier in the sentence",
+    ),
+    (
+        272,
+        r"\( T \)",
+        r"\( [0, \infty) \)",
+        "allow the nonnegative values required for sample standard deviation",
+    ),
+    (
+        280,
+        r"\( \var(U) \gt 0 \)",
+        r"\( \var(U) \ge 0 \)",
+        "do not infer strict variance from a multipoint parameter space",
+    ),
+    (
+        281,
+        r"\( [\E(U)]^2 \lt \theta^2 \)",
+        r"\( [\E(U)]^2 \le \theta^2 \)",
+        "derive the weak inequality needed for negative bias",
+    ),
+    (
+        282,
+        r"\( \E(U) \lt \theta \)",
+        r"\( \E(U) \le \theta \)",
+        "state weak negative bias without an unproved strictness condition",
+    ),
+    (
+        305,
+        r"\( \rho \in [0, 1] \)",
+        r"\( \rho \in [-1, 1] \)",
+        "include valid negative correlations",
+    ),
+    (350, r"\(U_n\)", r"\(W_n\)", "name the covariance estimator proved above"),
+    (351, r"\(V_n\)", r"\(S_n\)", "name the sample covariance estimator proved above"),
+    (357, r"\(V_n\)", r"\(S_n\)", "name the sample covariance estimator in the asymptotic comparison"),
+    (358, r"\(U_n\)", r"\(W_n\)", "name the known-means covariance estimator in the asymptotic comparison"),
+    (
+        404,
+        r"\( n \in \N \)",
+        r"\( n \in \N_+ \)",
+        "exclude the zero-sized sample from the positive sample-size sequence",
+    ),
+)
+
+PROTECTED_MATH_CORRECTIONS += tuple(
+    {
+        "page": "random/point/Estimators.html",
+        "old": old,
+        "new": new,
+        "span_old": old,
+        "span_new": new,
+        "span_index": span_index,
+        "replacements": 1,
+        "surface": "math_span",
+        "reason": reason,
+    }
+    for span_index, old, new, reason in ESTIMATORS_MATH_CORRECTIONS
 )
 
 # Reader-facing language inside TeX \text{...} remains protected mathematics:

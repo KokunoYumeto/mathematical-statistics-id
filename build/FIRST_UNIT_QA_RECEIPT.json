@@ -206,12 +206,12 @@
     }
   ],
   "build": {
-    "reader_file_count": 40,
-    "reader_manifest_sha256": "715f04e6919fa1e6e982f613a0dcd5ee7e697b0d0872d0dfd654c4d2d1416a0c",
-    "reader_total_bytes": 2255748,
-    "receipt_bytes": 104605,
+    "reader_file_count": 41,
+    "reader_manifest_sha256": "5ec24c67e16ca04ed74925f9814a8aa29a8874a10d312287a9b1d5141658e6ed",
+    "reader_total_bytes": 2300109,
+    "receipt_bytes": 111680,
     "receipt_path": "build/FIRST_UNIT_BUILD_RECEIPT.json",
-    "receipt_sha256": "0490c4687c0d9058a435868424ead6b5357669931a5e5dfed392106a4af6a85d"
+    "receipt_sha256": "4383bcbc05ae1f64496a0a3ba3142a91d534c95f8e822c3dfc24ffe3cd00a5c1"
   },
   "math_text_localizations": [
     {
@@ -264,7 +264,7 @@
     "official_tag": "3.1.2",
     "reader_relative_path": "MathJax/input/tex/extensions/boldsymbol.js",
     "runtime_file_count": 1,
-    "script_page_references": 8,
+    "script_page_references": 9,
     "script_pages": [
       "random/sample/Introduction.html",
       "random/sample/Mean.html",
@@ -273,7 +273,8 @@
       "random/sample/Variance.html",
       "random/sample/OrderStatistics.html",
       "random/sample/Covariance.html",
-      "random/sample/Normal.html"
+      "random/sample/Normal.html",
+      "random/point/Estimators.html"
     ],
     "sha256": "716cf8735d00abfb1627f8adbbf4aeb915ac9b5c55d47aeaf276e73dac6a2aa1"
   },
@@ -282,31 +283,31 @@
     "controlled_filename_case_corrections": 6,
     "css_files": 1,
     "css_refs": 11,
-    "details": 201,
-    "external_https_anchors": 476,
+    "details": 216,
+    "external_https_anchors": 519,
     "external_https_metadata_links": 4,
-    "fragments": 88,
-    "href_delta_entries": 316,
-    "href_delta_occurrences": 438,
-    "html_pages": 12,
-    "ids": 440,
-    "local_refs": 372,
-    "math_spans": 3455,
+    "fragments": 93,
+    "href_delta_entries": 348,
+    "href_delta_occurrences": 477,
+    "html_pages": 13,
+    "ids": 491,
+    "local_refs": 399,
+    "math_spans": 3887,
     "math_text_localization_categories": 6,
     "math_text_localization_replacements": 11,
     "mathjax_runtime_files": 1,
     "occurrence_specific_href_deltas": 5,
-    "protected_math_correction_categories": 136,
-    "protected_math_replacements": 131,
-    "raw_script_style_blocks": 27,
+    "protected_math_correction_categories": 151,
+    "protected_math_replacements": 146,
+    "raw_script_style_blocks": 30,
     "readable_layout_css_appends": 1,
-    "reader_bytes": 2255748,
-    "reader_files": 40,
-    "source_elements": 4981,
+    "reader_bytes": 2300109,
+    "reader_files": 41,
+    "source_elements": 5361,
     "svg_files": 10,
-    "translated_pages": 10,
+    "translated_pages": 11,
     "transport_hardening_deltas": 14,
-    "units": 292
+    "units": 325
   },
   "protected_math_corrections": [
     {
@@ -1671,6 +1672,171 @@
       "span_new": "\\(\\P(M \\gt 49, S^2 \\lt 20)\\)",
       "span_old": "\\(\\P(M \\gt 49, S^2 \\lt 20))\\)",
       "surface": "math_span"
+    },
+    {
+      "new": "\\( \\theta \\in T \\)",
+      "old": "\\( \\theta \\in \\Theta \\)",
+      "page": "random/point/Estimators.html",
+      "reason": "quantify over the declared parameter space T rather than undefined Theta",
+      "replacements": 1,
+      "span_index": 67,
+      "span_new": "\\( \\theta \\in T \\)",
+      "span_old": "\\( \\theta \\in \\Theta \\)",
+      "surface": "math_span"
+    },
+    {
+      "new": "\\(\\bias(U) = \\E(U - \\theta) = \\E(U) - \\theta \\)",
+      "old": "\\(\\bias(U) = E(U - \\theta) = \\E(U) - \\theta \\)",
+      "page": "random/point/Estimators.html",
+      "reason": "use the page's declared expectation macro consistently",
+      "replacements": 1,
+      "span_index": 69,
+      "span_new": "\\(\\bias(U) = \\E(U - \\theta) = \\E(U) - \\theta \\)",
+      "span_old": "\\(\\bias(U) = E(U - \\theta) = \\E(U) - \\theta \\)",
+      "surface": "math_span"
+    },
+    {
+      "new": "\\(\\bs{X} = (X_1, X_2, \\ldots)\\)",
+      "old": "\\(\\bs{X} = (X_1, X_2, \\ldots,)\\)",
+      "page": "random/point/Estimators.html",
+      "reason": "remove the stray comma after the sequence ellipsis",
+      "replacements": 1,
+      "span_index": 117,
+      "span_new": "\\(\\bs{X} = (X_1, X_2, \\ldots)\\)",
+      "span_old": "\\(\\bs{X} = (X_1, X_2, \\ldots,)\\)",
+      "surface": "math_span"
+    },
+    {
+      "new": "\\[ |\\E(U_n - \\theta)| \\le \\E(|U_n - \\theta|) \\le \\sqrt{\\E[(U_n - \\theta)^2]} \\to 0 \\text{ ketika } n \\to \\infty \\]",
+      "old": "\\[ |\\E(U_n - \\theta)| \\le \\E(|U_n - \\theta|) \\le \\sqrt{\\E[(U_n - \\theta)]^2} \\to 0 \\text{ as } n \\to \\infty \\]",
+      "page": "random/point/Estimators.html",
+      "reason": "put the squared error inside the expectation and localize the connective",
+      "replacements": 1,
+      "span_index": 162,
+      "span_new": "\\[ |\\E(U_n - \\theta)| \\le \\E(|U_n - \\theta|) \\le \\sqrt{\\E[(U_n - \\theta)^2]} \\to 0 \\text{ ketika } n \\to \\infty \\]",
+      "span_old": "\\[ |\\E(U_n - \\theta)| \\le \\E(|U_n - \\theta|) \\le \\sqrt{\\E[(U_n - \\theta)]^2} \\to 0 \\text{ as } n \\to \\infty \\]",
+      "surface": "math_span"
+    },
+    {
+      "new": "\\( (P_n(A): n \\in \\N_+) \\)",
+      "old": "\\( (\\P_n(A): n \\in \\N_+) \\)",
+      "page": "random/point/Estimators.html",
+      "reason": "use the empirical-probability notation defined earlier in the sentence",
+      "replacements": 1,
+      "span_index": 197,
+      "span_new": "\\( (P_n(A): n \\in \\N_+) \\)",
+      "span_old": "\\( (\\P_n(A): n \\in \\N_+) \\)",
+      "surface": "math_span"
+    },
+    {
+      "new": "\\( [0, \\infty) \\)",
+      "old": "\\( T \\)",
+      "page": "random/point/Estimators.html",
+      "reason": "allow the nonnegative values required for sample standard deviation",
+      "replacements": 1,
+      "span_index": 272,
+      "span_new": "\\( [0, \\infty) \\)",
+      "span_old": "\\( T \\)",
+      "surface": "math_span"
+    },
+    {
+      "new": "\\( \\var(U) \\ge 0 \\)",
+      "old": "\\( \\var(U) \\gt 0 \\)",
+      "page": "random/point/Estimators.html",
+      "reason": "do not infer strict variance from a multipoint parameter space",
+      "replacements": 1,
+      "span_index": 280,
+      "span_new": "\\( \\var(U) \\ge 0 \\)",
+      "span_old": "\\( \\var(U) \\gt 0 \\)",
+      "surface": "math_span"
+    },
+    {
+      "new": "\\( [\\E(U)]^2 \\le \\theta^2 \\)",
+      "old": "\\( [\\E(U)]^2 \\lt \\theta^2 \\)",
+      "page": "random/point/Estimators.html",
+      "reason": "derive the weak inequality needed for negative bias",
+      "replacements": 1,
+      "span_index": 281,
+      "span_new": "\\( [\\E(U)]^2 \\le \\theta^2 \\)",
+      "span_old": "\\( [\\E(U)]^2 \\lt \\theta^2 \\)",
+      "surface": "math_span"
+    },
+    {
+      "new": "\\( \\E(U) \\le \\theta \\)",
+      "old": "\\( \\E(U) \\lt \\theta \\)",
+      "page": "random/point/Estimators.html",
+      "reason": "state weak negative bias without an unproved strictness condition",
+      "replacements": 1,
+      "span_index": 282,
+      "span_new": "\\( \\E(U) \\le \\theta \\)",
+      "span_old": "\\( \\E(U) \\lt \\theta \\)",
+      "surface": "math_span"
+    },
+    {
+      "new": "\\( \\rho \\in [-1, 1] \\)",
+      "old": "\\( \\rho \\in [0, 1] \\)",
+      "page": "random/point/Estimators.html",
+      "reason": "include valid negative correlations",
+      "replacements": 1,
+      "span_index": 305,
+      "span_new": "\\( \\rho \\in [-1, 1] \\)",
+      "span_old": "\\( \\rho \\in [0, 1] \\)",
+      "surface": "math_span"
+    },
+    {
+      "new": "\\(W_n\\)",
+      "old": "\\(U_n\\)",
+      "page": "random/point/Estimators.html",
+      "reason": "name the covariance estimator proved above",
+      "replacements": 1,
+      "span_index": 350,
+      "span_new": "\\(W_n\\)",
+      "span_old": "\\(U_n\\)",
+      "surface": "math_span"
+    },
+    {
+      "new": "\\(S_n\\)",
+      "old": "\\(V_n\\)",
+      "page": "random/point/Estimators.html",
+      "reason": "name the sample covariance estimator proved above",
+      "replacements": 1,
+      "span_index": 351,
+      "span_new": "\\(S_n\\)",
+      "span_old": "\\(V_n\\)",
+      "surface": "math_span"
+    },
+    {
+      "new": "\\(S_n\\)",
+      "old": "\\(V_n\\)",
+      "page": "random/point/Estimators.html",
+      "reason": "name the sample covariance estimator in the asymptotic comparison",
+      "replacements": 1,
+      "span_index": 357,
+      "span_new": "\\(S_n\\)",
+      "span_old": "\\(V_n\\)",
+      "surface": "math_span"
+    },
+    {
+      "new": "\\(W_n\\)",
+      "old": "\\(U_n\\)",
+      "page": "random/point/Estimators.html",
+      "reason": "name the known-means covariance estimator in the asymptotic comparison",
+      "replacements": 1,
+      "span_index": 358,
+      "span_new": "\\(W_n\\)",
+      "span_old": "\\(U_n\\)",
+      "surface": "math_span"
+    },
+    {
+      "new": "\\( n \\in \\N_+ \\)",
+      "old": "\\( n \\in \\N \\)",
+      "page": "random/point/Estimators.html",
+      "reason": "exclude the zero-sized sample from the positive sample-size sequence",
+      "replacements": 1,
+      "span_index": 404,
+      "span_new": "\\( n \\in \\N_+ \\)",
+      "span_old": "\\( n \\in \\N \\)",
+      "surface": "math_span"
     }
   ],
   "readable_reflow": {
@@ -1688,6 +1854,32 @@
     "version": "o006-id-readable-layout-v3"
   },
   "results": {
+    "random/point/Estimators.html": {
+      "details": 15,
+      "edition_notice": {
+        "bytes": 1172,
+        "links": 4,
+        "sha256": "eafff6cf003edc517cbc99727456b283de19cff49e07d20b10fea57dca0f8a3d"
+      },
+      "elements": 380,
+      "hierarchy_sha256": "f9204e02fa8699e0c30dee79161ce37a7a96f2fc75abd90f63d67b03b4c23bb2",
+      "href_delta_entries": 34,
+      "href_delta_occurrences": 41,
+      "ids": 51,
+      "math_spans": 432,
+      "math_text_localization_replacements": 0,
+      "occurrence_specific_href_deltas": 0,
+      "protected_math_replacements": 15,
+      "raw_script_style_blocks": 3,
+      "reader_bytes": 44440,
+      "reader_sha256": "f7bd6f892222b887b072c215a8c51d4f591aeeefdebdc96a4998aeaadfb52297",
+      "reader_target_byte_identical": true,
+      "source_bytes": 37864,
+      "source_sha256": "10914ffca9034209da0111918cfb534d60982bde0bba142a11d61d43114c6e2a",
+      "target_bytes": 44440,
+      "target_sha256": "f7bd6f892222b887b072c215a8c51d4f591aeeefdebdc96a4998aeaadfb52297",
+      "units": 33
+    },
     "random/point/index.html": {
       "details": 0,
       "edition_notice": {
@@ -1697,21 +1889,21 @@
       },
       "elements": 155,
       "hierarchy_sha256": "6b6d12100e8f69215ad341e2edb91332b75b38265422cd81ac250fe4aaa2fed0",
-      "href_delta_entries": 40,
-      "href_delta_occurrences": 59,
+      "href_delta_entries": 39,
+      "href_delta_occurrences": 58,
       "ids": 6,
       "math_spans": 0,
       "math_text_localization_replacements": 0,
       "occurrence_specific_href_deltas": 0,
       "protected_math_replacements": 0,
       "raw_script_style_blocks": 1,
-      "reader_bytes": 11355,
-      "reader_sha256": "b0bc5eddeed420424aefa51a7f55a45c17ab60cfb48ef272f62dd2b47ac36361",
+      "reader_bytes": 11311,
+      "reader_sha256": "74303dc2b6d5383bb44b7ec5a78e605cdccd0c001802d21cf870e0af31906970",
       "reader_target_byte_identical": true,
       "source_bytes": 8311,
       "source_sha256": "b0e3e9e5f55bfd4ebac0047dafff725628d6a0ca6e638d7a2847095b311d637c",
-      "target_bytes": 11355,
-      "target_sha256": "b0bc5eddeed420424aefa51a7f55a45c17ab60cfb48ef272f62dd2b47ac36361",
+      "target_bytes": 11311,
+      "target_sha256": "74303dc2b6d5383bb44b7ec5a78e605cdccd0c001802d21cf870e0af31906970",
       "units": 0
     },
     "random/sample/CLT.html": {
@@ -1801,21 +1993,21 @@
       },
       "elements": 305,
       "hierarchy_sha256": "5c0d5dbd8f5ce20bd12602452d97e7e74779ee36a0186126919674afc4789a07",
-      "href_delta_entries": 31,
-      "href_delta_occurrences": 37,
+      "href_delta_entries": 30,
+      "href_delta_occurrences": 36,
       "ids": 33,
       "math_spans": 268,
       "math_text_localization_replacements": 9,
       "occurrence_specific_href_deltas": 0,
       "protected_math_replacements": 5,
       "raw_script_style_blocks": 3,
-      "reader_bytes": 34820,
-      "reader_sha256": "243118b707ff34b0978f6d659a48b3bc37a358393b4b25283e93585fca12e703",
+      "reader_bytes": 34785,
+      "reader_sha256": "d712ac4ed7c26757d6a13d873b0bf003c8cf487270b2f90fe6c074008ef372c0",
       "reader_target_byte_identical": true,
       "source_bytes": 30754,
       "source_sha256": "8662dfc55683fa40c79a5d453a450730e2ba151716a20eb61a2db307c33f5e85",
-      "target_bytes": 34820,
-      "target_sha256": "243118b707ff34b0978f6d659a48b3bc37a358393b4b25283e93585fca12e703",
+      "target_bytes": 34785,
+      "target_sha256": "d712ac4ed7c26757d6a13d873b0bf003c8cf487270b2f90fe6c074008ef372c0",
       "units": 21
     },
     "random/sample/Mean.html": {
@@ -1952,14 +2144,14 @@
   "schema": "o006.random.first-unit-qa.v1",
   "scripts": {
     "build": {
-      "bytes": 82048,
+      "bytes": 84970,
       "path": "scripts/build_first_unit.py",
-      "sha256": "39743559112f8dc4d18a47a9e19da00b1d62722b96ba6fea77c37eb90f8d055c"
+      "sha256": "a17a32f34385615149b1723121ee6a0d2a1acf92768571d00e390973fb3a4f37"
     },
     "qa": {
-      "bytes": 78486,
+      "bytes": 82362,
       "path": "scripts/qa_first_unit.py",
-      "sha256": "4e4950ab5b4d826692f954f3f7a3a2b65cff3b7422305f8688ecc452802be563"
+      "sha256": "f7a4db14514bdfc63750e5a1595c95ffed49bbcea9edbebf8a4a2aa328ec39e2"
     }
   },
   "transport_hardening": [

@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="id-ID">
+
+<head>
+	<meta charset="utf-8">
+	<title>Penduga</title>
+	<meta name="author" content="Kyle Siegrist">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="keywords" content="probabilitas, statistika, pendugaan titik, penduga tak bias, galat kuadrat rata-rata, penduga konsisten, rata-rata sampel, varians sampel, kovarians sampel, regresi linear, distribusi Poisson">
+	<link rel="icon" href="../icons/Icon.svg" type="image/svg">
+	<link rel="stylesheet" href="../Screen.css" type="text/css" media="screen">
+	<script src="../Basic.js"></script>
+	<script src="../../MathJax/tex-svg.js" id="MathJax-script" async></script>
+</head>
+
+<body>
+
+<div class="latex">
+	\(\newcommand{\R}{\mathbb{R}}\)
+	\(\newcommand{\N}{\mathbb{N}}\)
+	\(\newcommand{\Z}{\mathbb{Z}}\)
+	\(\newcommand{\E}{\mathbb{E}}\)
+	\(\newcommand{\P}{\mathbb{P}}\)
+	\(\newcommand{\var}{\text{var}}\)
+	\(\newcommand{\sd}{\text{sd}}\)
+	\(\newcommand{\cov}{\text{cov}}\)
+	\(\newcommand{\cor}{\text{cor}}\)
+	\(\newcommand{\bias}{\text{bias}}\)
+	\(\newcommand{\mse}{\text{mse}}\)
+	\(\newcommand{\eff}{\text{eff}}\)
+	\(\newcommand{\bs}{\boldsymbol}\)
+	\( \newcommand{\ms}{\mathscr} \)
+</div>
+
+<header>
+	<ol class="map">
+		<li class="parent"><a href="https://www.randomservices.org/random/index.html">Random</a></li>
+		<li class="parent"><a href="index.html">6. Pendugaan Titik</a></li>
+		<li class="current">1</li>
+		<li class="child"><a href="https://www.randomservices.org/random/point/Moments.html" title="Metode Momen">2</a></li>
+		<li class="child"><a href="https://www.randomservices.org/random/point/Likelihood.html" title="Kemungkinan Maksimum">3</a></li>
+		<li class="child"><a href="https://www.randomservices.org/random/point/Bayes.html" title="Penduga Bayes">4</a></li>
+		<li class="child"><a href="https://www.randomservices.org/random/point/Unbiased.html" title="Penduga Tak Bias Terbaik">5</a></li>
+		<li class="child"><a href="https://www.randomservices.org/random/point/Sufficient.html" title="Statistik Cukup, Lengkap, dan Ancilar">6</a></li>
+		<li class="details"><button type="button" title="Perluas Rincian" onclick="expandDetails(true);"><img src="../icons/Plus.svg" alt="Perluas"></button></li>
+		<li class="details"><button type="button" title="Ciutkan Rincian" onclick="expandDetails(false);"><img src="../icons/Minus.svg" alt="Ciutkan"></button></li>
+	</ol>
+	<h2 id="o006.random.point.estimators.page">1. Penduga</h2>
+</header>
+
+<h3 id="o006.random.point.estimators.section.basic-statistical-model">Model Statistik Dasar</h3>
+
+<p>Seperti biasa, titik awal kita adalah sebuah <a href="https://www.randomservices.org/random/prob/Experiments.html">eksperimen acak</a> yang dimodelkan oleh <a href="https://www.randomservices.org/random/prob/Probability2.html">ruang probabilitas</a> \((\Omega, \ms F, \P)\). Dalam model statistik dasar, kita memiliki <a href="https://www.randomservices.org/random/prob/Probability.html">variabel acak</a> teramati \(\bs{X}\) dengan nilai dalam suatu himpunan \(S\). Ingat bahwa, secara umum, variabel ini dapat memiliki struktur yang cukup rumit. Sebagai contoh, jika eksperimennya adalah mengambil sampel \(n\) objek dari suatu populasi dan mencatat berbagai pengukuran yang menjadi perhatian, maka vektor data berbentuk
+\[ \bs{X} = (X_1, X_2, \ldots, X_n) \]
+dengan \(X_i\) merupakan vektor pengukuran untuk objek ke-\(i\). Kasus khusus yang paling penting adalah ketika \((X_1, X_2, \ldots, X_n)\) saling bebas dan berdistribusi identik (IID). Dalam hal ini, \(\bs{X}\) adalah <a href="../sample/Introduction.html">sampel acak</a> berukuran \(n\) dari distribusi suatu variabel pengukuran dasar \(X\).</p>
+
+<h4 id="o006.random.point.estimators.section.statistics">Statistik</h4>
+
+<p>Ingat pula bahwa <dfn>statistik</dfn> adalah variabel acak yang merupakan fungsi teramati dari variabel hasil eksperimen acak: \(\bs{U} = \bs{u}(\bs{X})\), dengan \( \bs{u} \) fungsi yang diketahui dari \( S \) ke suatu himpunan lain. Jadi, statistik hanyalah variabel acak yang diturunkan dari variabel pengamatan \(\bs{X}\), dengan asumsi bahwa \(\bs{U}\) juga teramati. Seperti ditunjukkan oleh notasinya, \(\bs{U}\) biasanya juga bernilai vektor. Perhatikan bahwa vektor data awal \(\bs{X}\) sendiri merupakan statistik, tetapi biasanya kita tertarik pada statistik yang diturunkan dari \(\bs{X}\). Statistik \(\bs{U}\) dapat dihitung untuk menjawab suatu pertanyaan inferensial. Dalam konteks ini, jika dimensi \(\bs{U}\) (sebagai vektor) lebih kecil daripada dimensi \(\bs{X}\) (seperti yang biasanya terjadi), maka kita telah mencapai <dfn>reduksi data</dfn>. Idealnya, kita ingin mencapai reduksi data yang berarti tanpa kehilangan informasi tentang pertanyaan inferensial yang sedang dikaji.</p>
+
+<h4 id="o006.random.point.estimators.section.parameters">Parameter</h4>
+
+<div class="unit" id="o006.random.point.estimators.unit.parameter-definition">
+	<p class="dfn">Dalam pengertian teknis, <dfn>parameter</dfn> \(\bs{\theta}\) adalah fungsi dari <em>distribusi</em> \(\bs{X}\), dengan nilai dalam suatu himpunan \(T\).</p>
+	<details>
+		<p>Seperti biasa, \(T\) dilengkapi dengan suatu <a href="https://www.randomservices.org/random/foundations/Measurable.html">\(\sigma\)-aljabar</a> \(\ms T\) yang terdiri atas himpunan-himpunan bagian yang diperbolehkan, sehingga \((T, \ms T)\) merupakan <dfn>ruang parameter</dfn>.</p>
+	</details>
+</div>	
+	
+<p>Biasanya, distribusi \(\bs{X}\) memiliki \(k \in \N_+\) parameter riil yang menjadi perhatian, sehingga \(\bs{\theta}\) berbentuk \(\bs{\theta} = (\theta_1, \theta_2, \ldots, \theta_k)\) dan dengan demikian \(T \subseteq \R^k\). Dalam banyak kasus, satu atau lebih parameter tersebut tidak diketahui dan harus diduga dari variabel data \(\bs{X}\). Ini merupakan salah satu masalah terpenting dan paling mendasar dalam statistika, sekaligus pokok bahasan bab ini. Jika \( \bs{U} \) adalah suatu statistik, distribusi \( \bs{U} \) akan bergantung pada parameter \( \bs{X} \); demikian pula besaran distribusional seperti rata-rata, varians, kovarians, fungsi kepadatan probabilitas, dan sebagainya. Biasanya kita tidak menampakkan kebergantungan ini dalam notasi agar ekspresi matematis tidak menjadi terlalu rumit, tetapi penting untuk menyadari bahwa kebergantungan yang mendasarinya tetap ada. Gagasan utamanya adalah bahwa dengan mengamati suatu nilai \( \bs{u} \) dari statistik \( \bs{U} \), kita diharapkan memperoleh informasi tentang parameter yang tidak diketahui.</p>
+
+<h4 id="est">Penduga</h4>
+
+<p>Sekarang andaikan kita memiliki parameter riil yang tidak diketahui, \(\theta\), dengan nilai dalam ruang parameter \(T \subseteq \R\). Statistik bernilai riil \(U = u(\bs{X})\) yang digunakan untuk menduga \(\theta\) disebut <dfn>penduga</dfn> bagi \(\theta\). Jadi, penduga merupakan variabel acak dan karenanya memiliki distribusi, rata-rata, varians, dan seterusnya (semuanya, seperti telah disebutkan, pada umumnya bergantung pada \( \theta \)). Ketika kita benar-benar menjalankan eksperimen dan mengamati data \(\bs{x}\), nilai teramati \(u = 
+u(\bs{x})\) (sebuah bilangan tunggal) adalah <dfn>dugaan</dfn> bagi parameter \(\theta\). Definisi-definisi berikut bersifat mendasar.</p>
+
+<div class="unit" id="o006.random.point.estimators.unit.error-bias-mse">
+	<p class="dfn">Andaikan \( U \) adalah statistik yang digunakan sebagai penduga parameter \( \theta \) dengan nilai dalam \( T \subseteq \R \). Untuk \( \theta \in T \),</p>
+	<ol class="sub">
+		<li>\( U - \theta \) adalah <dfn>galat</dfn>.</li>
+		<li>\(\bias(U) = \E(U - \theta) = \E(U) - \theta \) adalah <dfn>bias</dfn> \( U \).</li>
+		<li>\(\mse(U) = \E\left[(U - \theta)^2\right] \) adalah <dfn>galat kuadrat rata-rata</dfn> \( U \).</li>
+	</ol>
+</div>
+
+<p>Jadi, galat adalah selisih antara penduga dan parameter yang diduga; tentu saja galat merupakan variabel acak. Bias \( U \) hanyalah nilai harapan galat, sedangkan galat kuadrat rata-rata adalah nilai harapan kuadrat galat. Perhatikan bahwa bias dan galat kuadrat rata-rata merupakan fungsi dari \( \theta \in T \). Definisi-definisi berikut melengkapi definisi bias secara alami.</p>
+
+<div class="unit" id="o006.random.point.estimators.unit.bias-signs">
+	<p class="dfn">Andaikan kembali bahwa \( U \) adalah statistik yang digunakan sebagai penduga parameter \( \theta \) dengan nilai dalam \( T \subseteq \R \).</p>
+	<ol class="sub">
+		<li>\(U\) <dfn>tak bias</dfn> jika \(\bias(U) = 0\), atau secara ekuivalen \(\E(U) = \theta\), untuk setiap \(\theta \in T\).</li>
+		<li>\(U\) <dfn>berbias negatif</dfn> jika \(\bias(U) \le 0\), atau secara ekuivalen \(\E(U) \le \theta\), untuk setiap \(\theta \in T\).</li>
+		<li>\(U\) <dfn>berbias positif</dfn> jika \(\bias(U) \ge 0\), atau secara ekuivalen \(\E(U) \ge \theta\), untuk setiap \(\theta \in T\).</li>
+	</ol>
+</div>
+
+<p>Jadi, bagi penduga tak bias, nilai harapan penduga sama dengan parameter yang diduga; jelas ini merupakan sifat yang diinginkan. Di sisi lain, penduga berbias positif secara rata-rata menghasilkan dugaan yang terlalu tinggi, sedangkan penduga berbias negatif secara rata-rata menghasilkan dugaan yang terlalu rendah. Definisi bias negatif dan positif kita bersifat <em>lemah</em> karena menggunakan pertidaksamaan lemah \(\le\) dan \(\ge\). Tentu ada definisi ketat yang bersesuaian, dengan pertidaksamaan ketat \(\lt\) dan \(\gt\). Namun, perhatikan bahwa tidak satu pun dari definisi tersebut harus berlaku. Sebagai contoh, dapat terjadi bahwa \(\bias(U) \lt 0\) untuk sebagian \(\theta \in T\), \(\bias(U) = 0\) untuk sebagian \(\theta \in T\) lainnya, dan \(\bias(U) \gt 0\) untuk nilai \(\theta \in T\) yang lain lagi.</p>
+
+<div class="unit" id="est3">
+	<p class="math">\(\mse(U) = \var(U) + \bias^2(U)\)</p>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Hasil ini mengikuti sifat-sifat dasar nilai harapan dan varians:
+		\[ \E[(U - \theta)^2] = \var(U - \theta) + [\E(U - \theta)]^2 = \var(U) + \bias^2(U) \]</p>
+	</details>
+</div>
+
+<p>Khususnya, jika penduga tak bias, maka galat kuadrat rata-rata \(U\) sama dengan <a href="https://www.randomservices.org/random/expect/Variance.html">varians</a> \(U\).</p>
+
+<p>Idealnya, kita ingin memiliki penduga tak bias dengan galat kuadrat rata-rata yang kecil. Namun, hal ini tidak selalu mungkin, dan <a href="#est3" class="ref"></a> menunjukkan hubungan yang rumit antara bias dan galat kuadrat rata-rata. Pada bagian berikutnya kita akan melihat contoh dua penduga suatu parameter yang merupakan kelipatan satu sama lain; yang satu tak bias, tetapi yang lain memiliki galat kuadrat rata-rata lebih kecil. Namun, jika kita memiliki dua penduga tak bias bagi \(\theta\), secara alami kita memilih penduga dengan varians (galat kuadrat rata-rata) yang lebih kecil.</p>
+
+<div class="unit" id="o006.random.point.estimators.unit.efficiency">
+	<p class="dfn">Andaikan \( U \) dan \( V \) adalah penduga tak bias bagi parameter \( \theta \) dengan nilai dalam \( T \subseteq \R \).</p>
+	<ol class="sub">
+		<li>\( U \) <dfn>lebih efisien daripada</dfn> \( V \) jika \( \var(U) \le \var(V) \).</li>
+		<li><dfn>Efisiensi relatif</dfn> \(U\) terhadap \(V\) adalah
+		\[ \eff(U, V) = \frac{\var(V)}{\var(U)} \]</li>
+	</ol>
+</div>
+
+<h4 id="o006.random.point.estimators.section.asymptotic-properties">Sifat Asimtotik</h4>
+
+<p>Andaikan kembali bahwa kita memiliki parameter riil \( \theta \) dengan nilai yang mungkin dalam ruang parameter \( T \). Dalam eksperimen statistik, kita sering mengamati barisan tak hingga variabel acak seiring waktu, \(\bs{X} = (X_1, X_2, \ldots)\), sehingga pada waktu \( n \) kita telah mengamati \( \bs{X}_n = (X_1, X_2, \ldots, X_n) \). Dalam keadaan ini, kita sering memiliki suatu rumus umum yang mendefinisikan penduga \(\theta\) untuk setiap ukuran sampel \(n\). Secara teknis, ini menghasilkan suatu <em>barisan</em> penduga bernilai riil bagi \(\theta\): \( \bs{U} = (U_1, U_2, \ldots) \), dengan \( U_n \) fungsi bernilai riil dari \( \bs{X}_n \) untuk setiap \( n \in \N_+ \). Dalam hal ini, kita dapat membahas sifat asimtotik penduga ketika \(n \to \infty\). Sebagian besar definisi berikut merupakan perumuman alami dari definisi sebelumnya.</p>
+
+<div class="unit" id="o006.random.point.estimators.unit.asymptotic-unbiasedness">
+	<p class="dfn">Barisan penduga \(\bs{U} = (U_1, U_2, \ldots)\) <dfn>tak bias secara asimtotik</dfn> jika \( \bias(U_n) \to 0\) ketika \(n \to \infty\) untuk setiap \(\theta \in T \), atau secara ekuivalen, \(\E(U_n) \to \theta\) ketika \(n \to \infty\) untuk setiap \(\theta \in T\).</p>
+</div>
+
+<div class="unit" id="o006.random.point.estimators.unit.asymptotic-relative-efficiency">
+	<p class="dfn">Andaikan \(\bs{U} = (U_1, U_2, \ldots)\) dan \(\bs{V} = (V_1, V_2, \ldots)\) adalah dua barisan penduga yang tak bias secara asimtotik. <dfn>Efisiensi relatif asimtotik</dfn> \(\bs{U}\) terhadap \(\bs{V}\) adalah
+	\[ \lim_{n \to \infty} \eff(U_n, V_n) = \lim_{n \to \infty} \frac{\var(V_n)}{\var(U_n)} \]
+	dengan asumsi bahwa limit tersebut ada.</p>
+</div>
+
+<p>Secara alami, kita mengharapkan penduga membaik ketika ukuran sampel \(n\) bertambah dan, dalam suatu pengertian, konvergen menuju parameter ketika \( n \to \infty \). Gagasan umum ini dikenal sebagai <em>konsistensi</em>. Sekali lagi, untuk pembahasan selanjutnya kita mengasumsikan bahwa \(\bs{U} = (U_1, U_2, \ldots)\) adalah barisan penduga bagi parameter bernilai riil \( \theta \), dengan nilai dalam ruang parameter \( T \).</p>
+
+<div class="unit" id="o006.random.point.estimators.unit.consistency">
+	<p class="dfn">Konsistensi</p>
+	<ol class="sub">
+		<li>\( \bs{U} \) <dfn>konsisten</dfn> jika \(U_n \to \theta\) ketika \(n \to \infty\) <a href="https://www.randomservices.org/random/prob/Convergence.html">dalam probabilitas</a> untuk setiap \(\theta \in T\). Artinya, \( \P\left(\left|U_n - \theta\right| \gt \epsilon\right) \to 0\) ketika \(n \to \infty\) untuk setiap \(\epsilon \gt 0\) dan \(\theta \in T\).</li>
+		<li>\( \bs{U} \) <dfn>konsisten dalam kuadrat rata-rata</dfn> jika \( \mse(U_n) = \E[(U_n - \theta)^2] \to 0 \) ketika \( n \to \infty \) untuk setiap \( \theta \in T \).</li>
+	</ol>
+</div>
+
+<p>Berikut adalah hubungan antara kedua definisi tersebut:</p>
+
+<div class="unit" id="o006.random.point.estimators.unit.mean-square-implies-consistency">
+	<p class="math">Jika \( \bs{U} \) konsisten dalam kuadrat rata-rata, maka \(\bs{U}\) konsisten.</p>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Dari <a href="https://www.randomservices.org/random/expect/Properties2.html#mar">ketaksamaan Markov</a>,
+		\[ \P\left(\left|U_n - \theta\right| \gt \epsilon\right) = \P\left[(U_n - \theta)^2 \gt \epsilon^2\right] \le \frac{\E\left[(U_n - \theta)^2\right]}{\epsilon^2} \to 0 \text{ as } n \to \infty \]</p>
+	</details>
+</div>
+
+<p>Fakta bahwa konsistensi dalam kuadrat rata-rata mengakibatkan konsistensi biasa hanyalah versi statistik dari teorema yang menyatakan bahwa <a href="https://www.randomservices.org/random/expect/Variance.html">konvergensi dalam kuadrat rata-rata</a> mengakibatkan konvergensi dalam probabilitas. Berikut satu lagi akibat penting dari konsistensi dalam kuadrat rata-rata.</p>
+
+<div class="unit" id="o006.random.point.estimators.unit.mean-square-implies-asymptotic-unbiasedness">
+	<p class="math">Jika \( \bs{U} \) konsisten dalam kuadrat rata-rata, maka \( \bs{U} \) tak bias secara asimtotik.</p>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Hasil ini mengikuti fakta bahwa galat absolut rata-rata lebih kecil daripada akar galat kuadrat rata-rata, yang merupakan kasus khusus suatu hasil umum tentang norma. Lihat bagian mengenai <a href="https://www.randomservices.org/random/expect/Spaces.html">ruang vektor</a> untuk perincian lebih lanjut. Dengan menggunakan hasil ini dan ketaksamaan segitiga biasa untuk nilai harapan, kita peroleh
+		\[ |\E(U_n - \theta)| \le \E(|U_n - \theta|) \le \sqrt{\E[(U_n - \theta)^2]} \to 0 \text{ ketika } n \to \infty \]
+		Dengan demikian \( \E(U_n) \to \theta \) ketika \( n \to \infty \) untuk \( \theta \in T \).</p>
+	</details>
+</div>
+
+<p>Dalam beberapa subbagian berikutnya, kita akan meninjau kembali beberapa masalah dasar pendugaan yang dipelajari dalam bab mengenai <a href="../sample/index.html">sampel acak</a>.</p>
+
+<h3 id="o006.random.point.estimators.section.single-variable-model">Pendugaan dalam Model Variabel Tunggal</h3>
+
+<p>Andaikan \( X \) adalah variabel acak dasar bernilai riil untuk suatu eksperimen, dengan rata-rata \( \mu \in \R\) dan varians \( \sigma^2 \in (0, \infty) \). Kita mengambil sampel dari distribusi \( X \) untuk menghasilkan barisan \(\bs{X} = (X_1, X_2, \ldots)\) variabel-variabel yang saling bebas, masing-masing dengan distribusi \( X \). Untuk setiap \( n \in \N_+ \), \( \bs{X}_n = (X_1, X_2, \ldots, X_n) \) merupakan sampel acak berukuran \(n\) dari distribusi \(X\).</p>
+
+<h4 id="mea">Menduga Rata-Rata</h4>
+
+<p>Subbagian ini meninjau kembali beberapa hasil yang diperoleh dalam bagian mengenai <a href="../sample/LLN.html">hukum bilangan besar</a>. Ingat bahwa penduga alami bagi rata-rata distribusi \(\mu\) adalah <a href="../sample/LLN.html">rata-rata sampel</a>, yang didefinisikan oleh
+\[ M_n = \frac{1}{n} \sum_{i=1}^n X_i, \quad n \in \N_+ \]</p>
+
+<div class="unit" id="mea1">
+	<p class="math">Sifat-sifat \( \bs M = (M_1, M_2, \ldots) \) sebagai barisan penduga bagi \( \mu \).</p>
+	<ol class="sub">
+		<li>\(\E(M_n) = \mu\), sehingga \(M_n\) tak bias untuk \( n \in \N_+ \).</li>
+		<li>\(\var(M_n) = \sigma^2 / n\) untuk \( n \in \N_+ \), sehingga \( \bs M \) konsisten.</li>
+	</ol>
+</div>
+
+<p>Konsistensi \(\bs M\) tidak lain adalah <a href="../sample/LLN.html">hukum lemah bilangan besar</a>. Selain itu, terdapat sejumlah kasus khusus penting dari <a href="#mea1" class="ref"></a>. Lihat bagian mengenai <a href="../sample/Mean.html">rata-rata sampel</a> untuk perinciannya.</p>
+
+<div class="unit" id="o006.random.point.estimators.unit.sample-mean-special-cases">
+	<p class="math">Kasus-kasus khusus rata-rata sampel</p>
+	<ol class="sub">
+		<li>Andaikan \(X = \bs{1}_A\), variabel indikator bagi suatu kejadian \(A\) yang memiliki probabilitas \(\P(A)\). Maka rata-rata sampel dari sampel acak berukuran \( n \in \N_+ \) yang berasal dari distribusi \( X \) adalah <dfn>frekuensi relatif</dfn> atau <dfn>probabilitas empiris</dfn> bagi \(A\), yang dilambangkan \(P_n(A)\). Dengan demikian, \(P_n(A)\) merupakan penduga tak bias bagi \( \P(A) \) untuk \( n \in \N_+ \), dan \( (P_n(A): n \in \N_+) \) konsisten.</li>
+		<li>Andaikan \(F\) menyatakan fungsi distribusi suatu variabel acak bernilai riil \(Y\). Untuk \(y \in \R\) yang tetap, <dfn>fungsi distribusi empiris</dfn> \(F_n(y)\) hanyalah rata-rata sampel dari sampel acak berukuran \(n \in \N_+\) yang berasal dari distribusi variabel indikator \(X = \bs{1}(Y \le y)\). Dengan demikian, \(F_n(y)\) merupakan penduga tak bias bagi \( F(y) \) untuk \( n \in \N_+ \), dan \( (F_n(y): n \in \N_+) \) konsisten.</li>
+		<li>Andaikan \(U\) adalah variabel acak dengan distribusi diskret pada suatu himpunan terhitung \(S\), dan \(f\) menyatakan fungsi kepadatan probabilitas \(U\). Untuk \(u \in S\) yang tetap, <dfn>fungsi kepadatan probabilitas empiris</dfn> \(f_n(u)\) hanyalah rata-rata sampel dari sampel acak berukuran \(n \in \N_+\) yang berasal dari distribusi variabel indikator \(X = \bs{1}(U = u)\). Dengan demikian, \(f_n(u)\) merupakan penduga tak bias bagi \( f(u) \) untuk \( n \in \N_+ \), dan \( (f_n(u): n \in \N_+) \) konsisten.</li>
+	</ol>
+</div>
+
+<h4 id="o006.random.point.estimators.section.estimating-variance">Menduga Varians</h4>
+
+<p>Subbagian ini meninjau kembali beberapa hasil yang diperoleh dalam bagian mengenai <a href="../sample/Variance.html">varians sampel</a>. Kita juga mengasumsikan bahwa momen pusat keempat \(\sigma_4 = \E\left[(X - \mu)^4\right]\) berhingga. Ingat bahwa \(\sigma_4 / \sigma^4\) adalah <a href="https://www.randomservices.org/random/expect/Skew.html#kur">kurtosis</a> \(X\). Ingat pula bahwa jika \(\mu\) diketahui (hampir selalu merupakan asumsi artifisial), penduga alami bagi \(\sigma^2\) adalah suatu versi khusus <a href="../sample/Variance.html">varians sampel</a>, yang didefinisikan oleh
+\[ W_n^2 = \frac{1}{n} \sum_{i=1}^n (X_i - \mu)^2, \quad n \in \N_+ \]</p>
+
+<div class="unit" id="o006.random.point.estimators.unit.known-mean-variance-estimator">
+	<p class="math">Sifat-sifat \( \bs W^2 = (W_1^2, W_2^2, \ldots) \) sebagai barisan penduga bagi \( \sigma^2 \).</p>
+	<ol class="sub">
+		<li>\(\E\left(W_n^2\right) = \sigma^2\), sehingga \(W_n^2\) tak bias untuk \( n \in \N_+ \).</li>
+		<li>\(\var\left(W_n^2\right) = \frac{1}{n}(\sigma_4 - \sigma^4)\) untuk \( n \in \N_+ \), sehingga \(\bs W^2\) konsisten.</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<p>\( \bs W^2 \) bersesuaian dengan pengambilan sampel dari distribusi \( (X - \mu)^2 \). Distribusi ini memiliki rata-rata \( \sigma^2 \) dan varians \( \sigma_4 - \sigma^4 \), sehingga hasil tersebut langsung mengikuti <a href="#mea1" class="ref"></a>.</p>
+	</details>
+</div>
+
+<p>Jika \(\mu\) tidak diketahui (asumsi yang lebih masuk akal), penduga alami bagi varians distribusi adalah versi standar <a href="../sample/Variance.html">varians sampel</a>, yang didefinisikan oleh
+\[ S_n^2 = \frac{1}{n - 1} \sum_{i=1}^n (X_i - M_n)^2, \quad n \in \{2, 3, \ldots\} \]</p>
+
+<div class="unit" id="o006.random.point.estimators.unit.sample-variance-estimator">
+	<p class="math">Sifat-sifat \( \bs S^2 = (S_2^2, S_3^2, \ldots) \) sebagai barisan penduga bagi \( \sigma^2 \).</p>
+	<ol class="sub">
+		<li>\(\E\left(S_n^2\right) = \sigma^2\), sehingga \(S_n^2\) tak bias untuk \( n \in \{2, 3, \ldots\} \).</li>
+		<li>\(\var\left(S_n^2\right) = \frac{1}{n} \left(\sigma_4 - \frac{n - 3}{n - 1} \sigma^4 \right)\) untuk \( n \in \{2, 3, \ldots\} \), sehingga \(\bs S^2\) merupakan barisan yang konsisten.</li>
+	</ol>
+</div>
+
+<p>Secara alami, kita ingin membandingkan barisan \( \bs W^2 \) dan \( \bs S^2 \) sebagai penduga bagi \( \sigma^2 \). Namun, ingat kembali bahwa \( \bs W^2 \) hanya masuk akal jika \( \mu \) diketahui.</p>
+
+<div class="unit" id="comp">
+	<p class="math">Perbandingan \( \bs W^2 \) dan \( \bs S^2 \)</p>
+	<ol class="sub">
+		<li>\(\var\left(W_n^2\right) \lt \var(S_n^2)\) untuk \( n \in \{2, 3, \ldots\} \).</li>
+		<li>Efisiensi relatif asimtotik \(\bs W^2\) terhadap \(\bs S^2\) adalah 1.</li>
+	</ol>
+</div>
+
+<p>Jadi, menurut bagian (a) dari <a href="#comp" class="ref"></a>, \(W_n^2\) lebih baik daripada \(S_n^2\) untuk \( n \in \{2, 3, \ldots\} \), dengan asumsi bahwa \(\mu\) diketahui sehingga kita benar-benar dapat <em>menggunakan</em> \(W_n^2\). Hal ini mungkin tidak mengejutkan, tetapi menurut bagian (b), \(S_n^2\) bekerja hampir sebaik \(W_n^2\) untuk ukuran sampel \( n \) yang besar. Tentu saja, simpangan baku sampel \(S_n\) merupakan penduga alami bagi simpangan baku distribusi \(\sigma\). Sayangnya, penduga ini berbias. Berikut hasil yang lebih umum:</p>
+
+<div class="unit" id="o006.random.point.estimators.unit.square-root-bias">
+	<p class="math">Andaikan \( \theta \) adalah parameter dengan nilai yang mungkin dalam \(T \subseteq (0, \infty) \), dan \( U \) adalah statistik dengan nilai dalam \( [0, \infty) \). Jika \( U^2 \) merupakan penduga tak bias bagi \( \theta^2 \), maka \( U \) merupakan penduga berbias negatif bagi \( \theta \).</p>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Perhatikan bahwa
+		\[ \var(U) = \E(U^2) - [\E(U)]^2 = \theta^2 - [\E(U)]^2, \quad \theta \in T \]
+		Karena \( T \) hanya memuat nilai parameter positif dan \( U \) bernilai nonnegatif, nilai harapannya juga nonnegatif. Selain itu, \( \var(U) \ge 0 \), sehingga \( [\E(U)]^2 \le \theta^2 \). Oleh karena itu, \( \E(U) \le \theta \) untuk setiap \( \theta \in T \).</p>
+	</details>
+</div>
+
+<p>Jadi, kita tidak seharusnya terlalu terpaku pada sifat tak bias. Bagi kebanyakan distribusi penarikan sampel, tidak akan ada statistik \(U\) dengan sifat bahwa \(U\) merupakan penduga tak bias bagi \(\sigma\) dan \(U^2\) merupakan penduga tak bias bagi \(\sigma^2\).</p>
+
+<h3 id="o006.random.point.estimators.section.bivariate-model">Pendugaan dalam Model Bivariat</h3>
+
+<p>Dalam subbagian ini, kita meninjau kembali beberapa hasil yang diperoleh dalam bagian mengenai <a href="../sample/Covariance.html">korelasi dan regresi</a>.</p>
+
+<p>Andaikan \( X \) dan \( Y \) adalah variabel acak bernilai riil untuk suatu eksperimen, sehingga \( (X, Y) \) memiliki distribusi bivariat pada \( \R^2 \). Misalkan \( \mu = \E(X)\) dan \( \sigma^2 = \var(X) \) masing-masing menyatakan rata-rata dan varians \( X \), serta \( \nu = \E(Y) \) dan \( \tau^2 = \var(Y) \) masing-masing menyatakan rata-rata dan varians \( Y \). Untuk parameter bivariat, misalkan \( \delta = \cov(X, Y) \) menyatakan kovarians distribusi dan \( \rho = \cor(X, Y) \) menyatakan korelasi distribusi. Kita juga memerlukan satu momen berorde lebih tinggi: misalkan \( \delta_2 = \E\left[(X - \mu)^2 (Y - \nu)^2\right] \), dan seperti biasa kita mengasumsikan bahwa semua parameter tersebut ada. Jadi, ruang parameter umumnya adalah \( \mu, \, \nu \in \R \), \( \sigma^2, \, \tau^2 \in (0, \infty) \), \( \delta \in \R \), dan \( \rho \in [-1, 1] \). Sekarang andaikan kita mengambil sampel dari distribusi \( (X, Y) \) untuk menghasilkan barisan variabel-variabel bebas \(\left((X_1, Y_1), (X_2, Y_2), \ldots\right)\), yang masing-masing memiliki distribusi \( (X, Y) \). Seperti biasa, kita tuliskan \(\bs{X}_n = (X_1, X_2, \ldots, X_n)\) dan \(\bs{Y}_n = (Y_1, Y_2, \ldots, Y_n)\); keduanya masing-masing merupakan sampel acak berukuran \(n\) dari distribusi \(X\) dan \(Y\). Karena sekarang kita memiliki dua variabel dasar, notasi kita perlu sedikit diperluas.</p>
+
+<h4 id="o006.random.point.estimators.section.estimating-covariance">Menduga Kovarians</h4>
+
+<p>Jika \(\mu\) dan \(\nu\) diketahui (hampir selalu merupakan asumsi artifisial), penduga alami bagi kovarians distribusi \(\delta\) adalah suatu versi khusus kovarians sampel, yang didefinisikan oleh
+\[ W_n = W_n\left(\bs{X}, \bs{Y}\right) = \frac{1}{n} \sum_{i=1}^n (X_i - \mu)(Y_i - \nu), \quad n \in \N_+\]</p>
+
+<div class="unit" id="o006.random.point.estimators.unit.known-means-covariance-estimator">
+	<p class="math">Sifat-sifat \( \bs W = (W_1, W_2, \ldots) \) sebagai barisan penduga bagi \( \delta \).</p>
+	<ol class="sub">
+		<li>\(\E\left(W_n\right) = \delta\), sehingga \(W_n\) tak bias untuk \( n \in \N_+ \).</li>
+		<li>\( \var\left(W_n\right) = \frac{1}{n}(\delta_2 - \delta^2) \) untuk \( n \in \N_+ \), sehingga \(\bs W\) konsisten.</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Bukti ini sudah pernah kita kerjakan, tetapi begitu mendasar sehingga layak diulang. Perhatikan bahwa \( \bs W \) bersesuaian dengan pengambilan sampel dari distribusi \( (X - \mu) (Y - \nu) \). Distribusi ini memiliki rata-rata \( \delta \) dan varians \( \delta_2 - \delta^2 \), sehingga hasil-hasil tersebut segera mengikuti dari <a href="#mea1" class="ref"></a>.</p>
+	</details>
+</div>
+
+<p>Jika \(\mu\) dan \(\nu\) tidak diketahui (yang biasanya merupakan asumsi lebih masuk akal), penduga alami bagi kovarians distribusi \(\delta\) adalah bentuk baku kovarians sampel, yang didefinisikan oleh
+\[  S_n = S_n(\bs X , \bs Y) = \frac{1}{n - 1} \sum_{i=1}^n [X_i - M_n(\bs X)][Y_i - M_n(\bs Y)], \quad n \in \{2, 3, \ldots\}\]</p>
+
+<div class="unit" id="o006.random.point.estimators.unit.sample-covariance-estimator">
+	<p class="math">Sifat-sifat \( \bs S = (S_2, S_3, \ldots) \) sebagai barisan penduga bagi \( \delta \).</p>
+	<ol class="sub">
+		<li>\(\E\left(S_n\right) = \delta\), sehingga \( S_n \) tak bias untuk \( n \in \{2, 3, \ldots\} \).</li>
+		<li>\( \var\left(S_n\right) = \frac{1}{n}\left(\delta_2 + \frac{1}{n - 1} \sigma^2 \tau^2 - \frac{n - 2}{n - 1} \delta^2\right) \) untuk \( n \in \{2, 3, \ldots\} \), sehingga \(\bs S\) konsisten.</li>
+	</ol>
+</div>
+
+<p>Sekali lagi, karena kita memiliki dua barisan penduga yang bersaing bagi \( \delta \), kita ingin membandingkan keduanya.</p>
+
+<div class="unit" id="o006.random.point.estimators.unit.covariance-efficiency-comparison">
+	<p class="math">Perbandingan \(\bs W\) dan \(\bs S\) sebagai penduga bagi \(\delta\):</p>
+	<ol class="sub">
+		<li>\(\var\left(W_n\right) \lt \var\left(S_n\right)\) untuk \( n \in \{2, 3, \ldots\} \).</li>
+		<li>Efisiensi relatif asimtotik \(\bs W\) terhadap \(\bs S\) adalah 1.</li>
+	</ol>
+</div>
+
+<p>Jadi, \(W_n\) lebih baik daripada \(S_n\) untuk \( n \in \{2, 3, \ldots\} \), dengan asumsi bahwa \(\mu\) dan \( \nu \) diketahui sehingga kita benar-benar dapat <em>menggunakan</em> \(W_n\). Namun, untuk \( n \) besar, \(S_n\) bekerja hampir sama baiknya dengan \(W_n\).</p>
+
+<h4 id="o006.random.point.estimators.section.estimating-correlation">Menduga Korelasi</h4>
+
+<p>Penduga alami bagi korelasi distribusi \(\rho\) adalah korelasi sampel
+\[ R_n = \frac{S_n (\bs X, \bs Y)}{S_n(\bs X) S_n(\bs Y)}, \quad n \in \{2, 3, \ldots\} \]
+Perhatikan bahwa statistik ini merupakan fungsi nonlinear dari kovarians sampel dan kedua simpangan baku sampel. Rasio di atas digunakan ketika hasil kali kedua simpangan baku sampel positif; ketika hasil kali itu nol, tetapkan statistiknya bernilai 0. Karena kedua varians sampel konvergen hampir pasti menuju varians distribusi yang positif, definisi pada kejadian berpenyebut nol ini tidak memengaruhi limit. Untuk sebagian besar distribusi \((X, Y)\), hampir mustahil menghitung bias atau galat kuadrat rata-rata penduga ini. Jika kita <em>dapat</em> menghitung nilai harapannya, kemungkinan besar kita akan mendapati bahwa penduga ini berbias. Di sisi lain, meskipun kita tidak dapat menghitung galat kuadrat rata-ratanya, penerapan sederhana hukum bilangan besar menunjukkan bahwa \(R_n \to \rho\) ketika \(n \to \infty\) dengan probabilitas 1. Jadi, \( \bs R = (R_2, R_3, \ldots) \) setidaknya konsisten.</p>
+
+<h4 id="o006.random.point.estimators.section.estimating-regression-coefficients">Menduga Koefisien Regresi</h4>
+
+<p>Ingat bahwa <a href="https://www.randomservices.org/random/expect/Covariance.html#blp">garis regresi distribusi</a>, dengan \(X\) sebagai variabel prediktor dan \(Y\) sebagai variabel respons, adalah \(y = a + b \, x\), dengan
+\[ a = \E(Y) - \frac{\cov(X, Y)}{\var(X)} \E(X), \quad b = \frac{\cov(X, Y)}{\var(X)} \]
+Di sisi lain, garis regresi sampel berdasarkan sampel berukuran \( n \in \{2, 3, \ldots\} \) adalah \(y = A_n + B_n x\), dengan
+\[ A_n = M_n(\bs Y) - \frac{S_n(\bs X, \bs Y)}{S_n^2(\bs X )} M_n(\bs X), \quad B_n = \frac{S_n(\bs X, \bs Y)}{S_n^2(\bs X)} \]
+Tentu saja, statistik \(A_n\) dan \(B_n\) masing-masing merupakan penduga alami bagi parameter \(a\) dan \(b\), dan dalam arti tertentu diturunkan dari penduga-penduga kita sebelumnya bagi rata-rata, varians, dan kovarians distribusi. Rumus di atas digunakan ketika varians sampel prediktor positif; ketika varians itu nol, tetapkan kedua statistik pada nilai tetap yang sembarang. Karena varians sampel prediktor konvergen hampir pasti menuju varians distribusi yang positif, definisi pada kejadian berpenyebut nol ini tidak memengaruhi limit. Sekali lagi, untuk sebagian besar distribusi \((X, Y)\), bias dan galat kuadrat rata-rata penduga-penduga ini sulit dihitung. Namun, penerapan hukum bilangan besar menunjukkan bahwa, dengan probabilitas 1, \( A_n \to a \) dan \( B_n \to b \) ketika \( n \to \infty \). Jadi, setidaknya \( \bs A = (A_2, A_3, \ldots) \) dan \( \bs B = (B_2, B_3, \ldots) \) konsisten.</p>
+
+<h3 id="o006.random.point.estimators.section.exercises-and-special-cases">Latihan dan Kasus Khusus</h3>
+
+<h4 id="poi">Distribusi Poisson</h4>
+
+<p>Mari kita bahas sebuah contoh sederhana yang menggambarkan beberapa gagasan di atas. Ingat bahwa <a href="https://www.randomservices.org/random/poisson/Poisson.html">distribusi Poisson</a> dengan parameter \(\lambda \in (0, \infty)\) memiliki fungsi kepadatan probabilitas \(g\) yang diberikan oleh
+\[ g(x) = e^{-\lambda} \frac{\lambda^x}{x!}, \quad x \in \N \]
+Distribusi Poisson sering digunakan untuk memodelkan banyaknya <q>titik</q> acak dalam suatu wilayah waktu atau ruang, khususnya dalam konteks <a href="https://www.randomservices.org/random/poisson/index.html">proses Poisson</a>. Parameter \(\lambda\) sebanding dengan ukuran wilayah waktu atau ruang tersebut; konstanta kesebandingannya adalah <dfn>laju</dfn> rata-rata titik-titik acak. Distribusi ini dinamai menurut <a href="https://www.randomservices.org/random/biographies/Poisson.html" class="ancillary">Simeon Poisson</a>.</p>
+
+<div class="unit" id="o006.random.point.estimators.unit.poisson-moments">
+	<p class="math">Misalkan \(X\) berdistribusi Poisson dengan parameter \(\lambda\). Maka</p>
+	<ol class="sub">
+		<li>\(\mu = \E(X) = \lambda\)</li>
+		<li>\(\sigma^2 = \var(X) = \lambda\)</li>
+		<li>\(\sigma_4 = \E\left[(X - \lambda)^4\right] = 3 \lambda^2 + \lambda\)</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Ingat notasi permutasi \( x^{(n)} = x (x - 1) \cdots (x - n + 1) \) untuk \( x \in \R \) dan \( n \in \N \). Nilai harapan \( \E[X^{(n)}] \) adalah <dfn>momen faktorial</dfn> \( X \) berorde \( n \). Mudah dilihat bahwa momen-momen faktorialnya adalah \( \E\left[X^{(n)}\right] = \lambda^n \) untuk \( n \in \N \). Hasil-hasil di atas mengikuti fakta ini.</p>
+	</details>
+</div>
+
+<p>Sekarang, misalkan kita mengambil sampel dari distribusi \( X \) untuk menghasilkan barisan variabel acak independen \( \bs{X} = (X_1, X_2, \ldots) \), yang masing-masing berdistribusi Poisson dengan parameter tak diketahui \( \lambda \in (0, \infty) \). Sekali lagi, \(\bs{X}_n = (X_1, X_2, \ldots, X_n)\) merupakan sampel acak berukuran \(n \in \N_+\) dari distribusi tersebut untuk setiap \( n \in \N_+ \). Dari latihan sebelumnya, \(\lambda\) merupakan rata-rata sekaligus varians distribusi, sehingga kita dapat menggunakan rata-rata sampel \(M_n\) atau varians sampel \(S_n^2\) sebagai penduga bagi \(\lambda\). Keduanya tak bias, jadi manakah yang lebih baik? Secara alami, kita menggunakan galat kuadrat rata-rata sebagai kriteria.</p>
+
+<div class="unit" id="o006.random.point.estimators.unit.poisson-estimator-comparison">
+	<p class="math">Perbandingan \(\bs M\) dengan \(\bs S^2\) sebagai penduga bagi \(\lambda\).</p>
+	<ol class="sub">
+		<li>\(\var\left(M_n\right) = \frac{\lambda}{n}\) untuk \( n \in \N_+ \).</li>
+		<li>\(\var\left(S_n^2\right) = \frac{\lambda}{n} \left(1 + 2 \lambda \frac{n}{n - 1} \right)\) untuk \( n \in \{2, 3, \ldots\} \).</li>
+		<li>\(\var\left(M_n\right) \lt \var\left(S_n^2\right)\), sehingga \( M_n \) lebih efisien daripada penduga varians sampel untuk \( n \in \{2, 3, \ldots\} \).</li>
+		<li>Efisiensi relatif asimtotik \(\bs M\) terhadap \(\bs S^2\) adalah \(1 + 2 \lambda\).</li>
+	</ol>
+</div>
+
+<p>Jadi, kesimpulan kita adalah bahwa rata-rata sampel \(M_n\) merupakan penduga yang lebih baik bagi parameter \(\lambda\) daripada varians sampel \(S_n^2\) untuk \( n \in \{2, 3, \ldots\} \), dan perbedaan kualitasnya meningkat bersama \( \lambda \).</p>
+
+<div class="unit" id="o006.random.point.estimators.unit.poisson-simulation">
+	<p class="app">Jalankan <a href="https://www.randomservices.org/random/apps/Poisson.html" class="ancillary">eksperimen Poisson</a> sebanyak 100 kali untuk beberapa nilai parameter. Dalam setiap kasus, hitung penduga \(M\) dan \(S^2\). Penduga mana yang tampaknya bekerja lebih baik?</p>
+</div>
+
+<div class="unit" id="o006.random.point.estimators.unit.alpha-emissions-data">
+	<p class="stat">Emisi partikel elementer dari suatu sampel bahan radioaktif dalam selang waktu tertentu sering diasumsikan mengikuti distribusi Poisson. Oleh karena itu, misalkan <a href="https://www.randomservices.org/random/data/Alpha.html" class="ancillary">himpunan data emisi alfa</a> merupakan sampel dari distribusi Poisson. Duga parameter laju \(\lambda\).</p>
+	<ol class="sub">
+		<li>dengan menggunakan rata-rata sampel</li>
+		<li>dengan menggunakan varians sampel</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<ol class="sub">
+			<li>8.367</li>
+			<li>8.649</li>
+		</ol>
+	</details>
+</div>
+
+<h4 id="o006.random.point.estimators.section.simulation-exercises">Latihan Simulasi</h4>
+
+<div class="unit" id="o006.random.point.estimators.unit.sample-mean-simulation">
+	<p class="app">Dalam <a href="https://www.randomservices.org/random/apps/MeanEstimate.html" class="ancillary">eksperimen rata-rata sampel</a>, tetapkan distribusi penarikan sampel menjadi gamma. Tingkatkan ukuran sampel dengan bilah geser dan amati secara grafis maupun numerik sifat tak bias dan konsistennya. Jalankan eksperimen sebanyak 1.000 kali dan bandingkan rata-rata sampel dengan rata-rata distribusi.</p>
+</div>
+
+<div class="unit" id="o006.random.point.estimators.unit.normal-estimation-simulation">
+	<p class="app">Jalankan <a href="https://www.randomservices.org/random/apps/NormalEstimate.html" class="ancillary">eksperimen pendugaan pada distribusi normal</a> sebanyak 1.000 kali untuk beberapa nilai parameter.</p>
+	<ol class="sub">
+		<li>Bandingkan bias empiris dan galat kuadrat rata-rata \(M\) dengan nilai-nilai teoretisnya.</li>
+		<li>Bandingkan bias empiris dan galat kuadrat rata-rata \(S^2\) serta \(W^2\) dengan nilai-nilai teoretisnya. Penduga mana yang tampaknya bekerja lebih baik?</li>
+	</ol>
+</div>
+
+<div class="unit" id="o006.random.point.estimators.unit.matching-simulation">
+	<p class="app">Dalam <a href="https://www.randomservices.org/random/apps/Match.html" class="ancillary">eksperimen pencocokan</a>, variabel acaknya adalah banyaknya kecocokan. Jalankan simulasi sebanyak 1.000 kali dan bandingkan</p>
+	<ol class="sub">
+		<li>rata-rata sampel dengan rata-rata distribusi.</li>
+		<li>fungsi kepadatan empiris dengan fungsi kepadatan probabilitas.</li>
+	</ol>
+</div>
+
+<div class="unit" id="o006.random.point.estimators.unit.exponential-simulation">
+	<p class="app">Jalankan <a href="https://www.randomservices.org/random/apps/ExponentialExperiment.html" class="ancillary">eksperimen eksponensial</a> sebanyak 1.000 kali dan bandingkan simpangan baku sampel dengan simpangan baku distribusi.</p>
+</div>
+
+<h4 id="o006.random.point.estimators.section.data-analysis-exercises">Latihan Analisis Data</h4>
+
+<div class="unit" id="o006.random.point.estimators.unit.michelson-data">
+	<p class="stat">Untuk <a href="https://www.randomservices.org/random/data/Michelson.html" class="ancillary">data kelajuan cahaya Michelson</a>, hitung rata-rata sampel dan varians sampel.</p>
+	<details>
+		<summary>Rincian:</summary>
+		<p>852.4, 6242.67</p>
+	</details>
+</div>
+
+<div class="unit" id="o006.random.point.estimators.unit.cavendish-data">
+	<p class="stat">Untuk <a href="https://www.randomservices.org/random/data/Cavendish.html" class="ancillary">data densitas Bumi Cavendish</a>, hitung rata-rata sampel dan varians sampel.</p>
+	<details>
+		<summary>Rincian:</summary>
+		<p>5.448, 0.048817</p>
+	</details>
+</div>
+
+<div class="unit" id="o006.random.point.estimators.unit.short-data">
+	<p class="stat">Untuk <a href="https://www.randomservices.org/random/data/Short.html" class="ancillary">data paralaks matahari Short</a>, hitung rata-rata sampel dan varians sampel.</p>
+	<details>
+		<summary>Rincian:</summary>
+		<p>8.616, 0.561032</p>
+	</details>
+</div>
+
+<div class="unit" id="o006.random.point.estimators.unit.cicada-data">
+	<p class="stat">Pertimbangkan <a href="https://www.randomservices.org/random/data/Cicada.html" class="ancillary">data Cicada</a>.</p>
+	<ol class="sub">
+		<li>Hitung rata-rata sampel dan varians sampel variabel panjang tubuh.</li>
+		<li>Hitung rata-rata sampel dan varians sampel variabel berat tubuh.</li>
+		<li>Hitung kovarians sampel dan korelasi sampel antara variabel panjang tubuh dan berat tubuh.</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<ol class="sub">
+			<li>24.0, 3.92</li>
+			<li>0.180, 0.003512</li>
+			<li>0.0471, 0.4012</li>
+		</ol>
+	</details>
+</div>
+
+<div class="unit" id="o006.random.point.estimators.unit.mm-data">
+	<p class="stat">Pertimbangkan <a href="https://www.randomservices.org/random/data/MM.html" class="ancillary">data M&amp;M</a>.</p>
+	<ol class="sub">
+		<li>Hitung rata-rata sampel dan varians sampel variabel berat bersih.</li>
+		<li>Hitung rata-rata sampel dan varians sampel jumlah total permen.</li>
+		<li>Hitung kovarians sampel dan korelasi sampel antara jumlah permen dan berat bersih.</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<ol class="sub">
+			<li>49.215, 2.3163</li>
+			<li>57.1, 5.68</li>
+			<li>2.878, 0.794</li>
+		</ol>
+	</details>
+</div>
+
+<div class="unit" id="o006.random.point.estimators.unit.pearson-data">
+	<p class="stat">Pertimbangkan <a href="https://www.randomservices.org/random/data/Pearson.html" class="ancillary">data tinggi badan Pearson</a>.</p>
+	<ol class="sub">
+		<li>Hitung rata-rata sampel dan varians sampel tinggi badan ayah.</li>
+		<li>Hitung rata-rata sampel dan varians sampel tinggi badan anak laki-laki.</li>
+		<li>Hitung kovarians sampel dan korelasi sampel antara tinggi badan ayah dan tinggi badan anak laki-laki.</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<ol class="sub">
+			<li>67.69, 7.5396</li>
+			<li>68.68, 7.9309</li>
+			<li>3.875, 0.501</li>
+		</ol>
+	</details>
+</div>
+
+<p>Penduga rata-rata, varians, dan kovarians yang telah kita bahas dalam bagian ini dapat dianggap alami dalam arti tertentu. Namun, untuk parameter lain, belum tentu jelas cara menemukan penduga yang masuk akal. Dalam beberapa bagian berikutnya, kita akan membahas masalah konstruksi penduga. Setelah itu, kita kembali mempelajari sifat-sifat matematis penduga dan menelaah kapan kita dapat mengetahui bahwa suatu penduga adalah yang terbaik untuk data yang diberikan.</p>
+
+<footer>
+	<ol class="map">
+		<li class="parent"><a href="https://www.randomservices.org/random/index.html">Random</a></li>
+		<li class="parent"><a href="index.html">6. Pendugaan Titik</a></li>
+		<li class="current">1</li>
+		<li class="child"><a href="https://www.randomservices.org/random/point/Moments.html" title="Metode Momen">2</a></li>
+		<li class="child"><a href="https://www.randomservices.org/random/point/Likelihood.html" title="Kemungkinan Maksimum">3</a></li>
+		<li class="child"><a href="https://www.randomservices.org/random/point/Bayes.html" title="Penduga Bayes">4</a></li>
+		<li class="child"><a href="https://www.randomservices.org/random/point/Unbiased.html" title="Penduga Tak Bias Terbaik">5</a></li>
+		<li class="child"><a href="https://www.randomservices.org/random/point/Sufficient.html" title="Statistik Cukup, Lengkap, dan Ancilar">6</a></li>
+		<li class="details"><button type="button" title="Perluas Rincian" onclick="expandDetails(true);"><img src="../icons/Plus.svg" alt="Perluas"></button></li>
+		<li class="details"><button type="button" title="Ciutkan Rincian" onclick="expandDetails(false);"><img src="../icons/Minus.svg" alt="Ciutkan"></button></li>
+	</ol>
+	<ul class="map">
+		<li class="sister"><a href="https://www.randomservices.org/random/apps/index.html" class="ancillary">Aplikasi</a></li>
+		<li class="sister"><a href="https://www.randomservices.org/random/data/index.html" class="ancillary">Himpunan Data</a></li>
+		<li class="child"><a href="https://www.randomservices.org/random/biographies/index.html" class="ancillary">Biografi</a></li>
+	</ul>
+	<section class="edition-notice" data-o006-edition-notice="v1">
+		<p><strong>Pemberitahuan edisi.</strong> Terjemahan Bahasa Indonesia ini mengadaptasi <a href="https://www.randomservices.org/random/">Random: Probabilitas, Statistika Matematis, dan Proses Stokastik</a> karya Kyle Siegrist. Perubahan pada halaman ini mencakup penerjemahan, penambahan ID stabil, pengalihan tautan inti yang telah diterjemahkan ke edisi lokal, pengalihan tautan inti yang belum diterjemahkan ke sumber resmi, pengubahan tautan pelengkap menjadi tautan HTTPS resmi, serta koreksi terbatas terhadap kekeliruan matematis dan data yang dicatat dalam daftar koreksi edisi.</p>
+		<p>Situs asal menyatakan <a href="https://creativecommons.org/licenses/by/2.0/">CC BY 2.0</a>, sedangkan halaman <a href="https://www.randomservices.org/random/Credits.html">Kredit</a> menautkan <a href="https://creativecommons.org/licenses/by/1.0/">CC BY 1.0</a>; perbedaan ini dipertahankan. Edisi independen ini tidak didukung maupun disahkan oleh Kyle Siegrist atau Random Services. Tautan ke aplikasi, data, dan biografi pihak ketiga tidak menyatakan hak untuk mendistribusikan ulang materi tersebut.</p>
+	</section>
+</footer>
+
+<script>getReferences();</script>
+
+</body>
+</html>

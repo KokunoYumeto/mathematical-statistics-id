@@ -36,6 +36,7 @@ PAIRS = (
     PurePosixPath("random/sample/Covariance.html"),
     PurePosixPath("random/sample/Normal.html"),
     PurePosixPath("random/point/index.html"),
+    PurePosixPath("random/point/Estimators.html"),
 )
 
 # This is an exact page/original-href allowlist. There is deliberately no URL
@@ -142,7 +143,6 @@ HREF_DELTA_ALLOWLIST: dict[PurePosixPath, dict[str, str]] = {
         "../prob/Probability.html": "https://www.randomservices.org/random/prob/Probability.html",
         "../expect/Properties.html": "https://www.randomservices.org/random/expect/Properties.html",
         "../expect/Variance.html": "https://www.randomservices.org/random/expect/Variance.html",
-        "../point/Estimators.html": "https://www.randomservices.org/random/point/Estimators.html",
         "../expect/Spaces.html#con": "https://www.randomservices.org/random/expect/Spaces.html#con",
         "../prob/Convergence.html#lim2": "https://www.randomservices.org/random/prob/Convergence.html#lim2",
         "../expect/Variance.html#chb": "https://www.randomservices.org/random/expect/Variance.html#chb",
@@ -348,7 +348,6 @@ HREF_DELTA_ALLOWLIST: dict[PurePosixPath, dict[str, str]] = {
         "../markov/index.html": "https://www.randomservices.org/random/markov/index.html",
         "../martingales/index.html": "https://www.randomservices.org/random/martingales/index.html",
         "../brown/index.html": "https://www.randomservices.org/random/brown/index.html",
-        "Estimators.html": "https://www.randomservices.org/random/point/Estimators.html",
         "Moments.html": "https://www.randomservices.org/random/point/Moments.html",
         "Likelihood.html": "https://www.randomservices.org/random/point/Likelihood.html",
         "Bayes.html": "https://www.randomservices.org/random/point/Bayes.html",
@@ -371,6 +370,42 @@ HREF_DELTA_ALLOWLIST: dict[PurePosixPath, dict[str, str]] = {
         "JavaScript:openAncillary('../apps/index.html')": "https://www.randomservices.org/random/apps/index.html",
         "JavaScript:openAncillary('../data/index.html')": "https://www.randomservices.org/random/data/index.html",
         "JavaScript:openAncillary('../biographies/index.html')": "https://www.randomservices.org/random/biographies/index.html",
+    },
+    PurePosixPath("random/point/Estimators.html"): {
+        "../expect/Covariance.html#blp": "https://www.randomservices.org/random/expect/Covariance.html#blp",
+        "../expect/Properties2.html#mar": "https://www.randomservices.org/random/expect/Properties2.html#mar",
+        "../expect/Skew.html#kur": "https://www.randomservices.org/random/expect/Skew.html#kur",
+        "../expect/Spaces.html": "https://www.randomservices.org/random/expect/Spaces.html",
+        "../expect/Variance.html": "https://www.randomservices.org/random/expect/Variance.html",
+        "../foundations/Measurable.html": "https://www.randomservices.org/random/foundations/Measurable.html",
+        "../index.html": "https://www.randomservices.org/random/index.html",
+        "../poisson/Poisson.html": "https://www.randomservices.org/random/poisson/Poisson.html",
+        "../poisson/index.html": "https://www.randomservices.org/random/poisson/index.html",
+        "../prob/Convergence.html": "https://www.randomservices.org/random/prob/Convergence.html",
+        "../prob/Experiments.html": "https://www.randomservices.org/random/prob/Experiments.html",
+        "../prob/Probability.html": "https://www.randomservices.org/random/prob/Probability.html",
+        "../prob/Probability2.html": "https://www.randomservices.org/random/prob/Probability2.html",
+        "Bayes.html": "https://www.randomservices.org/random/point/Bayes.html",
+        "JavaScript:openAncillary('../apps/ExponentialExperiment.html')": "https://www.randomservices.org/random/apps/ExponentialExperiment.html",
+        "JavaScript:openAncillary('../apps/Match.html')": "https://www.randomservices.org/random/apps/Match.html",
+        "JavaScript:openAncillary('../apps/MeanEstimate.html')": "https://www.randomservices.org/random/apps/MeanEstimate.html",
+        "JavaScript:openAncillary('../apps/NormalEstimate.html')": "https://www.randomservices.org/random/apps/NormalEstimate.html",
+        "JavaScript:openAncillary('../apps/Poisson.html')": "https://www.randomservices.org/random/apps/Poisson.html",
+        "JavaScript:openAncillary('../apps/index.html')": "https://www.randomservices.org/random/apps/index.html",
+        "JavaScript:openAncillary('../biographies/Poisson.html')": "https://www.randomservices.org/random/biographies/Poisson.html",
+        "JavaScript:openAncillary('../biographies/index.html')": "https://www.randomservices.org/random/biographies/index.html",
+        "JavaScript:openAncillary('../data/Alpha.html')": "https://www.randomservices.org/random/data/Alpha.html",
+        "JavaScript:openAncillary('../data/Cavendish.html')": "https://www.randomservices.org/random/data/Cavendish.html",
+        "JavaScript:openAncillary('../data/Cicada.html')": "https://www.randomservices.org/random/data/Cicada.html",
+        "JavaScript:openAncillary('../data/MM.html')": "https://www.randomservices.org/random/data/MM.html",
+        "JavaScript:openAncillary('../data/Michelson.html')": "https://www.randomservices.org/random/data/Michelson.html",
+        "JavaScript:openAncillary('../data/Pearson.html')": "https://www.randomservices.org/random/data/Pearson.html",
+        "JavaScript:openAncillary('../data/Short.html')": "https://www.randomservices.org/random/data/Short.html",
+        "JavaScript:openAncillary('../data/index.html')": "https://www.randomservices.org/random/data/index.html",
+        "Likelihood.html": "https://www.randomservices.org/random/point/Likelihood.html",
+        "Moments.html": "https://www.randomservices.org/random/point/Moments.html",
+        "Sufficient.html": "https://www.randomservices.org/random/point/Sufficient.html",
+        "Unbiased.html": "https://www.randomservices.org/random/point/Unbiased.html",
     },
 }
 
@@ -432,6 +467,7 @@ NOTICE_MARKUP_SHA256 = {
     PurePosixPath("random/sample/Covariance.html"): "eafff6cf003edc517cbc99727456b283de19cff49e07d20b10fea57dca0f8a3d",
     PurePosixPath("random/sample/Normal.html"): "eafff6cf003edc517cbc99727456b283de19cff49e07d20b10fea57dca0f8a3d",
     PurePosixPath("random/point/index.html"): "5e06080b66862d770e89a0692ad72c347e52055448843e60d132e72aa2fb3e8f",
+    PurePosixPath("random/point/Estimators.html"): "eafff6cf003edc517cbc99727456b283de19cff49e07d20b10fea57dca0f8a3d",
 }
 NOTICE_LINKS = (
     "https://www.randomservices.org/random/",
@@ -486,6 +522,11 @@ ENGLISH_DENY = (
     ">Designed experiment<",
     ">Observational study<",
     ">Point Estimation<",
+    ">Estimators<",
+    ">Simulation Exercises<",
+    ">Data Analysis Exercises<",
+    "Suppose that ",
+    "Properties of ",
 )
 
 # These exact non-fetching metadata links are already part of the approved
@@ -1042,6 +1083,7 @@ def check_mathjax_runtime() -> dict[str, Any]:
         "random/sample/OrderStatistics.html",
         "random/sample/Covariance.html",
         "random/sample/Normal.html",
+        "random/point/Estimators.html",
     ]
     if script_pages != expected_script_pages:
         fail(f"MathJax bundle reference pages changed: {script_pages}")

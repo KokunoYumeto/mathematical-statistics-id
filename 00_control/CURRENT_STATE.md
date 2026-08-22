@@ -5,8 +5,8 @@ Updated: 2026-08-22
 ## Status
 
 Edition source admitted; exact authority and component-rights freezes complete; the
-first ten contiguous Indonesian pages and the full 29-page machine backend
-are locally verified. Every entity on those ten pages is now bound to its target
+first eleven contiguous Indonesian pages and the full 29-page machine backend
+are locally verified. Every entity on those eleven pages is now bound to its target
 path, locale, byte count, and SHA-256. The repository is public; the repaired
 three- and four-page Pages checkpoints remain historical evidence. The
 five-page boundary through the central limit theorem remains publicly verified.
@@ -31,6 +31,12 @@ two deterministic replay gates. Its fresh live browser pass is explicitly
 deferred because the in-app browser became unavailable; no visual pass is
 claimed. A one-shot GitHub recheck again returned the explicit suspended-account
 response.
+The eleven-page boundary completes the Estimators page. It has passed two
+independent language audits and an independent mathematics/topology/data
+audit, exact topology and protected-math gates, backend/build/QA, two
+byte-identical deterministic replays, and fresh live desktop/mobile rendering.
+All 432 MathJax containers render in a centered page-filling layout without
+page-level overflow; all 15 disclosure controls open and close correctly.
 The complete 29-page edition is not yet claimed.
 
 ## Admitted source
@@ -100,18 +106,18 @@ entities and 9,035 relations. It contains 29 documents, 366 sections, 760
 structural units, 451 disclosures, 2,891 math-text containers, 24 figures, 236
 assets, and 1,810 internal links. The source-grounded exercise rule designates
 260 units and leaves 500 undesignated; its exact basis is 123 both, 95
-exercise-section only, 42 native `app`/`stat` only, and 500 neither. All 2,705
-entities on ordinals 1–10 carry verified id-ID bindings; 3,862 later entities
+exercise-section only, 42 native `app`/`stat` only, and 500 neither. All 2,931
+entities on ordinals 1–11 carry verified id-ID bindings; 3,636 later entities
 carry explicit untranslated/null locale fields.
 
-- Entity JSONL: 10,379,609 bytes; SHA-256
-  `4d75ed73359d7fcadb1a070695980ec21485aac8ca3d0ef8bc21598153bc49da`.
+- Entity JSONL: 10,401,983 bytes; SHA-256
+  `3d80a48445a8dd7b199f004f78149f7d7c4aadc4d9c646f4b44f0b9635b5778a`.
 - Relation CSV: 1,182,589 bytes; SHA-256
   `b235f4d4d724c7fe8653dfd06b075b2225cc2d116f3b87d0fda950d47030159a`.
 - Backend receipt SHA-256:
-  `ed75729d4a6eb309501e0a93982bf5bba339afa51934487aff5ea3b22b7612bc`.
+  `a8008155f230c315663217a476ed404146497af00a38defd1ad86d95167b8662`.
 - Bound translation-ledger SHA-256:
-  `07548cfe76aaa9773f985568f4e4871ecb8324d99af3cda496c4f889e2a41a5e`.
+  `c0a7a0a1df965917e47531479d79438bf54e1ea402156bd4527a3f7cc76b9cb1`.
 - Replay: `python scripts/generate_random_backend.py --check-only`.
 
 ## Four-page reader checkpoint
@@ -331,6 +337,35 @@ evidence is in `CHECKPOINT_2026-08-22_TEN_PAGE.md` (5,323 bytes; SHA-256
 The complete boundary is preserved in local commit
 `16384bdf1e9c3b00c82815f32c7bc5e11f923034`.
 
+## Eleven-page local checkpoint
+
+Core ordinals 1–11 are complete through
+`random/point/Estimators.html`. The reader is 41 files / 2,300,109 bytes;
+canonical manifest SHA-256 is
+`5ec24c67e16ca04ed74925f9814a8aa29a8874a10d312287a9b1d5141658e6ed`.
+Build-receipt SHA-256 is
+`4383bcbc05ae1f64496a0a3ba3142a91d534c95f8e822c3dfc24ffe3cd00a5c1`;
+QA-receipt SHA-256 is
+`2115e0416ebe3f4005d3de049983d54bd3685249b2d74b403d35a1d7f69b6180`.
+
+Estimators preserves the exact 380-element hierarchy and all 432 TeX spans,
+contains 33 units and 15 disclosures, and carries 51 native/additive IDs.
+Fifteen protected mathematical repairs, the zero-denominator correlation and
+regression definitions, malformed Poisson anchor, truncated efficiency
+conclusion, and reversed M&M answer order are exact and recorded. Its 34 href
+delta categories account for 41 occurrences. The aggregate census is 5,361
+source elements, 325 units, 216 disclosures, 3,887 TeX spans, 491 IDs, 399
+local references, and 93 fragments. The backend now binds 2,931 translated
+entities.
+
+Two complete backend/build/QA check-only replays returned byte-identical
+identities. Fresh live desktop/mobile inspection rendered all 432 MathJax
+containers, found centered page-filling geometry and zero page-level overflow,
+and exercised all 15 disclosure controls in both directions with an empty
+warning/error console. Exact evidence is in
+`CHECKPOINT_2026-08-22_ELEVEN_PAGE.md`. The exact narrow content commit and
+the single bounded GitHub attempt remain to be recorded.
+
 ## Rights boundary
 
 The Random landing page identifies CC BY 2.0; `Credits.html` links CC BY 1.0.
@@ -344,7 +379,7 @@ the site-wide notice; they must be cleared, replaced, or linked externally.
 
 ## Known upstream defects (do not silently alter authority)
 
-`ADVERSE_LEDGER.jsonl` runs through `O006-ADV-0115`. CLT repairs include the
+`ADVERSE_LEDGER.jsonl` runs through `O006-ADV-0129`. CLT repairs include the
 zero-origin condition, correlation domain/formula/citation, the rigorous
 characteristic-function proof, continuity notation, dice answer, chi-square
 definition, negative-binomial support/domain/answer mapping, and determinate
@@ -372,16 +407,22 @@ incomplete independence proof. Its orphan paragraph close is retained as a
 recorded source artifact. The point-estimation index records the corrected
 Roger L. Berger name, deduplicated keyword metadata, and retained
 standards/accessibility quirks that require an explicit topology-delta registry
-before any structural repair. Authority bytes remain immutable. Do not contact
-upstream during production.
+before any structural repair. Estimators repairs cover its undefined parameter
+space symbol and expectation macro, malformed RMS proof, empirical-probability
+notation, square-root-estimator domain/proof, correlation range, covariance
+copy/paste symbols, zero-denominator correlation/regression definitions,
+malformed Poisson link, sample-size domain, incomplete efficiency conclusion,
+and reversed M&M answers. The other frozen data answers were independently
+recomputed and agree. Authority bytes remain immutable. Do not contact upstream
+during production.
 
 ## Next work
 
-1. Continue immediately through all 19 remaining source pages, beginning with
-   `random/point/Estimators.html` (core ordinal 11), while growing the same
+1. Continue immediately through all 18 remaining source pages, beginning with
+   `random/point/Moments.html` (core ordinal 12), while growing the same
    deterministic reader and stable-ID backend.
-2. At the next substantial boundary, attempt the deferred live desktop/mobile
-   inspection once and briefly recheck current GitHub availability once. The
+2. Record the exact eleven-page content commit and briefly recheck current
+   GitHub availability once. The
    supplied credentials currently resolve to one suspended account and one
    invalid credential; do not loop or expose either token. Preserve the exact
    local history until an active identity exists.

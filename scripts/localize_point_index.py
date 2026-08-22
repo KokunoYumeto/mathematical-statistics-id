@@ -96,6 +96,7 @@ LOCAL_URLS = {
     "https://www.randomservices.org/random/icons/Icon.svg": "../icons/Icon.svg",
     "https://www.randomservices.org/random/sample/index.html": "../sample/index.html",
     "https://www.randomservices.org/random/point/index.html": "index.html",
+    "https://www.randomservices.org/random/point/Estimators.html": "Estimators.html",
 }
 
 
