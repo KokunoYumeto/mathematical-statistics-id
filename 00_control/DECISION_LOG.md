@@ -134,7 +134,7 @@ expressions without page-level overflow. Continue at Variance.
 ## O006-D012 — publish the Variance boundary
 
 Date: 2026-08-22
-Status: controlling; local gates complete, public transaction pending
+Status: completed
 
 Treat the first six contiguous pages through sample variance as a substantial
 instructional and correction boundary. Variance alone contains 827 source
@@ -142,5 +142,8 @@ elements, 47 units, 39 disclosed derivations/answers, and 583 delimited TeX
 spans; its independently recomputed formula, answer, data-summary, domain, and
 reference repairs are exact and declared. The six-page reader and 1,411 bound
 backend entities passed two deterministic replays plus local desktop/mobile
-rendering. Publish immediately, anonymously verify every manifest byte and the
-live reader, then continue at `random/sample/OrderStatistics.html`.
+rendering. Commit `ee74fbbd813eec05963eb586fd9be41acb7ebe83` deployed
+successfully through workflow `32542434389` and Pages deployment `6031730044`.
+Anonymous readback matched all 29 files / 1,986,156 bytes, and the live desktop
+and mobile page rendered 586/586 expressions without page-level overflow or
+console messages. Continue at `random/sample/OrderStatistics.html`.

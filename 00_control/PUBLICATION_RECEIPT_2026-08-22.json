@@ -1,0 +1,125 @@
+{
+  "schema": "o006.github-pages-publication.v1",
+  "checkpoint": "six-page-reader",
+  "verified_at": "2026-08-22T03:10:24+02:00",
+  "repository": {
+    "url": "https://github.com/KokunoYumeto/mathematical-statistics-id",
+    "branch": "main",
+    "public": true
+  },
+  "accepted_deployment": {
+    "source_commit_sha": "ee74fbbd813eec05963eb586fd9be41acb7ebe83",
+    "source_tree_sha": "320928d2915d27a0f49548159add525383c78f31",
+    "workflow_run_id": 32542434389,
+    "workflow_job_id": 96954879102,
+    "workflow_url": "https://github.com/KokunoYumeto/mathematical-statistics-id/actions/runs/32542434389",
+    "workflow_status": "completed",
+    "workflow_conclusion": "success",
+    "pages_deployment_id": 6031730044,
+    "pages_deployment_status_id": 17148354399,
+    "pages_deployment_status": "success",
+    "pages_exact_sha_status": "success",
+    "public_url": "https://kokunoyumeto.github.io/mathematical-statistics-id/"
+  },
+  "reader": {
+    "manifest_path": "build/FIRST_UNIT_MANIFEST.csv",
+    "manifest_bytes": 2800,
+    "manifest_sha256": "d3d2aa5822b4a004536b855d1e08ba72073a4e41c8fbfe5b6932db000c5de1e8",
+    "build_receipt_sha256": "0afdf82a919d6da686e9c74f002e583d59db218380729be7eaaf8e1c71b982c4",
+    "qa_receipt_sha256": "b296c0f884194354d1fb4281c1f80ad973bcfc835d255a934520a1410a36c0a5",
+    "files": 29,
+    "bytes": 1986156,
+    "translated_pages": 6,
+    "new_page": {
+      "path": "random/sample/Variance.html",
+      "bytes": 59889,
+      "sha256": "ceb67e081061d1cecd52f9e02434defba71067ff28ae3037587675b11b2f1de4"
+    }
+  },
+  "anonymous_byte_readback": {
+    "method": "HTTPS GET of every manifest row with no authorization header and Cache-Control: no-cache",
+    "attempt": 1,
+    "files_checked": 29,
+    "bytes_checked": 1986156,
+    "http_200_responses": 29,
+    "size_mismatches": 0,
+    "sha256_mismatches": 0,
+    "manifest_bound_inventory": true,
+    "result": "pass"
+  },
+  "browser_verification": {
+    "audio_exercised": false,
+    "page": "random/sample/Variance.html",
+    "html_lang": "id-ID",
+    "desktop": {
+      "viewport_width": 1280,
+      "viewport_height": 720,
+      "document_client_width": 1265,
+      "document_scroll_width": 1265,
+      "body_width": 1152,
+      "body_left": 56.4444465637207,
+      "horizontal_overflow": false,
+      "units": 47,
+      "details": 39,
+      "mathjax_containers": 586,
+      "raw_tex_markers": 0,
+      "complete_images": 4,
+      "incomplete_images": 0,
+      "uncontained_wide_elements": 0,
+      "console_messages": 0
+    },
+    "mobile": {
+      "viewport_width": 390,
+      "viewport_height": 844,
+      "document_client_width": 375,
+      "document_scroll_width": 375,
+      "body_width": 351.1111145019531,
+      "body_left": 12,
+      "horizontal_overflow": false,
+      "units": 47,
+      "details": 39,
+      "mathjax_containers": 586,
+      "raw_tex_markers": 0,
+      "complete_images": 4,
+      "incomplete_images": 0,
+      "contained_horizontal_scrollers": 1,
+      "contained_scroller_id": "cmp3",
+      "uncontained_wide_elements": 0,
+      "console_messages": 0
+    },
+    "visual_snapshot_review": "pass",
+    "temporary_viewport_reset": true,
+    "temporary_tab_closed": true,
+    "result": "pass"
+  },
+  "backend": {
+    "entities": 6567,
+    "relations": 9035,
+    "translated_entity_bindings": 1411,
+    "untranslated_entity_bindings": 5156,
+    "entities_sha256": "3d983daa9bf034b049a4584828e198ca397ea9ae3d1c91c8b1356ec5f8efc921",
+    "relations_sha256": "b235f4d4d724c7fe8653dfd06b075b2225cc2d116f3b87d0fda950d47030159a",
+    "receipt_sha256": "370c15a36c0950846d8bbd7e8363c51fe9dc8bb433e51c155b3766686b541661",
+    "translation_ledger_sha256": "5a703ac9ea05efe127a121770b443ed49613c7b671ff1a7b3718153f027d939a"
+  },
+  "checkpoint_record": {
+    "path": "00_control/CHECKPOINT_2026-08-22_SIX_PAGE.md",
+    "bytes": 4567,
+    "sha256": "a745d64d4ada0d30ec9170863168e131c1b6be3949dae51f581cbd50b9ff3610"
+  },
+  "previous_accepted_deployment": {
+    "checkpoint": "five-page-reader",
+    "source_commit_sha": "79d6adf164a28ba4ba6c9894397ff8cd4d6286df",
+    "workflow_run_id": 32528680262,
+    "pages_deployment_id": 6029599489,
+    "reader_files": 28,
+    "reader_bytes": 1926717,
+    "status": "superseded-by-verified-six-page-reader"
+  },
+  "scope": {
+    "complete_random_edition_claimed": false,
+    "configured_c140_complete_claimed": false,
+    "next_random_source": "random/sample/OrderStatistics.html",
+    "upstream_contacted": false
+  }
+}

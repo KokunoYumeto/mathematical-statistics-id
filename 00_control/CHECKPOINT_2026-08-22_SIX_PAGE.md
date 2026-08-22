@@ -67,10 +67,21 @@ scroller and the document scroll width remains 375 px.
 
 ## Publication state
 
-The six-page source is ready for the standing authorized push. Public commit,
-workflow/deployment identity, anonymous 29-file byte readback, live public
-desktop/mobile results, and the sanitized receipt are pending this transaction.
-The last already verified public boundary remains the five-page CLT checkpoint.
+The six-page source is publicly verified at commit
+`ee74fbbd813eec05963eb586fd9be41acb7ebe83`. Workflow run `32542434389`, job
+`96954879102`, Pages deployment `6031730044`, and deployment status
+`17148354399` all completed successfully. Anonymous HTTPS readback matched all
+29 manifest rows / 1,986,156 bytes by exact size and SHA-256 on the first
+attempt.
+
+The live public Variance page rendered 586/586 MathJax containers at both
+1280×720 and 390×844. It retained 47 units, 39 disclosures, four complete
+images, zero visible raw-TeX markers, zero console messages, and zero
+uncontained wide elements. The mobile document remained exactly 375 px wide;
+the sole wide `cmp3` table is contained by its local horizontal scroller. The
+temporary viewport override was reset and the verification tab was closed.
+Sanitized transaction evidence is recorded in
+`PUBLICATION_RECEIPT_2026-08-22.json`.
 
 Next source cursor after publication: `random/sample/OrderStatistics.html`,
 ordinal 7 of 29.

@@ -1,6 +1,6 @@
 # Current state — O006 / C140 Mathematical Statistics (id-ID)
 
-Updated: 2026-08-21
+Updated: 2026-08-22
 
 ## Status
 
@@ -11,8 +11,8 @@ path, locale, byte count, and SHA-256. The repository is public; the repaired
 three- and four-page Pages checkpoints remain historical evidence. The
 five-page boundary through the central limit theorem remains publicly verified.
 The six-page boundary through sample variance has passed its bounded target
-audit, two deterministic replays, and local desktop/mobile rendering and is
-ready for immediate deployment and public readback. The exact official MathJax
+audit, two deterministic replays, public deployment, anonymous byte readback,
+and live desktop/mobile rendering. The exact official MathJax
 3.1.2 `boldsymbol.js` module remains pinned. The complete 29-page edition is not
 yet claimed.
 
@@ -156,7 +156,7 @@ SHA-256 is
 `35ca61902a110eea71ea1a06e0ac566a81b1f27d7dbfac4e4cb006d50220276c`.
 This is not a claim that the 29-page edition is complete.
 
-## Six-page local checkpoint
+## Six-page public checkpoint
 
 Core ordinals 1–6 are complete through `random/sample/Variance.html`. The
 reader is 29 files / 1,986,156 bytes; canonical manifest SHA-256
@@ -177,9 +177,16 @@ The aggregate QA census is 2,694 source elements, 154 units, 112 disclosures,
 Two consecutive backend/build/QA check-only replays returned identical hashes.
 Local live rendering produced 586/586 MathJax containers at desktop and mobile,
 with 47 units, 39 disclosures, four complete images, no raw TeX, no console
-warnings/errors, and no page-level overflow. The six-page boundary is ready for
-the authorized public push and anonymous readback; it is not a claim that the
-complete edition or configured C140 course is complete.
+warnings/errors, and no page-level overflow. Source commit
+`ee74fbbd813eec05963eb586fd9be41acb7ebe83`, workflow run `32542434389`, job
+`96954879102`, Pages deployment `6031730044`, and deployment status
+`17148354399` succeeded. Anonymous readback matched all 29 files / 1,986,156
+bytes by size and SHA-256 on the first attempt. The public desktop/mobile page
+again rendered 586/586 expressions with no raw TeX, incomplete images, console
+messages, uncontained wide elements, or page-level overflow. This is not a
+claim that the complete edition or configured C140 course is complete.
+Publication-receipt SHA-256 is
+`96a8721193f3173ceec85dcff31607c635540e042fcf499d80b318d0ff21ca0f`.
 
 ## Rights boundary
 
@@ -210,11 +217,10 @@ Authority bytes remain immutable. Do not contact upstream during production.
 
 ## Next work
 
-1. Publish and anonymously verify the six-page Variance boundary.
-2. Continue immediately with `random/sample/OrderStatistics.html` (core ordinal 7).
-3. Advance contiguously through the remaining 23 source pages, growing the
+1. Continue immediately with `random/sample/OrderStatistics.html` (core ordinal 7).
+2. Advance contiguously through the remaining 23 source pages, growing the
    same deterministic reader and stable-ID backend.
-4. Keep Penn State reconstruction, the one-page Random completeness donor, and
+3. Keep Penn State reconstruction, the one-page Random completeness donor, and
    original C140 companion in separate component paths/repositories; begin
    them only after this clean checkpoint or in a demonstrably non-overlapping
    path.
