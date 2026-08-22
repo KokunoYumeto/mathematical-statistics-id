@@ -203,6 +203,104 @@
       "page": "random/point/index.html",
       "reason": "correct the misspelled name of Statistical Inference coauthor Roger L. Berger",
       "replacements": 1
+    },
+    {
+      "new": "Namun, dalam penerapan berikut, indeks itu kita tampilkan kembali karena kita hendak membahas perilaku asimtotik. Pada sampel berhingga, persamaan momen dapat pula tidak mempunyai solusi dalam ruang parameter atau menghasilkan penyebut nol; dalam kasus seperti itu, rumus yang ditampilkan hanya berlaku ketika solusinya terdefinisi dan memenuhi batas parameter yang dinyatakan.</p>",
+      "old": "Namun, dalam penerapan berikut, indeks itu kita tampilkan kembali karena kita hendak membahas perilaku asimtotik.</p>",
+      "page": "random/point/Moments.html",
+      "reason": "state the finite-sample parameter-space and zero-denominator limits of raw moment equations",
+      "replacements": 1
+    },
+    {
+      "new": "Dengan syarat momen pusat keempat berhingga dan lebih besar daripada kuadrat varians, ingat bahwa \\( \\var(W_n^2) \\lt \\var(S_n^2) \\) untuk \\( n \\in \\{2, 3, \\ldots\\} \\) dan \\( \\var(S_n^2) / \\var(W_n^2) \\to 1 \\) ketika \\( n \\to \\infty \\).",
+      "old": "Ingat bahwa \\( \\var(W_n^2) \\lt \\var(S_n^2) \\) untuk \\( n \\in \\{2, 3, \\ldots\\} \\), tetapi \\( \\var(S_n^2) / \\var(W_n^2) \\to 1 \\) ketika \\( n \\to \\infty \\).",
+      "page": "random/point/Moments.html",
+      "reason": "the variance comparison and ratio require finite nondegenerate fourth central moment",
+      "replacements": 1
+    },
+    {
+      "new": "    <p class=\"math\">Jika momen pusat keempat berhingga dan lebih besar daripada kuadrat varians, maka \\( \\mse(T_n^2) / \\mse(W_n^2) \\to 1 \\) dan \\( \\mse(T_n^2) / \\mse(S_n^2) \\to 1 \\) ketika \\( n \\to \\infty \\).</p>",
+      "old": "    <p class=\"math\">\\( \\mse(T_n^2) / \\mse(W_n^2) \\to 1 \\) dan \\( \\mse(T_n^2) / \\mse(S_n^2) \\to 1 \\) ketika \\( n \\to \\infty \\).</p>",
+      "page": "random/point/Moments.html",
+      "reason": "exclude infinite and zero leading terms from the asymptotic MSE-ratio theorem",
+      "replacements": 1
+    },
+    {
+      "new": "Koefisien \\( \\sigma_4 \\) dan \\( \\sigma^4 \\) dalam \\( \\mse(T_n^2) \\) masing-masing asimtotik terhadap \\( 1 / n \\) dan negatifnya ketika \\( n \\to \\infty \\). Dengan hipotesis di atas, selisih kedua momen itu menghasilkan suku utama bersama yang positif pada pembilang dan penyebut, sehingga rasionya menuju 1.",
+      "old": "Koefisien \\( \\sigma_4 \\) dan \\( \\sigma^4 \\) dalam \\( \\mse(T_n^2) \\) masing-masing asimtotik terhadap \\( 1 / n \\) ketika \\( n \\to \\infty \\).",
+      "page": "random/point/Moments.html",
+      "reason": "restore the negative sign of the sigma-fourth coefficient and complete the ratio proof",
+      "replacements": 1
+    },
+    {
+      "new": "Jadi, bias \\( W \\) sebagai penduga bagi \\( \\sigma \\) tidak positif dan menjadi negatif kecuali kuadrat penduga tersebut konstan hampir pasti; penduga ini tak bias secara asimtotik dan konsisten.",
+      "old": "Jadi, \\( W \\) berbias negatif sebagai penduga bagi \\( \\sigma \\), tetapi tak bias secara asimtotik dan konsisten.",
+      "page": "random/point/Moments.html",
+      "reason": "Jensen gives weak rather than universally strict negative bias",
+      "replacements": 1
+    },
+    {
+      "new": "        <p>Rumus di atas menghasilkan nilai dalam ruang parameter hanya ketika rata-rata sampel positif dan varians sampel berbias lebih besar daripada rata-rata sampel. Mencocokkan rata-rata dan varians distribusi dengan rata-rata dan varians sampel memberikan persamaan",
+      "old": "        <p>Mencocokkan rata-rata dan varians distribusi dengan rata-rata dan varians sampel memberikan persamaan",
+      "page": "random/point/Moments.html",
+      "reason": "state the exact admissibility conditions for the two-parameter negative-binomial estimates",
+      "replacements": 1
+    },
+    {
+      "new": "<p>Andaikan sekarang \\(\\bs{X} = (X_1, X_2, \\ldots, X_n)\\) merupakan sampel acak dari distribusi gamma dengan parameter bentuk \\(k\\) dan parameter skala \\(b\\). Untuk rumus dua parameter di bawah, diperlukan ukuran sampel sekurang-kurangnya dua dan varians sampel berbias yang positif; untuk sampel kontinu, syarat kedua berlaku hampir pasti.</p>",
+      "old": "<p>Andaikan sekarang \\(\\bs{X} = (X_1, X_2, \\ldots, X_n)\\) merupakan sampel acak dari distribusi gamma dengan parameter bentuk \\(k\\) dan parameter skala \\(b\\).</p>",
+      "page": "random/point/Moments.html",
+      "reason": "close the gamma two-parameter denominator and parameter-space domain",
+      "replacements": 1
+    },
+    {
+      "new": "Andaikan sekarang \\(\\bs{X} = (X_1, X_2, \\ldots, X_n)\\) merupakan sampel acak berukuran \\(n\\) dari distribusi beta dengan parameter kiri \\(a\\) dan parameter kanan \\(b\\). Untuk rumus dua parameter di bawah, diperlukan ukuran sampel sekurang-kurangnya dua dan varians sampel berbias yang positif; untuk sampel kontinu, syarat kedua berlaku hampir pasti.</p>",
+      "old": "Andaikan sekarang \\(\\bs{X} = (X_1, X_2, \\ldots, X_n)\\) merupakan sampel acak berukuran \\(n\\) dari distribusi beta dengan parameter kiri \\(a\\) dan parameter kanan \\(b\\).</p>",
+      "page": "random/point/Moments.html",
+      "reason": "close the beta two-parameter denominator and parameter-space domain",
+      "replacements": 1
+    },
+    {
+      "new": "Andaikan sekarang \\(\\bs{X} = (X_1, X_2, \\ldots, X_n)\\) merupakan sampel acak berukuran \\(n\\) dari distribusi Pareto dengan parameter bentuk \\(a \\gt 2\\) dan parameter skala \\(b \\gt 0\\). Untuk rumus dua parameter di bawah, diperlukan ukuran sampel sekurang-kurangnya dua dan varians sampel berbias yang positif; untuk sampel kontinu, syarat kedua berlaku hampir pasti.</p>",
+      "old": "Andaikan sekarang \\(\\bs{X} = (X_1, X_2, \\ldots, X_n)\\) merupakan sampel acak berukuran \\(n\\) dari distribusi Pareto dengan parameter bentuk \\(a \\gt 2\\) dan parameter skala \\(b \\gt 0\\).</p>",
+      "page": "random/point/Moments.html",
+      "reason": "close the Pareto two-parameter denominator and parameter-space domain",
+      "replacements": 1
+    },
+    {
+      "new": "Andaikan sekarang \\( \\bs{X} = (X_1, X_2, \\ldots, X_n) \\) merupakan sampel acak berukuran \\( n \\) dari distribusi seragam. Untuk rumus dua parameter di bawah, diperlukan ukuran sampel sekurang-kurangnya dua dan varians sampel berbias yang positif; untuk sampel kontinu, syarat kedua berlaku hampir pasti.</p>",
+      "old": "Andaikan sekarang \\( \\bs{X} = (X_1, X_2, \\ldots, X_n) \\) merupakan sampel acak berukuran \\( n \\) dari distribusi seragam.</p>",
+      "page": "random/point/Moments.html",
+      "reason": "close the uniform two-parameter denominator and parameter-space domain",
+      "replacements": 1
+    },
+    {
+      "new": "        Dengan menyelesaikan persamaan tersebut, diperoleh hasil di atas. Solusi positif hanya ada ketika momen sampel kedua lebih besar daripada seperempat dan lebih kecil daripada setengah; di luar rentang itu, persamaan momen tidak mempunyai solusi positif.</p>",
+      "old": "        Dengan menyelesaikan persamaan tersebut, diperoleh hasil di atas.</p>",
+      "page": "random/point/Moments.html",
+      "reason": "state the exact positive-solution range of the repaired symmetric-beta estimator",
+      "replacements": 1
+    },
+    {
+      "new": "<p>Jika \\(b\\) diketahui, persamaan metode momen bagi \\(U_b\\) sebagai penduga \\(a\\) adalah \\(b U_b \\big/ (U_b - 1) = M\\). Dengan menyelesaikan persamaan tersebut terhadap \\(U_b\\), diperoleh rumus di atas. Karena model pada bagian ini mensyaratkan parameter bentuk lebih besar daripada dua, hasil mentah ini juga harus diperiksa terhadap syarat tersebut.</p>",
+      "old": "<p>Jika \\(b\\) diketahui, persamaan metode momen bagi \\(U_b\\) sebagai penduga \\(a\\) adalah \\(b U_b \\big/ (U_b - 1) = M\\). Dengan menyelesaikan persamaan tersebut terhadap \\(U_b\\), diperoleh rumus di atas.</p>",
+      "page": "random/point/Moments.html",
+      "reason": "the known-scale Pareto moment solution may fall outside the section's shape-parameter model",
+      "replacements": 1
+    },
+    {
+      "new": "<p>Kita mengambil sampel \\( n \\) objek secara acak dari populasi, tanpa pengembalian; ukuran sampel diasumsikan sekurang-kurangnya satu dan tidak melebihi ukuran populasi. Misalkan",
+      "old": "<p>Kita mengambil sampel \\( n \\) objek secara acak dari populasi, tanpa pengembalian. Misalkan",
+      "page": "random/point/Moments.html",
+      "reason": "state the hypergeometric sampling constraint one through population size",
+      "replacements": 1
+    },
+    {
+      "new": "        <p>Semua hasil ini langsung mengikuti fakta bahwa \\( \\E(X) = \\P(X = 1) = r / N \\). Penduga bagi parameter bilangan bulat di atas adalah nilai mentah real dari metode momen; jika hasilnya harus berada dalam ruang parameter bilangan bulat, diperlukan aturan proyeksi atau pembulatan terkendala yang dinyatakan secara terpisah.</p>",
+      "old": "        <p>Semua hasil ini langsung mengikuti fakta bahwa \\( \\E(X) = \\P(X = 1) = r / N \\).</p>",
+      "page": "random/point/Moments.html",
+      "reason": "distinguish raw real moment estimates from constrained integer-valued parameter estimates",
+      "replacements": 1
     }
   ],
   "frozen_manifests": {
@@ -380,6 +478,17 @@
         "role": "core",
         "sha256": "b0e3e9e5f55bfd4ebac0047dafff725628d6a0ca6e638d7a2847095b311d637c",
         "url": "https://www.randomservices.org/random/point/index.html"
+      },
+      {
+        "bytes": 48492,
+        "content_type": "text/html",
+        "etag": "\"bd6c-69b43d7b-7154b679a1e3a76b;;;\"",
+        "last_modified": "Fri, 13 Mar 2026 16:38:19 GMT",
+        "purpose": "translation_authority",
+        "relative_path": "random/point/Moments.html",
+        "role": "core",
+        "sha256": "43755b5bee6179fca8d7c1c964e7c6a9bb1a9de6f3916130100c69e666a3194e",
+        "url": "https://www.randomservices.org/random/point/Moments.html"
       },
       {
         "bytes": 790,
@@ -696,14 +805,19 @@
     ],
     "targets": [
       {
-        "bytes": 44440,
+        "bytes": 44352,
         "relative_path": "random/point/Estimators.html",
-        "sha256": "f7bd6f892222b887b072c215a8c51d4f591aeeefdebdc96a4998aeaadfb52297"
+        "sha256": "4a271e29ca745eeea8a9aa386b9d21aa36f10fab123334415587155dbb5fd5a7"
       },
       {
-        "bytes": 11311,
+        "bytes": 11267,
         "relative_path": "random/point/index.html",
-        "sha256": "74303dc2b6d5383bb44b7ec5a78e605cdccd0c001802d21cf870e0af31906970"
+        "sha256": "16aaef9344b2d0f86041ba8ac5d64336f7f7a4e0880598a05e668b940a4d6bdd"
+      },
+      {
+        "bytes": 57501,
+        "relative_path": "random/point/Moments.html",
+        "sha256": "911915cdc9352f2624cb1bf321e4be66de947ef599b2fe63d80ae1d80d17dd27"
       },
       {
         "bytes": 46128,
@@ -2280,11 +2394,143 @@
       "span_new": "\\( n \\in \\N_+ \\)",
       "span_old": "\\( n \\in \\N \\)",
       "surface": "math_span"
+    },
+    {
+      "new": "\\( W_n^2 \\)",
+      "old": "\\( \\W_n^2 \\)",
+      "page": "random/point/Moments.html",
+      "reason": "remove the undefined W macro from the known-mean variance proof",
+      "replacements": 1,
+      "span_index": 133,
+      "span_new": "\\( W_n^2 \\)",
+      "span_old": "\\( \\W_n^2 \\)",
+      "surface": "math_span"
+    },
+    {
+      "new": "\\(n \\in \\{2, 3, \\ldots\\}\\)",
+      "old": "\\(n \\in \\{2, 3, \\ldots, \\}\\)",
+      "page": "random/point/Moments.html",
+      "reason": "remove the empty trailing entry from the sample-size set",
+      "replacements": 1,
+      "span_index": 214,
+      "span_new": "\\(n \\in \\{2, 3, \\ldots\\}\\)",
+      "span_old": "\\(n \\in \\{2, 3, \\ldots, \\}\\)",
+      "surface": "math_span"
+    },
+    {
+      "new": "\\( \\E(U_p) = \\frac{p}{1 - p} \\E(M)\\)",
+      "old": "\\( E(U_p) = \\frac{p}{1 - p} \\E(M)\\)",
+      "page": "random/point/Moments.html",
+      "reason": "use the declared expectation macro consistently",
+      "replacements": 1,
+      "span_index": 386,
+      "span_new": "\\( \\E(U_p) = \\frac{p}{1 - p} \\E(M)\\)",
+      "span_old": "\\( E(U_p) = \\frac{p}{1 - p} \\E(M)\\)",
+      "surface": "math_span"
+    },
+    {
+      "new": "\\( \\var(M) = \\frac{1}{n} \\var(X) = \\frac{k(1 - p)}{n p^2} \\)",
+      "old": "\\( \\var(M) = \\frac{1}{n} \\var(X) = \\frac{1 - p}{n p^2} \\)",
+      "page": "random/point/Moments.html",
+      "reason": "restore the missing negative-binomial shape factor",
+      "replacements": 1,
+      "span_index": 389,
+      "span_new": "\\( \\var(M) = \\frac{1}{n} \\var(X) = \\frac{k(1 - p)}{n p^2} \\)",
+      "span_old": "\\( \\var(M) = \\frac{1}{n} \\var(X) = \\frac{1 - p}{n p^2} \\)",
+      "surface": "math_span"
+    },
+    {
+      "new": "\\( \\var(V_k) = \\frac{b^2}{k n} \\)",
+      "old": "\\( \\var(V_k) = b^2 / k n \\)",
+      "page": "random/point/Moments.html",
+      "reason": "group the gamma-estimator variance denominator unambiguously",
+      "replacements": 1,
+      "span_index": 445,
+      "span_new": "\\( \\var(V_k) = \\frac{b^2}{k n} \\)",
+      "span_old": "\\( \\var(V_k) = b^2 / k n \\)",
+      "surface": "math_span"
+    },
+    {
+      "new": "\\(\\var(V_k) = \\var(M) / k^2 = k b ^2 / (n k^2) = \\frac{b^2}{k n}\\)",
+      "old": "\\(\\var(V_k) = \\var(M) / k^2 = k b ^2 / (n k^2) = b^2 / k n\\)",
+      "page": "random/point/Moments.html",
+      "reason": "apply the same gamma-estimator denominator repair in the proof",
+      "replacements": 1,
+      "span_index": 452,
+      "span_new": "\\(\\var(V_k) = \\var(M) / k^2 = k b ^2 / (n k^2) = \\frac{b^2}{k n}\\)",
+      "span_old": "\\(\\var(V_k) = \\var(M) / k^2 = k b ^2 / (n k^2) = b^2 / k n\\)",
+      "surface": "math_span"
+    },
+    {
+      "new": "\\[ U = \\frac{1 - 2 M^{(2)}}{4 M^{(2)} - 1} \\]",
+      "old": "\\[ U = \\frac{2 M^{(2)}}{1 - 4 M^{(2)}} \\]",
+      "page": "random/point/Moments.html",
+      "reason": "solve the symmetric-beta second-moment equation correctly",
+      "replacements": 1,
+      "span_index": 512,
+      "span_new": "\\[ U = \\frac{1 - 2 M^{(2)}}{4 M^{(2)} - 1} \\]",
+      "span_old": "\\[ U = \\frac{2 M^{(2)}}{1 - 4 M^{(2)}} \\]",
+      "surface": "math_span"
+    },
+    {
+      "new": "\\( [b, \\infty) \\)",
+      "old": "\\( (b, \\infty) \\)",
+      "page": "random/point/Moments.html",
+      "reason": "make the Pareto support agree with the displayed density",
+      "replacements": 1,
+      "span_index": 519,
+      "span_new": "\\( [b, \\infty) \\)",
+      "span_old": "\\( (b, \\infty) \\)",
+      "surface": "math_span"
+    },
+    {
+      "new": "\\[ U = M - \\sqrt{3} T, \\quad V = 2 \\sqrt{3} T \\]",
+      "old": "\\[ U = 2 M - \\sqrt{3} T, \\quad V = 2 \\sqrt{3} T \\]",
+      "page": "random/point/Moments.html",
+      "reason": "correct the two-parameter uniform location estimator",
+      "replacements": 1,
+      "span_index": 583,
+      "span_new": "\\[ U = M - \\sqrt{3} T, \\quad V = 2 \\sqrt{3} T \\]",
+      "span_old": "\\[ U = 2 M - \\sqrt{3} T, \\quad V = 2 \\sqrt{3} T \\]",
+      "surface": "math_span"
+    },
+    {
+      "new": "\\( V_a \\)",
+      "old": "\\( V \\)",
+      "page": "random/point/Moments.html",
+      "reason": "name the Pareto scale estimator actually under discussion",
+      "replacements": 1,
+      "span_index": 592,
+      "span_new": "\\( V_a \\)",
+      "span_old": "\\( V \\)",
+      "surface": "math_span"
+    },
+    {
+      "new": "\\( \\P(X_i = 1) = r / N \\)",
+      "old": "\\( P(X_i = 1) = r / N \\)",
+      "page": "random/point/Moments.html",
+      "reason": "use the page's declared probability macro",
+      "replacements": 1,
+      "span_index": 621,
+      "span_new": "\\( \\P(X_i = 1) = r / N \\)",
+      "span_old": "\\( P(X_i = 1) = r / N \\)",
+      "surface": "math_span"
+    },
+    {
+      "new": "\\[ \\P(Y = y) = \\frac{\\binom{r}{y} \\binom{N - r}{n - y}}{\\binom{N}{n}} = \\binom{n}{y} \\frac{r^{(y)} (N - r)^{(n - y)}}{N^{(n)}}, \\quad y \\in \\{\\max\\{0, n - N + r\\}, \\ldots, \\min\\{n, r\\}\\} \\]",
+      "old": "\\[ P(Y = y) = \\frac{\\binom{r}{y} \\binom{N - r}{n - y}}{\\binom{N}{n}} = \\binom{n}{y} \\frac{r^{(y)} (N - r)^{(n - y)}}{N^{(n)}}, \\quad y \\in \\{\\max\\{0, N - n + r\\}, \\ldots, \\min\\{n, r\\}\\} \\]",
+      "page": "random/point/Moments.html",
+      "reason": "use the declared probability macro and correct the hypergeometric support lower bound",
+      "replacements": 1,
+      "span_index": 627,
+      "span_new": "\\[ \\P(Y = y) = \\frac{\\binom{r}{y} \\binom{N - r}{n - y}}{\\binom{N}{n}} = \\binom{n}{y} \\frac{r^{(y)} (N - r)^{(n - y)}}{N^{(n)}}, \\quad y \\in \\{\\max\\{0, n - N + r\\}, \\ldots, \\min\\{n, r\\}\\} \\]",
+      "span_old": "\\[ P(Y = y) = \\frac{\\binom{r}{y} \\binom{N - r}{n - y}}{\\binom{N}{n}} = \\binom{n}{y} \\frac{r^{(y)} (N - r)^{(n - y)}}{N^{(n)}}, \\quad y \\in \\{\\max\\{0, N - n + r\\}, \\ldots, \\min\\{n, r\\}\\} \\]",
+      "surface": "math_span"
     }
   ],
   "reader": {
     "directory": "build/html-id",
-    "file_count": 41,
+    "file_count": 42,
     "files": [
       {
         "bytes": 533,
@@ -2372,14 +2618,19 @@
         "sha256": "54bf3c5fd23ccf5dd602750aaf09c42ca6d4b1b10b8333e54bc580580f06686e"
       },
       {
-        "bytes": 44440,
+        "bytes": 44352,
         "relative_path": "random/point/Estimators.html",
-        "sha256": "f7bd6f892222b887b072c215a8c51d4f591aeeefdebdc96a4998aeaadfb52297"
+        "sha256": "4a271e29ca745eeea8a9aa386b9d21aa36f10fab123334415587155dbb5fd5a7"
       },
       {
-        "bytes": 11311,
+        "bytes": 11267,
         "relative_path": "random/point/index.html",
-        "sha256": "74303dc2b6d5383bb44b7ec5a78e605cdccd0c001802d21cf870e0af31906970"
+        "sha256": "16aaef9344b2d0f86041ba8ac5d64336f7f7a4e0880598a05e668b940a4d6bdd"
+      },
+      {
+        "bytes": 57501,
+        "relative_path": "random/point/Moments.html",
+        "sha256": "911915cdc9352f2624cb1bf321e4be66de947ef599b2fe63d80ae1d80d17dd27"
       },
       {
         "bytes": 790,
@@ -2492,10 +2743,10 @@
         "sha256": "b8af913a9be5c7e0313653afc6eae3121f3850fd72535cdab9e36f03279fcc34"
       }
     ],
-    "manifest_bytes": 4031,
+    "manifest_bytes": 4128,
     "manifest_path": "build/FIRST_UNIT_MANIFEST.csv",
-    "manifest_sha256": "5ec24c67e16ca04ed74925f9814a8aa29a8874a10d312287a9b1d5141658e6ed",
-    "total_bytes": 2300109
+    "manifest_sha256": "020f808d914fefd34e92473da916c2d3f845464ebb38e3bc4380ef173451669f",
+    "total_bytes": 2357478
   },
   "reader_customizations": [
     {
@@ -2516,14 +2767,14 @@
   "schema": "o006.random.first-unit-build.v1",
   "scripts": {
     "build": {
-      "bytes": 84970,
+      "bytes": 97159,
       "path": "scripts/build_first_unit.py",
-      "sha256": "a17a32f34385615149b1723121ee6a0d2a1acf92768571d00e390973fb3a4f37"
+      "sha256": "403f87247c9e20495d9750dea1b05f9cf01f50b89d9debc80aab76d6c6be400c"
     },
     "qa": {
-      "bytes": 82362,
+      "bytes": 87026,
       "path": "scripts/qa_first_unit.py",
-      "sha256": "f7a4db14514bdfc63750e5a1595c95ffed49bbcea9edbebf8a4a2aa328ec39e2"
+      "sha256": "c8b4c39606d542f93e4f7a2d966c385975827ea9b65c2be717ac844be3260048"
     }
   },
   "transport_hardening": [

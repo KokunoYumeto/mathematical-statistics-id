@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="id-ID">
+
+<head>
+	<meta charset="utf-8">
+    <title>Metode Momen</title>
+	<meta name="author" content="Kyle Siegrist">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="probabilitas, statistika, pendugaan titik, metode momen, rata-rata, varians, distribusi normal, distribusi Bernoulli, distribusi geometrik, distribusi binomial negatif, distribusi Poisson, distribusi gamma, distribusi beta, distribusi Pareto, distribusi seragam, distribusi hipergeometrik">
+	<link rel="icon" href="../icons/Icon.svg" type="image/svg">
+	<link rel="stylesheet" href="../Screen.css" type="text/css" media="screen">
+	<script src="../Basic.js"></script>
+	<script src="../../MathJax/tex-svg.js" id="MathJax-script" async></script>
+</head>
+
+<body>
+
+<div class="latex">
+	\(\newcommand{\R}{\mathbb{R}}\)
+	\(\newcommand{\N}{\mathbb{N}}\)
+	\(\newcommand{\Z}{\mathbb{Z}}\)
+	\(\newcommand{\E}{\mathbb{E}}\)
+	\(\newcommand{\P}{\mathbb{P}}\)
+	\(\newcommand{\var}{\text{var}}\)
+	\(\newcommand{\sd}{\text{sd}}\)
+	\(\newcommand{\cov}{\text{cov}}\)
+	\(\newcommand{\cor}{\text{cor}}\)
+	\(\newcommand{\bias}{\text{bias}}\)
+	\(\newcommand{\mse}{\text{mse}}\)
+	\(\newcommand{\bs}{\boldsymbol}\)
+</div>
+
+<header>
+	<ol class="map">
+		<li class="parent"><a href="https://www.randomservices.org/random/index.html">Random</a></li>
+        <li class="parent"><a href="index.html">6. Pendugaan Titik</a></li>
+        <li class="child"><a href="Estimators.html" title="Penduga">1</a></li>
+		<li class="current">2</li>
+        <li class="child"><a href="https://www.randomservices.org/random/point/Likelihood.html" title="Kemungkinan Maksimum">3</a></li>
+        <li class="child"><a href="https://www.randomservices.org/random/point/Bayes.html" title="Penduga Bayes">4</a></li>
+        <li class="child"><a href="https://www.randomservices.org/random/point/Unbiased.html" title="Penduga Tak Bias Terbaik">5</a></li>
+        <li class="child"><a href="https://www.randomservices.org/random/point/Sufficient.html" title="Statistik Cukup, Lengkap, dan Ancilar">6</a></li>
+        <li class="details"><button type="button" title="Perluas Rincian" onclick="expandDetails(true);"><img src="../icons/Plus.svg" alt="Perluas"></button></li>
+        <li class="details"><button type="button" title="Ciutkan Rincian" onclick="expandDetails(false);"><img src="../icons/Minus.svg" alt="Ciutkan"></button></li>
+	</ol>
+    <h2 id="o006.random.point.moments.page">2. Metode Momen</h2>
+</header>
+
+<h3 id="o006.random.point.moments.section.basic-theory">Teori Dasar</h3>
+
+<h4 id="o006.random.point.moments.section.method">Metode</h4>
+
+<p>Andaikan kita memiliki suatu <a href="https://www.randomservices.org/random/prob/Experiments.html">eksperimen acak</a> dasar dengan <a href="https://www.randomservices.org/random/prob/Probability.html">variabel acak</a> teramati bernilai riil \(X\). Distribusi \(X\) memiliki \(k\) parameter bernilai riil yang tidak diketahui, atau secara ekuivalen vektor parameter \(\bs{\theta} = (\theta_1, \theta_2, \ldots, \theta_k)\) dengan nilai dalam suatu himpunan bagian dari \( \R^k \). Seperti biasa, kita mengulangi eksperimen sebanyak \(n\) kali untuk menghasilkan <a href="../sample/Introduction.html">sampel acak</a> berukuran \(n\) dari distribusi \(X\).
+\[ \bs{X} = (X_1, X_2, \ldots, X_n) \]
+Jadi, \(\bs{X}\) merupakan barisan variabel acak yang <a href="https://www.randomservices.org/random/prob/Independence.html">saling bebas</a>, masing-masing dengan distribusi \(X\). <dfn>Metode momen</dfn> adalah teknik untuk membangun <a href="Estimators.html">penduga</a> parameter dengan mencocokkan <em>momen sampel</em> dengan <em>momen distribusi</em> yang bersesuaian.</p>
+
+<div class="unit" id="o006.random.point.moments.unit.distribution-moments">
+    <p class="dfn">Misalkan \(\mu^{(j)}(\bs{\theta})\) menyatakan <a href="https://www.randomservices.org/random/expect/Properties.html#mom">momen</a> ke-\(j\) dari \(X\) terhadap titik asal (nol):
+	\[ \mu^{(j)}(\bs{\theta}) = \E\left(X^j\right), \quad j \in \N_+ \]</p>
+</div>
+
+<p>Notasi ini menekankan kebergantungan momen-momen tersebut pada vektor parameter \(\bs{\theta}\). Perhatikan pula bahwa \(\mu^{(1)}(\bs{\theta})\) hanyalah rata-rata \(X\), yang biasanya kita nyatakan cukup dengan \(\mu\).</p>
+
+<div class="unit" id="o006.random.point.moments.unit.sample-moments">
+    <p class="dfn">Misalkan \(M^{(j)}(\bs{X})\) menyatakan momen sampel ke-\(j\) terhadap titik asal (nol):
+	\[ M^{(j)}(\bs{X}) = \frac{1}{n} \sum_{i=1}^n X_i^j, \quad j \in \N_+ \]</p>
+</div>
+
+<p>Secara ekuivalen, \(M^{(j)}(\bs{X})\) adalah rata-rata sampel untuk sampel acak \(\left(X_1^j, X_2^j, \ldots, X_n^j\right)\) dari distribusi \(X^j\). Notasi ini menekankan kebergantungan momen sampel pada sampel \(\bs{X}\). Perhatikan pula bahwa \(M^{(1)}(\bs{X})\) hanyalah rata-rata sampel biasa, yang umumnya kita nyatakan dengan \(M\) (atau \( M_n \) jika hendak menegaskan kebergantungannya pada ukuran sampel). Dari hasil sebelumnya, kita mengetahui bahwa \(M^{(j)}(\bs{X})\) merupakan penduga tak bias dan konsisten bagi \(\mu^{(j)}(\bs{\theta})\) untuk setiap \(j\). Metodenya bekerja sebagai berikut.</p>
+
+<div class="unit" id="mom">
+    <p class="dfn">Untuk membangun penduga <dfn>metode momen</dfn> \(\left(W_1, W_2, \ldots, W_k\right)\) masing-masing bagi parameter \((\theta_1, \theta_2, \ldots, \theta_k)\), kita tinjau persamaan
+	\[ \mu^{(j)}(W_1, W_2, \ldots, W_k) = M^{(j)}(X_1, X_2, \ldots, X_n) \]
+    secara berurutan untuk \( j \in \N_+ \) sampai kita dapat menyatakan \(\left(W_1, W_2, \ldots, W_k\right)\) sebagai fungsi dari \(\left(M^{(1)}, M^{(2)}, \ldots\right)\).</p>
+</div>
+
+<p>Persamaan untuk \( j \in \{1, 2, \ldots, k\} \) memberikan \(k\) persamaan dengan \(k\) peubah tak diketahui, sehingga ada harapan—tetapi tidak ada jaminan—bahwa persamaan tersebut dapat diselesaikan untuk menyatakan \( (W_1, W_2, \ldots, W_k) \) sebagai fungsi dari \( (M^{(1)}, M^{(2)}, \ldots, M^{(k)}) \). Bahkan, terkadang kita memerlukan persamaan dengan \( j \gt k \). Latihan <a href="#bet2" class="ref"></a> memberikan contoh sederhana. Metode momen dapat diperluas ke parameter yang berkaitan dengan distribusi bivariat atau distribusi multivariat yang lebih umum dengan mencocokkan momen hasil kali sampel dengan momen hasil kali distribusi yang bersesuaian. Metode momen juga terkadang tetap masuk akal ketika variabel sampel \( (X_1, X_2, \ldots, X_n) \) tidak saling bebas, asalkan setidaknya berdistribusi identik. <a href="#hyp">Model hipergeometrik</a> pada subbagian berikut merupakan salah satu contohnya.</p>
+
+<p>Tentu saja, penduga metode momen bergantung pada ukuran sampel \( n \in \N_+ \). Sejauh ini kita menyembunyikan indeks tersebut agar notasi tetap sederhana. Namun, dalam penerapan berikut, indeks itu kita tampilkan kembali karena kita hendak membahas perilaku asimtotik. Pada sampel berhingga, persamaan momen dapat pula tidak mempunyai solusi dalam ruang parameter atau menghasilkan penyebut nol; dalam kasus seperti itu, rumus yang ditampilkan hanya berlaku ketika solusinya terdefinisi dan memenuhi batas parameter yang dinyatakan.</p>
+
+<h4 id="est">Menduga Rata-Rata dan Varians</h4>
+
+<p>Menduga <a href="https://www.randomservices.org/random/expect/Properties.html">rata-rata</a> dan <a href="https://www.randomservices.org/random/expect/Variance.html">varians</a> suatu distribusi merupakan penerapan metode momen yang paling sederhana. Di seluruh subbagian ini, kita mengasumsikan suatu variabel acak dasar bernilai riil \( X \) dengan \( \mu = \E(X) \in \R \) dan \( \sigma^2 = \var(X) \in (0, \infty) \). Sesekali kita juga memerlukan \( \sigma_4 = \E[(X - \mu)^4] \), yaitu momen pusat keempat. Kita mengambil sampel dari distribusi \( X \) untuk menghasilkan barisan \( \bs X = (X_1, X_2, \ldots) \) yang terdiri atas variabel-variabel saling bebas, masing-masing dengan distribusi \( X \). Untuk setiap \( n \in \N_+ \), \( \bs X_n = (X_1, X_2, \ldots, X_n) \) merupakan sampel acak berukuran \( n \) dari distribusi \( X \). Kita mulai dengan menduga rata-rata, yang pada dasarnya langsung diperoleh dengan metode ini.</p>
+
+<div class="unit" id="o006.random.point.moments.unit.mean-estimator">
+    <p class="math">Andaikan rata-rata \(\mu\) tidak diketahui. Penduga metode momen bagi \( \mu \) berdasarkan \( \bs X_n \) adalah rata-rata sampel
+	\[ M_n = \frac{1}{n} \sum_{i=1}^n X_i\]</p>
+	<ol class="sub">
+        <li>\( \E(M_n) = \mu \), sehingga \( M_n \) tak bias untuk \( n \in \N_+ \).</li>
+        <li>\( \var(M_n) = \sigma^2/n \) untuk \( n \in \N_+ \), sehingga \( \bs M = (M_1, M_2, \ldots) \) konsisten.</li>
+	</ol>
+	<details>
+        <summary>Rincian:</summary>
+        <p>Inilah bentuk paling dasar dari metode tersebut. Metode momen bekerja dengan mencocokkan rata-rata distribusi dengan rata-rata sampel. Fakta bahwa \( \E(M_n) = \mu \) dan \( \var(M_n) = \sigma^2 / n \) untuk \( n \in \N_+ \) merupakan sifat yang telah kita jumpai beberapa kali.</p>
+	</details>
+</div>
+
+<p>Sebaliknya, pendugaan varians distribusi bergantung pada apakah rata-rata distribusi \( \mu \) diketahui atau tidak. Mula-mula kita tinjau kasus yang lebih realistis ketika rata-rata juga tidak diketahui. Ingat bahwa untuk \( n \in \{2, 3, \ldots\} \), <a href="../sample/Variance.html">varians sampel</a> berdasarkan \( \bs X_n \) adalah
+\[ S_n^2 = \frac{1}{n - 1} \sum_{i=1}^n (X_i - M_n)^2 \]
+Ingat pula bahwa \(\E(S_n^2) = \sigma^2\), sehingga \( S_n^2 \) tak bias untuk \( n \in \{2, 3, \ldots\} \), dan bahwa \(\var(S_n^2) = \frac{1}{n} \left(\sigma_4 - \frac{n - 3}{n - 1} \sigma^4 \right)\), sehingga \( \bs S^2 = (S_2^2, S_3^2, \ldots) \) konsisten.</p>
+
+<div class="unit" id="o006.random.point.moments.unit.biased-sample-variance">
+    <p class="math">Andaikan rata-rata \( \mu \) dan varians \( \sigma^2 \) keduanya tidak diketahui. Untuk \( n \in \N_+ \), penduga metode momen bagi \(\sigma^2\) berdasarkan \( \bs X_n \) adalah
+	\[T_n^2 = \frac{1}{n} \sum_{i=1}^n (X_i - M_n)^2\]</p>
+	<ol class="sub">
+        <li>\(\bias(T_n^2) = -\sigma^2 / n\) untuk \( n \in \N_+ \), sehingga \( \bs T^2 = (T_1^2, T_2^2, \ldots) \) tak bias secara asimtotik.</li>
+        <li>\(\mse(T_n^2) = \frac{1}{n^3}\left[(n - 1)^2 \sigma_4 - (n^2 - 5 n + 3) \sigma^4\right]\) untuk \( n \in \N_+ \), sehingga \( \bs T^2 \) konsisten.</li>
+	</ol>
+	<details>
+        <summary>Rincian:</summary>
+
+        <p>Seperti sebelumnya, penduga metode momen bagi rata-rata distribusi \(\mu\) adalah rata-rata sampel \(M_n\). Di sisi lain, \(\sigma^2 = \mu^{(2)} - \mu^2\), sehingga penduga metode momen bagi \(\sigma^2\) adalah \(T_n^2 = M_n^{(2)} - M_n^2\), yang dapat disederhanakan menjadi hasil di atas. Perhatikan bahwa \(T_n^2 = \frac{n - 1}{n} S_n^2\) untuk \( n \in \{2, 3, \ldots\} \).</p>
+		<ol class="sub">
+            <li>Perhatikan bahwa \(\E(T_n^2) = \frac{n - 1}{n} \E(S_n^2) = \frac{n - 1}{n} \sigma^2\), sehingga \(\bias(T_n^2) = \frac{n-1}{n}\sigma^2 - \sigma^2 = -\frac{1}{n} \sigma^2\).</li>
+            <li>Ingat bahwa \(\mse(T_n^2) = \var(T_n^2) + \bias^2(T_n^2)\). Namun, \(\var(T_n^2) = \left(\frac{n-1}{n}\right)^2 \var(S_n^2)\). Hasilnya diperoleh dengan menyubstitusikan \(\var(S_n^2)\) yang diberikan di atas dan \(\bias(T_n^2)\) pada bagian (a).</li>
+		</ol>
+	</details>
+</div>
+
+<p>Jadi, \( T_n^2 \) berbias negatif dan secara rata-rata menduga \(\sigma^2\) terlalu rendah. Karena hasil ini, \( T_n^2 \) disebut <dfn>varians sampel berbias</dfn> untuk membedakannya dari varians sampel biasa (tak bias) \( S_n^2 \).</p>
+
+<p>Selanjutnya, mari kita tinjau kasus yang jarang terjadi dan biasanya tidak realistis, tetapi menarik secara matematis: rata-rata diketahui, sedangkan varians tidak diketahui.</p>
+
+<div class="unit" id="o006.random.point.moments.unit.known-mean-variance">
+    <p class="math">Andaikan rata-rata \( \mu \) diketahui dan varians \( \sigma^2 \) tidak diketahui. Untuk \( n \in \N_+ \), penduga metode momen bagi \(\sigma^2\) berdasarkan \( \bs X_n \) adalah
+	\[ W_n^2 = \frac{1}{n} \sum_{i=1}^n (X_i - \mu)^2 \]</p>
+	<ol class="sub">
+        <li>\( \E(W_n^2) = \sigma^2 \), sehingga \( W_n^2 \) tak bias untuk \( n \in \N_+ \).</li>
+        <li>\(\var(W_n^2) = \frac{1}{n}(\sigma_4 - \sigma^4)\) untuk \( n \in \N_+ \), sehingga \( \bs W^2 = (W_1^2, W_2^2, \ldots) \) konsisten.</li>
+	</ol>
+	<details>
+        <summary>Rincian:</summary>
+        <p>Hasil-hasil ini berlaku karena \( W_n^2 \) merupakan rata-rata sampel yang bersesuaian dengan sampel acak berukuran \( n \) dari distribusi \( (X - \mu)^2 \).</p>
+	</details>
+</div>
+
+<p>Kita membandingkan barisan penduga \( \bs S^2 \) dengan barisan penduga \( \bs W^2 \) dalam bagian pengantar mengenai <a href="Estimators.html">penduga</a>. Dengan syarat momen pusat keempat berhingga dan lebih besar daripada kuadrat varians, ingat bahwa \( \var(W_n^2) \lt \var(S_n^2) \) untuk \( n \in \{2, 3, \ldots\} \) dan \( \var(S_n^2) / \var(W_n^2) \to 1 \) ketika \( n \to \infty \). Tidak ada hubungan umum yang sederhana antara \( \mse(T_n^2) \) dan \( \mse(S_n^2) \), ataupun antara \( \mse(T_n^2) \) dan \( \mse(W_n^2) \), tetapi hubungan asimtotiknya sederhana.</p>
+
+<div class="unit" id="asymp">
+    <p class="math">Jika momen pusat keempat berhingga dan lebih besar daripada kuadrat varians, maka \( \mse(T_n^2) / \mse(W_n^2) \to 1 \) dan \( \mse(T_n^2) / \mse(S_n^2) \to 1 \) ketika \( n \to \infty \).</p>
+	<details>
+        <summary>Rincian:</summary>
+        <p>Berdasarkan uraian sebelumnya, kita cukup membuktikan salah satu limit tersebut. Koefisien \( \sigma_4 \) dan \( \sigma^4 \) dalam \( \mse(T_n^2) \) masing-masing asimtotik terhadap \( 1 / n \) dan negatifnya ketika \( n \to \infty \). Dengan hipotesis di atas, selisih kedua momen itu menghasilkan suku utama bersama yang positif pada pembilang dan penyebut, sehingga rasionya menuju 1.</p>
+	</details>
+</div>
+
+<p>Dari sini juga diperoleh bahwa jika \( \mu \) dan \( \sigma^2 \) keduanya tidak diketahui, penduga metode momen bagi simpangan baku \( \sigma \) adalah \( T = \sqrt{T^2} \). Dalam kasus yang jarang terjadi, yaitu ketika \( \mu \) diketahui tetapi \( \sigma^2 \) tidak diketahui, penduga metode momen bagi \( \sigma \) adalah \( W = \sqrt{W^2} \).</p>
+
+<h4 id="o006.random.point.moments.section.two-parameter-estimation">Menduga Dua Parameter</h4>
+
+<p>Ada beberapa distribusi khusus penting dengan dua parameter; sebagian di antaranya disertakan dalam latihan komputasi pada <a href="#spe" class="ref"></a> berikut. Dengan dua parameter, kita dapat menurunkan penduga metode momen dengan mencocokkan rata-rata dan varians distribusi dengan rata-rata dan varians sampel, alih-alih mencocokkan rata-rata dan momen kedua distribusi dengan rata-rata dan momen kedua sampel. Pendekatan alternatif ini terkadang menghasilkan persamaan yang lebih mudah. Untuk menetapkan notasi, andaikan suatu distribusi pada \( \R \) memiliki parameter \( a \) dan \( b \). Kita mengambil sampel dari distribusi tersebut untuk menghasilkan barisan variabel saling bebas \( \bs X = (X_1, X_2, \ldots) \), semuanya dengan distribusi yang sama. Untuk \( n \in \N_+ \), \( \bs X_n = (X_1, X_2, \ldots, X_n) \) merupakan sampel acak berukuran \( n \) dari distribusi itu. Misalkan \( M_n \), \( M_n^{(2)} \), dan \( T_n^2 \) masing-masing menyatakan rata-rata sampel, momen sampel kedua, dan varians sampel berbias yang bersesuaian dengan \( \bs X_n \), sedangkan \( \mu(a, b) \), \( \mu^{(2)}(a,  b) \), dan \( \sigma^2(a, b) \) masing-masing menyatakan rata-rata, momen kedua, dan varians distribusi.</p>
+
+<div class="unit" id="o006.random.point.moments.unit.two-parameter-equivalence">
+    <p class="math">Jika penduga metode momen \( U_n \) dan \( V_n \), masing-masing bagi \( a \) dan \( b \), dapat diperoleh dengan menyelesaikan dua persamaan pertama
+	\[ \mu(U_n, V_n) = M_n, \quad \mu^{(2)}(U_n, V_n) = M_n^{(2)} \]
+    maka \( U_n \) dan \( V_n \) juga dapat diperoleh dengan menyelesaikan persamaan
+	\[ \mu(U_n, V_n) = M_n, \quad \sigma^2(U_n, V_n) = T_n^2 \]</p>
+	<details>
+        <summary>Rincian:</summary>
+        <p>Ingat bahwa \( \sigma^2(a, b) = \mu^{(2)}(a, b) - \mu^2(a, b) \). Selain itu, \( T_n^2 = M_n^{(2)} - M_n^2 \). Jadi, persamaan \( \mu(U_n, V_n) = M_n \), \( \sigma^2(U_n, V_n) = T_n^2 \) ekuivalen dengan persamaan \( \mu(U_n, V_n) = M_n \), \( \mu^{(2)}(U_n, V_n) = M_n^{(2)} \).</p>
+	</details>
+</div>
+
+<p>Karena hasil ini, varians sampel berbias \( T_n^2 \) akan muncul dalam banyak masalah pendugaan untuk distribusi khusus yang kita tinjau di bawah.</p>
+
+<h3 id="spe">Distribusi Khusus</h3>
+
+<h4 id="norm">Distribusi Normal</h4>
+
+<p><a href="https://www.randomservices.org/random/special/Normal.html">Distribusi normal</a> dengan rata-rata \( \mu \in \R \) dan varians \( \sigma^2 \in (0, \infty) \) adalah distribusi kontinu pada \( \R \) dengan fungsi kepadatan probabilitas \( g \) yang diberikan oleh
+\[ g(x) = \frac{1}{\sqrt{2 \pi} \sigma} \exp\left[-\frac{1}{2}\left(\frac{x - \mu}{\sigma}\right)^2\right], \quad x \in \R \]
+Distribusi ini merupakan salah satu distribusi terpenting dalam probabilitas dan statistika, terutama karena <a href="../sample/CLT.html">teorema limit pusat</a>.</p>
+
+<p>Andaikan sekarang \( \bs{X} = (X_1, X_2, \ldots, X_n) \) merupakan sampel acak berukuran \( n \) dari distribusi normal dengan rata-rata \( \mu \) dan varians \( \sigma^2 \). Dari hasil umum di atas, kita mengetahui bahwa jika \( \mu \) tidak diketahui maka rata-rata sampel \( M \) adalah penduga metode momen bagi \( \mu \), dan jika \( \sigma^2 \) juga tidak diketahui maka penduga metode momen bagi \( \sigma^2 \) adalah \( T^2 \). Sebaliknya, dalam kasus yang jarang terjadi, yaitu ketika \( \mu \) diketahui, \( W^2 \) adalah penduga metode momen bagi \( \sigma^2 \). Tujuan kita adalah melihat bagaimana perbandingan di atas menyederhana untuk distribusi normal.</p>
+
+<div class="unit" id="norm1">
+    <p class="math">Galat kuadrat rata-rata bagi \( S_n^2 \) dan \( T_n^2 \).</p>
+	<ol class="sub">
+		<li>\(\mse(T^2) = \frac{2 n - 1}{n^2} \sigma^4\)</li>
+		<li>\(\mse(S^2) = \frac{2}{n - 1} \sigma^4\)</li>
+        <li>\(\mse(T^2) \lt \mse(S^2)\) untuk \(n \in \{2, 3, \ldots\}\).</li>
+	</ol>
+	<details>
+    <summary>Rincian:</summary>
+    <p>Ingat bahwa untuk distribusi normal, \(\sigma_4 = 3 \sigma^4\). Dengan menyubstitusikan nilai ini ke dalam hasil umum, kita memperoleh bagian (a) dan (b). Bagian (c) mengikuti dari (a) dan (b). Tentu saja, dari <a href="#asymp" class="ref"></a>, efisiensi relatif asimtotiknya tetap 1.</p>
+	</details>
+</div>
+
+<p>Jadi, \(S^2\) dan \(T^2\) merupakan kelipatan satu sama lain; \(S^2\) tak bias, tetapi ketika sampel berasal dari distribusi normal, \(T^2\) memiliki galat kuadrat rata-rata yang lebih kecil. Yang mengejutkan, galat kuadrat rata-rata \(T^2\) bahkan lebih kecil daripada \(W^2\).</p>
+
+<div class="unit" id="norm2">
+    <p class="math">Galat kuadrat rata-rata bagi \( T^2 \) dan \( W^2 \).</p>
+	<ol class="sub">
+		<li>\(\mse(W^2) = \frac{2}{n} \sigma^4\)</li>
+        <li>\(\mse(T^2) \lt \mse(W^2)\) untuk \(n \in \{2, 3, \ldots\}\).</li>
+	</ol>
+	<details>
+        <summary>Rincian:</summary>
+        <p>Sekali lagi, karena sampel berasal dari distribusi normal, \(\sigma_4 = 3 \sigma^4\). Dengan menyubstitusikan nilai ini ke dalam rumus umum bagi \(\var(W_n^2)\), kita memperoleh bagian (a).</p>
+	</details>
+</div>
+
+<div class="unit" id="o006.random.point.moments.unit.normal-variance-simulation">
+    <p class="app">Jalankan <a href="https://www.randomservices.org/random/apps/NormalEstimate.html" class="ancillary">eksperimen pendugaan pada distribusi normal</a> sebanyak 1.000 kali untuk beberapa nilai ukuran sampel \(n\) serta parameter \(\mu\) dan \(\sigma\). Bandingkan bias empiris dan galat kuadrat rata-rata \(S^2\) serta \(T^2\) dengan nilai teoretisnya. Penduga mana yang lebih baik dari segi bias? Penduga mana yang lebih baik dari segi galat kuadrat rata-rata?</p>
+</div>
+
+<p>Selanjutnya kita tinjau penduga bagi simpangan baku \( \sigma \). Seperti dicatat dalam pembahasan umum di atas, \( T = \sqrt{T^2} \) adalah penduga metode momen ketika \( \mu \) tidak diketahui, sedangkan \( W = \sqrt{W^2} \) adalah penduga metode momen dalam kasus yang jarang terjadi, yaitu ketika \( \mu \) diketahui. Penduga alami lainnya tentu saja adalah \( S = \sqrt{S^2} \), yaitu simpangan baku sampel biasa. Barisan berikut, yang didefinisikan melalui <a href="https://www.randomservices.org/random/special/Gamma.html">fungsi gamma</a>, ternyata penting dalam analisis ketiga penduga tersebut.</p>
+
+<div class="unit" id="norm3">
+    <p class="math">Tinjau barisan
+	\[ a_n = \sqrt{\frac{2}{n}} \frac{\Gamma[(n + 1) / 2)}{\Gamma(n / 2)}, \quad n \in \N_+ \]
+    Maka \( 0 \lt a_n \lt 1 \) untuk \( n \in \N_+ \) dan \( a_n \uparrow 1 \) ketika \( n \uparrow \infty \).</p>
+</div>
+
+<p>Pertama, andaikan \( \mu \) diketahui sehingga \( W_n \) merupakan penduga metode momen bagi \( \sigma \).</p>
+
+<div class="unit" id="norm4">
+    <p class="math">Untuk \( n \in \N_+ \),</p>
+	<ol class="sub">
+		<li>\( \E(W) = a_n \sigma \)</li>
+		<li>\( \bias(W) = (a_n - 1) \sigma \)</li>
+		<li>\( \var(W) = \left(1 - a_n^2\right) \sigma^2 \)</li>
+		<li>\( \mse(W) = 2 (1 - a_n) \sigma^2 \)</li>
+	</ol>
+	<details>
+        <summary>Rincian:</summary>
+        <p>Ingat bahwa \(U^2 =  n W^2 / \sigma^2 \) memiliki <a href="https://www.randomservices.org/random/special/ChiSquare.html">distribusi khi-kuadrat</a> dengan \( n \) derajat kebebasan, sehingga \( U \) memiliki <a href="https://www.randomservices.org/random/special/ChiSquare.html#chi">distribusi khi</a> dengan \( n \) derajat kebebasan. Dengan menyelesaikan hubungan tersebut terhadap penduga simpangan baku, kita peroleh
+		\[ W = \frac{\sigma}{\sqrt{n}} U \]
+        Dari rumus rata-rata dan varians distribusi khi, kita peroleh
+		\begin{align*}
+			\E(W) &amp; = \frac{\sigma}{\sqrt{n}} \E(U) = \frac{\sigma}{\sqrt{n}} \sqrt{2} \frac{\Gamma[(n + 1) / 2)}{\Gamma(n / 2)} = \sigma a_n \\
+			\var(W) &amp; = \frac{\sigma^2}{n} \var(U) = \frac{\sigma^2}{n}\left\{n - [\E(U)]^2\right\} = \sigma^2\left(1 - a_n^2\right)
+		\end{align*} </p>
+	</details>
+</div>
+
+<p>Jadi, bias \( W \) sebagai penduga bagi \( \sigma \) tidak positif dan menjadi negatif kecuali kuadrat penduga tersebut konstan hampir pasti; penduga ini tak bias secara asimtotik dan konsisten. Secara umum—apa pun distribusi yang mendasarinya—kita mengetahui bahwa \( W^2 \) merupakan penduga tak bias bagi \( \sigma^2 \), sehingga bias \( W \) sebagai penduga bagi \( \sigma \) juga tidak positif, dan menjadi negatif kecuali kuadratnya konstan hampir pasti. Dalam kasus normal, karena \( a_n \) tidak melibatkan parameter yang tidak diketahui, statistik \( W / a_n \) merupakan penduga tak bias bagi \( \sigma \). Selanjutnya kita tinjau simpangan baku sampel biasa \( S \).</p>
+
+<div class="unit" id="norm5">
+    <p class="math">Untuk \( n \in \{2, 3, \ldots\} \),</p>
+	<ol class="sub">
+		<li>\( \E(S) = a_{n-1} \sigma \)</li>
+		<li>\( \bias(S) = (a_{n-1} - 1) \sigma \)</li>
+		<li>\( \var(S) = \left(1 - a_{n-1}^2\right) \sigma^2 \)</li>
+		<li>\( \mse(S) = 2 (1 - a_{n-1}) \sigma^2 \)</li>
+	</ol>
+	<details>
+        <summary>Rincian:</summary>
+        <p>Ingat bahwa \(V^2 =  (n - 1) S^2 / \sigma^2 \) memiliki <a href="https://www.randomservices.org/random/special/ChiSquare.html">distribusi khi-kuadrat</a> dengan \( n - 1 \) derajat kebebasan, sehingga \( V \) memiliki <a href="https://www.randomservices.org/random/special/ChiSquare.html#chi">distribusi khi</a> dengan \( n - 1 \) derajat kebebasan. Buktinya sama seperti pada <a href="#norm4" class="ref"></a>, tetapi dengan \( n - 1 \) menggantikan \( n \).</p>
+	</details>
+</div>
+
+<p>Seperti \( W \), statistik \( S \) berbias negatif sebagai penduga bagi \( \sigma \), tetapi tak bias secara asimtotik dan juga konsisten. Karena \( a_{n - 1}\) tidak melibatkan parameter yang tidak diketahui, statistik \( S / a_{n-1} \) merupakan penduga tak bias bagi \( \sigma \). Perhatikan pula bahwa, dari segi bias dan galat kuadrat rata-rata, \( S \) dengan ukuran sampel \( n \) berperilaku seperti \( W \) dengan ukuran sampel \( n - 1 \). Terakhir, kita tinjau \( T \), yaitu penduga metode momen bagi \( \sigma \) ketika \( \mu \) tidak diketahui.</p>
+
+<div class="unit" id="norm6">
+    <p class="math">Untuk \( n \in \{2, 3, \ldots\} \),</p>
+	<ol class="sub">
+		<li>\( \E(T) = \sqrt{\frac{n - 1}{n}} a_{n-1} \sigma \)</li>
+		<li>\( \bias(T) = \left(\sqrt{\frac{n - 1}{n}} a_{n-1} - 1\right) \sigma \)</li>
+		<li>\( \var(T) = \frac{n - 1}{n} \left(1 - a_{n-1}^2 \right) \sigma^2 \)</li>
+		<li>\( \mse(T) = \left(2 - \frac{1}{n} - 2 \sqrt{\frac{n-1}{n}} a_{n-1} \right) \sigma^2 \)</li>
+	</ol>
+	<details>
+        <summary>Rincian:</summary>
+        <p>Hasil-hasil tersebut segera mengikuti dari <a href="#norm5" class="ref"></a> karena \( T_n = \sqrt{\frac{n - 1}{n}} S_n \).</p>
+	</details>
+</div>
+
+<h4 id="ber">Distribusi Bernoulli</h4>
+
+<p>Ingat bahwa <dfn>variabel indikator</dfn> adalah variabel acak \( X \) yang hanya bernilai 0 dan 1. Distribusi \( X \) dikenal sebagai <dfn>distribusi Bernoulli</dfn>, dinamai menurut <a href="https://www.randomservices.org/random/biographies/Bernoulli.html" class="ancillary">Jacob Bernoulli</a>, dan memiliki fungsi kepadatan probabilitas \( g \) yang diberikan oleh
+\[ g(x) = p^x (1 - p)^{1 - x}, \quad x \in \{0, 1\} \]
+dengan \( p \in (0, 1) \) sebagai <dfn>parameter keberhasilan</dfn>. Rata-rata distribusi adalah \( p \) dan variansnya \( p (1 - p) \).</p>
+
+<p>Andaikan sekarang \( \bs{X} = (X_1, X_2, \ldots, X_n) \) merupakan sampel acak berukuran \( n \) dari distribusi Bernoulli dengan parameter keberhasilan \( p \) yang tidak diketahui. Karena rata-rata distribusi adalah \( p \), dari hasil umum pada <a href="#est" class="ref"></a> penduga metode momen bagi \( p \) adalah \( M \), yaitu rata-rata sampel. Dalam kasus ini, sampel \( \bs{X} \) merupakan barisan <a href="https://www.randomservices.org/random/bernoulli/index.html">percobaan Bernoulli</a>, dan \( M \) memiliki versi terskala dari <a href="https://www.randomservices.org/random/bernoulli/Binomial.html">distribusi binomial</a> dengan parameter \( n \) dan \( p \):
+\[ \P\left(M = \frac{k}{n}\right) = \binom{n}{k} p^k (1 - p)^{n - k}, \quad k \in \{0, 1, \ldots, n\} \]
+Karena \( X^k = X \) untuk setiap \( k \in \N_+ \), diperoleh \( \mu^{(k)} = p \) dan \( M^{(k)} = M \) untuk setiap \( k \in \N_+ \). Jadi, setiap persamaan metode momen akan menghasilkan rata-rata sampel \( M \) sebagai penduga bagi \( p \). Walaupun sangat sederhana, ini merupakan penerapan penting karena percobaan Bernoulli muncul sebagai komponen dalam berbagai masalah pendugaan, seperti fungsi kepadatan probabilitas empiris dan fungsi distribusi empiris.</p>
+
+<h4 id="geo">Distribusi Geometrik</h4>
+
+<p><dfn>Distribusi geometrik</dfn> pada \(\N_+\) dengan parameter keberhasilan \(p \in (0, 1)\) memiliki fungsi kepadatan probabilitas \( g \) yang diberikan oleh
+\[ g(x) = p (1 - p)^{x-1}, \quad x \in \N_+ \]
+<a href="https://www.randomservices.org/random/bernoulli/Geometric.html">Distribusi geometrik</a> pada \( \N_+ \) memodelkan banyaknya percobaan yang diperlukan untuk memperoleh keberhasilan pertama dalam barisan <a href="https://www.randomservices.org/random/bernoulli/index.html">percobaan Bernoulli</a> dengan parameter keberhasilan \( p \). Rata-rata distribusinya adalah \(\mu = 1 / p\).</p>
+
+<div class="unit" id="o006.random.point.moments.unit.geometric-positive-support">
+    <p class="math">Andaikan \(\bs{X} = (X_1, X_2, \ldots, X_n)\) merupakan sampel acak berukuran \(n\) dari distribusi geometrik pada \( \N_+ \) dengan parameter keberhasilan \(p\) yang tidak diketahui. Penduga metode momen bagi \(p\) adalah
+	\[U = \frac{1}{M}\]</p>
+	<details>
+        <summary>Rincian:</summary>
+        <p>Persamaan metode momen bagi \(U\) adalah \(1 / U = M\).</p>
+	</details>
+</div>
+
+<p>Distribusi geometrik pada \( \N \) dengan parameter keberhasilan \( p \in (0, 1) \) memiliki fungsi kepadatan probabilitas
+\[ g(x) = p (1 - p)^x, \quad x \in \N \]
+Versi distribusi geometrik ini memodelkan banyaknya kegagalan sebelum keberhasilan pertama dalam barisan percobaan Bernoulli. Rata-rata distribusinya adalah \( \mu = (1 - p) \big/ p \).</p>
+
+<div class="unit" id="o006.random.point.moments.unit.geometric-zero-support">
+    <p class="math">Andaikan \(\bs{X} = (X_1, X_2, \ldots, X_n)\) merupakan sampel acak berukuran \(n\) dari distribusi geometrik pada \( \N \) dengan parameter \(p\) yang tidak diketahui. Penduga metode momen bagi \(p\) adalah
+	\[U = \frac{1}{M + 1}\]</p>
+	<details>
+        <summary>Rincian:</summary>
+        <p>Persamaan metode momen bagi \(U\) adalah \((1 - U) \big/ U = M\).</p>
+	</details>
+</div>
+
+<h4 id="o006.random.point.moments.section.negative-binomial">Distribusi Binomial Negatif</h4>
+
+<p>Secara lebih umum, <a href="https://www.randomservices.org/random/bernoulli/NegativeBinomial.html">distribusi binomial negatif</a> pada \( \N \) dengan parameter bentuk \( k \in (0, \infty) \) dan parameter keberhasilan \( p \in (0, 1) \) memiliki fungsi kepadatan probabilitas
+\[ g(x) = \binom{x + k - 1}{k - 1} p^k (1 - p)^x, \quad x \in \N \]
+Jika \( k \) bilangan bulat positif, distribusi ini memodelkan banyaknya kegagalan sebelum keberhasilan ke-\( k \) dalam barisan <a href="https://www.randomservices.org/random/bernoulli/index.html">percobaan Bernoulli</a> dengan parameter keberhasilan \( p \). Namun, definisi distribusi tersebut berlaku untuk setiap \( k \in (0, \infty) \). Rata-ratanya \( k (1 - p) \big/ p \) dan variansnya \( k (1 - p) \big/ p^2 \). Andaikan sekarang \(\bs{X} = (X_1, X_2, \ldots, X_n)\) merupakan sampel acak berukuran \(n\) dari distribusi binomial negatif pada \( \N \) dengan parameter bentuk \( k \) dan parameter keberhasilan \( p \).</p>
+
+<div class="unit" id="o006.random.point.moments.unit.negative-binomial-both-unknown">
+    <p class="math">Jika \( k \) dan \( p \) tidak diketahui, penduga metode momen yang bersesuaian, \( U \) dan \( V \), adalah
+	\[ U = \frac{M^2}{T^2 - M}, \quad V = \frac{M}{T^2} \]</p>
+	<details>
+        <summary>Rincian:</summary>
+        <p>Rumus di atas menghasilkan nilai dalam ruang parameter hanya ketika rata-rata sampel positif dan varians sampel berbias lebih besar daripada rata-rata sampel. Mencocokkan rata-rata dan varians distribusi dengan rata-rata dan varians sampel memberikan persamaan
+		\[ U \frac{1 - V}{V} = M, \quad U \frac{1 - V}{V^2} = T^2 \]</p>
+	</details>
+</div>
+
+<p>Seperti biasa, hasilnya lebih sederhana ketika salah satu parameter diketahui.</p>
+
+<div class="unit" id="o006.random.point.moments.unit.negative-binomial-known-shape">
+    <p class="math">Andaikan \( k \) diketahui tetapi \( p \) tidak diketahui. Penduga metode momen \( V_k \) bagi \( p \) adalah
+	\[ V_k = \frac{k}{M + k} \]</p>
+	<details>
+        <summary>Rincian:</summary>
+        <p>Mencocokkan rata-rata distribusi dengan rata-rata sampel memberikan persamaan
+		\[ k \frac{1 - V_k}{V_k} = M \]</p>
+	</details>
+</div>
+
+<div class="unit" id="o006.random.point.moments.unit.negative-binomial-known-success">
+    <p class="math">Andaikan \( k \) tidak diketahui tetapi \( p \) diketahui. Penduga metode momen bagi \( k \) adalah
+	\[ U_p = \frac{p}{1 - p} M \]</p>
+	<ol class="sub">
+        <li>\( \E(U_p) = k \), sehingga \( U_p \) tak bias.</li>
+        <li>\( \var(U_p) = \frac{k}{n (1 - p)} \), sehingga \( U_p \) konsisten.</li>
+	</ol>
+	<details>
+        <summary>Rincian:</summary>
+        <p>Mencocokkan rata-rata distribusi dengan rata-rata sampel memberikan persamaan \( U_p \frac{1 - p}{p} = M\).</p>
+		<ol class="sub">
+            <li>\( \E(U_p) = \frac{p}{1 - p} \E(M)\) dan \(\E(M) = \frac{1 - p}{p} k\).</li>
+            <li>\( \var(U_p) = \left(\frac{p}{1 - p}\right)^2 \var(M) \) dan \( \var(M) = \frac{1}{n} \var(X) = \frac{k(1 - p)}{n p^2} \).</li>
+		</ol>
+	</details>
+</div>
+
+<h4 id="o006.random.point.moments.section.poisson">Distribusi Poisson</h4>
+
+<p><a href="https://www.randomservices.org/random/poisson/Poisson.html">Distribusi Poisson</a> dengan parameter \( r \in (0, \infty) \) adalah distribusi diskret pada \( \N \) dengan fungsi kepadatan probabilitas \( g \) yang diberikan oleh
+\[ g(x) = e^{-r} \frac{r^x}{x!}, \quad x \in \N \]
+Rata-rata dan variansnya sama-sama \( r \). Distribusi ini dinamai menurut <a href="https://www.randomservices.org/random/biographies/Poisson.html" class="ancillary">Simeon Poisson</a> dan banyak digunakan untuk memodelkan banyaknya <q>titik acak</q> dalam suatu wilayah waktu atau ruang, terutama dalam konteks <a href="https://www.randomservices.org/random/poisson/index.html">proses Poisson</a>. Parameter \( r \) sebanding dengan ukuran wilayah tersebut, dengan konstanta kesebandingannya berperan sebagai <dfn>laju</dfn> rata-rata titik-titik tersebut dalam waktu atau ruang.</p>
+
+<p>Andaikan sekarang \( \bs{X} = (X_1, X_2, \ldots, X_n) \) merupakan sampel acak berukuran \( n \) dari distribusi Poisson dengan parameter \( r \). Karena \( r \) adalah rata-ratanya, dari hasil umum pada <a href="#est" class="ref"></a> penduga metode momen bagi \( r \) adalah rata-rata sampel \( M \).</p>
+
+<h4 id="gam">Distribusi Gamma</h4>
+
+<p><a href="https://www.randomservices.org/random/special/Gamma.html">Distribusi gamma</a> dengan parameter bentuk \(k \in (0, \infty) \) dan parameter skala \(b \in (0, \infty)\) adalah distribusi kontinu pada \( (0, \infty) \) dengan fungsi kepadatan probabilitas \( g \) yang diberikan oleh
+\[ g(x) = \frac{1}{\Gamma(k) b^k} x^{k-1} e^{-x / b}, \quad x \in (0, \infty) \]
+Fungsi kepadatan gamma mempunyai beragam bentuk, sehingga distribusi ini digunakan untuk memodelkan berbagai jenis variabel acak positif. Ketika \(k \in \N_+\), distribusi gamma juga dikenal sebagai <a href="https://www.randomservices.org/random/poisson/Gamma.html">distribusi Erlang</a>, dinamai menurut <a href="https://www.randomservices.org/random/biographies/Erlang.html" class="ancillary">Agner Erlang</a>. Dalam kasus ini, distribusi tersebut memodelkan waktu kedatangan ke-\(k\) dalam <a href="https://www.randomservices.org/random/poisson/index.html">proses Poisson</a>. Rata-ratanya \(\mu = k b\) dan variansnya \(\sigma^2 = k b^2\).</p>
+
+<p>Andaikan sekarang \(\bs{X} = (X_1, X_2, \ldots, X_n)\) merupakan sampel acak dari distribusi gamma dengan parameter bentuk \(k\) dan parameter skala \(b\). Untuk rumus dua parameter di bawah, diperlukan ukuran sampel sekurang-kurangnya dua dan varians sampel berbias yang positif; untuk sampel kontinu, syarat kedua berlaku hampir pasti.</p>
+
+<div class="unit" id="gam1">
+	<p class="math">
+    Andaikan \(k\) dan \(b\) keduanya tidak diketahui, serta \(U\) dan \(V\) adalah penduga metode momen yang bersesuaian. Maka
+	\[ U = \frac{M^2}{T^2}, \quad V = \frac{T^2}{M}\]</p>
+	<details>
+        <summary>Rincian:</summary>
+        <p>Mencocokkan rata-rata dan varians distribusi dengan rata-rata dan varians sampel menghasilkan persamaan \(U V = M\), \(U V^2 = T^2\). Dengan menyelesaikan sistem tersebut, diperoleh hasil di atas.</p>
+	</details>
+</div>
+
+<p>Penduga metode momen bagi \(k\) dan \(b\) pada <a href="#gam1" class="ref"></a> merupakan fungsi nonlinear yang rumit dari rata-rata sampel \(M\) dan varians sampel \(T^2\). Karena itu, menghitung bias dan galat kuadrat rata-rata penduga-penduga ini merupakan masalah sulit yang tidak akan kita coba. Namun, kita dapat menilai mutu penduga secara empiris melalui simulasi.</p>
+
+<p>Ketika salah satu parameter diketahui, penduga metode momen bagi parameter lainnya jauh lebih sederhana.</p>
+
+<div class="unit" id="o006.random.point.moments.unit.gamma-known-scale">
+    <p class="math">Andaikan \(k\) tidak diketahui, tetapi \(b\) diketahui. Penduga metode momen bagi \( k \) adalah
+	\[U_b = \frac{M}{b}\]</p>
+	<ol class="sub">
+        <li>\( \E(U_b) = k \), sehingga \(U_b\) tak bias.</li>
+        <li>\(\var(U_b) = k / n\), sehingga \(U_b\) konsisten.</li>
+	</ol>
+	<details>
+        <summary>Rincian:</summary>
+        <p>Jika \(b\) diketahui, persamaan metode momen bagi \(U_b\) adalah \(b U_b = M\). Dengan menyelesaikan persamaan tersebut, diperoleh rumus di atas. Selanjutnya, \(\E(U_b) = \E(M) / b = k b / b = k\), sehingga \(U_b\) tak bias. Terakhir, \(\var(U_b) = \var(M) / b^2 = k b ^2 / (n b^2) = k / n\).</p>
+	</details>
+</div>
+
+<div class="unit" id="o006.random.point.moments.unit.gamma-known-shape">
+    <p class="math">Andaikan \(b\) tidak diketahui, tetapi \(k\) diketahui. Penduga metode momen bagi \(b\) adalah
+	\[V_k = \frac{M}{k}\]</p>
+	<ol class="sub">
+        <li>\( \E(V_k) = b \), sehingga \(V_k\) tak bias.</li>
+        <li>\( \var(V_k) = \frac{b^2}{k n} \), sehingga \(V_k\) konsisten.</li>
+	</ol>
+	<details>
+        <summary>Rincian:</summary>
+        <p>Jika \(k\) diketahui, persamaan metode momen bagi \(V_k\) adalah \(k V_k = M\). Dengan menyelesaikan persamaan tersebut, diperoleh rumus di atas. Selanjutnya, \(\E(V_k) = \E(M) / k = k b / k = b\), sehingga \(V_k\) tak bias. Terakhir, \(\var(V_k) = \var(M) / k^2 = k b ^2 / (n k^2) = \frac{b^2}{k n}\).</p>
+	</details>
+</div>
+
+<div class="unit" id="o006.random.point.moments.unit.gamma-simulation">
+    <p class="app">Jalankan <a href="https://www.randomservices.org/random/apps/GammaEstimate.html" class="ancillary">eksperimen pendugaan gamma</a> sebanyak 1.000 kali untuk beberapa nilai ukuran sampel \(n\) serta parameter \(k\) dan \(b\). Amati bias empiris dan galat kuadrat rata-rata penduga \(U\), \(V\), \(U_b\), dan \(V_k\). Secara intuitif, penduga ketika salah satu parameter diketahui mungkin diharapkan bekerja lebih baik daripada penduga yang bersesuaian ketika kedua parameter tidak diketahui; selidiki dugaan ini secara empiris.</p>
+</div>
+
+<h4 id="bet">Distribusi Beta</h4>
+
+<p><a href="https://www.randomservices.org/random/special/Beta.html">Distribusi beta</a> dengan parameter kiri \(a \in (0, \infty) \) dan parameter kanan \(b \in (0, \infty)\) adalah distribusi kontinu pada \( (0, 1) \) dengan fungsi kepadatan probabilitas \( g \) yang diberikan oleh
+\[ g(x) = \frac{1}{B(a, b)} x^{a-1} (1 - x)^{b-1}, \quad 0 \lt x \lt 1 \]
+Fungsi kepadatan beta mempunyai beragam bentuk, sehingga distribusi ini banyak digunakan untuk memodelkan probabilitas dan proporsi acak serta—setelah diskalakan dengan tepat—berbagai jenis variabel acak yang bernilai dalam interval terbatas. Dua momen pertamanya adalah
+\[\mu = \frac{a}{a + b}, \quad \mu^{(2)} = \frac{a (a + 1)}{(a + b)(a + b + 1)}\]
+Andaikan sekarang \(\bs{X} = (X_1, X_2, \ldots, X_n)\) merupakan sampel acak berukuran \(n\) dari distribusi beta dengan parameter kiri \(a\) dan parameter kanan \(b\). Untuk rumus dua parameter di bawah, diperlukan ukuran sampel sekurang-kurangnya dua dan varians sampel berbias yang positif; untuk sampel kontinu, syarat kedua berlaku hampir pasti.</p>
+
+<div class="unit" id="bet1">
+    <p class="math">Andaikan \(a\) dan \(b\) keduanya tidak diketahui, serta \(U\) dan \(V\) adalah penduga metode momen yang bersesuaian. Maka
+	\[U = \frac{M \left(M - M^{(2)}\right)}{M^{(2)} - M^2}, \quad V = \frac{(1 - M)\left(M - M^{(2)}\right)}{M^{(2)} - M^2}\]</p>
+	<details>
+        <summary>Rincian:</summary>
+        <p>Persamaan metode momen bagi \(U\) dan \(V\) adalah
+		\[\frac{U}{U + V} = M, \quad \frac{U(U + 1)}{(U + V)(U + V + 1)} = M^{(2)}\]
+        Dengan menyelesaikan sistem tersebut, diperoleh hasil di atas.</p>
+	</details>
+</div>
+
+<p>Penduga metode momen bagi \(a\) dan \(b\) pada <a href="#bet1" class="ref"></a> merupakan fungsi nonlinear yang rumit dari momen sampel \(M\) dan \(M^{(2)}\). Karena itu, kita tidak akan mencoba menentukan bias dan galat kuadrat rata-ratanya secara analitis, tetapi kita dapat menyelidikinya secara empiris melalui simulasi.</p>
+
+<div class="unit" id="o006.random.point.moments.unit.beta-known-right">
+    <p class="math">Andaikan \(a\) tidak diketahui, tetapi \(b\) diketahui. Misalkan \(U_b\) adalah penduga metode momen bagi \(a\). Maka
+	\[ U_b = b \frac{M}{1 - M} \]</p>
+	<details>
+        <summary>Rincian:</summary>
+        <p>Jika \(b\) diketahui, persamaan metode momen bagi \(U_b\) sebagai penduga \(a\) adalah \(U_b \big/ (U_b + b) = M\). Dengan menyelesaikan persamaan tersebut terhadap \(U_b\), diperoleh rumus di atas.</p>
+	</details>
+</div>
+
+<div class="unit" id="o006.random.point.moments.unit.beta-known-left">
+    <p class="math">Andaikan \(b\) tidak diketahui, tetapi \(a\) diketahui. Misalkan \(V_a\) adalah penduga metode momen bagi \(b\). Maka
+	\[ V_a = a \frac{1 - M}{M} \]</p>
+	<details>
+        <summary>Rincian:</summary>
+        <p>Jika \(a\) diketahui, persamaan metode momen bagi \(V_a\) sebagai penduga \(b\) adalah \(a \big/ (a + V_a) = M\). Dengan menyelesaikan persamaan tersebut terhadap \(V_a\), diperoleh rumus di atas.</p>
+	</details>
+</div>
+
+<div class="unit" id="o006.random.point.moments.unit.beta-simulation">
+    <p class="app">Jalankan <a href="https://www.randomservices.org/random/apps/BetaEstimate.html" class="ancillary">eksperimen pendugaan beta</a> sebanyak 1.000 kali untuk beberapa nilai ukuran sampel \(n\) serta parameter \(a\) dan \(b\). Amati bias empiris dan galat kuadrat rata-rata penduga \(U\), \(V\), \(U_b\), dan \(V_a\). Secara intuitif, penduga ketika salah satu parameter diketahui mungkin diharapkan bekerja lebih baik daripada penduga yang bersesuaian ketika kedua parameter tidak diketahui; selidiki dugaan ini secara empiris.</p>
+</div>
+
+<p>Latihan <a href="#bet2" class="ref"></a> berikut membahas distribusi yang hanya memiliki satu parameter, tetapi persamaan momen kedua dari metode momen diperlukan untuk menurunkan penduganya.</p>
+
+<div class="unit" id="bet2">
+    <p class="math">Andaikan \( \bs{X} = (X_1, X_2, \ldots, X_n) \) merupakan sampel acak dari distribusi beta <dfn>simetris</dfn>, dengan parameter kiri dan kanan sama dengan nilai tak diketahui \( c \in (0, \infty) \). Penduga metode momen bagi \( c \) adalah
+	\[ U = \frac{1 - 2 M^{(2)}}{4 M^{(2)} - 1} \]</p>
+	<details>
+        <summary>Rincian:</summary>
+        <p>Perhatikan bahwa rata-rata \( \mu \) dari distribusi simetris adalah \( \frac{1}{2} \), tidak bergantung pada \( c \), sehingga persamaan pertama metode momen tidak berguna. Namun, mencocokkan momen kedua distribusi dengan momen kedua sampel menghasilkan persamaan
+		\[ \frac{U + 1}{2 (2 U + 1)} = M^{(2)} \]
+        Dengan menyelesaikan persamaan tersebut, diperoleh hasil di atas. Solusi positif hanya ada ketika momen sampel kedua lebih besar daripada seperempat dan lebih kecil daripada setengah; di luar rentang itu, persamaan momen tidak mempunyai solusi positif.</p>
+	</details>
+</div>
+
+<h4 id="par">Distribusi Pareto</h4>
+
+<p><a href="https://www.randomservices.org/random/special/Pareto.html">Distribusi Pareto</a> dengan parameter bentuk \(a \in (0, \infty)\) dan parameter skala \(b \in (0, \infty)\) adalah distribusi kontinu pada \( [b, \infty) \) dengan fungsi kepadatan probabilitas \( g \) yang diberikan oleh
+\[ g(x) = \frac{a b^a}{x^{a + 1}}, \quad b \le x \lt \infty \]
+Distribusi Pareto dinamai menurut <a href="https://www.randomservices.org/random/biographies/Pareto.html" class="ancillary">Vilfredo Pareto</a> dan merupakan distribusi yang sangat miring serta <dfn>berekor berat</dfn>. Distribusi ini sering digunakan untuk memodelkan pendapatan dan jenis variabel acak positif tertentu lainnya. Jika \(a \gt 2\), dua momen pertama distribusi Pareto adalah
+\[\mu = \frac{a b}{a - 1}, \quad \mu^{(2)} = \frac{a b^2}{a - 2}\]
+Andaikan sekarang \(\bs{X} = (X_1, X_2, \ldots, X_n)\) merupakan sampel acak berukuran \(n\) dari distribusi Pareto dengan parameter bentuk \(a \gt 2\) dan parameter skala \(b \gt 0\). Untuk rumus dua parameter di bawah, diperlukan ukuran sampel sekurang-kurangnya dua dan varians sampel berbias yang positif; untuk sampel kontinu, syarat kedua berlaku hampir pasti.</p>
+
+<div class="unit" id="par1">
+    <p class="math">Andaikan \(a\) dan \(b\) keduanya tidak diketahui, serta \(U\) dan \(V\) adalah penduga metode momen yang bersesuaian. Maka
+	\begin{align}
+		U &amp; = 1 + \sqrt{\frac{M^{(2)}}{M^{(2)} - M^2}} \\
+		V &amp; = \frac{M^{(2)}}{M} \left( 1 - \sqrt{\frac{M^{(2)} - M^2}{M^{(2)}}} \right)
+	\end{align}</p>
+	<details>
+        <summary>Rincian:</summary>
+        <p>Persamaan metode momen bagi \(U\) dan \(V\) adalah
+		\begin{align}
+			\frac{U V}{U - 1} &amp; = M \\
+			\frac{U V^2}{U - 2} &amp; = M^{(2)}
+		\end{align}
+        Dengan menyelesaikan sistem tersebut terhadap \(U\) dan \(V\), diperoleh hasil di atas.</p>
+	</details>
+</div>
+
+<p>Penduga metode momen pada contoh <a href="#par1" class="ref"></a> merupakan fungsi nonlinear yang rumit dari \(M\) dan \(M^{(2)}\), sehingga menghitung bias dan galat kuadrat rata-ratanya sulit. Sebagai gantinya, kita dapat menyelidiki bias dan galat kuadrat rata-rata secara empiris melalui simulasi.</p>
+
+<div class="unit" id="o006.random.point.moments.unit.pareto-simulation">
+    <p class="app">Jalankan <a href="https://www.randomservices.org/random/apps/ParetoEstimate.html" class="ancillary">eksperimen pendugaan Pareto</a> sebanyak 1.000 kali untuk beberapa nilai ukuran sampel \(n\) serta parameter \(a\) dan \(b\). Amati bias empiris dan galat kuadrat rata-rata penduga \(U\) dan \(V\).</p>
+</div>
+
+<p>Ketika salah satu parameter diketahui, penduga metode momen bagi parameter lainnya lebih sederhana.</p>
+
+<div class="unit" id="o006.random.point.moments.unit.pareto-known-scale">
+    <p class="math">Andaikan \(a\) tidak diketahui, tetapi \(b\) diketahui. Misalkan \(U_b\) adalah penduga metode momen bagi \(a\). Maka
+	\[ U_b = \frac{M}{M - b}\]</p>
+	<details>
+        <summary>Rincian:</summary>
+        <p>Jika \(b\) diketahui, persamaan metode momen bagi \(U_b\) sebagai penduga \(a\) adalah \(b U_b \big/ (U_b - 1) = M\). Dengan menyelesaikan persamaan tersebut terhadap \(U_b\), diperoleh rumus di atas. Karena model pada bagian ini mensyaratkan parameter bentuk lebih besar daripada dua, hasil mentah ini juga harus diperiksa terhadap syarat tersebut.</p>
+	</details>
+</div>
+
+<div class="unit" id="o006.random.point.moments.unit.pareto-known-shape">
+    <p class="math">Andaikan \(b\) tidak diketahui, tetapi \(a\) diketahui. Misalkan \(V_a\) adalah penduga metode momen bagi \(b\). Maka
+	\[V_a = \frac{a - 1}{a}M\]</p>
+	<ol class="sub">
+        <li>\( \E(V_a) = b \), sehingga \(V_a\) tak bias.</li>
+        <li>\(\var(V_a) = \frac{b^2}{n a (a - 2)}\), sehingga \(V_a\) konsisten.</li>
+	</ol>
+	<details>
+        <summary>Rincian:</summary>
+        <p>Jika \(a\) diketahui, persamaan metode momen bagi \(V_a\) sebagai penduga \(b\) adalah \(a V_a \big/ (a - 1) = M\). Dengan menyelesaikan persamaan tersebut terhadap \(V_a\), diperoleh rumus di atas. Selanjutnya, \(\E(V_a) = \frac{a - 1}{a} \E(M) = \frac{a - 1}{a} \frac{a b}{a - 1} = b\), sehingga \(V_a\) tak bias. Terakhir, \(\var(V_a) = \left(\frac{a - 1}{a}\right)^2 \var(M) = \frac{(a - 1)^2}{a^2} \frac{a b^2}{n (a - 1)^2 (a - 2)} = \frac{b^2}{n a (a - 2)}\).</p>
+	</details>
+</div>
+
+<h4 id="uni">Distribusi Seragam</h4>
+
+<p><a href="https://www.randomservices.org/random/special/UniformContinuous.html">Distribusi seragam kontinu</a> pada interval tertutup yang ujung kirinya adalah parameter lokasi dan panjangnya adalah parameter skala, dengan parameter lokasi \( a \in \R \) dan parameter skala \( h \in (0, \infty) \), memiliki fungsi kepadatan probabilitas \( g \) yang diberikan oleh
+\[ g(x) = \frac{1}{h}, \quad x \in [a, a + h] \]
+Distribusi tersebut memodelkan suatu titik yang dipilih <q>secara acak</q> dari interval \( [a, a + h] \). Rata-rata distribusinya \( \mu = a + \frac{1}{2} h \) dan variansnya \( \sigma^2 = \frac{1}{12} h^2 \). Andaikan sekarang \( \bs{X} = (X_1, X_2, \ldots, X_n) \) merupakan sampel acak berukuran \( n \) dari distribusi seragam. Untuk rumus dua parameter di bawah, diperlukan ukuran sampel sekurang-kurangnya dua dan varians sampel berbias yang positif; untuk sampel kontinu, syarat kedua berlaku hampir pasti.</p>
+
+<div class="unit" id="o006.random.point.moments.unit.uniform-both-unknown">
+    <p class="math">Andaikan \( a \) dan \( h \) keduanya tidak diketahui, serta \( U \) dan \( V \) menyatakan penduga metode momen yang bersesuaian. Maka
+	\[ U = M - \sqrt{3} T, \quad V = 2 \sqrt{3} T \]</p>
+	<details>
+        <summary>Rincian:</summary>
+        <p>Mencocokkan rata-rata dan varians distribusi dengan rata-rata dan varians sampel menghasilkan persamaan \( U + \frac{1}{2} V = M \) dan \( \frac{1}{12} V^2 = T^2 \). Dengan menyelesaikan sistem tersebut, diperoleh hasil di atas.</p>
+	</details>
+</div>
+
+<p>Seperti biasa, kita memperoleh hasil yang lebih sederhana ketika salah satu parameter diketahui.</p>
+
+<div class="unit" id="o006.random.point.moments.unit.uniform-known-location">
+    <p class="math">Andaikan \( a \) diketahui dan \( h \) tidak diketahui, serta \( V_a \) menyatakan penduga metode momen bagi \( h \). Maka
+	\[ V_a = 2 (M - a) \]</p>
+	<ol class="sub">
+        <li>\( \E(V_a) = h \), sehingga \( V_a \) tak bias.</li>
+        <li>\( \var(V_a) = \frac{h^2}{3 n} \), sehingga \( V_a \) konsisten.</li>
+	</ol>
+	<details>
+        <summary>Rincian:</summary>
+        <p>Mencocokkan rata-rata distribusi dengan rata-rata sampel menghasilkan persamaan \( a + \frac{1}{2} V_a = M \). Dengan menyelesaikan persamaan tersebut, diperoleh rumus di atas.</p>
+		<ol class="sub">
+            <li>\( \E(V_a) = 2[\E(M) - a] = 2(a + h/2 - a) = h \).</li>
+            <li>\( \var(V_a) = 4 \var(M) = \frac{h^2}{3 n} \).</li>
+		</ol>
+	</details>
+</div>
+
+<div class="unit" id="o006.random.point.moments.unit.uniform-known-scale">
+    <p class="math">Andaikan \( h \) diketahui dan \( a \) tidak diketahui, serta \( U_h \) menyatakan penduga metode momen bagi \( a \). Maka
+	\[ U_h = M - \frac{1}{2} h \]</p>
+	<ol class="sub">
+        <li>\( \E(U_h) = a \), sehingga \( U_h \) tak bias.</li>
+        <li>\( \var(U_h) = \frac{h^2}{12 n} \), sehingga \( U_h \) konsisten.</li>
+	</ol>
+	<details>
+        <summary>Rincian:</summary>
+        <p>Mencocokkan rata-rata distribusi dengan rata-rata sampel menghasilkan persamaan \( U_h + \frac{1}{2} h = M \). Dengan menyelesaikan persamaan tersebut, diperoleh rumus di atas.</p>
+		<ol class="sub">
+            <li>\( \E(U_h) = \E(M) - \frac{1}{2}h = a + \frac{1}{2} h - \frac{1}{2} h = a \).</li>
+            <li>\( \var(U_h) = \var(M) = \frac{h^2}{12 n} \).</li>
+		</ol>
+	</details>
+</div>
+
+<h4 id="hyp">Model Hipergeometrik</h4>
+
+<p>Asumsi dasar metode momen adalah bahwa barisan variabel acak teramati \( \bs{X} = (X_1, X_2, \ldots, X_n) \) merupakan sampel acak dari suatu distribusi. Namun, setidaknya dalam beberapa kasus, metode ini tetap masuk akal ketika variabel-variabel berdistribusi identik tetapi saling bergantung. Dalam <dfn>model hipergeometrik</dfn>, kita memiliki populasi berisi \( N \) objek, dengan \( r \) objek <dfn>tipe 1</dfn> dan \( N - r \) objek sisanya <dfn>tipe 0</dfn>. Parameter \( N \), yaitu <dfn>ukuran populasi</dfn>, adalah bilangan bulat positif. Parameter \( r \), yaitu <dfn>jumlah objek tipe 1</dfn>, adalah bilangan bulat taknegatif dengan \( r \le N \). Keduanya merupakan parameter dasar, dan biasanya salah satu atau keduanya tidak diketahui. Berikut beberapa contoh umum.</p>
+
+<ol>
+    <li>Objeknya adalah perangkat, yang diklasifikasikan sebagai <dfn>baik</dfn> atau <dfn>cacat</dfn>.</li>
+    <li>Objeknya adalah orang, yang diklasifikasikan sebagai <dfn>perempuan</dfn> atau <dfn>laki-laki</dfn>.</li>
+    <li>Objeknya adalah pemilih, yang diklasifikasikan sebagai <dfn>pendukung</dfn> atau <dfn>penentang</dfn> kandidat tertentu.</li>
+    <li>Objeknya adalah satwa liar dari jenis tertentu, yang <dfn>ditandai</dfn> atau <dfn>tidak ditandai</dfn>.</li>
+</ol>
+
+<p>Kita mengambil sampel \( n \) objek secara acak dari populasi, tanpa pengembalian; ukuran sampel diasumsikan sekurang-kurangnya satu dan tidak melebihi ukuran populasi. Misalkan \( X_i \) adalah tipe objek ke-\( i \) yang terpilih, sehingga barisan variabel teramati adalah \( \bs{X} = (X_1, X_2, \ldots, X_n) \). Variabel-variabel ini merupakan indikator yang berdistribusi identik, dengan \( \P(X_i = 1) = r / N \) untuk setiap \( i \in \{1, 2, \ldots, n\} \), tetapi saling bergantung karena pensampelan dilakukan tanpa pengembalian. Banyaknya objek tipe 1 dalam sampel adalah \( Y = \sum_{i=1}^n X_i \). Statistik ini memiliki <a href="https://www.randomservices.org/random/urn/Hypergeometric.html">distribusi hipergeometrik</a> dengan parameter \( N \), \( r \), dan \( n \), serta fungsi kepadatan probabilitas yang diberikan oleh
+\[ \P(Y = y) = \frac{\binom{r}{y} \binom{N - r}{n - y}}{\binom{N}{n}} = \binom{n}{y} \frac{r^{(y)} (N - r)^{(n - y)}}{N^{(n)}}, \quad y \in \{\max\{0, n - N + r\}, \ldots, \min\{n, r\}\} \]</p>
+
+<div class="unit" id="o006.random.point.moments.unit.hypergeometric-estimators">
+    <p class="math">Seperti di atas, misalkan \( \bs{X} = (X_1, X_2, \ldots, X_n) \) adalah variabel teramati dalam model hipergeometrik dengan parameter \( N \) dan \( r \). Maka</p>
+	<ol class="sub">
+        <li>Penduga metode momen bagi \( p = r / N \) adalah \( M = Y / n \), yaitu rata-rata sampel.</li>
+        <li>Penduga metode momen bagi \( r \) ketika \( N \) diketahui adalah \( U = N M = N Y / n \).</li>
+        <li>Penduga metode momen bagi \( N \) ketika \( r \) diketahui adalah \( V = r / M = r n / Y \) jika \( Y > 0 \).</li>
+	</ol>
+	<details>
+        <summary>Rincian:</summary>
+        <p>Semua hasil ini langsung mengikuti fakta bahwa \( \E(X) = \P(X = 1) = r / N \). Penduga bagi parameter bilangan bulat di atas adalah nilai mentah real dari metode momen; jika hasilnya harus berada dalam ruang parameter bilangan bulat, diperlukan aturan proyeksi atau pembulatan terkendala yang dinyatakan secara terpisah.</p>
+	</details>
+</div>
+
+<p>Dalam contoh pemilih (3) di atas, biasanya \( N \) dan \( r \) keduanya tidak diketahui, tetapi kita hanya tertarik menduga rasio \( p = r / N \). Dalam contoh keandalan (1), biasanya kita mengetahui \( N \) dan tertarik menduga \( r \). Dalam contoh satwa liar (4), biasanya kita mengetahui \( r \) dan tertarik menduga \( N \). Contoh ini dikenal sebagai model <dfn>tangkap–tangkap kembali</dfn>.</p>
+
+<p>Jelas terdapat hubungan erat antara model hipergeometrik dan <a href="#ber">model percobaan Bernoulli</a> pada subbagian di atas. Jika pensampelan dilakukan <em>dengan</em> pengembalian, model percobaan Bernoulli berlaku, bukan model hipergeometrik. Selain itu, jika ukuran populasi \( N \) besar dibandingkan ukuran sampel \( n \), model percobaan Bernoulli memberikan hampiran yang baik bagi model hipergeometrik.</p>
+
+<footer>
+	<ol class="map">
+		<li class="parent"><a href="https://www.randomservices.org/random/index.html">Random</a></li>
+        <li class="parent"><a href="index.html">6. Pendugaan Titik</a></li>
+        <li class="child"><a href="Estimators.html" title="Penduga">1</a></li>
+		<li class="current">2</li>
+        <li class="child"><a href="https://www.randomservices.org/random/point/Likelihood.html" title="Kemungkinan Maksimum">3</a></li>
+        <li class="child"><a href="https://www.randomservices.org/random/point/Bayes.html" title="Penduga Bayes">4</a></li>
+        <li class="child"><a href="https://www.randomservices.org/random/point/Unbiased.html" title="Penduga Tak Bias Terbaik">5</a></li>
+        <li class="child"><a href="https://www.randomservices.org/random/point/Sufficient.html" title="Statistik Cukup, Lengkap, dan Ancilar">6</a></li>
+        <li class="details"><button type="button" title="Perluas Rincian" onclick="expandDetails(true);"><img src="../icons/Plus.svg" alt="Perluas"></button></li>
+        <li class="details"><button type="button" title="Ciutkan Rincian" onclick="expandDetails(false);"><img src="../icons/Minus.svg" alt="Ciutkan"></button></li>
+	</ol>
+	<ul class="map">
+        <li class="sister"><a href="https://www.randomservices.org/random/apps/index.html" class="ancillary">Aplikasi</a></li>
+        <li class="sister"><a href="https://www.randomservices.org/random/data/index.html" class="ancillary">Himpunan Data</a></li>
+        <li class="child"><a href="https://www.randomservices.org/random/biographies/index.html" class="ancillary">Biografi</a></li>
+	</ul>
+    <section class="edition-notice" data-o006-edition-notice="v1">
+        <p><strong>Pemberitahuan edisi.</strong> Terjemahan Bahasa Indonesia ini mengadaptasi <a href="https://www.randomservices.org/random/">Random: Probabilitas, Statistika Matematis, dan Proses Stokastik</a> karya Kyle Siegrist. Perubahan pada halaman ini mencakup penerjemahan, penambahan ID stabil, pengalihan tautan inti yang telah diterjemahkan ke edisi lokal, pengalihan tautan inti yang belum diterjemahkan ke sumber resmi, pengubahan tautan pelengkap menjadi tautan HTTPS resmi, serta koreksi terbatas terhadap kekeliruan matematis dan data yang dicatat dalam daftar koreksi edisi.</p>
+        <p>Situs asal menyatakan <a href="https://creativecommons.org/licenses/by/2.0/">CC BY 2.0</a>, sedangkan halaman <a href="https://www.randomservices.org/random/Credits.html">Kredit</a> menautkan <a href="https://creativecommons.org/licenses/by/1.0/">CC BY 1.0</a>; perbedaan ini dipertahankan. Edisi independen ini tidak didukung maupun disahkan oleh Kyle Siegrist atau Random Services. Tautan ke aplikasi, data, dan biografi pihak ketiga tidak menyatakan hak untuk mendistribusikan ulang materi tersebut.</p>
+    </section>
+</footer>
+
+<script>getReferences();</script>
+
+</body>
+</html>

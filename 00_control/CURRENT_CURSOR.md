@@ -7,12 +7,12 @@
   `d36e0f8bf9fa44a38a7504f9688a08af6787d88ede99298316a3e022b6f799f5`
 - Ordered core: the `core_paths` array in
   `authority/SOURCE_FREEZE_RECEIPT.json`
-- Last completed source page: `random/point/Estimators.html` (core ordinal 11 of 29)
-- Next contiguous source page: `random/point/Moments.html` (core ordinal 12)
-- Latest reader: 11 translated pages; 41 files; 2,300,109 bytes; manifest
-  SHA-256 `5ec24c67e16ca04ed74925f9814a8aa29a8874a10d312287a9b1d5141658e6ed`
+- Last completed source page: `random/point/Moments.html` (core ordinal 12 of 29)
+- Next contiguous source page: `random/point/Likelihood.html` (core ordinal 13).
+- Latest reader: 12 translated pages; 42 files; 2,357,478 bytes; manifest
+  SHA-256 `020f808d914fefd34e92473da916c2d3f845464ebb38e3bc4380ef173451669f`
 - Latest deterministic QA receipt SHA-256:
-  `2115e0416ebe3f4005d3de049983d54bd3685249b2d74b403d35a1d7f69b6180`
+  `7369eae27c7958b964c780983b0c0929ab0beed10ad16c42f83439df9fe01a4b`
 - Publication transaction: commit
   `1806863320c1c0859e04a2d93773adbb8d4ae377`, workflow `32557204624`, job
   `96993176639`, deployment `6034057446`, and deployment status `17154596564`
@@ -39,9 +39,17 @@
   `e8de31f98d918f8bf394bebd3527751da6cf0f46`). The single bounded push at
   2026-08-22T17:02:32.3706667+02:00 returned GitHub's explicit
   account-suspended HTTP 403 response; no credential was read or retried.
+- Twelve-page local checkpoint:
+  `CHECKPOINT_2026-08-22_TWELVE_PAGE.md`; ordinal 12 preserves the exact
+  440-element hierarchy and 649 TeX spans, binds 3,243 translated backend
+  entities, passes two deterministic backend/build/QA replays, and passes fresh
+  live desktop/mobile centered reflow checks with all 652 MathJax containers,
+  no page-level overflow, and functional 29/29 disclosure controls. Boundary
+  commit and publication disposition are pending the exact local checkpoint
+  transaction.
 
 Resume by reading this file, `CURRENT_STATE.md`, the freeze receipt, and the
 last row of `TRANSLATION_LEDGER.csv`. Continue with
-`random/point/Moments.html`; perform only one bounded GitHub current-state
-recheck at each future substantial boundary, not again for this one. Do not
+`random/point/Likelihood.html`; perform only one bounded GitHub current-state
+recheck at each future substantial boundary. Do not
 restart source selection or repeat the completed pages.

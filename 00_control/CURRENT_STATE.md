@@ -5,8 +5,8 @@ Updated: 2026-08-22
 ## Status
 
 Edition source admitted; exact authority and component-rights freezes complete; the
-first eleven contiguous Indonesian pages and the full 29-page machine backend
-are locally verified. Every entity on those eleven pages is now bound to its target
+first twelve contiguous Indonesian pages and the full 29-page machine backend
+are locally verified. Every entity on those twelve pages is now bound to its target
 path, locale, byte count, and SHA-256. The repository is public; the repaired
 three- and four-page Pages checkpoints remain historical evidence. The
 five-page boundary through the central limit theorem remains publicly verified.
@@ -37,7 +37,18 @@ audit, exact topology and protected-math gates, backend/build/QA, two
 byte-identical deterministic replays, and fresh live desktop/mobile rendering.
 All 432 MathJax containers render in a centered page-filling layout without
 page-level overflow; all 15 disclosure controls open and close correctly.
-The complete 29-page edition is not yet claimed.
+The twelve-page boundary completes `random/point/Moments.html`. It passed an
+independent language audit and an independent mathematical/topological audit,
+exact 440-element topology and 649-span protected-math gates, backend/build/QA,
+two byte-identical deterministic replays, and fresh live desktop/mobile
+rendering. All 652 rendered MathJax containers fit the centered page-filling
+reader without page-level overflow; all 29 disclosure controls open and close
+correctly. The authority remains immutable. The complete 29-page edition is
+not yet claimed.
+
+Ordinal 13, `random/point/Likelihood.html`, is the next contiguous production
+page. Do not skip to the separate Penn State component or repeat completed
+Random pages.
 
 ## Admitted source
 
@@ -106,18 +117,18 @@ entities and 9,035 relations. It contains 29 documents, 366 sections, 760
 structural units, 451 disclosures, 2,891 math-text containers, 24 figures, 236
 assets, and 1,810 internal links. The source-grounded exercise rule designates
 260 units and leaves 500 undesignated; its exact basis is 123 both, 95
-exercise-section only, 42 native `app`/`stat` only, and 500 neither. All 2,931
-entities on ordinals 1–11 carry verified id-ID bindings; 3,636 later entities
+exercise-section only, 42 native `app`/`stat` only, and 500 neither. All 3,243
+entities on ordinals 1–12 carry verified id-ID bindings; 3,324 later entities
 carry explicit untranslated/null locale fields.
 
-- Entity JSONL: 10,401,983 bytes; SHA-256
-  `3d80a48445a8dd7b199f004f78149f7d7c4aadc4d9c646f4b44f0b9635b5778a`.
+- Entity JSONL: 10,431,935 bytes; SHA-256
+  `be579f147cef70bade84bcb30f34973697eaa61018b4e7f277c0381f7307c233`.
 - Relation CSV: 1,182,589 bytes; SHA-256
   `b235f4d4d724c7fe8653dfd06b075b2225cc2d116f3b87d0fda950d47030159a`.
 - Backend receipt SHA-256:
-  `a8008155f230c315663217a476ed404146497af00a38defd1ad86d95167b8662`.
+  `9c93c0a65c48790ed5759fe6fab289d56e3fa5aaeeb6b63b2728cdb03237dace`.
 - Bound translation-ledger SHA-256:
-  `c0a7a0a1df965917e47531479d79438bf54e1ea402156bd4527a3f7cc76b9cb1`.
+  `fc910d4b723de0cc37b9b4955407914521a9915c9334b297373167366f72b578`.
 - Replay: `python scripts/generate_random_backend.py --check-only`.
 
 ## Four-page reader checkpoint
@@ -370,6 +381,36 @@ warning/error console. Exact evidence is in
 account-suspended HTTP 403 response; no credential was read or retried. The
 commit remains preserved locally.
 
+## Twelve-page local checkpoint
+
+Core ordinals 1–12 are complete through `random/point/Moments.html`. The reader
+is 42 files / 2,357,478 bytes; canonical manifest SHA-256 is
+`020f808d914fefd34e92473da916c2d3f845464ebb38e3bc4380ef173451669f`.
+Build-receipt SHA-256 is
+`fdfe451256e13dd08679f4c0e9186366663e4d6566dabc6cc8a24d6560be250c`;
+QA-receipt SHA-256 is
+`7369eae27c7958b964c780983b0c0929ab0beed10ad16c42f83439df9fe01a4b`.
+
+Moments preserves the exact 440-element hierarchy and all 649 TeX spans,
+contains 37 units and 29 disclosures, and carries 54 native/additive IDs.
+Twelve protected mathematical repairs correct the symmetric-beta and uniform
+estimators, hypergeometric support, negative-binomial variance, gamma
+denominator, Pareto support, and notation defects. Bounded prose corrections
+close the MSE theorem's hypotheses/proof, Jensen strictness, and finite-sample
+parameter domains; four missing paragraph closes preserve the parsed source
+hierarchy. Its 37 href-delta categories account for 48 occurrences. The
+aggregate census is 5,801 source elements, 362 units, 245 disclosures, 4,536
+TeX spans, 545 IDs, 432 local references, and 106 fragments. The backend binds
+3,243 translated entities.
+
+Two complete backend/build/QA check-only replays returned byte-identical
+identities. Fresh live desktop/mobile inspection rendered all 652 MathJax
+containers, found centered page-filling geometry and zero page-level overflow,
+and exercised all 29 disclosure controls in both directions with an empty
+warning/error console. Exact evidence is in
+`CHECKPOINT_2026-08-22_TWELVE_PAGE.md`. Boundary commit and publication
+disposition are pending the exact local checkpoint transaction.
+
 ## Rights boundary
 
 The Random landing page identifies CC BY 2.0; `Credits.html` links CC BY 1.0.
@@ -383,7 +424,7 @@ the site-wide notice; they must be cleared, replaced, or linked externally.
 
 ## Known upstream defects (do not silently alter authority)
 
-`ADVERSE_LEDGER.jsonl` runs through `O006-ADV-0129`. CLT repairs include the
+`ADVERSE_LEDGER.jsonl` runs through `O006-ADV-0141`. CLT repairs include the
 zero-origin condition, correlation domain/formula/citation, the rigorous
 characteristic-function proof, continuity notation, dice answer, chi-square
 definition, negative-binomial support/domain/answer mapping, and determinate
@@ -420,12 +461,20 @@ and reversed M&M answers. The other frozen data answers were independently
 recomputed and agree. Authority bytes remain immutable. Do not contact upstream
 during production.
 
+Moments repairs cover its undefined macro; missing MSE-ratio hypotheses and
+proof sign; negative-binomial variance factor; gamma denominator; corrected
+symmetric-beta and uniform moment solutions; Pareto and hypergeometric support;
+finite-sample parameter domains; Jensen strictness; probability/expectation and
+estimator notation; four omitted paragraph closes; and determinate prose and
+orphan part-reference defects. All are target-only; the 48,492-byte authority
+remains unchanged.
+
 ## Next work
 
-1. Continue immediately through all 18 remaining source pages, beginning with
-   `random/point/Moments.html` (core ordinal 12), while growing the same
+1. Continue immediately through all 17 remaining source pages, beginning with
+   `random/point/Likelihood.html` (core ordinal 13), while growing the same
    deterministic reader and stable-ID backend.
-2. Record the exact eleven-page content commit and briefly recheck current
+2. Record the exact twelve-page content commit and briefly recheck current
    GitHub availability once. The
    supplied credentials currently resolve to one suspended account and one
    invalid credential; do not loop or expose either token. Preserve the exact

@@ -72,6 +72,7 @@ TARGETS = (
     PurePosixPath("random/sample/Normal.html"),
     PurePosixPath("random/point/index.html"),
     PurePosixPath("random/point/Estimators.html"),
+    PurePosixPath("random/point/Moments.html"),
 )
 
 # Screen.css references all of these local assets. Keeping the complete exact set
@@ -428,6 +429,107 @@ BOUNDED_TEXT_CORRECTIONS = (
         "new": "Roger L Berger",
         "replacements": 1,
         "reason": "correct the misspelled name of Statistical Inference coauthor Roger L. Berger",
+    },
+)
+
+BOUNDED_TEXT_CORRECTIONS += (
+    {
+        "page": "random/point/Moments.html",
+        "old": "Namun, dalam penerapan berikut, indeks itu kita tampilkan kembali karena kita hendak membahas perilaku asimtotik.</p>",
+        "new": "Namun, dalam penerapan berikut, indeks itu kita tampilkan kembali karena kita hendak membahas perilaku asimtotik. Pada sampel berhingga, persamaan momen dapat pula tidak mempunyai solusi dalam ruang parameter atau menghasilkan penyebut nol; dalam kasus seperti itu, rumus yang ditampilkan hanya berlaku ketika solusinya terdefinisi dan memenuhi batas parameter yang dinyatakan.</p>",
+        "replacements": 1,
+        "reason": "state the finite-sample parameter-space and zero-denominator limits of raw moment equations",
+    },
+    {
+        "page": "random/point/Moments.html",
+        "old": r"Ingat bahwa \( \var(W_n^2) \lt \var(S_n^2) \) untuk \( n \in \{2, 3, \ldots\} \), tetapi \( \var(S_n^2) / \var(W_n^2) \to 1 \) ketika \( n \to \infty \).",
+        "new": r"Dengan syarat momen pusat keempat berhingga dan lebih besar daripada kuadrat varians, ingat bahwa \( \var(W_n^2) \lt \var(S_n^2) \) untuk \( n \in \{2, 3, \ldots\} \) dan \( \var(S_n^2) / \var(W_n^2) \to 1 \) ketika \( n \to \infty \).",
+        "replacements": 1,
+        "reason": "the variance comparison and ratio require finite nondegenerate fourth central moment",
+    },
+    {
+        "page": "random/point/Moments.html",
+        "old": r'    <p class="math">\( \mse(T_n^2) / \mse(W_n^2) \to 1 \) dan \( \mse(T_n^2) / \mse(S_n^2) \to 1 \) ketika \( n \to \infty \).</p>',
+        "new": r'    <p class="math">Jika momen pusat keempat berhingga dan lebih besar daripada kuadrat varians, maka \( \mse(T_n^2) / \mse(W_n^2) \to 1 \) dan \( \mse(T_n^2) / \mse(S_n^2) \to 1 \) ketika \( n \to \infty \).</p>',
+        "replacements": 1,
+        "reason": "exclude infinite and zero leading terms from the asymptotic MSE-ratio theorem",
+    },
+    {
+        "page": "random/point/Moments.html",
+        "old": r"Koefisien \( \sigma_4 \) dan \( \sigma^4 \) dalam \( \mse(T_n^2) \) masing-masing asimtotik terhadap \( 1 / n \) ketika \( n \to \infty \).",
+        "new": r"Koefisien \( \sigma_4 \) dan \( \sigma^4 \) dalam \( \mse(T_n^2) \) masing-masing asimtotik terhadap \( 1 / n \) dan negatifnya ketika \( n \to \infty \). Dengan hipotesis di atas, selisih kedua momen itu menghasilkan suku utama bersama yang positif pada pembilang dan penyebut, sehingga rasionya menuju 1.",
+        "replacements": 1,
+        "reason": "restore the negative sign of the sigma-fourth coefficient and complete the ratio proof",
+    },
+    {
+        "page": "random/point/Moments.html",
+        "old": r"Jadi, \( W \) berbias negatif sebagai penduga bagi \( \sigma \), tetapi tak bias secara asimtotik dan konsisten.",
+        "new": r"Jadi, bias \( W \) sebagai penduga bagi \( \sigma \) tidak positif dan menjadi negatif kecuali kuadrat penduga tersebut konstan hampir pasti; penduga ini tak bias secara asimtotik dan konsisten.",
+        "replacements": 1,
+        "reason": "Jensen gives weak rather than universally strict negative bias",
+    },
+    {
+        "page": "random/point/Moments.html",
+        "old": "        <p>Mencocokkan rata-rata dan varians distribusi dengan rata-rata dan varians sampel memberikan persamaan",
+        "new": "        <p>Rumus di atas menghasilkan nilai dalam ruang parameter hanya ketika rata-rata sampel positif dan varians sampel berbias lebih besar daripada rata-rata sampel. Mencocokkan rata-rata dan varians distribusi dengan rata-rata dan varians sampel memberikan persamaan",
+        "replacements": 1,
+        "reason": "state the exact admissibility conditions for the two-parameter negative-binomial estimates",
+    },
+    {
+        "page": "random/point/Moments.html",
+        "old": r"<p>Andaikan sekarang \(\bs{X} = (X_1, X_2, \ldots, X_n)\) merupakan sampel acak dari distribusi gamma dengan parameter bentuk \(k\) dan parameter skala \(b\).</p>",
+        "new": r"<p>Andaikan sekarang \(\bs{X} = (X_1, X_2, \ldots, X_n)\) merupakan sampel acak dari distribusi gamma dengan parameter bentuk \(k\) dan parameter skala \(b\). Untuk rumus dua parameter di bawah, diperlukan ukuran sampel sekurang-kurangnya dua dan varians sampel berbias yang positif; untuk sampel kontinu, syarat kedua berlaku hampir pasti.</p>",
+        "replacements": 1,
+        "reason": "close the gamma two-parameter denominator and parameter-space domain",
+    },
+    {
+        "page": "random/point/Moments.html",
+        "old": r"Andaikan sekarang \(\bs{X} = (X_1, X_2, \ldots, X_n)\) merupakan sampel acak berukuran \(n\) dari distribusi beta dengan parameter kiri \(a\) dan parameter kanan \(b\).</p>",
+        "new": r"Andaikan sekarang \(\bs{X} = (X_1, X_2, \ldots, X_n)\) merupakan sampel acak berukuran \(n\) dari distribusi beta dengan parameter kiri \(a\) dan parameter kanan \(b\). Untuk rumus dua parameter di bawah, diperlukan ukuran sampel sekurang-kurangnya dua dan varians sampel berbias yang positif; untuk sampel kontinu, syarat kedua berlaku hampir pasti.</p>",
+        "replacements": 1,
+        "reason": "close the beta two-parameter denominator and parameter-space domain",
+    },
+    {
+        "page": "random/point/Moments.html",
+        "old": r"Andaikan sekarang \(\bs{X} = (X_1, X_2, \ldots, X_n)\) merupakan sampel acak berukuran \(n\) dari distribusi Pareto dengan parameter bentuk \(a \gt 2\) dan parameter skala \(b \gt 0\).</p>",
+        "new": r"Andaikan sekarang \(\bs{X} = (X_1, X_2, \ldots, X_n)\) merupakan sampel acak berukuran \(n\) dari distribusi Pareto dengan parameter bentuk \(a \gt 2\) dan parameter skala \(b \gt 0\). Untuk rumus dua parameter di bawah, diperlukan ukuran sampel sekurang-kurangnya dua dan varians sampel berbias yang positif; untuk sampel kontinu, syarat kedua berlaku hampir pasti.</p>",
+        "replacements": 1,
+        "reason": "close the Pareto two-parameter denominator and parameter-space domain",
+    },
+    {
+        "page": "random/point/Moments.html",
+        "old": r"Andaikan sekarang \( \bs{X} = (X_1, X_2, \ldots, X_n) \) merupakan sampel acak berukuran \( n \) dari distribusi seragam.</p>",
+        "new": r"Andaikan sekarang \( \bs{X} = (X_1, X_2, \ldots, X_n) \) merupakan sampel acak berukuran \( n \) dari distribusi seragam. Untuk rumus dua parameter di bawah, diperlukan ukuran sampel sekurang-kurangnya dua dan varians sampel berbias yang positif; untuk sampel kontinu, syarat kedua berlaku hampir pasti.</p>",
+        "replacements": 1,
+        "reason": "close the uniform two-parameter denominator and parameter-space domain",
+    },
+    {
+        "page": "random/point/Moments.html",
+        "old": "        Dengan menyelesaikan persamaan tersebut, diperoleh hasil di atas.</p>",
+        "new": "        Dengan menyelesaikan persamaan tersebut, diperoleh hasil di atas. Solusi positif hanya ada ketika momen sampel kedua lebih besar daripada seperempat dan lebih kecil daripada setengah; di luar rentang itu, persamaan momen tidak mempunyai solusi positif.</p>",
+        "replacements": 1,
+        "reason": "state the exact positive-solution range of the repaired symmetric-beta estimator",
+    },
+    {
+        "page": "random/point/Moments.html",
+        "old": r"<p>Jika \(b\) diketahui, persamaan metode momen bagi \(U_b\) sebagai penduga \(a\) adalah \(b U_b \big/ (U_b - 1) = M\). Dengan menyelesaikan persamaan tersebut terhadap \(U_b\), diperoleh rumus di atas.</p>",
+        "new": r"<p>Jika \(b\) diketahui, persamaan metode momen bagi \(U_b\) sebagai penduga \(a\) adalah \(b U_b \big/ (U_b - 1) = M\). Dengan menyelesaikan persamaan tersebut terhadap \(U_b\), diperoleh rumus di atas. Karena model pada bagian ini mensyaratkan parameter bentuk lebih besar daripada dua, hasil mentah ini juga harus diperiksa terhadap syarat tersebut.</p>",
+        "replacements": 1,
+        "reason": "the known-scale Pareto moment solution may fall outside the section's shape-parameter model",
+    },
+    {
+        "page": "random/point/Moments.html",
+        "old": r"<p>Kita mengambil sampel \( n \) objek secara acak dari populasi, tanpa pengembalian. Misalkan",
+        "new": r"<p>Kita mengambil sampel \( n \) objek secara acak dari populasi, tanpa pengembalian; ukuran sampel diasumsikan sekurang-kurangnya satu dan tidak melebihi ukuran populasi. Misalkan",
+        "replacements": 1,
+        "reason": "state the hypergeometric sampling constraint one through population size",
+    },
+    {
+        "page": "random/point/Moments.html",
+        "old": r"        <p>Semua hasil ini langsung mengikuti fakta bahwa \( \E(X) = \P(X = 1) = r / N \).</p>",
+        "new": r"        <p>Semua hasil ini langsung mengikuti fakta bahwa \( \E(X) = \P(X = 1) = r / N \). Penduga bagi parameter bilangan bulat di atas adalah nilai mentah real dari metode momen; jika hasilnya harus berada dalam ruang parameter bilangan bulat, diperlukan aturan proyeksi atau pembulatan terkendala yang dinyatakan secara terpisah.</p>",
+        "replacements": 1,
+        "reason": "distinguish raw real moment estimates from constrained integer-valued parameter estimates",
     },
 )
 
@@ -1150,6 +1252,96 @@ PROTECTED_MATH_CORRECTIONS += tuple(
         "reason": reason,
     }
     for span_index, old, new, reason in ESTIMATORS_MATH_CORRECTIONS
+)
+
+MOMENTS_MATH_CORRECTIONS = (
+    (
+        133,
+        r"\( \W_n^2 \)",
+        r"\( W_n^2 \)",
+        "remove the undefined W macro from the known-mean variance proof",
+    ),
+    (
+        214,
+        r"\(n \in \{2, 3, \ldots, \}\)",
+        r"\(n \in \{2, 3, \ldots\}\)",
+        "remove the empty trailing entry from the sample-size set",
+    ),
+    (
+        386,
+        r"\( E(U_p) = \frac{p}{1 - p} \E(M)\)",
+        r"\( \E(U_p) = \frac{p}{1 - p} \E(M)\)",
+        "use the declared expectation macro consistently",
+    ),
+    (
+        389,
+        r"\( \var(M) = \frac{1}{n} \var(X) = \frac{1 - p}{n p^2} \)",
+        r"\( \var(M) = \frac{1}{n} \var(X) = \frac{k(1 - p)}{n p^2} \)",
+        "restore the missing negative-binomial shape factor",
+    ),
+    (
+        445,
+        r"\( \var(V_k) = b^2 / k n \)",
+        r"\( \var(V_k) = \frac{b^2}{k n} \)",
+        "group the gamma-estimator variance denominator unambiguously",
+    ),
+    (
+        452,
+        r"\(\var(V_k) = \var(M) / k^2 = k b ^2 / (n k^2) = b^2 / k n\)",
+        r"\(\var(V_k) = \var(M) / k^2 = k b ^2 / (n k^2) = \frac{b^2}{k n}\)",
+        "apply the same gamma-estimator denominator repair in the proof",
+    ),
+    (
+        512,
+        r"\[ U = \frac{2 M^{(2)}}{1 - 4 M^{(2)}} \]",
+        r"\[ U = \frac{1 - 2 M^{(2)}}{4 M^{(2)} - 1} \]",
+        "solve the symmetric-beta second-moment equation correctly",
+    ),
+    (
+        519,
+        r"\( (b, \infty) \)",
+        r"\( [b, \infty) \)",
+        "make the Pareto support agree with the displayed density",
+    ),
+    (
+        583,
+        r"\[ U = 2 M - \sqrt{3} T, \quad V = 2 \sqrt{3} T \]",
+        r"\[ U = M - \sqrt{3} T, \quad V = 2 \sqrt{3} T \]",
+        "correct the two-parameter uniform location estimator",
+    ),
+    (
+        592,
+        r"\( V \)",
+        r"\( V_a \)",
+        "name the Pareto scale estimator actually under discussion",
+    ),
+    (
+        621,
+        r"\( P(X_i = 1) = r / N \)",
+        r"\( \P(X_i = 1) = r / N \)",
+        "use the page's declared probability macro",
+    ),
+    (
+        627,
+        r"\[ P(Y = y) = \frac{\binom{r}{y} \binom{N - r}{n - y}}{\binom{N}{n}} = \binom{n}{y} \frac{r^{(y)} (N - r)^{(n - y)}}{N^{(n)}}, \quad y \in \{\max\{0, N - n + r\}, \ldots, \min\{n, r\}\} \]",
+        r"\[ \P(Y = y) = \frac{\binom{r}{y} \binom{N - r}{n - y}}{\binom{N}{n}} = \binom{n}{y} \frac{r^{(y)} (N - r)^{(n - y)}}{N^{(n)}}, \quad y \in \{\max\{0, n - N + r\}, \ldots, \min\{n, r\}\} \]",
+        "use the declared probability macro and correct the hypergeometric support lower bound",
+    ),
+)
+
+PROTECTED_MATH_CORRECTIONS += tuple(
+    {
+        "page": "random/point/Moments.html",
+        "old": old,
+        "new": new,
+        "span_old": old,
+        "span_new": new,
+        "span_index": span_index,
+        "replacements": 1,
+        "surface": "math_span",
+        "reason": reason,
+    }
+    for span_index, old, new, reason in MOMENTS_MATH_CORRECTIONS
 )
 
 # Reader-facing language inside TeX \text{...} remains protected mathematics:
