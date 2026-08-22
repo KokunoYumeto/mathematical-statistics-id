@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="id-ID">
+
+<head>
+	<meta charset="utf-8">
+	<title>Pendugaan Titik</title>
+	<meta name="author" content="Kyle Siegrist">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="keywords" content="probabilitas, statistika, pendugaan titik, metode momen, metode kemungkinan maksimum, penduga tak bias, penduga Bayes, statistik cukup, statistik lengkap, statistik ancilar">
+	<link rel="icon" href="../icons/Icon.svg" type="image/svg">
+	<link rel="stylesheet" href="../Screen.css" type="text/css" media="screen">
+	<link rel="contents" href="https://www.randomservices.org/random/index.html">
+	<link rel="previous" href="../sample/index.html">
+	<link rel="next" href="https://www.randomservices.org/random/interval/index.html">
+	<script src="../Basic.js"></script>
+</head>
+
+<body>
+
+<header>
+	<ol class="map">
+		<li class="parent"><a href="https://www.randomservices.org/random/index.html">Random</a></li>
+		<li class="child"><a href="https://www.randomservices.org/random/foundations/index.html" title="Dasar-Dasar">0</a></li>
+		<li class="child"><a href="https://www.randomservices.org/random/prob/index.html" title="Ruang Probabilitas">1</a></li>
+		<li class="child"><a href="https://www.randomservices.org/random/dist/index.html" title="Distribusi">2</a></li>
+		<li class="child"><a href="https://www.randomservices.org/random/expect/index.html" title="Nilai Harapan">3</a></li>
+		<li class="child"><a href="https://www.randomservices.org/random/special/index.html" title="Distribusi Khusus">4</a></li>
+		<li class="child"><a href="../sample/index.html" title="Sampel Acak">5</a></li>
+		<li class="current">6</li>
+		<li class="child"><a href="https://www.randomservices.org/random/interval/index.html" title="Pendugaan Himpunan">7</a></li>
+		<li class="child"><a href="https://www.randomservices.org/random/hypothesis/index.html" title="Pengujian Hipotesis">8</a></li>
+		<li class="child"><a href="https://www.randomservices.org/random/buffon/index.html" title="Model Geometris">9</a></li>
+		<li class="child"><a href="https://www.randomservices.org/random/bernoulli/index.html" title="Percobaan Bernoulli">10</a></li>
+		<li class="child"><a href="https://www.randomservices.org/random/urn/index.html" title="Model Pengambilan Sampel Hingga">11</a></li>
+		<li class="child"><a href="https://www.randomservices.org/random/games/index.html" title="Permainan Untung-untungan">12</a></li>
+		<li class="child"><a href="https://www.randomservices.org/random/poisson/index.html" title="Proses Poisson">13</a></li>
+		<li class="child"><a href="https://www.randomservices.org/random/renewal/index.html" title="Proses Pembaruan">14</a></li>
+		<li class="child"><a href="https://www.randomservices.org/random/markov/index.html" title="Proses Markov">15</a></li>
+		<li class="child"><a href="https://www.randomservices.org/random/martingales/index.html" title="Martingal">16</a></li>
+		<li class="child"><a href="https://www.randomservices.org/random/brown/index.html" title="Gerak Brown">17</a></li>
+	</ol>
+	<h1 id="o006.random.point.index.chapter">6. Pendugaan Titik</h1>
+</header>
+
+<h4 id="o006.random.point.index.summary">Ringkasan</h4>
+
+<p>Pendugaan titik adalah proses menduga parameter suatu distribusi probabilitas berdasarkan data yang diamati dari distribusi tersebut. Topik ini merupakan salah satu pokok utama statistika matematis. Dalam bab ini, kita akan mengkaji metode pendugaan titik yang paling umum: metode momen, metode kemungkinan maksimum, dan penduga Bayes. Kita juga mempelajari sifat-sifat penting penduga, termasuk kecukupan dan kelengkapan, serta pertanyaan mendasar apakah suatu penduga merupakan penduga terbaik yang dapat diperoleh.</p>
+
+<h4 id="o006.random.point.index.topics">Topik</h4>
+
+<ol>
+	<li><a href="https://www.randomservices.org/random/point/Estimators.html">Penduga</a></li>
+	<li><a href="https://www.randomservices.org/random/point/Moments.html">Metode Momen</a></li>
+	<li><a href="https://www.randomservices.org/random/point/Likelihood.html">Kemungkinan Maksimum</a></li>
+	<li><a href="https://www.randomservices.org/random/point/Bayes.html">Pendugaan Bayes</a></li>
+	<li><a href="https://www.randomservices.org/random/point/Unbiased.html">Penduga Tak Bias Terbaik</a></li>
+	<li><a href="https://www.randomservices.org/random/point/Sufficient.html">Statistik Cukup, Lengkap, dan Ancilar</a></li>
+</ol>
+
+<h4 id="o006.random.point.index.apps">Aplikasi</h4>
+
+<ul class="ancillary">
+	<li><a href="https://www.randomservices.org/random/apps/NormalEstimate.html" class="ancillary">Eksperimen Pendugaan pada Distribusi Normal</a></li>
+	<li><a href="https://www.randomservices.org/random/apps/UniformEstimate.html" class="ancillary">Eksperimen Pendugaan pada Distribusi Seragam</a></li>
+	<li><a href="https://www.randomservices.org/random/apps/GammaEstimate.html" class="ancillary">Eksperimen Pendugaan pada Distribusi Gamma</a></li>
+	<li><a href="https://www.randomservices.org/random/apps/BetaEstimate.html" class="ancillary">Eksperimen Pendugaan pada Distribusi Beta</a></li>
+	<li><a href="https://www.randomservices.org/random/apps/ParetoEstimate.html" class="ancillary">Eksperimen Pendugaan pada Distribusi Pareto</a></li>
+	<li><a href="https://www.randomservices.org/random/apps/BetaCoin.html" class="ancillary">Eksperimen Koin Beta</a></li>
+</ul>
+
+<h4 id="o006.random.point.index.sources-resources">Sumber dan Sumber Daya</h4>
+
+<ul>
+	<li><a href="https://www.google.com/search?q=Introduction+to+Probability+and+Mathematical+Statistics,+Bain,+Engelhardt" target="external" class="external">Introduction to Probability and Mathematical Statistics</a>. Lee J Bain dan Max Engelhardt</li>
+	<li><a href="https://www.google.com/search?q=Statistical+Inference+Casella+Berger" target="external" class="external">Statistical Inference</a>. George Casella dan Roger L Berger</li>
+	<li><a href="https://www.google.com/search?q=Statistics,Freedman,Pisani,Purves" target="external" class="external">Statistics</a>. David Freedman, Robert Pisani, dan Robert Purves</li>
+	<li><a href="https://www.google.com/search?q=An+Introduction+to+Mathematical+Statistics,Larsen,Marx" target="external" class="external">An Introduction to Mathematical Statistics and Its Applications</a>. Richard J Larsen dan Morris L Marx</li>
+	<li><a href="https://www.google.com/search?q=Elementary+Statistics,Triola" target="external" class="external">Elementary Statistics</a>. Mario Triola</li>
+	<li><a href="https://www.google.com/search?q=Introductory+Statistics,Weiss" target="external" class="external">Introductory Statistics</a>. Neil A Weiss</li>
+	<li><a href="https://en.wikipedia.org/wiki/Portal:Statistics" class="external" target="external">Portal statistika Wikipedia</a></li>
+	<li><a href="https://mathworld.wolfram.com/topics/ProbabilityandStatistics.html" class="external" target="external">Artikel Wolfram MathWorld tentang probabilitas dan statistika</a></li>
+</ul>
+
+<h4 id="o006.random.point.index.quote">Kutipan</h4>
+
+<ul class="quote" title="Kutipan">
+	<li><q>Jauh lebih baik memperoleh jawaban hampiran atas pertanyaan yang tepat, yang sering kali samar, daripada jawaban eksak atas pertanyaan yang keliru, yang selalu dapat dirumuskan dengan tepat.</q>&mdash;<a href="https://www.randomservices.org/random/biographies/Tukey.html" class="ancillary">John Tukey</a>, <cite>Annals of Mathematical Statistics</cite>, <strong>33</strong> (1962).</li>
+</ul>
+
+<footer>
+	<ol class="map">
+		<li class="parent"><a href="https://www.randomservices.org/random/index.html">Random</a></li>
+		<li class="child"><a href="https://www.randomservices.org/random/foundations/index.html" title="Dasar-Dasar">0</a></li>
+		<li class="child"><a href="https://www.randomservices.org/random/prob/index.html" title="Ruang Probabilitas">1</a></li>
+		<li class="child"><a href="https://www.randomservices.org/random/dist/index.html" title="Distribusi">2</a></li>
+		<li class="child"><a href="https://www.randomservices.org/random/expect/index.html" title="Nilai Harapan">3</a></li>
+		<li class="child"><a href="https://www.randomservices.org/random/special/index.html" title="Distribusi Khusus">4</a></li>
+		<li class="child"><a href="../sample/index.html" title="Sampel Acak">5</a></li>
+		<li class="current">6</li>
+		<li class="child"><a href="https://www.randomservices.org/random/interval/index.html" title="Pendugaan Himpunan">7</a></li>
+		<li class="child"><a href="https://www.randomservices.org/random/hypothesis/index.html" title="Pengujian Hipotesis">8</a></li>
+		<li class="child"><a href="https://www.randomservices.org/random/buffon/index.html" title="Model Geometris">9</a></li>
+		<li class="child"><a href="https://www.randomservices.org/random/bernoulli/index.html" title="Percobaan Bernoulli">10</a></li>
+		<li class="child"><a href="https://www.randomservices.org/random/urn/index.html" title="Model Pengambilan Sampel Hingga">11</a></li>
+		<li class="child"><a href="https://www.randomservices.org/random/games/index.html" title="Permainan Untung-untungan">12</a></li>
+		<li class="child"><a href="https://www.randomservices.org/random/poisson/index.html" title="Proses Poisson">13</a></li>
+		<li class="child"><a href="https://www.randomservices.org/random/renewal/index.html" title="Proses Pembaruan">14</a></li>
+		<li class="child"><a href="https://www.randomservices.org/random/markov/index.html" title="Proses Markov">15</a></li>
+		<li class="child"><a href="https://www.randomservices.org/random/martingales/index.html" title="Martingal">16</a></li>
+		<li class="child"><a href="https://www.randomservices.org/random/brown/index.html" title="Gerak Brown">17</a></li>
+	</ol>
+	<ul class="map">
+		<li class="sister"><a href="https://www.randomservices.org/random/apps/index.html" class="ancillary">Aplikasi</a></li>
+		<li class="sister"><a href="https://www.randomservices.org/random/data/index.html" class="ancillary">Himpunan Data</a></li>
+		<li class="child"><a href="https://www.randomservices.org/random/biographies/index.html" class="ancillary">Biografi</a></li>
+	</ul>
+
+	<section class="edition-notice" data-o006-edition-notice="v1">
+		<p><strong>Pemberitahuan edisi.</strong> Terjemahan Bahasa Indonesia ini mengadaptasi <a href="https://www.randomservices.org/random/">Random: Probabilitas, Statistika Matematis, dan Proses Stokastik</a> karya Kyle Siegrist. Perubahan pada halaman ini mencakup penerjemahan, penambahan ID stabil, pengalihan tautan inti yang telah diterjemahkan ke edisi lokal, pengalihan tautan inti yang belum diterjemahkan ke sumber resmi, pengubahan tautan pelengkap menjadi tautan HTTPS resmi, serta koreksi terbatas terhadap kekeliruan bibliografis yang dicatat dalam daftar koreksi edisi.</p>
+		<p>Situs asal menyatakan <a href="https://creativecommons.org/licenses/by/2.0/">CC BY 2.0</a>, sedangkan halaman <a href="https://www.randomservices.org/random/Credits.html">Kredit</a> menautkan <a href="https://creativecommons.org/licenses/by/1.0/">CC BY 1.0</a>; perbedaan ini dipertahankan. Edisi independen ini tidak didukung maupun disahkan oleh Kyle Siegrist atau Random Services. Tautan ke aplikasi, data, dan biografi pihak ketiga tidak menyatakan hak untuk mendistribusikan ulang materi tersebut.</p>
+	</section>
+</footer>
+
+</body>
+</html>

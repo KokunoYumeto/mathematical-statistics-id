@@ -5,8 +5,8 @@ Updated: 2026-08-22
 ## Status
 
 Edition source admitted; exact authority and component-rights freezes complete; the
-first nine contiguous Indonesian pages and the full 29-page machine backend
-are locally verified. Every entity on those nine pages is now bound to its target
+first ten contiguous Indonesian pages and the full 29-page machine backend
+are locally verified. Every entity on those ten pages is now bound to its target
 path, locale, byte count, and SHA-256. The repository is public; the repaired
 three- and four-page Pages checkpoints remain historical evidence. The
 five-page boundary through the central limit theorem remains publicly verified.
@@ -25,6 +25,12 @@ replays, and local desktop/mobile rendering. Its push, clean workflow,
 deployment, and immediate 39-file anonymous byte readback succeeded. GitHub
 then suspended the publishing account and withdrew both repository and Pages;
 current public live-browser verification is therefore unavailable.
+The ten-page boundary starts the point-estimation chapter and has passed three
+independent read-only audits, exact topology, link, locale, backend, build, and
+two deterministic replay gates. Its fresh live browser pass is explicitly
+deferred because the in-app browser became unavailable; no visual pass is
+claimed. A one-shot GitHub recheck again returned the explicit suspended-account
+response.
 The complete 29-page edition is not yet claimed.
 
 ## Admitted source
@@ -94,18 +100,18 @@ entities and 9,035 relations. It contains 29 documents, 366 sections, 760
 structural units, 451 disclosures, 2,891 math-text containers, 24 figures, 236
 assets, and 1,810 internal links. The source-grounded exercise rule designates
 260 units and leaves 500 undesignated; its exact basis is 123 both, 95
-exercise-section only, 42 native `app`/`stat` only, and 500 neither. All 2,640
-entities on ordinals 1–9 carry verified id-ID bindings; 3,927 later entities
+exercise-section only, 42 native `app`/`stat` only, and 500 neither. All 2,705
+entities on ordinals 1–10 carry verified id-ID bindings; 3,862 later entities
 carry explicit untranslated/null locale fields.
 
-- Entity JSONL: 10,373,499 bytes; SHA-256
-  `95c56925d17e34c37e8128e1ed8e4f1f349edd5cd3077ee7816f0eb98862029b`.
+- Entity JSONL: 10,379,609 bytes; SHA-256
+  `4d75ed73359d7fcadb1a070695980ec21485aac8ca3d0ef8bc21598153bc49da`.
 - Relation CSV: 1,182,589 bytes; SHA-256
   `b235f4d4d724c7fe8653dfd06b075b2225cc2d116f3b87d0fda950d47030159a`.
 - Backend receipt SHA-256:
-  `681023726a222fafa90934d657e81576d031d2e465a8454e5776cce7772a95e4`.
+  `ed75729d4a6eb309501e0a93982bf5bba339afa51934487aff5ea3b22b7612bc`.
 - Bound translation-ledger SHA-256:
-  `1fd6f61a0a6074282470c12ed2ec26a0395f04a9e50a9eb2632e94d159d6135b`.
+  `07548cfe76aaa9773f985568f4e4871ecb8324d99af3cda496c4f889e2a41a5e`.
 - Replay: `python scripts/generate_random_backend.py --check-only`.
 
 ## Four-page reader checkpoint
@@ -295,6 +301,34 @@ GitHub subsequently suspended the account. The complete edition and configured
 C140 course are not claimed. Sanitized incident-receipt SHA-256 is
 `4d7b0e510724c6e9d7cda858441e8526d7896e8983a28c238ed4d5d72b9efa36`.
 
+## Ten-page local checkpoint
+
+Core ordinals 1–10 are complete through `random/point/index.html`. The reader
+is 40 files / 2,255,748 bytes; canonical manifest SHA-256 is
+`715f04e6919fa1e6e982f613a0dcd5ee7e697b0d0872d0dfd654c4d2d1416a0c`.
+Build-receipt SHA-256 is
+`0490c4687c0d9058a435868424ead6b5357669931a5e5dfed392106a4af6a85d`;
+QA-receipt SHA-256 is
+`c87c1f076566afef41c6fb5f35d1a39e61bb8a92e69e36706109cc48fc6f55f0`.
+
+The point-estimation index preserves the exact 155-element hierarchy, contains
+no math or disclosures, adds six stable content IDs, and applies 40 exact href
+delta categories across 59 occurrences. Three independent read-only audits
+were reconciled into formal `pendugaan`/`penduga` terminology, published-title
+preservation, and one proved bibliographic correction. The aggregate census is
+4,981 source elements, 292 units, 201 disclosures, 3,455 TeX spans, 440 IDs,
+372 local references, and 88 fragments. Two complete backend/build/QA
+check-only replays returned byte-identical identities.
+
+The deterministic readable-layout gate continues to enforce the centered
+72-rem desktop and fluid mobile layout. A new live visual pass is not claimed:
+the in-app browser disappeared during connection and its single bounded
+recovery check found no available browser. At 2026-08-22T09:14:35+02:00 the
+promised one-shot GitHub check again returned HTTP 403 with the explicit
+account-suspended response. No credential was read or retried. Exact local
+evidence is in `CHECKPOINT_2026-08-22_TEN_PAGE.md` (5,138 bytes; SHA-256
+`77fe79e4ab4d22639b267988ce64eaaa13581e0111cf82585096d8088aec62ba`).
+
 ## Rights boundary
 
 The Random landing page identifies CC BY 2.0; `Credits.html` links CC BY 1.0.
@@ -308,7 +342,7 @@ the site-wide notice; they must be cleared, replaced, or linked externally.
 
 ## Known upstream defects (do not silently alter authority)
 
-`ADVERSE_LEDGER.jsonl` runs through `O006-ADV-0112`. CLT repairs include the
+`ADVERSE_LEDGER.jsonl` runs through `O006-ADV-0115`. CLT repairs include the
 zero-origin condition, correlation domain/formula/citation, the rigorous
 characteristic-function proof, continuity notation, dice answer, chi-square
 definition, negative-binomial support/domain/answer mapping, and determinate
@@ -333,18 +367,22 @@ harmless recorded source artifact. Normal repairs cover malformed two-sample
 delimiters, Student construction, correlation range, central-moment and vector
 notation, a covariance label, sample-size and CLT hypotheses, and the logically
 incomplete independence proof. Its orphan paragraph close is retained as a
-recorded source artifact. Authority bytes remain immutable. Do not contact
+recorded source artifact. The point-estimation index records the corrected
+Roger L. Berger name, deduplicated keyword metadata, and retained
+standards/accessibility quirks that require an explicit topology-delta registry
+before any structural repair. Authority bytes remain immutable. Do not contact
 upstream during production.
 
 ## Next work
 
-1. Continue immediately through all 20 remaining source pages, beginning with
-   `random/point/index.html` (core ordinal 10), while growing the same
+1. Continue immediately through all 19 remaining source pages, beginning with
+   `random/point/Estimators.html` (core ordinal 11), while growing the same
    deterministic reader and stable-ID backend.
-2. At the next substantial boundary, briefly recheck current GitHub
-   availability once. The supplied credentials currently resolve to one
-   suspended account and one invalid credential; do not loop or expose either
-   token. Preserve the exact local history until an active identity exists.
+2. At the next substantial boundary, attempt the deferred live desktop/mobile
+   inspection once and briefly recheck current GitHub availability once. The
+   supplied credentials currently resolve to one suspended account and one
+   invalid credential; do not loop or expose either token. Preserve the exact
+   local history until an active identity exists.
 3. Keep Penn State reconstruction, the one-page Random completeness donor, and
    original C140 companion in separate component paths/repositories; begin
    them only after this clean checkpoint or in a demonstrably non-overlapping

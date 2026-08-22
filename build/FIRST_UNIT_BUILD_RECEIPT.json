@@ -189,6 +189,20 @@
       "page": "random/sample/Normal.html",
       "reason": "the displayed statistic is sample covariance, not sample variance",
       "replacements": 1
+    },
+    {
+      "new": "Roger L Berger",
+      "old": "Rober L Berger",
+      "page": "random/sample/index.html",
+      "reason": "correct the misspelled name of Statistical Inference coauthor Roger L. Berger",
+      "replacements": 1
+    },
+    {
+      "new": "Roger L Berger",
+      "old": "Rober L Berger",
+      "page": "random/point/index.html",
+      "reason": "correct the misspelled name of Statistical Inference coauthor Roger L. Berger",
+      "replacements": 1
     }
   ],
   "frozen_manifests": {
@@ -344,6 +358,17 @@
         "role": "asset",
         "sha256": "54bf3c5fd23ccf5dd602750aaf09c42ca6d4b1b10b8333e54bc580580f06686e",
         "url": "https://www.randomservices.org/random/icons/Stop.svg"
+      },
+      {
+        "bytes": 8311,
+        "content_type": "text/html",
+        "etag": "\"2077-69b43d7b-4ecbfb92296ab787;;;\"",
+        "last_modified": "Fri, 13 Mar 2026 16:38:19 GMT",
+        "purpose": "translation_authority",
+        "relative_path": "random/point/index.html",
+        "role": "core",
+        "sha256": "b0e3e9e5f55bfd4ebac0047dafff725628d6a0ca6e638d7a2847095b311d637c",
+        "url": "https://www.randomservices.org/random/point/index.html"
       },
       {
         "bytes": 790,
@@ -660,6 +685,11 @@
     ],
     "targets": [
       {
+        "bytes": 11355,
+        "relative_path": "random/point/index.html",
+        "sha256": "b0bc5eddeed420424aefa51a7f55a45c17ab60cfb48ef272f62dd2b47ac36361"
+      },
+      {
         "bytes": 46128,
         "relative_path": "random/sample/CLT.html",
         "sha256": "10d28d9d12e4d2df32044e81222e479dd1788ec4903bebe40322896c026d20e3"
@@ -670,9 +700,9 @@
         "sha256": "f66fe02402dbe33914a86a8e0796c7c8d9d292744168c8796091fc2bc561e11d"
       },
       {
-        "bytes": 11489,
+        "bytes": 11573,
         "relative_path": "random/sample/index.html",
-        "sha256": "0567e8309100240fcb6bd9a008fb8bfb4475c27e550f402a063d4095a4feeaaa"
+        "sha256": "9b0efeae9ab7df2e5f5f5e18448fe00a8a6b387e5cc84d9f0970f1cd23756b54"
       },
       {
         "bytes": 36248,
@@ -690,9 +720,9 @@
         "sha256": "f21bd99cfcd9b6609526966b27e59cd4c1600caf825ec7d428f0e1e63b3a703a"
       },
       {
-        "bytes": 38892,
+        "bytes": 38857,
         "relative_path": "random/sample/Normal.html",
-        "sha256": "58a819f8775846488f653ba26dc18ed7f15711a96652866ed84b2ea91c11a6a2"
+        "sha256": "846c53efe49d203e5358f8f170d71bf705db9bff00a951318ae229cbc17338c5"
       },
       {
         "bytes": 68830,
@@ -2073,7 +2103,7 @@
   ],
   "reader": {
     "directory": "build/html-id",
-    "file_count": 39,
+    "file_count": 40,
     "files": [
       {
         "bytes": 533,
@@ -2161,6 +2191,11 @@
         "sha256": "54bf3c5fd23ccf5dd602750aaf09c42ca6d4b1b10b8333e54bc580580f06686e"
       },
       {
+        "bytes": 11355,
+        "relative_path": "random/point/index.html",
+        "sha256": "b0bc5eddeed420424aefa51a7f55a45c17ab60cfb48ef272f62dd2b47ac36361"
+      },
+      {
         "bytes": 790,
         "relative_path": "random/sample/BoxPlot.png",
         "sha256": "7bcb3be4ffad0fc64d06cc5bc4fb14122ab3b117f31f0713988b0188fb8062f1"
@@ -2201,9 +2236,9 @@
         "sha256": "17bbf2b59e4b0902a84e8ea66f1b40a0343ddff578359ce842c60f109ea047ae"
       },
       {
-        "bytes": 11489,
+        "bytes": 11573,
         "relative_path": "random/sample/index.html",
-        "sha256": "0567e8309100240fcb6bd9a008fb8bfb4475c27e550f402a063d4095a4feeaaa"
+        "sha256": "9b0efeae9ab7df2e5f5f5e18448fe00a8a6b387e5cc84d9f0970f1cd23756b54"
       },
       {
         "bytes": 36248,
@@ -2226,9 +2261,9 @@
         "sha256": "f21bd99cfcd9b6609526966b27e59cd4c1600caf825ec7d428f0e1e63b3a703a"
       },
       {
-        "bytes": 38892,
+        "bytes": 38857,
         "relative_path": "random/sample/Normal.html",
-        "sha256": "58a819f8775846488f653ba26dc18ed7f15711a96652866ed84b2ea91c11a6a2"
+        "sha256": "846c53efe49d203e5358f8f170d71bf705db9bff00a951318ae229cbc17338c5"
       },
       {
         "bytes": 68830,
@@ -2271,10 +2306,10 @@
         "sha256": "b8af913a9be5c7e0313653afc6eae3121f3850fd72535cdab9e36f03279fcc34"
       }
     ],
-    "manifest_bytes": 3836,
+    "manifest_bytes": 3931,
     "manifest_path": "build/FIRST_UNIT_MANIFEST.csv",
-    "manifest_sha256": "e38a70e74ea24f17360b47ccffbf242f09ec26cf784fa326632a85d0f999f5a3",
-    "total_bytes": 2244344
+    "manifest_sha256": "715f04e6919fa1e6e982f613a0dcd5ee7e697b0d0872d0dfd654c4d2d1416a0c",
+    "total_bytes": 2255748
   },
   "reader_customizations": [
     {
@@ -2295,14 +2330,14 @@
   "schema": "o006.random.first-unit-build.v1",
   "scripts": {
     "build": {
-      "bytes": 81332,
+      "bytes": 82048,
       "path": "scripts/build_first_unit.py",
-      "sha256": "d1cc09566b3610cba8f8cb844e0e15969a2c86405199a8edbe241b5ad4a708de"
+      "sha256": "39743559112f8dc4d18a47a9e19da00b1d62722b96ba6fea77c37eb90f8d055c"
     },
     "qa": {
-      "bytes": 73459,
+      "bytes": 78486,
       "path": "scripts/qa_first_unit.py",
-      "sha256": "1fdce83e6cf5a33f4efbfe28d6274f9ca5ee51bd8f12c0da89d29ba2141234d6"
+      "sha256": "4e4950ab5b4d826692f954f3f7a3a2b65cff3b7422305f8688ecc452802be563"
     }
   },
   "transport_hardening": [
@@ -2345,6 +2380,48 @@
     {
       "original_href": "http://mathworld.wolfram.com/topics/ProbabilityandStatistics.html",
       "page": "random/sample/index.html",
+      "reason": "transport-only HTTP-to-HTTPS hardening",
+      "target_href": "https://mathworld.wolfram.com/topics/ProbabilityandStatistics.html"
+    },
+    {
+      "original_href": "http://www.google.com/search?q=Introduction+to+Probability+and+Mathematical+Statistics,+Bain,+Engelhardt",
+      "page": "random/point/index.html",
+      "reason": "transport-only HTTP-to-HTTPS hardening",
+      "target_href": "https://www.google.com/search?q=Introduction+to+Probability+and+Mathematical+Statistics,+Bain,+Engelhardt"
+    },
+    {
+      "original_href": "http://www.google.com/search?q=Statistical+Inference+Casella+Berger",
+      "page": "random/point/index.html",
+      "reason": "transport-only HTTP-to-HTTPS hardening",
+      "target_href": "https://www.google.com/search?q=Statistical+Inference+Casella+Berger"
+    },
+    {
+      "original_href": "http://www.google.com/search?q=Statistics,Freedman,Pisani,Purves",
+      "page": "random/point/index.html",
+      "reason": "transport-only HTTP-to-HTTPS hardening",
+      "target_href": "https://www.google.com/search?q=Statistics,Freedman,Pisani,Purves"
+    },
+    {
+      "original_href": "http://www.google.com/search?q=An+Introduction+to+Mathematical+Statistics,Larsen,Marx",
+      "page": "random/point/index.html",
+      "reason": "transport-only HTTP-to-HTTPS hardening",
+      "target_href": "https://www.google.com/search?q=An+Introduction+to+Mathematical+Statistics,Larsen,Marx"
+    },
+    {
+      "original_href": "http://www.google.com/search?q=Elementary+Statistics,Triola",
+      "page": "random/point/index.html",
+      "reason": "transport-only HTTP-to-HTTPS hardening",
+      "target_href": "https://www.google.com/search?q=Elementary+Statistics,Triola"
+    },
+    {
+      "original_href": "http://www.google.com/search?q=Introductory+Statistics,Weiss",
+      "page": "random/point/index.html",
+      "reason": "transport-only HTTP-to-HTTPS hardening",
+      "target_href": "https://www.google.com/search?q=Introductory+Statistics,Weiss"
+    },
+    {
+      "original_href": "http://mathworld.wolfram.com/topics/ProbabilityandStatistics.html",
+      "page": "random/point/index.html",
       "reason": "transport-only HTTP-to-HTTPS hardening",
       "target_href": "https://mathworld.wolfram.com/topics/ProbabilityandStatistics.html"
     }

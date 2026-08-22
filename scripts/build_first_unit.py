@@ -70,6 +70,7 @@ TARGETS = (
     PurePosixPath("random/sample/OrderStatistics.html"),
     PurePosixPath("random/sample/Covariance.html"),
     PurePosixPath("random/sample/Normal.html"),
+    PurePosixPath("random/point/index.html"),
 )
 
 # Screen.css references all of these local assets. Keeping the complete exact set
@@ -214,6 +215,12 @@ TRANSPORT_HARDENING = (
         "target_href": "https://mathworld.wolfram.com/topics/ProbabilityandStatistics.html",
         "reason": "transport-only HTTP-to-HTTPS hardening",
     },
+)
+
+TRANSPORT_HARDENING += tuple(
+    {**change, "page": "random/point/index.html"}
+    for change in TRANSPORT_HARDENING
+    if change["page"] == "random/sample/index.html"
 )
 
 BOUNDED_TEXT_CORRECTIONS = (
@@ -406,6 +413,20 @@ BOUNDED_TEXT_CORRECTIONS = (
         "new": "Rata-rata dan varians dari kovarians sampel adalah",
         "replacements": 1,
         "reason": "the displayed statistic is sample covariance, not sample variance",
+    },
+    {
+        "page": "random/sample/index.html",
+        "old": "Rober L Berger",
+        "new": "Roger L Berger",
+        "replacements": 1,
+        "reason": "correct the misspelled name of Statistical Inference coauthor Roger L. Berger",
+    },
+    {
+        "page": "random/point/index.html",
+        "old": "Rober L Berger",
+        "new": "Roger L Berger",
+        "replacements": 1,
+        "reason": "correct the misspelled name of Statistical Inference coauthor Roger L. Berger",
     },
 )
 

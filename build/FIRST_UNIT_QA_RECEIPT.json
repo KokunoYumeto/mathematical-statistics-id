@@ -189,15 +189,29 @@
       "page": "random/sample/Normal.html",
       "reason": "the displayed statistic is sample covariance, not sample variance",
       "replacements": 1
+    },
+    {
+      "new": "Roger L Berger",
+      "old": "Rober L Berger",
+      "page": "random/sample/index.html",
+      "reason": "correct the misspelled name of Statistical Inference coauthor Roger L. Berger",
+      "replacements": 1
+    },
+    {
+      "new": "Roger L Berger",
+      "old": "Rober L Berger",
+      "page": "random/point/index.html",
+      "reason": "correct the misspelled name of Statistical Inference coauthor Roger L. Berger",
+      "replacements": 1
     }
   ],
   "build": {
-    "reader_file_count": 39,
-    "reader_manifest_sha256": "e38a70e74ea24f17360b47ccffbf242f09ec26cf784fa326632a85d0f999f5a3",
-    "reader_total_bytes": 2244344,
-    "receipt_bytes": 101148,
+    "reader_file_count": 40,
+    "reader_manifest_sha256": "715f04e6919fa1e6e982f613a0dcd5ee7e697b0d0872d0dfd654c4d2d1416a0c",
+    "reader_total_bytes": 2255748,
+    "receipt_bytes": 104605,
     "receipt_path": "build/FIRST_UNIT_BUILD_RECEIPT.json",
-    "receipt_sha256": "29d389ca58991ac01b676b8348690b053a6841cad2b1afd212e47cc24a6fb621"
+    "receipt_sha256": "0490c4687c0d9058a435868424ead6b5357669931a5e5dfed392106a4af6a85d"
   },
   "math_text_localizations": [
     {
@@ -264,19 +278,19 @@
     "sha256": "716cf8735d00abfb1627f8adbbf4aeb915ac9b5c55d47aeaf276e73dac6a2aa1"
   },
   "pass_counts": {
-    "bounded_text_correction_categories": 28,
+    "bounded_text_correction_categories": 30,
     "controlled_filename_case_corrections": 6,
     "css_files": 1,
     "css_refs": 11,
     "details": 201,
-    "external_https_anchors": 416,
+    "external_https_anchors": 476,
     "external_https_metadata_links": 4,
     "fragments": 88,
-    "href_delta_entries": 278,
-    "href_delta_occurrences": 383,
-    "html_pages": 11,
-    "ids": 434,
-    "local_refs": 362,
+    "href_delta_entries": 316,
+    "href_delta_occurrences": 438,
+    "html_pages": 12,
+    "ids": 440,
+    "local_refs": 372,
     "math_spans": 3455,
     "math_text_localization_categories": 6,
     "math_text_localization_replacements": 11,
@@ -284,14 +298,14 @@
     "occurrence_specific_href_deltas": 5,
     "protected_math_correction_categories": 136,
     "protected_math_replacements": 131,
-    "raw_script_style_blocks": 26,
+    "raw_script_style_blocks": 27,
     "readable_layout_css_appends": 1,
-    "reader_bytes": 2244344,
-    "reader_files": 39,
-    "source_elements": 4826,
+    "reader_bytes": 2255748,
+    "reader_files": 40,
+    "source_elements": 4981,
     "svg_files": 10,
-    "translated_pages": 9,
-    "transport_hardening_deltas": 7,
+    "translated_pages": 10,
+    "transport_hardening_deltas": 14,
     "units": 292
   },
   "protected_math_corrections": [
@@ -1674,6 +1688,32 @@
     "version": "o006-id-readable-layout-v3"
   },
   "results": {
+    "random/point/index.html": {
+      "details": 0,
+      "edition_notice": {
+        "bytes": 1166,
+        "links": 4,
+        "sha256": "5e06080b66862d770e89a0692ad72c347e52055448843e60d132e72aa2fb3e8f"
+      },
+      "elements": 155,
+      "hierarchy_sha256": "6b6d12100e8f69215ad341e2edb91332b75b38265422cd81ac250fe4aaa2fed0",
+      "href_delta_entries": 40,
+      "href_delta_occurrences": 59,
+      "ids": 6,
+      "math_spans": 0,
+      "math_text_localization_replacements": 0,
+      "occurrence_specific_href_deltas": 0,
+      "protected_math_replacements": 0,
+      "raw_script_style_blocks": 1,
+      "reader_bytes": 11355,
+      "reader_sha256": "b0bc5eddeed420424aefa51a7f55a45c17ab60cfb48ef272f62dd2b47ac36361",
+      "reader_target_byte_identical": true,
+      "source_bytes": 8311,
+      "source_sha256": "b0e3e9e5f55bfd4ebac0047dafff725628d6a0ca6e638d7a2847095b311d637c",
+      "target_bytes": 11355,
+      "target_sha256": "b0bc5eddeed420424aefa51a7f55a45c17ab60cfb48ef272f62dd2b47ac36361",
+      "units": 0
+    },
     "random/sample/CLT.html": {
       "details": 21,
       "edition_notice": {
@@ -1813,21 +1853,21 @@
       },
       "elements": 380,
       "hierarchy_sha256": "bdeb23615d43a439d714d09c6dd514747d42e400b5f01db48cd8ad9bccef2a9f",
-      "href_delta_entries": 22,
-      "href_delta_occurrences": 38,
+      "href_delta_entries": 21,
+      "href_delta_occurrences": 37,
       "ids": 44,
       "math_spans": 380,
       "math_text_localization_replacements": 0,
       "occurrence_specific_href_deltas": 0,
       "protected_math_replacements": 9,
       "raw_script_style_blocks": 3,
-      "reader_bytes": 38892,
-      "reader_sha256": "58a819f8775846488f653ba26dc18ed7f15711a96652866ed84b2ea91c11a6a2",
+      "reader_bytes": 38857,
+      "reader_sha256": "846c53efe49d203e5358f8f170d71bf705db9bff00a951318ae229cbc17338c5",
       "reader_target_byte_identical": true,
       "source_bytes": 35940,
       "source_sha256": "d9a62017ae3a8488aedac3eceedb15d8b68243ae60894104ab88564ace25ff79",
-      "target_bytes": 38892,
-      "target_sha256": "58a819f8775846488f653ba26dc18ed7f15711a96652866ed84b2ea91c11a6a2",
+      "target_bytes": 38857,
+      "target_sha256": "846c53efe49d203e5358f8f170d71bf705db9bff00a951318ae229cbc17338c5",
       "units": 29
     },
     "random/sample/OrderStatistics.html": {
@@ -1885,41 +1925,41 @@
     "random/sample/index.html": {
       "details": 0,
       "edition_notice": {
-        "bytes": 998,
+        "bytes": 1155,
         "links": 4,
-        "sha256": "d56c45b9741ffdb1adbc27999f42e6a6ea2865a5271b413222d4a8c1a40044c6"
+        "sha256": "dc2b63db3864d3b2d9d2937269badca5ba6cbac0046482c03385aca0cb7bd255"
       },
       "elements": 163,
       "hierarchy_sha256": "6a96ead836c5ac42b781f0ade81b07aa852dac73946f60028b3ba8b43d4829ba",
-      "href_delta_entries": 36,
-      "href_delta_occurrences": 57,
+      "href_delta_entries": 35,
+      "href_delta_occurrences": 54,
       "ids": 6,
       "math_spans": 0,
       "math_text_localization_replacements": 0,
       "occurrence_specific_href_deltas": 0,
       "protected_math_replacements": 0,
       "raw_script_style_blocks": 1,
-      "reader_bytes": 11489,
-      "reader_sha256": "0567e8309100240fcb6bd9a008fb8bfb4475c27e550f402a063d4095a4feeaaa",
+      "reader_bytes": 11573,
+      "reader_sha256": "9b0efeae9ab7df2e5f5f5e18448fe00a8a6b387e5cc84d9f0970f1cd23756b54",
       "reader_target_byte_identical": true,
       "source_bytes": 8952,
       "source_sha256": "9f7b9a075c430efbae92192e131152c6728f7827dc3dde987ce871ec9d6ae35c",
-      "target_bytes": 11489,
-      "target_sha256": "0567e8309100240fcb6bd9a008fb8bfb4475c27e550f402a063d4095a4feeaaa",
+      "target_bytes": 11573,
+      "target_sha256": "9b0efeae9ab7df2e5f5f5e18448fe00a8a6b387e5cc84d9f0970f1cd23756b54",
       "units": 0
     }
   },
   "schema": "o006.random.first-unit-qa.v1",
   "scripts": {
     "build": {
-      "bytes": 81332,
+      "bytes": 82048,
       "path": "scripts/build_first_unit.py",
-      "sha256": "d1cc09566b3610cba8f8cb844e0e15969a2c86405199a8edbe241b5ad4a708de"
+      "sha256": "39743559112f8dc4d18a47a9e19da00b1d62722b96ba6fea77c37eb90f8d055c"
     },
     "qa": {
-      "bytes": 73459,
+      "bytes": 78486,
       "path": "scripts/qa_first_unit.py",
-      "sha256": "1fdce83e6cf5a33f4efbfe28d6274f9ca5ee51bd8f12c0da89d29ba2141234d6"
+      "sha256": "4e4950ab5b4d826692f954f3f7a3a2b65cff3b7422305f8688ecc452802be563"
     }
   },
   "transport_hardening": [
@@ -1962,6 +2002,48 @@
     {
       "original_href": "http://mathworld.wolfram.com/topics/ProbabilityandStatistics.html",
       "page": "random/sample/index.html",
+      "reason": "transport-only HTTP-to-HTTPS hardening",
+      "target_href": "https://mathworld.wolfram.com/topics/ProbabilityandStatistics.html"
+    },
+    {
+      "original_href": "http://www.google.com/search?q=Introduction+to+Probability+and+Mathematical+Statistics,+Bain,+Engelhardt",
+      "page": "random/point/index.html",
+      "reason": "transport-only HTTP-to-HTTPS hardening",
+      "target_href": "https://www.google.com/search?q=Introduction+to+Probability+and+Mathematical+Statistics,+Bain,+Engelhardt"
+    },
+    {
+      "original_href": "http://www.google.com/search?q=Statistical+Inference+Casella+Berger",
+      "page": "random/point/index.html",
+      "reason": "transport-only HTTP-to-HTTPS hardening",
+      "target_href": "https://www.google.com/search?q=Statistical+Inference+Casella+Berger"
+    },
+    {
+      "original_href": "http://www.google.com/search?q=Statistics,Freedman,Pisani,Purves",
+      "page": "random/point/index.html",
+      "reason": "transport-only HTTP-to-HTTPS hardening",
+      "target_href": "https://www.google.com/search?q=Statistics,Freedman,Pisani,Purves"
+    },
+    {
+      "original_href": "http://www.google.com/search?q=An+Introduction+to+Mathematical+Statistics,Larsen,Marx",
+      "page": "random/point/index.html",
+      "reason": "transport-only HTTP-to-HTTPS hardening",
+      "target_href": "https://www.google.com/search?q=An+Introduction+to+Mathematical+Statistics,Larsen,Marx"
+    },
+    {
+      "original_href": "http://www.google.com/search?q=Elementary+Statistics,Triola",
+      "page": "random/point/index.html",
+      "reason": "transport-only HTTP-to-HTTPS hardening",
+      "target_href": "https://www.google.com/search?q=Elementary+Statistics,Triola"
+    },
+    {
+      "original_href": "http://www.google.com/search?q=Introductory+Statistics,Weiss",
+      "page": "random/point/index.html",
+      "reason": "transport-only HTTP-to-HTTPS hardening",
+      "target_href": "https://www.google.com/search?q=Introductory+Statistics,Weiss"
+    },
+    {
+      "original_href": "http://mathworld.wolfram.com/topics/ProbabilityandStatistics.html",
+      "page": "random/point/index.html",
       "reason": "transport-only HTTP-to-HTTPS hardening",
       "target_href": "https://mathworld.wolfram.com/topics/ProbabilityandStatistics.html"
     }
