@@ -22,8 +22,9 @@
   QA could not be completed after withdrawal. Sanitized evidence:
   `PUBLICATION_RECEIPT_2026-08-22_NINE_PAGE.json`; SHA-256
   `4d7b0e510724c6e9d7cda858441e8526d7896e8983a28c238ed4d5d72b9efa36`.
-- Ten-page local checkpoint: `CHECKPOINT_2026-08-22_TEN_PAGE.md` (5,138 bytes;
-  SHA-256 `77fe79e4ab4d22639b267988ce64eaaa13581e0111cf82585096d8088aec62ba`).
+- Ten-page local checkpoint: `CHECKPOINT_2026-08-22_TEN_PAGE.md` (5,323 bytes;
+  SHA-256 `96a63189ca27fa8f50cdfe9a146fdc434913dea6813983fa088d34df453bbadb`),
+  preserved in local commit `16384bdf1e9c3b00c82815f32c7bc5e11f923034`.
   Its backend, build, and QA each passed two byte-identical check-only replays. A fresh live
   browser pass is deferred because the in-app browser was unavailable. The
   one-shot 2026-08-22T09:14:35+02:00 GitHub check again returned the explicit

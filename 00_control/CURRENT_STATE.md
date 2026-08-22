@@ -326,8 +326,10 @@ the in-app browser disappeared during connection and its single bounded
 recovery check found no available browser. At 2026-08-22T09:14:35+02:00 the
 promised one-shot GitHub check again returned HTTP 403 with the explicit
 account-suspended response. No credential was read or retried. Exact local
-evidence is in `CHECKPOINT_2026-08-22_TEN_PAGE.md` (5,138 bytes; SHA-256
-`77fe79e4ab4d22639b267988ce64eaaa13581e0111cf82585096d8088aec62ba`).
+evidence is in `CHECKPOINT_2026-08-22_TEN_PAGE.md` (5,323 bytes; SHA-256
+`96a63189ca27fa8f50cdfe9a146fdc434913dea6813983fa088d34df453bbadb`).
+The complete boundary is preserved in local commit
+`16384bdf1e9c3b00c82815f32c7bc5e11f923034`.
 
 ## Rights boundary
 

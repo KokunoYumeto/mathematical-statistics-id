@@ -82,6 +82,10 @@ retry live desktop/mobile inspection at the next clean boundary.
 
 ## Publication state
 
+The complete ten-page source/backend/reader/control boundary is preserved in
+local commit `16384bdf1e9c3b00c82815f32c7bc5e11f923034` (tree
+`a97a18d8e535b98059429c5ccb4f87cb2b901260`).
+
 The last successful public transaction remains the nine-page commit
 `1806863320c1c0859e04a2d93773adbb8d4ae377`, whose workflow, deployment, and
 immediate anonymous 39-file readback passed before GitHub withdrew the account.
