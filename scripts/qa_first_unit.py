@@ -39,6 +39,7 @@ PAIRS = (
     PurePosixPath("random/point/Estimators.html"),
     PurePosixPath("random/point/Moments.html"),
     PurePosixPath("random/point/Likelihood.html"),
+    PurePosixPath("random/point/Bayes.html"),
 )
 
 # This is an exact page/original-href allowlist. There is deliberately no URL
@@ -350,7 +351,6 @@ HREF_DELTA_ALLOWLIST: dict[PurePosixPath, dict[str, str]] = {
         "../markov/index.html": "https://www.randomservices.org/random/markov/index.html",
         "../martingales/index.html": "https://www.randomservices.org/random/martingales/index.html",
         "../brown/index.html": "https://www.randomservices.org/random/brown/index.html",
-        "Bayes.html": "https://www.randomservices.org/random/point/Bayes.html",
         "Unbiased.html": "https://www.randomservices.org/random/point/Unbiased.html",
         "Sufficient.html": "https://www.randomservices.org/random/point/Sufficient.html",
         "JavaScript:openAncillary('../apps/NormalEstimate.html')": "https://www.randomservices.org/random/apps/NormalEstimate.html",
@@ -385,7 +385,6 @@ HREF_DELTA_ALLOWLIST: dict[PurePosixPath, dict[str, str]] = {
         "../prob/Experiments.html": "https://www.randomservices.org/random/prob/Experiments.html",
         "../prob/Probability.html": "https://www.randomservices.org/random/prob/Probability.html",
         "../prob/Probability2.html": "https://www.randomservices.org/random/prob/Probability2.html",
-        "Bayes.html": "https://www.randomservices.org/random/point/Bayes.html",
         "JavaScript:openAncillary('../apps/ExponentialExperiment.html')": "https://www.randomservices.org/random/apps/ExponentialExperiment.html",
         "JavaScript:openAncillary('../apps/Match.html')": "https://www.randomservices.org/random/apps/Match.html",
         "JavaScript:openAncillary('../apps/MeanEstimate.html')": "https://www.randomservices.org/random/apps/MeanEstimate.html",
@@ -407,7 +406,6 @@ HREF_DELTA_ALLOWLIST: dict[PurePosixPath, dict[str, str]] = {
     },
     PurePosixPath("random/point/Moments.html"): {
         "../index.html": "https://www.randomservices.org/random/index.html",
-        "Bayes.html": "https://www.randomservices.org/random/point/Bayes.html",
         "Unbiased.html": "https://www.randomservices.org/random/point/Unbiased.html",
         "Sufficient.html": "https://www.randomservices.org/random/point/Sufficient.html",
         "../prob/Experiments.html": "https://www.randomservices.org/random/prob/Experiments.html",
@@ -464,7 +462,6 @@ HREF_DELTA_ALLOWLIST: dict[PurePosixPath, dict[str, str]] = {
         "../urn/OrderStatistics.html": "https://www.randomservices.org/random/urn/OrderStatistics.html",
         "../urn/Hypergeometric.html": "https://www.randomservices.org/random/urn/Hypergeometric.html",
         "../urn/index.html": "https://www.randomservices.org/random/urn/index.html",
-        "Bayes.html": "https://www.randomservices.org/random/point/Bayes.html",
         "Unbiased.html": "https://www.randomservices.org/random/point/Unbiased.html",
         "Sufficient.html": "https://www.randomservices.org/random/point/Sufficient.html",
         "JavaScript:openAncillary('../apps/NormalEstimate.html')": "https://www.randomservices.org/random/apps/NormalEstimate.html",
@@ -477,6 +474,40 @@ HREF_DELTA_ALLOWLIST: dict[PurePosixPath, dict[str, str]] = {
         "JavaScript:openAncillary('../biographies/Pareto.html')": "https://www.randomservices.org/random/biographies/Pareto.html",
         "JavaScript:openAncillary('../biographies/index.html')": "https://www.randomservices.org/random/biographies/index.html",
         "JavaScript:openAncillary('../data/index.html')": "https://www.randomservices.org/random/data/index.html",
+    },
+    PurePosixPath("random/point/Bayes.html"): {
+        "../index.html": "https://www.randomservices.org/random/index.html",
+        "Unbiased.html": "https://www.randomservices.org/random/point/Unbiased.html",
+        "Sufficient.html": "https://www.randomservices.org/random/point/Sufficient.html",
+        "../prob/Probability.html": "https://www.randomservices.org/random/prob/Probability.html",
+        "../prob/Experiments.html": "https://www.randomservices.org/random/prob/Experiments.html",
+        "../dist/Discrete.html": "https://www.randomservices.org/random/dist/Discrete.html",
+        "../dist/Continuous.html": "https://www.randomservices.org/random/dist/Continuous.html",
+        "JavaScript:openAncillary('../biographies/Bayes.html')": "https://www.randomservices.org/random/biographies/Bayes.html",
+        "../dist/Conditional.html#bay": "https://www.randomservices.org/random/dist/Conditional.html#bay",
+        "../dist/Joint.html": "https://www.randomservices.org/random/dist/Joint.html",
+        "../special/Uniform.html": "https://www.randomservices.org/random/special/Uniform.html",
+        "../expect/Conditional.html": "https://www.randomservices.org/random/expect/Conditional.html",
+        "../martingales/index.html": "https://www.randomservices.org/random/martingales/index.html",
+        "../expect/Spaces.html#cen": "https://www.randomservices.org/random/expect/Spaces.html#cen",
+        "../bernoulli/Introduction.html": "https://www.randomservices.org/random/bernoulli/Introduction.html",
+        "../bernoulli/Binomial.html": "https://www.randomservices.org/random/bernoulli/Binomial.html",
+        "../special/Beta.html": "https://www.randomservices.org/random/special/Beta.html",
+        "../bernoulli/BetaBernoulli.html": "https://www.randomservices.org/random/bernoulli/BetaBernoulli.html",
+        "JavaScript:openAncillary('../apps/BetaCoin.html')": "https://www.randomservices.org/random/apps/BetaCoin.html",
+        "../bernoulli/Geometric.html": "https://www.randomservices.org/random/bernoulli/Geometric.html",
+        "../bernoulli/index.html": "https://www.randomservices.org/random/bernoulli/index.html",
+        "../bernoulli/NegativeBinomial.html": "https://www.randomservices.org/random/bernoulli/NegativeBinomial.html",
+        "../poisson/Poisson.html": "https://www.randomservices.org/random/poisson/Poisson.html",
+        "../poisson/index.html": "https://www.randomservices.org/random/poisson/index.html",
+        "JavaScript:openAncillary('../biographies/Poisson.html')": "https://www.randomservices.org/random/biographies/Poisson.html",
+        "../special/Gamma.html": "https://www.randomservices.org/random/special/Gamma.html",
+        "../special/Normal.html": "https://www.randomservices.org/random/special/Normal.html",
+        "../special/Pareto.html": "https://www.randomservices.org/random/special/Pareto.html",
+        "JavaScript:openAncillary('../biographies/Pareto.html')": "https://www.randomservices.org/random/biographies/Pareto.html",
+        "JavaScript:openAncillary('../apps/index.html')": "https://www.randomservices.org/random/apps/index.html",
+        "JavaScript:openAncillary('../data/index.html')": "https://www.randomservices.org/random/data/index.html",
+        "JavaScript:openAncillary('../biographies/index.html')": "https://www.randomservices.org/random/biographies/index.html",
     },
 }
 
@@ -541,6 +572,7 @@ NOTICE_MARKUP_SHA256 = {
     PurePosixPath("random/point/Estimators.html"): "eafff6cf003edc517cbc99727456b283de19cff49e07d20b10fea57dca0f8a3d",
     PurePosixPath("random/point/Moments.html"): "eafff6cf003edc517cbc99727456b283de19cff49e07d20b10fea57dca0f8a3d",
     PurePosixPath("random/point/Likelihood.html"): "eafff6cf003edc517cbc99727456b283de19cff49e07d20b10fea57dca0f8a3d",
+    PurePosixPath("random/point/Bayes.html"): "eafff6cf003edc517cbc99727456b283de19cff49e07d20b10fea57dca0f8a3d",
 }
 NOTICE_LINKS = (
     "https://www.randomservices.org/random/",
@@ -570,6 +602,9 @@ REFERENCE_ATTRIBUTES = FETCH_ATTRIBUTES | {
 
 MATH_RE = re.compile(r"\\\((?:[^\\]|\\.)*?\\\)|\\\[(?:[^\\]|\\.)*?\\\]", re.DOTALL)
 RAW_TEXT_RE = re.compile(r"<(script|style)\b[^>]*>(.*?)</\1\s*>", re.IGNORECASE | re.DOTALL)
+RAW_MATH_ENV_RE = re.compile(
+    r"\\begin\{(align\*?)\}.*?\\end\{\1\}", re.DOTALL
+)
 CSS_COMMENT_RE = re.compile(r"/\*.*?\*/", re.DOTALL)
 CSS_URL_RE = re.compile(
     r"url\(\s*(?:(['\"])(.*?)\1|([^)]*?))\s*\)", re.IGNORECASE | re.DOTALL
@@ -727,6 +762,29 @@ def normalize_authority_math(
     return normalized, corrected, localized
 
 
+def normalize_authority_raw_math(
+    rel: PurePosixPath, environments: list[str]
+) -> tuple[list[str], int]:
+    """Apply only declared repairs inside undelimited align environments."""
+    normalized = list(environments)
+    corrected = 0
+    for change in build_pipeline.PROTECTED_MATH_CORRECTIONS:
+        if change["page"] != rel.as_posix() or change["surface"] != "raw_math_environment":
+            continue
+        old = change["old"]
+        new = change["new"]
+        expected = int(change["replacements"])
+        observed = sum(environment.count(old) for environment in normalized)
+        if observed != expected:
+            fail(
+                f"{rel}: raw-math correction authority count changed for {old!r}: "
+                f"{observed} != {expected}"
+            )
+        normalized = [environment.replace(old, new) for environment in normalized]
+        corrected += expected
+    return normalized, corrected
+
+
 def element_stream(parsed: BeautifulSoup) -> list[Tag]:
     return list(parsed.find_all(True))
 
@@ -838,6 +896,19 @@ def compare_pair(rel: PurePosixPath) -> dict[str, Any]:
     ) = normalize_authority_math(rel, source_math)
     if expected_math != target_math:
         fail(f"{rel}: exact TeX/math sequence changed ({len(source_math)} vs {len(target_math)})")
+    source_raw_math = [match.group(0) for match in RAW_MATH_ENV_RE.finditer(source_text)]
+    target_raw_math = [match.group(0) for match in RAW_MATH_ENV_RE.finditer(target_text)]
+    raw_math_replacements = 0
+    if rel == PurePosixPath("random/point/Bayes.html"):
+        expected_raw_math, raw_math_replacements = normalize_authority_raw_math(
+            rel, source_raw_math
+        )
+        if expected_raw_math != target_raw_math:
+            fail(
+                f"{rel}: exact raw align-environment sequence changed "
+                f"({len(source_raw_math)} vs {len(target_raw_math)})"
+            )
+    protected_math_replacements += raw_math_replacements
 
     source_tags = element_stream(source)
     target_tags = element_stream(target)
@@ -938,6 +1009,8 @@ def compare_pair(rel: PurePosixPath) -> dict[str, Any]:
         "hierarchy_sha256": sha256_bytes(hierarchy_bytes),
         "raw_script_style_blocks": len(source_raw),
         "math_spans": len(source_math),
+        "raw_math_environments": len(source_raw_math),
+        "raw_math_sha256": sha256_bytes("\n".join(source_raw_math).encode("utf-8")),
         "protected_math_replacements": protected_math_replacements,
         "math_text_localization_replacements": math_text_localization_replacements,
         "href_delta_entries": len(seen_deltas) + len(seen_element_deltas),
@@ -1159,6 +1232,7 @@ def check_mathjax_runtime() -> dict[str, Any]:
         "random/point/Estimators.html",
         "random/point/Moments.html",
         "random/point/Likelihood.html",
+        "random/point/Bayes.html",
     ]
     if script_pages != expected_script_pages:
         fail(f"MathJax bundle reference pages changed: {script_pages}")
@@ -1229,6 +1303,9 @@ def expected_qa_receipt(
         "translated_pages": len(results),
         "source_elements": sum(int(result["elements"]) for result in results.values()),
         "math_spans": sum(int(result["math_spans"]) for result in results.values()),
+        "raw_math_environments": sum(
+            int(result["raw_math_environments"]) for result in results.values()
+        ),
         "raw_script_style_blocks": sum(
             int(result["raw_script_style_blocks"]) for result in results.values()
         ),
@@ -1396,8 +1473,8 @@ def run(*, check_only: bool = False) -> dict[str, Any]:
         or moments["details"] != 29
         or moments["math_spans"] != 649
         or moments["ids"] != 54
-        or moments["href_delta_entries"] != 36
-        or moments["href_delta_occurrences"] != 46
+        or moments["href_delta_entries"] != 35
+        or moments["href_delta_occurrences"] != 44
         or moments["protected_math_replacements"] != 12
     ):
         fail(f"Moments census changed: {moments}")
@@ -1411,12 +1488,28 @@ def run(*, check_only: bool = False) -> dict[str, Any]:
         or likelihood["details"] != 22
         or likelihood["math_spans"] != 589
         or likelihood["ids"] != 53
-        or likelihood["href_delta_entries"] != 33
-        or likelihood["href_delta_occurrences"] != 40
+        or likelihood["href_delta_entries"] != 32
+        or likelihood["href_delta_occurrences"] != 38
         or likelihood["protected_math_replacements"] != 36
         or likelihood["math_text_localization_replacements"] != 1
     ):
         fail(f"Likelihood census changed: {likelihood}")
+    bayes = results["random/point/Bayes.html"]
+    if (
+        bayes["elements"] != 352
+        or bayes["hierarchy_sha256"]
+        != "84a3f8750b133d3dd77e245ebc56e7a65501e967f038b20f36e1783fa0eb5dca"
+        or bayes["raw_script_style_blocks"] != 3
+        or bayes["raw_math_environments"] != 8
+        or bayes["units"] != 31
+        or bayes["details"] != 23
+        or bayes["math_spans"] != 625
+        or bayes["ids"] != 46
+        or bayes["href_delta_entries"] != 32
+        or bayes["href_delta_occurrences"] != 41
+        or bayes["protected_math_replacements"] != 17
+    ):
+        fail(f"Bayes census changed: {bayes}")
     reference_counts = check_reader_references()
     mathjax_runtime = check_mathjax_runtime()
     readable_reflow = check_readable_reflow()

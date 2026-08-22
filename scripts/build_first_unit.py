@@ -74,6 +74,7 @@ TARGETS = (
     PurePosixPath("random/point/Estimators.html"),
     PurePosixPath("random/point/Moments.html"),
     PurePosixPath("random/point/Likelihood.html"),
+    PurePosixPath("random/point/Bayes.html"),
 )
 
 # Screen.css references all of these local assets. Keeping the complete exact set
@@ -1577,6 +1578,135 @@ PROTECTED_MATH_CORRECTIONS += tuple(
         "reason": reason,
     }
     for span_index, old, new, reason in LIKELIHOOD_MATH_CORRECTIONS
+)
+
+BAYES_MATH_CORRECTIONS = (
+    (
+        49,
+        r"\( h(\theta \mid x) = h(\theta) f(\bs x \mid \theta) / f(\bs x) \)",
+        r"\( h(\theta \mid \bs x) = h(\theta) f(\bs x \mid \theta) / f(\bs x) \)",
+        "use the sample vector consistently in the posterior-density identity",
+    ),
+    (
+        123,
+        r"\( u \mapsto \E[(\Theta - u)^2 \mid \bs X = \bs x) \)",
+        r"\( u \mapsto \E[(\Theta - u)^2 \mid \bs X = \bs x] \)",
+        "close the conditional posterior-risk expression with the matching bracket",
+    ),
+    (
+        206,
+        r"\( E(Y_n \mid p) = n p \)",
+        r"\( \E(Y_n \mid p) = n p \)",
+        "use the page's declared expectation macro",
+    ),
+    (
+        238,
+        r"\(U\)",
+        r"\(U_n\)",
+        "restore the estimator index in the constant-MSE discussion",
+    ),
+    (
+        250,
+        r"\[ M_n = \frac{Y}{n} = \frac{1}{n} \sum_{i=1}^n X_i \]",
+        r"\[ M_n = \frac{Y_n}{n} = \frac{1}{n} \sum_{i=1}^n X_i \]",
+        "restore the indexed Bernoulli success count",
+    ),
+    (
+        299,
+        r"\( U_n = E(P \mid \bs{X}_n) \)",
+        r"\( U_n = \E(P \mid \bs{X}_n) \)",
+        "use the page's declared expectation macro",
+    ),
+    (
+        304,
+        r"\( U = 1 \cdot 0 + \frac{1}{2} \cdot 1 = \frac{1}{2} \)",
+        r"\( U_n = 1 \cdot 0 + \frac{1}{2} \cdot 1 = \frac{1}{2} \)",
+        "restore the estimator index in the two-point Bernoulli rule",
+    ),
+    (
+        317,
+        r"\( \bias(U_n \mid p) = E(U - p \mid p) \)",
+        r"\( \bias(U_n \mid p) = \E(U_n - p \mid p) \)",
+        "use the expectation macro and the indexed estimator in the bias definition",
+    ),
+    (
+        376,
+        r"\(Y - n\)",
+        r"\(Y_n - n\)",
+        "restore the indexed geometric failure count",
+    ),
+    (
+        448,
+        r"\[ \mse(V \mid \lambda) ",
+        r"\[ \mse(V_n \mid \lambda) ",
+        "restore the estimator index in the Poisson MSE decomposition",
+    ),
+    (
+        484,
+        r"\( \bs x = (x_1, x_2, \ldots, x_n) \in \R \)",
+        r"\( \bs x = (x_1, x_2, \ldots, x_n) \in \R^n \)",
+        "put the normal data vector in its n-dimensional sample space",
+    ),
+    (
+        535,
+        r"\(\mse(U \mid \mu)",
+        r"\(\mse(U_n \mid \mu)",
+        "restore the estimator index in the special-case normal MSE",
+    ),
+    (
+        540,
+        r"\(\var(M) = \sigma^2 / n\)",
+        r"\(\mse(M_n \mid \mu) = \var(M_n \mid \mu) = \sigma^2 / n\)",
+        "identify the indexed sample mean and its equal MSE and variance",
+    ),
+    (
+        618,
+        r"\(U\)",
+        r"\(U_n\)",
+        "restore the estimator index in the Pareto comparison",
+    ),
+)
+
+PROTECTED_MATH_CORRECTIONS += tuple(
+    {
+        "page": "random/point/Bayes.html",
+        "old": old,
+        "new": new,
+        "span_old": old,
+        "span_new": new,
+        "span_index": span_index,
+        "replacements": 1,
+        "surface": "math_span",
+        "reason": reason,
+    }
+    for span_index, old, new, reason in BAYES_MATH_CORRECTIONS
+)
+
+PROTECTED_MATH_CORRECTIONS += (
+    {
+        "page": "random/point/Bayes.html",
+        "old": r"\bias(U \mid p)",
+        "new": r"\bias(U_n \mid p)",
+        "replacements": 1,
+        "surface": "raw_math_environment",
+        "reason": "restore the indexed estimator in the raw bias derivation",
+    },
+    {
+        "page": "random/point/Bayes.html",
+        "old": r"\P(Y = n \mid p)",
+        "new": r"\P(Y_n = n \mid p)",
+        "replacements": 1,
+        "surface": "raw_math_environment",
+        "reason": "restore the indexed success count in the raw bias derivation",
+    },
+    {
+        "page": "random/point/Bayes.html",
+        "old": r"\P(Y \lt n \mid p)",
+        "new": r"\P(Y_n \lt n \mid p)",
+        "replacements": 1,
+        "surface": "raw_math_environment",
+        "reason": "restore the indexed success count in the complementary raw event",
+    },
 )
 
 # Reader-facing language inside TeX \text{...} remains protected mathematics:
