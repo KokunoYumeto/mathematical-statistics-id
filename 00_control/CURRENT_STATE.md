@@ -14,9 +14,9 @@ The six-page boundary through sample variance has passed its bounded target
 audit, two deterministic replays, public deployment, anonymous byte readback,
 and live desktop/mobile rendering. The exact official MathJax
 3.1.2 `boldsymbol.js` module remains pinned. The seven-page boundary through
-order statistics has passed target audit, two deterministic replays, and local
-desktop/mobile rendering; publication is pending. The complete 29-page edition
-is not yet claimed.
+order statistics has passed target audit, two deterministic replays, public
+deployment, anonymous byte readback, and live desktop/mobile rendering. The
+complete 29-page edition is not yet claimed.
 
 ## Admitted source
 
@@ -189,7 +189,7 @@ claim that the complete edition or configured C140 course is complete.
 Publication-receipt SHA-256 is
 `96a8721193f3173ceec85dcff31607c635540e042fcf499d80b318d0ff21ca0f`.
 
-## Seven-page local checkpoint
+## Seven-page public checkpoint
 
 Core ordinals 1–7 are complete through
 `random/sample/OrderStatistics.html`. The reader is 31 files / 2,055,914
@@ -212,9 +212,20 @@ Local desktop/mobile rendering produced 569/569 MathJax containers, five
 complete images, no raw TeX, no console messages, and no page-level overflow.
 The reader-only layout v3 keeps the desktop body centered at 72 rem while
 containing the 662-px Michelson table, wider display equations, and visually
-clipped assistive MathML within the mobile canvas. Publication and anonymous
-public readback remain pending. This is not a claim that the complete edition
-or configured C140 course is complete.
+clipped assistive MathML within the mobile canvas.
+
+The first deployment attempt at commit
+`4c1e9ac7beab9174c5a01f5d7e45290cd18a8396` correctly failed because the
+ignored authority copy of `BoxPlot.png` was absent from the clean runner. The
+exact 790-byte authority file was committed without reader-byte changes.
+Commit `fd340e9f9a834584216a6480dd104c5bcbe4c66c`, workflow run `32546766027`,
+job `96966470663`, Pages deployment `6032396193`, and deployment status
+`17150132847` then succeeded. Anonymous readback matched all 31 files /
+2,055,914 bytes. The public desktop/mobile page again rendered all 569
+expressions and five images with zero raw TeX, console messages, or page-level
+overflow. This is not a claim that the complete edition or configured C140
+course is complete. Sanitized publication-receipt SHA-256 is
+`e90d168806308a4d996f399c04738fd654cb9654679107e1ceb9eba423153920`.
 
 ## Rights boundary
 
@@ -249,11 +260,10 @@ Authority bytes remain immutable. Do not contact upstream during production.
 
 ## Next work
 
-1. Publish and anonymously verify the seven-page OrderStatistics checkpoint.
-2. Continue immediately through all 22 remaining source pages, beginning with
+1. Continue immediately through all 22 remaining source pages, beginning with
    `random/sample/Covariance.html` (core ordinal 8), while growing the
    same deterministic reader and stable-ID backend.
-3. Keep Penn State reconstruction, the one-page Random completeness donor, and
+2. Keep Penn State reconstruction, the one-page Random completeness donor, and
    original C140 companion in separate component paths/repositories; begin
    them only after this clean checkpoint or in a demonstrably non-overlapping
    path.

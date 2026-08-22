@@ -80,9 +80,27 @@ forcing page-level overflow. Visual snapshot review passed.
 
 ## Publication state
 
-Publication and anonymous byte readback are pending for this seven-page
-boundary. The last accepted public boundary remains the six-page reader at
-commit `ee74fbbd813eec05963eb586fd9be41acb7ebe83`.
+The translation boundary was first pushed at commit
+`4c1e9ac7beab9174c5a01f5d7e45290cd18a8396`. Workflow run `32546700625`
+correctly failed before deployment because the manifest-bound 790-byte
+`authority/upstream/random/sample/BoxPlot.png` was covered by the repository's
+authority-ignore rule and therefore absent from the clean runner. The exact
+authority copy was force-added without changing its bytes or the reader at
+commit `fd340e9f9a834584216a6480dd104c5bcbe4c66c`.
 
-Next source after public verification: `random/sample/Covariance.html`, ordinal
-8 of 29.
+Workflow run `32546766027`, job `96966470663`, Pages deployment `6032396193`,
+and deployment status `17150132847` then completed successfully. Anonymous
+HTTPS readback matched all 31 manifest rows / 2,055,914 bytes by exact size and
+SHA-256 on the first post-deployment attempt.
+
+The live public OrderStatistics page rendered 569/569 MathJax containers at
+1280×720 and 390×844, with 51 units, 34 disclosures, five complete images,
+zero raw-TeX markers, zero console messages, and no page-level horizontal
+overflow. Desktop remained centered at 1,152 px. The mobile document remained
+exactly 375 px wide; two tables and seven displayed equations exposed local
+horizontal scrollers. Visual review of the page head and the Michelson table
+passed. The temporary viewport was reset and both verification tabs were
+closed. Sanitized evidence is recorded in
+`PUBLICATION_RECEIPT_2026-08-22_SEVEN_PAGE.json`.
+
+Next source cursor: `random/sample/Covariance.html`, ordinal 8 of 29.

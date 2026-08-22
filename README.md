@@ -16,8 +16,9 @@ Checkpoint tujuh halaman lulus dua pemutaran ulang build dan QA deterministik:
 dan 2.280 rentang TeX. Halaman Statistik Terurut lulus pemeriksaan visual
 desktop/seluler dengan 569 rumus dan lima gambar lengkap, tanpa galat konsol,
 TeX mentah, atau luapan horizontal halaman. Tabel dan rumus yang lebar dapat
-digulir secara lokal pada layar kecil. Produksi berikutnya berlanjut dari
-`sample/Covariance.html` setelah verifikasi publik checkpoint ini.
+digulir secara lokal pada layar kecil. Seluruh 31 berkas publik cocok dengan
+manifes byte demi byte. Produksi berikutnya berlanjut dari
+`sample/Covariance.html`.
 
 - Pembaca web: <https://kokunoyumeto.github.io/mathematical-statistics-id/>
 - Sumber dan bukti: <https://github.com/KokunoYumeto/mathematical-statistics-id>

@@ -151,7 +151,7 @@ console messages. Continue at `random/sample/OrderStatistics.html`.
 ## O006-D013 — publish the OrderStatistics boundary
 
 Date: 2026-08-22
-Status: approved for immediate publication; public verification pending
+Status: completed
 
 Treat the first seven contiguous pages through order statistics as a
 substantial instructional and correction boundary. OrderStatistics adds 846
@@ -162,3 +162,12 @@ desktop/mobile rendering. Publish the 31-file reader immediately, anonymously
 verify every manifest byte and the live page, then continue at
 `random/sample/Covariance.html` without describing the partial edition as
 complete.
+
+Commit `fd340e9f9a834584216a6480dd104c5bcbe4c66c` deployed successfully through
+workflow `32546766027` and Pages deployment `6032396193`. Anonymous readback
+matched all 31 files / 2,055,914 bytes. Public desktop/mobile QA rendered all
+569 expressions and five images with no raw TeX, console messages, or
+page-level overflow. The preceding run `32546700625` failed before deployment
+because the clean runner lacked the ignored BoxPlot authority copy; force-adding
+that exact manifest-bound file closed the reproducibility defect without
+changing reader bytes.

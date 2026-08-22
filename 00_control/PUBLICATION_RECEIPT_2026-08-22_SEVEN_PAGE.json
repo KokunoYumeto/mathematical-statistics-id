@@ -1,0 +1,176 @@
+{
+  "schema": "o006.github-pages-publication.v1",
+  "checkpoint": "seven-page-reader",
+  "verified_at": "2026-08-22T04:41:55+02:00",
+  "repository": {
+    "url": "https://github.com/KokunoYumeto/mathematical-statistics-id",
+    "branch": "main",
+    "public": true
+  },
+  "accepted_deployment": {
+    "source_commit_sha": "fd340e9f9a834584216a6480dd104c5bcbe4c66c",
+    "source_tree_sha": "39b2d719addbd8a52e219fb882c570194fee6fc2",
+    "workflow_run_id": 32546766027,
+    "workflow_job_id": 96966470663,
+    "workflow_url": "https://github.com/KokunoYumeto/mathematical-statistics-id/actions/runs/32546766027",
+    "workflow_status": "completed",
+    "workflow_conclusion": "success",
+    "pages_deployment_id": 6032396193,
+    "pages_deployment_status_id": 17150132847,
+    "pages_deployment_status": "success",
+    "pages_exact_sha_status": "success",
+    "public_url": "https://kokunoyumeto.github.io/mathematical-statistics-id/"
+  },
+  "rejected_attempt": {
+    "source_commit_sha": "4c1e9ac7beab9174c5a01f5d7e45290cd18a8396",
+    "workflow_run_id": 32546700625,
+    "workflow_job_id": 96966295982,
+    "workflow_status": "completed",
+    "workflow_conclusion": "failure",
+    "pages_deployed": false,
+    "failure_step": "Replay deterministic backend and reader gates",
+    "failure_reason": "the manifest-bound authority/upstream/random/sample/BoxPlot.png was covered by the authority ignore rule and absent from the clean runner",
+    "repair": "force-add the exact 790-byte frozen authority file; no reader or translation bytes changed"
+  },
+  "reader": {
+    "manifest_path": "build/FIRST_UNIT_MANIFEST.csv",
+    "manifest_bytes": 3001,
+    "manifest_sha256": "46ae01e822f9f53416cad5f5d85d64888ecc2265a85ccbeb68c4d9359c400368",
+    "build_receipt_sha256": "691aec356dd3d445174a029af76451d7b07df604f458fece0d6056d14de9c931",
+    "qa_receipt_sha256": "290c31e8a6cf6dc6764e0d0d1e04c417932850587204bbcfa5f30f1ed0f01c62",
+    "files": 31,
+    "bytes": 2055914,
+    "translated_pages": 7,
+    "new_page": {
+      "path": "random/sample/OrderStatistics.html",
+      "bytes": 69010,
+      "sha256": "351bc402538eebdffff10e5fb24161676ff36c39c80530c62b9168213211e48f"
+    },
+    "new_asset": {
+      "path": "random/sample/BoxPlot.png",
+      "bytes": 790,
+      "sha256": "7bcb3be4ffad0fc64d06cc5bc4fb14122ab3b117f31f0713988b0188fb8062f1",
+      "authority_path": "authority/upstream/random/sample/BoxPlot.png",
+      "authority_reader_byte_identical": true
+    }
+  },
+  "anonymous_byte_readback": {
+    "method": "HTTPS GET of every manifest row with no authorization header and Cache-Control: no-cache",
+    "attempt": 1,
+    "files_checked": 31,
+    "bytes_checked": 2055914,
+    "http_200_responses": 31,
+    "size_mismatches": 0,
+    "sha256_mismatches": 0,
+    "manifest_bound_inventory": true,
+    "result": "pass"
+  },
+  "anonymous_github_source_readback": {
+    "method": "HTTPS GET from raw.githubusercontent.com at the accepted commit with no authorization header and Cache-Control: no-cache",
+    "source_commit_sha": "fd340e9f9a834584216a6480dd104c5bcbe4c66c",
+    "files_checked": 18,
+    "bytes_checked": 10987912,
+    "http_200_responses": 18,
+    "size_mismatches": 0,
+    "sha256_mismatches": 0,
+    "scope": "new or changed immutable authority, translation targets, localization/build/QA scripts, ledgers, backend artifacts, and build receipts",
+    "paths": [
+      "authority/upstream/random/sample/BoxPlot.png",
+      "00_control/ADVERSE_LEDGER.jsonl",
+      "00_control/TRANSLATION_LEDGER.csv",
+      "backend/BACKEND_RECEIPT.json",
+      "backend/entities.jsonl",
+      "build/FIRST_UNIT_BUILD_RECEIPT.json",
+      "build/FIRST_UNIT_MANIFEST.csv",
+      "build/FIRST_UNIT_QA_RECEIPT.json",
+      "scripts/build_first_unit.py",
+      "scripts/localize_order_statistics.py",
+      "scripts/qa_first_unit.py",
+      "source/id-ID/random/sample/index.html",
+      "source/id-ID/random/sample/Introduction.html",
+      "source/id-ID/random/sample/Mean.html",
+      "source/id-ID/random/sample/LLN.html",
+      "source/id-ID/random/sample/CLT.html",
+      "source/id-ID/random/sample/Variance.html",
+      "source/id-ID/random/sample/OrderStatistics.html"
+    ],
+    "result": "pass"
+  },
+  "browser_verification": {
+    "audio_exercised": false,
+    "page": "random/sample/OrderStatistics.html",
+    "html_lang": "id-ID",
+    "desktop": {
+      "viewport_width": 1280,
+      "viewport_height": 720,
+      "document_client_width": 1265,
+      "document_scroll_width": 1265,
+      "body_width": 1152,
+      "body_left": 56.4444465637207,
+      "horizontal_overflow": false,
+      "units": 51,
+      "details": 34,
+      "mathjax_containers": 569,
+      "raw_tex_markers": 0,
+      "complete_images": 5,
+      "incomplete_images": 0,
+      "uncontained_wide_elements": 0,
+      "console_messages": 0
+    },
+    "mobile": {
+      "viewport_width": 390,
+      "viewport_height": 844,
+      "document_client_width": 375,
+      "document_scroll_width": 375,
+      "body_width": 351.1111145019531,
+      "body_left": 12,
+      "horizontal_overflow": false,
+      "units": 51,
+      "details": 34,
+      "mathjax_containers": 569,
+      "raw_tex_markers": 0,
+      "complete_images": 5,
+      "incomplete_images": 0,
+      "tables": 4,
+      "contained_scrollable_tables": 2,
+      "display_math_blocks": 30,
+      "contained_scrollable_display_math": 7,
+      "uncontained_wide_elements": 0,
+      "console_messages": 0
+    },
+    "visual_snapshot_review": "pass",
+    "temporary_viewport_reset": true,
+    "temporary_tabs_closed": true,
+    "result": "pass"
+  },
+  "backend": {
+    "entities": 6567,
+    "relations": 9035,
+    "translated_entity_bindings": 1785,
+    "untranslated_entity_bindings": 4782,
+    "entities_sha256": "7fec8864f403d12a281e4f3ff52dd1ee0dfe072e3ba252ee28f0ba7e25e5ae98",
+    "relations_sha256": "b235f4d4d724c7fe8653dfd06b075b2225cc2d116f3b87d0fda950d47030159a",
+    "receipt_sha256": "85a2e2ae66a1dbb6ad96ec25157e90abe255bdc6140da62c031316175bd837cc",
+    "translation_ledger_sha256": "c3d4abc6f72148803e9ccdc83a78a118985c66a58e4c0f44f938f1c889bf6a7e"
+  },
+  "checkpoint_record": {
+    "path": "00_control/CHECKPOINT_2026-08-22_SEVEN_PAGE.md",
+    "bytes": 5719,
+    "sha256": "15e41ba2e2e0ca7227c0be3dc5dc967270e59f0922e3c96ba3356581744cac85"
+  },
+  "previous_accepted_deployment": {
+    "checkpoint": "six-page-reader",
+    "source_commit_sha": "ee74fbbd813eec05963eb586fd9be41acb7ebe83",
+    "workflow_run_id": 32542434389,
+    "pages_deployment_id": 6031730044,
+    "reader_files": 29,
+    "reader_bytes": 1986156,
+    "status": "superseded-by-verified-seven-page-reader"
+  },
+  "scope": {
+    "complete_random_edition_claimed": false,
+    "configured_c140_complete_claimed": false,
+    "next_random_source": "random/sample/Covariance.html",
+    "upstream_contacted": false
+  }
+}
