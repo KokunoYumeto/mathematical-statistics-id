@@ -1,0 +1,51 @@
+{
+  "schema": "o006.random.github-publication-readback.v1",
+  "result": "pass",
+  "repository": {
+    "url": "https://github.com/KokunoYumeto/mathematical-statistics-id",
+    "branch": "main",
+    "commit": "4677fcf1ef8357de89ae0afd4e640e8076530873",
+    "previous_public_commit": "a898a1371f9c027d2b3316814a5391ae02d561ac"
+  },
+  "workflow": {
+    "run_id": 32655887678,
+    "url": "https://github.com/KokunoYumeto/mathematical-statistics-id/actions/runs/32655887678",
+    "conclusion": "success"
+  },
+  "pages_readback": {
+    "url": "https://kokunoyumeto.github.io/mathematical-statistics-id/",
+    "method": "credential-free HTTPS downloads of every reader-manifest row",
+    "files": 46,
+    "bytes": 2564819,
+    "manifest_sha256": "6cdf7d7592f9468a782801ed2dae9ed7dfdc14cde445c1026cb8018bb3ef3482",
+    "all_size_and_sha256_matches": true,
+    "root_model_provenance_present": true,
+    "root_source_author_credit_present": true
+  },
+  "raw_commit_readback": {
+    "method": "credential-free raw.githubusercontent.com downloads",
+    "files": [
+      {"bytes": 60930, "path": "source/id-ID/random/point/Sufficient.html", "sha256": "6dd895c08456da30a3a8a2aace5528a7ef32be5b6ad33c064af71fb5065250f6"},
+      {"bytes": 10538491, "path": "backend/entities.jsonl", "sha256": "2d36d064b3e89e7cdd281f0a91f18a8386050739fe149941aec035638536836b"},
+      {"bytes": 24067, "path": "backend/BACKEND_RECEIPT.json", "sha256": "6d929c056f14b6b40d2d29d50707f32f5fe19ce4ab7a6f905cac57008d3c6843"},
+      {"bytes": 5107, "path": "00_control/CHECKPOINT_2026-08-23_SIXTEEN_PAGE.md", "sha256": "328f4ae42271bb00468478f960f60c84b6239c906d5a0deb412488cc4d2e3a76"},
+      {"bytes": 1746, "path": "00_control/LIVE_BROWSER_QA_2026-08-23_SIXTEEN_PAGE.json", "sha256": "d593b8c81b62476baf01f644c0ce5facc301fb464f39c9b71f547b319b1bf126"},
+      {"bytes": 7011, "path": "00_control/TERMINOLOGY_QA_2026-08-22.md", "sha256": "46ce8b83bcd730e832bdc904c209eae754d5f6e97a95b1ec0f87c842c0bf4832"},
+      {"bytes": 4522, "path": "build/FIRST_UNIT_MANIFEST.csv", "sha256": "6cdf7d7592f9468a782801ed2dae9ed7dfdc14cde445c1026cb8018bb3ef3482"},
+      {"bytes": 10695, "path": "build/PDF_READER_RECEIPT.json", "sha256": "d3e9826b0bad4f120599a501521477c3b5344cf157fd7c25de5b6af81c7ab6a1"},
+      {"bytes": 3069, "path": "README.md", "sha256": "3cefdd64cfff3fbbaa12088728d73c7a056963e1b5d51fb8ac3d85ebeb0ea701"}
+    ]
+  },
+  "release": {
+    "tag": "v2026.08.23.16",
+    "url": "https://github.com/KokunoYumeto/mathematical-statistics-id/releases/tag/v2026.08.23.16",
+    "prerelease": true,
+    "completion_claim": "16 of 29 core pages; incomplete edition",
+    "asset": {
+      "name": "statistika-matematis-id-reader.pdf",
+      "bytes": 85357801,
+      "sha256": "f1a886ff1285315478bb7e50a773e8a5d79b47e6170a86e82e7b98126f6f6160",
+      "anonymous_download_match": true
+    }
+  }
+}
