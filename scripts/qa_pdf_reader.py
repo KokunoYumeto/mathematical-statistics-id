@@ -16,7 +16,7 @@ from pypdf import PdfReader
 
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_PDF = ROOT / "output" / "pdf" / "statistika-matematis-id-reader.pdf"
-DEFAULT_IMAGES = ROOT / "tmp" / "pdfs" / "pdf-qa-15"
+DEFAULT_IMAGES = ROOT / "tmp" / "pdfs" / "pdf-qa-16"
 RECEIPT = ROOT / "build" / "PDF_VISUAL_QA_RECEIPT.json"
 
 
@@ -48,8 +48,8 @@ def main() -> None:
     reader = PdfReader(args.pdf)
     if reader.is_encrypted:
         raise RuntimeError("reader PDF is unexpectedly encrypted")
-    if len(reader.pages) != 182:
-        raise RuntimeError(f"expected 182 PDF pages, found {len(reader.pages)}")
+    if len(reader.pages) != 197:
+        raise RuntimeError(f"expected 197 PDF pages, found {len(reader.pages)}")
     page_sizes = {
         (round(float(page.mediabox.width), 3), round(float(page.mediabox.height), 3))
         for page in reader.pages
@@ -80,8 +80,8 @@ def main() -> None:
     if min(extracted_lengths) < 20:
         raise RuntimeError("one or more PDF pages have effectively empty extracted text")
     outline_count = len(flatten_outline(reader.outline))
-    if outline_count < 17:
-        raise RuntimeError(f"expected cover, contents, and 15 document outline entries; found {outline_count}")
+    if outline_count < 18:
+        raise RuntimeError(f"expected cover, contents, and 16 document outline entries; found {outline_count}")
 
     images = sorted(args.images.glob("page-*.png"))
     if len(images) != len(reader.pages):
@@ -138,8 +138,8 @@ def main() -> None:
         },
         "manual_visual_review": {
             "contact_sheets": len(contacts),
-            "all_182_pages_reviewed_in_contact_sheets": bool(args.manual_contact_sheets_reviewed),
-            "full_resolution_spot_checks": [1, 2, 107, 160, 175, 182],
+            "all_197_pages_reviewed_in_contact_sheets": bool(args.manual_contact_sheets_reviewed),
+            "full_resolution_spot_checks": [1, 2, 107, 160, 175, 183, 190, 197],
             "observed_defects": 0,
             "known_limit": "The consolidated PDF is not tagged after deterministic merge; the offline HTML reader remains the accessibility-first surface.",
         },

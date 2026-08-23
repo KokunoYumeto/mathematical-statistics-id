@@ -34,6 +34,7 @@ const documents = [
   [13, "random/point/Likelihood.html", "Kemungkinan Maksimum"],
   [14, "random/point/Bayes.html", "Pendugaan Bayes"],
   [15, "random/point/Unbiased.html", "Penduga Tak Bias Terbaik"],
+  [16, "random/point/Sufficient.html", "Statistik Cukup, Lengkap, dan Ancillary"],
 ];
 
 const printCss = String.raw`

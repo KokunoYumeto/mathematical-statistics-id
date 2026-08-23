@@ -1,0 +1,55 @@
+{
+  "schema": "o006.random.live-browser-qa.v1",
+  "date": "2026-08-23",
+  "result": "pass",
+  "surface": "credential-free local HTML reader",
+  "server": "http://127.0.0.1:8787/",
+  "root": {
+    "url": "http://127.0.0.1:8787/index.html",
+    "title": "Statistika Matematis — Bahasa Indonesia",
+    "lang": "id-ID",
+    "translation_provenance": "OpenAI Codex gpt-5.6-sol, Ultra",
+    "viewport": [1280, 720],
+    "scroll_width": 1280,
+    "client_width": 1280,
+    "horizontal_overflow": false,
+    "raw_tex_visible": false
+  },
+  "sufficient": {
+    "url": "http://127.0.0.1:8787/random/point/Sufficient.html",
+    "title": "Statistik Cukup, Lengkap, dan Ancillary",
+    "lang": "id-ID",
+    "desktop": {
+      "viewport": [1280, 720],
+      "scroll_width": 1265,
+      "client_width": 1265,
+      "horizontal_overflow": false,
+      "wide_elements": [],
+      "mathjax_containers": 804,
+      "details": 26,
+      "open_details": 0,
+      "incomplete_images": 0,
+      "raw_tex_visible": false,
+      "source_link": "https://www.randomservices.org/random/index.html"
+    },
+    "mobile": {
+      "viewport": [390, 844],
+      "scroll_width": 375,
+      "client_width": 375,
+      "horizontal_overflow": false,
+      "wide_elements": [],
+      "mathjax_containers": 804,
+      "details": 26,
+      "open_details": 0,
+      "incomplete_images": 0,
+      "raw_tex_visible": false
+    }
+  },
+  "console_errors_or_warnings": [],
+  "browser": {
+    "name": "Codex In-app Browser",
+    "chromium_version": "151.0.7922.173",
+    "executable_sha256": "bd88b26777496cef22fc09860164da7cba4a5c77e1dcbf5ad3a3967aa457d715"
+  },
+  "note": "Read-only DOM geometry and console checks; no credentials, cookies, storage, or network account state inspected."
+}

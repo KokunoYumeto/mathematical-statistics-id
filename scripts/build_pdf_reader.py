@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build the reader-first PDF for the current 15/29 Indonesian checkpoint."""
+"""Build the reader-first PDF for the current 16/29 Indonesian checkpoint."""
 
 from __future__ import annotations
 
@@ -68,8 +68,8 @@ CHROME = dependency_path(
 )
 ARIAL = Path(r"C:\Windows\Fonts\arial.ttf")
 ARIAL_BOLD = Path(r"C:\Windows\Fonts\arialbd.ttf")
-PUBLICATION_DATE = "22 Agustus 2026"
-FIXED_PDF_DATE = "D:20260822200000+02'00'"
+PUBLICATION_DATE = "23 Agustus 2026"
+FIXED_PDF_DATE = "D:20260823200000+02'00'"
 TRANSLATION_PROVENANCE = "OpenAI Codex gpt-5.6-sol, Ultra"
 
 DOCUMENTS = (
@@ -88,6 +88,7 @@ DOCUMENTS = (
     (13, "Kemungkinan Maksimum"),
     (14, "Pendugaan Bayes"),
     (15, "Penduga Tak Bias Terbaik"),
+    (16, "Statistik Cukup, Lengkap, dan Ancillary"),
 )
 
 
@@ -160,11 +161,11 @@ def build_front_matter(path: Path, page_counts: list[int]) -> None:
     c.drawString(50, height - 180, "Edisi Bahasa Indonesia (id-ID)")
     c.setFont(bold, 13)
     c.setFillColor(HexColor("#74b4d8"))
-    c.drawString(50, height - 235, "CHECKPOINT PARSIAL: 15 DARI 29 HALAMAN INTI")
+    c.drawString(50, height - 235, "CHECKPOINT PARSIAL: 16 DARI 29 HALAMAN INTI")
     c.setFillColor(HexColor("#ffffff"))
     c.setFont(regular, 10.5)
     y = height - 285
-    y = wrap(c, "Bab sampel acak lengkap, diikuti pendugaan titik sampai Penduga Tak Bias Terbaik. Edisi lengkap belum diklaim; halaman berikutnya adalah Statistik Cukup, Lengkap, dan Ancillary.", 50, y, width - 100, regular, 10.5, 15)
+    y = wrap(c, "Bab sampel acak lengkap, diikuti pendugaan titik sampai Statistik Cukup, Lengkap, dan Ancillary. Edisi lengkap belum diklaim; halaman berikutnya melanjutkan teori pendugaan titik.", 50, y, width - 100, regular, 10.5, 15)
     y -= 14
     y = wrap(c, "Berdasarkan Random: Probability, Mathematical Statistics, and Stochastic Processes karya Kyle Siegrist.", 50, y, width - 100, regular, 10.5, 15)
     y -= 8
@@ -201,7 +202,7 @@ def build_front_matter(path: Path, page_counts: list[int]) -> None:
         start_page += count
     c.setFillColor(HexColor("#4d5f6c"))
     c.setFont(regular, 8.2)
-    wrap(c, "Status: belum lengkap. Semua rincian dan derivasi yang dapat diperluas dalam pembaca HTML dibuka di PDF ini. Laman sumber 1-15 disusun berurutan.", 45, 92, width - 90, regular, 8.2, 11)
+    wrap(c, "Status: belum lengkap. Semua rincian dan derivasi yang dapat diperluas dalam pembaca HTML dibuka di PDF ini. Laman sumber 1-16 disusun berurutan.", 45, 92, width - 90, regular, 8.2, 11)
     c.showPage()
     c.save()
 
@@ -252,8 +253,8 @@ def produce(candidate: Path) -> dict[str, Any]:
         raise RuntimeError(f"HTML-to-PDF renderer failed: {message}")
     render = json.loads(completed.stdout.decode("utf-8"))
     rows = render.get("documents", [])
-    if len(rows) != 15:
-        raise RuntimeError(f"expected 15 rendered source documents, found {len(rows)}")
+    if len(rows) != 16:
+        raise RuntimeError(f"expected 16 rendered source documents, found {len(rows)}")
     page_counts: list[int] = []
     for row in rows:
         path = PAGE_ROOT / row["filename"]
@@ -281,7 +282,7 @@ def produce(candidate: Path) -> dict[str, Any]:
         {
             "/Title": "Statistika Matematis - Edisi Bahasa Indonesia (id-ID)",
             "/Author": "Kyle Siegrist; edisi Bahasa Indonesia oleh Kokuno Yumeto",
-            "/Subject": "Checkpoint parsial: 15 dari 29 halaman inti",
+            "/Subject": "Checkpoint parsial: 16 dari 29 halaman inti",
             "/Keywords": "statistika matematis, Bahasa Indonesia, sumber pendidikan terbuka",
             "/Creator": "O006 deterministic reader pipeline",
             "/Producer": "pypdf + ReportLab + Chromium",
@@ -316,8 +317,8 @@ def produce(candidate: Path) -> dict[str, Any]:
     return {
         "schema": "o006.random.pdf-reader-receipt.v1",
         "translation_provenance": TRANSLATION_PROVENANCE,
-        "status": "partial-15-of-29",
-        "source_documents": 15,
+        "status": "partial-16-of-29",
+        "source_documents": 16,
         "physical_pages": len(final_reader.pages),
         "bytes": candidate.stat().st_size,
         "sha256": sha256(candidate),

@@ -10,28 +10,30 @@ naratif untuk kursus C140 yang dikonfigurasi secara terpisah.
 Provenans terjemahan: OpenAI Codex gpt-5.6-sol, Ultra. Semua kredit karya
 sumber, penulis, dan kontributor manusia tetap dipertahankan secara terpisah.
 
-Status pembaca: **15 dari 29 halaman sumber inti telah diterjemahkan**, secara
-berurutan dari indeks Sampel Acak sampai `point/Unbiased.html`.
+Status pembaca: **16 dari 29 halaman sumber inti telah diterjemahkan**, secara
+berurutan dari indeks Sampel Acak sampai `point/Sufficient.html`.
 Korpus belum selesai; repositori ini tidak mengklaim kelengkapan dini.
 
-Checkpoint lima belas halaman lulus dua pemutaran ulang build dan QA
-deterministik: 45 berkas pembaca, 466 unit instruksional, 300 pengungkapan
-jawaban/rincian, dan 247 wadah MathJax pada halaman Penduga Tak Bias Terbaik.
+Checkpoint enam belas halaman lulus dua pemutaran ulang build dan QA
+deterministik: 46 berkas pembaca, 505 unit instruksional, 326 pengungkapan
+jawaban/rincian, dan 804 wadah MathJax pada halaman Statistik Cukup, Lengkap,
+dan Ancillary.
 Pemeriksaan
 desktop/seluler menemukan tata letak yang terpusat dan memenuhi halaman, tanpa
 galat konsol, TeX mentah, gambar hilang, atau luapan horizontal halaman. PDF
-pembaca langsung berisi 182 halaman A4 dan seluruh rincian yang diperluas.
-Produksi berikutnya berlanjut dari `point/Sufficient.html`.
+pembaca langsung berisi 197 halaman A4 dan seluruh rincian yang diperluas.
+Produksi berikutnya berlanjut dari `interval/index.html`.
 
-- Arsip Zenodo checkpoint 15/29: <https://doi.org/10.5281/zenodo.22062664>
+- Arsip Zenodo checkpoint terbaru: lihat receipt publik di `00_control/` setelah
+  rilis; DOI konsep semua versi tetap <https://doi.org/10.5281/zenodo.22059763>
 - DOI konsep semua versi: <https://doi.org/10.5281/zenodo.22059763>
 - Pembaca web: <https://kokunoyumeto.github.io/mathematical-statistics-id/>
 - Sumber, riwayat, dan rilis PDF GitHub:
   <https://github.com/KokunoYumeto/mathematical-statistics-id>
-- Rilis PDF checkpoint 15/29:
-  <https://github.com/KokunoYumeto/mathematical-statistics-id/releases/tag/v2026.08.22.15>
-- Pointer metadata Figshare checkpoint 15/29:
-  <https://doi.org/10.6084/m9.figshare.33314784.v3>
+- Rilis PDF checkpoint 16/29: public link is recorded in the sixteen-page
+  publication receipt under `00_control/`.
+- Pointer metadata Figshare checkpoint 16/29: public DOI is recorded in the
+  sixteen-page publication receipt under `00_control/`.
 - Karya sumber resmi: <https://www.randomservices.org/random/>
 
 Pembaca luring dibangun secara deterministik dari `source/id-ID/` dengan

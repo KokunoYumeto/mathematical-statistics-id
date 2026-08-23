@@ -7,20 +7,20 @@
   `d36e0f8bf9fa44a38a7504f9688a08af6787d88ede99298316a3e022b6f799f5`
 - Ordered core: the `core_paths` array in
   `authority/SOURCE_FREEZE_RECEIPT.json`.
-- Last completed source page: `random/point/Unbiased.html` (core ordinal 15 of
-  29); target 31,784 bytes, SHA-256
-  `3bbe9f00642b1095c120fc940b5aa6c026a62a8c757edc81f0fc334b9b6b86ba`.
-- Next contiguous source page: `random/point/Sufficient.html` (core ordinal
-  16); authority 57,507 bytes, SHA-256
-  `4d7402f2a960ea2b4232e57e4ee5992ac29801b9269f300f17f8e83074d5a0e4`.
-- Latest HTML reader: 15 translated pages; 45 files; 2,503,889 bytes;
+- Last completed source page: `random/point/Sufficient.html` (core ordinal 16
+  of 29); target 60,930 bytes, SHA-256
+  `6dd895c08456da30a3a8a2aace5528a7ef32be5b6ad33c064af71fb5065250f6`.
+- Next contiguous source page: `random/interval/index.html` (core ordinal 17);
+  authority 7,789 bytes, SHA-256
+  `85fcad0292636fbae0935ebb775a87b9e4dbdf33692b5e2823b353163d168403`.
+- Latest HTML reader: 16 translated pages; 46 files; 2,564,819 bytes;
   manifest SHA-256
-  `d6f51461a9db39f53f832912fbe4c865059177094564ca5a6d0b30cc3c1740aa`.
+  `6cdf7d7592f9468a782801ed2dae9ed7dfdc14cde445c1026cb8018bb3ef3482`.
 - Latest deterministic HTML QA receipt SHA-256:
-  `3031b412ce7eb275f2c0ad7129799a76506c86b50b34dc439d34d4d0d71ac0b0`.
-- Backend: 6,567 entities / 9,035 relations; 4,012 translated bindings;
+  `238ece761f934f6a71058f2fca0a1780538283e359eb3d3c7808ff52b9758cdf`.
+- Backend: 6,567 entities / 9,035 relations; 4,337 translated bindings;
   receipt SHA-256
-  `26ae6fe8e9b1a02ad7c65b9b93bed53d85ae62c56124bd13cc416fdccaf0a6a5`.
+  `6d929c056f14b6b40d2d29d50707f32f5fe19ce4ab7a6f905cac57008d3c6843`.
 - Terminology QA: no qualifying Indonesian mathematical-statistics arXiv TeX
   source was found; the permitted Universitas Lampung PDF fallback and bounded
   institutional comparators were inspected directly. Decisions, exact URLs,
@@ -32,15 +32,15 @@
   Two full backend/build/QA replays are byte-identical. The exact additive
   provenance string is `OpenAI Codex gpt-5.6-sol, Ultra`; source-author and
   human-contributor credits remain intact.
-- Reader-first PDF: 182 A4 pages / 76,775,084 bytes; SHA-256
-  `7c4898505962f6978eb064c605a77fca9ccbcd3ba7f9238f9cf0d8ae974662ef`.
-  All 182 pages were rerendered and visually reviewed. PDF receipt SHA-256:
-  `69995c86f5b69696e39f21ad31696517dac1d56ea8afd212efe7eb7f8c9d2029`;
+- Reader-first PDF: 197 A4 pages / 85,357,801 bytes; SHA-256
+  `f1a886ff1285315478bb7e50a773e8a5d79b47e6170a86e82e7b98126f6f6160`.
+  All 197 pages were rerendered and visually reviewed. PDF receipt SHA-256:
+  `d3e9826b0bad4f120599a501521477c3b5344cf157fd7c25de5b6af81c7ab6a1`;
   visual-QA receipt SHA-256:
-  `cf7b1c869b2f9848725800f19a5cfad3d39554430824627ba5859c71eb332f0b`.
+  `91338964c52b6d2c8bb1f0bb0bf2f43cca3af22b4aae7cdb6a3f565bcbe13166`.
 - Exact local checkpoint:
-  `CHECKPOINT_2026-08-22_FIFTEEN_PAGE.md` and
-  `LIVE_BROWSER_QA_2026-08-22_FIFTEEN_PAGE.json`.
+  `CHECKPOINT_2026-08-23_SIXTEEN_PAGE.md` and
+  `LIVE_BROWSER_QA_2026-08-23_SIXTEEN_PAGE.json`.
 - The fifteen-page checkpoint is public at GitHub commit
   `df7b2322ce75419e5c682f4b882af626a320bdf5`; workflow `32601081875` / job
   `97099317560` passed. All 45 Pages files / 2,503,889 bytes and nine selected
@@ -63,6 +63,6 @@
 
 Resume by reading this file, `CURRENT_STATE.md`, the freeze receipt, the final
 row of `TRANSLATION_LEDGER.csv`, the terminology QA/glossary, and the
-fifteen-page checkpoint. Continue with ordinal 16
-`random/point/Sufficient.html`. Do not restart source selection, duplicate a
-DOI lineage, contact upstream, or repeat completed pages.
+sixteen-page checkpoint. Continue with ordinal 17
+`random/interval/index.html`. Do not restart source selection, duplicate a DOI
+lineage, contact upstream, or repeat completed pages.

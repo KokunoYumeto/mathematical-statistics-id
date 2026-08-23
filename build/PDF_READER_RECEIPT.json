@@ -1,11 +1,11 @@
 {
   "schema": "o006.random.pdf-reader-receipt.v1",
   "translation_provenance": "OpenAI Codex gpt-5.6-sol, Ultra",
-  "status": "partial-15-of-29",
-  "source_documents": 15,
-  "physical_pages": 182,
-  "bytes": 76775084,
-  "sha256": "7c4898505962f6978eb064c605a77fca9ccbcd3ba7f9238f9cf0d8ae974662ef",
+  "status": "partial-16-of-29",
+  "source_documents": 16,
+  "physical_pages": 197,
+  "bytes": 85357801,
+  "sha256": "f1a886ff1285315478bb7e50a773e8a5d79b47e6170a86e82e7b98126f6f6160",
   "filename": "statistika-matematis-id-reader.pdf",
   "front_matter_pages": 2,
   "documents": [
@@ -26,7 +26,7 @@
       "documentScrollWidth": 1280,
       "wideElements": [],
       "pdf_pages": 3,
-      "sha256": "eec2a7dc20ca6e075a38399f5867934ecf8e28d91e18a897195872a5b80b0fea"
+      "sha256": "ca666a9d0a6f69ca99a2dcdd7cff78c271325545274d54c6cbe35c3ad77cb8cc"
     },
     {
       "ordinal": 2,
@@ -45,7 +45,7 @@
       "documentScrollWidth": 1280,
       "wideElements": [],
       "pdf_pages": 8,
-      "sha256": "8478da851b057542f77d89cddcf869196c6f4e0f062d73df8a1cfd3ed02775f6"
+      "sha256": "169f249a8b077ee829c050f4cbdc3d5691bef901c92b918a7e6ae6b240294e0c"
     },
     {
       "ordinal": 3,
@@ -64,7 +64,7 @@
       "documentScrollWidth": 1280,
       "wideElements": [],
       "pdf_pages": 14,
-      "sha256": "a953d23a2d10ae8be14b492451a5271fe2d64688cc262f90834ca67b81d154cd"
+      "sha256": "e3cbc31ac247293dea79a8955a8e897e861aac5793497e579ba0593414296ea5"
     },
     {
       "ordinal": 4,
@@ -83,7 +83,7 @@
       "documentScrollWidth": 1280,
       "wideElements": [],
       "pdf_pages": 9,
-      "sha256": "b20dcc979b0fb5dce94d40822e949511f801dc238ff7726a5fc51495e13db3a7"
+      "sha256": "8c702ad35bfb3b81b15ad00fac2bf063c321128706fda34c3e9e3247bb5e82cb"
     },
     {
       "ordinal": 5,
@@ -102,7 +102,7 @@
       "documentScrollWidth": 1280,
       "wideElements": [],
       "pdf_pages": 12,
-      "sha256": "5abdd750d8280f61abfb345f36fd9a48ae684dc6889198d12432853f484c9589"
+      "sha256": "12d0ab0c93d32ef6b2f3a6e65b1f9637305db41b5faac515c7c1290def84ac13"
     },
     {
       "ordinal": 6,
@@ -121,7 +121,7 @@
       "documentScrollWidth": 1280,
       "wideElements": [],
       "pdf_pages": 18,
-      "sha256": "5ce2605fbe37e3db27249a68f6a6e5e1d4e51ac103aaad1279984fa1af6547ad"
+      "sha256": "b3c33509b6733ab8b18b2af869adf82013fae7bb848d17655005850388474873"
     },
     {
       "ordinal": 7,
@@ -140,7 +140,7 @@
       "documentScrollWidth": 1280,
       "wideElements": [],
       "pdf_pages": 17,
-      "sha256": "1b9d1c3077b9a7e7a4f682ae40afd86ba042b76c59896894f6563961ec06bffe"
+      "sha256": "b280c047d2b812013a848271cd5034c67566616e8dc7245b79d3a8debc5b3d30"
     },
     {
       "ordinal": 8,
@@ -159,7 +159,7 @@
       "documentScrollWidth": 1280,
       "wideElements": [],
       "pdf_pages": 23,
-      "sha256": "bce54ca62e9b79e1b9077a102bbf56225994db23dd4985a733488b2dee3a27eb"
+      "sha256": "8fd2c86c13f6ee1c604f86b361a63c0dfbab42ddbc91ed4e89c170453b666c22"
     },
     {
       "ordinal": 9,
@@ -178,7 +178,7 @@
       "documentScrollWidth": 1283,
       "wideElements": [],
       "pdf_pages": 11,
-      "sha256": "89f09a266a7bc299c5a780d29bab19194b033c3bd69a8d3e4997e831abcc2d3f"
+      "sha256": "f28582b798249646682b9e663ca66a0435e61751a234bc2c3abe9027b405d450"
     },
     {
       "ordinal": 10,
@@ -197,7 +197,7 @@
       "documentScrollWidth": 1280,
       "wideElements": [],
       "pdf_pages": 2,
-      "sha256": "c05dddd4646bbf9ed1e0bbf79ed20ff3d9a4aca26d4a69872668998eb33bee53"
+      "sha256": "ff1f8574541b908de3974feea4b51a1a630e09179bcdc20babaa9d64e2b98076"
     },
     {
       "ordinal": 11,
@@ -216,7 +216,7 @@
       "documentScrollWidth": 1280,
       "wideElements": [],
       "pdf_pages": 10,
-      "sha256": "cec9f93b984c0ef29d806630a6cace20ce0a5597077635beeb5377abca67413a"
+      "sha256": "694626d1134af5b60e0d6ea404bfbcbdfe6f63a9af74fa0cb3a2a9cdab7d5027"
     },
     {
       "ordinal": 12,
@@ -235,7 +235,7 @@
       "documentScrollWidth": 1280,
       "wideElements": [],
       "pdf_pages": 15,
-      "sha256": "6d67379dd2ed9baf9fe01964f7a0da0f7c2c3647b013608c0c0cc8d0004b9312"
+      "sha256": "cc99ca51bb800814b8fb944d6875446e7de2246d3f8b0106db3c18b277c5f0b5"
     },
     {
       "ordinal": 13,
@@ -254,7 +254,7 @@
       "documentScrollWidth": 1280,
       "wideElements": [],
       "pdf_pages": 15,
-      "sha256": "1d040ab2628844eff6d668a25feace5e0198475fb994146941a32482efdf076c"
+      "sha256": "0ca172a0988e0ec43bf9d67b126de2696b6f77755aaba2032dff8c5d4de8a200"
     },
     {
       "ordinal": 14,
@@ -273,7 +273,7 @@
       "documentScrollWidth": 1280,
       "wideElements": [],
       "pdf_pages": 15,
-      "sha256": "76a87ba06b5ecdaf8572e07a00d00a1c213a2f3ef129312732a3375c6a5f51c0"
+      "sha256": "4b13a64b065b226e85aabdd8fbffe985014b5f24799955563b6d02af76eaefd5"
     },
     {
       "ordinal": 15,
@@ -292,17 +292,36 @@
       "documentScrollWidth": 1280,
       "wideElements": [],
       "pdf_pages": 8,
-      "sha256": "e6a5683e3cc6b012024264fb101a8f7fa7d7eeaf86ee3ea8b45bda148e9c63fe"
+      "sha256": "fb22623fc9cb2d8e779634d8d15fac11f63bef1501b7562a8ac780a148b93431"
+    },
+    {
+      "ordinal": 16,
+      "relativePath": "random/point/Sufficient.html",
+      "label": "Statistik Cukup, Lengkap, dan Ancillary",
+      "filename": "16-Sufficient.pdf",
+      "bytes": 1368728,
+      "title": "Statistik Cukup, Lengkap, dan Ancillary",
+      "mathContainers": 804,
+      "details": 26,
+      "openDetails": 26,
+      "incompleteImages": 0,
+      "rawTex": false,
+      "pageOverflow": false,
+      "viewportWidth": 1280,
+      "documentScrollWidth": 1280,
+      "wideElements": [],
+      "pdf_pages": 15,
+      "sha256": "30c79b95cd0c798fee0c0b799948fb899dd12e1ef7a0e6eff0903daba08e1212"
     }
   ],
   "browser_version": "151.0.7922.173",
   "browser_executable_sha256": "bd88b26777496cef22fc09860164da7cba4a5c77e1dcbf5ad3a3967aa457d715",
   "regular_font_sha256": "b3658eadae55e682b5f69eb64c439c1ecc8f196c0bb8d4756d145d13bc86476a",
   "bold_font_sha256": "e8f4e3baf6cc35fed6fcce3a540e8b39e8f6cda1d22a28f2ec8f526fef7a43f5",
-  "renderer_sha256": "5434cc4641dbe7ab2114d1028a7c1c90c24d10eefdc24a9862fda4739dddef8f",
-  "builder_sha256": "5e49ec1329deff04cbd0869437e383fa1bb1d9aa4563a31799ecbd7b9f94939f",
-  "reader_manifest_sha256": "d6f51461a9db39f53f832912fbe4c865059177094564ca5a6d0b30cc3c1740aa",
-  "reader_build_receipt_sha256": "80cccbfe818a9f912bc183deb2f41448ebaa1d91756ad003b87a96eda5dcdd64",
-  "reader_qa_receipt_sha256": "3031b412ce7eb275f2c0ad7129799a76506c86b50b34dc439d34d4d0d71ac0b0",
+  "renderer_sha256": "67ca2d7de8f9e62e8b015be94272d8655141ffcf6f423beb190a995cc311c8d9",
+  "builder_sha256": "da274d18fd51bc2b24a7da7923748edead733dce686539d6a79aa155ecfdac99",
+  "reader_manifest_sha256": "6cdf7d7592f9468a782801ed2dae9ed7dfdc14cde445c1026cb8018bb3ef3482",
+  "reader_build_receipt_sha256": "2c3b453aecfdd6cb3f6c5a8ada8c04ebbd0392a58412456f17c50e6d08bd99a7",
+  "reader_qa_receipt_sha256": "238ece761f934f6a71058f2fca0a1780538283e359eb3d3c7808ff52b9758cdf",
   "license_path": "LICENSE.md"
 }

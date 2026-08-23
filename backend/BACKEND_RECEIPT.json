@@ -372,9 +372,9 @@
   },
   "outputs": {
     "entities.jsonl": {
-      "bytes": 10506316,
+      "bytes": 10538491,
       "records": 6567,
-      "sha256": "7f93f59a5cbd55c647c5f5356a828843aa22754a411db579029439dd5471617b"
+      "sha256": "2d36d064b3e89e7cdd281f0a91f18a8386050739fe149941aec035638536836b"
     },
     "relations.csv": {
       "bytes": 1182589,
@@ -399,15 +399,15 @@
   "translation_binding": {
     "documents": {
       "total": 29,
-      "translated": 15,
-      "untranslated": 14
+      "translated": 16,
+      "untranslated": 13
     },
     "entities": {
       "total": 6567,
-      "translated": 4012,
-      "untranslated": 2555
+      "translated": 4337,
+      "untranslated": 2230
     },
-    "ledger_bytes": 7256,
+    "ledger_bytes": 8031,
     "ledger_columns": [
       "ordinal",
       "source_path",
@@ -420,11 +420,11 @@
       "notes"
     ],
     "ledger_path": "00_control/TRANSLATION_LEDGER.csv",
-    "ledger_rows": 15,
-    "ledger_sha256": "3acc79418261793ec77b907e078868668ca419ca56d8fa33bd5ca5aac9d7d12a",
+    "ledger_rows": 16,
+    "ledger_sha256": "592ea699a8d6aadf1bedb1d5545310a104b919ec350459efa6e24735460a1f45",
     "status_counts": {
-      "complete": 15,
-      "untranslated": 14
+      "complete": 16,
+      "untranslated": 13
     },
     "target_locale": "id-ID",
     "translated_document_ordinals": [
@@ -442,7 +442,8 @@
       12,
       13,
       14,
-      15
+      15,
+      16
     ],
     "verified_rows": [
       {
@@ -609,6 +610,17 @@
         "target_locale": "id-ID",
         "target_path": "source/id-ID/random/point/Unbiased.html",
         "target_sha256": "3bbe9f00642b1095c120fc940b5aa6c026a62a8c757edc81f0fc334b9b6b86ba"
+      },
+      {
+        "ordinal": 16,
+        "source_bytes": 57507,
+        "source_path": "random/point/Sufficient.html",
+        "source_sha256": "4d7402f2a960ea2b4232e57e4ee5992ac29801b9269f300f17f8e83074d5a0e4",
+        "status": "complete",
+        "target_bytes": 60930,
+        "target_locale": "id-ID",
+        "target_path": "source/id-ID/random/point/Sufficient.html",
+        "target_sha256": "6dd895c08456da30a3a8a2aace5528a7ef32be5b6ad33c064af71fb5065250f6"
       }
     ]
   },

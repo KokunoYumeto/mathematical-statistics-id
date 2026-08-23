@@ -5,8 +5,8 @@ Updated: 2026-08-23
 ## Status
 
 Edition source admitted; exact authority and component-rights freezes complete; the
-first fifteen contiguous Indonesian pages and the full 29-page machine backend
-are locally verified. Every entity on those fifteen pages is now bound to its target
+first sixteen contiguous Indonesian pages and the full 29-page machine backend
+are locally verified. Every entity on those sixteen pages is now bound to its target
 path, locale, byte count, and SHA-256. The repository was public before the
 publishing account was suspended; the repaired
 three- and four-page Pages checkpoints remain historical evidence. The
@@ -91,9 +91,14 @@ published and anonymously read back in the existing GitHub, Zenodo, and
 Figshare-pointer lineages; the exact public identities and hashes are recorded
 in the three fifteen-page publication receipts below.
 
-Ordinal 16, `random/point/Sufficient.html`, is the next contiguous production
-page. Do not skip to the separate Penn State component or repeat completed
-Random pages.
+The sixteen-page boundary completes `random/point/Sufficient.html`. It passed
+the protected-math, exact-topology, stable-ID, link-closure, backend/build,
+deterministic replay, PDF, and fresh credential-free desktop/mobile browser
+gates. The exact boundary evidence is recorded below; its public release
+receipts will be added immediately after the three existing publication
+lineages are advanced. The next contiguous page is
+`random/interval/index.html` (core ordinal 17). Do not skip to the separate
+Penn State component or repeat completed Random pages.
 
 ## Admitted source
 
@@ -610,6 +615,69 @@ zero-file CC0 metadata pointer (the mixed component licences prohibit a false
 single-file licence); its receipt is
 `FIGSHARE_PUBLICATION_RECEIPT_2026-08-23_FIFTEEN_PAGE.json`.
 
+## Sixteen-page verified checkpoint
+
+Core ordinal 16 is `random/point/Sufficient.html`. The immutable authority is
+57,507 bytes, SHA-256
+`4d7402f2a960ea2b4232e57e4ee5992ac29801b9269f300f17f8e83074d5a0e4`; the
+id-ID target is 60,930 bytes, SHA-256
+`6dd895c08456da30a3a8a2aace5528a7ef32be5b6ad33c064af71fb5065250f6`.
+The target has 436 exact elements, 804 protected MathJax spans, 39 structural
+units, 26 derivation disclosures, 51 retained/additive IDs, 18 protected-math
+repairs, and four visible TeX-text localizations. The 19 previously unlabelled
+units now have deterministic locale-neutral IDs; native IDs remain intact.
+The source's unresolved `Moments.html#poi` witness remains in the backend, while
+the reader link is repaired to the stable translated Poisson-section anchor.
+The append-only adverse ledger now ends at `O006-ADV-0200`, SHA-256
+`101011319837b60943e3d13d3a24db3a5b6cc3cc9c4ca9f963f2de705cd4493a`.
+
+The deterministic HTML reader is 46 files / 2,564,819 bytes; manifest SHA-256
+`6cdf7d7592f9468a782801ed2dae9ed7dfdc14cde445c1026cb8018bb3ef3482`.
+Build-receipt SHA-256 is
+`2c3b453aecfdd6cb3f6c5a8ada8c04ebbd0392a58412456f17c50e6d08bd99a7`;
+QA-receipt SHA-256 is
+`238ece761f934f6a71058f2fca0a1780538283e359eb3d3c7808ff52b9758cdf`.
+The backend remains 6,567 entities / 9,035 relations, with 4,337 translated
+bindings. Its receipt SHA-256 is
+`6d929c056f14b6b40d2d29d50707f32f5fe19ce4ab7a6f905cac57008d3c6843`;
+entities and relations hashes are
+`2d36d064b3e89e7cdd281f0a91f18a8386050739fe149941aec035638536836b` and
+`b235f4d4d724c7fe8653dfd06b075b2225cc2d116f3b87d0fda950d47030159`.
+
+The reader-first PDF is 197 A4 pages / 85,357,801 bytes, SHA-256
+`f1a886ff1285315478bb7e50a773e8a5d79b47e6170a86e82e7b98126f6f6160`.
+The PDF build receipt is 10,695 bytes, SHA-256
+`d3e9826b0bad4f120599a501521477c3b5344cf157fd7c25de5b6af81c7ab6a1`; the
+visual-QA receipt is SHA-256
+`91338964c52b6d2c8bb1f0bb0bf2f43cca3af22b4aae7cdb6a3f565bcbe13166`.
+All 197 rendered pages were reviewed in ten contact sheets with eight
+full-resolution spot checks; automated clipping/URI/encryption checks passed
+and no visual defect was observed. The known accessibility limit remains that
+the merged PDF is not tagged; the offline HTML reader is the accessibility-first
+surface.
+
+Fresh local browser evidence is
+`LIVE_BROWSER_QA_2026-08-23_SIXTEEN_PAGE.json` (SHA-256
+`d593b8c81b62476baf01f644c0ce5facc301fb464f39c9b71f547b319b1bf126`).
+The root and Sufficient page passed id-ID/provenance checks, 804 MathJax
+containers, all 26 disclosure controls, zero incomplete images, zero console
+errors/warnings, and no horizontal overflow at 1280×720 and 390×844.
+
+The terminology gate remains the bounded 2026-08-22 audit: no qualifying
+Indonesian mathematical-statistics arXiv TeX source existed, so the permitted
+Universitas Lampung PDF fallback was inspected directly. The exact evidence and
+glossary hashes remain in `TERMINOLOGY_QA_2026-08-22.md` and
+`TERMINOLOGY_GLOSSARY_ID_ID.csv`; the additive provenance string is
+`OpenAI Codex gpt-5.6-sol, Ultra`, with source-author and human-contributor
+credits preserved.
+
+The next source cursor is `random/interval/index.html` (core ordinal 17),
+authority 7,789 bytes, SHA-256
+`85fcad0292636fbae0935ebb775a87b9e4dbdf33692b5e2823b353163d168403`.
+Publication of this sixteen-page checkpoint is pending the immediate
+GitHub/Zenodo/Figshare public-byte readbacks; no upstream communication has
+been sent.
+
 ## Rights boundary
 
 The Random landing page identifies CC BY 2.0; `Credits.html` links CC BY 1.0.
@@ -623,7 +691,7 @@ the site-wide notice; they must be cleared, replaced, or linked externally.
 
 ## Known upstream defects (do not silently alter authority)
 
-`ADVERSE_LEDGER.jsonl` runs through `O006-ADV-0183`. CLT repairs include the
+`ADVERSE_LEDGER.jsonl` runs through `O006-ADV-0200`. CLT repairs include the
 zero-origin condition, correlation domain/formula/citation, the rigorous
 characteristic-function proof, continuity notation, dice answer, chi-square
 definition, negative-binomial support/domain/answer mapping, and determinate
@@ -692,9 +760,17 @@ invalid formal uniform-model bounds, inverse-variance BLUE boundary cases, and
 determinate spelling/markup defects. All changes are target-only; the
 28,635-byte authority remains unchanged.
 
+Sufficient repairs cover factorization notation, protected binomial/Poisson/
+normal/Pareto/uniform/hypergeometric formulas, beta-statistic symbols, the
+Pareto support and moment, fixed-support exponential-family qualifications,
+reader-facing formula text, placeholder-order prose, the missing Moments
+fragment's translated target mapping, an explicit Pareto estimator-order note,
+and deterministic additive unit IDs. The 57,507-byte authority remains
+unchanged; the unresolved authority fragment is retained as a backend witness.
+
 ## Next work
 
-### Terminology and model-provenance gate completed before ordinal 15
+### Terminology and model-provenance gate completed before ordinal 16
 
 A bounded arXiv search found no source satisfying all three requirements:
 Indonesian prose, mathematical-statistics/inference content, and downloadable
@@ -717,18 +793,19 @@ source-author credit, and human-contributor credit were not rewritten.
 
 The exact provenance string `OpenAI Codex gpt-5.6-sol, Ultra` is additive in
 repository, generated-reader, build, backend, and PDF metadata. The current
-reader is 45 files / 2,503,889 bytes with manifest SHA-256
-`d6f51461a9db39f53f832912fbe4c865059177094564ca5a6d0b30cc3c1740aa`;
+reader is 46 files / 2,564,819 bytes with manifest SHA-256
+`6cdf7d7592f9468a782801ed2dae9ed7dfdc14cde445c1026cb8018bb3ef3482`;
 the QA receipt is
-`3031b412ce7eb275f2c0ad7129799a76506c86b50b34dc439d34d4d0d71ac0b0`.
-Two complete backend/build/QA check-only sequences reproduced these identities.
-The new 182-page PDF carries the normalized terminology and exact provenance.
+`238ece761f934f6a71058f2fca0a1780538283e359eb3d3c7808ff52b9758cdf`.
+Two complete backend/build/QA check-only sequences reproduced the sixteen-page
+identities. The new 197-page PDF carries the normalized terminology and exact
+provenance.
 
-1. The verified fifteen-page boundary is published and anonymously read back
-   in the existing GitHub, Zenodo, and Figshare-pointer lineages; the three
-   receipts above are the controlling evidence.
-2. Continue immediately through all 14 remaining source pages, beginning with
-   `random/point/Sufficient.html` (core ordinal 16), while growing the same
+1. Publish the verified sixteen-page boundary and anonymously read it back in
+   the existing GitHub, Zenodo, and Figshare-pointer lineages; the new receipts
+   are the controlling evidence.
+2. Continue immediately through the remaining 13 source pages, beginning with
+   `random/interval/index.html` (core ordinal 17), while growing the same
    deterministic reader and stable-ID backend.
 3. Maintain later substantial verified checkpoints as new versions in the
    same Zenodo concept lineage and as fast-forward GitHub releases.

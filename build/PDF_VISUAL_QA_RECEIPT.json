@@ -3,40 +3,42 @@
   "result": "pass",
   "pdf": {
     "path": "output/pdf/statistika-matematis-id-reader.pdf",
-    "bytes": 76775084,
-    "sha256": "7c4898505962f6978eb064c605a77fca9ccbcd3ba7f9238f9cf0d8ae974662ef",
-    "physical_pages": 182,
+    "bytes": 85357801,
+    "sha256": "f1a886ff1285315478bb7e50a773e8a5d79b47e6170a86e82e7b98126f6f6160",
+    "physical_pages": 197,
     "page_size_points": [
       595.276,
       841.89
     ],
     "encrypted": false,
-    "outline_entries": 234,
-    "external_uri_annotations": 1011,
+    "outline_entries": 253,
+    "external_uri_annotations": 1092,
     "local_or_loopback_uri_annotations": 0,
     "minimum_extracted_text_characters": 356
   },
   "poppler_render": {
-    "png_pages": 182,
+    "png_pages": 197,
     "raster_dimensions": [
       596,
       842
     ],
     "edge_clipping_candidates": 0,
     "minimum_ink_ratio": 0.024797143267069457,
-    "median_ink_ratio": 0.07983448644167769,
-    "maximum_ink_ratio": 0.9948927130992045
+    "median_ink_ratio": 0.08021409555389054,
+    "maximum_ink_ratio": 0.9949166254842258
   },
   "manual_visual_review": {
     "contact_sheets": 10,
-    "all_182_pages_reviewed_in_contact_sheets": true,
+    "all_197_pages_reviewed_in_contact_sheets": true,
     "full_resolution_spot_checks": [
       1,
       2,
       107,
       160,
       175,
-      182
+      183,
+      190,
+      197
     ],
     "observed_defects": 0,
     "known_limit": "The consolidated PDF is not tagged after deterministic merge; the offline HTML reader remains the accessibility-first surface."

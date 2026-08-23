@@ -41,6 +41,7 @@ PAIRS = (
     PurePosixPath("random/point/Likelihood.html"),
     PurePosixPath("random/point/Bayes.html"),
     PurePosixPath("random/point/Unbiased.html"),
+    PurePosixPath("random/point/Sufficient.html"),
 )
 
 # This is an exact page/original-href allowlist. There is deliberately no URL
@@ -532,6 +533,47 @@ HREF_DELTA_ALLOWLIST: dict[PurePosixPath, dict[str, str]] = {
         "JavaScript:openAncillary('../data/index.html')": "https://www.randomservices.org/random/data/index.html",
         "JavaScript:openAncillary('../biographies/index.html')": "https://www.randomservices.org/random/biographies/index.html",
     },
+    PurePosixPath("random/point/Sufficient.html"): {
+        "../interval/index.html": "https://www.randomservices.org/random/interval/index.html",
+        "../index.html": "https://www.randomservices.org/random/index.html",
+        "../prob/Experiments.html": "https://www.randomservices.org/random/prob/Experiments.html",
+        "../prob/Probability.html": "https://www.randomservices.org/random/prob/Probability.html",
+        "../dist/Conditional.html": "https://www.randomservices.org/random/dist/Conditional.html",
+        "../dist/Discrete.html": "https://www.randomservices.org/random/dist/Discrete.html",
+        "JavaScript:openAncillary('../biographies/Fisher.html')": "https://www.randomservices.org/random/biographies/Fisher.html",
+        "JavaScript:openAncillary('../biographies/Neyman.html')": "https://www.randomservices.org/random/biographies/Neyman.html",
+        "../expect/Conditional.html": "https://www.randomservices.org/random/expect/Conditional.html",
+        "JavaScript:openAncillary('../biographies/Rao.html')": "https://www.randomservices.org/random/biographies/Rao.html",
+        "JavaScript:openAncillary('../biographies/Blackwell.html')": "https://www.randomservices.org/random/biographies/Blackwell.html",
+        "JavaScript:openAncillary('../biographies/Lehmann.html')": "https://www.randomservices.org/random/biographies/Lehmann.html",
+        "JavaScript:openAncillary('../biographies/Scheffe.html')": "https://www.randomservices.org/random/biographies/Scheffe.html",
+        "../bernoulli/Introduction.html": "https://www.randomservices.org/random/bernoulli/Introduction.html",
+        "../bernoulli/index.html": "https://www.randomservices.org/random/bernoulli/index.html",
+        "JavaScript:openAncillary('../biographies/Bernoulli.html')": "https://www.randomservices.org/random/biographies/Bernoulli.html",
+        "../bernoulli/Binomial.html": "https://www.randomservices.org/random/bernoulli/Binomial.html",
+        "../special/Beta.html": "https://www.randomservices.org/random/special/Beta.html",
+        "../poisson/Poisson.html": "https://www.randomservices.org/random/poisson/Poisson.html",
+        "JavaScript:openAncillary('../biographies/Poisson.html')": "https://www.randomservices.org/random/biographies/Poisson.html",
+        "../poisson/index.html": "https://www.randomservices.org/random/poisson/index.html",
+        "../bernoulli/Multinomial.html": "https://www.randomservices.org/random/bernoulli/Multinomial.html",
+        "../expect/Generating.html#pgf": "https://www.randomservices.org/random/expect/Generating.html#pgf",
+        "../special/Normal.html": "https://www.randomservices.org/random/special/Normal.html",
+        "JavaScript:openAncillary('../apps/NormalEstimate.html')": "https://www.randomservices.org/random/apps/NormalEstimate.html",
+        "../special/ChiSquare.html": "https://www.randomservices.org/random/special/ChiSquare.html",
+        "../special/Gamma.html": "https://www.randomservices.org/random/special/Gamma.html",
+        "JavaScript:openAncillary('../apps/GammaEstimate.html')": "https://www.randomservices.org/random/apps/GammaEstimate.html",
+        "JavaScript:openAncillary('../apps/BetaEstimate.html')": "https://www.randomservices.org/random/apps/BetaEstimate.html",
+        "../special/Pareto.html": "https://www.randomservices.org/random/special/Pareto.html",
+        "JavaScript:openAncillary('../biographies/Pareto.html')": "https://www.randomservices.org/random/biographies/Pareto.html",
+        "JavaScript:openAncillary('../apps/ParetoEstimate.html')": "https://www.randomservices.org/random/apps/ParetoEstimate.html",
+        "../special/UniformContinuous.html": "https://www.randomservices.org/random/special/UniformContinuous.html",
+        "JavaScript:openAncillary('../apps/UniformEstimate.html')": "https://www.randomservices.org/random/apps/UniformEstimate.html",
+        "../urn/Hypergeometric.html": "https://www.randomservices.org/random/urn/Hypergeometric.html",
+        "../special/GeneralExponential.html": "https://www.randomservices.org/random/special/GeneralExponential.html",
+        "JavaScript:openAncillary('../apps/index.html')": "https://www.randomservices.org/random/apps/index.html",
+        "JavaScript:openAncillary('../data/index.html')": "https://www.randomservices.org/random/data/index.html",
+        "JavaScript:openAncillary('../biographies/index.html')": "https://www.randomservices.org/random/biographies/index.html",
+    },
 }
 
 # Source defects require occurrence-specific href deltas because each original
@@ -556,6 +598,23 @@ HREF_ELEMENT_DELTAS: dict[
     (PurePosixPath("random/point/Unbiased.html"), 242): ("#crb3", "#crb2"),
     (PurePosixPath("random/point/Unbiased.html"), 246): ("#sam5", "#sam4"),
     (PurePosixPath("random/point/Unbiased.html"), 253): ("#crb3", "#crb2"),
+    (PurePosixPath("random/point/Sufficient.html"), 398): ("#ber", "#par"),
+    (PurePosixPath("random/point/Sufficient.html"), 223): ("Moments.html#poi", "Moments.html#o006.random.point.moments.section.poisson"),
+}
+
+# The frozen Sufficient page has two unlabelled section headings and one
+# duplicate native id.  The localizer gives the headings stable native anchors
+# and renames the second ``gam2`` to ``gam3``; these are the only non-prefix
+# identifiers admitted by this verifier.
+SUFFICIENT_ID_ADDITIONS = {
+    (PurePosixPath("random/point/Sufficient.html"), 39, "the"),
+    (PurePosixPath("random/point/Sufficient.html"), 161, "exa"),
+}
+SUFFICIENT_ID_RENAMES = {
+    (PurePosixPath("random/point/Sufficient.html"), 298, "gam2", "gam3"),
+}
+SUFFICIENT_CLASS_CORRECTIONS = {
+    (PurePosixPath("random/point/Sufficient.html"), 350, ("mian",), ("main",)),
 }
 
 CORRECTION_DELTAS = {
@@ -607,6 +666,7 @@ NOTICE_MARKUP_SHA256 = {
     PurePosixPath("random/point/Likelihood.html"): "eafff6cf003edc517cbc99727456b283de19cff49e07d20b10fea57dca0f8a3d",
     PurePosixPath("random/point/Bayes.html"): "eafff6cf003edc517cbc99727456b283de19cff49e07d20b10fea57dca0f8a3d",
     PurePosixPath("random/point/Unbiased.html"): "eafff6cf003edc517cbc99727456b283de19cff49e07d20b10fea57dca0f8a3d",
+    PurePosixPath("random/point/Sufficient.html"): "e05998dbc797a6a347ea25c3d38230297a352c0c749e3eac5a5ee0d4c3c50c47",
 }
 NOTICE_LINKS = (
     "https://www.randomservices.org/random/",
@@ -678,6 +738,7 @@ EXACT_EXTERNAL_METADATA_LINKS = {
     ("random/sample/index.html", "https://www.randomservices.org/random/special/index.html", "previous"),
     ("random/point/index.html", "https://www.randomservices.org/random/index.html", "contents"),
     ("random/point/index.html", "https://www.randomservices.org/random/interval/index.html", "next"),
+    ("random/point/Sufficient.html", "https://www.randomservices.org/random/interval/index.html", "next"),
 }
 
 
@@ -975,15 +1036,21 @@ def compare_pair(rel: PurePosixPath) -> dict[str, Any]:
                     if str(source_value) in page_allowlist:
                         fail(f"{rel}: allowlisted href delta was not applied at element {index}")
                 continue
+            if key == "class":
+                if (rel, index, tuple(source_value or ()), tuple(target_value or ())) in SUFFICIENT_CLASS_CORRECTIONS:
+                    continue
+                fail(f"{rel}: unexplained class delta at element {index}")
             if key not in allowed_attr_deltas:
                 fail(f"{rel}: unexplained attr delta at element {index}: {key}")
             if key == "lang" and not (source_value == "en" and target_value == "id-ID"):
                 fail(f"{rel}: invalid lang delta {source_value!r}->{target_value!r}")
             elif key == "id":
                 if source_value is not None:
-                    fail(f"{rel}: existing id changed at element {index}")
-                if not isinstance(target_value, str) or not target_value.startswith("o006.random."):
-                    fail(f"{rel}: invalid additive stable id at element {index}: {target_value!r}")
+                    if (rel, index, str(source_value), str(target_value)) not in SUFFICIENT_ID_RENAMES:
+                        fail(f"{rel}: existing id changed at element {index}")
+                elif (rel, index, str(target_value)) not in SUFFICIENT_ID_ADDITIONS:
+                    if not isinstance(target_value, str) or not target_value.startswith("o006.random."):
+                        fail(f"{rel}: invalid additive stable id at element {index}: {target_value!r}")
             elif key == "href":
                 original = str(source_value)
                 element_delta = HREF_ELEMENT_DELTAS.get((rel, index))
@@ -1276,6 +1343,7 @@ def check_mathjax_runtime() -> dict[str, Any]:
         "random/point/Likelihood.html",
         "random/point/Bayes.html",
         "random/point/Unbiased.html",
+        "random/point/Sufficient.html",
     ]
     if script_pages != expected_script_pages:
         fail(f"MathJax bundle reference pages changed: {script_pages}")

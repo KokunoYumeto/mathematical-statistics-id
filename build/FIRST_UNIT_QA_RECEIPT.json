@@ -395,12 +395,12 @@
     }
   ],
   "build": {
-    "reader_file_count": 45,
-    "reader_manifest_sha256": "d6f51461a9db39f53f832912fbe4c865059177094564ca5a6d0b30cc3c1740aa",
-    "reader_total_bytes": 2503889,
-    "receipt_bytes": 166383,
+    "reader_file_count": 46,
+    "reader_manifest_sha256": "6cdf7d7592f9468a782801ed2dae9ed7dfdc14cde445c1026cb8018bb3ef3482",
+    "reader_total_bytes": 2564819,
+    "receipt_bytes": 179233,
     "receipt_path": "build/FIRST_UNIT_BUILD_RECEIPT.json",
-    "receipt_sha256": "80cccbfe818a9f912bc183deb2f41448ebaa1d91756ad003b87a96eda5dcdd64"
+    "receipt_sha256": "2c3b453aecfdd6cb3f6c5a8ada8c04ebbd0392a58412456f17c50e6d08bd99a7"
   },
   "math_text_localizations": [
     {
@@ -451,6 +451,27 @@
       "page": "random/sample/LLN.html",
       "replacements": 1,
       "surface": "math_span"
+    },
+    {
+      "new": "\\text{ tidak bergantung pada }",
+      "old": "\\text{ is independent of }",
+      "page": "random/point/Sufficient.html",
+      "replacements": 1,
+      "surface": "math_span"
+    },
+    {
+      "new": "\\text{ jika dan hanya jika }",
+      "old": "\\text{ if and only if }",
+      "page": "random/point/Sufficient.html",
+      "replacements": 1,
+      "surface": "math_span"
+    },
+    {
+      "new": "\\text{ untuk semua }",
+      "old": "\\text{ for all }",
+      "page": "random/point/Sufficient.html",
+      "replacements": 2,
+      "surface": "math_span"
     }
   ],
   "mathjax_runtime": {
@@ -460,7 +481,7 @@
     "official_tag": "3.1.2",
     "reader_relative_path": "MathJax/input/tex/extensions/boldsymbol.js",
     "runtime_file_count": 1,
-    "script_page_references": 13,
+    "script_page_references": 14,
     "script_pages": [
       "random/sample/Introduction.html",
       "random/sample/Mean.html",
@@ -474,7 +495,8 @@
       "random/point/Moments.html",
       "random/point/Likelihood.html",
       "random/point/Bayes.html",
-      "random/point/Unbiased.html"
+      "random/point/Unbiased.html",
+      "random/point/Sufficient.html"
     ],
     "sha256": "716cf8735d00abfb1627f8adbbf4aeb915ac9b5c55d47aeaf276e73dac6a2aa1"
   },
@@ -483,32 +505,32 @@
     "controlled_filename_case_corrections": 6,
     "css_files": 1,
     "css_refs": 11,
-    "details": 300,
-    "external_https_anchors": 667,
-    "external_https_metadata_links": 4,
-    "fragments": 180,
-    "href_delta_entries": 470,
-    "href_delta_occurrences": 618,
-    "html_pages": 17,
-    "ids": 696,
-    "local_refs": 593,
-    "math_spans": 5993,
-    "math_text_localization_categories": 7,
-    "math_text_localization_replacements": 12,
+    "details": 326,
+    "external_https_anchors": 712,
+    "external_https_metadata_links": 5,
+    "fragments": 232,
+    "href_delta_entries": 511,
+    "href_delta_occurrences": 662,
+    "html_pages": 18,
+    "ids": 747,
+    "local_refs": 675,
+    "math_spans": 6797,
+    "math_text_localization_categories": 10,
+    "math_text_localization_replacements": 16,
     "mathjax_runtime_files": 1,
-    "occurrence_specific_href_deltas": 14,
-    "protected_math_correction_categories": 222,
-    "protected_math_replacements": 217,
+    "occurrence_specific_href_deltas": 16,
+    "protected_math_correction_categories": 240,
+    "protected_math_replacements": 235,
     "raw_math_environments": 30,
-    "raw_script_style_blocks": 42,
+    "raw_script_style_blocks": 45,
     "readable_layout_css_appends": 1,
-    "reader_bytes": 2503889,
-    "reader_files": 45,
-    "source_elements": 6856,
+    "reader_bytes": 2564819,
+    "reader_files": 46,
+    "source_elements": 7292,
     "svg_files": 10,
-    "translated_pages": 15,
+    "translated_pages": 16,
     "transport_hardening_deltas": 14,
-    "units": 466
+    "units": 505
   },
   "protected_math_corrections": [
     {
@@ -2808,6 +2830,204 @@
       "reason": "differentiate the bracketed product under the integral rather than h alone",
       "replacements": 1,
       "surface": "raw_math_environment"
+    },
+    {
+      "new": "\\( c(y) \\)",
+      "old": "\\( C \\)",
+      "page": "random/point/Sufficient.html",
+      "reason": "replace the factorization constant with the required data-only positive function",
+      "replacements": 1,
+      "span_index": 88,
+      "span_new": "\\( c(y) \\)",
+      "span_old": "\\( C \\)",
+      "surface": "math_span"
+    },
+    {
+      "new": "\\( h_\\theta(y) = c(y) G(y, \\theta) \\)",
+      "old": "\\( h_\\theta(y) = C G(y, \\theta) \\)",
+      "page": "random/point/Sufficient.html",
+      "reason": "use the data-only positive factor consistently",
+      "replacements": 1,
+      "span_index": 89,
+      "span_new": "\\( h_\\theta(y) = c(y) G(y, \\theta) \\)",
+      "span_old": "\\( h_\\theta(y) = C G(y, \\theta) \\)",
+      "surface": "math_span"
+    },
+    {
+      "new": "\\( f_\\theta(\\bs x) \\big/ h_\\theta[u(\\bs{x})] = r(\\bs x) / c[u(\\bs{x})]\\)",
+      "old": "\\( f_\\theta(\\bs x) \\big/ h_\\theta[u(x)] = r(\\bs x) / C\\)",
+      "page": "random/point/Sufficient.html",
+      "reason": "correct the vector argument and data-only denominator in the factorization proof",
+      "replacements": 1,
+      "span_index": 92,
+      "span_new": "\\( f_\\theta(\\bs x) \\big/ h_\\theta[u(\\bs{x})] = r(\\bs x) / c[u(\\bs{x})]\\)",
+      "span_old": "\\( f_\\theta(\\bs x) \\big/ h_\\theta[u(x)] = r(\\bs x) / C\\)",
+      "surface": "math_span"
+    },
+    {
+      "new": "\\( \\theta \\in T \\)",
+      "old": "\\( \\theta \\in \\Theta \\)",
+      "page": "random/point/Sufficient.html",
+      "reason": "use the page's declared parameter-space symbol",
+      "replacements": 1,
+      "span_index": 150,
+      "span_new": "\\( \\theta \\in T \\)",
+      "span_old": "\\( \\theta \\in \\Theta \\)",
+      "surface": "math_span"
+    },
+    {
+      "new": "\\(\\theta \\in T\\)",
+      "old": "\\(\\theta \\in \\Theta\\)",
+      "page": "random/point/Sufficient.html",
+      "reason": "use the page's declared parameter-space symbol",
+      "replacements": 1,
+      "span_index": 229,
+      "span_new": "\\(\\theta \\in T\\)",
+      "span_old": "\\(\\theta \\in \\Theta\\)",
+      "surface": "math_span"
+    },
+    {
+      "new": "\\[\\E[r(Y)] = \\sum_{y=0}^n r(y) \\binom{n}{y} p^y (1 - p)^{n-y} = (1 - p)^n \\sum_{y=0}^n r(y) \\binom{n}{y} \\left(\\frac{p}{1 - p}\\right)^y\\]",
+      "old": "\\[\\E[r(Y)] = \\sum_{y=0}^n r(y) \\binom{n}{k} p^y (1 - p)^{n-y} = (1 - p)^n \\sum_{y=0}^n r(y) \\binom{n}{y} \\left(\\frac{p}{1 - p}\\right)^y\\]",
+      "page": "random/point/Sufficient.html",
+      "reason": "the summation variable is y, not the undefined k",
+      "replacements": 1,
+      "span_index": 331,
+      "span_new": "\\[\\E[r(Y)] = \\sum_{y=0}^n r(y) \\binom{n}{y} p^y (1 - p)^{n-y} = (1 - p)^n \\sum_{y=0}^n r(y) \\binom{n}{y} \\left(\\frac{p}{1 - p}\\right)^y\\]",
+      "span_old": "\\[\\E[r(Y)] = \\sum_{y=0}^n r(y) \\binom{n}{k} p^y (1 - p)^{n-y} = (1 - p)^n \\sum_{y=0}^n r(y) \\binom{n}{y} \\left(\\frac{p}{1 - p}\\right)^y\\]",
+      "surface": "math_span"
+    },
+    {
+      "new": "\\[ f(\\bs x) = g(x_1) g(x_2) \\cdots g(x_n) = \\frac{e^{-n \\theta} \\theta^y}{x_1! x_2! \\cdots x_n!}, \\quad \\bs x = (x_1, x_2, \\ldots, x_n) \\in \\N^n \\]",
+      "old": "\\[ f(\\bs x) = g(x_1) g(x_2) \\cdot g(x_n) = \\frac{e^{-n \\theta} \\theta^y}{x_1! x_2! \\cdots x_n!}, \\quad \\bs x = (x_1, x_2, \\ldots, x_n) \\in \\N^n \\]",
+      "page": "random/point/Sufficient.html",
+      "reason": "restore the omitted product factors",
+      "replacements": 1,
+      "span_index": 404,
+      "span_new": "\\[ f(\\bs x) = g(x_1) g(x_2) \\cdots g(x_n) = \\frac{e^{-n \\theta} \\theta^y}{x_1! x_2! \\cdots x_n!}, \\quad \\bs x = (x_1, x_2, \\ldots, x_n) \\in \\N^n \\]",
+      "span_old": "\\[ f(\\bs x) = g(x_1) g(x_2) \\cdot g(x_n) = \\frac{e^{-n \\theta} \\theta^y}{x_1! x_2! \\cdots x_n!}, \\quad \\bs x = (x_1, x_2, \\ldots, x_n) \\in \\N^n \\]",
+      "surface": "math_span"
+    },
+    {
+      "new": "\\[ f(\\bs x) = g(x_1) g(x_2) \\cdots g(x_n) = \\frac{1}{(2 \\pi)^{n/2} \\sigma^n} \\exp\\left[-\\frac{1}{2 \\sigma^2} \\sum_{i=1}^n (x_i - \\mu)^2\\right], \\quad \\bs x = (x_1, x_2, \\ldots, x_n) \\in \\R^n \\]",
+      "old": "\\[ f(\\bs x) = g(x_1) g(x_2) \\cdots g(x_n) = \\frac{1}{(2 \\pi)^{n/2} \\sigma^n} \\exp\\left[-\\frac{1}{2 \\sigma^2} \\sum_{i=1}^n (x_i - \\mu)^2\\right], \\quad \\bs x = (x_1, x_2 \\ldots, x_n) \\in \\R^n \\]",
+      "page": "random/point/Sufficient.html",
+      "reason": "repair the tuple punctuation",
+      "replacements": 1,
+      "span_index": 460,
+      "span_new": "\\[ f(\\bs x) = g(x_1) g(x_2) \\cdots g(x_n) = \\frac{1}{(2 \\pi)^{n/2} \\sigma^n} \\exp\\left[-\\frac{1}{2 \\sigma^2} \\sum_{i=1}^n (x_i - \\mu)^2\\right], \\quad \\bs x = (x_1, x_2, \\ldots, x_n) \\in \\R^n \\]",
+      "span_old": "\\[ f(\\bs x) = g(x_1) g(x_2) \\cdots g(x_n) = \\frac{1}{(2 \\pi)^{n/2} \\sigma^n} \\exp\\left[-\\frac{1}{2 \\sigma^2} \\sum_{i=1}^n (x_i - \\mu)^2\\right], \\quad \\bs x = (x_1, x_2 \\ldots, x_n) \\in \\R^n \\]",
+      "surface": "math_span"
+    },
+    {
+      "new": "\\[ f(\\bs x) = \\frac{1}{(2 \\pi)^{n/2} \\sigma^n} e^{-n \\mu^2 / (2 \\sigma^2)} \\exp\\left(-\\frac{1}{2 \\sigma^2}  \\sum_{i=1}^n x_i^2 + \\frac{\\mu}{\\sigma^2} \\sum_{i=1}^n x_i \\right), \\quad \\bs x = (x_1, x_2, \\ldots, x_n) \\in \\R^n\\]",
+      "old": "\\[ f(\\bs x) = \\frac{1}{(2 \\pi)^{n/2} \\sigma^n} e^{-n \\mu^2 / \\sigma^2} \\exp\\left(-\\frac{1}{2 \\sigma^2}  \\sum_{i=1}^n x_i^2 + \\frac{2 \\mu}{\\sigma^2} \\sum_{i=1}^n x_i \\right), \\quad \\bs x = (x_1, x_2 \\ldots, x_n) \\in \\R^n\\]",
+      "page": "random/point/Sufficient.html",
+      "reason": "restore the missing normal expansion factors and tuple punctuation",
+      "replacements": 1,
+      "span_index": 461,
+      "span_new": "\\[ f(\\bs x) = \\frac{1}{(2 \\pi)^{n/2} \\sigma^n} e^{-n \\mu^2 / (2 \\sigma^2)} \\exp\\left(-\\frac{1}{2 \\sigma^2}  \\sum_{i=1}^n x_i^2 + \\frac{\\mu}{\\sigma^2} \\sum_{i=1}^n x_i \\right), \\quad \\bs x = (x_1, x_2, \\ldots, x_n) \\in \\R^n\\]",
+      "span_old": "\\[ f(\\bs x) = \\frac{1}{(2 \\pi)^{n/2} \\sigma^n} e^{-n \\mu^2 / \\sigma^2} \\exp\\left(-\\frac{1}{2 \\sigma^2}  \\sum_{i=1}^n x_i^2 + \\frac{2 \\mu}{\\sigma^2} \\sum_{i=1}^n x_i \\right), \\quad \\bs x = (x_1, x_2 \\ldots, x_n) \\in \\R^n\\]",
+      "surface": "math_span"
+    },
+    {
+      "new": "\\( \\bs{Z} = (Z_1, Z_2, \\ldots, Z_n) \\)",
+      "old": "\\( \\bs{Z} = (Z_1, X_2, \\ldots, Z_n) \\)",
+      "page": "random/point/Sufficient.html",
+      "reason": "use the defined transformed variable Z_2",
+      "replacements": 1,
+      "span_index": 586,
+      "span_new": "\\( \\bs{Z} = (Z_1, Z_2, \\ldots, Z_n) \\)",
+      "span_old": "\\( \\bs{Z} = (Z_1, X_2, \\ldots, Z_n) \\)",
+      "surface": "math_span"
+    },
+    {
+      "new": "\\( (P, Q) \\)",
+      "old": "\\( (U, V) \\)",
+      "page": "random/point/Sufficient.html",
+      "reason": "match the beta sufficient-statistic names defined in the theorem",
+      "replacements": 1,
+      "span_index": 617,
+      "span_new": "\\( (P, Q) \\)",
+      "span_old": "\\( (U, V) \\)",
+      "surface": "math_span"
+    },
+    {
+      "new": "\\[ f(\\bs x) = g(x_1) g(x_2) \\cdots g(x_n) = \\frac{a^n b^{n a}}{(x_1 x_2 \\cdots x_n)^{a + 1}} \\bs{1}\\left(x_{(1)} \\ge b\\right), \\quad (x_1, x_2, \\ldots, x_n) \\in (0, \\infty)^n  \\]",
+      "old": "\\[ f(\\bs x) = g(x_1) g(x_2) \\cdots g(x_n) = \\frac{a^n b^{n a}}{(x_1 x_2 \\cdots x_n)^{a + 1}} \\bs{1}\\left(x_{(n)} \\ge b\\right), \\quad (x_1, x_2, \\ldots, x_n) \\in (0, \\infty)^n  \\]",
+      "page": "random/point/Sufficient.html",
+      "reason": "the Pareto support is determined by the sample minimum",
+      "replacements": 1,
+      "span_index": 658,
+      "span_new": "\\[ f(\\bs x) = g(x_1) g(x_2) \\cdots g(x_n) = \\frac{a^n b^{n a}}{(x_1 x_2 \\cdots x_n)^{a + 1}} \\bs{1}\\left(x_{(1)} \\ge b\\right), \\quad (x_1, x_2, \\ldots, x_n) \\in (0, \\infty)^n  \\]",
+      "span_old": "\\[ f(\\bs x) = g(x_1) g(x_2) \\cdots g(x_n) = \\frac{a^n b^{n a}}{(x_1 x_2 \\cdots x_n)^{a + 1}} \\bs{1}\\left(x_{(n)} \\ge b\\right), \\quad (x_1, x_2, \\ldots, x_n) \\in (0, \\infty)^n  \\]",
+      "surface": "math_span"
+    },
+    {
+      "new": "\\( M^{(2)} = \\frac{1}{n} \\sum_{i=1}^n X_i^2 \\)",
+      "old": "\\( M^{(2)} = \\sum_{i=1}^n X_i^2 \\)",
+      "page": "random/point/Sufficient.html",
+      "reason": "use the stated second sample moment rather than the unnormalised sum",
+      "replacements": 1,
+      "span_index": 669,
+      "span_new": "\\( M^{(2)} = \\frac{1}{n} \\sum_{i=1}^n X_i^2 \\)",
+      "span_old": "\\( M^{(2)} = \\sum_{i=1}^n X_i^2 \\)",
+      "surface": "math_span"
+    },
+    {
+      "new": "\\[ f(\\bs x) = g(x_1) g(x_2) \\cdots g(x_n) = \\frac{1}{h^n}, \\quad \\bs x = (x_1, x_2, \\ldots, x_n) \\in [a, a + h]^n \\]",
+      "old": "\\[ f(\\bs x) = g(x_1) g(x_2) \\cdots g(x_n) = \\frac{1}{h^n}, \\quad \\bs x = (x_1, x_2, \\ldots x_n) \\in [a, a + h]^n \\]",
+      "page": "random/point/Sufficient.html",
+      "reason": "repair the tuple punctuation",
+      "replacements": 1,
+      "span_index": 690,
+      "span_new": "\\[ f(\\bs x) = g(x_1) g(x_2) \\cdots g(x_n) = \\frac{1}{h^n}, \\quad \\bs x = (x_1, x_2, \\ldots, x_n) \\in [a, a + h]^n \\]",
+      "span_old": "\\[ f(\\bs x) = g(x_1) g(x_2) \\cdots g(x_n) = \\frac{1}{h^n}, \\quad \\bs x = (x_1, x_2, \\ldots x_n) \\in [a, a + h]^n \\]",
+      "surface": "math_span"
+    },
+    {
+      "new": "\\( a \\)",
+      "old": "\\( h \\)",
+      "page": "random/point/Sufficient.html",
+      "reason": "the sentence concerns the location parameter a",
+      "replacements": 1,
+      "span_index": 726,
+      "span_new": "\\( a \\)",
+      "span_old": "\\( h \\)",
+      "surface": "math_span"
+    },
+    {
+      "new": "\\[ h(y) = \\frac{\\binom{r}{y} \\binom{N - r}{n - y}}{\\binom{N}{n}} = \\binom{n}{y} \\frac{r^{(y)} (N - r)^{(n - y)}}{N^{(n)}}, \\quad y \\in \\{\\max\\{0, n - N + r\\}, \\ldots, \\min\\{n, r\\}\\} \\]",
+      "old": "\\[ h(y) = \\frac{\\binom{r}{y} \\binom{N - r}{n - y}}{\\binom{N}{n}} = \\binom{n}{y} \\frac{r^{(y)} (N - r)^{(n - y)}}{N^{(n)}}, \\quad y \\in \\{\\max\\{0, N - n + r\\}, \\ldots, \\min\\{n, r\\}\\} \\]",
+      "page": "random/point/Sufficient.html",
+      "reason": "correct the lower support bound for sampling without replacement",
+      "replacements": 1,
+      "span_index": 747,
+      "span_new": "\\[ h(y) = \\frac{\\binom{r}{y} \\binom{N - r}{n - y}}{\\binom{N}{n}} = \\binom{n}{y} \\frac{r^{(y)} (N - r)^{(n - y)}}{N^{(n)}}, \\quad y \\in \\{\\max\\{0, n - N + r\\}, \\ldots, \\min\\{n, r\\}\\} \\]",
+      "span_old": "\\[ h(y) = \\frac{\\binom{r}{y} \\binom{N - r}{n - y}}{\\binom{N}{n}} = \\binom{n}{y} \\frac{r^{(y)} (N - r)^{(n - y)}}{N^{(n)}}, \\quad y \\in \\{\\max\\{0, N - n + r\\}, \\ldots, \\min\\{n, r\\}\\} \\]",
+      "surface": "math_span"
+    },
+    {
+      "new": "\\( y \\in \\{\\max\\{0, n - N + r\\}, \\ldots, \\min\\{n, r\\}\\} \\)",
+      "old": "\\( y \\in \\{\\max\\{0, N - n + r\\}, \\ldots, \\min\\{n, r\\}\\} \\)",
+      "page": "random/point/Sufficient.html",
+      "reason": "correct the lower support bound in the conditional-distribution statement",
+      "replacements": 1,
+      "span_index": 751,
+      "span_new": "\\( y \\in \\{\\max\\{0, n - N + r\\}, \\ldots, \\min\\{n, r\\}\\} \\)",
+      "span_old": "\\( y \\in \\{\\max\\{0, N - n + r\\}, \\ldots, \\min\\{n, r\\}\\} \\)",
+      "surface": "math_span"
+    },
+    {
+      "new": "\\( y \\in \\{\\max\\{0, n - N + r\\}, \\ldots, \\min\\{n, r\\}\\} \\)",
+      "old": "\\( y \\in \\{\\max\\{0, N - n + r\\}, \\ldots, \\min\\{n, r\\}\\} \\)",
+      "page": "random/point/Sufficient.html",
+      "reason": "correct the repeated lower support bound",
+      "replacements": 1,
+      "span_index": 759,
+      "span_new": "\\( y \\in \\{\\max\\{0, n - N + r\\}, \\ldots, \\min\\{n, r\\}\\} \\)",
+      "span_old": "\\( y \\in \\{\\max\\{0, N - n + r\\}, \\ldots, \\min\\{n, r\\}\\} \\)",
+      "surface": "math_span"
     }
   ],
   "readable_reflow": {
@@ -2936,6 +3156,34 @@
       "target_bytes": 57237,
       "target_sha256": "e961188a1410c2ed23ac22efe0dd39d4284706dc571d9fe4126a591ff01afe12",
       "units": 37
+    },
+    "random/point/Sufficient.html": {
+      "details": 26,
+      "edition_notice": {
+        "bytes": 1184,
+        "links": 4,
+        "sha256": "e05998dbc797a6a347ea25c3d38230297a352c0c749e3eac5a5ee0d4c3c50c47"
+      },
+      "elements": 436,
+      "hierarchy_sha256": "09ed2f9346887b3c5ba20e1981f35bbb8dc6d40d9cac9a48820c9c93bb4012c8",
+      "href_delta_entries": 41,
+      "href_delta_occurrences": 44,
+      "ids": 51,
+      "math_spans": 804,
+      "math_text_localization_replacements": 4,
+      "occurrence_specific_href_deltas": 2,
+      "protected_math_replacements": 18,
+      "raw_math_environments": 0,
+      "raw_math_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_script_style_blocks": 3,
+      "reader_bytes": 60930,
+      "reader_sha256": "6dd895c08456da30a3a8a2aace5528a7ef32be5b6ad33c064af71fb5065250f6",
+      "reader_target_byte_identical": true,
+      "source_bytes": 57507,
+      "source_sha256": "4d7402f2a960ea2b4232e57e4ee5992ac29801b9269f300f17f8e83074d5a0e4",
+      "target_bytes": 60930,
+      "target_sha256": "6dd895c08456da30a3a8a2aace5528a7ef32be5b6ad33c064af71fb5065250f6",
+      "units": 39
     },
     "random/point/Unbiased.html": {
       "details": 10,
@@ -3249,14 +3497,14 @@
   "schema": "o006.random.first-unit-qa.v1",
   "scripts": {
     "build": {
-      "bytes": 122314,
+      "bytes": 128094,
       "path": "scripts/build_first_unit.py",
-      "sha256": "d9110d9277b885e50f8f77a878c117116b0e2f99c30b766e0909c5b28fde9c10"
+      "sha256": "65c98409d19a3119f12fa0f04beba85d11af99508c4e11b64cc7709654900a17"
     },
     "qa": {
-      "bytes": 101858,
+      "bytes": 107960,
       "path": "scripts/qa_first_unit.py",
-      "sha256": "737c1f1709090cd6f7be87d496cd21519a9e4ed65206e334fb2239f8bd9f457b"
+      "sha256": "9982e7b46e57e4bbfcc41a2d2b8b6e6bde738b7db3cb24feca8eb52c43bb6685"
     }
   },
   "transport_hardening": [

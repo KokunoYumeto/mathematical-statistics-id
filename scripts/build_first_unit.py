@@ -77,6 +77,7 @@ TARGETS = (
     PurePosixPath("random/point/Likelihood.html"),
     PurePosixPath("random/point/Bayes.html"),
     PurePosixPath("random/point/Unbiased.html"),
+    PurePosixPath("random/point/Sufficient.html"),
 )
 
 # Screen.css references all of these local assets. Keeping the complete exact set
@@ -1892,6 +1893,45 @@ PROTECTED_MATH_CORRECTIONS += (
     },
 )
 
+# The admitted Sufficient page contains a bounded set of proved formula and
+# notation defects.  These are indexed against the frozen authority's
+# protected-TeX stream so the reader and verifier agree on every correction.
+SUFFICIENT_MATH_CORRECTIONS = (
+    (88, r"\( C \)", r"\( c(y) \)", "replace the factorization constant with the required data-only positive function"),
+    (89, r"\( h_\theta(y) = C G(y, \theta) \)", r"\( h_\theta(y) = c(y) G(y, \theta) \)", "use the data-only positive factor consistently"),
+    (92, r"\( f_\theta(\bs x) \big/ h_\theta[u(x)] = r(\bs x) / C\)", r"\( f_\theta(\bs x) \big/ h_\theta[u(\bs{x})] = r(\bs x) / c[u(\bs{x})]\)", "correct the vector argument and data-only denominator in the factorization proof"),
+    (150, r"\( \theta \in \Theta \)", r"\( \theta \in T \)", "use the page's declared parameter-space symbol"),
+    (229, r"\(\theta \in \Theta\)", r"\(\theta \in T\)", "use the page's declared parameter-space symbol"),
+    (331, r"\[\E[r(Y)] = \sum_{y=0}^n r(y) \binom{n}{k} p^y (1 - p)^{n-y} = (1 - p)^n \sum_{y=0}^n r(y) \binom{n}{y} \left(\frac{p}{1 - p}\right)^y\]", r"\[\E[r(Y)] = \sum_{y=0}^n r(y) \binom{n}{y} p^y (1 - p)^{n-y} = (1 - p)^n \sum_{y=0}^n r(y) \binom{n}{y} \left(\frac{p}{1 - p}\right)^y\]", "the summation variable is y, not the undefined k"),
+    (404, r"\[ f(\bs x) = g(x_1) g(x_2) \cdot g(x_n) = \frac{e^{-n \theta} \theta^y}{x_1! x_2! \cdots x_n!}, \quad \bs x = (x_1, x_2, \ldots, x_n) \in \N^n \]", r"\[ f(\bs x) = g(x_1) g(x_2) \cdots g(x_n) = \frac{e^{-n \theta} \theta^y}{x_1! x_2! \cdots x_n!}, \quad \bs x = (x_1, x_2, \ldots, x_n) \in \N^n \]", "restore the omitted product factors"),
+    (460, r"\[ f(\bs x) = g(x_1) g(x_2) \cdots g(x_n) = \frac{1}{(2 \pi)^{n/2} \sigma^n} \exp\left[-\frac{1}{2 \sigma^2} \sum_{i=1}^n (x_i - \mu)^2\right], \quad \bs x = (x_1, x_2 \ldots, x_n) \in \R^n \]", r"\[ f(\bs x) = g(x_1) g(x_2) \cdots g(x_n) = \frac{1}{(2 \pi)^{n/2} \sigma^n} \exp\left[-\frac{1}{2 \sigma^2} \sum_{i=1}^n (x_i - \mu)^2\right], \quad \bs x = (x_1, x_2, \ldots, x_n) \in \R^n \]", "repair the tuple punctuation"),
+    (461, r"\[ f(\bs x) = \frac{1}{(2 \pi)^{n/2} \sigma^n} e^{-n \mu^2 / \sigma^2} \exp\left(-\frac{1}{2 \sigma^2}  \sum_{i=1}^n x_i^2 + \frac{2 \mu}{\sigma^2} \sum_{i=1}^n x_i \right), \quad \bs x = (x_1, x_2 \ldots, x_n) \in \R^n\]", r"\[ f(\bs x) = \frac{1}{(2 \pi)^{n/2} \sigma^n} e^{-n \mu^2 / (2 \sigma^2)} \exp\left(-\frac{1}{2 \sigma^2}  \sum_{i=1}^n x_i^2 + \frac{\mu}{\sigma^2} \sum_{i=1}^n x_i \right), \quad \bs x = (x_1, x_2, \ldots, x_n) \in \R^n\]", "restore the missing normal expansion factors and tuple punctuation"),
+    (586, r"\( \bs{Z} = (Z_1, X_2, \ldots, Z_n) \)", r"\( \bs{Z} = (Z_1, Z_2, \ldots, Z_n) \)", "use the defined transformed variable Z_2"),
+    (617, r"\( (U, V) \)", r"\( (P, Q) \)", "match the beta sufficient-statistic names defined in the theorem"),
+    (658, r"\[ f(\bs x) = g(x_1) g(x_2) \cdots g(x_n) = \frac{a^n b^{n a}}{(x_1 x_2 \cdots x_n)^{a + 1}} \bs{1}\left(x_{(n)} \ge b\right), \quad (x_1, x_2, \ldots, x_n) \in (0, \infty)^n  \]", r"\[ f(\bs x) = g(x_1) g(x_2) \cdots g(x_n) = \frac{a^n b^{n a}}{(x_1 x_2 \cdots x_n)^{a + 1}} \bs{1}\left(x_{(1)} \ge b\right), \quad (x_1, x_2, \ldots, x_n) \in (0, \infty)^n  \]", "the Pareto support is determined by the sample minimum"),
+    (669, r"\( M^{(2)} = \sum_{i=1}^n X_i^2 \)", r"\( M^{(2)} = \frac{1}{n} \sum_{i=1}^n X_i^2 \)", "use the stated second sample moment rather than the unnormalised sum"),
+    (690, r"\[ f(\bs x) = g(x_1) g(x_2) \cdots g(x_n) = \frac{1}{h^n}, \quad \bs x = (x_1, x_2, \ldots x_n) \in [a, a + h]^n \]", r"\[ f(\bs x) = g(x_1) g(x_2) \cdots g(x_n) = \frac{1}{h^n}, \quad \bs x = (x_1, x_2, \ldots, x_n) \in [a, a + h]^n \]", "repair the tuple punctuation"),
+    (726, r"\( h \)", r"\( a \)", "the sentence concerns the location parameter a"),
+    (747, r"\[ h(y) = \frac{\binom{r}{y} \binom{N - r}{n - y}}{\binom{N}{n}} = \binom{n}{y} \frac{r^{(y)} (N - r)^{(n - y)}}{N^{(n)}}, \quad y \in \{\max\{0, N - n + r\}, \ldots, \min\{n, r\}\} \]", r"\[ h(y) = \frac{\binom{r}{y} \binom{N - r}{n - y}}{\binom{N}{n}} = \binom{n}{y} \frac{r^{(y)} (N - r)^{(n - y)}}{N^{(n)}}, \quad y \in \{\max\{0, n - N + r\}, \ldots, \min\{n, r\}\} \]", "correct the lower support bound for sampling without replacement"),
+    (751, r"\( y \in \{\max\{0, N - n + r\}, \ldots, \min\{n, r\}\} \)", r"\( y \in \{\max\{0, n - N + r\}, \ldots, \min\{n, r\}\} \)", "correct the lower support bound in the conditional-distribution statement"),
+    (759, r"\( y \in \{\max\{0, N - n + r\}, \ldots, \min\{n, r\}\} \)", r"\( y \in \{\max\{0, n - N + r\}, \ldots, \min\{n, r\}\} \)", "correct the repeated lower support bound"),
+)
+
+PROTECTED_MATH_CORRECTIONS += tuple(
+    {
+        "page": "random/point/Sufficient.html",
+        "old": old,
+        "new": new,
+        "span_old": old,
+        "span_new": new,
+        "span_index": span_index,
+        "replacements": 1,
+        "surface": "math_span",
+        "reason": reason,
+    }
+    for span_index, old, new, reason in SUFFICIENT_MATH_CORRECTIONS
+)
+
 # Reader-facing language inside TeX \text{...} remains protected mathematics:
 # these exact substitutions localize words while leaving every operator,
 # identifier, delimiter, and formula position unchanged.
@@ -1943,6 +1983,27 @@ MATH_TEXT_LOCALIZATIONS = (
         "old": r"\text{ for every }",
         "new": r"\text{ untuk setiap }",
         "replacements": 1,
+        "surface": "math_span",
+    },
+    {
+        "page": "random/point/Sufficient.html",
+        "old": r"\text{ is independent of }",
+        "new": r"\text{ tidak bergantung pada }",
+        "replacements": 1,
+        "surface": "math_span",
+    },
+    {
+        "page": "random/point/Sufficient.html",
+        "old": r"\text{ if and only if }",
+        "new": r"\text{ jika dan hanya jika }",
+        "replacements": 1,
+        "surface": "math_span",
+    },
+    {
+        "page": "random/point/Sufficient.html",
+        "old": r"\text{ for all }",
+        "new": r"\text{ untuk semua }",
+        "replacements": 2,
         "surface": "math_span",
     },
 )
