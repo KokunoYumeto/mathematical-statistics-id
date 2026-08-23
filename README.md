@@ -23,13 +23,15 @@ galat konsol, TeX mentah, gambar hilang, atau luapan horizontal halaman. PDF
 pembaca langsung berisi 182 halaman A4 dan seluruh rincian yang diperluas.
 Produksi berikutnya berlanjut dari `point/Sufficient.html`.
 
-- Arsip Zenodo checkpoint 14/29: <https://doi.org/10.5281/zenodo.22061677>
+- Arsip Zenodo checkpoint 15/29: <https://doi.org/10.5281/zenodo.22062664>
 - DOI konsep semua versi: <https://doi.org/10.5281/zenodo.22059763>
 - Pembaca web: <https://kokunoyumeto.github.io/mathematical-statistics-id/>
 - Sumber, riwayat, dan rilis PDF GitHub:
   <https://github.com/KokunoYumeto/mathematical-statistics-id>
-- Rilis PDF publik terakhir (checkpoint 14/29; checkpoint 15 sedang diterbitkan):
-  <https://github.com/KokunoYumeto/mathematical-statistics-id/releases/tag/v2026.08.22.14>
+- Rilis PDF checkpoint 15/29:
+  <https://github.com/KokunoYumeto/mathematical-statistics-id/releases/tag/v2026.08.22.15>
+- Pointer metadata Figshare checkpoint 15/29:
+  <https://doi.org/10.6084/m9.figshare.33314784.v3>
 - Karya sumber resmi: <https://www.randomservices.org/random/>
 
 Pembaca luring dibangun secara deterministik dari `source/id-ID/` dengan

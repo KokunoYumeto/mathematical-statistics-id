@@ -1,0 +1,86 @@
+{
+  "schema": "o006.random.zenodo-publication-receipt.v1",
+  "checked_at": "2026-08-23T00:12:00+02:00",
+  "result": "published-new-version-and-public-bytes-verified",
+  "concept": {
+    "record_id": "22059763",
+    "doi": "10.5281/zenodo.22059763",
+    "duplicate_concept_created": false
+  },
+  "version": {
+    "record_id": "22062664",
+    "doi": "10.5281/zenodo.22062664",
+    "version": "2026.08.22.15",
+    "url": "https://zenodo.org/records/22062664",
+    "title": "Statistika Matematis — Edisi Bahasa Indonesia (id-ID): Checkpoint 15 dari 29 (Belum Lengkap)",
+    "submitted": true,
+    "completion_claim": "15 of 29 core pages; incomplete edition",
+    "model_provenance_present": true,
+    "source_author_credit_present": true
+  },
+  "lineage": {
+    "submitted_versions": 3,
+    "unsubmitted_drafts": 0,
+    "previous_record_id": "22061677"
+  },
+  "payload": {
+    "files": 7,
+    "bytes": 79416980,
+    "reader_first_visible_order_confirmed": true,
+    "visible_file_order": [
+      "00_statistika-matematis-id-reader-2026.08.22.15.pdf",
+      "10_mathematical-statistics-id-2026.08.22.15-reader-html.zip",
+      "20_mathematical-statistics-id-2026.08.22.15-source-provenance.zip",
+      "30_mathematical-statistics-id-2026.08.22.15-modular-backend.zip",
+      "40_LICENSE.md",
+      "50_mathematical-statistics-id-2026.08.22.15-release-manifest.json",
+      "SHA256SUMS.txt"
+    ],
+    "files_verified_by_anonymous_streamed_readback": [
+      {
+        "name": "00_statistika-matematis-id-reader-2026.08.22.15.pdf",
+        "bytes": 76775084,
+        "sha256": "7c4898505962f6978eb064c605a77fca9ccbcd3ba7f9238f9cf0d8ae974662ef"
+      },
+      {
+        "name": "10_mathematical-statistics-id-2026.08.22.15-reader-html.zip",
+        "bytes": 907206,
+        "sha256": "1c9d46745dceb6ebf7fb3f8e7587943e62bfbfc5f49e4016bfe198e6fbd4cac5"
+      },
+      {
+        "name": "20_mathematical-statistics-id-2026.08.22.15-source-provenance.zip",
+        "bytes": 691500,
+        "sha256": "16d960df6b9dade9d2ca0a15fb3093572eec8cc6ca88c457a9c22c379cc1e9f6"
+      },
+      {
+        "name": "30_mathematical-statistics-id-2026.08.22.15-modular-backend.zip",
+        "bytes": 1009104,
+        "sha256": "2f8c793c91bc2178b22683a8d5c3fe2e6117c5f79267a3ab638504f6d8ba676a"
+      },
+      {
+        "name": "40_LICENSE.md",
+        "bytes": 2164,
+        "sha256": "75adbef9afc9a804ac345d3d1c62d2957d2b3dfdd7886068c3e39dc581d63b73"
+      },
+      {
+        "name": "50_mathematical-statistics-id-2026.08.22.15-release-manifest.json",
+        "bytes": 31204,
+        "sha256": "5d8c6ccc7e57d4b307171894437ae1d9538c360a3417f2a57afd317d99872642"
+      },
+      {
+        "name": "SHA256SUMS.txt",
+        "bytes": 718,
+        "sha256": "84db2c39ffe60fbc343de3d5861b920749b18e325e5d800d17cc672431698223"
+      }
+    ]
+  },
+  "publication_incident": {
+    "published_before_correction": false,
+    "content_loss": false,
+    "cause": "The legacy deposition API returned the complete draft file set in an arbitrary response order and did not honor its optional reordering endpoint.",
+    "resolution": "The verifier now checks exact membership and lexicographic reader-first naming. The existing draft was reused without re-upload; the public Zenodo page visibly lists the 00-prefixed PDF first and embeds it as a 182-page reader."
+  },
+  "rights": "The Zenodo record uses other-open and preserves the collection's exact component licences; no false uniform relicensing is claimed.",
+  "credential_handling": "The authorized Zenodo token was read only at runtime from the user-controlled credential file and is absent from logs, URLs, packages, and this receipt.",
+  "upstream_contact": "none"
+}

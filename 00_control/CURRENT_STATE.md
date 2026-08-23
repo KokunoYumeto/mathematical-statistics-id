@@ -1,6 +1,6 @@
 # Current state — O006 / C140 Mathematical Statistics (id-ID)
 
-Updated: 2026-08-22
+Updated: 2026-08-23
 
 ## Status
 
@@ -23,9 +23,10 @@ deployment, anonymous byte readback, and live desktop/mobile rendering gates.
 The nine-page boundary completes the sample chapter and has passed independent
 language/mathematics audits, topology, backend, build, two deterministic
 replays, and local desktop/mobile rendering. Its push, clean workflow,
-deployment, and immediate 39-file anonymous byte readback succeeded. GitHub
-then suspended the publishing account and withdrew both repository and Pages;
-current public live-browser verification is therefore unavailable.
+deployment, and immediate 39-file anonymous byte readback succeeded. At that
+historical boundary GitHub suspended the publishing account and withdrew both
+repository and Pages; the account was subsequently restored and the current
+fifteen-page public readback is recorded below.
 The ten-page boundary starts the point-estimation chapter and has passed three
 independent read-only audits, exact topology, link, locale, backend, build, and
 two deterministic replay gates. Its fresh live browser pass is explicitly
@@ -73,8 +74,8 @@ page-filling reader; all 23 disclosures open and close; no raw TeX, missing
 image, page overflow, uncontained wide surface, or console warning/error
 remains. The corrected reader-first PDF is 173 A4 pages. All pages were
 rerendered and reviewed after correcting its initial Covariance/Normal order
-swap. GitHub access is restored; publication and anonymous readback of this
-fourteen-page boundary are the immediate release transaction.
+swap. GitHub access is restored; this fourteen-page boundary was subsequently
+published and anonymously read back as recorded in the fourteen-page receipt.
 
 The fifteen-page boundary completes `random/point/Unbiased.html`. It passed an
 independent language/mathematics recheck, exact 306-element topology, 243
@@ -85,9 +86,10 @@ ten disclosures open and close; four images are complete; and no raw TeX,
 page-level overflow, uncontained wide surface, or console warning/error
 remains. The reader-first PDF is 182 A4 pages / 76,775,084 bytes. All 182 pages
 were rerendered and visually reviewed with no observed defect. The terminology
-and model-provenance gate is incorporated into this new PDF. Publication into
-the existing GitHub, Zenodo, and Figshare-pointer lineages is the immediate
-release transaction.
+and model-provenance gate is incorporated into this new PDF. The boundary is
+published and anonymously read back in the existing GitHub, Zenodo, and
+Figshare-pointer lineages; the exact public identities and hashes are recorded
+in the three fifteen-page publication receipts below.
 
 Ordinal 16, `random/point/Sufficient.html`, is the next contiguous production
 page. Do not skip to the separate Penn State component or repeat completed
@@ -591,8 +593,22 @@ bytes, SHA-256
 Automated QA found 234 outline entries, 1,011 external URI annotations, no
 local/loopback URI, no encryption, no blank page, and no edge-clipping
 candidate. All 182 pages were reviewed in ten contact sheets and six
-full-resolution spot checks; no visual defect was observed. Publication and
-anonymous public-byte verification are pending in the existing lineages.
+full-resolution spot checks; no visual defect was observed.
+
+The verified fifteen-page boundary is now public and anonymously rechecked in
+all existing lineages. GitHub main is commit
+`df7b2322ce75419e5c682f4b882af626a320bdf5`; the successful workflow is run
+`32601081875` (job `97099317560`), and release `v2026.08.22.15` carries the
+reader PDF. The release receipt is
+`GITHUB_PUBLICATION_RECEIPT_2026-08-23_FIFTEEN_PAGE.json`. Zenodo record
+`22062664` / DOI `10.5281/zenodo.22062664` is version 15 in concept
+`22059763` / DOI `10.5281/zenodo.22059763`, with seven files / 79,416,980
+bytes and three submitted versions / zero drafts; its receipt is
+`ZENODO_PUBLICATION_RECEIPT_2026-08-23_FIFTEEN_PAGE.json`. Figshare article
+`33314784` version 3 / DOI `10.6084/m9.figshare.33314784.v3` is the public
+zero-file CC0 metadata pointer (the mixed component licences prohibit a false
+single-file licence); its receipt is
+`FIGSHARE_PUBLICATION_RECEIPT_2026-08-23_FIFTEEN_PAGE.json`.
 
 ## Rights boundary
 
@@ -708,9 +724,9 @@ the QA receipt is
 Two complete backend/build/QA check-only sequences reproduced these identities.
 The new 182-page PDF carries the normalized terminology and exact provenance.
 
-1. Publish the verified fifteen-page boundary into the existing GitHub and
-   Zenodo lineages, update the existing Figshare metadata pointer, and
-   anonymously read all public bytes back.
+1. The verified fifteen-page boundary is published and anonymously read back
+   in the existing GitHub, Zenodo, and Figshare-pointer lineages; the three
+   receipts above are the controlling evidence.
 2. Continue immediately through all 14 remaining source pages, beginning with
    `random/point/Sufficient.html` (core ordinal 16), while growing the same
    deterministic reader and stable-ID backend.

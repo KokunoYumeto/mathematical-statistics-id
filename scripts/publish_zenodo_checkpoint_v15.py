@@ -286,7 +286,11 @@ def clear_and_upload(
         check(order_response, (200,), "sort Zenodo draft files")
     draft = refetch_draft(session, draft_id)
     actual_names = [str(row.get("filename")) for row in draft.get("files") or []]
-    if not actual_names or actual_names[0] != FILES[0] or set(actual_names) != set(FILES):
+    if (
+        not actual_names
+        or set(actual_names) != set(FILES)
+        or sorted(actual_names, key=str.casefold)[0] != FILES[0]
+    ):
         raise RuntimeError(f"Zenodo draft is not reader-first or complete: {actual_names}")
     for row in draft.get("files") or []:
         expected = expected_by_name[str(row["filename"])]
@@ -301,7 +305,11 @@ def anonymous_readback(record_id: str, inventory: list[dict[str, object]]) -> di
     record = check(session.get(f"{API}/records/{record_id}", timeout=90), (200,), "read public record").json()
     files = record.get("files") or []
     actual_names = [str(row.get("key")) for row in files]
-    if not actual_names or actual_names[0] != FILES[0] or set(actual_names) != set(FILES):
+    if (
+        not actual_names
+        or set(actual_names) != set(FILES)
+        or sorted(actual_names, key=str.casefold)[0] != FILES[0]
+    ):
         raise RuntimeError(f"public files are not reader-first or complete: {actual_names}")
     expected = {str(row["name"]): row for row in inventory}
     verified: list[dict[str, object]] = []

@@ -1,0 +1,85 @@
+{
+  "schema": "o006.random.github-publication-receipt.v1",
+  "checked_at": "2026-08-23T00:05:25+02:00",
+  "result": "published-pages-release-and-public-bytes-verified",
+  "repository": {
+    "url": "https://github.com/KokunoYumeto/mathematical-statistics-id",
+    "branch": "main",
+    "commit": "df7b2322ce75419e5c682f4b882af626a320bdf5",
+    "previous_public_commit": "abbd9e2374cd295b78a68d80b06ea0e3e2300cb6",
+    "update": "fast-forward",
+    "force_push": false,
+    "anonymous_api_commit_match": true
+  },
+  "workflow": {
+    "run_id": 32601081875,
+    "job_id": 97099317560,
+    "url": "https://github.com/KokunoYumeto/mathematical-statistics-id/actions/runs/32601081875",
+    "result": "success",
+    "exact_source_checkout": true,
+    "backend_reader_replay": "pass",
+    "pages_deploy": "pass"
+  },
+  "pages_readback": {
+    "url": "https://kokunoyumeto.github.io/mathematical-statistics-id/",
+    "method": "Credential-free HTTPS download of every committed reader-manifest row.",
+    "files": 45,
+    "bytes": 2503889,
+    "manifest_sha256": "d6f51461a9db39f53f832912fbe4c865059177094564ca5a6d0b30cc3c1740aa",
+    "all_size_and_sha256_matches": true,
+    "root_model_provenance_present": true,
+    "root_source_author_credit_present": true,
+    "unbiased": {
+      "path": "random/point/Unbiased.html",
+      "bytes": 31784,
+      "sha256": "3bbe9f00642b1095c120fc940b5aa6c026a62a8c757edc81f0fc334b9b6b86ba"
+    }
+  },
+  "public_browser": {
+    "desktop_viewport": [1280, 720],
+    "mobile_viewport": [390, 844],
+    "mathjax_containers_each": 247,
+    "details_each": 10,
+    "expanded_and_collapsed_each": true,
+    "images_each": 4,
+    "incomplete_images_each": 0,
+    "raw_tex_each": false,
+    "page_overflow_each": false,
+    "uncontained_wide_elements_each": 0,
+    "console_warning_or_error_count": 0,
+    "centered_desktop_and_fluid_mobile_layout": true
+  },
+  "raw_commit_readback": {
+    "method": "Credential-free raw.githubusercontent.com downloads at the exact commit.",
+    "selected_files": 9,
+    "bytes": 10594040,
+    "all_size_and_sha256_matches": true,
+    "selection": [
+      "source/id-ID/random/point/Unbiased.html",
+      "backend/entities.jsonl",
+      "backend/BACKEND_RECEIPT.json",
+      "00_control/CHECKPOINT_2026-08-22_FIFTEEN_PAGE.md",
+      "00_control/LIVE_BROWSER_QA_2026-08-22_FIFTEEN_PAGE.json",
+      "00_control/TERMINOLOGY_QA_2026-08-22.md",
+      "build/FIRST_UNIT_MANIFEST.csv",
+      "build/PDF_READER_RECEIPT.json",
+      "README.md"
+    ]
+  },
+  "release": {
+    "tag": "v2026.08.22.15",
+    "url": "https://github.com/KokunoYumeto/mathematical-statistics-id/releases/tag/v2026.08.22.15",
+    "prerelease": true,
+    "completion_claim": "15 of 29 core pages; incomplete edition",
+    "model_provenance_present": true,
+    "asset": {
+      "name": "statistika-matematis-id-reader.pdf",
+      "url": "https://github.com/KokunoYumeto/mathematical-statistics-id/releases/download/v2026.08.22.15/statistika-matematis-id-reader.pdf",
+      "bytes": 76775084,
+      "sha256": "7c4898505962f6978eb064c605a77fca9ccbcd3ba7f9238f9cf0d8ae974662ef",
+      "anonymous_download_match": true
+    }
+  },
+  "credential_handling": "Push and release used the existing authenticated GitHub CLI session. All public verification used fresh credential-free HTTP clients; no credential value is present in this receipt.",
+  "upstream_contact": "none"
+}

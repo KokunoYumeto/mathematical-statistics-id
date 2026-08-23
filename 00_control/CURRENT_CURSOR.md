@@ -41,29 +41,28 @@
 - Exact local checkpoint:
   `CHECKPOINT_2026-08-22_FIFTEEN_PAGE.md` and
   `LIVE_BROWSER_QA_2026-08-22_FIFTEEN_PAGE.json`.
-- GitHub account and repository access are restored. The fourteen-page
-  checkpoint is public at commit
-  `394b3380dd654af6b133448bcaa999b3d875afa3`; workflow `32593666231` / job
-  `97081234452` passed. All 44 Pages files / 2,471,964 bytes match the local
-  manifest anonymously, and public desktop/mobile rendering passes. Prerelease
-  `v2026.08.22.14` exposes the byte-verified 173-page PDF. Sanitized evidence:
-  `GITHUB_PUBLICATION_RECEIPT_2026-08-22_FOURTEEN_PAGE.json`.
+- The fifteen-page checkpoint is public at GitHub commit
+  `df7b2322ce75419e5c682f4b882af626a320bdf5`; workflow `32601081875` / job
+  `97099317560` passed. All 45 Pages files / 2,503,889 bytes and nine selected
+  raw-commit files / 10,594,040 bytes match anonymously. Public desktop/mobile
+  rendering passes. Prerelease `v2026.08.22.15` exposes the byte-verified
+  182-page PDF. Sanitized evidence:
+  `GITHUB_PUBLICATION_RECEIPT_2026-08-23_FIFTEEN_PAGE.json`.
 - Zenodo lineage is concept `22059763` / concept DOI
-  `10.5281/zenodo.22059763`; current immutable v14 is record `22061677` / DOI
-  `10.5281/zenodo.22061677`. Anonymous streamed readback matches all seven
-  files / 76,411,559 bytes, and the owned lineage has two submitted versions
-  and zero drafts. Evidence:
-  `ZENODO_PUBLICATION_RECEIPT_2026-08-22_FOURTEEN_PAGE.json`.
-- Figshare article `33314784`, DOI `10.6084/m9.figshare.33314784.v2`, is the
-  public zero-file CC0 metadata pointer to Zenodo v14 and belongs to project
+  `10.5281/zenodo.22059763`; current immutable v15 is record `22062664` / DOI
+  `10.5281/zenodo.22062664`. Anonymous streamed readback matches all seven
+  files / 79,416,980 bytes, the public page visibly embeds the PDF first, and
+  the owned lineage has three submitted versions and zero drafts. Evidence:
+  `ZENODO_PUBLICATION_RECEIPT_2026-08-23_FIFTEEN_PAGE.json`.
+- Figshare article `33314784`, DOI `10.6084/m9.figshare.33314784.v3`, is the
+  public zero-file CC0 metadata pointer to Zenodo v15 and belongs to project
   `280296`. The current collection deliberately excludes link-only items.
   Both licence inventories lack Other/custom/mixed rights, so never upload the
   mixed-rights reader under CC0 or a false CC BY 4.0 licence. Evidence:
-  `FIGSHARE_PUBLICATION_RECEIPT_2026-08-22_FOURTEEN_PAGE.json`.
+  `FIGSHARE_PUBLICATION_RECEIPT_2026-08-23_FIFTEEN_PAGE.json`.
 
 Resume by reading this file, `CURRENT_STATE.md`, the freeze receipt, the final
 row of `TRANSLATION_LEDGER.csv`, the terminology QA/glossary, and the
-fifteen-page checkpoint. Publish the verified fifteen-page boundary in the
-existing lineages, anonymously read it back, then continue with ordinal 16
+fifteen-page checkpoint. Continue with ordinal 16
 `random/point/Sufficient.html`. Do not restart source selection, duplicate a
 DOI lineage, contact upstream, or repeat completed pages.

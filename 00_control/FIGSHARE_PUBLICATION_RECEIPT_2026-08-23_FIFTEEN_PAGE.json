@@ -1,0 +1,60 @@
+{
+  "schema": "o006.random.figshare-publication-receipt.v1",
+  "checked_at": "2026-08-23T00:15:00+02:00",
+  "result": "published-metadata-pointer-and-publicly-verified",
+  "article": {
+    "id": 33314784,
+    "version": 3,
+    "doi": "10.6084/m9.figshare.33314784.v3",
+    "url": "https://figshare.com/articles/online_resource/33314784/3",
+    "title": "Statistika Matematis — Edisi Bahasa Indonesia (id-ID): Checkpoint 15 dari 29 (Tautan Metadata; Belum Lengkap)",
+    "license": "CC0",
+    "file_count": 0,
+    "model_provenance_present": true,
+    "metadata_only_rights_notice_present": true
+  },
+  "project": {
+    "id": 280296,
+    "contains_article": true
+  },
+  "collection": {
+    "id": 8668413,
+    "version": 42,
+    "doi": "10.6084/m9.figshare.c.8668413.v42",
+    "contains_article": false,
+    "disposition": "The current collection is reader-PDF-bearing and deliberately excludes link-only catalog records; this zero-file metadata pointer remains in the public project only."
+  },
+  "linked_release": {
+    "scope": "15 of 29 core pages; incomplete edition",
+    "zenodo_version_doi": "10.5281/zenodo.22062664",
+    "zenodo_concept_doi": "10.5281/zenodo.22059763",
+    "github_release": "https://github.com/KokunoYumeto/mathematical-statistics-id/releases/tag/v2026.08.22.15",
+    "public_file_count": 7,
+    "public_total_bytes": 79416980,
+    "reader_pdf_pages": 182
+  },
+  "license_inventory": {
+    "available_labels": [
+      "CC BY 4.0",
+      "CC0",
+      "MIT",
+      "GPL",
+      "GPL 2.0+",
+      "GPL 3.0+",
+      "Apache 2.0"
+    ],
+    "exact_mixed_rights_label_available": false
+  },
+  "rights_boundary": "CC0 applies only to the Figshare metadata/link item. No edition bytes were copied because Figshare exposes no exact mixed-rights licence for this account.",
+  "public_browser": {
+    "title_match": true,
+    "partial_status_match": true,
+    "zenodo_version_and_concept_links_present": true,
+    "github_release_link_present": true,
+    "model_provenance_present": true,
+    "metadata_only_notice_present": true,
+    "files_not_publicly_available_banner_present": true
+  },
+  "credential_handling": "The authorized Figshare token was read only at runtime from the user-controlled credential file and is absent from logs, URLs, packages, and this receipt.",
+  "upstream_contact": "none"
+}

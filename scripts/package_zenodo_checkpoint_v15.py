@@ -132,7 +132,7 @@ def reader_entries() -> tuple[dict[str, Path], dict[str, object]]:
         ROOT / "build" / "PDF_VISUAL_QA_RECEIPT.json",
         ROOT / "00_control" / "CHECKPOINT_2026-08-22_FIFTEEN_PAGE.md",
         ROOT / "00_control" / "LIVE_BROWSER_QA_2026-08-22_FIFTEEN_PAGE.json",
-        ROOT / "00_control" / "GITHUB_PUBLICATION_RECEIPT_2026-08-22_FIFTEEN_PAGE.json",
+        ROOT / "00_control" / "GITHUB_PUBLICATION_RECEIPT_2026-08-23_FIFTEEN_PAGE.json",
     ]
     for path in evidence:
         add_entry(entries, f"_evidence/{path.name}", path)
@@ -167,7 +167,7 @@ def source_entries(rows: list[dict[str, str]]) -> dict[str, Path]:
         ROOT / "00_control" / "TERMINOLOGY_GLOSSARY_ID_ID.csv",
         ROOT / "00_control" / "CHECKPOINT_2026-08-22_FIFTEEN_PAGE.md",
         ROOT / "00_control" / "LIVE_BROWSER_QA_2026-08-22_FIFTEEN_PAGE.json",
-        ROOT / "00_control" / "GITHUB_PUBLICATION_RECEIPT_2026-08-22_FIFTEEN_PAGE.json",
+        ROOT / "00_control" / "GITHUB_PUBLICATION_RECEIPT_2026-08-23_FIFTEEN_PAGE.json",
         ROOT / "00_control" / "ZENODO_PUBLICATION_RECEIPT_2026-08-22_THIRTEEN_PAGE.json",
         ROOT / "build" / "FIRST_UNIT_MANIFEST.csv",
         ROOT / "build" / "FIRST_UNIT_BUILD_RECEIPT.json",
@@ -413,4 +413,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-
