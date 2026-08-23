@@ -246,7 +246,13 @@ def anonymous_readback(record_id: str, inventory: list[dict[str, object]]) -> di
         if total != expected[name]["bytes"] or sha.hexdigest() != expected[name]["sha256"]:
             raise RuntimeError(f"public Zenodo file mismatch: {name}")
         verified.append({"name": name, "bytes": total, "sha256": sha.hexdigest()})
-    versions = check(session.get(f"{API}/records", params={"q": f"conceptrecid:{CONCEPT_RECORD_ID}", "allversions": "true", "size": 100}, timeout=90), (200,), "read Zenodo public lineage").json()
+    # The public records search uses the same underscored parameter spelling as
+    # the authenticated depositions endpoint.  `allversions` used to be
+    # accepted by older deployments but now returns HTTP 400, which would make
+    # a successful publication look unverifiable.
+    # Anonymous record search caps `size` at 25; the lineage is only four
+    # versions, so use the public-safe bound rather than the authenticated 100.
+    versions = check(session.get(f"{API}/records", params={"q": f"conceptrecid:{CONCEPT_RECORD_ID}", "all_versions": "true", "size": 25}, timeout=90), (200,), "read Zenodo public lineage").json()
     hits = versions.get("hits", {}).get("hits", [])
     submitted = [row for row in hits if isinstance(row, dict) and row.get("submitted")]
     if len(submitted) != 4 or any(isinstance(row, dict) and not row.get("submitted") for row in hits):

@@ -1,0 +1,68 @@
+{
+  "result": "published-and-anonymously-verified",
+  "concept_record_id": "22059763",
+  "concept_doi": "10.5281/zenodo.22059763",
+  "record_id": "22071140",
+  "doi": "10.5281/zenodo.22071140",
+  "record_url": "https://zenodo.org/records/22071140",
+  "version": "2026.08.23.16",
+  "scope": "16 of 29 contiguous Random chapter 5-8 core pages; incomplete edition",
+  "public_versions": 4,
+  "unsubmitted_drafts": 0,
+  "reader_first_html_order_verified": true,
+  "public_readback": {
+    "method": "credential-free HTTPS API and file downloads",
+    "files": [
+      {
+        "name": "40_LICENSE.md",
+        "bytes": 2164,
+        "sha256": "75adbef9afc9a804ac345d3d1c62d2957d2b3dfdd7886068c3e39dc581d63b73",
+        "url": "https://zenodo.org/records/22071140/files/40_LICENSE.md"
+      },
+      {
+        "name": "00_statistika-matematis-id-reader-2026.08.23.16.pdf",
+        "bytes": 85357801,
+        "sha256": "f1a886ff1285315478bb7e50a773e8a5d79b47e6170a86e82e7b98126f6f6160",
+        "url": "https://zenodo.org/records/22071140/files/00_statistika-matematis-id-reader-2026.08.23.16.pdf"
+      },
+      {
+        "name": "30_mathematical-statistics-id-2026.08.23.16-modular-backend.zip",
+        "bytes": 1012022,
+        "sha256": "36b94a89f7b4a38374cb8af8713a7c9d7bc4772cdeac5fab28286cc48b2038c6",
+        "url": "https://zenodo.org/records/22071140/files/30_mathematical-statistics-id-2026.08.23.16-modular-backend.zip"
+      },
+      {
+        "name": "10_mathematical-statistics-id-2026.08.23.16-reader-html.zip",
+        "bytes": 923530,
+        "sha256": "5c75b0b7cfa2a2cc10186474aa57573742be856e04c61719e8412f92edc10926",
+        "url": "https://zenodo.org/records/22071140/files/10_mathematical-statistics-id-2026.08.23.16-reader-html.zip"
+      },
+      {
+        "name": "SHA256SUMS.txt",
+        "bytes": 799,
+        "sha256": "a431a55b334536090fe0632a247cab85026a4adeec5c74354085326f973d80ba",
+        "url": "https://zenodo.org/records/22071140/files/SHA256SUMS.txt"
+      },
+      {
+        "name": "20_mathematical-statistics-id-2026.08.23.16-source-provenance.zip",
+        "bytes": 737646,
+        "sha256": "df1776d44165011b33f6ccde43d6b2954d8d56271a9b20a7d9de3e7b6960b337",
+        "url": "https://zenodo.org/records/22071140/files/20_mathematical-statistics-id-2026.08.23.16-source-provenance.zip"
+      },
+      {
+        "name": "50_mathematical-statistics-id-2026.08.23.16-release-manifest.json",
+        "bytes": 32372,
+        "sha256": "755a6a8154943cfdd81c58ee9e1e28b32b9e89788580cd2ee2726ba4c1f4c568",
+        "url": "https://zenodo.org/records/22071140/files/50_mathematical-statistics-id-2026.08.23.16-release-manifest.json"
+      }
+    ],
+    "total_bytes": 88066334,
+    "pdf_pages": 197,
+    "html_primary_file": "00_statistika-matematis-id-reader-2026.08.23.16.pdf",
+    "html_primary_file_link": "https://zenodo.org/records/22071140/files/00_statistika-matematis-id-reader-2026.08.23.16.pdf"
+  },
+  "rights_note": "Figshare/Zenodo metadata does not flatten component rights: Random attribution witnesses are retained (CC BY 2.0 landing / CC BY 1.0 Credits), MathJax remains Apache 2.0, and designated assets remain CC0.",
+  "provenance": "OpenAI Codex gpt-5.6-sol, Ultra",
+  "credits_preserved": true,
+  "generated_by": "scripts/publish_zenodo_checkpoint_v16.py --verify-published"
+}

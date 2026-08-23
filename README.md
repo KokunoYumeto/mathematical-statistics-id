@@ -24,16 +24,18 @@ galat konsol, TeX mentah, gambar hilang, atau luapan horizontal halaman. PDF
 pembaca langsung berisi 197 halaman A4 dan seluruh rincian yang diperluas.
 Produksi berikutnya berlanjut dari `interval/index.html`.
 
-- Arsip Zenodo checkpoint terbaru: lihat receipt publik di `00_control/` setelah
-  rilis; DOI konsep semua versi tetap <https://doi.org/10.5281/zenodo.22059763>
+- Arsip Zenodo checkpoint 16/29:
+  <https://doi.org/10.5281/zenodo.22071140>
 - DOI konsep semua versi: <https://doi.org/10.5281/zenodo.22059763>
 - Pembaca web: <https://kokunoyumeto.github.io/mathematical-statistics-id/>
 - Sumber, riwayat, dan rilis PDF GitHub:
   <https://github.com/KokunoYumeto/mathematical-statistics-id>
-- Rilis PDF checkpoint 16/29: public link is recorded in the sixteen-page
-  publication receipt under `00_control/`.
-- Pointer metadata Figshare checkpoint 16/29: public DOI is recorded in the
-  sixteen-page publication receipt under `00_control/`.
+- Rilis PDF GitHub checkpoint 16/29:
+  <https://github.com/KokunoYumeto/mathematical-statistics-id/releases/tag/v2026.08.23.16>
+- Figshare tidak sedang menjadi jalur publik saat ini: akun mengembalikan status
+  dinonaktifkan dan API publik tidak lagi menampilkan pointer historis. Tidak ada
+  salinan atau item duplikat yang dibuat; lihat receipt percobaan di
+  `00_control/`.
 - Karya sumber resmi: <https://www.randomservices.org/random/>
 
 Pembaca luring dibangun secara deterministik dari `source/id-ID/` dengan

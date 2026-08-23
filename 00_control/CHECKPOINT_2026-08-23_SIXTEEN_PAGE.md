@@ -95,10 +95,23 @@ zero console errors/warnings, and no horizontal overflow. The root carries
 ## Publication gate
 
 This is a coherent partial checkpoint, not completion of the 29-page edition.
-Publication is authorized by the standing release instruction and remains
-pending only the immediate GitHub fast-forward, Zenodo new version in concept
-22059763, and Figshare zero-file CC0 metadata-pointer update, each followed by
-anonymous filename/byte/hash readback. No upstream message has been sent.
+It is public and anonymously verified in both available preservation lineages.
+GitHub boundary commit `4677fcf1ef8357de89ae0afd4e640e8076530873`, workflow
+`32655887678`, Pages, and prerelease `v2026.08.23.16` are verified by
+`GITHUB_PUBLICATION_RECEIPT_2026-08-23_SIXTEEN_PAGE.json`. Zenodo record
+`22071140`, DOI `10.5281/zenodo.22071140`, is the fourth immutable version in
+concept `22059763`; all seven files / 88,066,334 bytes match anonymously and
+zero drafts remain. Evidence is
+`ZENODO_PUBLICATION_RECEIPT_2026-08-23_SIXTEEN_PAGE.json` (SHA-256
+`0e42ba66454a0338822d702c28fec51d2130c64a59f15a8b020a903f2a2d83b1`).
 
-Next executable action: publish this checkpoint without creating a duplicate
-concept, then verify the public bytes and advance the cursor to ordinal 17.
+The existing Figshare article could not be advanced: authenticated preflight
+returned `403 InactiveAccount`, while its public API returned
+`404 EntityNotFound`. No duplicate item or falsely licensed file was created;
+the exact disposition is
+`FIGSHARE_PUBLICATION_ATTEMPT_2026-08-23_SIXTEEN_PAGE.json` (SHA-256
+`6d0e17a5ec559164ea85117ffa6d83be416bd666e4b14e2e4e2ff646a9eba642`).
+No upstream message has been sent.
+
+Next executable action: continue ordinal 17 `random/interval/index.html`; retry
+the exact existing Figshare pointer only after account reactivation.

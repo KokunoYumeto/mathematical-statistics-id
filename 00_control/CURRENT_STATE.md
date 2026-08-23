@@ -94,9 +94,10 @@ in the three fifteen-page publication receipts below.
 The sixteen-page boundary completes `random/point/Sufficient.html`. It passed
 the protected-math, exact-topology, stable-ID, link-closure, backend/build,
 deterministic replay, PDF, and fresh credential-free desktop/mobile browser
-gates. The exact boundary evidence is recorded below; its public release
-receipts will be added immediately after the three existing publication
-lineages are advanced. The next contiguous page is
+gates. It is public and anonymously byte-verified on GitHub and Zenodo. The
+existing Figshare pointer could not be advanced because the account is
+disabled; the public API also no longer exposes that historical item, so no
+current Figshare claim is made. The next contiguous page is
 `random/interval/index.html` (core ordinal 17). Do not skip to the separate
 Penn State component or repeat completed Random pages.
 
@@ -674,9 +675,20 @@ credits preserved.
 The next source cursor is `random/interval/index.html` (core ordinal 17),
 authority 7,789 bytes, SHA-256
 `85fcad0292636fbae0935ebb775a87b9e4dbdf33692b5e2823b353163d168403`.
-Publication of this sixteen-page checkpoint is pending the immediate
-GitHub/Zenodo/Figshare public-byte readbacks; no upstream communication has
-been sent.
+GitHub boundary commit `4677fcf1ef8357de89ae0afd4e640e8076530873`, workflow
+`32655887678`, Pages, and prerelease `v2026.08.23.16` have passed anonymous
+readback. Zenodo record `22071140` / DOI `10.5281/zenodo.22071140` is version
+16 in concept `22059763` / DOI `10.5281/zenodo.22059763`; all seven public
+files / 88,066,334 bytes match local SHA-256 identities, and the lineage has
+four submitted versions / zero drafts. Exact receipts are
+`GITHUB_PUBLICATION_RECEIPT_2026-08-23_SIXTEEN_PAGE.json` and
+`ZENODO_PUBLICATION_RECEIPT_2026-08-23_SIXTEEN_PAGE.json`.
+
+The attempted Figshare update failed before mutation with authenticated
+`403 InactiveAccount`; credential-free article readback returned
+`404 EntityNotFound`. No duplicate item and no falsely licensed bytes were
+created. `FIGSHARE_PUBLICATION_ATTEMPT_2026-08-23_SIXTEEN_PAGE.json` records
+the exact disposition. No upstream communication has been sent.
 
 ## Rights boundary
 
@@ -801,14 +813,13 @@ Two complete backend/build/QA check-only sequences reproduced the sixteen-page
 identities. The new 197-page PDF carries the normalized terminology and exact
 provenance.
 
-1. Publish the verified sixteen-page boundary and anonymously read it back in
-   the existing GitHub, Zenodo, and Figshare-pointer lineages; the new receipts
-   are the controlling evidence.
-2. Continue immediately through the remaining 13 source pages, beginning with
+1. Continue immediately through the remaining 13 source pages, beginning with
    `random/interval/index.html` (core ordinal 17), while growing the same
    deterministic reader and stable-ID backend.
-3. Maintain later substantial verified checkpoints as new versions in the
+2. Maintain later substantial verified checkpoints as new versions in the
    same Zenodo concept lineage and as fast-forward GitHub releases.
+3. Retry exactly Figshare article `33314784` only after account reactivation;
+   do not create a duplicate or attach mixed-rights bytes under CC0.
 4. Keep Penn State reconstruction, the one-page Random completeness donor, and
    original C140 companion in separate component paths/repositories; begin
    them only after this clean checkpoint or in a demonstrably non-overlapping

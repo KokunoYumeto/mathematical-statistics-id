@@ -1,0 +1,36 @@
+{
+  "result": "not-published-account-disabled",
+  "attempted_at": "2026-08-23",
+  "target": {
+    "article_id": 33314784,
+    "historical_doi": "10.6084/m9.figshare.33314784.v3",
+    "project_id": 280296,
+    "collection_id": 8668413,
+    "intended_scope": "zero-file CC0 metadata/link pointer to Zenodo checkpoint 16/29"
+  },
+  "authenticated_preflight": {
+    "endpoint": "https://api.figshare.com/v2/account/licenses",
+    "http_status": 403,
+    "error_code": "InactiveAccount",
+    "message": "Inactive/disabled account",
+    "credential_exposed": false
+  },
+  "credential_free_readback": {
+    "article_endpoint": "https://api.figshare.com/v2/articles/33314784",
+    "article_http_status": 404,
+    "article_error_code": "EntityNotFound",
+    "versions_endpoint": "https://api.figshare.com/v2/articles/33314784/versions",
+    "versions_http_status": 200,
+    "versions": [],
+    "project_articles_endpoint": "https://api.figshare.com/v2/projects/280296/articles",
+    "project_article_count_observed": 0,
+    "collection_articles_endpoint": "https://api.figshare.com/v2/collections/8668413/articles",
+    "collection_article_count_observed": 0,
+    "doi_resolution": "https://doi.org/10.6084/m9.figshare.33314784.v3 redirects to a Figshare page that returned an AWS WAF HTTP 202 response without readable article bytes"
+  },
+  "rights_disposition": "No files were uploaded. The public/account licence inventories previously lacked an exact mixed/custom licence; when the account is restored, retain the existing zero-file CC0 metadata-pointer design rather than applying CC0 or a false single licence to mixed-rights edition bytes.",
+  "next_action": "After Figshare account reactivation, rerun scripts/publish_figshare_metadata_checkpoint_v16.py --preflight, update exactly article 33314784, publish, and require anonymous API readback before claiming a current pointer.",
+  "duplicate_created": false,
+  "files_uploaded": 0,
+  "provenance": "OpenAI Codex gpt-5.6-sol, Ultra"
+}
