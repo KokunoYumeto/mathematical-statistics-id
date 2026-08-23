@@ -75,6 +75,7 @@ def reader_entries_v16() -> tuple[dict[str, Path], dict[str, object]]:
     for path in (
         ROOT / "00_control" / "CHECKPOINT_2026-08-23_SIXTEEN_PAGE.md",
         ROOT / "00_control" / "LIVE_BROWSER_QA_2026-08-23_SIXTEEN_PAGE.json",
+        ROOT / "00_control" / "GITHUB_PUBLICATION_RECEIPT_2026-08-23_SIXTEEN_PAGE.json",
     ):
         IMPL.add_entry(entries, f"_evidence/{path.name}", path)
     return entries, summary
@@ -94,7 +95,10 @@ def source_entries_v16(rows: list[dict[str, str]]) -> dict[str, Path]:
     for path in (
         ROOT / "00_control" / "CHECKPOINT_2026-08-23_SIXTEEN_PAGE.md",
         ROOT / "00_control" / "LIVE_BROWSER_QA_2026-08-23_SIXTEEN_PAGE.json",
+        ROOT / "00_control" / "GITHUB_PUBLICATION_RECEIPT_2026-08-23_SIXTEEN_PAGE.json",
         ROOT / "scripts" / "package_zenodo_checkpoint_v16.py",
+        ROOT / "scripts" / "publish_zenodo_checkpoint_v16.py",
+        ROOT / "scripts" / "verify_github_checkpoint_v16.py",
     ):
         IMPL.add_entry(entries, path.relative_to(ROOT).as_posix(), path)
     return entries
