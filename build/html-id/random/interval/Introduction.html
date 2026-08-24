@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="id-ID">
+
+<head>
+	<meta charset="utf-8">
+	<title>Pendahuluan</title>
+	<meta name="author" content="Kyle Siegrist">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="keywords" content="probabilitas, statistika, pendugaan himpunan, pendugaan interval, tingkat kepercayaan, variabel pivot, keluarga lokasi-skala, distribusi eksponensial">
+	<link rel="icon" href="../icons/Icon.svg" type="image/svg">
+	<link rel="stylesheet" href="../Screen.css" type="text/css" media="screen">
+	<script src="../Basic.js"></script>
+	<script src="../../MathJax/tex-svg.js" id="MathJax-script" async></script>
+</head>
+
+<body>
+
+<div class="latex">
+	\(\newcommand{\R}{\mathbb{R}}\)
+	\(\newcommand{\N}{\mathbb{N}}\)
+	\(\newcommand{\Z}{\mathbb{Z}}\)
+	\(\newcommand{\P}{\mathbb{P}}\)
+	\(\newcommand{\E}{\mathbb{E}}\)
+	\(\newcommand{\var}{\text{var}}\)
+	\(\newcommand{\sd}{\text{sd}}\)
+	\(\newcommand{\bs}{\boldsymbol}\)
+</div>
+
+<header>
+	<ol class="map">
+		<li class="parent"><a href="https://www.randomservices.org/random/index.html">Random</a></li>
+		<li class="parent"><a href="index.html">7. Pendugaan Himpunan</a></li>
+		<li class="current">1</li>
+		<li class="child"><a href="Normal.html" title="Pendugaan pada Model Normal">2</a></li>
+		<li class="child"><a href="Bernoulli.html" title="Pendugaan pada Model Bernoulli">3</a></li>
+		<li class="child"><a href="BivariateNormal.html" title="Pendugaan pada Model Normal Dua Sampel">4</a></li>
+		<li class="child"><a href="Bayes.html" title="Pendugaan Interval Bayes">5</a></li>
+		<li class="details"><button type="button" title="Perluas Rincian" onclick="expandDetails(true);"><img src="../icons/Plus.svg" alt="Perluas"></button></li>
+		<li class="details"><button type="button" title="Ciutkan Rincian" onclick="expandDetails(false);"><img src="../icons/Minus.svg" alt="Ciutkan"></button></li>
+	</ol>
+	<h2 id="o006.random.interval.introduction.page">1. Pendahuluan</h2>
+</header>
+
+<h3 id="o006.random.interval.introduction.section.basic-theory">Teori Dasar</h3>
+
+<h4 id="mod">Model Statistik Dasar</h4>
+
+<p>Seperti biasa, titik awal kita adalah sebuah <a href="https://www.randomservices.org/random/prob/Experiments.html">eksperimen acak</a> dengan <a href="https://www.randomservices.org/random/prob/Events.html">ruang sampel</a> yang mendasari dan sebuah <a href="https://www.randomservices.org/random/prob/Probability.html">ukuran probabilitas</a> \(\P\). Dalam model statistik dasar, terdapat <a href="https://www.randomservices.org/random/prob/Probability.html">variabel acak</a> teramati \(\bs{X}\) yang mengambil nilai dalam suatu himpunan \(S\). Secara umum, struktur \(\bs{X}\) dapat cukup rumit. Misalnya, jika eksperimennya adalah mengambil sampel \(n\) objek dari suatu populasi dan mencatat berbagai pengukuran yang diminati, maka
+\[ \bs{X} = (X_1, X_2, \ldots, X_n) \]
+dengan \(X_i\) sebagai vektor pengukuran untuk objek ke-\(i\). Kasus khusus terpenting terjadi ketika \((X_1, X_2, \ldots, X_n)\) saling bebas dan berdistribusi identik. Dalam hal ini, kita mempunyai <a href="../sample/Introduction.html">sampel acak</a> berukuran \(n\) dari distribusi bersama tersebut.</p>
+
+<p>Misalkan pula distribusi \(\bs{X}\) bergantung pada parameter \(\theta\) yang nilainya berada dalam suatu himpunan \(\Theta\). Parameter itu juga dapat bernilai vektor; dalam hal ini \(\Theta \subseteq \R^k\) untuk suatu \(k \in \N_+\), dan vektor parameternya berbentuk \(\bs{\theta} = (\theta_1, \theta_2, \ldots, \theta_k)\).</p>
+
+<h4 id="o006.random.interval.introduction.section.confidence-sets">Himpunan Kepercayaan</h4>
+
+<div class="unit" id="o006.random.interval.introduction.unit-01">
+	<p class="dfn">Sebuah <dfn>himpunan kepercayaan</dfn> adalah himpunan bagian \(C(\bs{X})\) dari ruang parameter \(\Theta\) yang hanya bergantung pada variabel data \(\bs{X}\), bukan pada parameter yang tak diketahui. <dfn>Tingkat kepercayaan</dfn> adalah infimum, atas seluruh ruang parameter, dari peluang bahwa \(\theta \in C(\bs{X})\):
+	\[ \inf_{\theta \in \Theta}\P_\theta[\theta \in C(\bs{X})] \]</p>
+</div>
+
+<p>Jadi, dalam suatu pengertian, himpunan kepercayaan adalah <em>statistik bernilai himpunan</em>. Himpunan kepercayaan merupakan penduga \(\theta\) karena kita berharap \(\theta \in C(\bs{X})\) dengan peluang besar, sehingga tingkat kepercayaannya tinggi. Karena distribusi \(\bs{X}\) bergantung pada \(\theta\), ukuran probabilitas \(\P\) dalam definisi tingkat kepercayaan juga bergantung pada \(\theta\); indeks ini biasanya disembunyikan agar notasi tetap ringkas. Biasanya kita berusaha membangun himpunan kepercayaan bagi \(\theta\) dengan tingkat yang ditetapkan sebesar \(1 - \alpha\), dengan \(0 \lt \alpha \lt 1\). Tingkat kepercayaan yang lazim adalah 0,9, 0,95, dan 0,99. Kadang-kadang yang dapat dibangun hanyalah himpunan yang tingkat kepercayaannya <em>sekurang-kurangnya</em> \(1 - \alpha\); himpunan seperti ini disebut himpunan kepercayaan \(1 - \alpha\) yang <dfn>konservatif</dfn> bagi \(\theta\).</p>
+
+<figure>
+	<figcaption>Dugaan himpunan yang berhasil memuat parameter</figcaption>
+	<img src="SetEstimate.png" alt="Himpunan kepercayaan acak yang memuat nilai parameter sebenarnya">
+</figure>
+
+<p>Misalkan \(C(\bs{X})\) adalah himpunan kepercayaan bertingkat sekurang-kurangnya \(1 - \alpha\) bagi parameter \(\theta\). Ketika eksperimen dijalankan dan data \(\bs{x}\) diamati, himpunan kepercayaan yang <em>dihitung</em> adalah \(C(\bs{x})\). Nilai sebenarnya dari \(\theta\) berada atau tidak berada dalam himpunan itu, dan biasanya kita tidak akan pernah mengetahuinya. Namun, menurut <a href="../sample/Mean.html">hukum bilangan besar</a>, jika eksperimen kepercayaan tersebut diulangi terus-menerus pada nilai parameter yang sama, proporsi himpunan yang memuat \(\theta\) akan konvergen ke \(\P_\theta[\theta \in C(\bs{X})] \ge 1 - \alpha\); kesamaan berlaku bila peluang cakupan pada nilai parameter tersebut tepat sama dengan tingkat nominalnya. Inilah makna tepat istilah <dfn>kepercayaan</dfn>. Dalam terminologi statistika yang lazim, himpunan acak \(C(\bs{X})\) adalah <dfn>penduga</dfn>, sedangkan himpunan deterministik \(C(\bs{x})\), berdasarkan nilai amatan \(\bs{x}\), adalah <dfn>dugaan</dfn>.</p>
+
+<p>Kualitas himpunan kepercayaan sebagai penduga \(\theta\) ditentukan oleh dua faktor: tingkat kepercayaan dan <dfn>presisi</dfn>, yang diukur melalui <q>ukuran</q> himpunan tersebut. Penduga yang baik berukuran kecil—sehingga memberi dugaan \(\theta\) yang presisi—dan memiliki tingkat kepercayaan tinggi. Akan tetapi, untuk \(\bs{X}\) tertentu biasanya terdapat kompromi antara tingkat kepercayaan dan presisi: tingkat kepercayaan hanya dapat dinaikkan dengan memperbesar himpunan, sedangkan ukuran himpunan hanya dapat diperkecil dengan menurunkan tingkat kepercayaan. Cara mengukur <q>ukuran</q> himpunan kepercayaan bergantung pada dimensi ruang parameter dan sifat himpunannya. Selain itu, ukuran himpunan biasanya acak, walaupun dalam beberapa kasus khusus dapat bersifat deterministik.</p>
+
+<p>Kasus-kasus ekstrem dapat memberi sedikit pemahaman. Pertama, misalkan \(C(\bs{X}) = \Theta\). Penduga himpunan ini mempunyai tingkat kepercayaan maksimum 1, tetapi tanpa presisi sehingga tidak berguna—kita sudah <em>mengetahui</em> bahwa \(\theta \in \Theta\). Pada ekstrem lain, misalkan \(C(\bs{X})\) adalah himpunan beranggota tunggal. Penduga himpunan ini mempunyai presisi terbaik yang mungkin, tetapi untuk distribusi kontinu biasanya memiliki tingkat kepercayaan 0. Di antara kedua ekstrem itu, kita berharap menemukan penduga himpunan yang sekaligus mempunyai tingkat kepercayaan dan presisi tinggi.</p>
+
+<div class="unit" id="int">
+	<p class="math">Misalkan \(C_i(\bs{X})\) adalah himpunan kepercayaan bertingkat \(1 - \alpha_i\) bagi \(\theta\), untuk \(i \in \{1, 2, \ldots, k\}\). Jika \(\alpha = \alpha_1 + \alpha_2 + \cdots + \alpha_k \lt 1\), maka \(C_1(\bs{X}) \cap C_2(\bs{X}) \cap \cdots \cap C_k(\bs{X})\) adalah himpunan kepercayaan konservatif bertingkat \(1 - \alpha\) bagi \(\theta\).</p>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Hasil ini mengikuti <a href="https://www.randomservices.org/random/prob/Probability.html#boo">pertidaksamaan Bonferroni</a>.</p>
+	</details>
+</div>
+
+<h4 id="o006.random.interval.introduction.section.real-valued-parameters">Parameter Bernilai Riil</h4>
+
+<p>Dalam banyak kasus, kita ingin menduga parameter bernilai riil \(\lambda = \lambda(\theta)\) yang nilainya berada dalam interval \((a, b)\), dengan \(a, \, b \in \R\) dan \(a \lt b\). Tentu saja, mungkin \(a = -\infty\) atau \(b = \infty\). Dalam konteks ini, himpunan kepercayaan sering berbentuk
+\[ C(\bs{X}) = \left\{\theta \in \Theta: L(\bs{X}) \lt \lambda(\theta) \lt U(\bs{X})\right\} \]
+dengan \(L(\bs{X})\) dan \(U(\bs{X})\) sebagai statistik bernilai riil. Dalam hal ini, \((L(\bs{X}), U(\bs{X}))\) disebut <dfn>interval kepercayaan</dfn> bagi \(\lambda\). Jika \(L(\bs{X})\) dan \(U(\bs{X})\) keduanya acak, interval tersebut sering disebut <dfn>dua sisi</dfn>. Dalam kasus khusus \(U(\bs{X}) = b\), \(L(\bs{X})\) disebut <dfn>batas bawah kepercayaan</dfn> bagi \(\lambda\). Dalam kasus khusus \(L(\bs{X}) = a\), \(U(\bs{X})\) disebut <dfn>batas atas kepercayaan</dfn> bagi \(\lambda\).</p>
+
+<div class="unit" id="o006.random.interval.introduction.unit-03">
+	<p class="math">Misalkan \(L(\bs{X})\) adalah batas bawah kepercayaan bertingkat \(1 - \alpha\) bagi \(\lambda\), dan \(U(\bs{X})\) adalah batas atas kepercayaan bertingkat \(1 - \beta\) bagi \(\lambda\). Jika \(\alpha + \beta \lt 1\), maka \((L(\bs{X}), U(\bs{X}))\) adalah interval kepercayaan konservatif bertingkat \(1 - (\alpha + \beta)\) bagi \(\lambda\).</p>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Hasil ini langsung mengikuti <a href="#int" class="ref"></a>.</p>
+	</details>
+</div>
+
+<h4 id="piv">Variabel Pivot</h4>
+
+<p>Membangun himpunan kepercayaan bagi parameter \(\theta\) mungkin tampak sangat sulit. Namun, dalam banyak kasus khusus yang penting, himpunan kepercayaan dapat dibangun dengan mudah dari variabel acak tertentu yang dikenal sebagai <em>variabel pivot</em>.</p>
+
+<div class="unit" id="o006.random.interval.introduction.unit-04">
+	<p class="dfn">Misalkan \(V\) adalah fungsi dari \(S \times \Theta\) ke suatu himpunan \(T\). Variabel acak \(V(\bs{X}, \theta)\) adalah <dfn>variabel pivot</dfn> bagi \(\theta\) jika distribusinya tidak bergantung pada \(\theta\). Secara khusus, \(\P[V(\bs{X}, \theta) \in B]\) konstan terhadap \(\theta \in \Theta\) untuk setiap himpunan terukur \(B \subseteq T\).</p>
+</div>
+
+<p>Gagasan dasarnya adalah menggabungkan \(\bs{X}\) dan \(\theta\) secara aljabar sedemikian rupa sehingga ketergantungan distribusi variabel acak hasil \(V(\bs{X}, \theta)\) pada \(\theta\) dapat <em>dihilangkan</em>. Jika distribusi variabel pivot diketahui, maka untuk suatu \(\alpha\) kita dapat mencari \(B \subseteq T\), yang tidak bergantung pada \(\theta\), sedemikian sehingga \( \P_\theta\left[V(\bs{X}, \theta) \in B\right] = 1 - \alpha \). Dengan demikian, himpunan kepercayaan bertingkat \(1 - \alpha\) bagi parameter tersebut diberikan oleh \( C(\bs{X}) = \{ \theta \in \Theta: V(\bs{X}, \theta) \in B \} \).</p>
+
+<figure>
+	<figcaption>Himpunan kepercayaan yang dibangun dari variabel pivot</figcaption>
+	<img src="PivotVariable.png" alt="Pemetaan variabel pivot dari ruang data dan parameter ke ruang hasil">
+</figure>
+
+<p>Sekarang misalkan variabel pivot \(V(\bs{X}, \theta)\) bernilai riil dan, demi kesederhanaan, mempunyai <a href="https://www.randomservices.org/random/dist/Continuous.html">distribusi kontinu</a>. Untuk \(p \in (0, 1)\), misalkan \(v(p)\) menyatakan <a href="https://www.randomservices.org/random/dist/CDF.html#qnt">kuantil</a> berorde \(p\) dari variabel pivot \(V(\bs{X}, \theta)\). Berdasarkan definisi variabel pivot, \(v(p)\) tidak bergantung pada \(\theta\).</p>
+
+<div class="unit" id="set">
+	<p class="math">Untuk setiap \(p \in (0, 1)\), sebuah himpunan kepercayaan bertingkat \(1 - \alpha\) bagi \(\theta\) adalah
+	\[ \left\{\theta \in \Theta: v(\alpha - p \alpha) \lt V(\bs{X}, \theta) \lt v(1 - p \alpha)\right\} \]</p>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Menurut definisi, peluang kejadian tersebut adalah \((1 - p \alpha) - (\alpha - p \alpha) = 1 - \alpha\).</p>
+	</details>
+</div>
+
+<p>Himpunan kepercayaan di atas menempatkan peluang \((1 - p) \alpha\) di ekor kiri dan \(p \alpha\) di ekor kanan distribusi variabel pivot \(V(\bs{X}, \theta)\). Kasus khusus \(p = \frac{1}{2}\) disebut kasus <dfn>berekor sama</dfn> dan merupakan kasus yang paling umum.</p>
+
+<figure>
+	<figcaption>Distribusi variabel pivot dengan \((1 - p) \alpha\) di ekor kiri dan \(p \alpha\) di ekor kanan.</figcaption>
+	<img src="Tails-id.svg" alt="Kurva distribusi variabel pivot V dari X dan theta dengan peluang tengah satu dikurangi alfa serta peluang pada kedua ekor">
+</figure>
+
+<div class="unit" id="o006.random.interval.introduction.unit-06">
+	<p class="math">Untuk \(p\) tetap, himpunan kepercayaan <a href="#set" class="ref"></a> mengecil ketika \(\alpha\) membesar, sehingga membesar ketika \(1 - \alpha\) membesar, dalam arti relasi himpunan bagian.</p>
+</div>
+
+<p>Untuk himpunan kepercayaan <a href="#set" class="ref"></a>, secara alami kita ingin memilih \(p\) yang meminimalkan ukuran himpunan dalam suatu pengertian. Namun, masalah ini sering sulit. Interval berekor sama, yang bersesuaian dengan \(p = \frac{1}{2}\), merupakan kasus yang paling sering digunakan dan kadang-kadang—tetapi tidak selalu—merupakan pilihan optimal. Variabel pivot jauh dari unik; tantangannya adalah menemukan variabel pivot yang distribusinya diketahui dan menghasilkan batas parameter yang rapat, yaitu presisi tinggi.</p>
+
+<div class="unit" id="o006.random.interval.introduction.unit-07">
+	<p class="math">Misalkan \(V(\bs{X}, \theta)\) adalah variabel pivot bagi \(\theta\). Jika \(g\) adalah fungsi yang didefinisikan pada daerah nilai \(V\) dan \(g\) tidak melibatkan parameter tak diketahui, maka \(U = g[V(\bs{X}, \theta)]\) juga merupakan variabel pivot bagi \(\theta\).</p>
+</div>
+
+<h3 id="o006.random.interval.introduction.section.examples-special-cases">Contoh dan Kasus Khusus</h3>
+
+<h4 id="o006.random.interval.introduction.section.location-scale-families">Keluarga Lokasi-Skala</h4>
+
+<p>Untuk <a href="https://www.randomservices.org/random/special/LocationScale.html">keluarga lokasi-skala</a>, variabel pivot dapat ditemukan dengan mudah. Misalkan \(Z\) adalah variabel acak bernilai riil dengan distribusi kontinu yang mempunyai fungsi kepadatan probabilitas \(g\) dan tidak mengandung parameter tak diketahui. Misalkan \(X = \mu + \sigma Z\), dengan \(\mu \in \R\) dan \(\sigma \in (0, \infty)\) sebagai parameter. Ingat bahwa fungsi kepadatan probabilitas \(X\) diberikan oleh
+\[ f_{\mu, \sigma}(x) = \frac{1}{\sigma} g\left( \frac{x - \mu}{\sigma} \right), \quad x \in \R\]
+dan keluarga distribusi yang bersesuaian disebut <dfn>keluarga lokasi-skala</dfn> yang terkait dengan distribusi \(Z\); \(\mu\) adalah <dfn>parameter lokasi</dfn> dan \(\sigma\) adalah <dfn>parameter skala</dfn>. Secara umum, kedua parameter ini dianggap tak diketahui.</p>
+
+<p>Sekarang misalkan \(\bs{X} = (X_1, X_2, \ldots, X_n)\) adalah sampel acak berukuran \(n\) dari distribusi \(X\); inilah vektor hasil yang dapat diamati. Untuk setiap \(i\), misalkan
+\[ Z_i = \frac{X_i - \mu}{\sigma} \]</p>
+
+<div class="unit" id="o006.random.interval.introduction.unit-08">
+	<p class="math">Vektor acak \(\bs{Z} = (Z_1, Z_2, \ldots, Z_n)\) adalah sampel acak berukuran \(n\) dari distribusi \(Z\).</p>
+</div>
+
+<p>Khususnya, \(\bs{Z}\) adalah variabel pivot bagi \((\mu, \sigma)\), sebab \(\bs{Z}\) merupakan fungsi dari \(\bs{X}\), \(\mu\), dan \(\sigma\), sedangkan distribusi \(\bs{Z}\) tidak bergantung pada \(\mu\) maupun \(\sigma\). Karena itu, setiap fungsi dari \(\bs{Z}\) juga merupakan variabel pivot bagi \((\mu, \sigma)\), asalkan fungsi tersebut tidak melibatkan parameternya. Tentu saja, sebagian variabel pivot ini jauh lebih berguna daripada yang lain untuk menduga \(\mu\) dan \(\sigma\). Dalam latihan berikut, kita mengkaji dua variabel pivot yang umum dan penting.</p>
+
+<div class="unit" id="o006.random.interval.introduction.unit-09">
+	<p class="math">Misalkan \(M(\bs{X})\) dan \(M(\bs{Z})\) masing-masing menyatakan <a href="../sample/Mean.html">rata-rata sampel</a> dari \(\bs{X}\) dan \(\bs{Z}\). Maka \(M(\bs{Z})\) adalah variabel pivot bagi \((\mu, \sigma)\), sebab
+	\[ M(\bs{Z}) = \frac{M(\bs{X}) - \mu}{\sigma} \]</p>
+</div>
+
+<div class="unit" id="lcs">
+	<p class="math">Misalkan \(m\) menyatakan fungsi kuantil variabel pivot \(M(\bs{Z})\). Untuk setiap \(p \in (0, 1)\), sebuah himpunan kepercayaan bertingkat \(1 - \alpha\) bagi \((\mu, \sigma)\) adalah
+	\[ Z_{\alpha, p}(\bs{X}) = \{(\mu, \sigma): M(\bs{X}) - m(1 - p \alpha) \sigma \lt \mu \lt M(\bs{X}) - m(\alpha - p \alpha) \sigma \} \]</p>
+</div>
+
+<div class="unit" id="o006.random.interval.introduction.unit-11">
+	<p class="math">Himpunan kepercayaan yang dibangun dalam <a href="#lcs" class="ref"></a> berbentuk <q>kerucut</q> dalam ruang parameter \((\mu, \sigma)\), dengan titik puncak \((M(\bs{X}), 0)\). Jika kuantil penyebut tidak nol, garis-garis batasnya mempunyai kemiringan \(-1 / m(1 - p \alpha)\) dan \(-1 / m(\alpha - p \alpha)\), seperti pada grafik di bawah; bila suatu kuantil bernilai nol, batas yang bersesuaian adalah garis vertikal. Perhatikan bahwa kedua kemiringan dapat sama-sama negatif atau sama-sama positif.</p>
+</div>
+
+<figure>
+	<figcaption>Himpunan kepercayaan bagi \((\mu, \sigma)\) yang dibangun dari \(M\)</figcaption>
+	<img src="ZSet.png" alt="Kerucut himpunan kepercayaan dalam ruang parameter mu-sigma">
+</figure>
+
+<p>Himpunan kepercayaan yang tak terbatas jelas bukan hasil yang baik, tetapi hal itu mungkin tidak mengejutkan: kita menduga dua parameter riil dengan satu variabel pivot bernilai riil. Namun, jika \(\sigma\) diketahui, himpunan tersebut menentukan sebuah <em>interval kepercayaan</em> bagi \(\mu\). Secara geometris, interval kepercayaan itu adalah penampang horizontal pada nilai \(\sigma\) yang diketahui.</p>
+
+<div class="unit" id="o006.random.interval.introduction.unit-12">
+	<p class="math">Dua himpunan kepercayaan satu sisi bertingkat \(1 - \alpha\) bagi \((\mu, \sigma)\) adalah:</p>
+	<ol class="sub">
+		<li>\(Z_{\alpha, 1}(\bs{X}) = \{(\mu, \sigma): M(\bs{X}) - m(1 - \alpha) \sigma \lt \mu \lt \infty\}\)</li>
+		<li>\(Z_{\alpha, 0}(\bs{X}) = \{(\mu, \sigma): - \infty \lt \mu \lt M(\bs{X}) - m(\alpha) \sigma\}\)</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Untuk himpunan dalam <a href="#lcs" class="ref"></a>, kedua batas mengikuti langsung, masing-masing, dari \(\P[M(\bs{Z}) \lt m(1 - \alpha)] = 1 - \alpha\) dan \(\P[M(\bs{Z}) \gt m(\alpha)] = 1 - \alpha\). Argumen ini tidak memerlukan asumsi kuantil ujung yang tak dinyatakan.</p>
+	</details>
+</div>
+
+<p>Jika \(\sigma\) diketahui, bagian (a) memberikan batas bawah kepercayaan bertingkat \(1 - \alpha\) bagi \(\mu\), sedangkan bagian (b) memberikan batas atas kepercayaan bertingkat \(1 - \alpha\) bagi \(\mu\).</p>
+
+<div class="unit" id="o006.random.interval.introduction.unit-13">
+	<p class="math">Untuk ukuran sampel sekurang-kurangnya 2, misalkan \(S(\bs{X})\) dan \(S(\bs{Z})\) masing-masing menyatakan <a href="../sample/Variance.html">simpangan baku sampel</a> dari \(\bs{X}\) dan \(\bs{Z}\). Maka \(S(\bs{Z})\) adalah variabel pivot bagi \((\mu, \sigma)\), sekaligus variabel pivot bagi \(\sigma\), sebab
+	\[ S(\bs{Z}) = \frac{S(\bs{X})}{\sigma} \]</p>
+</div>
+
+<div class="unit" id="o006.random.interval.introduction.unit-14">
+	<p class="math">Misalkan \(s\) menyatakan fungsi kuantil \(S(\bs{Z})\). Untuk setiap \(\alpha \in (0, 1)\) dan \(p \in (0, 1)\), sebuah himpunan kepercayaan bertingkat \(1 - \alpha\) bagi \((\mu, \sigma)\) adalah
+	\[ V_{\alpha, p}(\bs{X}) = \left\{(\mu, \sigma): \frac{S(\bs{X})}{s(1 - p \alpha)} \lt \sigma \lt \frac{S(\bs{X})}{s(\alpha - p \alpha)} \right\} \]</p>
+</div>
+
+<p>Himpunan kepercayaan ini tidak memberikan informasi tentang \(\mu\), sebab variabel acak di atas merupakan variabel pivot bagi \(\sigma\) saja. Himpunan tersebut juga dapat dipandang sebagai <em>interval</em> kepercayaan terbatas bagi \(\sigma\).</p>
+
+<figure>
+	<figcaption>Himpunan kepercayaan bagi \((\mu, \sigma)\) yang dibangun dari \(S\)</figcaption>
+	<img src="VSet.png" alt="Pita horizontal himpunan kepercayaan bagi parameter skala sigma">
+</figure>
+
+<div class="unit" id="o006.random.interval.introduction.unit-15">
+	<p class="math">Dua himpunan kepercayaan satu sisi bertingkat \(1 - \alpha\) bagi \((\mu, \sigma)\) adalah:</p>
+	<ol class="sub">
+		<li>\(V_{\alpha, 1}(\bs{X}) = \left \{ (\mu, \sigma): S(\bs{X}) / s(1 - \alpha) \lt \sigma \lt \infty \right \}\)</li>
+		<li>\(V_{\alpha, 0}(\bs{X}) = \left \{ (\mu, \sigma): 0 \lt \sigma \lt S(\bs{X}) / s(\alpha) \right \}\)</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Kedua batas mengikuti langsung, masing-masing, dari \(\P[S(\bs{Z}) \lt s(1 - \alpha)] = 1 - \alpha\) dan \(\P[S(\bs{Z}) \gt s(\alpha)] = 1 - \alpha\). Argumen ini tidak memerlukan asumsi kuantil ujung yang tak dinyatakan.</p>
+	</details>
+</div>
+
+<p>Himpunan pada bagian (a) memberikan batas bawah kepercayaan bertingkat \(1 - \alpha\) bagi \(\sigma\), sedangkan himpunan pada bagian (b) memberikan batas atas kepercayaan bertingkat \(1 - \alpha\) bagi \(\sigma\).</p>
+
+<p>Kita dapat mengiriskan himpunan kepercayaan yang bersesuaian dengan kedua variabel pivot untuk menghasilkan himpunan kepercayaan yang konservatif dan terbatas.</p>
+
+<div class="unit" id="o006.random.interval.introduction.unit-16">
+	<p class="math">Jika \(\alpha, \; \beta, \; p, \; q \in (0, 1)\) dan \(\alpha + \beta \lt 1\), maka \(Z_{\alpha, p}(\bs{X}) \cap V_{\beta, q}(\bs{X})\) adalah himpunan kepercayaan konservatif bertingkat \(1 - (\alpha + \beta)\) bagi \((\mu, \sigma)\).</p>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Hasil ini mengikuti <a href="#int" class="ref"></a>.</p>
+	</details>
+</div>
+
+<figure>
+	<figcaption>Himpunan kepercayaan terbatas bagi \((\mu, \sigma)\) yang dibangun dari \((M, S)\)</figcaption>
+	<img src="ZVSet.png" alt="Irisan terbatas dua himpunan kepercayaan dalam ruang mu-sigma">
+</figure>
+
+<p>Keluarga lokasi-skala terpenting adalah keluarga <a href="https://www.randomservices.org/random/special/Normal.html">distribusi normal</a>. Masalah <a href="Normal.html">pendugaan pada model normal</a> dibahas pada bagian berikutnya. Dalam sisa bagian ini, kita mengkaji satu keluarga skala penting lainnya.</p>
+
+<h4 id="o006.random.interval.introduction.section.exponential-distribution">Distribusi Eksponensial</h4>
+
+<p>Ingat bahwa <a href="https://www.randomservices.org/random/special/Gamma.html">distribusi eksponensial</a> dengan parameter skala \(\sigma \in (0, \infty)\) mempunyai fungsi kepadatan probabilitas \(f(x) = \frac{1}{\sigma} e^{-x / \sigma}, \; x \in [0, \infty)\). Distribusi ini merupakan keluarga skala yang terkait dengan distribusi eksponensial standar, yang mempunyai fungsi kepadatan probabilitas \(g(x) = e^{-x}, \; x \in [0, \infty)\). Distribusi eksponensial banyak digunakan untuk memodelkan waktu acak, seperti masa pakai dan waktu <q>kedatangan</q>, terutama dalam konteks model Poisson. Sekarang misalkan \(\bs{X} = (X_1, X_2, \ldots, X_n)\) adalah sampel acak berukuran \(n\) dari distribusi eksponensial dengan parameter skala tak diketahui \(\sigma\). Misalkan
+\[ Y = \sum_{i=1}^n X_i \]</p>
+
+<div class="unit" id="o006.random.interval.introduction.unit-17">
+	<p class="math">Variabel acak \(\frac{2}{\sigma} Y\) mempunyai <a href="https://www.randomservices.org/random/special/ChiSquare.html">distribusi khi-kuadrat</a> dengan \(2 n\) derajat kebebasan, sehingga merupakan variabel pivot bagi \(\sigma\).</p>
+</div>
+
+<p>Variabel pivot ini merupakan kelipatan dari variabel \(M\) yang dibangun di atas untuk keluarga lokasi-skala umum, dengan \(\mu = 0\). Untuk \(p \in (0, 1)\) dan \(k \in (0, \infty)\), misalkan \(\chi_k^2(p)\) menyatakan <a href="https://www.randomservices.org/random/dist/CDF.html#qnt">kuantil</a> berorde \(p\) dari distribusi khi-kuadrat dengan \(k\) derajat kebebasan. Untuk nilai \(k\) dan \(p\) tertentu, \(\chi_k^2(p)\) dapat diperoleh dari <a href="https://www.randomservices.org/random/apps/QuantileApp.html" class="ancillary">aplikasi kuantil</a> atau dari sebagian besar perangkat lunak statistika.</p>
+
+<div class="unit" id="o006.random.interval.introduction.unit-18">
+	<p class="math">Ingat bahwa</p>
+	<ol class="sub">
+		<li>\(\chi_k^2(p) \to 0\) ketika \(p \downarrow 0\)</li>
+		<li>\(\chi_k^2(p) \to \infty\) ketika \(p \uparrow 1\)</li>
+	</ol>
+</div>
+
+<div class="unit" id="o006.random.interval.introduction.unit-19">
+	<p class="math">Untuk setiap \(\alpha \in (0, 1)\) dan \(p \in (0, 1)\), sebuah interval kepercayaan bertingkat \(1 - \alpha\) bagi \(\sigma\) adalah
+	\[ \left( \frac{2\,Y}{\chi_{2n}^2(1 - p \alpha)}, \frac{2\,Y}{\chi_{2n}^2(\alpha - p \alpha)} \right) \]</p>
+</div>
+
+<div class="unit" id="o006.random.interval.introduction.unit-20">
+	<p class="math">Perhatikan bahwa</p>
+	<ol class="sub">
+		<li>\(2 Y \big/ \chi_{2n}^2(1 - \alpha)\) adalah batas bawah kepercayaan bertingkat \(1 - \alpha\) bagi \(\sigma\).</li>
+		<li>\(2 Y \big/ \chi_{2n}^2(\alpha)\) adalah batas atas kepercayaan bertingkat \(1 - \alpha\) bagi \(\sigma\).</li>
+	</ol>
+</div>
+
+<p>Di antara interval kepercayaan dua sisi yang dibangun di atas, secara alami kita memilih interval dengan panjang terkecil karena interval itu memberikan informasi terbanyak tentang parameter \(\sigma\). Namun, meminimalkan panjang sebagai fungsi \(p\) sulit secara komputasional. Interval kepercayaan dua sisi yang lazim digunakan adalah interval <dfn>berekor sama</dfn>, yang diperoleh dengan mengambil \(p = \frac{1}{2}\):
+\[ \left( \frac{2\,Y}{\chi_{2n}^2(1 - \alpha/2)}, \frac{2\,Y}{\chi_{2n}^2(\alpha/2)} \right) \]</p>
+
+<div class="unit" id="o006.random.interval.introduction.unit-21">
+	<p class="stat">Masa pakai suatu jenis komponen, dalam jam, mengikuti distribusi eksponensial dengan parameter skala tak diketahui \(\sigma\). Sepuluh perangkat dioperasikan sampai gagal; masa pakainya adalah 592, 861, 1470, 2412, 335, 3485, 736, 758, 530, 1961.</p>
+	<ol class="sub">
+		<li>Bangun interval kepercayaan dua sisi 95% bagi \(\sigma\).</li>
+		<li>Bangun batas bawah kepercayaan 95% bagi \(\sigma\).</li>
+		<li>Bangun batas atas kepercayaan 95% bagi \(\sigma\).</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<ol class="sub">
+			<li>\((769.1, 2740.1)\)</li>
+			<li>836.7</li>
+			<li>2421.9</li>
+		</ol>
+	</details>
+</div>
+
+<footer>
+	<ol class="map">
+		<li class="parent"><a href="https://www.randomservices.org/random/index.html">Random</a></li>
+		<li class="parent"><a href="index.html">7. Pendugaan Himpunan</a></li>
+		<li class="current">1</li>
+		<li class="child"><a href="Normal.html" title="Pendugaan pada Model Normal">2</a></li>
+		<li class="child"><a href="Bernoulli.html" title="Pendugaan pada Model Bernoulli">3</a></li>
+		<li class="child"><a href="BivariateNormal.html" title="Pendugaan pada Model Normal Dua Sampel">4</a></li>
+		<li class="child"><a href="Bayes.html" title="Pendugaan Interval Bayes">5</a></li>
+		<li class="details"><button type="button" title="Perluas Rincian" onclick="expandDetails(true);"><img src="../icons/Plus.svg" alt="Perluas"></button></li>
+		<li class="details"><button type="button" title="Ciutkan Rincian" onclick="expandDetails(false);"><img src="../icons/Minus.svg" alt="Ciutkan"></button></li>
+	</ol>
+	<ul class="map">
+		<li class="sister"><a href="https://www.randomservices.org/random/apps/index.html" class="ancillary">Aplikasi</a></li>
+		<li class="sister"><a href="https://www.randomservices.org/random/data/index.html" class="ancillary">Himpunan Data</a></li>
+		<li class="child"><a href="https://www.randomservices.org/random/biographies/index.html" class="ancillary">Biografi</a></li>
+	</ul>
+
+	<section class="edition-notice" data-o006-edition-notice="v1">
+		<p><strong>Pemberitahuan edisi.</strong> Terjemahan Bahasa Indonesia ini mengadaptasi <a href="https://www.randomservices.org/random/">Random: Probabilitas, Statistika Matematis, dan Proses Stokastik</a> karya Kyle Siegrist. Perubahan pada halaman ini mencakup penerjemahan, penambahan ID stabil, pengalihan tautan inti yang telah diterjemahkan ke edisi lokal, pengalihan tautan inti yang belum diterjemahkan ke sumber resmi, pengubahan tautan pelengkap menjadi tautan HTTPS resmi, deskripsi gambar yang lebih informatif, dan koreksi matematis terbatas yang dicatat dalam daftar koreksi edisi.</p>
+		<p>Situs asal menyatakan <a href="https://creativecommons.org/licenses/by/2.0/">CC BY 2.0</a>, sedangkan halaman <a href="https://www.randomservices.org/random/Credits.html">Kredit</a> menautkan <a href="https://creativecommons.org/licenses/by/1.0/">CC BY 1.0</a>; perbedaan ini dipertahankan. Edisi independen ini tidak didukung maupun disahkan oleh Kyle Siegrist atau Random Services. Tautan ke aplikasi, data, dan biografi pihak ketiga tidak menyatakan hak untuk mendistribusikan ulang materi tersebut.</p>
+	</section>
+</footer>
+
+<script>getReferences();</script>
+
+</body>
+</html>

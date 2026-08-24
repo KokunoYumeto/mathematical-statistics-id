@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="id-ID">
+
+<head>
+	<meta charset="utf-8">
+	<title>Uji Khi-Kuadrat</title>
+	<meta name="author" content="Kyle Siegrist">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="keywords" content="probabilitas, statistika, uji hipotesis, uji kecocokan, uji khi-kuadrat, distribusi khi-kuadrat, percobaan Bernoulli, percobaan multinomial, uji independensi">
+	<link rel="icon" href="../icons/Icon.svg" type="image/svg">
+	<link rel="stylesheet" href="../Screen.css" type="text/css" media="screen">
+	<link rel="next" href="https://www.randomservices.org/random/buffon/index.html">
+	<script src="../Basic.js"></script>
+	<script src="../../MathJax/tex-svg.js" id="MathJax-script" async></script>
+</head>
+
+<body>
+
+<div class="latex">
+	\(\newcommand{\R}{\mathbb{R}}\) 
+	\(\newcommand{\N}{\mathbb{N}}\)
+	\(\newcommand{\Z}{\mathbb{Z}}\)
+	\(\newcommand{\P}{\mathbb{P}}\)
+	\(\newcommand{\E}{\mathbb{E}}\)
+	\(\newcommand{\var}{\text{var}}\)
+	\(\newcommand{\sd}{\text{sd}}\)
+	\(\newcommand{\bs}{\boldsymbol}\)
+</div>
+
+<header>
+	<ol class="map">
+		<li class="parent"><a href="https://www.randomservices.org/random/index.html">Random</a></li>
+		<li class="parent"><a href="index.html">8. Pengujian Hipotesis</a></li>
+		<li class="child"><a href="Introduction.html" title="Pendahuluan">1</a></li>
+		<li class="child"><a href="Normal.html" title="Pengujian pada Model Normal">2</a></li>
+		<li class="child"><a href="Bernoulli.html" title="Pengujian pada Model Bernoulli">3</a></li>
+		<li class="child"><a href="BivariateNormal.html" title="Pengujian pada Model Normal Dua Sampel">4</a></li>
+		<li class="child"><a href="Likelihood.html" title="Uji Rasio Likelihood">5</a></li>
+		<li class="current">6</li>
+		<li class="details"><button type="button" title="Perluas Rincian" onclick="expandDetails(true);"><img src="../icons/Plus.svg" alt="Perluas"></button></li>
+		<li class="details"><button type="button" title="Ciutkan Rincian" onclick="expandDetails(false);"><img src="../icons/Minus.svg" alt="Ciutkan"></button></li>
+	</ol>
+	<h2 id="o006.random.hypothesis.chi-square.page">6. Uji Khi-Kuadrat</h2>
+</header>
+
+<p>Dalam bagian ini, kita akan mempelajari sejumlah <a href="Introduction.html">uji hipotesis</a> penting yang secara umum disebut <dfn>uji khi-kuadrat</dfn>. Nama itu digunakan karena, pada setiap kasus, statistik ujinya mempunyai <a href="https://www.randomservices.org/random/special/ChiSquare.html">distribusi khi-kuadrat</a> secara asimtotik. Walaupun kategori ini memuat beberapa uji yang berbeda, semuanya mempunyai tema bersama:</p>
+
+<ul>
+	<li>Setiap uji didasari oleh satu atau beberapa <a href="https://www.randomservices.org/random/bernoulli/Multinomial.html">sampel multinomial</a>. Model multinomial tentu mencakup <a href="https://www.randomservices.org/random/bernoulli/Introduction.html">model Bernoulli</a> sebagai kasus khusus.</li>
+	<li>Setiap uji membandingkan <dfn>frekuensi teramati</dfn> berbagai hasil dengan <dfn>frekuensi harapan</dfn> di bawah hipotesis nol.</li>
+	<li>Jika model <dfn>ditentukan secara tidak lengkap</dfn>, sebagian frekuensi harapan harus diduga; pada kondisi regular, hal ini mengurangi derajat kebebasan distribusi khi-kuadrat pembatas.</li>
+</ul>
+
+<p>Kita mulai dari kasus paling sederhana, yang penurunannya paling langsung; bahkan uji ini ekuivalen dengan uji yang telah kita pelajari. Selanjutnya kita beralih ke model yang berturut-turut lebih rumit.</p>
+
+<h4 id="o006.random.hypothesis.chi-square.topics">Topik</h4>
+
+<ul>
+	<li><a href="#osb">Model Bernoulli Satu Sampel</a></li>
+	<li><a href="#msb">Model Bernoulli Banyak Sampel</a></li>
+	<li><a href="#osm">Model Multinomial Satu Sampel</a></li>
+	<li><a href="#msm">Model Multinomial Banyak Sampel</a></li>
+	<li><a href="#fit">Uji Kecocokan</a></li>
+	<li><a href="#ind">Uji Independensi</a></li>
+	<li><a href="#exe">Latihan Komputasi dan Simulasi</a></li>
+</ul>
+
+<h3 id="osb">Model Bernoulli Satu Sampel</h3>
+
+<p>Andaikan \(\bs{X} = (X_1, X_2, \ldots, X_n)\) merupakan sampel acak dari <a href="https://www.randomservices.org/random/bernoulli/Introduction.html">distribusi Bernoulli</a> dengan parameter sukses tak diketahui \(p \in (0, 1)\). Jadi, variabel-variabel tersebut <a href="https://www.randomservices.org/random/prob/Independence.html">saling bebas</a> dan merupakan <a href="https://www.randomservices.org/random/prob/Events.html">variabel acak</a> yang bernilai 1 dan 0 dengan probabilitas masing-masing \(p\) dan \(1 - p\). Kita ingin menguji \(H_0: p = p_0\) melawan \(H_1: p \ne p_0\), dengan \(p_0 \in (0, 1)\) ditentukan. Kita tentu telah mempelajari <a href="Bernoulli.html">uji pada model Bernoulli</a> semacam ini. Namun, ingatlah bahwa metode dalam bagian ini akan diperumum ke berbagai model baru yang belum kita pelajari.</p>
+
+<p>Misalkan \(O_1 = \sum_{j=1}^n X_j\) dan \(O_0 = n - O_1 = \sum_{j=1}^n (1 - X_j)\). Statistik-statistik ini masing-masing menyatakan banyaknya (frekuensi) hasil 1 dan 0. Kita juga mengetahui bahwa keduanya mempunyai <a href="https://www.randomservices.org/random/bernoulli/Binomial.html">distribusi binomial</a>; \(O_1\) berparameter \(n\) dan \(p\), sedangkan \(O_0\) berparameter \(n\) dan \(1 - p\). Khususnya, \(\E(O_1) = n p\), \(\E(O_0) = n (1 - p)\), dan \(\var(O_1) = \var(O_0) = n p (1 - p)\). Ingat pula bahwa \(O_1\) <a href="../point/Sufficient.html#ber">cukup</a> bagi \(p\). Karena itu, statistik uji yang baik seharusnya merupakan fungsi dari \(O_1\). Selanjutnya, ingat bahwa ketika \(n\) besar, distribusi \(O_1\) <a href="https://www.randomservices.org/random/bernoulli/Binomial.html#nor">mendekati normal</a> menurut <a href="../sample/CLT.html">teorema limit pusat</a>. Misalkan
+\[ Z = \frac{O_1 - n p_0}{\sqrt{n p_0 (1 - p_0)}} \]
+Perhatikan bahwa \(Z\) adalah skor baku \(O_1\) di bawah \(H_0\). Jadi, jika \(n\) besar, \(Z\) kira-kira berdistribusi normal baku di bawah \(H_0\); akibatnya, \(V = Z^2\) kira-kira berdistribusi khi-kuadrat dengan 1 derajat kebebasan di bawah \(H_0\). Pembenaran asimtotik ini mengandaikan probabilitas nol tetap di bagian dalam interval sehingga kedua frekuensi harapan bertumbuh. Seperti biasa, misalkan \(\chi_k^2\) menyatakan <a href="https://www.randomservices.org/random/dist/CDF.html#qnt">fungsi kuantil</a> distribusi khi-kuadrat dengan \(k\) derajat kebebasan.</p>
+
+<div class="unit" id="osb1">
+	<p class="math">Uji hampiran bagi \(H_0\) melawan \(H_1\) pada tingkat signifikansi \(\alpha\) adalah menolak \(H_0\) jika dan hanya jika \(V \gt \chi_1^2(1 - \alpha)\).</p>
+</div>
+
+<div class="unit" id="osb2">
+	<p class="math">Uji <a href="#osb1" class="ref"></a> ekuivalen dengan uji tak bias berstatistik uji \(Z\) (<a href="Bernoulli.html#nor">uji normal hampiran</a>) yang diturunkan dalam bagian <a href="Bernoulli.html">pengujian pada model Bernoulli</a>.</p>
+</div>
+
+<p>Untuk keperluan perumuman, hasil penting dalam latihan berikut adalah representasi khusus dari \(V\). Misalkan \(e_0 = n (1 - p_0)\) dan \(e_1 = n p_0\). Besaran-besaran ini merupakan frekuensi harapan bagi hasil 0 dan 1 di bawah \(H_0\).</p>
+
+<div class="unit" id="osb3">
+	<p class="math">\(V\) dapat dituliskan dalam frekuensi teramati dan frekuensi harapan sebagai berikut:
+	\[ V = \frac{(O_0 - e_0)^2}{e_0} + \frac{(O_1 - e_1)^2}{e_1} \]</p>
+</div>
+
+<p>Representasi ini menunjukkan bahwa statistik uji \(V\) mengukur selisih antara frekuensi harapan di bawah \(H_0\) dan frekuensi teramati. Tentu saja, nilai \(V\) yang besar merupakan bukti yang mendukung \(H_1\). Terakhir, walaupun pengembangan \(V\) dalam Latihan 3 mempunyai dua suku, derajat kebebasannya hanya satu karena \(O_0 + O_1 = n\). Frekuensi teramati dan frekuensi harapan dapat disimpan dalam tabel \(1 \times 2\).</p>
+
+<h3 id="msb">Model Bernoulli Banyak Sampel</h3>
+
+<p>Sekarang andaikan kita mempunyai sampel dari beberapa proses percobaan Bernoulli yang saling bebas dan mungkin berbeda. Secara khusus, andaikan \(\bs{X}_i = (X_{i,1}, X_{i,2}, \ldots, X_{i,n_i})\) merupakan sampel acak berukuran \(n_i\) dari <a href="https://www.randomservices.org/random/bernoulli/Introduction.html">distribusi Bernoulli</a> dengan parameter sukses tak diketahui \(p_i \in (0, 1)\) untuk setiap \(i \in \{1, 2, \ldots, m\}\). Selain itu, sampel-sampel \((\bs{X}_1, \bs{X}_2, \ldots, \bs{X}_m)\) saling bebas. Kita ingin menguji hipotesis mengenai vektor parameter tak diketahui \(\bs{p} = (p_1, p_2, \ldots, p_m)\). Ada dua kasus umum yang akan kita bahas, tetapi pertama-tama kita tetapkan notasi penting bagi keduanya. Untuk \(i \in \{1, 2, \ldots, m\}\) dan \(j \in \{0, 1\}\), misalkan \(O_{i,j}\) menyatakan banyaknya hasil \(j\) dalam sampel \(\bs{X}_i\). Frekuensi teramati \(O_{i,j}\) berdistribusi binomial; \(O_{i,1}\) berparameter \(n_i\) dan \(p_i\), sedangkan \(O_{i,0}\) berparameter \(n_i\) dan \(1 - p_i\).</p>
+
+<h4 id="msbc">Kasus yang Ditentukan Sepenuhnya</h4>
+
+<p>Tinjau vektor parameter yang ditentukan, \(\bs{p}_0 = (p_{0,1}, p_{0,2}, \ldots, p_{0,m}) \in (0, 1)^m\). Kita ingin menguji hipotesis nol \(H_0: \bs{p} = \bs{p}_0\) melawan \(H_1: \bs{p} \ne \bs{p}_0\). Karena hipotesis nol menentukan nilai \(p_i\) bagi setiap \(i\), kasus ini disebut <dfn>kasus yang ditentukan sepenuhnya</dfn>. Sekarang misalkan \(e_{i,0} = n_i (1 - p_{i,0})\) dan \(e_{i,1} = n_i p_{i,0}\). Besaran-besaran ini masing-masing merupakan frekuensi harapan bagi hasil 0 dan 1 dari sampel \(\bs{X}_i\) di bawah \(H_0\).</p>
+
+<div class="unit" id="msbc1">
+	<p class="math">Jika \(n_i\) besar bagi setiap \(i\), maka di bawah \(H_0\) statistik uji berikut kira-kira berdistribusi khi-kuadrat dengan \(m\) derajat kebebasan:
+	\[ V = \sum_{i=1}^m \sum_{j=0}^1 \frac{(O_{i,j} - e_{i,j})^2}{e_{i,j}} \]</p>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Hasil ini mengikuti <a href="#osb3" class="ref"></a> dan sifat saling bebas.</p>
+	</details>
+</div>
+
+<p>Kalibrasi asimtotik di atas mengasumsikan banyak sampel tetap, probabilitas sel di bawah nol positif, dan seluruh frekuensi harapan menuju tak hingga. Istilah <q>besar</q> tidak ditentukan hanya oleh aturan praktis konvensional \(e_{i,j} \ge 5\) bagi setiap \(i \in \{1, 2, \ldots, m\}\) dan \(j \in \{0, 1\}\); aturan itu hanyalah heuristik, bukan teorema. Sel yang jarang atau sangat tak seimbang dapat memerlukan penggabungan kategori yang telah ditetapkan sebelumnya atau kalibrasi eksak/simulasi.</p>
+
+<div class="unit" id="msbc2">
+	<p class="math">Di bawah asumsi sampel besar, uji hampiran bagi \(H_0\) melawan \(H_1\) pada tingkat signifikansi \(\alpha\) adalah menolak \(H_0\) jika dan hanya jika \(V \gt \chi_m^2(1 - \alpha)\).</p>
+</div>
+
+<p>Sekali lagi, statistik uji \(V\) mengukur selisih antara frekuensi harapan dan frekuensi teramati pada semua hasil dan semua sampel. Terdapat \(2 \, m\) suku dalam pengembangan \(V\) pada Latihan 4, tetapi hanya \(m\) derajat kebebasan karena \(O_{i,0} + O_{i,1} = n_i\) bagi setiap \(i \in \{1, 2, \ldots, m\}\). Frekuensi teramati dan frekuensi harapan dapat disimpan dalam tabel \(m \times 2\).</p>
+
+<h4 id="msbe">Kasus Probabilitas Sama</h4>
+
+<p>Sekarang andaikan kita ingin menguji hipotesis nol \(H_0: p_1 = p_2 = \cdots = p_m\), yakni semua probabilitas sukses sama, melawan hipotesis alternatif komplementer \(H_1\) bahwa probabilitas-probabilitas itu tidak semuanya sama. Berbeda dari model sebelumnya, hipotesis nol tidak menentukan nilai probabilitas sukses bersama \(p\). Namun, di bawah hipotesis nol, \(m\) sampel dapat digabungkan menjadi satu sampel besar percobaan Bernoulli dengan probabilitas sukses \(p\). Karena itu, pendekatan alaminya adalah menduga \(p\) lalu, seperti sebelumnya, mendefinisikan statistik uji yang mengukur selisih antara frekuensi harapan dan frekuensi teramati. Tantangannya adalah menentukan distribusi statistik uji tersebut.</p>
+
+<p>Misalkan \(n = \sum_{i=1}^m n_i\) menyatakan ukuran sampel total setelah semua sampel digabungkan. Rata-rata keseluruhan sampel, yang dalam konteks ini merupakan proporsi sukses keseluruhan, adalah
+\[ P = \frac{1}{n} \sum_{i=1}^m \sum_{j=1}^{n_i} X_{i,j} = \frac{1}{n} \sum_{i=1}^m O_{i,1} \]
+Proporsi sampel \(P\) merupakan penduga terbaik bagi \(p\) dalam hampir semua pengertian. Selanjutnya, misalkan \(E_{i,0} = n_i \, (1 - P)\) dan \(E_{i,1} = n_i \, P\). Besaran-besaran ini adalah frekuensi harapan <em>dugaan</em> bagi hasil 0 dan 1 dari sampel \(\bs{X}_i\) di bawah \(H_0\). Frekuensi dugaan ini sekarang tentu merupakan <em>statistik</em> (dan karena itu acak), bukan parameter. Seperti sebelumnya, kita definisikan statistik uji
+\[ V = \sum_{i=1}^m \sum_{j=0}^1 \frac{(O_{i,j} - E_{i,j})^2}{E_{i,j}} \]
+Untuk jumlah sampel tetap, proporsi ukuran sampel yang tidak merosot, dan probabilitas bersama di bagian dalam ruang parameter, di bawah \(H_0\) distribusi \(V\) konvergen ke distribusi khi-kuadrat dengan \(m - 1\) derajat kebebasan ketika \(n \to \infty\).</p>
+
+<div class="unit" id="msbe1">
+	<p class="math">Uji hampiran bagi \(H_0\) melawan \(H_1\) pada tingkat signifikansi \(\alpha\) adalah menolak \(H_0\) jika dan hanya jika \(V \gt \chi_{m-1}^2(1 - \alpha)\).</p>
+</div>
+
+<p>Secara intuitif, kita kehilangan satu derajat kebebasan dibandingkan kasus yang ditentukan sepenuhnya pada <a href="#msbc" class="ref"></a> karena harus menduga probabilitas sukses bersama tak diketahui \(p\). Frekuensi teramati dan harapan kembali dapat disimpan dalam tabel \(m \times 2\).</p>
+
+<h3 id="osm">Model Multinomial Satu Sampel</h3>
+
+<p>Model berikut memperumum <a href="#osb">model Bernoulli satu sampel</a> ke arah lain. Andaikan \(\bs{X} = (X_1, X_2, \ldots, X_n)\) merupakan barisan <a href="https://www.randomservices.org/random/bernoulli/Multinomial.html">percobaan multinomial</a>. Jadi, variabel-variabel ini saling bebas dan berdistribusi identik, masing-masing bernilai dalam himpunan \(S\) dengan \(k\) anggota. Tanpa mengurangi keumuman, kita dapat mengambil \(S = \{0, 1, \ldots, k - 1\}\); model Bernoulli satu sampel lalu bersesuaian dengan \(k = 2\). Misalkan \(f\) menyatakan fungsi kepadatan probabilitas yang sama bagi semua variabel sampel pada \(S\), sehingga \(f(j) = \P(X_i = j)\) bagi \(i \in \{1, 2, \ldots, n\}\) dan \(j \in S\). Nilai-nilai \(f\) dianggap tidak diketahui, tetapi tentu \(\sum_{j \in S} f(j) = 1\), sehingga sebenarnya hanya ada \(k - 1\) parameter tak diketahui. Bagi fungsi kepadatan probabilitas tertentu \(f_0\) pada \(S\), kita ingin menguji \(H_0: f = f_0\) melawan \(H_1: f \ne f_0\).</p>
+
+<p>Pendekatan umumnya kini seharusnya jelas. Misalkan \(O_j\) menyatakan banyaknya hasil \(j \in S\) dalam sampel \(\bs{X}\):
+\[ O_j = \sum_{i=1}^n \bs{1}(X_i = j) \]
+Perhatikan bahwa \(O_j\) mempunyai distribusi binomial berparameter \(n\) dan \(f(j)\). Jadi, \(e_j = n \, f_0(j)\) adalah frekuensi harapan hasil \(j\) di bawah \(H_0\). Statistik uji kita adalah
+\[ V = \sum_{j \in S} \frac{(O_j - e_j)^2}{e_j} \]
+Di bawah \(H_0\), jika banyak kategori tetap, seluruh probabilitas nol positif, dan frekuensi harapan menuju tak hingga, distribusi \(V\) konvergen ke distribusi khi-kuadrat dengan \(k - 1\) derajat kebebasan ketika \(n \to \infty\). Terdapat \(k\) suku dalam pengembangan \(V\), tetapi hanya \(k - 1\) derajat kebebasan karena \(\sum_{j \in S} O_j = n\).</p>
+
+<div class="unit" id="osm1">
+	<p class="math">Uji hampiran bagi \(H_0\) melawan \(H_1\) pada tingkat signifikansi \(\alpha\) adalah menolak \(H_0\) jika dan hanya jika \(V \gt \chi_{k-1}^2(1 - \alpha)\).</p>
+</div>
+
+<p>Aturan praktis konvensional meminta \(e_j \ge 5\) bagi setiap \(j \in S\), tetapi angka 5 bukan syarat matematis yang menjamin hampiran baik. Yang mendasari limit adalah frekuensi harapan setiap sel menuju tak hingga; untuk sampel hingga, sel jarang atau sangat tak seimbang dapat memerlukan kategori yang digabungkan menurut aturan yang telah ditetapkan atau metode eksak/simulasi.</p>
+
+<h3 id="msm">Model Multinomial Banyak Sampel</h3>
+
+<p>Perumuman terakhir adalah model multinomial banyak sampel. Secara khusus, andaikan \(\bs{X}_i = (X_{i,1}, X_{i,2}, \ldots, X_{i,n_i})\) merupakan sampel acak berukuran \(n_i\) dari distribusi pada himpunan \(S\) dengan \(k\) anggota, bagi setiap \(i \in \{1, 2, \ldots, m\}\). Kita juga mengasumsikan bahwa sampel-sampel \((\bs{X}_1, \bs{X}_2, \ldots, \bs{X}_m)\) saling bebas. Tanpa mengurangi keumuman, kita dapat mengambil \(S = \{0, 1, \ldots, k - 1\}\). Lalu \(k = 2\) menghasilkan <a href="#msb">model Bernoulli banyak sampel</a>, sedangkan \(m = 1\) bersesuaian dengan <a href="#osm">model multinomial satu sampel</a>.</p>
+
+<p>Misalkan \(f_i\) menyatakan fungsi kepadatan probabilitas yang sama bagi semua variabel dalam sampel \(\bs{X}_i\), sehingga \(f_i(j) = \P(X_{i,l} = j)\) bagi \(i \in \{1, 2, \ldots, m\}\), \(l \in \{1, 2, \ldots, n_i\}\), dan \(j \in S\). Fungsi-fungsi ini umumnya tidak diketahui, sehingga vektor parameter kita adalah vektor fungsi kepadatan probabilitas \(\bs{f} = (f_1, f_2, \ldots, f_m)\). Tentu saja, \(\sum_{j \in S} f_i(j) = 1\) bagi \(i \in \{1, 2, \ldots, m\}\), sehingga sebenarnya terdapat \(m \, (k - 1)\) parameter tak diketahui. Kita tertarik menguji hipotesis mengenai \(\bs{f}\). Seperti dalam model Bernoulli banyak sampel, ada dua kasus umum yang dibahas di bawah; pertama-tama kita tetapkan notasi penting bagi keduanya. Untuk \(i \in \{1, 2, \ldots, m\}\) dan \(j \in S\), misalkan \(O_{i,j}\) menyatakan banyaknya hasil \(j\) dalam sampel \(\bs{X}_i\). Frekuensi teramati \(O_{i,j}\) mempunyai distribusi binomial berparameter \(n_i\) dan \(f_i(j)\).</p>
+
+<h4 id="msmc">Kasus yang Ditentukan Sepenuhnya</h4>
+
+<p>Tinjau vektor fungsi kepadatan probabilitas tertentu pada \(S\), yang dilambangkan \(\bs{f}_0 = (f_{0,1}, f_{0,2}, \ldots, f_{0,m})\). Kita ingin menguji hipotesis nol \(H_0: \bs{f} = \bs{f}_0\) melawan \(H_1: \bs{f} \ne \bs{f}_0\). Karena hipotesis nol menentukan nilai \(f_i(j)\) bagi setiap \(i\) dan \(j\), kasus ini disebut <dfn>kasus yang ditentukan sepenuhnya</dfn>. Misalkan \(e_{i,j} = n_i \, f_{0,i}(j)\). Ini adalah frekuensi harapan hasil \(j\) dalam sampel \(\bs{X}_i\) di bawah \(H_0\).</p>
+
+<div class="unit" id="msmc1">
+	<p class="math">Jika \(n_i\) besar bagi setiap \(i\), maka di bawah \(H_0\) statistik uji \(V\) berikut kira-kira berdistribusi khi-kuadrat dengan \(m \, (k - 1)\) derajat kebebasan:
+	\[ V = \sum_{i=1}^m \sum_{j \in S} \frac{(O_{i,j} - e_{i,j})^2}{e_{i,j}} \]</p>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Hasil ini mengikuti kasus <a href="#osm">multinomial satu sampel</a> dan sifat saling bebas.</p>
+	</details>
+</div>
+
+<p>Secara asimtotik, banyak sampel dan banyak kategori harus tetap, semua probabilitas sel di bawah nol positif, dan setiap frekuensi harapan menuju tak hingga. Aturan praktis \(e_{i,j} \ge 5\) bagi setiap \(i \in \{1, 2, \ldots, m\}\) dan \(j \in S\) hanyalah heuristik sampel hingga; semakin besar dan seimbang frekuensi harapannya, biasanya semakin baik hampiran.</p>
+
+<div class="unit" id="msmc2">
+	<p class="math">Di bawah asumsi sampel besar, uji hampiran bagi \(H_0\) melawan \(H_1\) pada tingkat signifikansi \(\alpha\) adalah menolak \(H_0\) jika dan hanya jika \(V \gt \chi_{m \, (k - 1)}^2(1 - \alpha)\).</p>
+</div>
+
+<p>Seperti biasa, statistik uji \(V\) mengukur selisih antara frekuensi harapan dan frekuensi teramati pada semua hasil dan semua sampel. Terdapat \(m k\) suku dalam pengembangan \(V\) pada Latihan 8, tetapi kita kehilangan \(m\) derajat kebebasan karena \(\sum_{j \in S} O_{i,j} = n_i\) bagi setiap \(i \in \{1, 2, \ldots, m\}\).</p>
+
+<h4 id="msme">Kasus Fungsi Kepadatan Probabilitas Sama</h4>
+
+<p>Sekarang andaikan kita ingin menguji hipotesis nol \(H_0: f_1 = f_2 = \cdots = f_m\), yakni semua fungsi kepadatan probabilitas sama, melawan hipotesis alternatif komplementer \(H_1\) bahwa fungsi-fungsi itu tidak semuanya sama. Berbeda dari model sebelumnya, hipotesis nol tidak menentukan fungsi kepadatan probabilitas yang sama tersebut, \(f\). Namun, di bawah hipotesis nol, \(m\) sampel dapat digabungkan menjadi satu sampel besar percobaan multinomial berfungsi kepadatan probabilitas \(f\). Karena itu, pendekatan alaminya adalah menduga nilai-nilai \(f\) lalu, seperti sebelumnya, mendefinisikan statistik uji yang mengukur selisih antara frekuensi harapan dan frekuensi teramati.</p>
+
+<p>Misalkan \(n = \sum_{i=1}^m n_i\) menyatakan ukuran sampel total setelah semua sampel digabungkan. Di bawah \(H_0\), penduga terbaik kita bagi \(f(j)\) adalah
+\[ P_j = \frac{1}{n} \sum_{i=1}^m O_{i,j} \]
+Jadi, dugaan frekuensi harapan hasil \(j\) dalam sampel \(\bs{X}_i\) di bawah \(H_0\) adalah \(E_{i,j} = n_i P_j\). Frekuensi dugaan ini kembali merupakan <em>statistik</em> (dan karena itu acak), bukan parameter. Seperti sebelumnya, kita definisikan statistik uji
+\[ V = \sum_{i=1}^m \sum_{j \in S} \frac{(O_{i,j} - E_{i,j})^2}{E_{i,j}} \]
+Jika banyak sampel dan kategori tetap, proporsi ukuran sampel tidak merosot, probabilitas sel positif, dan setiap frekuensi harapan menuju tak hingga, maka di bawah \(H_0\) distribusi \(V\) konvergen ke distribusi khi-kuadrat ketika \(n \to \infty\). Derajat kebebasannya dapat ditentukan secara heuristik sebagai berikut.</p>
+
+<div class="unit" id="msme1">
+	<p class="math">Distribusi pembatas \(V\) mempunyai \((k - 1) (m - 1)\) derajat kebebasan.</p>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Terdapat \(k \, m\) suku dalam pengembangan \(V\). Kita kehilangan \(m\) derajat kebebasan karena \(\sum_{j \in S} O_{i,j} = n_i\) bagi setiap \(i \in \{1, 2, \ldots, m\}\). Kita harus menduga semua kecuali satu dari probabilitas \(f(j)\) bagi \(j \in S\), sehingga kehilangan \(k - 1\) derajat kebebasan lagi.</p>
+	</details>
+</div>
+
+<div class="unit" id="msme2">
+	<p class="math">Uji hampiran bagi \(H_0\) melawan \(H_1\) pada tingkat signifikansi \(\alpha\) adalah menolak \(H_0\) jika dan hanya jika \(V \gt \chi_{(k - 1) \, (m - 1)}^2(1 -\alpha)\).</p>
+</div>
+
+<h3 id="fit">Uji Kecocokan</h3>
+
+<p><dfn>Uji kecocokan</dfn> adalah uji hipotesis bahwa distribusi pensampelan yang tidak diketahui sama dengan distribusi tertentu yang ditentukan atau termasuk dalam suatu keluarga parametrik. Uji semacam ini jelas mendasar dan penting. <a href="#osm">Model multinomial satu sampel</a> menghasilkan uji kecocokan yang cukup umum.</p>
+
+<p>Untuk menyiapkan masalah, andaikan kita mempunyai variabel acak teramati \(X\) bagi suatu eksperimen yang bernilai dalam himpunan umum \(S\). Variabel acak \(X\) dapat berdistribusi kontinu atau diskret dan dapat berupa variabel tunggal atau multivariabel. Kita ingin menguji hipotesis nol bahwa \(X\) mempunyai distribusi tertentu yang ditentukan sepenuhnya, atau bahwa distribusi \(X\) termasuk dalam keluarga parametrik tertentu.</p>
+
+<p>Langkah pertama dalam kedua kasus adalah mengambil sampel dari distribusi \(X\) sehingga diperoleh barisan variabel saling bebas dan berdistribusi identik \(\bs{X} = (X_1, X_2, \ldots, X_n)\). Selanjutnya, kita pilih \(k \in \N_+\) dan <a href="https://www.randomservices.org/random/foundations/Sets.html#par">mempartisi</a> \(S\) menjadi \(k\) himpunan bagian yang saling lepas. Partisi ini kita lambangkan \(\{A_j: j \in J\}\), dengan \(\#(J) = k\). Batas partisi harus ditetapkan sebelum memeriksa data yang sama; jika kategori dipilih atau disetel dari data, prosedur pemilihan itu harus ikut dimasukkan dalam distribusi acuan atau kalibrasi simulasi. Kemudian kita definisikan barisan variabel acak \(\bs{Y} = (Y_1, Y_2, \ldots, Y_n)\) dengan \(Y_i = j\) jika dan hanya jika \(X_i \in A_j\), bagi \(i \in \{1, 2, \ldots, n\}\) dan \(j \in J\).</p>
+
+<div class="unit" id="fit1">
+	<p class="math">\(\bs{Y}\) merupakan barisan percobaan multinomial berparameter \(n\) dan \(f\), dengan \(f(j) = \P(X \in A_j)\) bagi \(j \in J\).</p>
+</div>
+
+<h4 id="fitc">Kasus yang Ditentukan Sepenuhnya</h4>
+
+<p>Misalkan \(H\) menyatakan bahwa \(X\) mempunyai distribusi tertentu yang ditentukan sepenuhnya. Misalkan \(f_0\) menyatakan fungsi kepadatan probabilitas pada \(J\) yang didefinisikan oleh \(f_0(j) = \P(X \in A_j \mid H)\) bagi \(j \in J\). Untuk menguji hipotesis \(H\), secara formal kita dapat menguji \(H_0: f = f_0\) melawan \(H_1: f \ne f_0\), tepat seperti masalah yang telah diselesaikan dalam <a href="#osm">model multinomial satu sampel</a>.</p>
+
+<p>Secara umum, partisi ruang \(S\) dipilih sebelum data uji dilihat agar mempunyai rincian sebanyak mungkin tanpa menciptakan sel yang terlalu jarang. Syarat semua frekuensi harapan sekurang-kurangnya 5 hanyalah heuristik; banyak kategori harus tetap dan, untuk pembenaran asimtotik, setiap frekuensi harapan harus menuju tak hingga.</p>
+
+<h4 id="fitp">Kasus yang Ditentukan Sebagian</h4>
+
+<p>Sering kali kita tidak ingin menguji apakah \(X\) mempunyai distribusi yang ditentukan sepenuhnya—misalnya normal dengan rata-rata 5 dan varians 9—melainkan apakah distribusi \(X\) termasuk dalam keluarga parametrik tertentu, misalnya keluarga normal. Pendekatan alaminya adalah menduga parameter tak diketahui di bawah hipotesis nol lalu melanjutkan seperti di atas. Karena didasarkan pada parameter dugaan, frekuensi harapan \(E_j\) menjadi statistik. Dalam statistik khi-kuadrat \(V\), pengurangan satu derajat kebebasan bagi setiap parameter bebas yang diduga berlaku hanya ketika parameterisasi dapat diidentifikasi dan regular, penduganya konsisten di bawah nol, informasi terkait berperingkat penuh, probabilitas sel positif, dan partisi ditetapkan sebelumnya. Pada kasus batas, tidak teridentifikasi, sel kosong, atau kategori yang dipilih dari data, limit dan kalibrasinya dapat berbeda; karena itu aturan “satu derajat untuk setiap parameter” bukan hukum universal.</p>
+
+<h3 id="ind">Uji Independensi</h3>
+
+<p>Andaikan kita mempunyai variabel acak teramati \(X\) dan \(Y\) bagi suatu eksperimen, dengan \(X\) bernilai dalam himpunan \(S\) yang mempunyai \(k\) anggota dan \(Y\) bernilai dalam himpunan \(T\) yang mempunyai \(m\) anggota. Misalkan \(f\) menyatakan <a href="https://www.randomservices.org/random/dist/Joint.html">fungsi kepadatan probabilitas gabungan</a> dari \((X, Y)\), sehingga \(f(i, j) = \P(X = i, Y = j)\) bagi \(i \in S\) dan \(j \in T\). Ingat bahwa fungsi kepadatan probabilitas marginal \(X\) dan \(Y\) masing-masing adalah \(g\) dan \(h\), dengan
+\begin{align}
+	g(i) = &amp; \sum_{j \in T} f(i, j), \quad i \in S \\
+	h(j) = &amp; \sum_{i \in S} f(i, j), \quad j \in T
+\end{align}
+Tentu saja, \(f\), \(g\), dan \(h\) biasanya tidak diketahui. Dalam bagian ini kita tertarik menguji apakah \(X\) dan \(Y\) saling bebas, suatu uji yang mendasar dan penting. Secara formal, kita ingin menguji hipotesis nol
+\[ H_0: f(i, j) = g(i) \, h(j), \quad (i, j) \in S \times T \]
+melawan hipotesis alternatif komplementer \(H_1\).</p>
+
+<p>Langkah pertama adalah mengambil sampel acak \((\bs{X}, \bs{Y}) = ((X_1, Y_1), (X_2, Y_2), \ldots, (X_n, Y_n))\) dari distribusi \((X, Y)\). Karena ruang keadaannya hingga, sampel ini membentuk barisan percobaan multinomial. Dengan notasi biasa, misalkan \(O_{i,j}\) menyatakan banyaknya kemunculan \((i, j)\) dalam sampel bagi setiap \((i, j) \in S \times T\). Statistik ini mempunyai distribusi binomial dengan parameter banyak percobaan \(n\) dan parameter sukses \(f(i, j)\). Di bawah \(H_0\), parameter suksesnya adalah \(g(i) \, h(j)\). Karena parameter sukses tidak diketahui, kita harus menduganya untuk menghitung frekuensi harapan. Penduga terbaik bagi \(f(i, j)\) adalah proporsi sampel \(\frac{1}{n} O_{i,j}\). Jadi, penduga terbaik bagi \(g(i)\) dan \(h(j)\) masing-masing adalah \(\frac{1}{n} N_i\) dan \(\frac{1}{n} M_j\), dengan \(N_i\) menyatakan banyaknya kemunculan \(i\) dalam sampel \(\bs{X}\), sedangkan \(M_j\) menyatakan banyaknya kemunculan \(j\) dalam sampel \(\bs{Y}\):
+\begin{align}
+	N_i &amp; = \sum_{j \in T} O_{i,j} \\
+	M_j &amp; = \sum_{i \in S} O_{i,j}
+\end{align}
+Jadi, dugaan frekuensi harapan bagi \((i, j)\) di bawah \(H_0\) adalah
+\[ E_{i,j} = n \, \frac{1}{n} \, N_i \frac{1}{n} \, M_j = \frac{1}{n} \, N_i \, M_j \]
+Seperti biasa, kita definisikan statistik uji
+\[ V = \sum_{i \in S} \sum_{j \in T} \frac{(O_{i,j} - E_{i,j})^2}{E_{i,j}} \]
+Jika banyak kategori tetap, peluang marginal positif, dan semua frekuensi sel harapan menuju tak hingga, distribusi \(V\) konvergen ke distribusi khi-kuadrat ketika \(n \to \infty\). Derajat kebebasannya dapat ditentukan secara heuristik sebagai berikut.</p>
+
+<div class="unit" id="ind1">
+	<p class="math">Distribusi pembatas \(V\) mempunyai \((k - 1) \, (m - 1)\) derajat kebebasan.</p>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Terdapat \(k m\) suku dalam pengembangan \(V\). Kita kehilangan satu derajat kebebasan karena \(\sum_{i \in S} \sum_{j \in T} O_{i,j} = n\). Kita harus menduga semua kecuali satu dari probabilitas \(g(i)\) bagi \(i \in S\), sehingga kehilangan \(k - 1\) derajat kebebasan; kita juga harus menduga semua kecuali satu dari probabilitas \(h(j)\) bagi \(j \in T\), sehingga kehilangan \(m - 1\) derajat kebebasan.</p>
+	</details>
+</div>
+
+<div class="unit" id="ind2">
+	<p class="math">Uji hampiran bagi \(H_0\) melawan \(H_1\) pada tingkat signifikansi \(\alpha\) adalah menolak \(H_0\) jika dan hanya jika \(V \gt \chi_{(k-1) (m-1)}^2(1 - \alpha)\).</p>
+</div>
+
+<p>Frekuensi teramati sering dicatat dalam tabel \(k \times m\) yang disebut <dfn>tabel kontingensi</dfn>, dengan \(O_{i,j}\) sebagai bilangan pada baris \(i\) dan kolom \(j\). Dalam penyajian ini, \(N_i\) adalah jumlah frekuensi pada baris ke-\(i\) dan \(M_j\) adalah jumlah frekuensi pada kolom ke-\(j\). Karena alasan historis, variabel acak \(X\) dan \(Y\) terkadang disebut <dfn>faktor</dfn>, sedangkan nilai-nilai yang mungkin disebut <dfn>kategori</dfn>.</p>
+
+<h3 id="exe">Latihan Komputasi dan Simulasi</h3>
+
+<h4 id="cmp">Latihan Komputasi</h4>
+
+<p>Dalam setiap latihan berikut, tentukan derajat kebebasan statistik khi-kuadrat, hitung nilai statistik tersebut, dan hitung nilai-\(P\) ujinya.</p>
+
+<div class="unit" id="cmp1">
+	<p class="math">Sebuah koin dilempar 100 kali dan menghasilkan 55 sisi kepala. Uji hipotesis nol bahwa koin itu adil.</p>
+	<details>
+		<summary>Rincian:</summary>
+		<p>1 derajat kebebasan, \(V = 1\), \(P = 0.3173\).</p>
+	</details>
+</div>
+
+<div class="unit" id="cmp2">
+	<p class="math">Andaikan kita mempunyai 3 koin. Koin-koin itu dilempar dan menghasilkan data dalam tabel berikut:</p>
+	<table>
+		<tbody>
+			<tr>
+				<th></th>
+				<th>Kepala</th>
+				<th>Ekor</th>
+			</tr>
+			<tr>
+				<th>Koin 1</th>
+				<td>29</td>
+				<td>21</td>
+			</tr>
+			<tr>
+				<th>Koin 2</th>
+				<td>23</td>
+				<td>17</td>
+			</tr>
+			<tr>
+				<th>Koin 3</th>
+				<td>42</td>
+				<td>18</td>
+			</tr>
+		</tbody>
+	</table>
+	<ol class="sub">
+		<li>Uji hipotesis nol bahwa ketiga koin adil.</li>
+		<li>Uji hipotesis nol bahwa probabilitas kepala koin 1 adalah \(\frac{3}{5}\), koin 2 adil, dan probabilitas kepala koin 3 adalah \(\frac{2}{3}\).</li>
+		<li>Uji hipotesis nol bahwa ketiga koin mempunyai probabilitas kepala yang sama.</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<ol class="sub">
+			<li>3 derajat kebebasan, \(V = 11.78\), \(P = 0.008\).</li>
+			<li>3 derajat kebebasan, \(V = 1.283\), \(P = 0.733\).</li>
+			<li>2 derajat kebebasan, \(V = 2.301\), \(P = 0.316\).</li>
+		</ol>
+	</details>
+</div>
+
+<div class="unit" id="cmp3">
+	<p class="math">Sebuah dadu dilempar 240 kali dan menghasilkan data dalam tabel berikut:</p>
+	<table>
+		<tbody>
+			<tr>
+				<th>Mata</th>
+				<th>1</th>
+				<th>2</th>
+				<th>3</th>
+				<th>4</th>
+				<th>5</th>
+				<th>6</th>
+			</tr>
+			<tr>
+				<th>Frekuensi</th>
+				<td>57</td>
+				<td>39</td>
+				<td>28</td>
+				<td>28</td>
+				<td>36</td>
+				<td>52</td>
+			</tr>
+		</tbody>
+	</table>
+	<ol class="sub">
+		<li>Uji hipotesis nol bahwa dadu itu adil.</li>
+		<li>Uji hipotesis nol bahwa dadu tersebut adalah dadu pipih satu-enam (sisi 1 dan 6 masing-masing mempunyai probabilitas \(\frac{1}{4}\), sedangkan sisi 2, 3, 4, dan 5 masing-masing mempunyai probabilitas \(\frac{1}{8}\)).</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<ol class="sub">
+			<li>5 derajat kebebasan, \(V = 18.45\), \(P = 0.0024\).</li>
+			<li>5 derajat kebebasan, \(V = 5.383\), \(P = 0.3709\).</li>
+		</ol>
+	</details>
+</div>
+
+<div class="unit" id="cmp4">
+	<p class="math">Dua dadu dilempar dan menghasilkan data dalam tabel berikut:</p>
+	<table>
+		<tbody>
+			<tr>
+				<th>Mata</th>
+				<th>1</th>
+				<th>2</th>
+				<th>3</th>
+				<th>4</th>
+				<th>5</th>
+				<th>6</th>
+			</tr>
+			<tr>
+				<th>Dadu 1</th>
+				<td>22</td>
+				<td>17</td>
+				<td>22</td>
+				<td>13</td>
+				<td>22</td>
+				<td>24</td>
+			</tr>
+			<tr>
+				<th>Dadu 2</th>
+				<td>44</td>
+				<td>24</td>
+				<td>19</td>
+				<td>19</td>
+				<td>18</td>
+				<td>36</td>
+			</tr>
+		</tbody>
+	</table>
+	<ol class="sub">
+		<li>Uji hipotesis nol bahwa dadu 1 adil dan dadu 2 adalah dadu pipih satu-enam.</li>
+		<li>Uji hipotesis nol bahwa kedua dadu mempunyai distribusi probabilitas yang sama.</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<ol class="sub">
+			<li>10 derajat kebebasan, \(V = 6.2\), \(P = 0.798\).</li>
+			<li>5 derajat kebebasan, \(V = 7.103\), \(P = 0.213\).</li>
+		</ol>
+	</details>
+</div>
+
+<div class="unit" id="cmp5">
+	<p class="math">Sebuah universitas mengelompokkan dosen berdasarkan jenjang menjadi <em>instruktur</em>, <em>asisten profesor</em>, <em>lektor kepala</em>, dan <em>profesor penuh</em>. Data menurut jenjang dan gender diberikan dalam tabel kontingensi berikut. Uji apakah jenjang dan gender dosen saling bebas.</p>
+	<table>
+		<tbody>
+			<tr>
+				<th>Dosen</th>
+				<th>Instruktur</th>
+				<th>Asisten Profesor</th>
+				<th>Lektor Kepala</th>
+				<th>Profesor Penuh</th>
+			</tr>
+			<tr>
+				<th>Laki-laki</th>
+				<td>62</td>
+				<td>238</td>
+				<td>185</td>
+				<td>115</td>
+			</tr>
+			<tr>
+				<th>Perempuan</th>
+				<td>118</td>
+				<td>122</td>
+				<td>123</td>
+				<td>37</td>
+			</tr>
+		</tbody>
+	</table>
+	<details>
+		<summary>Rincian:</summary>
+		<p>3 derajat kebebasan, \(V = 70.111\), \(P \approx 4.04 \times 10^{-15}\).</p>
+	</details>
+</div>
+
+<h4 id="dat">Latihan Analisis Data</h4>
+
+<div class="unit" id="dat1">
+	<p class="stat"><a href="https://www.randomservices.org/random/data/Buffon.html" class="ancillary">Kumpulan data percobaan Buffon</a> memuat hasil 104 pengulangan eksperimen jarum Buffon. Banyaknya lintasan yang memotong celah adalah 56. Secara teori, data ini seharusnya bersesuaian dengan 104 percobaan Bernoulli berprobabilitas sukses \(p = \frac{2}{\pi}\). Uji apakah anggapan itu masuk akal.</p>
+	<details>
+		<summary>Rincian:</summary>
+		<p>1 derajat kebebasan, \(V = 4.332\), \(P = 0.037\).</p>
+	</details>
+</div>
+
+<div class="unit" id="dat2">
+	<p class="stat">Uji apakah <a href="https://www.randomservices.org/random/data/Alpha.html" class="ancillary">data emisi alfa</a> berasal dari distribusi Poisson.</p>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Kita mempartisi \(\N\) menjadi 17 himpunan bagian: \(\{0, 1\}\), \(\{x\}\) bagi \(x \in \{2, 3, \ldots, 16\}\), dan \(\{17, 18, \ldots \}\). Derajat kebebasannya 15. Parameter Poisson dugaan adalah 8,367, \(V = 9.644\), dan \(P = 0.842\).</p>
+	</details>
+</div>
+
+<div class="unit" id="dat3">
+	<p class="stat">Uji apakah <a href="https://www.randomservices.org/random/data/Michelson.html" class="ancillary">data kecepatan cahaya Michelson</a> berasal dari distribusi normal.</p>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Gunakan partisi \(\R\) berikut, yang ditetapkan sebelum pengujian: \(\{(-\infty, 750), [750, 775), [775, 800), [800, 825), [825, 850), [850, 875), [875, 900), [900, 925), [925, 950), [950, 975), [975, \infty)\}\). Setelah rata-rata dan simpangan baku diduga dari data, derajat kebebasannya 8, \(V = 11.443\), dan \(P = 0.178\).</p>
+	</details>
+</div>
+
+<h4 id="sim">Latihan Simulasi</h4>
+
+<p>Dalam latihan simulasi berikut, Anda dapat menyelidiki uji kecocokan secara empiris.</p>
+
+<div class="unit" id="sim1">
+	<p class="app">Dalam <a href="https://www.randomservices.org/random/apps/DiceFit.html" class="ancillary">eksperimen kecocokan dadu</a>, atur distribusi pensampelan menjadi adil, ukuran sampel 50, dan tingkat signifikansi 0,1. Atur distribusi uji seperti di bawah, lalu jalankan simulasi 1.000 kali untuk setiap kasus. Pada (a), berikan dugaan empiris tingkat signifikansi dan bandingkan dengan 0,1. Pada kasus lainnya, berikan dugaan empiris kuasa uji. Urutkan distribusi (b)&ndash;(d) menurut kuasa yang tampak dari kecil ke besar. Apakah hasilnya masuk akal?</p>
+	<ol class="sub">
+		<li>adil</li>
+		<li>pipih satu-enam</li>
+		<li>distribusi simetris unimodal</li>
+		<li>distribusi menceng ke kanan</li>
+	</ol>
+</div>
+
+<div class="unit" id="sim2">
+	<p class="app">Dalam <a href="https://www.randomservices.org/random/apps/DiceFit.html" class="ancillary">eksperimen kecocokan dadu</a>, atur distribusi pensampelan menjadi pipih satu-enam, ukuran sampel 50, dan tingkat signifikansi 0,1. Atur distribusi uji seperti di bawah, lalu jalankan simulasi 1.000 kali untuk setiap kasus. Pada (a), berikan dugaan empiris tingkat signifikansi dan bandingkan dengan 0,1. Pada kasus lainnya, berikan dugaan empiris kuasa uji. Urutkan distribusi (b)&ndash;(d) menurut kuasa yang tampak dari kecil ke besar. Apakah hasilnya masuk akal?</p>
+	<ol class="sub">
+		<li>adil</li>
+		<li>pipih satu-enam</li>
+		<li>distribusi simetris unimodal</li>
+		<li>distribusi menceng ke kanan</li>
+	</ol>
+</div>
+
+<div class="unit" id="sim3">
+	<p class="app">Dalam <a href="https://www.randomservices.org/random/apps/DiceFit.html" class="ancillary">eksperimen kecocokan dadu</a>, atur distribusi pensampelan menjadi distribusi simetris unimodal, ukuran sampel 50, dan tingkat signifikansi 0,1. Atur distribusi uji seperti di bawah, lalu jalankan simulasi 1.000 kali untuk setiap kasus. Pada (a), berikan dugaan empiris tingkat signifikansi dan bandingkan dengan 0,1. Pada kasus lainnya, berikan dugaan empiris kuasa uji. Urutkan distribusi (b)&ndash;(d) menurut kuasa yang tampak dari kecil ke besar. Apakah hasilnya masuk akal?</p>
+	<ol class="sub">
+		<li>distribusi simetris unimodal</li>
+		<li>adil</li>
+		<li>pipih satu-enam</li>
+		<li>distribusi menceng ke kanan</li>
+	</ol>
+</div>
+
+<div class="unit" id="sim4">
+	<p class="app">Dalam <a href="https://www.randomservices.org/random/apps/DiceFit.html" class="ancillary">eksperimen kecocokan dadu</a>, atur distribusi pensampelan menjadi distribusi menceng ke kanan, ukuran sampel 50, dan tingkat signifikansi 0,1. Atur distribusi uji seperti di bawah, lalu jalankan simulasi 1.000 kali untuk setiap kasus. Pada (a), berikan dugaan empiris tingkat signifikansi dan bandingkan dengan 0,1. Pada kasus lainnya, berikan dugaan empiris kuasa uji. Urutkan distribusi (b)&ndash;(d) menurut kuasa yang tampak dari kecil ke besar. Apakah hasilnya masuk akal?</p>
+	<ol class="sub">
+		<li>distribusi menceng ke kanan</li>
+		<li>adil</li>
+		<li>pipih satu-enam</li>
+		<li>distribusi simetris unimodal</li>
+	</ol>
+</div>
+
+<div class="unit" id="sim5">
+	<p class="math">Andaikan \(D_1\) dan \(D_2\) merupakan distribusi yang berbeda. Apakah kuasa uji dengan distribusi pensampelan \(D_1\) dan distribusi uji \(D_2\) sama dengan kuasa uji dengan distribusi pensampelan \(D_2\) dan distribusi uji \(D_1\)? Buat konjektur berdasarkan empat latihan sebelumnya.</p>
+</div>
+
+<div class="unit" id="sim6">
+	<p class="app">Dalam <a href="https://www.randomservices.org/random/apps/DiceFit.html" class="ancillary">eksperimen kecocokan dadu</a>, atur distribusi pensampelan dan distribusi uji menjadi adil, serta tingkat signifikansi menjadi 0,05. Jalankan eksperimen 1.000 kali untuk setiap ukuran sampel berikut. Dalam setiap kasus, berikan dugaan empiris tingkat signifikansi dan bandingkan dengan 0,05.</p>
+	<ol class="sub">
+		<li>\(n = 10\)</li>
+		<li>\(n = 20\)</li>
+		<li>\(n = 40\)</li>
+		<li>\(n = 100\)</li>
+	</ol>
+</div>
+
+<div class="unit" id="o006.random.hypothesis.chi-square.unit.sim7">
+	<p class="app">Dalam <a href="https://www.randomservices.org/random/apps/DiceFit.html" class="ancillary">eksperimen kecocokan dadu</a>, atur distribusi pensampelan menjadi adil, distribusi uji menjadi pipih satu-enam, dan tingkat signifikansi menjadi 0,05. Jalankan eksperimen 1.000 kali untuk setiap ukuran sampel berikut. Dalam setiap kasus, berikan dugaan empiris kuasa uji. Apakah kuasanya tampak konvergen?</p>
+	<ol class="sub">
+		<li>\(n = 10\)</li>
+		<li>\(n = 20\)</li>
+		<li>\(n = 40\)</li>
+		<li>\(n = 100\)</li>
+	</ol>
+</div>
+
+<footer>
+	<ol class="map">
+		<li class="parent"><a href="https://www.randomservices.org/random/index.html">Random</a></li>
+		<li class="parent"><a href="index.html">8. Pengujian Hipotesis</a></li>
+		<li class="child"><a href="Introduction.html" title="Pendahuluan">1</a></li>
+		<li class="child"><a href="Normal.html" title="Pengujian pada Model Normal">2</a></li>
+		<li class="child"><a href="Bernoulli.html" title="Pengujian pada Model Bernoulli">3</a></li>
+		<li class="child"><a href="BivariateNormal.html" title="Pengujian pada Model Normal Dua Sampel">4</a></li>
+		<li class="child"><a href="Likelihood.html" title="Uji Rasio Likelihood">5</a></li>
+		<li class="current">6</li>
+		<li class="details"><button type="button" title="Perluas Rincian" onclick="expandDetails(true);"><img src="../icons/Plus.svg" alt="Perluas"></button></li>
+		<li class="details"><button type="button" title="Ciutkan Rincian" onclick="expandDetails(false);"><img src="../icons/Minus.svg" alt="Ciutkan"></button></li>
+	</ol>
+	<ul class="map">
+		<li class="sister"><a href="https://www.randomservices.org/random/apps/index.html" class="ancillary">Aplikasi</a></li>
+		<li class="sister"><a href="https://www.randomservices.org/random/data/index.html" class="ancillary">Kumpulan Data</a></li>
+		<li class="child"><a href="https://www.randomservices.org/random/biographies/index.html" class="ancillary">Biografi</a></li>
+	</ul>
+
+	<section class="edition-notice" data-o006-edition-notice="v1">
+		<p><strong>Pemberitahuan edisi.</strong> Terjemahan Bahasa Indonesia ini mengadaptasi <a href="https://www.randomservices.org/random/">Random: Probability, Mathematical Statistics, and Stochastic Processes</a> karya Kyle Siegrist. Perubahan pada halaman ini mencakup penerjemahan, penambahan ID stabil, pengalihan tautan korpus yang telah diterjemahkan ke edisi lokal, pengubahan tautan pelengkap menjadi HTTPS resmi, perbaikan dua indeks rumus Pearson, pembetulan nilai-<span class="math-inline">P</span> yang dibulatkan menjadi nol, perbaikan tata bahasa dan penomoran latihan, serta penambahan syarat regularitas, kualifikasi heuristik frekuensi harapan, dan persyaratan prapenetapan partisi; semuanya dicatat dalam daftar koreksi edisi.</p>
+		<p>Penerjemahan dan rekayasa edisi dilakukan dengan OpenAI Codex gpt-5.6-sol, Ultra, atas instruksi pengguna. Seluruh kredit bagi sumber, penulis, dan kontributor manusia tetap dipertahankan.</p>
+		<p>Situs asal menyatakan <a href="https://creativecommons.org/licenses/by/2.0/">CC BY 2.0</a>, sedangkan halaman <a href="https://www.randomservices.org/random/Credits.html">Kredit</a> menautkan <a href="https://creativecommons.org/licenses/by/1.0/">CC BY 1.0</a>; perbedaan ini dipertahankan. Edisi independen ini tidak didukung maupun disahkan oleh Kyle Siegrist atau Random Services. Data Buffon, alfa, dan Michelson serta aplikasi dadu tetap berupa tautan ke permukaan resmi; tautan tersebut tidak menyatakan hak edisi ini untuk mendistribusikan ulang materi eksternal.</p>
+	</section>
+</footer>
+
+<script>getReferences();</script>
+
+</body>
+</html>

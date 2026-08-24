@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 633 204" role="img" aria-labelledby="title desc">
+  <title id="title">Distribusi variabel pivot dan pembagian peluang kedua ekor</title>
+  <desc id="desc">Kurva kepadatan V dari X dan theta. Daerah tengah berpeluang satu dikurangi alfa; ekor kiri berpeluang satu dikurangi p kali alfa dan ekor kanan berpeluang p kali alfa.</desc>
+  <metadata>Redraw Bahasa Indonesia derived from Random interval/Tails.png, frozen SHA-256 4da888c59b35bc53fa57ba60e4daf8c9897b2db3bd9bd479c2add5bb4e4177dc. The source's lambda label is corrected to theta. OpenAI Codex gpt-5.6-sol, Ultra.</metadata>
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L7,3 z" fill="#111"/>
+    </marker>
+  </defs>
+  <rect width="633" height="204" fill="#fff"/>
+  <path d="M90 171 C106 158 118 120 132 87 L132 172 L90 172 Z" fill="#b9b9b9"/>
+  <path d="M132 87 C151 52 171 38 196 41 C237 44 269 78 314 103 C347 122 380 139 416 148 L416 172 L132 172 Z" fill="#fff200"/>
+  <path d="M416 148 C468 161 526 168 598 170 L598 172 L416 172 Z" fill="#b9b9b9"/>
+  <path d="M90 171 C106 158 118 120 132 87 C151 52 171 38 196 41 C237 44 269 78 314 103 C347 122 380 139 416 148 C468 161 526 168 598 170" fill="none" stroke="#0057ff" stroke-width="1.5"/>
+  <line x1="132" y1="87" x2="132" y2="172" stroke="#e02020" stroke-width="1.5"/>
+  <line x1="416" y1="148" x2="416" y2="172" stroke="#e02020" stroke-width="1.5"/>
+  <line x1="1" y1="172" x2="630" y2="172" stroke="#111" stroke-width="1" marker-end="url(#arrow)"/>
+  <line x1="15" y1="204" x2="15" y2="1" stroke="#111" stroke-width="1" marker-end="url(#arrow)"/>
+  <g fill="#111" font-family="Georgia, 'Times New Roman', serif" font-size="15">
+    <text x="23" y="16">Kepadatan V(X, θ)</text>
+    <text x="44" y="130">(1 − p)α</text>
+    <text x="209" y="122">1 − α</text>
+    <text x="440" y="140">pα</text>
+    <text x="97" y="196">v(α − pα)</text>
+    <text x="379" y="196">v(1 − pα)</text>
+    <text x="617" y="184">v</text>
+  </g>
+</svg>

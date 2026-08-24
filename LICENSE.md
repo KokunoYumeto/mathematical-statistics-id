@@ -1,6 +1,6 @@
 # Licensing and attribution
 
-This repository is an independent Bahasa Indonesia edition in progress of
+This repository is an independent, complete Bahasa Indonesia edition of
 Kyle Siegrist's *Random: Probability, Mathematical Statistics, and Stochastic
 Processes*, limited here to its mathematical-statistics chapters.
 

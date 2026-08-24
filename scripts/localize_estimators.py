@@ -287,6 +287,7 @@ LOCAL_URLS = {
     "https://www.randomservices.org/random/point/Likelihood.html": "Likelihood.html",
     "https://www.randomservices.org/random/point/Bayes.html": "Bayes.html",
     "https://www.randomservices.org/random/point/Unbiased.html": "Unbiased.html",
+    "https://www.randomservices.org/random/point/Sufficient.html": "Sufficient.html",
     "https://www.randomservices.org/random/sample/index.html": "../sample/index.html",
     "https://www.randomservices.org/random/sample/Introduction.html": "../sample/Introduction.html",
     "https://www.randomservices.org/random/sample/Mean.html": "../sample/Mean.html",
@@ -401,6 +402,20 @@ def main() -> None:
             raise RuntimeError(f"line {line_number}: stable-ID replacement overlaps translation")
         replace_exact_line(lines, line_number, expected, replacement)
     text = "".join(lines)
+    summary_anchor = (
+        "\t<details>\r\n\t\t<p>Seperti biasa, \\(T\\) dilengkapi"
+        if "\r\n" in text
+        else "\t<details>\n\t\t<p>Seperti biasa, \\(T\\) dilengkapi"
+    )
+    if text.count(summary_anchor) != 1:
+        raise RuntimeError("parameter-definition disclosure anchor is not unique")
+    newline = "\r\n" if "\r\n" in summary_anchor else "\n"
+    text = text.replace(
+        summary_anchor,
+        f"\t<details>{newline}\t\t<summary>Rincian:</summary>{newline}"
+        "\t\t<p>Seperti biasa, \\(T\\) dilengkapi",
+        1,
+    )
     text = re.sub(
         r'href="([^"]+)"',
         lambda match: f'href="{convert_href(match.group(1))}"',

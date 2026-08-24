@@ -348,6 +348,7 @@ LOCAL_URLS = {
     "https://www.randomservices.org/random/sample/OrderStatistics.html": "../sample/OrderStatistics.html",
     "https://www.randomservices.org/random/sample/Covariance.html": "../sample/Covariance.html",
     "https://www.randomservices.org/random/sample/Normal.html": "../sample/Normal.html",
+    "https://www.randomservices.org/random/interval/index.html": "../interval/index.html",
 }
 
 

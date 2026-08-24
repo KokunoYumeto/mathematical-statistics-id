@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="id-ID">
+
+<head>
+<meta charset="utf-8">
+	<title>Pendugaan dalam Model Normal Dua Sampel</title>
+	<meta name="author" content="Kyle Siegrist">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="keywords" content="probabilitas, statistika, pendugaan himpunan, pendugaan interval, model normal dua sampel, selisih rata-rata, rasio varians, model normal bivariat, tingkat kepercayaan">
+	<link rel="icon" href="../icons/Icon.svg" type="image/svg">
+	<link rel="stylesheet" href="../Screen.css" type="text/css" media="screen">
+	<script src="../Basic.js"></script>
+	<script src="../../MathJax/tex-svg.js" id="MathJax-script" async></script>
+</head>
+
+<body>
+
+<div class="latex">
+	\(\newcommand{\R}{\mathbb{R}}\) 
+	\(\newcommand{\N}{\mathbb{N}}\)
+	\(\newcommand{\Z}{\mathbb{Z}}\)
+	\(\newcommand{\P}{\mathbb{P}}\)
+	\(\newcommand{\E}{\mathbb{E}}\)
+	\(\newcommand{\var}{\text{var}}\)
+	\(\newcommand{\sd}{\text{sd}}\)
+	\(\newcommand{\cov}{\text{cov}}\)
+	\(\newcommand{\bs}{\boldsymbol}\)
+</div>
+
+<header>
+	<ol class="map">
+		<li class="parent"><a href="https://www.randomservices.org/random/index.html">Random</a></li>
+		<li class="parent"><a href="index.html">7. Pendugaan Himpunan</a></li>
+		<li class="child"><a href="Introduction.html" title="Pendahuluan">1</a></li>
+		<li class="child"><a href="Normal.html" title="Pendugaan dalam Model Normal">2</a></li>
+		<li class="child"><a href="Bernoulli.html" title="Pendugaan dalam Model Bernoulli">3</a></li>
+		<li class="current">4</li>
+		<li class="child"><a href="Bayes.html" title="Pendugaan Interval Bayes">5</a></li>
+		<li class="details"><button type="button" title="Perluas Rincian" onclick="expandDetails(true);"><img src="../icons/Plus.svg" alt="Perluas"></button></li>
+		<li class="details"><button type="button" title="Ciutkan Rincian" onclick="expandDetails(false);"><img src="../icons/Minus.svg" alt="Ciutkan"></button></li>
+	</ol>
+	<h2 id="o006.random.interval.bivariate-normal.page">4. Pendugaan dalam Model Normal Dua Sampel</h2>
+</header>
+
+<p>Seperti telah kita catat, <a href="https://www.randomservices.org/random/special/Normal.html">distribusi normal</a> mungkin merupakan distribusi terpenting dalam statistika matematis, antara lain karena <a href="../sample/CLT.html">teorema limit pusat</a>. Sebagai konsekuensi teorema ini, besaran terukur yang mengalami banyak galat acak kecil akan memiliki distribusi yang setidaknya mendekati normal. Variabel semacam itu terdapat di mana-mana dalam eksperimen statistik, dalam bidang yang beragam mulai dari ilmu fisika dan biologi hingga ilmu sosial.</p>
+
+<p>Dalam bagian ini, kita mempelajari masalah pendugaan pada model normal dua sampel dan model normal bivariat. Bagian ini sejajar dengan bagian mengenai <a href="../hypothesis/BivariateNormal.html">uji dalam model normal dua sampel</a> pada bab <a href="../hypothesis/Introduction.html">pengujian hipotesis</a>.</p>
+
+<h3 id="two">Model Normal Dua Sampel</h3>
+
+<h4 id="pre">Pendahuluan</h4>
+
+<p>Misalkan \(\bs{X} = (X_1, X_2, \ldots, X_m)\) adalah sampel acak berukuran \(m\) dari <a href="https://www.randomservices.org/random/special/Normal.html">distribusi normal</a> dengan <a href="https://www.randomservices.org/random/expect/Properties.html">rata-rata</a> \(\mu\) dan <a href="https://www.randomservices.org/random/expect/Variance.html">simpangan baku</a> \(\sigma\), dan misalkan \(\bs{Y} = (Y_1, Y_2, \ldots, Y_n)\) adalah sampel acak berukuran \(n\) dari distribusi normal dengan rata-rata \(\nu\) dan simpangan baku \(\tau\). Selain itu, misalkan sampel \(\bs{X}\) dan \(\bs{Y}\) <a href="https://www.randomservices.org/random/prob/Independence.html">saling bebas</a>. Biasanya parameter-parameternya tidak diketahui, sehingga ruang parameter bagi vektor parameter \((\mu, \nu, \sigma, \tau)\) adalah \(\R^2 \times (0, \infty)^2\).</p>
+
+<p>Situasi seperti ini sering muncul ketika variabel acak menyatakan suatu pengukuran yang diminati pada objek-objek dalam populasi, sedangkan kedua sampel bersesuaian dengan dua perlakuan berbeda. Sebagai contoh, kita mungkin tertarik pada tekanan darah suatu populasi pasien. Vektor \(\bs{X}\) mencatat tekanan darah sampel kontrol, sedangkan vektor \(\bs{Y}\) mencatat tekanan darah sampel yang menerima obat baru. Demikian pula, kita mungkin tertarik pada hasil panen jagung per ekar. Vektor \(\bs{X}\) mencatat hasil sampel yang menerima satu jenis pupuk, sedangkan vektor \(\bs{Y}\) mencatat hasil sampel yang menerima jenis pupuk lain.</p>
+
+<p>Biasanya perhatian kita tertuju pada perbandingan parameter kedua distribusi asal sampel, baik rata-rata maupun simpangan bakunya. Dalam bagian ini, kita membangun interval kepercayaan bagi selisih rata-rata distribusi \( \nu - \mu \) dan bagi rasio varians distribusi \( \tau^2 / \sigma^2 \). Seperti pada masalah pendugaan sebelumnya, konstruksinya bergantung pada penemuan <a href="Introduction.html">variabel pivot</a> yang sesuai.</p>
+
+<div class="unit" id="stats">
+	<p class="dfn">Untuk sampel generik \(\bs{U} = (U_1, U_2, \ldots, U_k)\) berukuran sekurang-kurangnya dua dari suatu distribusi dengan rata-rata \(a\), kita menggunakan notasi baku untuk <a href="../sample/Mean.html">rata-rata sampel</a> dan <a href="../sample/Variance.html">varians sampel</a>.
+	\begin{align}
+		M(\bs{U}) &amp; = \frac{1}{k} \sum_{i=1}^k U_i \\
+		S^2(\bs{U}) &amp; = \frac{1}{k - 1} \sum_{i=1}^k [U_i - M(\bs{U})]^2
+	\end{align}</p>
+</div>
+
+<p>Kita juga perlu mengingat <a href="../sample/Normal.html">sifat-sifat khusus</a> statistik ini ketika distribusi asal sampelnya normal. Distribusi pivot khusus yang berperan mendasar dalam bagian ini adalah distribusi <a href="https://www.randomservices.org/random/special/Normal.html">normal baku</a>, <a href="https://www.randomservices.org/random/special/Student.html">\( t \) Student</a>, dan <a href="https://www.randomservices.org/random/special/Fisher.html">Fisher \( F \)</a>. Untuk membangun dugaan interval, kita memerlukan <a href="https://www.randomservices.org/random/dist/CDF.html">kuantil</a> distribusi-distribusi tersebut. Kuantil dapat dihitung menggunakan <a href="https://www.randomservices.org/random/apps/QuantileApp.html" class="ancillary">aplikasi kuantil</a> atau sebagian besar perangkat lunak matematika dan statistika. Berikut notasi yang kita gunakan:</p>
+
+<div class="unit" id="qnt">
+	<p class="dfn">Misalkan \( p \in (0, 1) \) serta \(j, \, k \in \N_+ \).</p>
+	<ol class="sub">
+		<li>\( z(p) \) menyatakan kuantil berorde \( p \) dari distribusi normal baku.</li>
+		<li>\( t_k(p) \) menyatakan kuantil berorde \( p \) dari distribusi \( t \) Student dengan \( k \) derajat kebebasan.</li>
+		<li>\(f_{j,k}(p)\) menyatakan kuantil berorde \( p \) dari distribusi Fisher \( F \) dengan \( j \) derajat kebebasan pada pembilang dan \( k \) derajat kebebasan pada penyebut.</li>
+	</ol>
+</div>
+
+<p>Ingat bahwa berdasarkan simetri, \(z(p) = -z(1 - p)\) dan \( t_k(p) = -t_k(1 - p) \) untuk \( p \in (0, 1) \) serta \( k \in \N_+ \). Untuk distribusi Fisher, hubungan resiprokal yang tepat menukar derajat kebebasan: \(f_{j,k}(p) = 1 / f_{k,j}(1 - p)\).</p>
+
+<h4 id="knw">Interval Kepercayaan bagi Selisih Rata-Rata dengan Varians Diketahui</h4>
+
+<p>Pertama-tama kita membangun interval kepercayaan bagi \( \nu - \mu \) dengan asumsi varians distribusi \( \sigma^2 \) dan \( \tau^2 \) diketahui. Asumsi ini tidak selalu dibuat-buat. Seperti dalam <a href="Normal.html">model normal satu sampel</a>, varians kadang-kadang stabil sehingga setidaknya diketahui secara hampiran, sedangkan rata-rata berubah akibat perlakuan yang berbeda. Ingatlah terlebih dahulu fakta dasar berikut.</p>
+
+<div class="unit" id="knw1">
+	<p class="math">Selisih rata-rata sampel \(M(\bs{Y}) - M(\bs{X})\) berdistribusi normal dengan rata-rata \(\nu - \mu\) dan varians \(\sigma^2 / m + \tau^2 / n\). Oleh karena itu, skor baku selisih rata-rata sampel
+	\[ Z = \frac{[M(\bs{Y}) - M(\bs{X})] - (\nu - \mu)}{\sqrt{\sigma^2 / m + \tau^2 / n}} \]
+	mempunyai distribusi normal baku. Jadi, variabel ini merupakan variabel pivot bagi \( \nu - \mu \) ketika \( \sigma, \tau\) diketahui.</p>
+</div>
+
+<p>Interval kepercayaan dasar serta batas bawah dan batas atas kini mudah dibangun.</p>
+
+<div class="unit" id="knw2">
+	<p class="math">Untuk \( \alpha \in (0, 1) \),</p>
+	<ol class="sub">
+		<li>\( \left[M(\bs{Y}) - M(\bs{X}) - z\left(1 - \frac{\alpha}{2}\right) \sqrt{\frac{\sigma^2}{m} + \frac{\tau^2}{n}}, M(\bs{Y}) - M(\bs{X}) + z\left(1 - \frac{\alpha}{2}\right) \sqrt{\frac{\sigma^2}{m} + \frac{\tau^2}{n}}\right] \) adalah interval kepercayaan bertingkat \( 1 - \alpha \) bagi \( \nu - \mu \).</li>
+		<li>\( M(\bs{Y}) - M(\bs{X}) - z(1 - \alpha) \sqrt{\frac{\sigma^2}{m} + \frac{\tau^2}{n}} \) adalah batas bawah kepercayaan bertingkat \( 1 - \alpha \) bagi \( \nu - \mu \).</li>
+		<li>\( M(\bs{Y}) - M(\bs{X}) + z(1 - \alpha) \sqrt{\frac{\sigma^2}{m} + \frac{\tau^2}{n}} \) adalah batas atas kepercayaan bertingkat \( 1 - \alpha \) bagi \( \nu - \mu \).</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Variabel \( Z \) yang diberikan pada <a href="#knw1" class="ref"></a> mempunyai distribusi normal baku. Karena itu, menurut definisi kuantil, setiap kejadian berikut mempunyai peluang \( 1 - \alpha \):</p>
+		<ol class="sub">
+			<li>\( \left\{-z\left(1 - \frac{\alpha}{2}\right) \le Z \le z\left(1 - \frac{\alpha}{2}\right)\right\} \)</li>
+			<li>\( \left\{Z \le z(1 - \alpha)\right\} \)</li>
+			<li>\( \left\{Z \ge -z(1 - \alpha)\right\} \)</li>
+		</ol>
+		<p>Dalam setiap kasus, menyelesaikan pertidaksamaan terhadap \( \nu - \mu \) menghasilkan pernyataan yang dimaksud.</p>
+	</details>
+</div>
+
+<p>Interval dua sisi pada bagian (a) adalah <dfn>interval simetris</dfn> yang menempatkan \( \alpha / 2 \) pada masing-masing ekor distribusi normal baku. Seperti biasa, kita dapat membangun interval dua sisi yang lebih umum dengan membagi \( \alpha \) di antara ekor kiri dan kanan dengan cara apa pun yang diinginkan.</p>
+
+
+<div class="unit" id="knw3">
+	<p class="math">Untuk setiap \(\alpha, \, p \in (0, 1)\), sebuah interval kepercayaan bertingkat \(1 - \alpha\) bagi \(\nu - \mu\) adalah
+	\[ \left[M(\bs{Y}) - M(\bs{X}) - z(1 - \alpha p) \sqrt{\frac{\sigma^2}{m} + \frac{\tau^2}{n}},  M(\bs{Y}) - M(\bs{X}) - z(\alpha - p \alpha) \sqrt{\frac{\sigma^2}{m} + \frac{\tau^2}{n}} \right]\]</p>
+	<ol class="sub">
+		<li>\( p = \frac{1}{2} \) menghasilkan interval dua sisi simetris.</li>
+		<li>\( p \to 1 \) menghasilkan interval dengan batas bawah kepercayaan.</li>
+		<li>\( p \to 0 \) menghasilkan interval dengan batas atas kepercayaan.</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Dari distribusi variabel pivot dan definisi fungsi kuantil,
+		\[ \P \left[ z(\alpha - p \alpha) \lt \frac{[M(\bs{Y}) - M(\bs{X})] - (\nu - \mu)}{\sqrt{\sigma^2 / m + \tau^2 / n}} \lt z(1 - p \alpha) \right] = 1 - \alpha \]
+		Dengan menyelesaikan pertidaksamaan terhadap \(\nu - \mu\), diperoleh interval kepercayaan tersebut.</p>
+	</details>
+</div>
+
+<p>Teorema berikut memberikan beberapa sifat dasar panjang interval ini.</p>
+
+<div class="unit" id="knw4">
+	<p class="math">Panjang deterministik interval kepercayaan dua sisi umum adalah
+	\[ L = [z(1 - \alpha p) - z(\alpha - \alpha p)] \sqrt{\frac{\sigma^2}{m} + \frac{\tau^2}{n}}  \]</p>
+	<ol class="sub">
+		<li>\( L \) menurun sebagai fungsi \( m \) dan juga sebagai fungsi \( n \).</li>
+		<li>\( L \) meningkat sebagai fungsi \( \sigma \) dan juga sebagai fungsi \( \tau \).</li>
+		<li>\( L \) menurun sebagai fungsi \( \alpha \), sehingga meningkat sebagai fungsi tingkat kepercayaan.</li>
+		<li>Sebagai fungsi \( p \), \( L \) mula-mula menurun lalu meningkat, dengan nilai minimum pada \( p = \frac{1}{2} \).</li>
+	</ol>
+</div>
+
+<p>Bagian (a) berarti bahwa dugaan dapat dibuat lebih presisi dengan memperbesar salah satu atau kedua ukuran sampel. Bagian (b) berarti bahwa dugaan menjadi kurang presisi ketika varians salah satu distribusi meningkat. Bagian (c) menyatakan kompromi yang telah kita lihat sebelumnya: jika hal-hal lain tetap, tingkat kepercayaan hanya dapat dinaikkan dengan mengurangi presisi. Bagian (d) berarti bahwa interval simetris berekor sama mempunyai panjang minimum dalam keluarga interval dua sisi yang dibangun dari pembagian peluang ekor tersebut.</p>
+
+<h4 id="unk">Interval Kepercayaan bagi Selisih Rata-Rata dengan Varians Tidak Diketahui</h4>
+
+<p>Metode berikutnya membangun interval kepercayaan bagi selisih rata-rata \(\nu - \mu\) tanpa perlu mengetahui simpangan baku \(\sigma\) dan \(\tau\). Ada harga yang harus dibayar: kita mengasumsikan simpangan baku keduanya sama, \(\sigma = \tau\), tetapi nilai bersama itu tidak diketahui. Kedua ukuran sampel harus sedikitnya dua. Asumsi kesamaan ini masuk akal jika terdapat variabilitas inheren pada variabel pengukuran yang tidak berubah walaupun perlakuan berbeda diterapkan pada objek-objek dalam populasi. Kita perlu mengingat beberapa fakta dasar dari pembahasan <a href="../sample/Normal.html">sifat-sifat khusus sampel normal</a>.</p>
+
+<div class="unit" id="unk1">
+	<p class="math"><dfn>Penduga gabungan</dfn> bagi varians bersama \(\sigma^2 = \tau^2\) adalah
+	\[ S^2(\bs{X}, \bs{Y}) = \frac{(m - 1) S^2(\bs{X}) + (n - 1) S^2(\bs{Y})}{m + n - 2} \]
+	Variabel acak
+	\[ T = \frac{\left[M(\bs{Y}) - M(\bs{X})\right] - (\nu - \mu)}{S(\bs{X}, \bs{Y}) \sqrt{1 / m + 1 / n}} \]
+	mempunyai <a href="https://www.randomservices.org/random/special/Student.html">distribusi \( t \) Student</a> dengan \( m + n - 2 \) derajat kebebasan.</p>
+</div>
+
+<p>Perhatikan bahwa \( S^2(\bs{X}, \bs{Y}) \) merupakan rata-rata tertimbang kedua varians sampel, dengan derajat kebebasan sebagai bobotnya. Perhatikan pula bahwa \( T \) adalah variabel pivot bagi \( \nu - \mu \), sehingga interval kepercayaan bagi \( \nu - \mu \) dapat dibangun dengan cara biasa.</p>
+
+<div class="unit" id="unk2">
+	<p class="math">Untuk \( \alpha \in (0, 1) \),</p>
+	<ol class="sub">
+		<li>\( \left[M(\bs{Y}) - M(\bs{X}) - t_{m + n - 2}\left(1 - \frac{\alpha}{2}\right) S(\bs{X},\bs{Y})\sqrt{\frac{1}{m} + \frac{1}{n}}, M(\bs{Y}) - M(\bs{X}) + t_{m + n - 2}\left(1 - \frac{\alpha}{2}\right) S(\bs{X},\bs{Y})\sqrt{\frac{1}{m} + \frac{1}{n}}\right] \) adalah interval kepercayaan bertingkat \( 1 - \alpha \) bagi \( \nu - \mu \).</li>
+		<li>\( M(\bs{Y}) - M(\bs{X}) - t_{m + n - 2}(1 - \alpha) S(\bs{X},\bs{Y})\sqrt{\frac{1}{m} + \frac{1}{n}} \) adalah batas bawah kepercayaan bertingkat \( 1 - \alpha \) bagi \( \nu - \mu \).</li>
+		<li>\( M(\bs{Y}) - M(\bs{X}) + t_{m + n - 2}(1 - \alpha) S(\bs{X},\bs{Y})\sqrt{\frac{1}{m} + \frac{1}{n}} \) adalah batas atas kepercayaan bertingkat \( 1 - \alpha \) bagi \( \nu - \mu \).</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Variabel \( T \) yang diberikan pada <a href="#unk1" class="ref"></a> mempunyai distribusi t Student dengan derajat kebebasan sebanyak jumlah kedua ukuran sampel dikurangi dua. Karena itu, menurut definisi kuantil, setiap kejadian berikut mempunyai peluang \( 1 - \alpha \):</p>
+		<ol class="sub">
+			<li>\( \left\{-t_{m+n-2}\left(1 - \frac{\alpha}{2}\right) \le T \le t_{m+n-2}\left(1 - \frac{\alpha}{2}\right)\right\} \)</li>
+			<li>\( \left\{T \le t_{m+n-2}(1 - \alpha)\right\} \)</li>
+			<li>\( \left\{T \ge -t_{m+n-2}(1 - \alpha)\right\} \)</li>
+		</ol>
+		<p>Dalam setiap kasus, menyelesaikan pertidaksamaan terhadap \( \nu - \mu \) menghasilkan pernyataan yang dimaksud.</p>
+	</details>
+</div>
+
+<p>Interval dua sisi pada bagian (a) adalah <dfn>interval simetris</dfn> yang menempatkan \( \alpha / 2 \) pada masing-masing ekor distribusi \( t \) Student. Seperti biasa, kita dapat membangun interval dua sisi yang lebih umum dengan membagi \( \alpha \) di antara ekor kiri dan kanan dengan cara apa pun yang diinginkan.</p>
+
+<div class="unit" id="unk3">
+	<p class="math">Untuk setiap \(\alpha, \, p \in (0, 1)\), sebuah interval kepercayaan bertingkat \(1 - \alpha\) bagi \(\nu - \mu\) adalah
+	\[ \left[M(\bs{Y}) - M(\bs{X}) - t_{m+n-2}(1 - \alpha p) S(\bs{X}, \bs{Y})\sqrt{\frac{1}{m} + \frac{1}{n}},  M(\bs{Y}) - M(\bs{X}) - t_{m+n-2}(\alpha - p \alpha) S(\bs{X}, \bs{Y}) \sqrt{\frac{1}{m} + \frac{1}{n}} \right]\]</p>
+	<ol class="sub">
+		<li>\( p = \frac{1}{2} \) menghasilkan interval dua sisi simetris.</li>
+		<li>\( p \to 1 \) menghasilkan interval dengan batas bawah kepercayaan.</li>
+		<li>\( p \to 0 \) menghasilkan interval dengan batas atas kepercayaan.</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Dari distribusi variabel pivot dan definisi fungsi kuantil,
+		\[ \P \left[ t_{m+n-2}(\alpha - p \alpha) \lt \frac{[M(\bs{Y}) - M(\bs{X})] - (\nu - \mu)}{S(\bs{X}, \bs{Y})\sqrt{1 / m + 1 / n}} \lt t_{m+n-2}(1 - p \alpha) \right] = 1 - \alpha \]
+		Dengan menyelesaikan pertidaksamaan terhadap \(\nu - \mu\), diperoleh interval kepercayaan tersebut.</p>
+	</details>
+</div>
+
+<p>Hasil berikut membahas panjang interval dua sisi umum.</p>
+
+<div class="unit" id="o006.random.interval.bivariate-normal.unit-10">
+	<p class="math">Panjang acak interval dua sisi di atas adalah
+	\[ L = [t_{m+n-2}(1 - p \alpha) - t_{m+n-2}(\alpha - p \alpha)] S(\bs{X}, \bs{Y}) \sqrt{\frac{1}{m} + \frac{1}{n}} \]</p>
+	<ol class="sub">
+		<li>\( L \) menurun sebagai fungsi \( \alpha \), sehingga meningkat sebagai fungsi tingkat kepercayaan.</li>
+		<li>Sebagai fungsi \( p \), \( L \) mula-mula menurun lalu meningkat, dengan nilai minimum pada \( p = \frac{1}{2} \).</li>
+	</ol>
+</div>
+
+<p>Seperti dalam kasus varians diketahui, bagian (a) berarti bahwa jika hal-hal lain tetap, tingkat kepercayaan hanya dapat dinaikkan dengan mengurangi presisi. Bagian (b) berarti bahwa interval simetris berekor sama mempunyai panjang minimum dalam keluarga interval dua sisi ini.</p>
+
+<h4 id="rat">Interval Kepercayaan bagi Rasio Varians</h4>
+
+<p>Konstruksi berikut menghasilkan dugaan interval bagi rasio varians \( \tau^2 / \sigma^2 \), atau setelah mengambil akar kuadrat, bagi rasio simpangan baku \( \tau / \sigma \). Kedua ukuran sampel harus sedikitnya dua. Sekali lagi, kita perlu mengingat beberapa fakta dasar dari pembahasan <a href="../sample/Normal.html">sifat-sifat khusus</a> sampel acak dari distribusi normal.</p>
+
+<div class="unit" id="rat1">
+	<p class="math">Rasio
+	\[ U = \frac{S^2(\bs{X}) \tau^2}{S^2(\bs{Y}) \sigma^2} \]
+	mempunyai <a href="https://www.randomservices.org/random/special/Fisher.html">distribusi \(F\)</a> dengan \(m - 1\) derajat kebebasan pada pembilang dan \(n - 1\) derajat kebebasan pada penyebut. Karena itu, variabel ini merupakan variabel pivot bagi \(\tau^2 / \sigma^2\).</p>
+</div>
+
+<p>Variabel pivot \( U \) dapat digunakan untuk membangun interval kepercayaan bagi \( \tau^2 / \sigma^2 \) dengan cara biasa.</p>
+
+<div class="unit" id="rat2">
+	<p class="math">Untuk \( \alpha \in (0, 1) \),</p>
+	<ol class="sub">
+		<li>\( \left[f_{m-1, n-1}\left(\frac{\alpha}{2}\right) \frac{S^2(\bs{Y})}{S^2(\bs{X})}, f_{m-1, n-1}\left(1 - \frac{\alpha}{2}\right) \frac{S^2(\bs{Y})}{S^2(\bs{X})} \right] \) adalah interval kepercayaan bertingkat \( 1 - \alpha \) bagi \( \tau^2 / \sigma^2 \).</li>
+		<li>\( f_{m-1, n-1}(\alpha) \frac{S^2(\bs{Y})}{S^2(\bs{X})} \) adalah batas bawah kepercayaan bertingkat \( 1 - \alpha \) bagi \( \tau^2 / \sigma^2 \).</li>
+		<li>\(f_{m-1, n-1}(1 - \alpha) \frac{S^2(\bs{Y})}{S^2(\bs{X})} \) adalah batas atas kepercayaan bertingkat \( 1 - \alpha \) bagi \( \tau^2 / \sigma^2 \).</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Variabel \( U \) yang diberikan pada <a href="#rat1" class="ref"></a> mempunyai distribusi \( F \) dengan \( m - 1 \) derajat kebebasan pada pembilang dan \( n - 1 \) derajat kebebasan pada penyebut. Karena itu, menurut definisi kuantil, setiap kejadian berikut mempunyai peluang \( 1 - \alpha \):</p>
+		<ol class="sub">
+			<li>\( \left\{f_{m-1,n-1}\left(\frac{\alpha}{2}\right) \le U \le f_{m-1,n-1}\left(1 - \frac{\alpha}{2}\right)\right\} \)</li>
+			<li>\( \left\{U \ge f_{m-1,n-1}(\alpha)\right\} \)</li>
+			<li>\( \left\{U \le f_{m-1,n-1}(1 - \alpha)\right\} \)</li>
+		</ol>
+		<p>Dalam setiap kasus, menyelesaikan pertidaksamaan terhadap \( \tau^2 / \sigma^2 \) menghasilkan pernyataan yang dimaksud.</p>
+	</details>
+</div>
+
+<p>Interval kepercayaan dua sisi pada bagian (a) adalah interval kepercayaan <dfn>berekor sama</dfn> dan merupakan interval yang lazim digunakan. Namun, seperti biasa, kita dapat membagi \( \alpha \) di antara ekor kiri dan kanan distribusi variabel pivot dengan cara apa pun yang diinginkan.</p>
+
+<div class="unit" id="rat3">
+	<p class="math">Untuk setiap \(\alpha, \, p \in (0, 1)\), sebuah himpunan kepercayaan bertingkat \(1 - \alpha\) bagi \(\tau^2 / \sigma^2 \) adalah
+	\[ \left[f_{m-1, n-1}(\alpha - p \alpha) \frac{S^2(\bs{Y})}{S^2(\bs{X})}, f_{m-1, n-1}(1 - p \alpha) \frac{S^2(\bs{Y})}{S^2(\bs{X})} \right] \]</p>
+	<ol class="sub">
+		<li>\( p = \frac{1}{2} \) menghasilkan interval dua sisi berekor sama.</li>
+		<li>\( p \to 1 \) menghasilkan interval dengan batas atas kepercayaan.</li>
+		<li>\( p \to 0 \) menghasilkan interval dengan batas bawah kepercayaan.</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Dari variabel pivot \( F \) dan definisi fungsi kuantil,
+		\[ \P \left[ f_{m-1,n-1}(\alpha - p \, \alpha) \lt \frac{S^2(\bs{X}) \tau^2}{S^2(\bs{Y}) \sigma^2} \lt f_{m-1,n-1}(1 - p \,\alpha) \right] = 1 - \alpha \]
+		Dengan menyelesaikan pertidaksamaan terhadap \(\tau^2 / \sigma^2\), diperoleh interval kepercayaan tersebut.</p>
+	</details>
+</div>
+
+<p>Panjang interval kepercayaan umum dibahas berikutnya.</p>
+
+<div class="unit" id="rat4">
+	<p class="math">Panjang acak interval kepercayaan dua sisi umum di atas adalah
+	\[ L = \left[f_{m-1,n-1}(1 - p \alpha) - f_{m-1,n-1}(\alpha - p \alpha) \right] \frac{S^2(\bs{Y})}{S^2(\bs{X})}\]
+	Dengan asumsi \( m \gt 5 \) dan \( n \gt 1 \),</p>
+	<ol class="sub">
+		<li>\( L \) menurun sebagai fungsi \( \alpha \), sehingga meningkat sebagai fungsi tingkat kepercayaan.</li>
+		<li>\( \E(L) = \left[f_{m-1,n-1}(1 - p \alpha) - f_{m-1,n-1}(\alpha - p \alpha)\right] \frac{\tau^2}{\sigma^2} \frac{m - 1}{m - 3} \)</li>
+		<li>\( \var(L) = \left[f_{m-1,n-1}(1 - p \alpha) - f_{m-1,n-1}(\alpha - p \alpha)\right]^2 2 \frac{\tau^4}{\sigma^4} \left(\frac{m - 1}{m - 3}\right)^2 \frac{m + n - 4}{(n - 1) (m - 5)} \)</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Bagian (b) dan (c) mengikuti karena \( \frac{\sigma^2}{\tau^2} \frac{S^2(\bs{Y})}{S^2(\bs{X})} \) mempunyai distribusi \( F \) dengan \( n - 1 \) derajat kebebasan pada pembilang dan \( m - 1 \) derajat kebebasan pada penyebut.</p>
+	</details>
+</div>
+
+<p>Secara ideal, kita mungkin ingin memilih \( p \) yang meminimalkan \( \E(L) \). Namun, masalah ini sulit secara komputasional. Untungnya, interval berekor sama dengan \( p = \frac{1}{2} \) tidak terlalu jauh dari optimal ketika ukuran sampel \( m \) dan \( n \) besar; pernyataan ini bukan klaim optimalitas universal.</p>
+
+<h3 id="biv">Pendugaan dalam Model Normal Bivariat</h3>
+
+<p>Dalam subbagian ini, kita meninjau model yang sepintas mirip dengan model normal dua sampel, tetapi sebenarnya jauh lebih sederhana. Misalkan
+\[ \left((X_1, Y_1), (X_2, Y_2), \ldots, (X_n, Y_n)\right) \]
+adalah sampel acak berukuran \(n\) dari <a href="https://www.randomservices.org/random/special/MultiNormal.html">distribusi normal bivariat</a> suatu vektor acak \((X, Y)\), dengan \(\E(X) = \mu\), \(\E(Y) = \nu\), \(\var(X) = \sigma^2\), \(\var(Y) = \tau^2\), dan \(\cov(X, Y) = \delta\).</p>
+
+<p>Jadi, alih-alih mempunyai <em>sepasang sampel</em>, kita mempunyai <em>sampel pasangan</em>. Model seperti ini sering muncul dalam <dfn>eksperimen sebelum dan sesudah</dfn>, ketika suatu pengukuran yang diminati dicatat bagi sampel berukuran \(n\), baik sebelum maupun sesudah suatu perlakuan. Sebagai contoh, kita dapat mencatat tekanan darah sampel \(n\) pasien sebelum dan sesudah pemberian obat tertentu. Hal pentingnya ialah bahwa dalam model ini, \( X_i \) dan \( Y_i \) merupakan pengukuran pada objek dasar yang sama dalam sampel. Seperti pada model normal dua sampel, perhatian biasanya tertuju pada pendugaan selisih rata-rata.</p>
+
+<p>Untuk ukuran sampel sedikitnya dua, kita menggunakan notasi pada definisi <a href="#stats" class="ref"></a> bagi rata-rata dan varians sampel \(\bs{X} = (X_1, X_2, \ldots, X_n)\) serta \(\bs{Y} = (Y_1, Y_2, \ldots, Y_n)\). Ingat pula bahwa <a href="../sample/Covariance.html">kovarians sampel</a> dari \((\bs{X}, \bs{Y})\) adalah
+\[ S(\bs{X}, \bs{Y}) = \frac{1}{n - 1} \sum_{i=1}^n [X_i - M(\bs{X})][Y_i - M(\bs{Y})] \]
+(jangan disamakan dengan penduga gabungan simpangan baku pada model dua sampel).</p>
+
+<div class="unit" id="biv1">
+	<p class="math">Vektor selisih \(\bs{Y} - \bs{X} = (Y_1 - X_1, Y_2 - X_2, \ldots, Y_n - X_n)\) merupakan sampel acak berukuran \(n\) dari distribusi \(Y - X\), yang berdistribusi normal dengan</p>
+	<ol class="sub">
+		<li>\(\E(Y - X) = \nu - \mu\)</li>
+		<li>\(\var(Y - X) = \sigma^2 + \tau^2 - 2 \, \delta\)</li>
+	</ol>
+</div>
+
+<div class="unit" id="biv2">
+	<p class="math">Rata-rata sampel dan varians sampel dari sampel selisih diberikan oleh</p>
+	<ol class="sub">
+		<li>\(M(\bs{Y} - \bs{X}) = M(\bs{Y}) - M(\bs{X})\)</li>
+		<li>\(S^2(\bs{Y} - \bs{X}) = S^2(\bs{X}) + S^2(\bs{Y}) - 2 \, S(\bs{X}, \bs{Y})\)</li>
+	</ol>
+</div>
+
+<p>Jadi, sampel selisih \(\bs{Y} - \bs{X}\) memenuhi model normal bagi satu variabel. Bagian mengenai <a href="Normal.html">pendugaan dalam model normal</a> dapat digunakan untuk memperoleh himpunan dan interval kepercayaan bagi parameter \((\nu - \mu, \sigma^2 + \tau^2 - 2 \, \delta)\).</p>
+
+<div class="unit" id="biv3">
+	<p class="math">Dalam konteks subbagian ini, misalkan \(\bs{X} = (X_1, X_2, \ldots, X_n)\) dan \(\bs{Y} = (Y_1, Y_2, \ldots, Y_n)\) saling bebas. Secara matematis, situasi ini memenuhi kedua model—model normal dua sampel dan model normal bivariat. Prosedur mana yang lebih baik untuk menduga selisih rata-rata \(\nu - \mu\)?</p>
+	<ol class="sub">
+		<li>Jika simpangan baku \(\sigma\) dan \(\tau\) diketahui.</li>
+		<li>Jika simpangan baku \(\sigma\) dan \(\tau\) tidak diketahui.</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<ol class="sub">
+			<li>Kedua metode ekuivalen.</li>
+			<li>Tidak ada urutan universal. Jika kedua simpangan baku sama sehingga prosedur gabungan dua sampel sah, prosedur dua sampel memakai dua kali ukuran sampel dikurangi dua derajat kebebasan dan lebih efisien daripada prosedur selisih berpasangan, yang memakai ukuran sampel dikurangi satu derajat kebebasan. Jika kedua simpangan baku berbeda, prosedur gabungan tersebut tidak sah, sedangkan prosedur selisih berpasangan tetap eksak bagi pasangan normal.</li>
+		</ol>
+	</details>
+</div>
+
+<p>Walaupun konteks pada <a href="#biv3" class="ref"></a> memenuhi kedua model secara <em>matematis</em>, hanya satu model yang masuk akal dalam suatu masalah nyata. Sekali lagi, hal pentingnya ialah apakah \( (X_i, Y_i) \) masuk akal sebagai pasangan variabel acak (pengukuran) yang berkaitan dengan satu objek tertentu dalam sampel.</p>
+
+<h3 id="exe">Latihan Komputasi</h3>
+
+<div class="unit" id="exe1">
+	<p class="math">Sebuah obat baru sedang dikembangkan untuk menurunkan kadar suatu zat kimia dalam darah. Sebanyak 36 pasien diberi plasebo, sedangkan 49 pasien diberi obat tersebut. Misalkan \(X\) menyatakan pengukuran pada pasien yang menerima plasebo dan \(Y\) pengukuran pada pasien yang menerima obat, dalam mg. Statistiknya adalah \(m(\bs{x}) = 87\), \(s(\bs{x}) = 4\), \(m(\bs{y}) = 63\), dan \(s(\bs{y}) = 6\).</p>
+	<ol class="sub">
+		<li>Hitung interval kepercayaan 90% bagi \(\tau / \sigma\).</li>
+		<li>Dengan asumsi \(\sigma = \tau\), hitung interval kepercayaan 90% bagi \(\nu - \mu\).</li>
+		<li>Berdasarkan bagian (a), apakah asumsi \(\sigma = \tau\) masuk akal?</li>
+		<li>Berdasarkan bagian (b), apakah obat tersebut efektif?</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<ol class="sub">
+			<li>\((1.148, 1.937)\)</li>
+			<li>\((-25.917, -22.083)\)</li>
+			<li>Mungkin tidak.</li>
+			<li>Ya.</li>
+		</ol>
+	</details>
+</div>
+
+<div class="unit" id="exe2">
+	<p class="math">Sebuah perusahaan mengklaim bahwa suplemen herbal meningkatkan kecerdasan. Sampel sebanyak 25 orang menjalani tes IQ baku sebelum dan sesudah mengonsumsi suplemen tersebut. Misalkan \(X\) menyatakan IQ subjek sebelum mengonsumsi suplemen dan \(Y\) IQ subjek sesudahnya. Statistik sebelum dan sesudah adalah \(m(\bs{x}) = 105\), \(s(\bs{x}) = 13\), \(m(\bs{y}) = 110\), \(s(\bs{y}) = 17\), dan \(s(\bs{x}, \bs{y}) = 190\). Apakah Anda mempercayai klaim perusahaan tersebut?</p>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Batas bawah kepercayaan 90% bagi selisih IQ adalah 2,672. Mungkin terdapat peningkatan yang sangat kecil.</p>
+	</details>
+</div>
+
+<div class="unit" id="exe3">
+	<p class="stat">Dalam <a href="https://www.randomservices.org/random/data/Iris.html" class="ancillary">data iris Fisher</a>, misalkan \(X\) menyatakan panjang mahkota bunga iris Versicolor dan \(Y\) panjang mahkota bunga iris Virginica.</p>
+	<ol class="sub">
+		<li>Hitung interval kepercayaan 90% bagi \(\tau / \sigma\).</li>
+		<li>Dengan asumsi \(\sigma = \tau\), hitung interval kepercayaan 90% bagi \(\nu - \mu\).</li>
+		<li>Berdasarkan bagian (a), apakah asumsi \(\sigma = \tau\) masuk akal?</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<ol class="sub">
+			<li>\((0.8, 1.3)\)</li>
+			<li>\((10.5, 14.1)\)</li>
+			<li>Ya.</li>
+		</ol>
+	</details>
+</div>
+
+<div class="unit" id="exe4">
+	<p class="math">Sebuah pabrik mempunyai dua mesin yang menghasilkan batang bundar dengan diameter kritis, dalam cm. Misalkan \(X\) menyatakan diameter batang dari mesin pertama dan \(Y\) diameter batang dari mesin kedua. Sampel 100 batang dari mesin pertama mempunyai rata-rata 10,3 dan simpangan baku 1,2. Sampel 100 batang dari mesin kedua mempunyai rata-rata 9,8 dan simpangan baku 1,6.</p>
+	<ol class="sub">
+		<li>Hitung interval kepercayaan 90% bagi \(\tau / \sigma\).</li>
+		<li>Dengan asumsi \(\sigma = \tau\), hitung interval kepercayaan 90% bagi \(\nu - \mu\).</li>
+		<li>Berdasarkan bagian (a), apakah asumsi \(\sigma = \tau\) masuk akal?</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<ol class="sub">
+			<li>\((1.129, 1.574)\)</li>
+			<li>\((-0.831, -0.169)\)</li>
+			<li>Mungkin tidak.</li>
+		</ol>
+	</details>
+</div>
+
+<footer>
+	<ol class="map">
+		<li class="parent"><a href="https://www.randomservices.org/random/index.html">Random</a></li>
+		<li class="parent"><a href="index.html">7. Pendugaan Himpunan</a></li>
+		<li class="child"><a href="Introduction.html" title="Pendahuluan">1</a></li>
+		<li class="child"><a href="Normal.html" title="Pendugaan dalam Model Normal">2</a></li>
+		<li class="child"><a href="Bernoulli.html" title="Pendugaan dalam Model Bernoulli">3</a></li>
+		<li class="current">4</li>
+		<li class="child"><a href="Bayes.html" title="Pendugaan Interval Bayes">5</a></li>
+		<li class="details"><button type="button" title="Perluas Rincian" onclick="expandDetails(true);"><img src="../icons/Plus.svg" alt="Perluas"></button></li>
+		<li class="details"><button type="button" title="Ciutkan Rincian" onclick="expandDetails(false);"><img src="../icons/Minus.svg" alt="Ciutkan"></button></li>
+	</ol>
+	<ul class="map">
+		<li class="sister"><a href="https://www.randomservices.org/random/apps/index.html" class="ancillary">Aplikasi</a></li>
+		<li class="sister"><a href="https://www.randomservices.org/random/data/index.html" class="ancillary">Himpunan Data</a></li>
+		<li class="child"><a href="https://www.randomservices.org/random/biographies/index.html" class="ancillary">Biografi</a></li>
+	</ul>
+
+	<section class="edition-notice" data-o006-edition-notice="v1">
+		<p><strong>Pemberitahuan edisi.</strong> Terjemahan Bahasa Indonesia ini mengadaptasi <a href="https://www.randomservices.org/random/">Random: Probabilitas, Statistika Matematis, dan Proses Stokastik</a> karya Kyle Siegrist. Perubahan pada halaman ini mencakup penerjemahan, penambahan ID stabil, perbaikan satu paragraf sumber yang kehilangan tag pembuka, pengalihan tautan inti yang telah diterjemahkan ke edisi lokal, pengalihan tautan inti yang belum diterjemahkan ke sumber resmi, pengubahan tautan pelengkap menjadi tautan HTTPS resmi, dan koreksi matematis, jawaban, tautan, serta ejaan terbatas yang dicatat dalam daftar koreksi edisi.</p>
+		<p>Situs asal menyatakan <a href="https://creativecommons.org/licenses/by/2.0/">CC BY 2.0</a>, sedangkan halaman <a href="https://www.randomservices.org/random/Credits.html">Kredit</a> menautkan <a href="https://creativecommons.org/licenses/by/1.0/">CC BY 1.0</a>; perbedaan ini dipertahankan. Edisi independen ini tidak didukung maupun disahkan oleh Kyle Siegrist atau Random Services. Tautan ke aplikasi, data, dan biografi pihak ketiga tidak menyatakan hak untuk mendistribusikan ulang materi tersebut.</p>
+	</section>
+</footer>
+
+<script>getReferences();</script>
+
+</body>
+</html>

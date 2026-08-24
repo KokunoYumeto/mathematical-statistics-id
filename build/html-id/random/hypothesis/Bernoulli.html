@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="id-ID">
+
+<head>
+	<meta charset="utf-8">
+	<title>Pengujian pada Model Bernoulli</title>
+	<meta name="author" content="Kyle Siegrist">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="keywords" content="probabilitas, statistika, pengujian hipotesis, distribusi Bernoulli, proporsi, uji binomial, uji normal, uji tanda">
+	<link rel="icon" href="../icons/Icon.svg" type="image/svg">
+	<link rel="stylesheet" href="../Screen.css" type="text/css" media="screen">
+	<script src="../Basic.js"></script>
+	<script src="../../MathJax/tex-svg.js" id="MathJax-script" async></script>
+</head>
+
+<body>
+
+<div class="latex">
+	\(\newcommand{\R}{\mathbb{R}}\) 
+	\(\newcommand{\N}{\mathbb{N}}\)
+	\(\newcommand{\Z}{\mathbb{Z}}\)
+	\(\newcommand{\P}{\mathbb{P}}\)
+	\(\newcommand{\E}{\mathbb{E}}\)
+	\(\newcommand{\var}{\text{var}}\)
+	\(\newcommand{\sd}{\text{sd}}\)
+	\(\newcommand{\bs}{\boldsymbol}\)
+</div>
+
+<header>
+	<ol class="map">
+		<li class="parent"><a href="https://www.randomservices.org/random/index.html">Random</a></li>
+		<li class="parent"><a href="index.html">8. Pengujian Hipotesis</a></li>
+		<li class="child"><a href="Introduction.html" title="Pendahuluan">1</a></li>
+		<li class="child"><a href="Normal.html" title="Pengujian pada Model Normal">2</a></li>
+		<li class="current">3</li>
+		<li class="child"><a href="BivariateNormal.html" title="Pengujian pada Model Normal Dua Sampel">4</a></li>
+		<li class="child"><a href="Likelihood.html" title="Uji Rasio Kemungkinan">5</a></li>
+		<li class="child"><a href="ChiSquare.html" title="Uji Khi-Kuadrat">6</a></li>
+		<li class="details"><button type="button" title="Perluas Rincian" onclick="expandDetails(true);"><img src="../icons/Plus.svg" alt="Perluas"></button></li>
+		<li class="details"><button type="button" title="Ciutkan Rincian" onclick="expandDetails(false);"><img src="../icons/Minus.svg" alt="Ciutkan"></button></li>
+	</ol>
+	<h2 id="o006.random.hypothesis.bernoulli.page">3. Pengujian pada Model Bernoulli</h2>
+</header>
+
+<h3 id="bas">Uji Dasar</h3>
+
+<h4 id="pre">Pendahuluan Dasar</h4>
+
+<p>Andaikan \(\bs{X}=(X_1,X_2,\ldots,X_n)\) merupakan sampel acak dari <a href="https://www.randomservices.org/random/bernoulli/Introduction.html">distribusi Bernoulli</a> dengan parameter tak diketahui \(p\in(0,1)\). Dengan demikian, variabel-variabel tersebut <a href="https://www.randomservices.org/random/prob/Independence.html">saling independen</a> dan masing-masing mengambil nilai 1 dan 0 dengan probabilitas \(p\) dan \(1-p\). Dalam bahasa keandalan, 1 lazim menyatakan <dfn>sukses</dfn> dan 0 menyatakan <dfn>gagal</dfn>, tetapi keduanya hanyalah istilah umum.</p>
+
+<div class="unit" id="o006.random.hypothesis.bernoulli.unit-01">
+	<p class="math">Model ini sering muncul dalam salah satu konteks berikut:</p>
+	<ol class="sub">
+		<li>Terdapat suatu <em>kejadian</em> yang menjadi perhatian dalam eksperimen dasar, dengan probabilitas tak diketahui \(p\). Kita mengulang eksperimen itu \(n\) kali dan mendefinisikan \(X_i=1\) jika dan hanya jika kejadian tersebut terjadi pada pengulangan ke-\(i\).</li>
+		<li>Kita mempunyai populasi objek dengan beberapa jenis; \(p\) adalah proporsi tak diketahui dari jenis tertentu yang menjadi perhatian. Kita memilih \(n\) objek secara acak dari populasi dan menetapkan \(X_i=1\) jika dan hanya jika objek ke-\(i\) termasuk jenis tersebut.</li>
+	</ol>
+</div>
+
+<p>Pada bagian (b), jika pengambilan sampel dilakukan <em>dengan</em> pengembalian, variabel-variabel itu benar-benar membentuk sampel acak dari distribusi Bernoulli. Jika dilakukan <em>tanpa</em> pengembalian, variabel-variabelnya dependen, tetapi model Bernoulli masih dapat berlaku secara hampiran apabila ukuran populasi sangat besar dibandingkan ukuran sampel \(n\). Uraian lebih lanjut terdapat pada pembahasan <a href="https://www.randomservices.org/random/urn/Introduction.html">metode pengambilan sampel</a> dalam bab <a href="https://www.randomservices.org/random/urn/index.html">model pengambilan sampel hingga</a>. Pada bagian ini kita membangun uji hipotesis bagi parameter \(p\). Ruang parameter bagi \(p\) ialah interval \((0,1)\), dan semua hipotesis mendefinisikan himpunan bagian dari ruang tersebut. Bagian ini sejajar dengan <a href="../interval/Bernoulli.html">pendugaan pada model Bernoulli</a> dalam bab <a href="../interval/index.html">pendugaan himpunan</a>.</p>
+
+<h4 id="bin">Uji Binomial</h4>
+
+<p>Ingat bahwa banyaknya sukses \(Y = \sum_{i=1}^n X_i\) mempunyai <a href="https://www.randomservices.org/random/bernoulli/Binomial.html">distribusi binomial</a> dengan parameter \(n\) dan \(p\), serta fungsi massa probabilitas
+\[ \P(Y = y) = \binom{n}{y} p^y (1 - p)^{n-y}, \quad y \in \{0, 1, \ldots, n\} \]
+Ingat pula bahwa nilai harapannya ialah \(\E(Y)=np\) dan variansnya \(\var(Y)=np(1-p)\). Selain itu, \(Y\) merupakan statistik <a href="../point/Sufficient.html#ber">cukup</a> bagi \(p\), sehingga menjadi calon alami untuk statistik uji mengenai \(p\). Untuk \(\alpha \in (0,1)\), misalkan \(b_{n,p}(\alpha)\) menyatakan <a href="https://www.randomservices.org/random/dist/CDF.html#qnt">kuantil</a> berorde \(\alpha\) dari distribusi binomial berparameter \(n\) dan \(p\). Karena distribusi binomial diskret, hanya tingkat ekor tertentu yang dapat dicapai tepat. Dalam pembahasan selanjutnya, \(p_0 \in (0,1)\) adalah nilai dugaan bagi \(p\).</p>
+
+<div class="unit" id="bin1">
+	<p class="math">Untuk setiap \(\alpha \in (0,1)\), uji berikut mempunyai tingkat signifikansi yang mendekati \(\alpha\):</p>
+	<ol class="sub">
+		<li>Tolak \(H_0: p=p_0\) melawan \(H_1: p\ne p_0\) jika dan hanya jika \(Y \le b_{n,p_0}(\alpha/2)\) atau \(Y \ge b_{n,p_0}(1-\alpha/2)\).</li>
+		<li>Tolak \(H_0: p\ge p_0\) melawan \(H_1: p\lt p_0\) jika dan hanya jika \(Y \le b_{n,p_0}(\alpha)\).</li>
+		<li>Tolak \(H_0: p\le p_0\) melawan \(H_1: p\gt p_0\) jika dan hanya jika \(Y \ge b_{n,p_0}(1-\alpha)\).</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Pada bagian (a), \(H_0\) merupakan hipotesis sederhana dan, di bawah \(H_0\), statistik uji \(Y\) berdistribusi binomial dengan parameter \(n\) dan \(p_0\). Jika \(H_0\) benar, tingkat nominal \(\alpha\) hanya mendekati peluang menolak \(H_0\) secara keliru untuk batas kuantil yang dinyatakan; karena kisi binomial diskret, ukuran sebenarnya harus dihitung dari peluang ekor. Pada bagian (b) dan (c), \(H_0\) menentukan suatu rentang nilai \(p\). Jika \(H_0\) benar, peluang galat tipe I terbesar mendekati \(\alpha\) pada batas \(p=p_0\).</p>
+	</details>
+</div>
+
+<p>Uji pada (a) adalah uji dua sisi simetris yang baku, dengan kira-kira \(\alpha/2\) pada masing-masing ekor distribusi binomial di bawah \(H_0\). Uji pada (b) berekor kiri dan uji pada (c) berekor kanan. Secara lebih umum, \(\alpha\) dapat dibagi antara ekor kiri dan kanan dengan cara lain.</p>
+
+<div class="unit" id="bin2">
+	<p class="math">Untuk \(\alpha,\,r\in(0,1)\), uji berikut mempunyai tingkat signifikansi yang mendekati \(\alpha\): tolak \(H_0:p=p_0\) melawan \(H_1:p\ne p_0\) jika dan hanya jika \(Y\le b_{n,p_0}(\alpha-r\alpha)\) atau \(Y\ge b_{n,p_0}(1-r\alpha)\).</p>
+	<ol class="sub">
+		<li>\(r=\frac{1}{2}\) menghasilkan uji dua sisi simetris yang baku.</li>
+		<li>\(r\downarrow0\) menghasilkan uji berekor kiri.</li>
+		<li>\(r\uparrow1\) menghasilkan uji berekor kanan.</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Sekali lagi, \(H_0\) merupakan hipotesis sederhana dan, di bawah \(H_0\), statistik uji \(Y\) berdistribusi binomial dengan parameter \(n\) dan \(p_0\). Jika \(H_0\) benar, peluang menolak \(H_0\) secara keliru mendekati \(\alpha\); tingkat aktual harus dihitung dari peluang ekor diskret. Bagian (a)–(c) mengikuti sifat-sifat fungsi kuantil.</p>
+	</details>
+</div>
+
+<h4 id="nor">Uji Normal Hampiran</h4>
+
+<p>Jika \(n\) besar dan jumlah harapan sukses maupun gagal di bawah nilai nol cukup besar, distribusi \(Y\) <a href="https://www.randomservices.org/random/bernoulli/Binomial.html#nor">mendekati distribusi normal</a> menurut <a href="../sample/CLT.html">teorema limit pusat</a>. Karena itu kita dapat membangun <a href="Normal.html">uji normal</a> hampiran.</p>
+
+<div class="unit" id="nor1">
+	<p class="math">Andaikan ukuran sampel \(n\) besar. Untuk nilai dugaan \(p_0\in(0,1)\), definisikan statistik uji
+	\[ Z = \frac{Y - n p_0}{\sqrt{n p_0 (1 - p_0)}} \]
+	<ol class="sub">
+		<li>Jika \(p=p_0\), maka \(Z\) mempunyai distribusi normal standar secara hampiran.</li>
+		<li>Jika \(p\ne p_0\), maka \(Z\) mempunyai distribusi normal secara hampiran dengan rata-rata \(\sqrt{n}\frac{p-p_0}{\sqrt{p_0(1-p_0)}}\) dan varians \(\frac{p(1-p)}{p_0(1-p_0)}\).</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<ol class="sub">
+			<li>Hasil ini mengikuti teorema De Moivre–Laplace, yakni kasus khusus teorema limit pusat untuk distribusi binomial. Perhatikan bahwa \(Z\) adalah skor baku yang berkaitan dengan \(Y\).</li>
+			<li>Dengan aljabar sederhana, kita dapat menulis
+			\[ Z = \sqrt{n} \frac{p - p_0}{\sqrt{p_0 (1 - p_0)}} + \sqrt{\frac{p (1 - p)}{p_0 (1 - p_0)}} \frac{Y - n p}{\sqrt{n p (1 - p)}} \]
+			Faktor kedua dalam suku kedua kembali merupakan skor baku bagi \(Y\), sehingga mempunyai distribusi normal standar secara hampiran ketika kondisi aproksimasi binomial-normal terpenuhi. Hasilnya kemudian mengikuti sifat linear dasar distribusi normal.</li>
+		</ol>
+	</details>
+</div>
+
+<p>Seperti biasa, untuk \(\alpha\in(0,1)\), misalkan \(z(\alpha)\) menyatakan kuantil berorde \(\alpha\) dari distribusi normal standar. Untuk nilai \(\alpha\) tertentu, \(z(\alpha)\) dapat diperoleh dari <a href="https://www.randomservices.org/random/apps/QuantileApp.html" class="ancillary">aplikasi kuantil</a> atau sebagian besar perangkat lunak statistika. Menurut simetri, \(z(1-\alpha)=-z(\alpha)\).</p>
+
+<div class="unit" id="nor2">
+	<p class="math">Untuk setiap \(\alpha\in(0,1)\), uji berikut mempunyai tingkat signifikansi hampiran \(\alpha\):</p>
+	<ol class="sub">
+		<li>Tolak \(H_0:p=p_0\) melawan \(H_1:p\ne p_0\) jika dan hanya jika \(Z\lt-z(1-\alpha/2)\) atau \(Z\gt z(1-\alpha/2)\).</li>
+		<li>Tolak \(H_0:p\ge p_0\) melawan \(H_1:p\lt p_0\) jika dan hanya jika \(Z\lt-z(1-\alpha)\).</li>
+		<li>Tolak \(H_0:p\le p_0\) melawan \(H_1:p\gt p_0\) jika dan hanya jika \(Z\gt z(1-\alpha)\).</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Pada bagian (a), \(H_0\) adalah hipotesis sederhana dan, di bawah \(H_0\), statistik uji \(Z\) berdistribusi normal standar secara hampiran. Jika \(H_0\) benar, peluang menolak \(H_0\) secara keliru mendekati \(\alpha\). Pada bagian (b) dan (c), \(H_0\) menentukan suatu rentang nilai \(p\); di bawah \(H_0\), distribusi hampiran \(Z\) dijelaskan pada <a href="#nor1" class="ref"></a>. Peluang galat tipe I terbesar mendekati \(\alpha\) pada batas \(p=p_0\).</p>
+	</details>
+</div>
+
+<p>Uji pada (a) adalah uji dua sisi simetris, dengan \(\alpha/2\) pada masing-masing ekor distribusi \(Z\) di bawah \(H_0\). Uji pada (b) berekor kiri dan uji pada (c) berekor kanan. Uji dua sisi yang lebih umum dapat dibangun dengan membagi \(\alpha\) secara lain antara kedua ekor distribusi normal standar.</p>
+
+<div class="unit" id="nor3">
+	<p class="math">Untuk setiap \(\alpha,\,r\in(0,1)\), uji berikut mempunyai tingkat signifikansi hampiran \(\alpha\): tolak \(H_0:p=p_0\) melawan \(H_1:p\ne p_0\) jika dan hanya jika \(Z\lt z(\alpha-r\alpha)\) atau \(Z\gt z(1-r\alpha)\).</p>
+	<ol class="sub">
+		<li>\(r=\frac{1}{2}\) menghasilkan uji dua sisi simetris yang baku.</li>
+		<li>\(r\downarrow0\) menghasilkan uji berekor kiri.</li>
+		<li>\(r\uparrow1\) menghasilkan uji berekor kanan.</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Hipotesis \(H_0\) sederhana dan, di bawah \(H_0\), statistik uji \(Z\) mempunyai distribusi normal standar secara hampiran. Jika \(H_0\) benar, peluang menolak \(H_0\) secara keliru mendekati \(\alpha\) menurut definisi kuantil.</p>
+	</details>
+</div>
+
+<h4 id="sim">Latihan Simulasi</h4>
+
+<div class="unit" id="sim1">
+	<p class="app">Dalam <a href="https://www.randomservices.org/random/apps/ProportionTest.html" class="ancillary">eksperimen uji proporsi</a>, tetapkan \(H_0:p=p_0\), ukuran sampel 10, tingkat signifikansi 0,1, dan \(p_0=0.5\). Untuk setiap \(p\in\{0.1,0.2,\ldots,0.9\}\), jalankan eksperimen 1.000 kali, catat frekuensi relatif penolakan hipotesis nol, lalu gambarkan fungsi kuasa empiris.</p>
+</div>
+
+<div class="unit" id="sim2">
+	<p class="app">Dalam <a href="https://www.randomservices.org/random/apps/ProportionTest.html" class="ancillary">eksperimen uji proporsi</a>, ulangi latihan sebelumnya dengan ukuran sampel 20.</p>
+</div>
+
+<div class="unit" id="sim3">
+	<p class="app">Dalam <a href="https://www.randomservices.org/random/apps/ProportionTest.html" class="ancillary">eksperimen uji proporsi</a>, tetapkan \(H_0:p\le p_0\), ukuran sampel 15, tingkat signifikansi 0,05, dan \(p_0=0.3\). Untuk setiap \(p\in\{0.1,0.2,\ldots,0.9\}\), jalankan eksperimen 1.000 kali, catat frekuensi relatif penolakan hipotesis nol, lalu gambarkan fungsi kuasa empiris.</p>
+</div>
+
+<div class="unit" id="sim4">
+	<p class="app">Dalam <a href="https://www.randomservices.org/random/apps/ProportionTest.html" class="ancillary">eksperimen uji proporsi</a>, ulangi latihan sebelumnya dengan ukuran sampel 30.</p>
+</div>
+
+<div class="unit" id="sim5">
+	<p class="app">Dalam <a href="https://www.randomservices.org/random/apps/ProportionTest.html" class="ancillary">eksperimen uji proporsi</a>, tetapkan \(H_0:p\ge p_0\), ukuran sampel 20, tingkat signifikansi 0,01, dan \(p_0=0.6\). Untuk setiap \(p\in\{0.1,0.2,\ldots,0.9\}\), jalankan eksperimen 1.000 kali, catat frekuensi relatif penolakan hipotesis nol, lalu gambarkan fungsi kuasa empiris.</p>
+</div>
+
+<div class="unit" id="sim6">
+	<p class="app">Dalam <a href="https://www.randomservices.org/random/apps/ProportionTest.html" class="ancillary">eksperimen uji proporsi</a>, ulangi latihan sebelumnya dengan ukuran sampel 50.</p>
+</div>
+
+<h4 id="com">Latihan Komputasi</h4>
+
+<div class="unit" id="com1">
+	<p class="math">Dalam jajak pendapat terhadap 1.000 pemilih terdaftar di suatu distrik, 427 orang memilih calon X. Pada tingkat 0,1, apakah bukti cukup untuk menyimpulkan bahwa lebih dari 40% pemilih terdaftar memilih X?</p>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Statistik uji 1,743 dan nilai kritis 1,282. Tolak \(H_0\).</p>
+	</details>
+</div>
+
+<div class="unit" id="com2">
+	<p class="math">Sebuah koin dilempar 500 kali dan menghasilkan 302 sisi kepala. Pada tingkat 0,05, ujilah apakah koin tersebut tidak seimbang.</p>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Statistik uji 4,651 dan nilai kritis \(\pm1.961\). Tolak \(H_0\); data memberikan bukti yang sangat kuat bahwa probabilitas kepala bukan 0,5.</p>
+	</details>
+</div>
+
+<div class="unit" id="com3">
+	<p class="math">Sampel 400 cip memori dari suatu lini produksi diuji dan 32 di antaranya cacat. Pada tingkat 0,05, ujilah apakah proporsi cip cacat kurang dari 0,1.</p>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Statistik uji \(-1.333\) dan nilai kritis \(-1.645\). Gagal menolak \(H_0\).</p>
+	</details>
+</div>
+
+<div class="unit" id="com4">
+	<p class="math">Obat baru diberikan kepada 50 pasien dan efektif dalam 42 kasus. Pada tingkat 0,1, ujilah apakah tingkat keberhasilan obat tersebut lebih besar dari 0,8.</p>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Statistik uji 0,707 dan nilai kritis 1,282. Gagal menolak \(H_0\).</p>
+	</details>
+</div>
+
+<div class="unit" id="com5">
+	<p class="stat">Dengan <a href="https://www.randomservices.org/random/data/MM.html" class="ancillary">data M&amp;M</a>, ujilah hipotesis alternatif berikut pada tingkat signifikansi 0,1:</p>
+	<ol class="sub">
+		<li>Proporsi M&amp;M merah berbeda dari \(\frac{1}{6}\).</li>
+		<li>Proporsi M&amp;M hijau kurang dari \(\frac{1}{6}\).</li>
+		<li>Proporsi M&amp;M kuning lebih besar dari \(\frac{1}{6}\).</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<ol class="sub">
+			<li>Statistik uji 0,162 dan nilai kritis \(\pm1.645\). Gagal menolak \(H_0\).</li>
+			<li>Statistik uji \(-4.117\) dan nilai kritis \(-1.282\). Tolak \(H_0\).</li>
+			<li>Statistik uji 8,266 dan nilai kritis 1,282. Tolak \(H_0\).</li>
+		</ol>
+	</details>
+</div>
+
+<h3 id="sgn">Uji Tanda</h3>
+
+<h4 id="der">Penurunan</h4>
+
+<p>Andaikan kini kita mempunyai <a href="https://www.randomservices.org/random/prob/Experiments.html">eksperimen acak</a> dasar dengan <a href="https://www.randomservices.org/random/prob/Probability.html">variabel acak bernilai real</a> \(U\) yang menjadi perhatian. Kita mengasumsikan bahwa \(U\) mempunyai <a href="https://www.randomservices.org/random/dist/Continuous.html">distribusi kontinu</a> dengan dukungan pada suatu interval \(S\subseteq\R\), dan bahwa fungsi distribusinya meningkat ketat di sekitar kuantil yang dibandingkan sehingga kuantil tersebut unik. Misalkan \(m\) menyatakan <a href="https://www.randomservices.org/random/dist/CDF.html#qnt">kuantil</a> berorde tertentu \(p_0\in(0,1)\) bagi distribusi \(U\). Dengan demikian,
+\[ p_0 = \P(U \le m) \]
+Secara umum, \(m\) tidak diketahui meskipun \(p_0\) ditentukan, sebab distribusi \(U\) tidak diketahui. Kita ingin membangun uji hipotesis bagi \(m\). Untuk nilai uji tertentu \(m_0\), misalkan
+\[ p = \P(U \le m_0) \]
+Nilai \(p\) tidak diketahui meskipun \(m_0\) ditentukan, sekali lagi karena distribusi \(U\) tidak diketahui.</p>
+
+<div class="unit" id="der1">
+	<p class="math">Hubungan</p>
+	<ol class="sub">
+		<li>\(m=m_0\) jika dan hanya jika \(p=p_0\).</li>
+		<li>\(m\lt m_0\) jika dan hanya jika \(p\gt p_0\).</li>
+		<li>\(m\gt m_0\) jika dan hanya jika \(p\lt p_0\).</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Hasil-hasil tersebut mengikuti jika fungsi distribusi \(U\) kontinu dan meningkat ketat pada interval perbandingan \(S\). Dukungan yang berupa interval dan kontinuitas saja tidak cukup jika fungsi distribusi mempunyai bagian datar; dalam kasus itu kuantil harus didefinisikan dan hipotesis ditangani dengan lebih hati-hati.</p>
+	</details>
+</div>
+
+<p>Seperti biasa, kita mengulang eksperimen dasar \(n\) kali untuk menghasilkan <a href="../sample/Introduction.html">sampel acak</a> \(\bs{U}=(U_1,U_2,\ldots,U_n)\) berukuran \(n\) dari distribusi \(U\). Misalkan \(X_i=\bs{1}(U_i\le m_0)\) menjadi variabel indikator kejadian \(\{U_i\le m_0\}\), untuk \(i\in\{1,2,\ldots,n\}\).</p>
+
+<div class="unit" id="der2">
+	<p class="math">Perhatikan bahwa \(\bs{X}=(X_1,X_2,\ldots,X_n)\) adalah statistik—fungsi teramati dari vektor data \(\bs{U}\)—dan merupakan sampel acak berukuran \(n\) dari distribusi Bernoulli dengan parameter \(p\).</p>
+</div>
+
+<p>Dari teorema <a href="#der1" class="ref"></a> dan <a href="#der2" class="ref"></a>, pengujian terhadap kuantil tak diketahui \(m\) dapat diubah menjadi pengujian parameter Bernoulli \(p\), sehingga uji-uji di atas berlaku. Prosedur ini disebut <dfn>uji tanda</dfn> karena pada dasarnya hanya tanda \(U_i-m_0\) yang dicatat untuk setiap \(i\). Prosedur ini juga merupakan <dfn>uji nonparametrik</dfn>: selain sampel acak, kontinuitas, dan keunikan kuantil, kita tidak membuat asumsi parametrik tentang distribusi \(U\); khususnya, distribusi \(U\) tidak perlu termasuk keluarga parametrik tertentu.</p>
+
+<p>Kasus terpenting adalah \(p_0=\frac{1}{2}\), yakni uji tanda untuk median. Jika distribusi \(U\) simetris terhadap pusatnya dan nilai harapan ada, median, pusat simetri, dan rata-rata berimpit; dalam kondisi ini uji tanda untuk median juga menguji rata-rata. Simetri saja tidak menjamin nilai harapan ada.</p>
+
+<h4 id="ssm">Latihan Simulasi</h4>
+
+<div class="unit" id="ssm1">
+	<p class="app">Dalam <a href="https://www.randomservices.org/random/apps/SignTest.html" class="ancillary">eksperimen uji tanda</a>, tetapkan distribusi sampling normal dengan rata-rata 0 dan simpangan baku 2, ukuran sampel 10, dan tingkat signifikansi 0,1. Untuk masing-masing dari 9 nilai \(m_0\), jalankan simulasi 1.000 kali.</p>
+	<ol class="sub">
+		<li>Ketika \(m=m_0\), berikan dugaan empiris tingkat signifikansi uji dan bandingkan dengan 0,1.</li>
+		<li>Untuk kasus lainnya, berikan dugaan empiris kuasa uji.</li>
+	</ol>
+</div>
+
+<div class="unit" id="ssm2">
+	<p class="app">Dalam <a href="https://www.randomservices.org/random/apps/SignTest.html" class="ancillary">eksperimen uji tanda</a>, tetapkan distribusi sampling seragam pada interval \([0,5]\), ukuran sampel 20, dan tingkat signifikansi 0,05. Untuk masing-masing dari 9 nilai \(m_0\), jalankan simulasi 1.000 kali.</p>
+	<ol class="sub">
+		<li>Ketika \(m=m_0\), berikan dugaan empiris tingkat signifikansi uji dan bandingkan dengan 0,05.</li>
+		<li>Untuk kasus lainnya, berikan dugaan empiris kuasa uji.</li>
+	</ol>
+</div>
+
+<div class="unit" id="ssm3">
+	<p class="app">Dalam <a href="https://www.randomservices.org/random/apps/SignTest.html" class="ancillary">eksperimen uji tanda</a>, tetapkan distribusi sampling gamma dengan parameter bentuk 2 dan parameter skala 1, ukuran sampel 30, dan tingkat signifikansi 0,025. Untuk masing-masing dari 9 nilai \(m_0\), jalankan simulasi 1.000 kali.</p>
+	<ol class="sub">
+		<li>Ketika \(m=m_0\), berikan dugaan empiris tingkat signifikansi uji dan bandingkan dengan 0,025.</li>
+		<li>Untuk kasus lainnya, berikan dugaan empiris kuasa uji.</li>
+	</ol>
+</div>
+
+<h4 id="exe">Latihan Komputasi</h4>
+
+<div class="unit" id="exe1">
+	<p class="stat">Dengan <a href="https://www.randomservices.org/random/data/MM.html" class="ancillary">data M&amp;M</a>, ujilah apakah median berat melebihi 47,9 gram pada tingkat 0,1.</p>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Dengan konvensi indikator yang didefinisikan di atas, statistik uji adalah −3,286 dan nilai kritis berekor kiri −1,282. Tolak \(H_0\).</p>
+	</details>
+</div>
+
+<div class="unit" id="exe2">
+	<p class="stat">Dengan <a href="https://www.randomservices.org/random/data/Iris.html" class="ancillary">data iris Fisher</a>, lakukan pengujian berikut pada tingkat 0,1:</p>
+	<ol class="sub">
+		<li>Median panjang mahkota iris Setosa berbeda dari 15 mm.</li>
+		<li>Median panjang mahkota iris Virginica kurang dari 52 mm.</li>
+		<li>Median panjang mahkota iris Versicolor kurang dari 42 mm.</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<ol class="sub">
+			<li>Statistik uji 3,394 dan nilai kritis \(\pm1.645\). Tolak \(H_0\).</li>
+			<li>Statistik uji \(1.980\) dan nilai kritis \(1.282\). Tolak \(H_0\).</li>
+			<li>Statistik uji \(0.566\) dan nilai kritis \(1.282\). Gagal menolak \(H_0\).</li>
+		</ol>
+	</details>
+</div>
+
+<footer>
+	<ol class="map">
+		<li class="parent"><a href="https://www.randomservices.org/random/index.html">Random</a></li>
+		<li class="parent"><a href="index.html">8. Pengujian Hipotesis</a></li>
+		<li class="child"><a href="Introduction.html" title="Pendahuluan">1</a></li>
+		<li class="child"><a href="Normal.html" title="Pengujian pada Model Normal">2</a></li>
+		<li class="current">3</li>
+		<li class="child"><a href="BivariateNormal.html" title="Pengujian pada Model Normal Dua Sampel">4</a></li>
+		<li class="child"><a href="Likelihood.html" title="Uji Rasio Kemungkinan">5</a></li>
+		<li class="child"><a href="ChiSquare.html" title="Uji Khi-Kuadrat">6</a></li>
+		<li class="details"><button type="button" title="Perluas Rincian" onclick="expandDetails(true);"><img src="../icons/Plus.svg" alt="Perluas"></button></li>
+		<li class="details"><button type="button" title="Ciutkan Rincian" onclick="expandDetails(false);"><img src="../icons/Minus.svg" alt="Ciutkan"></button></li>
+	</ol>
+	<ul class="map">
+		<li class="sister"><a href="https://www.randomservices.org/random/apps/index.html" class="ancillary">Aplikasi</a></li>
+		<li class="sister"><a href="https://www.randomservices.org/random/data/index.html" class="ancillary">Himpunan Data</a></li>
+		<li class="child"><a href="https://www.randomservices.org/random/biographies/index.html" class="ancillary">Biografi</a></li>
+	</ul>
+
+	<section class="edition-notice" data-o006-edition-notice="v1">
+		<p><strong>Pemberitahuan edisi.</strong> Terjemahan Bahasa Indonesia ini mengadaptasi <a href="https://www.randomservices.org/random/">Random: Probabilitas, Statistika Matematis, dan Proses Stokastik</a> karya Kyle Siegrist. Perubahan pada halaman ini mencakup penerjemahan, ID stabil tambahan, tautan lokal untuk bagian inti yang diterjemahkan, tautan HTTPS resmi untuk bahan pelengkap, koreksi terbatas pada notasi hipotesis, markup daftar, syarat uji tanda, serta tanda statistik dan nilai kritis pada jawaban yang dicatat dalam daftar koreksi edisi.</p>
+		<p>Provenans terjemahan: OpenAI Codex gpt-5.6-sol, Ultra. Kredit penulis sumber dan kontributor manusia tetap dipertahankan.</p>
+		<p>Situs asal menyatakan <a href="https://creativecommons.org/licenses/by/2.0/">CC BY 2.0</a>, sedangkan halaman <a href="https://www.randomservices.org/random/Credits.html">Kredit</a> menautkan <a href="https://creativecommons.org/licenses/by/1.0/">CC BY 1.0</a>; perbedaan ini dipertahankan. Edisi independen ini tidak didukung maupun disahkan oleh Kyle Siegrist atau Random Services. Tautan ke aplikasi, data, dan biografi tidak menyatakan hak untuk mendistribusikan ulang materi tersebut.</p>
+	</section>
+</footer>
+
+<script>getReferences();</script>
+
+</body>
+</html>

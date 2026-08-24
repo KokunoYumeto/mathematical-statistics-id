@@ -1,0 +1,88 @@
+{
+  "schema": "o006.random.complete-29-live-browser-qa.v1",
+  "result": "pass",
+  "checked_at": "2026-08-24T07:59:24.1832220+02:00",
+  "scope": {
+    "edition": "complete Random chapters 5-8 Indonesian edition",
+    "source_documents": 29,
+    "ordinals": "1-29",
+    "first_route": "random/sample/index.html",
+    "last_route": "random/hypothesis/ChiSquare.html",
+    "origin": "http://127.0.0.1:18765/",
+    "credentials_used": false
+  },
+  "root": {
+    "title": "Statistika Matematis — Bahasa Indonesia",
+    "lang": "id-ID",
+    "complete_29_of_29_visible": true,
+    "model_provenance_visible": "OpenAI Codex gpt-5.6-sol, Ultra",
+    "source_author_credit_visible": true,
+    "source_title_credit_visible": true,
+    "chapter_links": [
+      "random/sample/index.html",
+      "random/point/index.html",
+      "random/interval/index.html",
+      "random/hypothesis/index.html"
+    ]
+  },
+  "desktop": {
+    "viewport": [1280, 900],
+    "documents_checked": 29,
+    "failures": 0,
+    "totals": {
+      "units": 760,
+      "details": 451,
+      "mathjax_containers": 10177,
+      "images": 124,
+      "edition_notices": 29,
+      "wide_elements": 0,
+      "wide_elements_contained": 0,
+      "wide_elements_uncontained": 0
+    },
+    "geometry": {
+      "minimum_left_margin_px": 56,
+      "minimum_right_margin_px": 57,
+      "maximum_center_delta_px": 1,
+      "maximum_document_height_px": 16028,
+      "page_overflow_routes": 0
+    }
+  },
+  "mobile": {
+    "viewport": [390, 844],
+    "documents_checked": 29,
+    "failures": 0,
+    "totals": {
+      "units": 760,
+      "details": 451,
+      "mathjax_containers": 10177,
+      "images": 124,
+      "edition_notices": 29,
+      "wide_elements": 120,
+      "wide_elements_contained": 120,
+      "wide_elements_uncontained": 0
+    },
+    "geometry": {
+      "minimum_left_margin_px": 12,
+      "minimum_right_margin_px": 12,
+      "maximum_center_delta_px": 0,
+      "maximum_document_height_px": 24446,
+      "page_overflow_routes": 0
+    }
+  },
+  "interaction": {
+    "route": "random/point/Sufficient.html",
+    "control": "first details > summary",
+    "initially_open": false,
+    "open_after_first_click": true,
+    "closed_after_second_click": true
+  },
+  "render_failures": {
+    "wrong_lang_routes": 0,
+    "incomplete_images": 0,
+    "mathjax_merrors": 0,
+    "page_overflow_routes": 0,
+    "uncontained_wide_elements": 0,
+    "console_warnings_or_errors": 0
+  },
+  "viewport_override_reset": true
+}

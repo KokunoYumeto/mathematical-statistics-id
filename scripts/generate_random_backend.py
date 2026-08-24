@@ -37,6 +37,7 @@ ENTITIES_REL = PurePosixPath("backend/entities.jsonl")
 RELATIONS_REL = PurePosixPath("backend/relations.csv")
 BACKEND_RECEIPT_REL = PurePosixPath("backend/BACKEND_RECEIPT.json")
 TRANSLATION_LEDGER_REL = PurePosixPath("00_control/TRANSLATION_LEDGER.csv")
+CORE_DOCUMENT_COUNT = 29
 
 TRANSLATION_LEDGER_COLUMNS = [
     "ordinal",
@@ -544,7 +545,7 @@ def load_inputs(root: Path) -> tuple[dict[str, Any], bytes, dict[str, dict[str, 
     core_paths = receipt.get("core_paths")
     if not isinstance(core_paths, list) or len(core_paths) != receipt.get("core_files"):
         raise BackendError("core_paths/core_files mismatch")
-    if len(core_paths) != 29 or len(set(core_paths)) != 29:
+    if len(core_paths) != CORE_DOCUMENT_COUNT or len(set(core_paths)) != CORE_DOCUMENT_COUNT:
         raise BackendError("the O006 core must contain exactly 29 unique paths")
 
     sources: list[dict[str, Any]] = []
@@ -602,8 +603,8 @@ def load_translation_bindings(
 ) -> tuple[bytes, dict[str, dict[str, Any]], list[dict[str, Any]]]:
     """Verify and bind the exact id-ID translation ledger to core pages.
 
-    The ledger is a canonical, contiguous prefix of the frozen core order. A
-    row is admitted only when both its authority-side and live target-side byte
+    The ledger must be the complete canonical frozen core order, ordinals 1--29.
+    A row is admitted only when both its authority-side and live target-side byte
     claims verify. The resolved target must stay below source/id-ID even if a
     path component is a symlink.
     """
@@ -624,8 +625,15 @@ def load_translation_bindings(
     rows = list(reader)
     if any(None in row or any(value is None for value in row.values()) for row in rows):
         raise BackendError("malformed translation ledger row")
-    if len(rows) > len(sources):
-        raise BackendError("translation ledger contains more rows than the frozen core")
+    if len(sources) != CORE_DOCUMENT_COUNT:
+        raise BackendError(
+            f"backend requires exactly {CORE_DOCUMENT_COUNT} frozen core documents"
+        )
+    if len(rows) != CORE_DOCUMENT_COUNT:
+        raise BackendError(
+            "translation ledger must contain the complete canonical core: "
+            f"expected {CORE_DOCUMENT_COUNT} rows, found {len(rows)}"
+        )
 
     target_root = path_from_posix(root, PurePosixPath("source/id-ID")).resolve()
     source_paths_seen: set[str] = set()
@@ -750,6 +758,11 @@ def load_translation_bindings(
             }
         )
 
+    required_ordinals = list(range(1, CORE_DOCUMENT_COUNT + 1))
+    if [row["ordinal"] for row in verified_rows] != required_ordinals:
+        raise BackendError("translation ledger does not bind exact ordinals 1 through 29")
+    if set(bindings) != {source["source_path"] for source in sources}:
+        raise BackendError("translation ledger does not bind every frozen core document")
     return ledger_bytes, bindings, verified_rows
 
 
@@ -1538,6 +1551,7 @@ def build(root: Path) -> tuple[dict[PurePosixPath, bytes], dict[str, Any]]:
         "duplicate_native_ids": duplicate_native_ids,
         "generator": {
             "path": "scripts/generate_random_backend.py",
+            "bytes": len(script_data),
             "sha256": sha256_bytes(script_data),
         },
         "outputs": {
@@ -1572,6 +1586,9 @@ def build(root: Path) -> tuple[dict[PurePosixPath, bytes], dict[str, Any]]:
         },
         "translation_provenance": "OpenAI Codex gpt-5.6-sol, Ultra",
         "translation_binding": {
+            "complete_core_required": True,
+            "required_document_count": CORE_DOCUMENT_COUNT,
+            "required_ordinals": list(range(1, CORE_DOCUMENT_COUNT + 1)),
             "documents": {
                 "total": len(sources),
                 "translated": len(verified_translation_rows),

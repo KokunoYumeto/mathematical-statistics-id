@@ -529,6 +529,8 @@ LOCAL_URLS = {
     "https://www.randomservices.org/random/sample/OrderStatistics.html": "OrderStatistics.html",
     "https://www.randomservices.org/random/sample/Covariance.html": "Covariance.html",
     "https://www.randomservices.org/random/sample/Normal.html": "Normal.html",
+    "https://www.randomservices.org/random/hypothesis/index.html": "../hypothesis/index.html",
+    "https://www.randomservices.org/random/hypothesis/ChiSquare.html": "../hypothesis/ChiSquare.html",
 }
 
 

@@ -1,0 +1,150 @@
+{
+  "date": "2026-08-23",
+  "inbound_pages": [
+    {
+      "bytes": 11435,
+      "interval_link_occurrences": 2,
+      "local_links_checked": 15,
+      "path": "random/sample/index.html",
+      "sha256": "f10455daf04ce812f4741c19d4bd77cda3003c3f7ef388563ff1afde37e4803b"
+    },
+    {
+      "bytes": 38395,
+      "interval_link_occurrences": 7,
+      "local_links_checked": 65,
+      "path": "random/sample/Normal.html",
+      "sha256": "acfba98e96a35fd02d95d224155db7b5c949c22c594199e8bc7997a6917548a0"
+    },
+    {
+      "bytes": 10918,
+      "interval_link_occurrences": 3,
+      "local_links_checked": 14,
+      "path": "random/point/index.html",
+      "sha256": "94b1667bcda20460d50bf5a5c0a41e9b251d5cd0aba82215c6aeafa8224ab2a4"
+    },
+    {
+      "bytes": 60895,
+      "interval_link_occurrences": 1,
+      "local_links_checked": 75,
+      "path": "random/point/Sufficient.html",
+      "sha256": "255ac88f235727301ee341eef79b9578910be88b7e2e038d4dfecc0ed686513c"
+    }
+  ],
+  "pages": [
+    {
+      "details": 0,
+      "ids": 6,
+      "local_links_checked": 13,
+      "math_spans": 0,
+      "ordinal": 17,
+      "path": "random/interval/index.html",
+      "source_bytes": 7789,
+      "source_elements": 148,
+      "source_sha256": "85fcad0292636fbae0935ebb775a87b9e4dbdf33692b5e2823b353163d168403",
+      "target_bytes": 10426,
+      "target_core_elements": 148,
+      "target_sha256": "3b63ca86e9f01b14417b52008244a36ba266017b7d9999aa8bf2f21031d7ccc1",
+      "units": 0
+    },
+    {
+      "details": 7,
+      "ids": 31,
+      "local_links_checked": 21,
+      "math_spans": 290,
+      "ordinal": 18,
+      "path": "random/interval/Introduction.html",
+      "source_bytes": 24577,
+      "source_elements": 249,
+      "source_sha256": "e5e6cb402c737c1d63a58ef4509975633f9cfa483f8f0afa8860ff9b6dbb4ee3",
+      "target_bytes": 29222,
+      "target_core_elements": 249,
+      "target_sha256": "08a909091adb7a04bb1bf65f8a0cfb68c93e8a23ecb0ab9e9af622d751a5737c",
+      "units": 21
+    },
+    {
+      "details": 19,
+      "ids": 54,
+      "local_links_checked": 24,
+      "math_spans": 380,
+      "ordinal": 19,
+      "path": "random/interval/Normal.html",
+      "source_bytes": 40632,
+      "source_elements": 401,
+      "source_sha256": "21c59dd27f38c17148de5af35d53d94a01c51cd4f230c81d75e91173a9917586",
+      "target_bytes": 43462,
+      "target_core_elements": 401,
+      "target_sha256": "9beed9d4ef4f2afbdea26cd50024568045f7fb32aa44052991ba83aedef3502d",
+      "units": 35
+    },
+    {
+      "details": 16,
+      "ids": 37,
+      "local_links_checked": 31,
+      "math_spans": 238,
+      "ordinal": 20,
+      "path": "random/interval/Bernoulli.html",
+      "source_bytes": 27886,
+      "source_elements": 285,
+      "source_sha256": "764f961e4f0db2562a3b1e42a446d3b5b3854cd8dc3468d017ee544f3aa87750",
+      "target_bytes": 32226,
+      "target_core_elements": 285,
+      "target_sha256": "fbc7286cc20c168bd728ffa55aca23d469da995fbc8520a84f908654be9e51b7",
+      "units": 24
+    },
+    {
+      "details": 12,
+      "ids": 30,
+      "local_links_checked": 27,
+      "math_spans": 267,
+      "ordinal": 21,
+      "path": "random/interval/BivariateNormal.html",
+      "source_bytes": 30167,
+      "source_elements": 303,
+      "source_sha256": "fde8da8c5d1e7b7d583f9eb47dac719234f1a63072c0333bdb815c117078211a",
+      "target_bytes": 32867,
+      "target_core_elements": 304,
+      "target_sha256": "2ba7e95b6ecfb3be8bf55d40a713565e017d08c343c6b15efedce173adbbe0af",
+      "units": 21
+    },
+    {
+      "details": 5,
+      "ids": 20,
+      "local_links_checked": 21,
+      "math_spans": 281,
+      "ordinal": 22,
+      "path": "random/interval/Bayes.html",
+      "source_bytes": 23436,
+      "source_elements": 206,
+      "source_sha256": "f89dfc9ed4b9475b2cd83b467f19cfbfa6164600f14567f4237fdae9076d1cb7",
+      "target_bytes": 26647,
+      "target_core_elements": 206,
+      "target_sha256": "b5239a340d36d4c485f308c2ce9c45f92c91b7a97258997b8303083b358239b8",
+      "units": 9
+    }
+  ],
+  "schema": "o006.random.interval-batch-qa.v1",
+  "scope": "core ordinals 17-22; bounded source/target QA only; no full reader/backend/PDF/release gate",
+  "status": "pass",
+  "target_only_assets": [
+    {
+      "bytes": 2150,
+      "path": "source/id-ID/random/interval/Tails-id.svg",
+      "sha256": "b218a05a39687f1e5c7bf0a14c1702b49e6ce24129e378ede2bcfa7a9fe2c151",
+      "xml_parse": "pass"
+    }
+  ],
+  "totals": {
+    "details": 59,
+    "local_links_checked": 137,
+    "math_spans": 1456,
+    "pages": 6,
+    "source_elements": 1592,
+    "target_core_elements": 1593,
+    "units": 110
+  },
+  "translation_ledger": {
+    "bytes": 18419,
+    "path": "00_control/TRANSLATION_LEDGER.csv",
+    "sha256": "ea9487f8f7cfc50318902caf878c85e527a4a8c4ec2e4d1f2796d3f4a9f85704"
+  }
+}

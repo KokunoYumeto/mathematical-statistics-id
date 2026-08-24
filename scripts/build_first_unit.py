@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build and verify the first deterministic O006 id-ID HTML reader unit."""
+"""Build and verify the complete deterministic O006 Random id-ID HTML reader."""
 
 from __future__ import annotations
 
@@ -10,11 +10,14 @@ import hashlib
 import io
 import json
 import os
+import posixpath
 import re
 import shutil
 import stat
+from html.parser import HTMLParser
 from pathlib import Path, PurePosixPath
 from typing import Any
+from urllib.parse import unquote, urlsplit
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -25,6 +28,7 @@ SOURCE_FREEZE_RECEIPT = ROOT / "authority" / "SOURCE_FREEZE_RECEIPT.json"
 LICENSE_ROOT = ROOT / "authority" / "component-licenses"
 LICENSE_MANIFEST = LICENSE_ROOT / "URL_MANIFEST.csv"
 LICENSE_FREEZE_RECEIPT = LICENSE_ROOT / "FREEZE_RECEIPT.json"
+TRANSLATION_LEDGER = ROOT / "00_control" / "TRANSLATION_LEDGER.csv"
 BUILD_DIR = ROOT / "build"
 OUTPUT = BUILD_DIR / "html-id"
 MANIFEST = BUILD_DIR / "FIRST_UNIT_MANIFEST.csv"
@@ -37,6 +41,7 @@ RUNTIME_READER_PATH = PurePosixPath("MathJax/input/tex/extensions/boldsymbol.js"
 RUNTIME_BYTES = 4709
 RUNTIME_SHA256 = "716cf8735d00abfb1627f8adbbf4aeb915ac9b5c55d47aeaf276e73dac6a2aa1"
 TRANSLATION_PROVENANCE = "OpenAI Codex gpt-5.6-sol, Ultra"
+CORE_DOCUMENT_COUNT = 29
 
 SOURCE_MANIFEST_HEADER = (
     "relative_path",
@@ -60,6 +65,17 @@ LICENSE_MANIFEST_HEADER = (
     "last_modified",
     "etag",
 )
+TRANSLATION_LEDGER_HEADER = (
+    "ordinal",
+    "source_path",
+    "target_path",
+    "status",
+    "source_bytes",
+    "source_sha256",
+    "target_bytes",
+    "target_sha256",
+    "notes",
+)
 
 TARGETS = (
     PurePosixPath("random/sample/index.html"),
@@ -78,37 +94,98 @@ TARGETS = (
     PurePosixPath("random/point/Bayes.html"),
     PurePosixPath("random/point/Unbiased.html"),
     PurePosixPath("random/point/Sufficient.html"),
+    PurePosixPath("random/interval/index.html"),
+    PurePosixPath("random/interval/Introduction.html"),
+    PurePosixPath("random/interval/Normal.html"),
+    PurePosixPath("random/interval/Bernoulli.html"),
+    PurePosixPath("random/interval/BivariateNormal.html"),
+    PurePosixPath("random/interval/Bayes.html"),
+    PurePosixPath("random/hypothesis/index.html"),
+    PurePosixPath("random/hypothesis/Introduction.html"),
+    PurePosixPath("random/hypothesis/Normal.html"),
+    PurePosixPath("random/hypothesis/Bernoulli.html"),
+    PurePosixPath("random/hypothesis/BivariateNormal.html"),
+    PurePosixPath("random/hypothesis/Likelihood.html"),
+    PurePosixPath("random/hypothesis/ChiSquare.html"),
 )
 
-# Screen.css references all of these local assets. Keeping the complete exact set
-# makes offline-link closure machine-checkable for this unit.
-SUPPORT = (
-    PurePosixPath("random/Screen.css"),
-    PurePosixPath("random/Basic.js"),
-    PurePosixPath("random/icons/Icon.svg"),
-    PurePosixPath("random/icons/Plus.svg"),
-    PurePosixPath("random/icons/Minus.svg"),
-    PurePosixPath("random/icons/DieBlue5.svg"),
-    PurePosixPath("random/icons/DieGreen5.svg"),
-    PurePosixPath("random/icons/DieRed5.svg"),
-    PurePosixPath("random/icons/Reset.svg"),
-    PurePosixPath("random/icons/Run.svg"),
-    PurePosixPath("random/icons/Step.svg"),
-    PurePosixPath("random/icons/Stop.svg"),
-    PurePosixPath("random/sample/DotPlot.png"),
-    PurePosixPath("random/sample/EmpiricalPDF.png"),
-    PurePosixPath("random/sample/DiscreteDistribution.png"),
-    PurePosixPath("random/sample/ContinuousDistribution.png"),
-    PurePosixPath("random/sample/Histogram.png"),
-    PurePosixPath("random/sample/BoxPlot.png"),
-    PurePosixPath("random/sample/ScatterPlot.png"),
-    PurePosixPath("random/sample/ScatterPlotMeans.png"),
-    PurePosixPath("random/sample/SampleRegression.png"),
-    PurePosixPath("random/sample/SampleRegressionMean.png"),
-    PurePosixPath("random/sample/LinearPredictor.png"),
-    PurePosixPath("random/sample/SampleLinearPredictor.png"),
-    PurePosixPath("MathJax/tex-svg.js"),
+TARGET_ONLY_SUPPORT = {
+    PurePosixPath("random/interval/Tails-id.svg"): {
+        "bytes": 2150,
+        "sha256": "b218a05a39687f1e5c7bf0a14c1702b49e6ce24129e378ede2bcfa7a9fe2c151",
+        "purpose": "reader_support_target_only_corrected_figure",
+    },
+}
+
+HTML_REFERENCE_ATTRIBUTES = {
+    "href",
+    "src",
+    "srcset",
+    "poster",
+    "data",
+    "action",
+    "formaction",
+    "xlink:href",
+    "background",
+    "cite",
+    "longdesc",
+    "manifest",
+    "usemap",
+}
+CSS_COMMENT_RE = re.compile(r"/\*.*?\*/", re.DOTALL)
+CSS_URL_RE = re.compile(
+    r"url\(\s*(?:(['\"])(.*?)\1|([^)]*?))\s*\)", re.IGNORECASE | re.DOTALL
 )
+CSS_IMPORT_RE = re.compile(r"@import\s+(['\"])(.*?)\1", re.IGNORECASE | re.DOTALL)
+
+
+class DependencyHTMLParser(HTMLParser):
+    """Collect dependency-bearing HTML/SVG attributes and inline CSS."""
+
+    def __init__(self) -> None:
+        super().__init__(convert_charrefs=True)
+        self.references: list[tuple[str, str]] = []
+        self.inline_css: list[str] = []
+        self._style_depth = 0
+
+    def _attributes(self, attrs: list[tuple[str, str | None]]) -> None:
+        for raw_name, raw_value in attrs:
+            if raw_value is None:
+                continue
+            name = raw_name.casefold()
+            value = raw_value.strip()
+            if not value:
+                continue
+            if name == "style":
+                self.inline_css.append(value)
+            elif name == "srcset":
+                for candidate in value.split(","):
+                    fields = candidate.strip().split()
+                    if not fields:
+                        raise RuntimeError("malformed empty srcset candidate")
+                    self.references.append(("html:srcset", fields[0]))
+            elif name in HTML_REFERENCE_ATTRIBUTES:
+                self.references.append((f"html:{name}", value))
+
+    def handle_starttag(
+        self, tag: str, attrs: list[tuple[str, str | None]]
+    ) -> None:
+        self._attributes(attrs)
+        if tag.casefold() == "style":
+            self._style_depth += 1
+
+    def handle_startendtag(
+        self, tag: str, attrs: list[tuple[str, str | None]]
+    ) -> None:
+        self._attributes(attrs)
+
+    def handle_endtag(self, tag: str) -> None:
+        if tag.casefold() == "style" and self._style_depth:
+            self._style_depth -= 1
+
+    def handle_data(self, data: str) -> None:
+        if self._style_depth and data:
+            self.inline_css.append(data)
 
 # Build-layer-only readability repair.  The translated HTML stays byte-identical
 # to its audited target while the reader's existing stylesheet receives one
@@ -660,6 +737,14 @@ BOUNDED_REFERENCE_CORRECTIONS = (
 )
 
 PROTECTED_MATH_CORRECTIONS = (
+    {
+        "page": "random/sample/Introduction.html",
+        "old": r"\newcommand{\bs}{\boldsymbol}",
+        "new": r"\newcommand{\bs}[1]{\boldsymbol{#1}}",
+        "replacements": 1,
+        "surface": "math_span",
+        "reason": "give the vector macro an explicit argument so MathJax does not concatenate its first use into the undefined control sequence \\boldsymbolx",
+    },
     {
         "page": "random/sample/Mean.html",
         "old": r"p\left(\bigcup_{i \in I} A_i\right)",
@@ -2157,14 +2242,26 @@ def root_index() -> bytes:
         '<html lang="id-ID"><head><meta charset="utf-8">\n'
         '<meta name="viewport" content="width=device-width, initial-scale=1">\n'
         f'<meta name="translation-provenance" content="{TRANSLATION_PROVENANCE}">\n'
-        "<title>Statistika Matematis — Bahasa Indonesia</title></head>\n"
+        "<title>Statistika Matematis — Bahasa Indonesia</title>\n"
+        "<style>body{margin:0;background:#e8edf2;color:#102536;font-family:system-ui,sans-serif}"
+        "main{box-sizing:border-box;width:min(100%,72rem);min-height:100vh;margin:0 auto;"
+        "padding:clamp(1.25rem,4vw,4rem);background:#fff;line-height:1.6}"
+        "a{color:#174f7a}li{margin:.45rem 0}</style></head>\n"
         '<body><main><h1>Statistika Matematis</h1>\n'
-        '<p><a href="random/sample/index.html">Mulai membaca: Sampel Acak</a></p>\n'
+        "<p>Edisi lengkap Bahasa Indonesia: 29 dari 29 halaman inti dalam bab "
+        "statistika matematis telah diterjemahkan.</p>\n"
+        "<nav aria-label=\"Bab\"><ol>\n"
+        '<li><a href="random/sample/index.html">5. Sampel Acak</a></li>\n'
+        '<li><a href="random/point/index.html">6. Pendugaan Titik</a></li>\n'
+        '<li><a href="random/interval/index.html">7. Pendugaan Himpunan</a></li>\n'
+        '<li><a href="random/hypothesis/index.html">8. Pengujian Hipotesis</a></li>\n'
+        "</ol></nav>\n"
         "<p>Edisi Bahasa Indonesia independen berdasarkan "
         '<a href="https://www.randomservices.org/random/">Random</a> karya Kyle Siegrist. '
         "Terjemahan ini tidak didukung atau disahkan oleh penulis sumber.</p>\n"
         f"<p>Provenans terjemahan: {TRANSLATION_PROVENANCE}. Kredit karya sumber "
         "dan kontributor manusia tetap dipertahankan.</p>\n"
+        '<p><a href="licenses/index.html">Atribusi dan lisensi komponen</a></p>\n'
         "</main></body></html>\n"
     ).encode("utf-8")
 
@@ -2174,7 +2271,11 @@ def licences_index() -> bytes:
         "<!doctype html>\n"
         '<html lang="id-ID"><head><meta charset="utf-8">'
         f'<meta name="translation-provenance" content="{TRANSLATION_PROVENANCE}">'
-        "<title>Atribusi dan Lisensi</title></head><body><main>\n"
+        "<title>Atribusi dan Lisensi</title>"
+        "<style>body{margin:0;background:#e8edf2;color:#102536;font-family:system-ui,sans-serif}"
+        "main{box-sizing:border-box;width:min(100%,72rem);min-height:100vh;margin:0 auto;"
+        "padding:clamp(1.25rem,4vw,4rem);background:#fff;line-height:1.6}"
+        "a{color:#174f7a}</style></head><body><main>\n"
         "<h1>Atribusi dan Lisensi</h1>\n"
         "<p>Sumber utama: Kyle Siegrist, <cite>Random: Probability, Mathematical "
         "Statistics, and Stochastic Processes</cite>. Terjemahan dan perubahan "
@@ -2233,6 +2334,264 @@ def _manifest_rows(data: bytes, header: tuple[str, ...], label: str) -> dict[str
             raise RuntimeError(f"{label} invalid SHA-256 for {rel}")
         rows[rel] = {key: row[key] for key in header}
     return rows
+
+
+def _canonical_positive_integer(value: str, *, label: str) -> int:
+    if not value or not value.isascii() or not value.isdecimal():
+        raise RuntimeError(f"{label} is not a positive canonical integer: {value!r}")
+    parsed = int(value)
+    if parsed < 1 or str(parsed) != value:
+        raise RuntimeError(f"{label} is not a positive canonical integer: {value!r}")
+    return parsed
+
+
+def _load_translation_ledger(
+    source_rows: dict[str, dict[str, str]],
+) -> tuple[bytes, list[dict[str, Any]], dict[str, bytes]]:
+    """Bind the build to the live, exact, complete 29-document ledger."""
+
+    if len(TARGETS) != CORE_DOCUMENT_COUNT or len(set(TARGETS)) != CORE_DOCUMENT_COUNT:
+        raise RuntimeError("TARGETS must contain exactly 29 unique Random core paths")
+    ledger_data = read_regular(TRANSLATION_LEDGER)
+    if ledger_data.startswith(b"\xef\xbb\xbf"):
+        raise RuntimeError("translation ledger must be UTF-8 without BOM")
+    try:
+        ledger_text = ledger_data.decode("utf-8")
+    except UnicodeDecodeError as exc:
+        raise RuntimeError(f"translation ledger is not UTF-8: {exc}") from exc
+    reader = csv.DictReader(io.StringIO(ledger_text, newline=""))
+    if tuple(reader.fieldnames or ()) != TRANSLATION_LEDGER_HEADER:
+        raise RuntimeError(f"translation ledger header mismatch: {reader.fieldnames}")
+    raw_rows = list(reader)
+    if len(raw_rows) != CORE_DOCUMENT_COUNT:
+        raise RuntimeError(
+            f"translation ledger must contain exactly {CORE_DOCUMENT_COUNT} rows, found {len(raw_rows)}"
+        )
+    if any(
+        None in row or any(row.get(column) is None for column in TRANSLATION_LEDGER_HEADER)
+        for row in raw_rows
+    ):
+        raise RuntimeError("translation ledger contains a malformed row")
+
+    verified_rows: list[dict[str, Any]] = []
+    target_data: dict[str, bytes] = {}
+    target_paths_seen: set[str] = set()
+    for ordinal, (expected_rel, row) in enumerate(zip(TARGETS, raw_rows, strict=True), 1):
+        row_number = ordinal + 1
+        found_ordinal = _canonical_positive_integer(
+            row["ordinal"], label=f"translation ledger row {row_number} ordinal"
+        )
+        if found_ordinal != ordinal:
+            raise RuntimeError(
+                f"translation ledger is not contiguous at row {row_number}: "
+                f"expected ordinal {ordinal}, found {found_ordinal}"
+            )
+        source_path = row["source_path"]
+        if source_path != expected_rel.as_posix():
+            raise RuntimeError(
+                f"translation ledger ordinal {ordinal} path mismatch: "
+                f"expected {expected_rel}, found {source_path}"
+            )
+        if row["status"] != "complete":
+            raise RuntimeError(
+                f"translation ledger ordinal {ordinal} is not complete: {row['status']!r}"
+            )
+        manifest_row = source_rows.get(source_path)
+        if manifest_row is None or manifest_row["role"] != "core":
+            raise RuntimeError(f"ledger authority is not a frozen core row: {source_path}")
+        source_bytes = _canonical_positive_integer(
+            row["source_bytes"], label=f"translation ledger ordinal {ordinal} source_bytes"
+        )
+        if source_bytes != int(manifest_row["bytes"]):
+            raise RuntimeError(f"translation ledger source byte mismatch at ordinal {ordinal}")
+        if row["source_sha256"] != manifest_row["sha256"]:
+            raise RuntimeError(f"translation ledger source SHA-256 mismatch at ordinal {ordinal}")
+
+        expected_target_path = (PurePosixPath("source/id-ID") / expected_rel).as_posix()
+        target_path = row["target_path"]
+        if target_path != expected_target_path or target_path in target_paths_seen:
+            raise RuntimeError(
+                f"translation ledger target path mismatch/collision at ordinal {ordinal}: {target_path}"
+            )
+        target_paths_seen.add(target_path)
+        translated = read_regular(ROOT / Path(target_path))
+        try:
+            translated.decode("utf-8")
+        except UnicodeDecodeError as exc:
+            raise RuntimeError(f"translation target is not UTF-8 at ordinal {ordinal}: {exc}") from exc
+        target_bytes = _canonical_positive_integer(
+            row["target_bytes"], label=f"translation ledger ordinal {ordinal} target_bytes"
+        )
+        if len(translated) != target_bytes:
+            raise RuntimeError(f"translation ledger target byte mismatch at ordinal {ordinal}")
+        if not SHA256_RE.fullmatch(row["target_sha256"]):
+            raise RuntimeError(f"translation ledger target SHA-256 is invalid at ordinal {ordinal}")
+        target_sha256 = sha256_bytes(translated)
+        if target_sha256 != row["target_sha256"]:
+            raise RuntimeError(f"translation ledger target SHA-256 mismatch at ordinal {ordinal}")
+        target_data[source_path] = translated
+        verified_rows.append(
+            {
+                "ordinal": ordinal,
+                "source_path": source_path,
+                "source_bytes": source_bytes,
+                "source_sha256": row["source_sha256"],
+                "target_path": target_path,
+                "target_bytes": target_bytes,
+                "target_sha256": target_sha256,
+                "status": "complete",
+            }
+        )
+    return ledger_data, verified_rows, target_data
+
+
+def _css_references(css: str) -> list[tuple[str, str]]:
+    without_comments = CSS_COMMENT_RE.sub("", css)
+    references: list[tuple[str, str]] = []
+    for match in CSS_URL_RE.finditer(without_comments):
+        value = (match.group(2) if match.group(1) else match.group(3)).strip()
+        references.append(("css:url", value))
+    references.extend(
+        ("css:import", match.group(2).strip())
+        for match in CSS_IMPORT_RE.finditer(without_comments)
+    )
+    return references
+
+
+def _resolve_local_dependency(owner: PurePosixPath, value: str) -> PurePosixPath | None:
+    if not value:
+        raise RuntimeError(f"empty dependency reference in {owner}")
+    if "\x00" in value or "\\" in value:
+        raise RuntimeError(f"noncanonical dependency reference in {owner}: {value!r}")
+    parsed = urlsplit(value)
+    if parsed.scheme or parsed.netloc:
+        return None
+    decoded = unquote(parsed.path)
+    if decoded != parsed.path or "\x00" in decoded or "\\" in decoded:
+        raise RuntimeError(f"encoded/noncanonical dependency path in {owner}: {value!r}")
+    if not decoded:
+        return None
+    joined = decoded.lstrip("/") if decoded.startswith("/") else posixpath.join(
+        owner.parent.as_posix(), decoded
+    )
+    normalized = posixpath.normpath(joined)
+    dependency = PurePosixPath(normalized)
+    if (
+        dependency.is_absolute()
+        or normalized in {"", ".", ".."}
+        or any(part in {"", ".", ".."} for part in dependency.parts)
+        or ":" in normalized
+    ):
+        raise RuntimeError(f"dependency escapes or is noncanonical in {owner}: {value!r}")
+    return dependency
+
+
+def _dependency_references(
+    owner: PurePosixPath, data: bytes
+) -> list[tuple[str, str]]:
+    suffix = owner.suffix.casefold()
+    if suffix == ".css":
+        try:
+            return _css_references(data.decode("utf-8"))
+        except UnicodeDecodeError as exc:
+            raise RuntimeError(f"dependency stylesheet is not UTF-8: {owner}") from exc
+    if suffix not in {".html", ".htm", ".svg"}:
+        return []
+    try:
+        text = data.decode("utf-8")
+    except UnicodeDecodeError as exc:
+        raise RuntimeError(f"dependency document is not UTF-8: {owner}") from exc
+    parser = DependencyHTMLParser()
+    try:
+        parser.feed(text)
+        parser.close()
+    except Exception as exc:
+        raise RuntimeError(f"cannot parse dependency-bearing document {owner}: {exc}") from exc
+    references = list(parser.references)
+    for css in parser.inline_css:
+        references.extend(_css_references(css))
+    return references
+
+
+def _discover_support_closure(
+    target_data: dict[str, bytes],
+    source_rows: dict[str, dict[str, str]],
+    provided_paths: set[PurePosixPath],
+) -> tuple[
+    dict[PurePosixPath, bytes],
+    list[dict[str, Any]],
+    list[dict[str, Any]],
+    list[dict[str, str]],
+]:
+    """Resolve every transitive local reader dependency from the 29 targets."""
+
+    target_paths = set(TARGETS)
+    pending: set[PurePosixPath] = set()
+    support_data: dict[PurePosixPath, bytes] = {}
+    authority_records: list[dict[str, Any]] = []
+    target_only_records: list[dict[str, Any]] = []
+    edges: set[tuple[str, str, str, str]] = set()
+
+    def enqueue(owner: PurePosixPath, data: bytes) -> None:
+        for kind, raw_reference in _dependency_references(owner, data):
+            dependency = _resolve_local_dependency(owner, raw_reference)
+            if dependency is None:
+                continue
+            edges.add((owner.as_posix(), kind, raw_reference, dependency.as_posix()))
+            if dependency not in target_paths and dependency not in provided_paths:
+                pending.add(dependency)
+
+    for rel in TARGETS:
+        enqueue(rel, target_data[rel.as_posix()])
+
+    while pending:
+        rel = min(pending, key=lambda item: (item.as_posix().casefold(), item.as_posix()))
+        pending.remove(rel)
+        if rel in support_data:
+            continue
+        target_only = TARGET_ONLY_SUPPORT.get(rel)
+        if target_only is not None:
+            data = read_regular(SOURCE / Path(rel.as_posix()))
+            if len(data) != target_only["bytes"] or sha256_bytes(data) != target_only["sha256"]:
+                raise RuntimeError(f"target-only support differs from its exact pin: {rel}")
+            record = {
+                "relative_path": rel.as_posix(),
+                "purpose": target_only["purpose"],
+                "authority_backed": False,
+                "bytes": len(data),
+                "sha256": sha256_bytes(data),
+            }
+            target_only_records.append(record)
+        else:
+            row = source_rows.get(rel.as_posix())
+            if row is None:
+                raise RuntimeError(f"local dependency is absent from the frozen manifest: {rel}")
+            if row["role"] != "asset":
+                raise RuntimeError(
+                    f"local dependency is neither a translated target nor a frozen asset: {rel} ({row['role']})"
+                )
+            if row["url"] != "https://www.randomservices.org/" + rel.as_posix():
+                raise RuntimeError(f"local dependency authority URL mismatch: {rel}")
+            data, record = _validated_file_record(
+                AUTHORITY, rel, row, purpose="reader_support_transitive"
+            )
+            authority_records.append(record)
+        support_data[rel] = data
+        enqueue(rel, data)
+
+    missing_target_only = set(TARGET_ONLY_SUPPORT) - set(support_data)
+    if missing_target_only:
+        raise RuntimeError(
+            "pinned target-only support is not referenced by the complete reader: "
+            + ", ".join(path.as_posix() for path in sorted(missing_target_only))
+        )
+    edge_records = [
+        {"owner": owner, "kind": kind, "reference": reference, "resolved_path": target}
+        for owner, kind, reference, target in sorted(
+            edges, key=lambda item: tuple(part.casefold() for part in item)
+        )
+    ]
+    return support_data, authority_records, target_only_records, edge_records
 
 
 def _freeze_evidence(
@@ -2509,8 +2868,23 @@ def collect_inputs() -> tuple[dict[PurePosixPath, bytes], dict[str, Any]]:
         hash_field="url_manifest_sha256",
         filename_field="url_manifest",
     )
+    try:
+        source_freeze_document = json.loads(read_regular(SOURCE_FREEZE_RECEIPT).decode("utf-8"))
+    except (UnicodeDecodeError, json.JSONDecodeError) as exc:
+        raise RuntimeError(f"invalid source freeze receipt: {exc}") from exc
+    frozen_core_paths = source_freeze_document.get("core_paths")
+    expected_core_paths = [rel.as_posix() for rel in TARGETS]
+    if (
+        frozen_core_paths != expected_core_paths
+        or source_freeze_document.get("core_files") != CORE_DOCUMENT_COUNT
+    ):
+        raise RuntimeError("TARGETS/translation ledger order differs from the frozen 29-document core")
+    source_freeze["core_document_count"] = CORE_DOCUMENT_COUNT
+    source_freeze["core_order_verified"] = True
+    source_freeze["core_paths"] = expected_core_paths
     source_rows = _manifest_rows(source_manifest_data, SOURCE_MANIFEST_HEADER, "source manifest")
     license_rows = _manifest_rows(license_manifest_data, LICENSE_MANIFEST_HEADER, "license manifest")
+    ledger_data, ledger_rows, target_data = _load_translation_ledger(source_rows)
 
     payload: dict[PurePosixPath, bytes] = {
         PurePosixPath("index.html"): root_index(),
@@ -2519,9 +2893,8 @@ def collect_inputs() -> tuple[dict[PurePosixPath, bytes], dict[str, Any]]:
     authority_inputs: list[dict[str, Any]] = []
     target_inputs: list[dict[str, Any]] = []
     authority_data: dict[str, bytes] = {}
-    target_data: dict[str, bytes] = {}
 
-    for rel in TARGETS:
+    for rel, ledger_row in zip(TARGETS, ledger_rows, strict=True):
         row = source_rows.get(rel.as_posix())
         if row is None or row["role"] != "core":
             raise RuntimeError(f"selected translation authority is not a core manifest row: {rel}")
@@ -2533,17 +2906,23 @@ def collect_inputs() -> tuple[dict[PurePosixPath, bytes], dict[str, Any]]:
         authority_data[rel.as_posix()] = authority
         authority_inputs.append(authority_record)
 
-        translated = read_regular(SOURCE / Path(rel.as_posix()))
-        translated.decode("utf-8")
+        translated = target_data[rel.as_posix()]
         payload[rel] = translated
-        target_data[rel.as_posix()] = translated
         target_inputs.append(
             {
+                "ordinal": ledger_row["ordinal"],
                 "relative_path": rel.as_posix(),
+                "ledger_target_path": ledger_row["target_path"],
+                "status": ledger_row["status"],
                 "bytes": len(translated),
                 "sha256": sha256_bytes(translated),
             }
         )
+
+    if sum(record["bytes"] for record in authority_inputs) != source_freeze_document.get(
+        "core_bytes"
+    ):
+        raise RuntimeError("verified translation-authority byte total differs from the core freeze")
 
     _validate_target_corrections(authority_data, target_data)
 
@@ -2552,15 +2931,13 @@ def collect_inputs() -> tuple[dict[PurePosixPath, bytes], dict[str, Any]]:
         raise RuntimeError(f"duplicate reader runtime path: {RUNTIME_READER_PATH}")
     payload[RUNTIME_READER_PATH] = runtime_data
 
+    support_data, support_authority_inputs, target_only_inputs, dependency_edges = (
+        _discover_support_closure(target_data, source_rows, {RUNTIME_READER_PATH})
+    )
+    authority_inputs.extend(support_authority_inputs)
     reader_customizations: list[dict[str, Any]] = []
-    for rel in SUPPORT:
-        row = source_rows.get(rel.as_posix())
-        if row is None or row["role"] != "asset":
-            raise RuntimeError(f"selected reader support is not an asset manifest row: {rel}")
-        if row["url"] != "https://www.randomservices.org/" + rel.as_posix():
-            raise RuntimeError(f"selected support URL mismatch: {rel}")
-        data, authority_record = _validated_file_record(AUTHORITY, rel, row, purpose="reader_support")
-        authority_inputs.append(authority_record)
+    for rel in sorted(support_data, key=lambda item: (item.as_posix().casefold(), item.as_posix())):
+        data = support_data[rel]
         reader_data = data
         if rel == PurePosixPath("random/Screen.css"):
             reader_data = data + READABLE_REFLOW_CSS
@@ -2581,6 +2958,12 @@ def collect_inputs() -> tuple[dict[PurePosixPath, bytes], dict[str, Any]]:
                 }
             )
         payload[rel] = reader_data
+
+    if read_regular(TRANSLATION_LEDGER) != ledger_data:
+        raise RuntimeError("translation ledger changed during reader input collection")
+    for rel in TARGETS:
+        if read_regular(SOURCE / Path(rel.as_posix())) != target_data[rel.as_posix()]:
+            raise RuntimeError(f"translation target changed during reader input collection: {rel}")
 
     license_inputs: list[dict[str, Any]] = []
     for source_rel, reader_rel, expected_license in LICENSE_FILES:
@@ -2606,8 +2989,32 @@ def collect_inputs() -> tuple[dict[PurePosixPath, bytes], dict[str, Any]]:
             "source": source_freeze,
             "component_licenses": license_freeze,
         },
+        "translation_ledger": {
+            "path": TRANSLATION_LEDGER.relative_to(ROOT).as_posix(),
+            "bytes": len(ledger_data),
+            "sha256": sha256_bytes(ledger_data),
+            "required_document_count": CORE_DOCUMENT_COUNT,
+            "required_ordinals": list(range(1, CORE_DOCUMENT_COUNT + 1)),
+            "verified_rows": ledger_rows,
+        },
         "authority_inputs": sorted(authority_inputs, key=lambda item: item["relative_path"].casefold()),
-        "target_inputs": sorted(target_inputs, key=lambda item: item["relative_path"].casefold()),
+        "target_inputs": target_inputs,
+        "target_only_inputs": sorted(
+            target_only_inputs, key=lambda item: item["relative_path"].casefold()
+        ),
+        "dependency_closure": {
+            "algorithm": "transitive local HTML/SVG href/src/reference attributes plus inline/external CSS url/import",
+            "authority_backed_support_paths": sorted(
+                (record["relative_path"] for record in support_authority_inputs),
+                key=str.casefold,
+            ),
+            "target_only_support_paths": sorted(
+                (record["relative_path"] for record in target_only_inputs),
+                key=str.casefold,
+            ),
+            "support_file_count": len(support_data),
+            "edges": dependency_edges,
+        },
         "license_inputs": sorted(license_inputs, key=lambda item: item["relative_path"].casefold()),
         "runtime_inputs": [runtime_input],
         "generated_inputs": sorted(
@@ -2652,16 +3059,19 @@ def expected_receipt(
     reader_manifest: bytes,
 ) -> dict[str, Any]:
     return {
-        "schema": "o006.random.first-unit-build.v1",
+        "schema": "o006.random.complete-core-build.v1",
         "translation_provenance": TRANSLATION_PROVENANCE,
         "frozen_manifests": evidence["frozen_manifests"],
+        "translation_ledger": evidence["translation_ledger"],
         "inputs": {
             "authority": evidence["authority_inputs"],
             "targets": evidence["target_inputs"],
+            "target_only_support": evidence["target_only_inputs"],
             "licenses": evidence["license_inputs"],
             "runtime": evidence["runtime_inputs"],
             "generated": evidence["generated_inputs"],
         },
+        "dependency_closure": evidence["dependency_closure"],
         "bounded_text_corrections": list(BOUNDED_TEXT_CORRECTIONS),
         "bounded_reference_corrections": list(BOUNDED_REFERENCE_CORRECTIONS),
         "protected_math_corrections": list(PROTECTED_MATH_CORRECTIONS),
@@ -2744,7 +3154,7 @@ def check(*, verbose: bool = True) -> dict[str, Any]:
     expected_build_receipt = canonical_json_bytes(expected_receipt(evidence, rows, expected_manifest))
     actual_build_receipt = read_regular(BUILD_RECEIPT, reject_hardlinks=True)
     if actual_build_receipt != expected_build_receipt:
-        raise RuntimeError("first-unit build receipt is stale or noncanonical")
+        raise RuntimeError("complete-core build receipt is stale or noncanonical")
 
     summary = {
         "file_count": len(rows),

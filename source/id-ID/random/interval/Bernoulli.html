@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="id-ID">
+
+<head>
+<meta charset="utf-8">
+  <title>Pendugaan pada Model Bernoulli</title>
+  <meta name="author" content="Kyle Siegrist">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="probabilitas, statistika, pendugaan interval, distribusi Bernoulli, tingkat kepercayaan, interval Wilson, interval Wald, interval konservatif">
+  <link rel="icon" href="../icons/Icon.svg" type="image/svg">
+  <link rel="stylesheet" href="../Screen.css" type="text/css" media="screen">
+  <script src="../Basic.js"></script>
+  <script src="../../MathJax/tex-svg.js" id="MathJax-script" async></script>
+</head>
+
+<body>
+
+<div class="latex">
+  \(\newcommand{\R}{\mathbb{R}}\)
+  \(\newcommand{\N}{\mathbb{N}}\)
+  \(\newcommand{\Z}{\mathbb{Z}}\)
+  \(\newcommand{\P}{\mathbb{P}}\)
+  \(\newcommand{\E}{\mathbb{E}}\)
+  \(\newcommand{\var}{\text{var}}\)
+  \(\newcommand{\sd}{\text{sd}}\)
+  \(\newcommand{\bs}{\boldsymbol}\)
+</div>
+
+<header>
+  <ol class="map">
+    <li class="parent"><a href="https://www.randomservices.org/random/index.html">Random</a></li>
+    <li class="parent"><a href="index.html">7. Pendugaan Himpunan</a></li>
+    <li class="child"><a href="Introduction.html" title="Pendahuluan">1</a></li>
+    <li class="child"><a href="Normal.html" title="Pendugaan pada Model Normal">2</a></li>
+    <li class="current">3</li>
+    <li class="child"><a href="BivariateNormal.html" title="Pendugaan pada Model Normal Dua Sampel">4</a></li>
+    <li class="child"><a href="Bayes.html" title="Pendugaan Interval Bayes">5</a></li>
+    <li class="details"><button type="button" title="Perluas Rincian" onclick="expandDetails(true);"><img src="../icons/Plus.svg" alt="Perluas"></button></li>
+    <li class="details"><button type="button" title="Ciutkan Rincian" onclick="expandDetails(false);"><img src="../icons/Minus.svg" alt="Ciutkan"></button></li>
+  </ol>
+  <h2 id="o006.random.interval.bernoulli.page">3. Pendugaan pada Model Bernoulli</h2>
+</header>
+
+<h3 id="o006.random.interval.bernoulli.section-introduction">Pendahuluan</h3>
+
+<p>Ingat bahwa <dfn>variabel indikator</dfn> adalah <a href="https://www.randomservices.org/random/prob/Events.html">variabel acak</a> yang hanya mengambil nilai 0 dan 1. Dalam penerapan, variabel indikator menunjukkan kejadian mana dari dua kejadian komplementer dalam suatu eksperimen acak yang terjadi.</p>
+
+<div class="unit" id="exm">
+  <p class="math">Contoh-contoh lazim meliputi</p>
+  <ol class="sub">
+    <li>Barang hasil produksi yang dipengaruhi faktor acak yang tidak terhindarkan dapat cacat atau layak.</li>
+    <li>Pemilih yang dipilih dari suatu populasi dapat mendukung calon tertentu atau tidak mendukungnya.</li>
+    <li>Orang yang dipilih dari suatu populasi dapat memiliki kondisi medis tertentu atau tidak memilikinya.</li>
+    <li>Siswa dalam suatu kelas dapat lulus atau gagal dalam ujian terstandar.</li>
+    <li>Sampel bahan radioaktif dapat memancarkan partikel alfa atau tidak memancarkannya dalam selang sepuluh detik tertentu.</li>
+  </ol>
+</div>
+
+<p>Ingat pula bahwa distribusi variabel indikator dikenal sebagai <dfn>distribusi Bernoulli</dfn>, yang dinamai untuk menghormati <a href="https://www.randomservices.org/random/biographies/Bernoulli.html" class="ancillary">Jacob Bernoulli</a>, dan mempunyai fungsi kepadatan probabilitas \(\P(X = 1) = p\), \(\P(X = 0) = 1 - p\), dengan \(p \in (0, 1)\) sebagai parameter dasarnya.</p>
+
+<div class="unit" id="o006.random.interval.bernoulli.unit-02">
+  <p class="math">Dalam konteks contoh-contoh pada <a href="#exm" class="ref"></a>,</p>
+  <ol class="sub">
+    <li>\(p\) adalah probabilitas bahwa barang hasil produksi tersebut cacat.</li>
+    <li>\(p\) adalah proporsi pemilih dalam populasi yang mendukung calon tersebut.</li>
+    <li>\(p\) adalah proporsi orang dalam populasi yang memiliki kondisi medis tersebut.</li>
+    <li>\(p\) adalah probabilitas bahwa seorang siswa dalam kelas tersebut akan lulus ujian.</li>
+    <li>\(p\) adalah probabilitas bahwa bahan tersebut akan memancarkan partikel alfa dalam selang yang ditentukan.</li>
+  </ol>
+</div>
+
+<p>Ingat bahwa rata-rata dan varians distribusi Bernoulli adalah \(\E(X) = p\) dan \(\var(X) = p (1 - p)\). Dalam penerapan statistika, \(p\) sering tidak diketahui dan harus diduga dari data sampel. Pada bagian ini kita akan mempelajari cara membangun dugaan interval bagi parameter tersebut dari data sampel. Bagian paralel mengenai <a href="../hypothesis/Bernoulli.html">pengujian pada model Bernoulli</a> terdapat dalam bab tentang <a href="../hypothesis/index.html">pengujian hipotesis</a>.</p>
+
+<h3 id="o006.random.interval.bernoulli.section-one-sample">Model Satu Sampel</h3>
+
+<h4 id="o006.random.interval.bernoulli.section-one-preliminaries">Pendahuluan Dasar</h4>
+
+<p>Andaikan \(\bs{X} = (X_1, X_2, \ldots, X_n)\) merupakan sampel acak dari distribusi Bernoulli dengan parameter tak diketahui \(p \in [0, 1]\). Artinya, \(\bs X\) adalah barisan <a href="https://www.randomservices.org/random/bernoulli/Introduction.html">percobaan Bernoulli</a>. Dari contoh-contoh dalam pendahuluan di atas, perhatikan bahwa eksperimen yang mendasari sering berupa pengambilan sampel acak dari populasi dikotomis. Jika pengambilan sampel dilakukan <em>dengan</em> pengembalian, \(\bs X\) benar-benar merupakan barisan percobaan Bernoulli. Jika pengambilan sampel dilakukan <em>tanpa</em> pengembalian, variabel-variabelnya dependen, tetapi model Bernoulli masih berlaku secara hampiran jika ukuran populasi besar dibandingkan ukuran sampel \(n\). Uraian lebih lanjut terdapat dalam <a href="https://www.randomservices.org/random/urn/Introduction.html">pendahuluan</a> pada bab tentang <a href="https://www.randomservices.org/random/urn/index.html">model pengambilan sampel hingga</a>. Pada titik batas ruang parameter, bentuk pivot di bawah terdegenerasi; derivasi aproksimasi normalnya berlaku untuk parameter di bagian dalam interval.</p>
+
+<p>Perhatikan bahwa rata-rata sampel dari vektor data \(\bs X\), yaitu
+\[ M = \frac{1}{n} \sum_{i=1}^n X_i \]
+adalah proporsi sampel objek dengan jenis yang menjadi perhatian. Menurut <a href="../sample/CLT.html">teorema limit pusat</a>, skor baku
+\[ Z = \frac{M - p}{\sqrt{p (1 - p) / n}} \]
+mempunyai <a href="https://www.randomservices.org/random/special/Normal.html">distribusi normal</a> standar secara hampiran dan karena itu merupakan variabel pivot hampiran bagi \(p\). Untuk ukuran sampel tertentu \(n\), distribusi \(Z\) paling dekat dengan normal ketika \(p\) berada dekat \(\frac{1}{2}\) dan paling jauh dari normal ketika \(p\) berada dekat 0 atau 1. Karena variabel pivot tersebut berdistribusi normal secara hampiran, konstruksi interval kepercayaan bagi \(p\) dalam model ini mirip dengan konstruksi <a href="Normal.html">interval kepercayaan</a> bagi rata-rata distribusi \(\mu\) dalam model normal. Namun, semua interval kepercayaan yang dibangun dengan cara ini bersifat hampiran.</p>
+
+<p>Seperti biasa, untuk \(r \in (0, 1)\), misalkan \(z(r)\) menyatakan <a href="https://www.randomservices.org/random/dist/CDF.html#qnt">kuantil</a> berorde \(r\) dari distribusi normal standar. Nilai \(z(r)\) dapat diperoleh dari <a href="https://www.randomservices.org/random/apps/QuantileApp.html" class="ancillary">aplikasi kuantil</a> atau dari sebagian besar paket perangkat lunak statistika.</p>
+
+<h4 id="o006.random.interval.bernoulli.section-wilson">Interval Kepercayaan Wilson</h4>
+
+<div class="unit" id="wil1">
+  <p class="math">Untuk \(\alpha \in (0, 1)\), berikut adalah himpunan kepercayaan hampiran bertingkat \(1 - \alpha\) bagi \(p\):</p>
+  <ol class="sub">
+    <li>\(\left\{ p \in [0, 1]: M - z(1 - \alpha / 2) \sqrt{p (1 - p) / n} \le p \le M + z(1 - \alpha / 2) \sqrt{p (1 - p) / n} \right\}\)</li>
+    <li>\(\left\{ p \in [0, 1]: p \le M + z(1 - \alpha) \sqrt{p (1 - p) / n} \right\}\)</li>
+    <li>\(\left\{ p \in [0, 1]: M - z(1 - \alpha) \sqrt{p (1 - p) / n} \le p \right\}\)</li>
+  </ol>
+  <details>
+    <summary>Rincian:</summary>
+    <p>Dari pembahasan di atas, \((M - p) / \sqrt{p (1 - p) / n}\) mempunyai distribusi normal standar secara hampiran. Karena itu, menurut definisi kuantil,</p>
+    <ol class="sub">
+      <li>\(\P[-z(1 - \alpha / 2) \le (M - p) / \sqrt{p (1 - p) / n} \le z(1 - \alpha / 2)] \approx 1 - \alpha\)</li>
+      <li>\(\P[-z(1 - \alpha) \le (M - p) / \sqrt{p (1 - p) / n}] \approx 1 - \alpha\)</li>
+      <li>\(\P[(M - p) / \sqrt{p (1 - p) / n} \le z(1 - \alpha)] \approx 1 - \alpha\)</li>
+    </ol>
+    <p>Menyelesaikan pertidaksamaan pada setiap kejadian terhadap \(p\) dalam bentuk \((M - p) / \sqrt{p (1 - p) / n}\) memberikan himpunan kepercayaan yang bersesuaian.</p>
+  </details>
+</div>
+
+<p>Himpunan-himpunan kepercayaan ini sebenarnya berupa interval yang dikenal sebagai <dfn>interval Wilson</dfn>, untuk menghormati Edwin Wilson.</p>
+
+<div class="unit" id="wil2">
+  <p class="math">Himpunan kepercayaan bagi \( p \) pada <a href="#wil1" class="ref"></a> merupakan interval. Misalkan
+  \[ U(z) = \frac{n}{n + z^2} \left(M + \frac{z^2}{2 n} + z \sqrt{\frac{M (1 - M)}{n} + \frac{z^2}{4 n^2}}\right)\] Maka interval dan batas berikut mempunyai tingkat kepercayaan hampiran \(1 - \alpha\) bagi \(p\).</p>
+  <ol class="sub">
+    <li>Interval dua sisi \(\left[U[-z(1 - \alpha / 2)], U[z(1 - \alpha / 2)]\right]\).</li>
+    <li>Batas atas \(U[z(1 - \alpha)]\).</li>
+    <li>Batas bawah \(U[-z(1 - \alpha)]\).</li>
+  </ol>
+  <details>
+    <summary>Rincian:</summary>
+    <p>Hasil ini diperoleh dengan menyelesaikan pertidaksamaan pada <a href="#wil1" class="ref"></a> terhadap \(p\). Pada setiap pertidaksamaan, kita dapat mengisolasi suku akar lalu menguadratkan kedua ruas. Dengan demikian diperoleh pertidaksamaan kuadrat yang dapat diselesaikan memakai rumus kuadrat.</p>
+  </details>
+</div>
+
+<p>Seperti biasa, interval kepercayaan <dfn>berekor sama</dfn> pada (a) bukan satu-satunya interval kepercayaan dua sisi bertingkat \(1 - \alpha\) bagi \(p\). Peluang \(\alpha\) dapat dibagi antara ekor kiri dan kanan distribusi normal standar dengan cara apa pun.</p>
+
+<div class="unit" id="wil3">
+  <p class="math">Untuk \(\alpha, \, r \in (0, 1)\), interval kepercayaan dua sisi hampiran bertingkat \(1 - \alpha\) bagi \(p\) adalah \(\left[U[z(\alpha - r \alpha)], U[z(1 - r \alpha)]\right]\), dengan \(U\) sebagai fungsi pada <a href="#wil2" class="ref"></a>.</p>
+  <details>
+    <summary>Rincian:</summary>
+    <p>Seperti dalam bukti <a href="#wil1" class="ref"></a>,
+    \[\P\left[z(\alpha - r \alpha) \le \frac{M - p}{\sqrt{p (1 - p) / n}} \le z(1 - r \alpha)\right] \approx 1 - \alpha\]
+    Menyelesaikannya terhadap \(p\) dengan bantuan rumus kuadrat memberikan hasil yang dinyatakan.</p>
+  </details>
+</div>
+
+<p>Dalam praktik, interval kepercayaan berekor sama bertingkat \(1 - \alpha\) pada bagian (a) dari <a href="#wil2" class="ref"></a>, yang diperoleh dengan menetapkan \(r = \frac{1}{2}\) pada <a href="#wil3" class="ref"></a>, merupakan interval yang lazim digunakan. Ketika \(r \uparrow 1\), titik ujung kanan konvergen ke batas atas kepercayaan bertingkat \(1 - \alpha\) pada bagian (b); ketika \(r \downarrow 0\), titik ujung kiri konvergen ke batas bawah kepercayaan bertingkat \(1 - \alpha\) pada bagian (c).</p>
+
+<div class="unit" id="o006.random.interval.bernoulli.unit-06">
+  <p class="app">Buka <a href="https://www.randomservices.org/random/apps/ProportionEstimate.html" class="ancillary">eksperimen pendugaan proporsi</a> dan pilih prosedur pendugaan Wilson. Untuk berbagai nilai \(p\), tingkat kepercayaan, ukuran sampel, dan jenis interval, jalankan eksperimen 1.000 kali dan bandingkan proporsi interval yang berhasil dengan tingkat kepercayaan teoretis. Perhatikan ukuran sampel \(n\): prosedur tidak bekerja sesuai tingkat nominal jika, untuk nilai \(p\) tersebut, jumlah harapan sukses dan gagal tidak cukup besar.</p>
+</div>
+
+<h4 id="o006.random.interval.bernoulli.section-wald">Interval Kepercayaan Wald</h4>
+
+<p>Interval kepercayaan hampiran bertingkat \(1 - \alpha\) yang lebih sederhana bagi \(p\) dapat diperoleh dengan mengganti rata-rata distribusi \(p\) oleh rata-rata sampel \(M\) pada suku akar dalam pertidaksamaan pada <a href="#wil1" class="ref"></a>.</p>
+
+<div class="unit" id="con4">
+  <p class="math">Untuk \(\alpha \in (0, 1)\), interval dan batas berikut mempunyai tingkat kepercayaan hampiran \(1 - \alpha\) bagi \(p\):</p>
+  <ol class="sub">
+    <li>Interval dua sisi dengan titik ujung \(M \pm z(1 - \alpha / 2) \sqrt{M (1 - M) / n}\).</li>
+    <li>Batas atas \(M + z(1 - \alpha) \sqrt{M (1 - M) / n}\).</li>
+    <li>Batas bawah \(M - z(1 - \alpha) \sqrt{M (1 - M) / n}\).</li>
+  </ol>
+  <details>
+    <summary>Rincian:</summary>
+    <p>Seperti telah dikemukakan, hasil-hasil ini diperoleh dari himpunan kepercayaan pada <a href="#wil1" class="ref"></a> dengan mengganti \( p \) oleh \( M \) dalam bentuk \( \sqrt{p (1 - p) / n} \).</p>
+  </details>
+</div>
+
+<p>Interval kepercayaan ini dikenal sebagai <dfn>interval Wald</dfn>, untuk menghormati <a href="https://www.randomservices.org/random/biographies/Wald.html" class="ancillary">Abraham Wald</a>. Interval Wald juga dapat diperoleh dari interval Wilson pada <a href="#wil2" class="ref"></a> dengan mengasumsikan bahwa \(n\) besar dibandingkan \(z\), sehingga \(n \big/ (n + z^2) \approx 1\), \(z^2 / 2 n \approx 0\), dan \(z^2 / 4 n^2 \approx 0\). Interval pada bagian (a) simetris terhadap proporsi sampel \(M\), tetapi panjang dan pusatnya acak. Inilah interval dua sisi yang lazim digunakan. Jika semua hasil dalam sampel sama, galat baku Wald menjadi nol; karena itu interval Wald sangat tidak andal di dekat batas 0 dan 1.</p>
+
+<div class="unit" id="o006.random.interval.bernoulli.unit-08">
+  <p class="app">Buka <a href="https://www.randomservices.org/random/apps/ProportionEstimate.html" class="ancillary">eksperimen pendugaan proporsi</a> dan pilih prosedur pendugaan Wald. Untuk berbagai nilai \(p\), tingkat kepercayaan, ukuran sampel, dan jenis interval, jalankan eksperimen 1.000 kali dan bandingkan proporsi interval yang berhasil dengan tingkat kepercayaan teoretis. Perhatikan ukuran sampel \(n\): prosedur tidak bekerja sesuai tingkat nominal jika, untuk nilai \(p\) tersebut, jumlah harapan sukses dan gagal tidak cukup besar.</p>
+</div>
+
+<p>Seperti biasa, interval berekor sama pada <a href="#con4" class="ref"></a> bukan satu-satunya interval kepercayaan dua sisi bertingkat \(1 - \alpha\).</p>
+
+<div class="unit" id="o006.random.interval.bernoulli.unit-09">
+  <p class="math">Untuk \(\alpha, \, r \in (0, 1)\), interval kepercayaan dua sisi hampiran bertingkat \(1 - \alpha\) bagi \(p\) adalah
+  \[\left[M - z(1 - r \alpha) \sqrt{\frac{M (1 - M)}{n}}, M - z(\alpha - r \alpha) \sqrt{\frac{M (1 - M)}{ n}}\right]\]
+  Interval dengan panjang terkecil adalah interval berekor sama dengan \(r = \frac 1 2\).</p>
+</div>
+
+<h4 id="o006.random.interval.bernoulli.section-one-conservative">Interval Kepercayaan Konservatif</h4>
+
+<p>Perhatikan bahwa fungsi \(p \mapsto p(1 - p)\) pada interval \( [0, 1] \) mencapai maksimum ketika \(p = \frac 1 2\), dengan nilai maksimum \(\frac{1}{4}\). Fakta ini dapat digunakan untuk memperoleh interval kepercayaan konservatif bagi \( p \) dari interval kepercayaan dasar.</p>
+
+<div class="unit" id="wald1">
+  <p class="math">Untuk \(\alpha \in (0, 1)\), dalam aproksimasi normal interval dan batas berikut mempunyai tingkat kepercayaan hampiran sekurang-kurangnya \(1 - \alpha\) bagi \(p\):</p>
+  <ol class="sub">
+    <li>Interval dua sisi dengan titik ujung \(M \pm z(1 - \alpha / 2) \frac{1}{2 \sqrt{n}}\).</li>
+    <li>Batas atas \(M + z(1 - \alpha) \frac{1}{2 \sqrt{n}}\).</li>
+    <li>Batas bawah \(M - z(1 - \alpha) \frac{1}{2 \sqrt{n}}\).</li>
+  </ol>
+  <details>
+    <summary>Rincian:</summary>
+    <p>Seperti telah dikemukakan, hasil-hasil ini diperoleh dari himpunan kepercayaan pada <a href="#wil1" class="ref"></a> dengan mengganti \( p \) oleh \( \frac 1 2 \) dalam bentuk \( \sqrt{p (1 - p) / n} \).</p>
+  </details>
+</div>
+
+<div class="unit" id="o006.random.interval.bernoulli.unit-11">
+  <p class="app">Buka <a href="https://www.randomservices.org/random/apps/ProportionEstimate.html" class="ancillary">eksperimen pendugaan proporsi</a> dan pilih prosedur pendugaan konservatif. Untuk berbagai nilai \(p\), tingkat kepercayaan, ukuran sampel, dan jenis interval, jalankan eksperimen 1.000 kali dan bandingkan proporsi interval yang berhasil dengan tingkat kepercayaan teoretis. Perhatikan ukuran sampel \(n\): prosedur tidak bekerja sesuai tingkat nominal jika, untuk nilai \(p\) tersebut, jumlah harapan sukses dan gagal tidak cukup besar. Jika ukuran sampel \(n\) cukup besar untuk nilai \(p\), tingkat kepercayaan empiris sering lebih tinggi daripada tingkat nominal.</p>
+</div>
+
+<p>Interval kepercayaan pada (a) simetris terhadap proporsi sampel \(M\) dan panjangnya deterministik. Interval konservatif tentu lebih lebar daripada interval Wald hampiran pada <a href="#con4" class="ref"></a>. Dugaan konservatif dapat digunakan untuk merancang eksperimen. Ingat bahwa <dfn>margin galat</dfn> adalah jarak antara proporsi sampel \( M \) dan suatu titik ujung interval kepercayaan.</p>
+
+<div class="unit" id="o006.random.interval.bernoulli.unit-12">
+  <p class="math">Dugaan konservatif bagi ukuran sampel \(n\) yang diperlukan untuk menduga \(p\) dengan tingkat kepercayaan \(1 - \alpha\) dan margin galat \(d\) adalah
+  \[ n = \left\lceil \frac{z_\alpha^2}{4 d^2} \right\rceil \]
+  dengan \(z_\alpha = z(1 - \alpha / 2)\) untuk interval dua sisi dan \(z_\alpha = z(1 - \alpha)\) untuk batas atas atau bawah kepercayaan.</p>
+  <details>
+    <summary>Rincian:</summary>
+    <p>Pada tingkat kepercayaan \( 1 - \alpha \), margin galat adalah \( z_\alpha \frac{1}{2 \sqrt{n}} \). Menyamakan bentuk ini dengan nilai \( d \) yang ditetapkan lalu menyelesaikannya terhadap ukuran sampel memberikan hasil yang dinyatakan.</p>
+  </details>
+</div>
+
+<p>Seperti biasa, interval berekor sama pada <a href="#wald1" class="ref"></a> bukan satu-satunya interval kepercayaan konservatif dua sisi bertingkat \(1 - \alpha\).</p>
+
+<div class="unit" id="o006.random.interval.bernoulli.unit-13">
+  <p class="math">Untuk \(\alpha, \, r \in (0, 1)\), interval kepercayaan konservatif dua sisi hampiran bertingkat \(1 - \alpha\) bagi \(p\) adalah
+  \[\left[M - z(1 - r \alpha) \frac{1}{2 \sqrt{n}}, M - z(\alpha - r \alpha) \frac{1}{2 \sqrt{n}}\right]\]
+  Interval dengan panjang terkecil adalah interval berekor sama dengan \(r = \frac 1 2\).</p>
+</div>
+
+<h3 id="two">Model Dua Sampel</h3>
+
+<h4 id="o006.random.interval.bernoulli.section-two-preliminaries">Pendahuluan Dasar</h4>
+
+<p>Sering kali terdapat dua distribusi Bernoulli asal dengan parameter \( p_1, \, p_2 \in [0, 1] \), dan kita ingin menduga selisih \( p_1 - p_2 \). Masalah ini dapat muncul dalam contoh-contoh berikut:</p>
+
+<ul>
+	<li>Dalam pengendalian mutu, andaikan \( p_1 \) adalah proporsi barang cacat yang diproduksi dalam satu kondisi produksi, sedangkan \( p_2 \) adalah proporsi barang cacat dalam kondisi yang berbeda.</li>
+	<li>Dalam suatu pemilihan, andaikan \( p_1 \) adalah proporsi pemilih yang mendukung calon tertentu pada satu tahap kampanye, sedangkan \( p_2 \) adalah proporsi yang mendukung calon tersebut pada tahap berikutnya, mungkin setelah muncul suatu skandal.</li>
+	<li>Andaikan \( p_1 \) adalah proporsi siswa yang lulus ujian terstandar dengan metode persiapan biasa, sedangkan \( p_2 \) adalah proporsi siswa yang lulus dengan metode persiapan baru.</li>
+	<li>Andaikan \( p_1 \) adalah proporsi orang yang tidak divaksinasi dalam suatu populasi yang tertular penyakit tertentu, sedangkan \( p_2 \) adalah proporsi orang yang divaksinasi yang tertular penyakit tersebut.</li>
+</ul>
+
+<p>Beberapa contoh tersebut dapat dipandang sebagai masalah <dfn>perlakuan–kontrol</dfn>. Kita dapat membangun dugaan interval \(I_1\) bagi \(p_1\) dan \(I_2\) bagi \(p_2\) secara terpisah seperti pada subbagian di atas. Namun, sebagaimana dicatat dalam <a href="Introduction.html">pendahuluan</a>, jika kedua interval ini mempunyai tingkat kepercayaan \(1 - \alpha\), maka himpunan hasil kali \(I_1 \times I_2\) mempunyai tingkat kepercayaan \((1 - \alpha)^2\) bagi \((p_1, p_2)\). Karena parameter yang menjadi perhatian adalah \(p_1 - p_2\), kita akan menggunakan pendekatan lain. Rumus berikut mensyaratkan dua sampel independen; desain yang mengamati individu yang sama pada dua waktu memerlukan analisis berpasangan.</p>
+
+<h4 id="o006.random.interval.bernoulli.section-two-simplified">Interval Kepercayaan yang Disederhanakan</h4>
+
+<p>Andaikan \( \bs X = (X_1, X_2, \ldots, X_{n_1}) \) merupakan sampel acak berukuran \( n_1 \) dari distribusi Bernoulli berparameter \( p_1 \), dan \( \bs Y = (Y_1, Y_2, \ldots, Y_{n_2}) \) merupakan sampel acak berukuran \( n_2 \) dari distribusi Bernoulli berparameter \( p_2 \). Kita mengasumsikan bahwa sampel \( \bs X \) dan \( \bs Y \) saling bebas. Misalkan
+\[ M_1 = \frac{1}{n_1} \sum_{i=1}^{n_1} X_i, \quad M_2 = \frac{1}{n_2} \sum_{i=1}^{n_2} Y_i \]
+menyatakan rata-rata sampel atau proporsi sampel bagi \( \bs X \) dan \( \bs Y \). Dugaan titik yang wajar bagi \( p_1 - p_2 \), sekaligus unsur dasar dugaan interval, adalah \( M_1 - M_2 \). Seperti pada model satu sampel, jika \( n_i \) besar, \( M_i \) mempunyai distribusi normal hampiran dengan rata-rata \( p_i \) dan varians \( p_i (1 - p_i) / n_i \) untuk \( i \in \{1, 2\} \). Karena kedua sampel saling bebas, kedua rata-rata sampelnya juga saling bebas. Karena itu, \( M_1 - M_2 \) mempunyai distribusi normal hampiran dengan rata-rata \( p_1 - p_2 \) dan varians \( p_1 (1 - p_1) / n_1 + p_2 (1 - p_2) / n_2\). Kini kita mempunyai semua unsur untuk membangun interval kepercayaan hampiran yang disederhanakan bagi \( p_1 - p_2 \).</p>
+
+<div class="unit" id="two1">
+  <p class="math">Untuk \(\alpha \in (0, 1)\), interval dan batas berikut mempunyai tingkat kepercayaan hampiran \(1 - \alpha\) bagi \(p_1 - p_2\):</p>
+  <ol class="sub">
+    <li>Interval dua sisi dengan titik ujung \((M_1 - M_2) \pm z\left(1 - \alpha / 2\right) \sqrt{M_1 (1 - M_1) / n_1 + M_2 (1 - M_2) / n_2} \).</li>
+    <li>Batas bawah \( (M_1 - M_2) - z(1 - \alpha) \sqrt{M_1 (1 - M_1) / n_1 + M_2 (1 - M_2) / n_2} \).</li>
+    <li>Batas atas \( (M_1 - M_2) + z(1 - \alpha) \sqrt{M_1 (1 - M_1) / n_1 + M_2 (1 - M_2) / n_2} \).</li>
+  </ol>
+  <details>
+    <summary>Rincian:</summary>
+    <p>Seperti disebutkan di atas, jika \(n_1\) dan \(n_2\) besar,
+    \[\frac{(M_1 - M_2) - (p_1 - p_2)}{\sqrt{p_1(1 - p_1) / n_1 + p_2(1 - p_2)/n_2}}\]
+    berdistribusi normal standar secara hampiran, dan karena itu demikian pula
+    \[Z = \frac{(M_1 - M_2) - (p_1 - p_2)}{\sqrt{M_1(1 - M_1) / n_1 + M_2(1 - M_2)/n_2}}\]</p>
+    <ol class="sub">
+      <li>\(\P[-z(1 - \alpha / 2) \le Z \le z(1 - \alpha / 2)] \approx 1 - \alpha\). Menyelesaikannya terhadap \(p_1 - p_2\) memberikan interval kepercayaan dua sisi.</li>
+      <li>\(\P[Z \le z(1 - \alpha)] \approx 1 - \alpha\). Menyelesaikannya terhadap \(p_1 - p_2\) memberikan batas bawah kepercayaan.</li>
+      <li>\(\P[-z(1 - \alpha) \le Z] \approx 1 - \alpha\). Menyelesaikannya terhadap \(p_1 - p_2\) memberikan batas atas kepercayaan.</li>
+    </ol>
+  </details>
+</div>
+
+<p>Seperti biasa, interval berekor sama pada (a) bukan satu-satunya interval kepercayaan dua sisi hampiran bertingkat \(1 - \alpha\).</p>
+
+<div class="unit" id="two2">
+  <p class="math">Untuk \(\alpha, \, r \in (0, 1)\), himpunan kepercayaan hampiran bertingkat \(1 - \alpha\) bagi \(p_1 - p_2\) adalah
+  \[ \left[(M_1 - M_2) - z(1 - r \alpha) \sqrt{M_1 (1 - M_1) / n_1 + M_2 (1 - M_2) / n_2}, (M_1 - M_2) - z(\alpha - r \alpha) \sqrt{M_1 (1 - M_1) / n_1 + M_2 (1 - M_2) / n_2} \right]\]</p>
+  <details>
+    <summary>Rincian:</summary>
+    <p>Seperti dinyatakan dalam rincian <a href="#two1" class="ref"></a>,
+    \[Z = \frac{(M_1 - M_2) - (p_1 - p_2)}{\sqrt{M_1(1 - M_1) / n_1 + M_2(1 - M_2)/n_2}}\]
+    berdistribusi normal standar secara hampiran jika \(n_1\) dan \(n_2\) besar. Karena itu, \(\P[z(\alpha - r \alpha) \le Z \le z(1 - r \alpha)] \approx 1 - \alpha\). Menyelesaikannya terhadap \(p_1 - p_2\) memberikan interval kepercayaan dua sisi.</p>
+  </details>
+</div>
+
+<h4 id="o006.random.interval.bernoulli.section-two-conservative">Interval Kepercayaan Konservatif</h4>
+
+<p>Sekali lagi, \(p \mapsto p (1 - p)\) mencapai maksimum ketika \(p = \frac 1 2 \), dengan nilai maksimum \(\frac 1 4\). Fakta ini dapat digunakan untuk membangun interval kepercayaan konservatif hampiran bagi \(p_1 - p_2\).</p>
+
+<div class="unit" id="two3">
+  <p class="math">Untuk \(\alpha \in (0, 1)\), dalam aproksimasi normal interval dan batas berikut mempunyai tingkat kepercayaan hampiran sekurang-kurangnya \(1 - \alpha\) bagi \(p_1 - p_2\):</p>
+  <ol class="sub">
+    <li>Interval dua sisi dengan titik ujung \((M_1 - M_2) \pm \frac{1}{2} z\left(1 - \alpha / 2\right) \sqrt{1 / n_1 + 1 / n_2} \).</li>
+    <li>Batas bawah \( (M_1 - M_2) - \frac{1}{2} z(1 - \alpha) \sqrt{1 / n_1 + 1 / n_2} \).</li>
+    <li>Batas atas \( (M_1 - M_2) + \frac{1}{2} z(1 - \alpha) \sqrt{1 / n_1 + 1 / n_2} \).</li>
+  </ol>
+  <details>
+    <summary>Rincian:</summary>
+    <p>Hasil-hasil ini diperoleh dari teorema <a href="#two1"></a> dengan mengganti \(M_1 (1 - M_1)\) dan \(M_2 (1 - M_2)\) masing-masing oleh \(\frac 1 4\).</p>
+  </details>
+</div>
+
+<h3 id="o006.random.interval.bernoulli.section-computational-exercises">Latihan Komputasi</h3>
+
+<div class="unit" id="o006.random.interval.bernoulli.unit-17">
+  <p class="math">Dalam jajak pendapat terhadap 1.000 pemilih terdaftar di suatu distrik, 427 orang memilih calon X. Dengan prosedur Wald, bangun interval kepercayaan dua sisi 95% bagi proporsi seluruh pemilih terdaftar di distrik tersebut yang memilih X.</p>
+  <details>
+    <summary>Rincian:</summary>
+    <p> \((0.396, 0.458)\)</p>
+  </details>
+</div>
+
+<div class="unit" id="o006.random.interval.bernoulli.unit-18">
+  <p class="math">Sebuah koin dilempar 500 kali dan menghasilkan 302 sisi kepala. Dengan prosedur Wald, bangun batas bawah kepercayaan 95% bagi probabilitas munculnya sisi kepala. Apakah data mendukung anggapan bahwa koin tersebut seimbang?</p>
+  <details>
+    <summary>Rincian:</summary>
+    <p>0.568. Tidak; batas bawah tersebut berada di atas 0.5, sehingga data memberikan bukti kuat bahwa probabilitas kepala bukan 0.5. Pernyataan ini bukan probabilitas posterior bahwa koin seimbang.</p>
+  </details>
+</div>
+
+<div class="unit" id="o006.random.interval.bernoulli.unit-19">
+  <p class="math">Sampel 400 cip memori dari suatu lini produksi diuji dan 30 di antaranya cacat. Bangun interval kepercayaan konservatif dua sisi 90% bagi proporsi cip yang cacat.</p>
+  <details>
+    <summary>Rincian:</summary>
+    <p>\((0.034, 0.116)\)</p>
+  </details>
+</div>
+
+<div class="unit" id="o006.random.interval.bernoulli.unit-20">
+  <p class="math">Sebuah perusahaan farmasi ingin menduga proporsi orang yang akan mengalami reaksi merugikan terhadap obat baru tertentu. Perusahaan menghendaki interval dua sisi dengan margin galat 0.03 dan tingkat kepercayaan 95%. Berapa besar sampel yang diperlukan?</p>
+  <details>
+    <summary>Rincian:</summary>
+    <p>1068</p>
+  </details>
+</div>
+
+<div class="unit" id="o006.random.interval.bernoulli.unit-21">
+  <p class="math">Sebuah biro iklan ingin membangun batas bawah kepercayaan 99% bagi proporsi dokter gigi yang merekomendasikan merek pasta gigi tertentu. Margin galat yang dikehendaki adalah 0.02. Berapa besar sampel yang diperlukan?</p>
+  <details>
+    <summary>Rincian:</summary>
+    <p>3383</p>
+  </details>
+</div>
+
+<div class="unit" id="o006.random.interval.bernoulli.unit-22">
+  <p class="stat"><a href="https://www.randomservices.org/random/data/Buffon.html" class="ancillary">Data percobaan Buffon</a> memuat hasil 104 pengulangan <a href="https://www.randomservices.org/random/buffon/Buffon.html#npr">eksperimen jarum Buffon</a>. Secara teoretis, data tersebut seharusnya bersesuaian dengan percobaan Bernoulli dengan \(p = 2 / \pi\), tetapi karena jarum dijatuhkan oleh mahasiswa sungguhan, nilai sebenarnya dari \(p\) tidak diketahui. Dengan prosedur Wald, bangun interval kepercayaan 95% bagi \(p\). Apakah data mendukung nilai teoretis \(p\)?</p>
+  <details>
+    <summary>Rincian:</summary>
+    <p>\((0.443, 0.634)\). Nilai teoretis kira-kira 0.637 dan tidak berada dalam interval kepercayaan tersebut.</p>
+  </details>
+</div>
+
+<div class="unit" id="o006.random.interval.bernoulli.unit-23">
+  <p class="math">Sebuah fasilitas manufaktur mempunyai dua lini produksi untuk barang tertentu. Dalam sampel 150 barang dari lini 1, terdapat 12 barang cacat. Dalam sampel 130 barang dari lini 2, terdapat 10 barang cacat. Dengan interval yang disederhanakan, bangun interval kepercayaan dua sisi 95% bagi \( p_1 - p_2 \), dengan \( p_i \) sebagai proporsi barang cacat dari lini \( i \) untuk \( i \in \{1, 2\} \).</p>
+  <details>
+    <summary>Rincian:</summary>
+    <p>\( [-0.060, 0.066] \)</p>
+  </details>
+</div>
+
+<div class="unit" id="o006.random.interval.bernoulli.unit-24">
+  <p class="math">Vaksin influenza disesuaikan setiap tahun dengan galur influenza dominan yang diprediksi. Andaikan 45 dari 500 orang yang tidak divaksinasi tertular influenza dalam suatu selang waktu, sedangkan 20 dari 300 orang yang divaksinasi tertular influenza dalam selang waktu yang sama. Dengan interval yang disederhanakan, bangun interval kepercayaan dua sisi 99% bagi \( p_1 - p_2 \), dengan \( p_1 \) sebagai insidensi influenza dalam populasi yang tidak divaksinasi dan \( p_2 \) sebagai insidensi influenza dalam populasi yang divaksinasi.</p>
+</div>
+
+<footer>
+  <ol class="map">
+    <li class="parent"><a href="https://www.randomservices.org/random/index.html">Random</a></li>
+    <li class="parent"><a href="index.html">7. Pendugaan Himpunan</a></li>
+    <li class="child"><a href="Introduction.html" title="Pendahuluan">1</a></li>
+    <li class="child"><a href="Normal.html" title="Pendugaan pada Model Normal">2</a></li>
+    <li class="current">3</li>
+    <li class="child"><a href="BivariateNormal.html" title="Pendugaan pada Model Normal Dua Sampel">4</a></li>
+    <li class="child"><a href="Bayes.html" title="Pendugaan Interval Bayes">5</a></li>
+    <li class="details"><button type="button" title="Perluas Rincian" onclick="expandDetails(true);"><img src="../icons/Plus.svg" alt="Perluas"></button></li>
+    <li class="details"><button type="button" title="Ciutkan Rincian" onclick="expandDetails(false);"><img src="../icons/Minus.svg" alt="Ciutkan"></button></li>
+  </ol>
+	<ul class="map">
+		<li class="sister"><a href="https://www.randomservices.org/random/apps/index.html" class="ancillary">Aplikasi</a></li>
+		<li class="sister"><a href="https://www.randomservices.org/random/data/index.html" class="ancillary">Himpunan Data</a></li>
+		<li class="child"><a href="https://www.randomservices.org/random/biographies/index.html" class="ancillary">Biografi</a></li>
+	</ul>
+
+	<section class="edition-notice" data-o006-edition-notice="v1">
+		<p><strong>Pemberitahuan edisi.</strong> Terjemahan Bahasa Indonesia ini mengadaptasi <a href="https://www.randomservices.org/random/">Random: Probabilitas, Statistika Matematis, dan Proses Stokastik</a> karya Kyle Siegrist. Perubahan pada halaman ini mencakup penerjemahan, penambahan ID stabil, pengalihan tautan inti yang telah diterjemahkan ke edisi lokal, pengalihan tautan inti yang belum diterjemahkan ke sumber resmi, pengubahan tautan pelengkap menjadi tautan HTTPS resmi, koreksi matematis, tautan, dan jawaban yang terbatas, serta kualifikasi rigor yang dicatat dalam daftar koreksi edisi.</p>
+		<p>Situs asal menyatakan <a href="https://creativecommons.org/licenses/by/2.0/">CC BY 2.0</a>, sedangkan halaman <a href="https://www.randomservices.org/random/Credits.html">Kredit</a> menautkan <a href="https://creativecommons.org/licenses/by/1.0/">CC BY 1.0</a>; perbedaan ini dipertahankan. Edisi independen ini tidak didukung maupun disahkan oleh Kyle Siegrist atau Random Services. Tautan ke aplikasi, data, dan biografi pihak ketiga tidak menyatakan hak untuk mendistribusikan ulang materi tersebut.</p>
+	</section>
+</footer>
+
+<script>getReferences();</script>
+
+</body>
+</html>

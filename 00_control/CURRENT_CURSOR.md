@@ -1,69 +1,94 @@
 # Production cursor
 
-- Role: O006 / C140 Mathematical Statistics
-- Locale: id-ID
-- Authority manifest: `authority/SOURCE_URL_MANIFEST.csv`
-- Authority manifest SHA-256:
-  `d36e0f8bf9fa44a38a7504f9688a08af6787d88ede99298316a3e022b6f799f5`
-- Ordered core: the `core_paths` array in
-  `authority/SOURCE_FREEZE_RECEIPT.json`.
-- Last completed source page: `random/point/Sufficient.html` (core ordinal 16
-  of 29); target 60,930 bytes, SHA-256
-  `6dd895c08456da30a3a8a2aace5528a7ef32be5b6ad33c064af71fb5065250f6`.
-- Next contiguous source page: `random/interval/index.html` (core ordinal 17);
-  authority 7,789 bytes, SHA-256
-  `85fcad0292636fbae0935ebb775a87b9e4dbdf33692b5e2823b353163d168403`.
-- Latest HTML reader: 16 translated pages; 46 files; 2,564,819 bytes;
-  manifest SHA-256
-  `6cdf7d7592f9468a782801ed2dae9ed7dfdc14cde445c1026cb8018bb3ef3482`.
-- Latest deterministic HTML QA receipt SHA-256:
-  `238ece761f934f6a71058f2fca0a1780538283e359eb3d3c7808ff52b9758cdf`.
-- Backend: 6,567 entities / 9,035 relations; 4,337 translated bindings;
-  receipt SHA-256
-  `6d929c056f14b6b40d2d29d50707f32f5fe19ce4ab7a6f905cac57008d3c6843`.
-- Terminology QA: no qualifying Indonesian mathematical-statistics arXiv TeX
-  source was found; the permitted Universitas Lampung PDF fallback and bounded
-  institutional comparators were inspected directly. Decisions, exact URLs,
-  hashes, evidence, aliases, and propagation are in
-  `TERMINOLOGY_QA_2026-08-22.md` (SHA-256
-  `46ce8b83bcd730e832bdc904c209eae754d5f6e97a95b1ec0f87c842c0bf4832`)
-  and `TERMINOLOGY_GLOSSARY_ID_ID.csv` (SHA-256
-  `4ac64a2fa99f90c019c865adb03a1f3852c99954474c4fefa8d28938dc19d93c`).
-  Two full backend/build/QA replays are byte-identical. The exact additive
-  provenance string is `OpenAI Codex gpt-5.6-sol, Ultra`; source-author and
-  human-contributor credits remain intact.
-- Reader-first PDF: 197 A4 pages / 85,357,801 bytes; SHA-256
-  `f1a886ff1285315478bb7e50a773e8a5d79b47e6170a86e82e7b98126f6f6160`.
-  All 197 pages were rerendered and visually reviewed. PDF receipt SHA-256:
-  `d3e9826b0bad4f120599a501521477c3b5344cf157fd7c25de5b6af81c7ab6a1`;
-  visual-QA receipt SHA-256:
-  `91338964c52b6d2c8bb1f0bb0bf2f43cca3af22b4aae7cdb6a3f565bcbe13166`.
-- Exact local checkpoint:
-  `CHECKPOINT_2026-08-23_SIXTEEN_PAGE.md` and
-  `LIVE_BROWSER_QA_2026-08-23_SIXTEEN_PAGE.json`.
-- The sixteen-page checkpoint is public at GitHub boundary commit
-  `4677fcf1ef8357de89ae0afd4e640e8076530873`; workflow `32655887678`
-  passed. All 46 Pages files / 2,564,819 bytes, the selected immutable raw
-  files, and the 197-page release PDF match anonymously. Prerelease
-  `v2026.08.23.16` exposes that PDF. Sanitized evidence:
-  `GITHUB_PUBLICATION_RECEIPT_2026-08-23_SIXTEEN_PAGE.json`.
-- Zenodo lineage is concept `22059763` / concept DOI
-  `10.5281/zenodo.22059763`; current immutable v16 is record `22071140` / DOI
-  `10.5281/zenodo.22071140`. Anonymous streamed readback matches all seven
-  files / 88,066,334 bytes; the record exposes the PDF as its primary reader;
-  the lineage has four submitted versions and zero drafts. Evidence:
-  `ZENODO_PUBLICATION_RECEIPT_2026-08-23_SIXTEEN_PAGE.json`, SHA-256
-  `0e42ba66454a0338822d702c28fec51d2130c64a59f15a8b020a903f2a2d83b1`.
-- Figshare article `33314784` / historical DOI
-  `10.6084/m9.figshare.33314784.v3` could not be advanced: authenticated
-  preflight returned `403 InactiveAccount`, and the public article API returned
-  `404 EntityNotFound`. No duplicate item or falsely licensed file was created.
-  Evidence: `FIGSHARE_PUBLICATION_ATTEMPT_2026-08-23_SIXTEEN_PAGE.json`,
-  SHA-256
-  `6d0e17a5ec559164ea85117ffa6d83be416bd666e4b14e2e4e2ff646a9eba642`.
+Updated: 2026-08-24
 
-Resume by reading this file, `CURRENT_STATE.md`, the freeze receipt, the final
-row of `TRANSLATION_LEDGER.csv`, the terminology QA/glossary, and the
-sixteen-page checkpoint. Continue with ordinal 17
-`random/interval/index.html`. Do not restart source selection, duplicate a DOI
-lineage, contact upstream, or repeat completed pages.
+## Lane and authority
+
+- Role: O006 / C140 Mathematical Statistics.
+- Locale: `id-ID`.
+- Active component: independent complete Indonesian edition of Kyle
+  Siegrist's *Random*, chapters 5–8.
+- Immutable authority manifest: `authority/SOURCE_URL_MANIFEST.csv`, SHA-256
+  `d36e0f8bf9fa44a38a7504f9688a08af6787d88ede99298316a3e022b6f799f5`.
+- Frozen authority: 29 core documents / 1,003,900 bytes; 205 files /
+  4,867,084 bytes in the bounded closure.
+
+## Translation cursor — complete
+
+- Last and final source page: `random/hypothesis/ChiSquare.html`, core ordinal
+  29 of 29; authority 39,651 bytes / SHA-256
+  `379cf5939801c94b251884c0c82f0e6efc7ecce35cec11a645881d7ca9c7a6aa`;
+  target 43,445 bytes / SHA-256
+  `60d8904caea827a840db04aad5f7f651ab5c6ed78672e8f0c7fcd577604ff24e`.
+- Next Random page: none. Do not reopen, repeat, or extend the admitted 29-page
+  boundary.
+- Translation ledger: 29 contiguous `complete` rows / 18,419 bytes / SHA-256
+  `ea9487f8f7cfc50318902caf878c85e527a4a8c4ec2e4d1f2796d3f4a9f85704`.
+- Adverse ledger: 330 contiguous records / 149,482 bytes / SHA-256
+  `e1b7d73ff16fe53552acafa32b15a885bf3c812e4ee8f4ec22830a7850efc277`.
+- Bounded interval and hypothesis receipts pass at SHA-256
+  `0acbf6422d8325ad104a7e6e664af7eece90e6faa790baffa34c3f01d8c6d1e5`
+  and
+  `42393865dbb724163c97ff3454d66aa5fdd1d01eb3f11f6e1b3d10108c8b8176`.
+- Terminology/provenance QA remains closed in
+  `TERMINOLOGY_QA_2026-08-22.md` and `TERMINOLOGY_GLOSSARY_ID_ID.csv`; exact
+  additive provenance is `OpenAI Codex gpt-5.6-sol, Ultra`.
+
+## Complete backend and HTML reader
+
+- Backend: 6,567 entities / 9,035 relations; all 29 documents and all 6,567
+  entities translated; zero untranslated entities. Receipt SHA-256:
+  `bfa3aabef34574f31c88eb83b641af4b429bd8ad55f50a0c14ecb898ef18baf3`.
+- Entities: 10,766,387 bytes / SHA-256
+  `153065119b66897db7cdf94699fa36a58f7cac2294f89669683dbc863b242fdd`.
+- Relations: 1,182,589 bytes / SHA-256
+  `b235f4d4d724c7fe8653dfd06b075b2225cc2d116f3b87d0fda950d47030159a`.
+- Offline reader: 67 files / 2,962,390 bytes; manifest SHA-256
+  `ce25e1505462bbe60cfe35a46844b40d1646baff18dff72a9f3f8bbf376c9887`.
+- Reader build-receipt SHA-256:
+  `9025eff944aff93122480c8e6dc30d761f6236eaa92eca6edfd953f460487521`.
+- Reader QA-receipt SHA-256:
+  `78b6e99ce044f9c9c9464eb197c2d9530fb1816ca9f9b7d016ff982040067737`.
+- Browser QA: all 29 routes pass at 1280×900 and 390×844; 10,177 MathJax
+  containers, 124 complete images, 760 units, 451 disclosures, zero console
+  problems/page overflows/uncontained wide surfaces. Receipt:
+  `LIVE_BROWSER_QA_2026-08-24_COMPLETE_29_PAGE.json`, SHA-256
+  `e400173a33e51d04e43b5be4d2528c6ecfe22042c61af2e46dbcee9069e6a786`.
+
+## Complete PDF
+
+- Reader PDF: 255 A4 pages / 118,920,837 bytes / SHA-256
+  `556a589cfdd54c9a7e7b5022976371ce31b68e11f947484bbc40cf7a6849a5bc`.
+- PDF receipt: 97,300 bytes / SHA-256
+  `7de9ed37c5a4f881f94edaa09d988f239e1e222581c419314171fcc1b095ae50`.
+- Visual-QA receipt: 1,890 bytes / SHA-256
+  `42366aec2a0e9f5be4a6fb4421ea0965ff831ce2f854f5f5100cacac1f8a91ff`.
+- All 255 pages were rerendered and reviewed in 13 contact sheets. The rejected
+  first complete candidate's Variance-table break was corrected; the accepted
+  byte identity above has zero observed visual defects. The HTML reader remains
+  accessibility-first because the merged PDF is not tagged.
+
+## Current release cursor
+
+The complete local release gate passes. Canonical checkpoint:
+`CHECKPOINT_2026-08-24_COMPLETE_29_PAGE.md`. The next executable action is one
+narrow final repository commit and push, then clean Pages verification, tag and
+release `v2026.08.24.29` with exactly the reader PDF, anonymous byte readback,
+deterministic seven-file packaging with that exact commit, and publication as
+version `2026.08.24.29` in existing Zenodo concept
+`10.5281/zenodo.22059763`. Do not create a duplicate Zenodo concept, retry
+Figshare, ask for publication confirmation, or contact upstream.
+
+After GitHub and Zenodo publication receipts are persisted, this independent
+Random edition is complete. Overall O006/C140 then continues in a separate
+component and repository with complete Penn State STAT 415, exactly the Random
+completeness donor page, and the original rigor/simulation/multiple-regression/
+mastery companion defined in `C140_CONFIGURED_ARCHITECTURE_2026-08-21.md`.
+
+## Recovery order
+
+Read `WORKFLOW.md`, this file, `CURRENT_STATE.md`, the complete checkpoint,
+`SOURCE_FREEZE_RECEIPT.json`, the final translation-ledger row, the backend/
+reader/PDF receipts, and the final publication receipts. Never treat historical
+16-page checkpoint text as the current cursor and never run a broad workspace
+or repository scan.

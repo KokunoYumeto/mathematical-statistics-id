@@ -101,6 +101,9 @@ LOCAL_URLS = {
     "https://www.randomservices.org/random/point/Likelihood.html": "Likelihood.html",
     "https://www.randomservices.org/random/point/Bayes.html": "Bayes.html",
     "https://www.randomservices.org/random/point/Unbiased.html": "Unbiased.html",
+    "https://www.randomservices.org/random/point/Sufficient.html": "Sufficient.html",
+    "https://www.randomservices.org/random/interval/index.html": "../interval/index.html",
+    "https://www.randomservices.org/random/hypothesis/index.html": "../hypothesis/index.html",
 }
 
 

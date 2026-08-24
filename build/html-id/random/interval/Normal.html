@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="id-ID">
+
+<head>
+	<meta charset="utf-8">
+	<title>Pendugaan pada Model Normal</title>
+	<meta name="author" content="Kyle Siegrist">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="keywords" content="probabilitas, statistika, pendugaan himpunan, pendugaan interval, distribusi normal, rata-rata, varians, pendugaan robust, tingkat kepercayaan">
+	<link rel="icon" href="../icons/Icon.svg" type="image/svg">
+	<link rel="stylesheet" href="../Screen.css" type="text/css" media="screen">
+	<script src="../Basic.js"></script>
+	<script src="../../MathJax/tex-svg.js" id="MathJax-script" async></script>
+</head>
+
+<body>
+
+<div class="latex">
+	\(\newcommand{\R}{\mathbb{R}}\) 
+	\(\newcommand{\N}{\mathbb{N}}\)
+	\(\newcommand{\Z}{\mathbb{Z}}\)
+	\(\newcommand{\P}{\mathbb{P}}\)
+	\(\newcommand{\E}{\mathbb{E}}\)
+	\(\newcommand{\var}{\text{var}}\)
+	\(\newcommand{\sd}{\text{sd}}\)
+	\(\newcommand{\bs}{\boldsymbol}\)
+</div>
+
+<header>
+	<ol class="map">
+		<li class="parent"><a href="https://www.randomservices.org/random/index.html">Random</a></li>
+		<li class="parent"><a href="index.html">7. Pendugaan Himpunan</a></li>
+		<li class="child"><a href="Introduction.html" title="Pendahuluan">1</a></li>
+		<li class="current">2</li>
+		<li class="child"><a href="Bernoulli.html" title="Pendugaan pada Model Bernoulli">3</a></li>
+		<li class="child"><a href="BivariateNormal.html" title="Pendugaan pada Model Normal Dua Sampel">4</a></li>
+		<li class="child"><a href="Bayes.html" title="Pendugaan Interval Bayes">5</a></li>
+		<li class="details"><button type="button" title="Perluas Rincian" onclick="expandDetails(true);"><img src="../icons/Plus.svg" alt="Perluas"></button></li>
+		<li class="details"><button type="button" title="Ciutkan Rincian" onclick="expandDetails(false);"><img src="../icons/Minus.svg" alt="Ciutkan"></button></li>
+	</ol>
+	<h2 id="o006.random.interval.normal.page">2. Pendugaan pada Model Normal</h2>
+</header>
+
+<h3 id="the">Teori Dasar</h3>
+
+<h4 id="mod">Model Normal</h4>
+
+<p><a href="https://www.randomservices.org/random/special/Normal.html">Distribusi normal</a> mungkin merupakan distribusi terpenting dalam kajian statistika matematis, antara lain karena <a href="../sample/CLT.html">teorema limit pusat</a>. Sebagai akibat teorema ini, suatu besaran terukur yang dipengaruhi oleh banyak galat acak kecil akan mempunyai distribusi yang setidaknya mendekati normal. Variabel semacam itu ada di mana-mana dalam eksperimen statistika, pada bidang yang membentang dari ilmu fisika dan biologi hingga ilmu sosial.</p>
+
+<p>Karena itu, pada bagian ini kita mengasumsikan bahwa \(\bs{X} = (X_1, X_2, \ldots, X_n)\) adalah <a href="../sample/Introduction.html">sampel acak</a> berukuran sekurang-kurangnya 2 dari <a href="https://www.randomservices.org/random/special/Normal.html">distribusi normal</a> dengan <a href="https://www.randomservices.org/random/expect/Properties.html">rata-rata</a> \(\mu\) dan <a href="https://www.randomservices.org/random/expect/Variance.html">simpangan baku</a> \(\sigma\). Tujuan kita adalah membangun <a href="Introduction.html">interval kepercayaan</a> bagi \(\mu\) dan \(\sigma\) secara terpisah, lalu secara lebih umum membangun himpunan kepercayaan bagi \((\mu, \sigma)\). Ini termasuk kasus khusus terpenting dalam pendugaan himpunan. Bagian paralel mengenai <a href="../hypothesis/Normal.html">pengujian pada model normal</a> terdapat dalam <a href="../hypothesis/index.html">Bab 8</a> tentang pengujian hipotesis. Pertama-tama kita perlu meninjau beberapa fakta dasar yang sangat penting bagi analisis kita.</p>
+
+<div class="unit" id="mod1">
+	<p class="math">Ingat bahwa <a href="../sample/LLN.html">rata-rata sampel</a> \(M\) dan <a href="../sample/Variance.html">varians sampel</a> \(S^2\) adalah
+	\[ M = \frac{1}{n} \sum_{i=1}^n X_i, \quad S^2 = \frac{1}{n - 1} \sum_{i=1}^n (X_i - M)^2\]</p>
+</div>
+
+<p>Dari kajian <a href="../point/index.html">pendugaan titik</a>, ingat bahwa \(M\) merupakan penduga tak bias dan konsisten bagi \(\mu\), sedangkan \(S^2\) merupakan penduga tak bias dan konsisten bagi \(\sigma^2\). Dari statistik-statistik dasar ini kita dapat membangun <a href="Introduction.html#piv">variabel pivot</a> yang akan digunakan untuk membangun dugaan interval. Ingat kembali <a href="../sample/Normal.html">sifat khusus distribusi normal</a> berikut:</p>
+
+<div class="unit" id="mod2">
+	<p class="math">Definisikan
+	\[ Z = \frac{M - \mu}{\sigma \big/ \sqrt{n}}, \quad T = \frac{M - \mu}{S \big/ \sqrt{n}}, \quad V = \frac{n - 1}{\sigma^2} S^2 \]</p>
+	<ol class="sub">
+		<li>\(Z\) mempunyai <a href="https://www.randomservices.org/random/special/Normal.html">distribusi normal standar</a>.</li>
+		<li>\(T\) mempunyai <a href="https://www.randomservices.org/random/special/Student.html">distribusi \(t\) Student</a> dengan \(n - 1\) derajat kebebasan.</li>
+		<li>\(V\) mempunyai <a href="https://www.randomservices.org/random/special/ChiSquare.html">distribusi khi-kuadrat</a> dengan \(n - 1\) derajat kebebasan.</li>
+		<li>\(Z\) dan \(V\) saling bebas.</li>
+	</ol>
+</div>
+
+<p>Dengan demikian, masing-masing variabel acak tersebut merupakan variabel pivot bagi \((\mu, \sigma)\): distribusinya tidak bergantung pada parameter, tetapi variabelnya sendiri secara fungsional bergantung pada salah satu atau kedua parameter. Variabel pivot \(Z\) dan \(T\) akan digunakan untuk membangun dugaan interval bagi \(\mu\), sedangkan \(V\) akan digunakan untuk membangun dugaan interval bagi \(\sigma^2\). Untuk membangun dugaan tersebut, kita memerlukan <a href="https://www.randomservices.org/random/dist/CDF.html#qnt">kuantil</a> distribusi-distribusi baku ini. Kuantil dapat dihitung memakai <a href="https://www.randomservices.org/random/apps/QuantileApp.html" class="ancillary">aplikasi kuantil</a> atau sebagian besar paket perangkat lunak matematika dan statistika. Notasi yang akan kita gunakan adalah sebagai berikut:</p>
+
+<div class="unit" id="mod3">
+	<p class="dfn">Misalkan \(p \in (0, 1)\) dan \(k \in \N_+\).</p>
+	<ol class="sub">
+		<li>\(z(p)\) menyatakan kuantil berorde \(p\) dari distribusi normal standar.</li>
+		<li>\(t_k(p)\) menyatakan kuantil berorde \(p\) dari distribusi \(t\) Student dengan \(k\) derajat kebebasan.</li>
+		<li>\(\chi^2_k(p)\) menyatakan kuantil berorde \(p\) dari distribusi khi-kuadrat dengan \(k\) derajat kebebasan.</li>
+	</ol>
+</div>
+
+<p>Karena distribusi normal standar dan distribusi \(t\) Student simetris terhadap 0, berlaku \(z(1 - p) = -z(p)\) dan \(t_k(1 - p) = -t_k(p)\) untuk \(p \in (0, 1)\) dan \(k \in \N_+\). Sebaliknya, distribusi khi-kuadrat tidak simetris.</p>
+
+<h4 id="muk">Interval Kepercayaan bagi \(\mu\) dengan \(\sigma\) Diketahui</h4>
+
+<p>Dalam pembahasan pertama, kita mengasumsikan bahwa rata-rata distribusi \(\mu\) tidak diketahui, tetapi simpangan baku \(\sigma\) diketahui. Asumsi ini tidak selalu artifisial. Sering ada keadaan ketika \(\sigma\) stabil sepanjang waktu sehingga setidaknya diketahui secara mendekati, sementara \(\mu\) berubah karena <q>perlakuan</q> yang berbeda. Contohnya diberikan dalam latihan komputasi di bawah. Variabel pivot \(Z\) menghasilkan interval kepercayaan bagi \(\mu\).</p>
+
+<div class="unit" id="muk1">
+	<p class="math">Untuk \(\alpha \in (0, 1)\),</p>
+	<ol class="sub">
+		<li>\(\left[M - z\left(1 - \frac{\alpha}{2}\right) \frac{\sigma}{\sqrt{n}}, M + z\left(1 - \frac{\alpha}{2}\right) \frac{\sigma}{\sqrt{n}}\right]\) adalah interval kepercayaan bertingkat \(1 - \alpha\) bagi \(\mu\).</li>
+		<li>\(M - z(1 - \alpha) \frac{\sigma}{\sqrt{n}}\) adalah batas bawah kepercayaan bertingkat \(1 - \alpha\) bagi \(\mu\).</li>
+		<li>\(M + z(1 - \alpha) \frac{\sigma}{\sqrt{n}}\) adalah batas atas kepercayaan bertingkat \(1 - \alpha\) bagi \(\mu\).</li></ol>
+
+	<details>
+		<summary>Rincian:</summary>
+		<p>Karena \(Z = \frac{M - \mu}{\sigma / \sqrt{n}}\) mempunyai distribusi normal standar, menurut definisi kuantil masing-masing kejadian berikut berpeluang \(1 - \alpha\):</p>
+		<ol class="sub">
+			<li>\( \left\{-z\left(1 - \frac{\alpha}{2}\right) \le \frac{M - \mu}{\sigma / \sqrt{n}} \le z\left(1 - \frac{\alpha}{2}\right)\right\} \)</li>
+			<li>\( \left\{\frac{M - \mu}{\sigma / \sqrt{n}} \le z(1 - \alpha)\right\} \)</li>
+			<li>\( \left\{\frac{M - \mu}{\sigma / \sqrt{n}} \ge -z(1 - \alpha)\right\} \)</li>
+		</ol>
+		<p>Dalam setiap kasus, menyelesaikan pertidaksamaan terhadap \(\mu\) memberikan hasil yang dinyatakan.</p>
+	</details>
+</div>
+
+<p>Inilah dugaan interval baku bagi \(\mu\) ketika \(\sigma\) diketahui. Interval kepercayaan dua sisi pada (a) simetris terhadap rata-rata sampel \(M\) dan, seperti ditunjukkan oleh bukti, bersesuaian dengan peluang yang sama sebesar \(\frac{\alpha}{2}\) pada setiap ekor distribusi variabel pivot \(Z\). Namun, ini bukan satu-satunya interval kepercayaan dua sisi bertingkat \(1 - \alpha\); peluang \(\alpha\) dapat dibagi antara ekor kiri dan kanan distribusi \(Z\) dengan cara apa pun.</p>
+
+<div class="unit" id="muk2">
+	<p class="math">Untuk setiap \(\alpha, \, p \in (0, 1)\), sebuah interval kepercayaan bertingkat \(1 - \alpha\) bagi \(\mu\) adalah
+	\[ \left[M - z(1 - p \alpha) \frac{\sigma}{\sqrt{n}}, M - z(\alpha - p \alpha) \frac{\sigma}{\sqrt{n}} \right] \]</p>
+	<ol class="sub">
+		<li>\(p = \frac{1}{2}\) memberikan interval kepercayaan simetris dan berekor sama.</li>
+		<li>\(p \to 0\) memberikan interval dengan batas atas kepercayaan.</li>
+		<li>\(p \to 1\) memberikan interval dengan batas bawah kepercayaan.</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Dari distribusi normal \(M\) dan definisi fungsi kuantil,
+		\[ \P \left[ z(\alpha - p \, \alpha) \lt \frac{M - \mu}{\sigma / \sqrt{n}} \lt z(1 - p \alpha) \right] = 1 - \alpha \]
+		Hasilnya kemudian diperoleh dengan menyelesaikan pertidaksamaan terhadap \(\mu\).</p>
+	</details>
+</div>
+
+<p>Ditinjau dari distribusi variabel pivot \(Z\), seperti ditunjukkan oleh bukti, interval kepercayaan dua sisi di atas bersesuaian dengan \(p \alpha\) pada ekor kanan dan \((1 - p) \alpha\) pada ekor kiri. Selanjutnya, mari kita telaah panjang interval kepercayaan ini.</p>
+
+<div class="unit" id="muk3">
+	<p class="math">Untuk \(\alpha, \, p \in (0, 1)\), panjang (deterministik) interval kepercayaan dua sisi bertingkat \(1 - \alpha\) di atas adalah
+	\[L = \frac{\left[z(1 - p \alpha) - z(\alpha - p \alpha)\right] \sigma}{\sqrt{n}} \]</p>
+	<ol class="sub">
+		<li>\(L\) menurun sebagai fungsi \(\alpha\), dengan \(L \downarrow 0\) ketika \(\alpha \uparrow 1\) dan \(L \uparrow \infty\) ketika \(\alpha \downarrow 0\).</li>
+		<li>\(L\) menurun sebagai fungsi \(n\), dengan \(L \downarrow 0\) ketika \(n \uparrow \infty\).</li>
+		<li>\(L\) meningkat sebagai fungsi \(\sigma\), dengan \(L \downarrow 0\) ketika \(\sigma \downarrow 0\) dan \(L \uparrow \infty\) ketika \(\sigma \uparrow \infty\).</li>
+		<li>Sebagai fungsi \(p\), \(L\) mula-mula menurun lalu meningkat, dengan nilai minimum pada titik simetri \(p = \frac{1}{2}\).</li>
+	</ol>
+</div>
+
+<p>Hasil terakhir kembali menunjukkan adanya kompromi antara tingkat kepercayaan dan panjang interval kepercayaan. Jika \(n\) dan \(p\) tetap, kita hanya dapat memperkecil \(L\)—dan dengan demikian memperketat dugaan—dengan mengorbankan tingkat kepercayaan. Sebaliknya, kita hanya dapat menaikkan tingkat kepercayaan dengan memperpanjang interval. Ditinjau dari \(p\), yang terbaik di antara interval kepercayaan dua sisi bertingkat \(1 - \alpha\)—dan yang hampir selalu digunakan—adalah interval simetris berekor sama dengan \(p = \frac{1}{2}\):</p>
+
+<div class="unit" id="muk4">
+	<p class="app">Gunakan <a href="https://www.randomservices.org/random/apps/MeanEstimate.html" class="ancillary">eksperimen pendugaan rata-rata</a> untuk menjelajahi prosedur ini. Pilih distribusi normal dan pivot normal. Gunakan berbagai nilai parameter, tingkat kepercayaan, ukuran sampel, dan jenis interval. Untuk setiap konfigurasi, jalankan eksperimen 1.000 kali. Ketika simulasi berjalan, perhatikan bahwa interval kepercayaan berhasil memuat rata-rata jika dan hanya jika nilai variabel pivot berada di antara kedua kuantil. Perhatikan ukuran dan letak interval kepercayaan, lalu bandingkan proporsi interval yang berhasil dengan tingkat kepercayaan teoretis.</p>
+</div>
+
+	<div class="unit" id="muk5">
+	<p class="math">Untuk interval kepercayaan baku, misalkan \(d\) menyatakan jarak antara rata-rata sampel \(M\) dan suatu titik ujung. Artinya,
+	\[ d = z_\alpha \frac{\sigma}{\sqrt{n}} \]
+	dengan \(z_\alpha = z(1 - \alpha /2 )\) untuk interval dua sisi dan \(z_\alpha = z(1 - \alpha)\) untuk interval kepercayaan atas atau bawah. Bilangan \(d\) adalah <dfn>margin galat</dfn> dugaan tersebut.</p>
+</div>
+
+<p>Perhatikan bahwa \(d\) deterministik dan panjang interval dua sisi baku adalah \(L = 2d\). Dalam banyak kasus, langkah pertama dalam <em>perancangan eksperimen</em> adalah menentukan ukuran sampel yang diperlukan untuk menduga \(\mu\) dengan margin galat dan tingkat kepercayaan tertentu.</p>
+
+<div class="unit" id="muk6">
+	<p class="math">Ukuran sampel yang diperlukan untuk menduga \(\mu\) dengan tingkat kepercayaan \(1 - \alpha\) dan margin galat \(d\) adalah
+	\[ n = \left \lceil \frac{z_\alpha^2 \sigma^2}{d^2} \right\rceil \]</p>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Hasil ini diperoleh dengan menyelesaikan definisi \(d\) di atas terhadap \(n\), lalu membulatkannya ke atas ke bilangan bulat berikutnya.</p>
+	</details>
+</div>
+
+<p>Perhatikan bahwa \(n\) berbanding lurus dengan \(z_\alpha^2\) dan \(\sigma^2\), serta berbanding terbalik dengan \(d^2\). Fakta terakhir ini menyiratkan <em>hukum hasil yang semakin berkurang</em> dalam mengecilkan margin galat. Misalnya, untuk mengecilkan suatu margin galat dengan faktor \(\frac{1}{2}\), kita harus memperbesar ukuran sampel dengan faktor 4.</p>
+
+<h4 id="muu">Interval Kepercayaan bagi \(\mu\) dengan \(\sigma\) Tidak Diketahui</h4>
+
+<p>Dalam pembahasan berikutnya, kita mengasumsikan bahwa rata-rata distribusi \(\mu\) dan simpangan baku \(\sigma\) tidak diketahui, sebagaimana lazimnya. Dalam hal ini, kita dapat menggunakan variabel pivot \(T\), bukan variabel pivot \(Z\), untuk membangun interval kepercayaan bagi \(\mu\).</p>
+
+<div class="unit" id="muu1">
+	<p class="math">Untuk \(\alpha \in (0, 1)\),</p>
+	<ol class="sub">
+		<li>\(\left[M - t_{n-1}\left(1 - \frac{\alpha}{2}\right) \frac{S}{\sqrt{n}}, M + t_{n-1}\left(1 - \frac{\alpha}{2}\right) \frac{S}{\sqrt{n}}\right]\) adalah interval kepercayaan bertingkat \(1 - \alpha\) bagi \(\mu\).</li>
+		<li>\(M - t_{n-1}(1 - \alpha) \frac{S}{\sqrt{n}}\) adalah batas bawah kepercayaan bertingkat \(1 - \alpha\) bagi \(\mu\).</li>
+		<li>\(M + t_{n-1}(1 - \alpha) \frac{S}{\sqrt{n}}\) adalah batas atas kepercayaan bertingkat \(1 - \alpha\) bagi \(\mu\).</li></ol>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Karena \(T = \frac{M - \mu}{S / \sqrt{n}}\) mempunyai distribusi \(t\) Student dengan \(n - 1\) derajat kebebasan, menurut definisi kuantil masing-masing kejadian berikut berpeluang \(1 - \alpha\):</p>
+		<ol class="sub">
+			<li>\( \left\{-t_{n-1}\left(1 - \frac{\alpha}{2}\right) \le \frac{M - \mu}{S / \sqrt{n}} \le t_{n-1}\left(1 - \frac{\alpha}{2}\right)\right\} \)</li>
+			<li>\( \left\{\frac{M - \mu}{S / \sqrt{n}} \le t_{n-1}(1 - \alpha)\right\} \)</li>
+			<li>\( \left\{\frac{M - \mu}{S / \sqrt{n}} \ge -t_{n-1}(1 - \alpha)\right\} \)</li>
+		</ol>
+		<p>Dalam setiap kasus, menyelesaikan pertidaksamaan terhadap \(\mu\) memberikan hasil yang dinyatakan.</p>
+	</details>
+</div>
+
+<p>Inilah dugaan interval baku bagi \(\mu\) ketika \(\sigma\) tidak diketahui. Interval kepercayaan dua sisi pada (a) simetris terhadap rata-rata sampel \(M\) dan bersesuaian dengan peluang yang sama sebesar \(\frac{\alpha}{2}\) pada setiap ekor distribusi variabel pivot \(T\). Seperti sebelumnya, ini bukan satu-satunya interval kepercayaan; \(\alpha\) dapat dibagi antara ekor kiri dan kanan dengan cara apa pun.</p>
+
+<div class="unit" id="muu2">
+	<p class="math">Untuk setiap \(\alpha, \, p \in (0, 1)\), sebuah interval kepercayaan bertingkat \(1 - \alpha\) bagi \(\mu\) adalah
+	\[ \left[M - t_{n-1}(1 - p \alpha) \frac{S}{\sqrt{n}}, M - t_{n-1}(\alpha - p \alpha) \frac{S}{\sqrt{n}} \right] \]</p>
+	<ol class="sub">
+		<li>\(p = \frac{1}{2}\) memberikan interval kepercayaan simetris dan berekor sama.</li>
+		<li>\(p \to 0\) memberikan interval dengan batas atas kepercayaan.</li>
+		<li>\(p \to 1\) memberikan interval dengan batas bawah kepercayaan.</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Karena \(T\) mempunyai distribusi \(t\) Student dengan \(n - 1\) derajat kebebasan, dari definisi kuantil diperoleh
+		\[ \P \left[ t_{n-1}(\alpha - p \alpha) \lt \frac{M - \mu}{S \big/ \sqrt{n}} \lt t_{n-1}(1 - p \alpha) \right] = 1 - \alpha \]
+		Hasilnya kemudian diperoleh dengan menyelesaikan pertidaksamaan terhadap \(\mu\).</p>
+	</details>
+</div>
+
+<p>Interval kepercayaan dua sisi di atas bersesuaian dengan \(p \alpha\) pada ekor kanan dan \((1 - p) \alpha\) pada ekor kiri distribusi variabel pivot \(T\). Selanjutnya, mari kita telaah panjang interval kepercayaan ini.</p>
+
+<div class="unit" id="muu3">
+	<p class="math">Untuk \(\alpha, \, p \in (0, 1)\), panjang (acak) interval kepercayaan dua sisi bertingkat \(1 - \alpha\) di atas adalah
+	\[ L = \frac{t_{n-1}(1 - p \alpha) - t_{n-1}(\alpha - p \alpha)} {\sqrt{n}} S \]</p>
+	<ol class="sub">
+		<li>\(L\) menurun sebagai fungsi \(\alpha\), dengan \(L \downarrow 0\) ketika \(\alpha \uparrow 1\) dan \(L \uparrow \infty\) ketika \(\alpha \downarrow 0\).</li>
+		<li>Sebagai fungsi \(p\), \(L\) mula-mula menurun lalu meningkat, dengan nilai minimum pada titik simetri \(p = \frac{1}{2}\).</li>
+		<li>\[ \E(L) = \frac{[t_{n-1}(1 - p \alpha) - t_{n-1}(\alpha - p \alpha)] \sqrt{2} \sigma \Gamma(n/2)}{\sqrt{n (n - 1)} \Gamma[(n - 1)/2]} \]</li>
+		<li>\[ \var(L) = \frac{1}{n}\left[t_{n-1}(1 - p \alpha) - t_{n-1}(\alpha - p \alpha)\right]^2 \sigma^2\left[1 - \frac{2 \Gamma^2(n / 2)}{(n - 1) \Gamma^2[(n - 1) / 2]}\right] \]</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Bagian (a) dan (b) mengikuti sifat fungsi kuantil Student \(t_{n-1}\). Bagian (c) dan (d) mengikuti fakta bahwa \(\frac{\sqrt{n - 1}}{\sigma} S\) mempunyai distribusi khi dengan \(n - 1\) derajat kebebasan.</p>
+	</details>
+</div>
+
+<p>Sekali lagi terdapat kompromi antara tingkat kepercayaan dan panjang interval kepercayaan. Jika \(n\) dan \(p\) tetap, kita hanya dapat memperkecil \(L\)—dan dengan demikian memperketat dugaan—dengan mengorbankan tingkat kepercayaan. Sebaliknya, kita hanya dapat menaikkan tingkat kepercayaan dengan memperpanjang interval. Ditinjau dari \(p\), yang terbaik di antara interval kepercayaan dua sisi bertingkat \(1 - \alpha\)—dan yang hampir selalu digunakan—adalah interval simetris berekor sama dengan \(p = \frac{1}{2}\). Terakhir, tidak tepat menganggap \(L\) sebagai fungsi aljabar dari \(S\), sebab \(S\) adalah statistik. Demikian pula, tidak tepat menganggap \(L\) sebagai fungsi aljabar dari \(n\), sebab mengubah \(n\) berarti mengambil data baru dan dengan demikian memperoleh nilai \(S\) yang baru.</p>
+
+<div class="unit" id="muu4">
+	<p class="app">Gunakan <a href="https://www.randomservices.org/random/apps/MeanEstimate.html" class="ancillary">eksperimen pendugaan rata-rata</a> untuk menjelajahi prosedur ini. Pilih distribusi normal dan pivot \(T\). Gunakan berbagai nilai parameter, tingkat kepercayaan, ukuran sampel, dan jenis interval. Untuk setiap konfigurasi, jalankan eksperimen 1.000 kali. Ketika simulasi berjalan, perhatikan bahwa interval kepercayaan berhasil memuat rata-rata jika dan hanya jika nilai variabel pivot berada di antara kedua kuantil. Perhatikan ukuran dan letak interval kepercayaan, lalu bandingkan proporsi interval yang berhasil dengan tingkat kepercayaan teoretis.</p>
+</div>
+
+<h4 id="sig">Interval Kepercayaan bagi \(\sigma^2\)</h4>
+
+<p>Selanjutnya kita akan membangun interval kepercayaan bagi \(\sigma^2\) menggunakan variabel pivot \(V\) yang diberikan dalam <a href="#mod2" class="ref"></a>.</p>
+
+<div class="unit" id="sig1">
+	<p class="math">Untuk \(\alpha \in (0, 1)\),</p>
+	<ol class="sub">
+		<li>\(\left[\frac{n - 1}{\chi^2_{n-1}\left(1 - \alpha / 2\right)} S^2,\frac{n - 1}{\chi^2_{n-1}\left(\alpha / 2\right)} S^2\right]\) adalah interval kepercayaan bertingkat \(1 - \alpha\) bagi \(\sigma^2\).</li>
+		<li>\(\frac{n - 1}{\chi^2_{n-1}\left(1 - \alpha\right)} S^2\) adalah batas bawah kepercayaan bertingkat \(1 - \alpha\) bagi \(\sigma^2\).</li>
+		<li>\(\frac{n - 1}{\chi^2_{n-1}(\alpha)} S^2\) adalah batas atas kepercayaan bertingkat \(1 - \alpha\) bagi \(\sigma^2\).</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Karena \(V = \frac{n - 1}{\sigma^2} S^2\) mempunyai distribusi khi-kuadrat dengan \(n - 1\) derajat kebebasan, menurut definisi kuantil masing-masing kejadian berikut berpeluang \(1 - \alpha\):</p>
+		<ol class="sub">
+			<li>\( \left\{\chi^2_{n-1}(\alpha / 2) \le \frac{n - 1}{\sigma^2} S^2 \le \chi^2_{n-1}(1 - \alpha / 2)\right\}  \)</li>
+			<li>\( \left\{\frac{n - 1}{\sigma^2} S^2 \le \chi^2_{n-1}(1 - \alpha)\right\} \)</li>
+			<li>\( \left\{\frac{n - 1}{\sigma^2} S^2 \ge \chi^2_{n-1}(\alpha)\right\} \)</li>
+		</ol>
+		<p>Dalam setiap kasus, menyelesaikan pertidaksamaan terhadap \(\sigma^2\) memberikan hasil yang dinyatakan.</p>
+	</details>
+</div>
+
+<p>Inilah dugaan interval baku bagi \(\sigma^2\). Interval dua sisi pada (a) adalah interval <dfn>berekor sama</dfn>, yang bersesuaian dengan peluang \(\alpha / 2\) pada setiap ekor distribusi variabel pivot \(V\). Namun, interval ini tidak simetris terhadap varians sampel \(S^2\). Sekali lagi, peluang \(\alpha\) dapat dibagi antara ekor kiri dan kanan distribusi \(V\) dengan cara apa pun.</p>
+
+<div class="unit" id="sig2">
+	<p class="math">Untuk setiap \(\alpha, \, p \in (0, 1)\), sebuah interval kepercayaan bertingkat \(1 - \alpha\) bagi \(\sigma^2\) adalah
+	\[ \left[\frac{n - 1}{\chi^2_{n-1}(1 - p \alpha)} S^2, \frac{n - 1}{\chi^2_{n-1}(\alpha - p \alpha)} S^2\right]\]</p>
+	<ol class="sub">
+		<li>\(p = \frac{1}{2}\) memberikan interval kepercayaan berekor sama bertingkat \(1 - \alpha\).</li>
+		<li>\(p \to 0\) memberikan interval dengan batas atas bertingkat \(1 - \alpha\).</li>
+		<li>\(p \to 1\) memberikan interval dengan batas bawah bertingkat \(1 - \alpha\).</li>
+	</ol>
+</div>
+
+<p>Ditinjau dari distribusi variabel pivot \(V\), interval kepercayaan di atas bersesuaian dengan \(p \alpha\) pada ekor kanan dan \((1 - p) \alpha\) pada ekor kiri. Sekali lagi, mari kita telaah panjang interval kepercayaan dua sisi yang umum. Panjangnya acak, tetapi merupakan kelipatan varians sampel \(S^2\). Karena itu, kita dapat menghitung nilai harapan dan varians panjang tersebut.</p>
+
+<div class="unit" id="sig3">
+	<p class="math">Untuk \(\alpha, \, p \in (0, 1)\), panjang (acak) interval kepercayaan dua sisi pada teorema sebelumnya adalah
+	\[ L = \left[\frac{1}{\chi^2_{n-1}(\alpha - p \alpha)} - \frac{1}{\chi^2_{n-1}(1 - p \alpha)}\right] (n - 1) S^2 \]</p>
+	<ol class="sub">
+		<li>\(\E(L) = \left[\frac{1}{\chi^2_{n-1}(\alpha - p \alpha)} - \frac{1}{\chi^2_{n-1}(1 - p \alpha)}\right] (n - 1) \sigma^2\)</li>
+		<li>\(\var(L) = 2 \left[\frac{1}{\chi^2_{n-1}(\alpha - p \alpha)} - \frac{1}{\chi^2_{n-1}(1 - p \alpha)}\right]^2 (n - 1) \sigma^4\)</li>
+	</ol>
+</div>
+
+<p>Untuk membangun interval kepercayaan dua sisi yang optimal, wajar untuk mencari \(p\) yang meminimalkan panjang harapan. Masalah ini rumit, tetapi untuk \(n\) besar interval berekor sama dengan \(p = \frac{1}{2}\) ternyata mendekati optimal. Tentu saja, mengambil akar kuadrat kedua titik ujung dari interval kepercayaan mana pun bagi \(\sigma^2\) menghasilkan interval kepercayaan bertingkat \(1 - \alpha\) bagi simpangan baku distribusi \(\sigma\).</p>
+
+<div class="unit" id="sig4">
+	<p class="app">Gunakan <a href="https://www.randomservices.org/random/apps/VarianceEstimate.html" class="ancillary">eksperimen pendugaan varians</a> untuk menjelajahi prosedur ini. Pilih distribusi normal. Gunakan berbagai nilai parameter, tingkat kepercayaan, ukuran sampel, dan jenis interval. Untuk setiap konfigurasi, jalankan eksperimen 1.000 kali. Ketika simulasi berjalan, perhatikan bahwa interval kepercayaan berhasil memuat simpangan baku jika dan hanya jika nilai variabel pivot berada di antara kedua kuantil. Perhatikan ukuran dan letak interval kepercayaan, lalu bandingkan proporsi interval yang berhasil dengan tingkat kepercayaan teoretis.</p>
+</div>
+
+<h3 id="bth">Himpunan Kepercayaan bagi \((\mu, \sigma)\)</h3>
+
+<p>Dalam pembahasan di atas, kita membangun interval kepercayaan bagi \(\mu\) dan \(\sigma\) secara terpisah (sekali lagi, biasanya kedua parameter tidak diketahui). Selanjutnya kita akan menelaah <em>himpunan</em> kepercayaan bagi titik parameter \((\mu, \sigma)\). Himpunan-himpunan ini merupakan himpunan bagian dari ruang parameter \(\R \times (0, \infty)\).</p>
+
+<h4 id="set">Himpunan Kepercayaan yang Dibangun dari Variabel Pivot</h4>
+
+<p>Setiap variabel pivot \(Z\), \(T\), dan \(V\) dapat digunakan untuk membangun himpunan kepercayaan bagi \((\mu, \sigma)\). Jika digunakan sendiri-sendiri, masing-masing menghasilkan himpunan kepercayaan tak terbatas; hal ini tidak mengejutkan karena satu variabel pivot digunakan untuk menduga dua parameter. Pertama, kita tinjau variabel pivot normal \(Z\).</p>
+
+<div class="unit" id="set1">
+	<p class="math">Untuk setiap \(\alpha, \, p \in (0, 1)\), sebuah himpunan kepercayaan bertingkat \(1 - \alpha\) bagi \((\mu, \sigma)\) adalah
+	\[ Z_{\alpha,p} = \left\{ (\mu, \sigma): M - z(1 - p \alpha) \frac{\sigma}{\sqrt{n}} \lt \mu \lt M - z(\alpha - p \alpha) \frac{\sigma}{\sqrt{n}} \right\} \]
+	Himpunan kepercayaan ini berbentuk <q>kerucut</q> dalam ruang parameter \((\mu, \sigma)\), dengan titik puncak \((M, 0)\) dan garis batas yang mempunyai kemiringan \(-\sqrt{n} \big/ z(1 - p \alpha)\) dan \(-\sqrt{n} \big/ z(\alpha - p \alpha)\) apabila penyebutnya tidak nol; jika suatu kuantil penyebut bernilai nol, batas yang bersesuaian adalah garis vertikal.</p>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Dari distribusi normal \(M\) dan definisi fungsi kuantil,
+		\[ \P \left[ z(\alpha - p \, \alpha) \lt \frac{M - \mu}{\sigma / \sqrt{n}} \lt z(1 - p \alpha) \right] = 1 - \alpha \]
+		Hasilnya kemudian diperoleh dengan menyelesaikan pertidaksamaan terhadap \(\mu\).</p>
+	</details>
+</div>
+
+<p>Kerucut kepercayaan tersebut ditampilkan pada grafik di bawah. (Perhatikan bahwa kedua kemiringan dapat sama-sama negatif atau sama-sama positif.)</p>
+
+<figure id="set2">
+	<figcaption>Himpunan kepercayaan berbasis variabel pivot normal</figcaption>
+	<img src="ZSet.png" alt="Kerucut himpunan kepercayaan berbasis pivot Z dalam ruang parameter mu-sigma">
+</figure>
+
+<p>Variabel pivot \(T\) menghasilkan pernyataan berikut:</p>
+
+<div class="unit" id="set3">
+	<p class="math">Untuk setiap \(\alpha, \, p \in (0, 1)\), sebuah himpunan kepercayaan bertingkat \(1 - \alpha\) bagi \((\mu, \sigma)\) adalah
+	\[ T_{\alpha, p} = \left\{ (\mu, \sigma): M - t_{n-1}(1 - p \alpha) \frac{S}{\sqrt{n}} \lt \mu \lt M - t_{n-1}(\alpha - p \alpha) \frac{S}{\sqrt{n}} \right\}\]</p>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Dari distribusi t Student bagi \(T\) dan definisi fungsi kuantil,
+		\[ \P \left[ t_{n-1}(\alpha - p \alpha) \lt \frac{M - \mu}{S \big/ \sqrt{n}} \lt t_{n-1}(1 - p \alpha) \right] = 1 - \alpha \]
+		Hasilnya kemudian diperoleh dengan menyelesaikan pertidaksamaan terhadap \(\mu\).</p>
+	</details>
+</div>
+
+<figure id="set4">
+	<figcaption>Himpunan kepercayaan berbasis variabel pivot \(T\)</figcaption>
+	<img src="TSet.png" alt="Pita vertikal himpunan kepercayaan berbasis pivot T dalam ruang parameter mu-sigma">
+</figure>
+
+<p>Berdasarkan konstruksinya, himpunan kepercayaan ini tidak memberikan informasi tentang \(\sigma\). Terakhir, variabel pivot \(V\) menghasilkan pernyataan berikut:</p>
+
+<div class="unit" id="set5">
+	<p class="math">Untuk setiap \(\alpha, \, p \in (0, 1)\), sebuah himpunan kepercayaan bertingkat \(1 - \alpha\) bagi \((\mu, \sigma)\) adalah
+	\[ V_{\alpha, p} = \left\{ (\mu, \sigma): \frac{(n - 1)S^2}{\chi_{n-1}^2(1 - p \alpha)} \lt \sigma^2 \lt \frac{(n - 1)S^2}{\chi_{n-1}^2(\alpha - p \alpha)} \right\} \]</p>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Dari distribusi khi-kuadrat bagi \(V\) dan definisi fungsi kuantil,
+		\[ \P \left[\chi_{n-1}^2(\alpha - p \, \alpha) \lt V \lt \chi_{n-1}^2(1 - p \alpha) \right] = 1 - \alpha \]
+		Hasilnya kemudian diperoleh dengan menyelesaikan pertidaksamaan terhadap \(\sigma^2\).</p>
+	</details>
+</div>
+
+<figure id="set6">
+	<figcaption>Himpunan kepercayaan berbasis variabel pivot \(V\)</figcaption>
+	<img src="VSet.png" alt="Pita horizontal himpunan kepercayaan berbasis pivot V dalam ruang parameter mu-sigma">
+</figure>
+
+<p>Berdasarkan konstruksinya, himpunan kepercayaan ini tidak memberikan informasi tentang \(\mu\).</p>
+
+<h4 id="int">Irisan</h4>
+
+<p>Sekarang kita dapat membentuk irisan beberapa himpunan kepercayaan di atas untuk memperoleh himpunan kepercayaan yang <em>terbatas</em> bagi \((\mu, \sigma)\). Kita akan menggunakan fakta bahwa rata-rata sampel \(M\) dan varians sampel \(S^2\) saling bebas, salah satu <a href="../sample/Normal.html">sifat khusus</a> terpenting dari sampel normal. Kita juga memerlukan hasil dalam <a href="Introduction.html#int">pendahuluan</a> tentang irisan himpunan kepercayaan. Dalam teorema-teorema berikut, misalkan \(\alpha, \, \beta, \, p, \, q \in (0, 1)\) dengan \(\alpha + \beta \lt 1\).</p>
+
+<div class="unit" id="int1">
+	<p class="math">Himpunan \(T_{\alpha, p} \cap V_{\beta, q}\) adalah himpunan kepercayaan konservatif bertingkat \(1 - (\alpha + \beta)\) bagi \((\mu, \sigma)\).</p>
+</div>
+
+<figure id="o006.random.interval.normal.figure-tv-intersection">
+	<figcaption>Himpunan kepercayaan \(T_{\alpha, p} \cap V_{\beta, q}\)</figcaption>
+	<img src="TVSet.png" alt="Irisan berbentuk persegi panjang dari pita pivot T dan V dalam ruang parameter mu-sigma">
+</figure>
+
+<div class="unit" id="int2">
+	<p class="math">Himpunan \(Z_{\alpha, p} \cap V_{\beta, q}\) adalah himpunan kepercayaan bertingkat \((1 - \alpha)(1 - \beta)\) bagi \((\mu, \sigma)\).</p>
+</div>
+
+<figure id="o006.random.interval.normal.figure-zv-intersection">
+	<figcaption>Himpunan kepercayaan \(Z_{\alpha, p} \cap V_{\beta, q}\)</figcaption>
+	<img src="ZVSet.png" alt="Irisan kerucut pivot Z dan pita pivot V yang membentuk daerah terbatas dalam ruang parameter mu-sigma">
+</figure>
+
+<p>Menarik untuk diperhatikan bahwa himpunan kepercayaan \(T_{\alpha, p} \cap V_{\beta, q}\) merupakan himpunan hasil kali sebagai himpunan bagian ruang parameter, tetapi bukan sebagai himpunan bagian ruang sampel. Sebaliknya, himpunan kepercayaan \(Z_{\alpha, p} \cap V_{\beta, q}\) bukan himpunan hasil kali dalam ruang parameter, tetapi merupakan himpunan hasil kali dalam ruang sampel.</p>
+
+<h3 id="exe">Latihan</h3>
+
+<h4 id="rob">Robustitas</h4>
+
+<p>Asumsi utama kita adalah bahwa distribusi asal sampel bersifat normal. Tentu saja, dalam masalah statistika nyata, kecil kemungkinan kita mengetahui banyak hal tentang distribusi asal sampel, apalagi mengetahui bahwa distribusi itu normal. Jika suatu prosedur statistika tetap bekerja cukup baik meskipun asumsi yang mendasarinya dilanggar, prosedur tersebut disebut <dfn>robust (tahan terhadap pelanggaran asumsi)</dfn>. Dalam subbagian ini, kita akan menjelajahi robustitas prosedur pendugaan bagi \(\mu\) dan \(\sigma\).</p>
+
+<p>Andaikan distribusi asal sampel sebenarnya tidak normal. Ketika ukuran sampel \(n\) relatif besar, distribusi rata-rata sampel masih mendekati normal menurut <a href="../sample/CLT.html">teorema limit pusat</a>. Karena itu, dugaan interval bagi \(\mu\) mungkin masih berlaku secara mendekati.</p>
+
+<div class="unit" id="rob1">
+	<p class="app">Gunakan simulasi <a href="https://www.randomservices.org/random/apps/MeanEstimate.html" class="ancillary">eksperimen pendugaan rata-rata</a> untuk menjelajahi prosedur ini. Pilih distribusi gamma dan pivot Student. Gunakan berbagai nilai parameter, tingkat kepercayaan, ukuran sampel, dan jenis interval. Untuk setiap konfigurasi, jalankan eksperimen 1.000 kali. Perhatikan ukuran dan letak interval kepercayaan, lalu bandingkan proporsi interval yang berhasil dengan tingkat kepercayaan teoretis.</p>
+</div>
+
+<div class="unit" id="rob2">
+	<p class="app">Dalam <a href="https://www.randomservices.org/random/apps/MeanEstimate.html" class="ancillary">eksperimen pendugaan rata-rata</a>, ulangi latihan sebelumnya dengan distribusi seragam.</p>
+</div>
+
+<p>Besarnya \(n\) yang diperlukan agar prosedur pendugaan interval bagi \(\mu\) bekerja dengan baik bergantung pada distribusi asal; semakin jauh distribusi tersebut menyimpang dari kenormalan, biasanya semakin besar \(n\) yang diperlukan. Konvergensi dalam teorema limit pusat dapat cepat pada banyak contoh yang lazim, sehingga ukuran sampel sekitar 30 atau lebih sering memadai dalam simulasi ini. Angka tersebut hanyalah aturan praktis, bukan jaminan universal; bentuk ekor, kemencengan, dan momen distribusi asal tetap menentukan mutu pendekatan.</p>
+
+<p>Secara umum, prosedur interval khi-kuadrat eksak bagi \(\sigma\) tidak robust: di luar model normal, tidak ada hasil yang membuat distribusi pivot V tetap khi-kuadrat secara eksak.</p>
+
+<div class="unit" id="rob3">
+	<p class="app">Dalam <a href="https://www.randomservices.org/random/apps/VarianceEstimate.html" class="ancillary">eksperimen pendugaan varians</a>, pilih distribusi gamma. Gunakan berbagai nilai parameter, tingkat kepercayaan, ukuran sampel, dan jenis interval. Untuk setiap konfigurasi, jalankan eksperimen 1.000 kali. Perhatikan ukuran dan letak interval kepercayaan, lalu bandingkan proporsi interval yang berhasil dengan tingkat kepercayaan teoretis.</p>
+</div>
+
+<div class="unit" id="rob4">
+	<p class="app">Dalam <a href="https://www.randomservices.org/random/apps/VarianceEstimate.html" class="ancillary">eksperimen pendugaan varians</a>, pilih distribusi seragam. Gunakan berbagai nilai parameter, tingkat kepercayaan, ukuran sampel, dan jenis interval. Untuk setiap konfigurasi, jalankan eksperimen 1.000 kali. Perhatikan ukuran dan letak interval kepercayaan, lalu bandingkan proporsi interval yang berhasil dengan tingkat kepercayaan teoretis.</p>
+</div>
+
+<h4 id="cmp">Latihan Komputasi</h4>
+
+<p>Dalam latihan-latihan berikut, gunakan konstruksi berekor sama untuk interval kepercayaan dua sisi, kecuali jika dinyatakan lain.</p>
+
+<div class="unit" id="cmp1">
+	<p class="math">Panjang suatu komponen hasil pemesinan seharusnya 10 sentimeter, tetapi akibat ketidaksempurnaan proses produksi, panjang sebenarnya merupakan variabel acak berdistribusi normal dengan rata-rata \(\mu\) dan varians \(\sigma^2\). Varians timbul dari faktor bawaan proses yang cukup stabil sepanjang waktu. Dari data historis diketahui bahwa \(\sigma = 0.3\). Sebaliknya, \(\mu\) dapat diatur dengan menyesuaikan berbagai parameter proses sehingga cukup sering berubah menjadi nilai tak diketahui. Sampel 100 komponen mempunyai rata-rata 10.2.</p>
+	<ol class="sub">
+		<li>Bangun interval kepercayaan 95% bagi \(\mu\).</li>
+		<li>Bangun batas atas kepercayaan 95% bagi \(\mu\).</li>
+		<li>Bangun batas bawah kepercayaan 95% bagi \(\mu\).</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<ol class="sub">
+			<li>\((10.14, 10.26)\)</li>
+			<li>10.25</li>
+			<li>10.15</li>
+		</ol>
+	</details>
+</div>
+
+<div class="unit" id="cmp2">
+	<p class="math">Andaikan berat sekantong keripik kentang (dalam gram) merupakan variabel acak berdistribusi normal dengan rata-rata \(\mu\) dan simpangan baku \(\sigma\), keduanya tidak diketahui. Sampel 75 kantong mempunyai rata-rata 250 dan simpangan baku 10.</p>
+	<ol class="sub">
+		<li>Bangun interval kepercayaan 90% bagi \(\mu\).</li>
+		<li>Bangun interval kepercayaan 90% bagi \(\sigma\).</li>
+		<li>Bangun persegi panjang kepercayaan konservatif 90% bagi \((\mu, \sigma)\).</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<ol class="sub">
+			<li>\((248.1, 251.9)\)</li>
+			<li>\((8.8, 11.6)\)</li>
+			<li>\((247.70, 252.30) \times (8.62, 11.92)\)</li>
+		</ol>
+	</details>
+</div>
+
+<div class="unit" id="cmp3">
+	<p class="math">Pada sebuah perusahaan pemasaran jarak jauh, durasi panggilan penawaran melalui telepon (dalam detik) merupakan variabel acak berdistribusi normal dengan rata-rata \(\mu\) dan simpangan baku \(\sigma\), keduanya tidak diketahui. Sampel 50 panggilan mempunyai durasi rata-rata 300 dan simpangan baku 60.</p>
+	<ol class="sub">
+		<li>Bangun batas atas kepercayaan 95% bagi \(\mu\).</li>
+		<li>Bangun batas bawah kepercayaan 95% bagi \(\sigma\).</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<ol class="sub">
+			<li>314.3.</li>
+			<li>51.6.</li>
+		</ol>
+	</details>
+</div>
+
+<div class="unit" id="cmp4">
+	<p class="math">Di suatu perkebunan, berat buah persik (dalam ounce [oz]) pada saat panen merupakan variabel acak berdistribusi normal dengan simpangan baku 0.5. Berapa buah persik yang harus dijadikan sampel untuk menduga berat rata-rata dengan margin galat \(\pm 0.2\) dan tingkat kepercayaan 95%?</p>
+	<details>
+		<summary>Rincian:</summary>
+		<p>25</p>
+	</details>
+</div>
+
+<div class="unit" id="cmp5">
+	<p class="math">Upah per jam untuk jenis pekerjaan konstruksi tertentu merupakan variabel acak berdistribusi normal dengan simpangan baku $1.25 dan rata-rata tak diketahui \(\mu\). Berapa pekerja yang harus dijadikan sampel untuk membangun batas bawah kepercayaan 95% bagi \(\mu\) dengan margin galat $0.25?</p>
+	<details>
+		<summary>Rincian:</summary>
+		<p>68</p>
+	</details>
+</div>
+
+<h4 id="dat">Latihan Analisis Data</h4>
+
+<div class="unit" id="dat1">
+	<p class="stat">Dalam <a href="https://www.randomservices.org/random/data/Michelson.html" class="ancillary">data Michelson</a>, asumsikan bahwa hasil pengukuran kecepatan cahaya mempunyai distribusi normal dengan rata-rata \(\mu\) dan simpangan baku \(\sigma\), keduanya tidak diketahui.</p>
+	<ol class="sub">
+		<li>Bangun interval kepercayaan 95% bagi \(\mu\). Apakah nilai <q>sebenarnya</q> dari kecepatan cahaya berada dalam interval ini?</li>
+		<li>Bangun interval kepercayaan 95% bagi \(\sigma\).</li>
+		<li>Jelajahi secara grafis dan informal asumsi bahwa distribusi asal bersifat normal.</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<ol class="sub">
+			<li>\((836.8, 868.0)\). Tidak, nilai sebenarnya tidak berada dalam interval.</li>
+			<li>\((69.4, 91.8)\)</li>
+		</ol>
+	</details>
+</div>
+
+<div class="unit" id="dat2">
+	<p class="stat">Dalam <a href="https://www.randomservices.org/random/data/Cavendish.html" class="ancillary">data Cavendish</a>, asumsikan bahwa hasil pengukuran massa jenis Bumi mempunyai distribusi normal dengan rata-rata \(\mu\) dan simpangan baku \(\sigma\), keduanya tidak diketahui.</p>
+	<ol class="sub">
+		<li>Bangun interval kepercayaan 95% bagi \(\mu\). Apakah nilai <q>sebenarnya</q> dari massa jenis Bumi berada dalam interval ini?</li>
+		<li>Bangun interval kepercayaan 95% bagi \(\sigma\).</li>
+		<li>Jelajahi secara grafis dan informal asumsi bahwa distribusi asal bersifat normal.</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<ol class="sub">
+			<li>\((5.364, 5.532)\). Ya, nilai sebenarnya berada dalam interval.</li>
+			<li>\((0.1725, 0.3074)\)</li>
+		</ol>
+	</details>
+</div>
+
+<div class="unit" id="dat3">
+	<p class="stat">Dalam <a href="https://www.randomservices.org/random/data/Short.html" class="ancillary">data Short</a>, asumsikan bahwa hasil pengukuran paralaks Matahari mempunyai distribusi normal dengan rata-rata \(\mu\) dan simpangan baku \(\sigma\), keduanya tidak diketahui.</p>
+	<ol class="sub">
+		<li>Bangun interval kepercayaan 95% bagi \(\mu\). Apakah nilai <q>sebenarnya</q> dari paralaks Matahari berada dalam interval ini?</li>
+		<li>Bangun interval kepercayaan 95% bagi \(\sigma\).</li>
+		<li>Jelajahi secara grafis dan informal asumsi bahwa distribusi asal bersifat normal.</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<ol class="sub">
+			<li>\((8.410, 8.822)\). Ya, nilai sebenarnya berada dalam interval.</li>
+			<li>\((0.629, 0.927)\)</li>
+		</ol>
+	</details>
+</div>
+
+<div class="unit" id="dat4">
+	<p class="stat">Andaikan panjang mahkota bunga iris dari suatu spesies (Setosa, Virginica, atau Versicolor) berdistribusi normal. Gunakan <a href="https://www.randomservices.org/random/data/Fisher.html" class="ancillary">data iris Fisher</a> untuk membangun interval kepercayaan dua sisi 90% bagi setiap parameter berikut.</p>
+	<ol class="sub">
+		<li>Rata-rata panjang mahkota bunga iris Setosa.</li>
+		<li>Rata-rata panjang mahkota bunga iris Virginica.</li>
+		<li>Rata-rata panjang mahkota bunga iris Versicolor.</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<ol class="sub">
+			<li>\((14.21, 15.03)\)</li>
+			<li>\((54.21, 56.83)\)</li>
+			<li>\((41.95, 44.49)\)</li>
+		</ol>
+	</details>
+</div>
+
+<footer>
+	<ol class="map">
+		<li class="parent"><a href="https://www.randomservices.org/random/index.html">Random</a></li>
+		<li class="parent"><a href="index.html">7. Pendugaan Himpunan</a></li>
+		<li class="child"><a href="Introduction.html" title="Pendahuluan">1</a></li>
+		<li class="current">2</li>
+		<li class="child"><a href="Bernoulli.html" title="Pendugaan pada Model Bernoulli">3</a></li>
+		<li class="child"><a href="BivariateNormal.html" title="Pendugaan pada Model Normal Dua Sampel">4</a></li>
+		<li class="child"><a href="Bayes.html" title="Pendugaan Interval Bayes">5</a></li>
+		<li class="details"><button type="button" title="Perluas Rincian" onclick="expandDetails(true);"><img src="../icons/Plus.svg" alt="Perluas"></button></li>
+		<li class="details"><button type="button" title="Ciutkan Rincian" onclick="expandDetails(false);"><img src="../icons/Minus.svg" alt="Ciutkan"></button></li>
+	</ol>
+	<ul class="map">
+		<li class="sister"><a href="https://www.randomservices.org/random/apps/index.html" class="ancillary">Aplikasi</a></li>
+		<li class="sister"><a href="https://www.randomservices.org/random/data/index.html" class="ancillary">Himpunan Data</a></li>
+		<li class="child"><a href="https://www.randomservices.org/random/biographies/index.html" class="ancillary">Biografi</a></li>
+	</ul>
+
+	<section class="edition-notice" data-o006-edition-notice="v1">
+		<p><strong>Pemberitahuan edisi.</strong> Terjemahan Bahasa Indonesia ini mengadaptasi <a href="https://www.randomservices.org/random/">Random: Probabilitas, Statistika Matematis, dan Proses Stokastik</a> karya Kyle Siegrist. Perubahan pada halaman ini mencakup penerjemahan, penambahan ID stabil, pengalihan tautan inti yang telah diterjemahkan ke edisi lokal, pengalihan tautan inti yang belum diterjemahkan ke sumber resmi, pengubahan tautan pelengkap menjadi tautan HTTPS resmi, deskripsi gambar yang lebih informatif, koreksi matematis terbatas, dan kualifikasi rigor yang dicatat dalam daftar koreksi edisi.</p>
+		<p>Situs asal menyatakan <a href="https://creativecommons.org/licenses/by/2.0/">CC BY 2.0</a>, sedangkan halaman <a href="https://www.randomservices.org/random/Credits.html">Kredit</a> menautkan <a href="https://creativecommons.org/licenses/by/1.0/">CC BY 1.0</a>; perbedaan ini dipertahankan. Edisi independen ini tidak didukung maupun disahkan oleh Kyle Siegrist atau Random Services. Tautan ke aplikasi, data, dan biografi pihak ketiga tidak menyatakan hak untuk mendistribusikan ulang materi tersebut.</p>
+	</section>
+</footer>
+
+<script>getReferences();</script>
+
+</body>
+</html>

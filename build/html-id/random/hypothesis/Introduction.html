@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="id-ID">
+
+<head>
+	<meta charset="utf-8">
+	<title>Pendahuluan</title>
+	<meta name="author" content="Kyle Siegrist">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="keywords" content="probabilitas, statistika, sampel acak, uji hipotesis, galat tipe I, galat tipe II, hipotesis nol, hipotesis alternatif, tingkat signifikansi, parameter, statistik uji, daerah kritis">
+	<link rel="icon" href="../icons/Icon.svg" type="image/svg">
+	<link rel="stylesheet" href="../Screen.css" type="text/css" media="screen">
+	<script src="../Basic.js"></script>
+	<script src="../../MathJax/tex-svg.js" id="MathJax-script" async></script>
+</head>
+
+<body>
+
+<div class="latex">
+	\(\newcommand{\R}{\mathbb{R}}\) 
+	\(\newcommand{\N}{\mathbb{N}}\)
+	\(\newcommand{\Z}{\mathbb{Z}}\)
+	\(\newcommand{\P}{\mathbb{P}}\)
+	\(\newcommand{\E}{\mathbb{E}}\)
+	\(\newcommand{\var}{\text{var}}\)
+	\(\newcommand{\sd}{\text{sd}}\)
+	\(\newcommand{\bs}{\boldsymbol}\)
+	\(\newcommand{\ms}{\mathscr}\)
+</div>
+
+<header>
+	<ol class="map">
+		<li class="parent"><a href="https://www.randomservices.org/random/index.html">Random</a></li>
+		<li class="parent"><a href="index.html">8. Pengujian Hipotesis</a></li>
+		<li class="current">1</li>
+		<li class="child"><a href="Normal.html" title="Uji pada Model Normal">2</a></li>
+		<li class="child"><a href="Bernoulli.html" title="Uji pada Model Bernoulli">3</a></li>
+		<li class="child"><a href="BivariateNormal.html" title="Uji pada Model Normal Dua Sampel">4</a></li>
+		<li class="child"><a href="Likelihood.html" title="Uji Rasio Kemungkinan">5</a></li>
+		<li class="child"><a href="ChiSquare.html" title="Uji Khi-Kuadrat">6</a></li>
+		<li class="details"><button type="button" title="Perluas Rincian" onclick="expandDetails(true);"><img src="../icons/Plus.svg" alt="Perluas"></button></li>
+		<li class="details"><button type="button" title="Ciutkan Rincian" onclick="expandDetails(false);"><img src="../icons/Minus.svg" alt="Ciutkan"></button></li>
+	</ol>
+	<h2 id="o006.random.hypothesis.introduction.page">1. Pendahuluan</h2>
+</header>
+
+<h3 id="the">Teori Dasar</h3>
+
+<h4 id="pre">Pendahuluan</h4>
+
+<p>Seperti biasa, titik awal kita adalah sebuah <a href="https://www.randomservices.org/random/prob/Experiments.html">eksperimen acak</a> yang dimodelkan oleh <a href="https://www.randomservices.org/random/prob/Probability2.html">ruang probabilitas</a> \((\Omega, \ms F, \P)\). Dalam model statistik dasar, kita mempunyai <a href="https://www.randomservices.org/random/prob/Events.html">variabel acak</a> teramati \(\bs{X}\) yang nilainya berada dalam suatu himpunan \(S\). Secara umum, struktur \(\bs{X}\) dapat cukup rumit. Misalnya, jika eksperimennya adalah mengambil sampel \(n\) objek dari suatu populasi dan mencatat berbagai pengukuran yang diminati, maka
+\[ \bs{X} = (X_1, X_2, \ldots, X_n) \]
+dengan \(X_i\) sebagai vektor pengukuran untuk objek ke-\(i\). Kasus khusus terpenting terjadi ketika \((X_1, X_2, \ldots, X_n)\) saling bebas dan berdistribusi identik. Dalam hal ini, kita mempunyai <a href="../sample/Introduction.html">sampel acak</a> berukuran \(n\) dari distribusi yang sama tersebut.</p>
+
+<p>Bagian ini bertujuan mendefinisikan dan membahas konsep-konsep dasar <dfn>pengujian hipotesis</dfn> statistik. Secara kolektif, konsep-konsep ini kadang-kadang disebut kerangka <dfn>Neyman–Pearson</dfn>, untuk menghormati <a href="https://www.randomservices.org/random/biographies/Neyman.html" class="ancillary" title="Buka sketsa biografi">Jerzy Neyman</a> dan <a href="https://www.randomservices.org/random/biographies/PearsonE.html" class="ancillary" title="Buka sketsa biografi">Egon Pearson</a>, yang pertama kali memformalkannya.</p>
+
+<h4 id="hyp">Hipotesis</h4>
+
+<div class="unit" id="hyp1">
+	<p class="dfn">Sebuah <dfn>hipotesis statistik</dfn> adalah pernyataan tentang distribusi \(\bs{X}\). Secara ekuivalen, hipotesis statistik menentukan suatu <em>himpunan</em> distribusi yang mungkin bagi \(\bs{X}\), yakni himpunan distribusi yang membuat pernyataan tersebut benar. Hipotesis yang menentukan tepat satu distribusi bagi \(\bs{X}\) disebut <dfn>sederhana</dfn>; hipotesis yang menentukan lebih dari satu distribusi bagi \(\bs{X}\) disebut <dfn>majemuk</dfn>.</p>
+</div>
+
+<p>Dalam <dfn>pengujian hipotesis</dfn>, tujuannya adalah menilai apakah terdapat bukti statistik yang cukup untuk menolak <dfn>hipotesis nol</dfn> yang diasumsikan, demi <dfn>hipotesis alternatif</dfn> yang diajukan. Hipotesis nol biasanya dilambangkan dengan \(H_0\), sedangkan hipotesis alternatif biasanya dilambangkan dengan \(H_1\).</p>
+
+<p>Uji hipotesis merupakan suatu <em>keputusan statistik</em>; kesimpulannya adalah <dfn>menolak</dfn> hipotesis nol demi hipotesis alternatif atau <dfn>gagal menolak</dfn> hipotesis nol. Keputusan tersebut tentu harus didasarkan pada nilai amatan \(\bs{x}\) dari vektor data \(\bs{X}\). Karena itu, kita mencari himpunan bagian \(R\) yang sesuai dari ruang sampel \(S\), lalu menolak \(H_0\) jika dan hanya jika \(\bs{x} \in R\). Himpunan \(R\) dikenal sebagai <dfn>daerah penolakan</dfn> atau <dfn>daerah kritis</dfn>. Perhatikan asimetri antara hipotesis nol dan hipotesis alternatif. Asimetri ini timbul karena, dalam suatu pengertian, kita <em>mengasumsikan</em> hipotesis nol, kemudian memeriksa apakah bukti dalam \(\bs{x}\) cukup kuat untuk menggugurkan asumsi tersebut demi hipotesis alternatif.</p>
+
+<p>Dalam suatu pengertian, uji hipotesis merupakan analogi statistik bagi pembuktian dengan kontradiksi. Misalkan sejenak bahwa \(H_1\) adalah sebuah pernyataan dalam teori matematika dan \(H_0\) adalah negasinya. Salah satu cara membuktikan \(H_1\) ialah mengasumsikan \(H_0\), lalu menurunkan suatu kontradiksi secara logis. Tentu saja kita tidak <q>membuktikan</q> apa pun dalam uji hipotesis, tetapi terdapat kemiripan: kita mengasumsikan \(H_0\), lalu menilai apakah data \(\bs{x}\) cukup bertentangan dengan asumsi itu sehingga kita beralasan untuk menolak \(H_0\) demi \(H_1\).</p>
+
+<p>Daerah kritis sering didefinisikan melalui suatu statistik \(w(\bs{X})\), yang disebut <dfn>statistik uji</dfn>, dengan \(w\) sebagai fungsi dari \(S\) ke himpunan lain \(T\). Kita mencari daerah penolakan \(R_T \subseteq T\) yang sesuai, lalu menolak \(H_0\) ketika nilai amatan \(w(\bs{x}) \in R_T\). Dengan demikian, daerah penolakan dalam \(S\) adalah \(R = w^{-1}(R_T) = \left\{\bs{x} \in S: w(\bs{x}) \in R_T\right\}\). Seperti biasa, penggunaan statistik sering memungkinkan <dfn>reduksi data</dfn> yang berarti ketika dimensi statistik uji jauh lebih kecil daripada dimensi vektor data.</p>
+
+<h4 id="err">Galat</h4>
+
+<p>Keputusan akhir dapat benar atau keliru. Terdapat dua jenis galat, bergantung pada hipotesis mana yang sebenarnya benar.</p>
+
+<div class="unit" id="err1">
+	<p class="dfn">Jenis galat:</p>
+	<ol class="sub">
+		<li><dfn>Galat tipe I</dfn> adalah menolak hipotesis nol \(H_0\) ketika \(H_0\) benar.</li>
+		<li><dfn>Galat tipe II</dfn> adalah gagal menolak hipotesis nol \(H_0\) ketika hipotesis alternatif \(H_1\) benar.</li>
+	</ol>
+</div>
+
+<p>Demikian pula, terdapat dua cara untuk membuat keputusan yang <em>benar</em>: kita dapat menolak \(H_0\) ketika \(H_1\) benar, atau gagal menolak \(H_0\) ketika \(H_0\) benar. Kemungkinan-kemungkinan itu dirangkum dalam tabel berikut.</p>
+
+<table>
+	<caption class="displayed">Uji Hipotesis</caption>
+	<tr>
+		<th>Keadaan | Keputusan</th>
+		<th>Gagal menolak \(H_0\)</th>
+		<th>Menolak \(H_0\)</th>
+	</tr>
+	<tr>
+	<th>\(H_0\) Benar</th>
+		<td>Benar</td>
+		<td>Galat tipe I</td>
+	</tr>
+	<tr>
+		<th>\(H_1\) Benar</th>
+		<td>Galat tipe II</td>
+		<td>Benar</td>
+	</tr>
+</table>
+
+<p>Tentu saja, setelah mengamati \(\bs{X} = \bs{x}\) dan mengambil keputusan, kita telah membuat keputusan yang benar atau melakukan galat, dan biasanya kita tidak akan pernah mengetahui mana yang terjadi. Namun, <em>sebelum</em> data dikumpulkan, kita dapat meninjau probabilitas berbagai galat tersebut.</p>
+
+<p>Jika \(H_0\) benar—artinya distribusi \(\bs{X}\) ditentukan oleh \(H_0\)—maka \(\P(\bs{X} \in R)\) adalah probabilitas galat tipe I bagi distribusi tersebut. Jika \(H_0\) majemuk, maka \(H_0\) menentukan beragam distribusi bagi \(\bs{X}\), sehingga terdapat suatu <em>himpunan</em> probabilitas galat tipe I.</p>
+
+<div class="unit" id="err2">
+	<p class="dfn">Supremum probabilitas galat tipe I atas himpunan distribusi yang ditentukan oleh \( H_0 \) adalah <dfn>tingkat signifikansi</dfn> uji tersebut atau <dfn>ukuran</dfn> daerah kritisnya.</p>
+</div>
+
+<p>Tingkat signifikansi sering dilambangkan dengan \(\alpha\). Biasanya, daerah penolakan dibangun agar tingkat signifikansinya sama dengan suatu nilai kecil yang ditetapkan (umumnya 0,1; 0,05; atau 0,01).</p>
+
+<p>Jika \(H_1\) benar—artinya distribusi \(\bs{X}\) ditentukan oleh \(H_1\)—maka \(\P(\bs{X} \notin R)\) adalah probabilitas galat tipe II bagi distribusi tersebut. Sekali lagi, jika \(H_1\) majemuk, maka \(H_1\) menentukan beragam distribusi bagi \(\bs{X}\), sehingga terdapat suatu himpunan probabilitas galat tipe II. Secara umum, terdapat kompromi antara probabilitas galat tipe I dan tipe II. Jika probabilitas galat tipe I dikurangi dengan memperkecil daerah penolakan \(R\), probabilitas galat tipe II pasti meningkat karena daerah komplemennya \(S \setminus R\) menjadi lebih besar.</p>
+
+<p>Kasus-kasus ekstrem memberi sedikit pemahaman. Pertama, tinjau aturan keputusan yang <em>tidak pernah</em> menolak \(H_0\), apa pun bukti \(\bs{x}\). Aturan ini bersesuaian dengan daerah penolakan \(R = \emptyset\). Galat tipe I mustahil terjadi, sehingga tingkat signifikansinya 0. Sebaliknya, probabilitas galat tipe II adalah 1 untuk setiap distribusi yang ditentukan oleh \(H_1\). Pada ekstrem lain, tinjau aturan keputusan yang selalu menolak \(H_0\), apa pun bukti \(\bs{x}\). Aturan ini bersesuaian dengan daerah penolakan \(R = S\). Galat tipe II mustahil terjadi, tetapi kini probabilitas galat tipe I adalah 1 untuk setiap distribusi yang ditentukan oleh \(H_0\). Di antara kedua uji yang tidak berguna ini terdapat uji-uji bermakna yang mempertimbangkan bukti \(\bs{x}\).</p>
+
+<h4 id="pow">Kuasa</h4>
+
+<div class="unit" id="pow1">
+	<p class="dfn">Jika \(H_1\) benar, sehingga distribusi \(\bs{X}\) ditentukan oleh \(H_1\), maka \(\P(\bs{X} \in R)\), yakni probabilitas menolak \(H_0\), adalah <dfn>kuasa</dfn> uji bagi distribusi tersebut.</p>
+</div>
+
+<p>Dengan demikian, kuasa uji bagi suatu distribusi yang ditentukan oleh \( H_1 \) adalah probabilitas membuat keputusan yang benar.</p>
+
+<div class="unit" id="pow2">
+	<p class="dfn">Misalkan terdapat dua uji yang masing-masing bersesuaian dengan daerah penolakan \(R_1\) dan \(R_2\), serta masing-masing mempunyai tingkat signifikansi \(\alpha\). Uji dengan daerah \(R_1\) disebut <dfn>lebih berkuasa secara seragam</dfn> daripada uji dengan daerah \(R_2\) jika
+	\[ \P(\bs{X} \in R_1) \ge \P(\bs{X} \in R_2) \text{ untuk setiap distribusi } \bs{X} \text{ yang ditentukan oleh } H_1 \]</p>
+</div>
+
+<p>Dalam hal ini, tentu kita lebih memilih uji pertama. Namun, dua uji sering kali tidak terurut secara seragam: satu uji lebih berkuasa bagi sebagian distribusi yang ditentukan oleh \(H_1\), sedangkan uji lain lebih berkuasa bagi distribusi lain yang ditentukan oleh \(H_1\).</p>
+
+<div class="unit" id="pow3">
+	<p class="dfn">Jika suatu uji mempunyai tingkat signifikansi \(\alpha\) dan lebih berkuasa secara seragam daripada setiap uji lain yang juga mempunyai tingkat signifikansi \(\alpha\), uji tersebut disebut <dfn>uji paling berkuasa secara seragam</dfn> pada tingkat \(\alpha\).</p>
+</div>
+
+<p>Jelas bahwa uji paling berkuasa secara seragam adalah yang terbaik yang dapat kita capai.</p>
+
+<h4 id="pva">Nilai-\(P\)</h4>
+
+<p>Dalam kebanyakan kasus, terdapat prosedur umum untuk membangun sebuah uji—yakni daerah penolakan \(R_\alpha\)—bagi setiap tingkat signifikansi \(\alpha \in (0, 1)\) yang diberikan. Biasanya, \(R_\alpha\) mengecil dalam arti relasi himpunan bagian ketika \(\alpha\) mengecil.</p>
+
+<div class="unit" id="pva1">
+	<p class="dfn"><dfn>Nilai-\(P\)</dfn> dari nilai amatan \(\bs{x}\) bagi \(\bs{X}\), yang dilambangkan dengan \(P(\bs{x})\), didefinisikan sebagai nilai \(\alpha\) terkecil yang memenuhi \(\bs{x} \in R_\alpha\); dengan kata lain, tingkat signifikansi terkecil yang membuat \(H_0\) ditolak ketika \(\bs{X} = \bs{x}\).</p>
+</div>
+
+<p>Mengetahui \(P(\bs{x})\) memungkinkan kita menguji \(H_0\) pada tingkat signifikansi mana pun untuk data \(\bs{x}\) yang diberikan: jika \(P(\bs{x}) \le \alpha\), kita menolak \(H_0\) pada tingkat signifikansi \(\alpha\); jika \(P(\bs{x}) \gt \alpha\), kita gagal menolak \(H_0\) pada tingkat signifikansi \(\alpha\). Perhatikan bahwa \(P(\bs{X})\) adalah sebuah <em>statistik</em>. Secara informal, \(P(\bs{x})\) sering dapat dipandang sebagai probabilitas hasil yang <q>sama ekstrem atau lebih ekstrem</q> daripada nilai amatan \(\bs{x}\), dengan makna <em>ekstrem</em> ditafsirkan relatif terhadap hipotesis nol \(H_0\).</p>
+
+<h4 id="jus">Analogi dengan Sistem Peradilan</h4>
+
+<p>Terdapat analogi yang membantu antara pengujian hipotesis statistik dan sistem peradilan pidana di Amerika Serikat serta berbagai negara lain. Tinjau seseorang yang didakwa melakukan tindak pidana. <em>Hipotesis nol</em> yang diasumsikan adalah bahwa orang tersebut tidak bersalah; <em>hipotesis alternatif</em> yang diajukan adalah bahwa orang tersebut bersalah. Pengujian kedua hipotesis itu berupa persidangan, dengan bukti yang diajukan oleh kedua pihak berperan sebagai data. Setelah menimbang bukti, juri memberikan putusan <em>tidak bersalah</em> atau <em>bersalah</em>. Perhatikan bahwa <em>tidak melakukan tindak pidana</em> bukanlah putusan tersendiri dari juri, sebab tujuan persidangan bukanlah <em>membuktikan</em> orang tersebut tidak melakukan tindak pidana. Tujuannya adalah menilai apakah bukti cukup kuat untuk menggugurkan hipotesis nol bahwa orang tersebut tidak bersalah demi hipotesis alternatif bahwa ia bersalah. <em>Galat tipe I</em> adalah menyatakan bersalah seseorang yang sebenarnya tidak bersalah; <em>galat tipe II</em> adalah membebaskan seseorang yang sebenarnya bersalah. Secara umum, galat tipe I dianggap lebih serius, sehingga untuk menahan peluangnya pada tingkat yang sangat rendah, standar pemidanaan dalam perkara pidana serius adalah <em>melampaui keraguan yang beralasan</em>.</p>
+
+<h3 id="par">Uji untuk Parameter Tak Diketahui</h3>
+
+<p>Pengujian hipotesis merupakan konsep yang sangat umum, tetapi sebuah kelas khusus yang penting muncul ketika distribusi variabel data \(\bs{X}\) bergantung pada parameter \(\theta\) yang nilainya berada dalam ruang parameter \(\Theta\). Parameter dapat bernilai vektor, sehingga \(\bs{\theta} = (\theta_1, \theta_2, \ldots, \theta_k)\) dan \(\Theta \subseteq \R^k\) untuk suatu \(k \in \N_+\). Hipotesis umumnya berbentuk
+\[ H_0: \theta \in \Theta_0 \text{ melawan } H_1: \theta \notin \Theta_0 \]
+dengan \(\Theta_0\) sebagai himpunan bagian yang ditetapkan dari ruang parameter \(\Theta\). Dalam kerangka ini, probabilitas membuat galat atau keputusan benar bergantung pada nilai sebenarnya dari \(\theta\). Jika \(R\) adalah daerah penolakan, maka <dfn>fungsi kuasa</dfn> \( Q \) diberikan oleh
+\[ Q(\theta) = \P_\theta(\bs{X} \in R), \quad \theta \in \Theta \]
+Fungsi kuasa memberikan banyak informasi tentang uji tersebut.</p>
+
+<div class="unit" id="par1">
+	<p class="math">Fungsi kuasa memenuhi sifat-sifat berikut:</p>
+	<ol class="sub">
+		<li>\(Q(\theta)\) adalah probabilitas galat tipe I ketika \(\theta \in \Theta_0\).</li>
+		<li>\(\sup\left\{Q(\theta): \theta \in \Theta_0\right\}\) adalah tingkat signifikansi uji.</li>
+		<li>\(1 - Q(\theta)\) adalah probabilitas galat tipe II ketika \(\theta \notin \Theta_0\).</li>
+		<li>\(Q(\theta)\) adalah kuasa uji ketika \(\theta \notin \Theta_0\).</li>
+	</ol>
+</div>
+
+<p>Jika terdapat dua uji, kita dapat membandingkannya melalui fungsi kuasanya.</p>
+
+<div class="unit" id="par2">
+	<p class="math">Misalkan terdapat dua uji yang masing-masing bersesuaian dengan daerah penolakan \(R_1\) dan \(R_2\), serta masing-masing mempunyai tingkat signifikansi \(\alpha\). Uji dengan daerah penolakan \(R_1\) lebih berkuasa secara seragam daripada uji dengan daerah penolakan \(R_2\) jika \( Q_1(\theta) \ge Q_2(\theta)\) untuk semua \( \theta \notin \Theta_0 \).</p>
+</div>
+
+<p>Kebanyakan uji hipotesis untuk parameter riil tak diketahui \(\theta\) termasuk dalam tiga kasus khusus berikut.</p>
+
+<div class="unit" id="par3">
+	<p class="dfn">Misalkan \( \theta \) adalah parameter riil dan \( \theta_0 \in \Theta \) adalah nilai yang ditetapkan. Ketiga uji berikut berturut-turut disebut <dfn>uji dua sisi</dfn>, <dfn>uji berekor kiri</dfn>, dan <dfn>uji berekor kanan</dfn>.</p>
+	<ol class="sub">
+		<li>\(H_0: \theta = \theta_0\) melawan \(H_1: \theta \ne \theta_0\)</li>
+		<li>\(H_0: \theta \ge \theta_0\) melawan \(H_1: \theta \lt \theta_0\)</li>
+		<li>\(H_0: \theta \le \theta_0\) melawan \(H_1: \theta \gt \theta_0\)</li>
+	</ol>
+</div>
+
+<p>Dengan demikian, uji-uji tersebut dinamai menurut hipotesis alternatif yang diajukan. Tentu saja, selain \(\theta\) mungkin terdapat parameter tak diketahui lain yang disebut <dfn>parameter pengganggu</dfn>.</p>
+
+<h4 id="equ">Ekuivalensi antara Uji Hipotesis dan Himpunan Kepercayaan</h4>
+
+<p>Terdapat ekuivalensi antara uji hipotesis dan <a href="../interval/Introduction.html">himpunan kepercayaan</a> bagi parameter \(\theta\).</p>
+
+<div class="unit" id="equ1">
+	<p class="math">Misalkan \(C(\bs{X})\) adalah himpunan kepercayaan dengan peluang cakupan sekurang-kurangnya \(1 - \alpha\) bagi \(\theta\). Uji berikut mempunyai tingkat signifikansi paling tinggi \(\alpha\) untuk hipotesis \( H_0: \theta = \theta_0 \) melawan \( H_1: \theta \ne \theta_0 \): tolak \(H_0\) jika dan hanya jika \(\theta_0 \notin C(\bs{x})\).</p>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Menurut asumsi, \(\P_{\theta_0}[\theta_0 \in C(\bs{X})] \ge 1 - \alpha\). Karena itu, jika \(H_0\) benar sehingga \(\theta = \theta_0\), probabilitas galat tipe I adalah \(\P_{\theta_0}[\theta_0 \notin C(\bs{X})] \le \alpha\).</p>
+	</details>
+</div>
+
+<p>Secara ekuivalen, kita <em>gagal</em> menolak \(H_0\) dalam uji dengan tingkat signifikansi paling tinggi \(\alpha\) jika dan hanya jika \(\theta_0\) berada dalam himpunan kepercayaan dengan tingkat kepercayaan sekurang-kurangnya \(1 - \alpha\) yang bersesuaian. Secara khusus, ekuivalensi ini berlaku bagi pendugaan interval parameter riil \(\theta\) dan uji-uji umum untuk \(\theta\) pada <a href="#par3" class="ref"></a>.</p>
+
+<div class="unit" id="equ2">
+	<p class="math">Dalam setiap kasus berikut, interval kepercayaan mempunyai tingkat kepercayaan sekurang-kurangnya \(1 - \alpha\), dan uji mempunyai tingkat signifikansi paling tinggi \(\alpha\).</p>
+	<ol class="sub">
+		<li>Misalkan \(\left[L(\bs{X}), U(\bs{X})\right]\) adalah interval kepercayaan dua sisi bagi \(\theta\). Tolak \(H_0: \theta = \theta_0\) melawan \(H_1: \theta \ne \theta_0\) jika dan hanya jika \(\theta_0 \lt L(\bs{X})\) atau \(\theta_0 \gt U(\bs{X})\).</li>
+		<li>Misalkan \(L(\bs{X})\) adalah batas bawah kepercayaan bagi \(\theta\). Tolak \(H_0: \theta \le \theta_0\) melawan \(H_1: \theta \gt \theta_0\) jika dan hanya jika \(\theta_0 \lt L(\bs{X})\).</li>
+		<li>Misalkan \(U(\bs{X})\) adalah batas atas kepercayaan bagi \(\theta\). Tolak \(H_0: \theta \ge \theta_0\) melawan \(H_1: \theta \lt \theta_0\) jika dan hanya jika \(\theta_0 \gt U(\bs{X})\).</li>
+	</ol>
+</div>
+
+<h4 id="piv">Variabel Pivot dan Statistik Uji</h4>
+
+<p>Ingat bahwa himpunan kepercayaan bagi parameter tak diketahui \(\theta\) sering dibangun melalui <dfn>variabel pivot</dfn>, yakni variabel acak \(W(\bs{X}, \theta)\) yang bergantung pada vektor data \(\bs{X}\) dan parameter \(\theta\), tetapi distribusinya diketahui dan tidak bergantung pada \(\theta\). Dalam hal ini, statistik uji yang wajar bagi uji-uji dasar pada definisi <a href="#par3" class="ref"></a> adalah \(W(\bs{X}, \theta_0)\).</p>
+
+<footer>
+	<ol class="map">
+		<li class="parent"><a href="https://www.randomservices.org/random/index.html">Random</a></li>
+		<li class="parent"><a href="index.html">8. Pengujian Hipotesis</a></li>
+		<li class="current">1</li>
+		<li class="child"><a href="Normal.html" title="Uji pada Model Normal">2</a></li>
+		<li class="child"><a href="Bernoulli.html" title="Uji pada Model Bernoulli">3</a></li>
+		<li class="child"><a href="BivariateNormal.html" title="Uji pada Model Normal Dua Sampel">4</a></li>
+		<li class="child"><a href="Likelihood.html" title="Uji Rasio Kemungkinan">5</a></li>
+		<li class="child"><a href="ChiSquare.html" title="Uji Khi-Kuadrat">6</a></li>
+		<li class="details"><button type="button" title="Perluas Rincian" onclick="expandDetails(true);"><img src="../icons/Plus.svg" alt="Perluas"></button></li>
+		<li class="details"><button type="button" title="Ciutkan Rincian" onclick="expandDetails(false);"><img src="../icons/Minus.svg" alt="Ciutkan"></button></li>
+	</ol>
+	<ul class="map">
+		<li class="sister"><a href="https://www.randomservices.org/random/apps/index.html" class="ancillary">Aplikasi</a></li>
+		<li class="sister"><a href="https://www.randomservices.org/random/data/index.html" class="ancillary">Himpunan Data</a></li>
+		<li class="child"><a href="https://www.randomservices.org/random/biographies/index.html" class="ancillary">Biografi</a></li>
+	</ul>
+
+	<section class="edition-notice" data-o006-edition-notice="v1">
+		<p><strong>Pemberitahuan edisi.</strong> Terjemahan Bahasa Indonesia ini mengadaptasi <a href="https://www.randomservices.org/random/">Random: Probability, Mathematical Statistics, and Stochastic Processes</a> karya Kyle Siegrist. Perubahan pada halaman ini mencakup penerjemahan, penambahan ID halaman stabil, pengalihan tautan korpus yang telah diterjemahkan ke edisi lokal, pengalihan tautan korpus di luar lingkup ke sumber HTTPS resmi, pengubahan tautan pelengkap menjadi HTTPS resmi, serta koreksi HTML dan matematis terbatas yang dicatat dalam daftar koreksi edisi.</p>
+		<p>Penerjemahan dan rekayasa edisi dilakukan dengan OpenAI Codex gpt-5.6-sol, Ultra, atas instruksi pengguna. Seluruh kredit bagi sumber, penulis, dan kontributor manusia tetap dipertahankan.</p>
+		<p>Situs asal menyatakan <a href="https://creativecommons.org/licenses/by/2.0/">CC BY 2.0</a>, sedangkan halaman <a href="https://www.randomservices.org/random/Credits.html">Kredit</a> menautkan <a href="https://creativecommons.org/licenses/by/1.0/">CC BY 1.0</a>; perbedaan ini dipertahankan. Edisi independen ini tidak didukung maupun disahkan oleh Kyle Siegrist atau Random Services. Tautan ke aplikasi, data, dan biografi pihak ketiga tidak menyatakan hak untuk mendistribusikan ulang materi tersebut.</p>
+	</section>
+</footer>
+
+<script>getReferences();</script>
+
+</body>
+</html>

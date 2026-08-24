@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="id-ID">
+
+<head>
+	<meta charset="utf-8">
+	<title>Pengujian pada Model Normal</title>
+	<meta name="author" content="Kyle Siegrist">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="keywords" content="probabilitas, statistika, uji hipotesis, distribusi normal, rata-rata, varians, distribusi t Student, distribusi khi-kuadrat, kuasa, prosedur robust">
+	<link rel="icon" href="../icons/Icon.svg" type="image/svg">
+	<link rel="stylesheet" href="../Screen.css" type="text/css" media="screen">
+	<script src="../Basic.js"></script>
+	<script src="../../MathJax/tex-svg.js" id="MathJax-script" async></script>
+</head>
+
+<body>
+
+<div class="latex">
+	\(\newcommand{\R}{\mathbb{R}}\) 
+	\(\newcommand{\N}{\mathbb{N}}\)
+	\(\newcommand{\Z}{\mathbb{Z}}\)
+	\(\newcommand{\P}{\mathbb{P}}\)
+	\(\newcommand{\E}{\mathbb{E}}\)
+	\(\newcommand{\var}{\text{var}}\)
+	\(\newcommand{\sd}{\text{sd}}\)
+	\(\newcommand{\bs}{\boldsymbol}\)
+</div>
+
+<header>
+	<ol class="map">
+		<li class="parent"><a href="https://www.randomservices.org/random/index.html">Random</a></li>
+		<li class="parent"><a href="index.html">8. Pengujian Hipotesis</a></li>
+		<li class="child"><a href="Introduction.html" title="Pendahuluan">1</a></li>
+		<li class="current">2</li>
+		<li class="child"><a href="Bernoulli.html" title="Uji dalam Model Bernoulli">3</a></li>
+		<li class="child"><a href="BivariateNormal.html" title="Uji dalam Model Normal Dua Sampel">4</a></li>
+		<li class="child"><a href="Likelihood.html" title="Uji Rasio Kemungkinan">5</a></li>
+		<li class="child"><a href="ChiSquare.html" title="Uji Khi-Kuadrat">6</a></li>
+		<li class="details"><button type="button" title="Perluas Rincian" onclick="expandDetails(true);"><img src="../icons/Plus.svg" alt="Perluas"></button></li>
+		<li class="details"><button type="button" title="Ciutkan Rincian" onclick="expandDetails(false);"><img src="../icons/Minus.svg" alt="Ciutkan"></button></li>
+	</ol>
+	<h2 id="o006.random.hypothesis.normal.page">2. Pengujian pada Model Normal</h2>
+</header>
+
+<h3 id="the">Teori Dasar</h3>
+
+<h4>Model Normal</h4>
+
+<p><a href="https://www.randomservices.org/random/special/Normal.html">Distribusi normal</a> mungkin merupakan distribusi terpenting dalam kajian statistika matematis, antara lain karena <a href="../sample/CLT.html">teorema limit pusat</a>. Sebagai konsekuensi teorema ini, suatu besaran terukur yang dipengaruhi oleh banyak galat acak kecil akan mempunyai distribusi yang setidaknya mendekati normal. Variabel semacam itu terdapat di mana-mana dalam eksperimen statistika, pada bidang yang membentang dari ilmu fisika dan biologi hingga ilmu sosial.</p>
+
+<p>Karena itu, dalam bagian ini kita mengasumsikan bahwa \(\bs{X} = (X_1, X_2, \ldots, X_n)\) adalah <a href="../sample/Introduction.html">sampel acak</a> dari <a href="https://www.randomservices.org/random/special/Normal.html">distribusi normal</a> dengan <a href="https://www.randomservices.org/random/expect/Properties.html">rata-rata</a> \(\mu\) dan <a href="https://www.randomservices.org/random/expect/Variance.html">simpangan baku</a> \(\sigma\). Tujuan kita adalah membangun <a href="Introduction.html">uji hipotesis</a> bagi \(\mu\) dan \(\sigma\); keduanya termasuk kasus khusus terpenting dalam pengujian hipotesis. Bagian ini sejajar dengan pembahasan <a href="../interval/Normal.html">pendugaan dalam model normal</a> pada bab <a href="../interval/index.html">pendugaan himpunan</a>. Khususnya, dualitas antara pendugaan interval dan pengujian hipotesis akan berperan penting. Namun, pertama-tama kita perlu meninjau beberapa fakta dasar yang sangat penting bagi analisis kita.</p>
+
+<div class="unit" id="mod1">
+	<p class="dfn">Ingat bahwa <a href="../sample/LLN.html">rata-rata sampel</a> \( M \) dan <a href="../sample/Variance.html">varians sampel</a> \( S^2 \) adalah
+	\[ M = \frac{1}{n} \sum_{i=1}^n X_i, \quad S^2 = \frac{1}{n - 1} \sum_{i=1}^n (X_i - M)^2\]</p>
+</div>
+
+<p>Dari pembahasan <a href="../point/index.html">pendugaan titik</a>, ingat bahwa \( M \) merupakan penduga tak bias dan konsisten bagi \( \mu \), sedangkan \( S^2 \) merupakan penduga tak bias dan konsisten bagi \( \sigma^2 \). Dari statistik-statistik dasar ini kita dapat membangun <a href="Introduction.html#piv">statistik uji</a> yang akan digunakan dalam uji hipotesis. Hasil berikut adalah <a href="../sample/Normal.html">sifat khusus</a> sampel dari distribusi normal.</p>
+
+<div class="unit" id="mod2">
+	<p class="math">Definisikan
+	\[ Z = \frac{M - \mu}{\sigma \big/ \sqrt{n}}, \quad T = \frac{M - \mu}{S \big/ \sqrt{n}}, \quad V = \frac{n - 1}{\sigma^2} S^2 \]</p>
+	<ol class="sub">
+		<li>\( Z \) mempunyai <a href="https://www.randomservices.org/random/special/Normal.html">distribusi normal baku</a>.</li>
+		<li>\( T \) mempunyai <a href="https://www.randomservices.org/random/special/Student.html">distribusi \( t \) Student</a> dengan \( n - 1 \) derajat kebebasan.</li>
+		<li>\( V \) mempunyai <a href="https://www.randomservices.org/random/special/ChiSquare.html">distribusi khi-kuadrat</a> dengan \( n - 1 \) derajat kebebasan.</li>
+		<li>\( Z \) dan \( V \) saling bebas.</li>
+	</ol>
+</div>
+
+<p>Jadi, setiap variabel acak ini merupakan variabel pivot bagi \( (\mu, \sigma) \): distribusinya tidak bergantung pada parameter, tetapi variabelnya sendiri secara fungsional bergantung pada salah satu atau kedua parameter. Variabel pivot tersebut menghasilkan statistik uji alami yang dapat dipakai untuk menguji hipotesis mengenai parameter. Untuk membangun uji, kita memerlukan <a href="https://www.randomservices.org/random/dist/CDF.html#qnt">kuantil</a> distribusi-distribusi baku ini. Kuantil dapat dihitung dengan <a href="https://www.randomservices.org/random/apps/QuantileApp.html" class="ancillary">aplikasi kuantil</a> atau sebagian besar paket perangkat lunak matematika dan statistika. Notasi yang kita gunakan adalah sebagai berikut:</p>
+
+<div class="unit" id="mod3">
+	<p class="dfn">Misalkan \( p \in (0, 1) \) dan \( k \in \N_+ \).</p>
+	<ol class="sub">
+		<li>\( z(p) \) menyatakan kuantil berorde \( p \) dari distribusi normal baku.</li>
+		<li>\(t_k(p)\) menyatakan kuantil berorde \( p \) dari distribusi \( t \) Student dengan \( k \) derajat kebebasan.</li>
+		<li>\( \chi^2_k(p) \) menyatakan kuantil berorde \( p \) dari distribusi khi-kuadrat dengan \( k \) derajat kebebasan.</li>
+	</ol>
+</div>
+
+<p>Karena distribusi normal baku dan distribusi \( t \) Student simetris terhadap 0, berlaku \( z(1 - p) = -z(p) \) dan \( t_k(1 - p) = -t_k(p) \) untuk \( p \in (0, 1) \) serta \( k \in \N_+ \). Sebaliknya, distribusi khi-kuadrat tidak simetris.</p>
+
+<h4 id="nor">Uji Rata-Rata dengan Simpangan Baku Diketahui</h4>
+
+<p>Dalam pembahasan pertama, kita mengasumsikan bahwa rata-rata distribusi \( \mu \) tidak diketahui, tetapi simpangan baku \( \sigma \) diketahui. Asumsi ini tidak selalu dibuat-buat. Sering ada keadaan ketika \( \sigma \) stabil sepanjang waktu sehingga setidaknya diketahui secara mendekati, sementara \( \mu \) berubah karena <q>perlakuan</q> yang berbeda. Contohnya diberikan dalam latihan komputasi di bawah.</p>
+
+<div class="unit" id="nor1">
+	<p class="math">Untuk nilai hipotesis \( \mu_0 \in \R \), definisikan statistik uji
+	\[ Z = \frac{M - \mu_0}{\sigma \big/ \sqrt{n}} \]</p>
+	<ol class="sub">
+		<li>Jika \( \mu = \mu_0 \), maka \( Z \) mempunyai distribusi normal baku.</li>
+		<li>Jika \( \mu \ne \mu_0 \), maka \( Z \) mempunyai distribusi normal dengan rata-rata \( \frac{\mu - \mu_0}{\sigma / \sqrt{n}} \) dan varians 1.</li>
+	</ol>
+</div>
+
+<p>Jadi, pada kasus (b), \( \frac{\mu - \mu_0}{\sigma / \sqrt{n}} \) dapat dipandang sebagai <dfn>parameter nonsentral</dfn>. Grafik fungsi kepadatan peluang \( Z \) berbentuk seperti fungsi kepadatan normal baku, tetapi bergeser ke kanan atau ke kiri sebesar parameter nonsentral, bergantung pada apakah \( \mu \gt \mu_0 \) atau \( \mu \lt \mu_0 \).</p>
+
+<div class="unit" id="nor2">
+	<p class="math">Untuk \( \alpha \in (0, 1) \), setiap uji berikut mempunyai tingkat signifikansi \( \alpha \):</p>
+	<ol class="sub">
+		<li>Tolak \( H_0: \mu = \mu_0 \) melawan \( H_1: \mu \ne \mu_0 \) jika dan hanya jika \( Z \lt -z(1 - \alpha /2) \) atau \( Z \gt z(1 - \alpha / 2) \); secara ekuivalen, jika dan hanya jika \( M \lt \mu_0 - z(1 - \alpha / 2) \frac{\sigma}{\sqrt{n}} \) atau \( M \gt \mu_0 + z(1 - \alpha / 2) \frac{\sigma}{\sqrt{n}} \).</li>
+		<li>Tolak \( H_0: \mu \le \mu_0 \) melawan \( H_1: \mu \gt \mu_0 \) jika dan hanya jika \( Z \gt z(1 - \alpha) \); secara ekuivalen, jika dan hanya jika \( M \gt \mu_0 + z(1 - \alpha) \frac{\sigma}{\sqrt{n}} \).</li>
+		<li>Tolak \( H_0: \mu \ge \mu_0 \) melawan \( H_1: \mu \lt \mu_0 \) jika dan hanya jika \( Z \lt -z(1 - \alpha) \); secara ekuivalen, jika dan hanya jika \( M \lt \mu_0 - z(1 - \alpha) \frac{\sigma}{\sqrt{n}} \).</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Pada bagian (a), \( H_0 \) merupakan hipotesis sederhana dan, di bawah \( H_0 \), \( Z \) mempunyai distribusi normal baku. Karena itu, menurut definisi kuantil, \( \alpha \) adalah peluang menolak \( H_0 \) secara keliru. Pada bagian (b) dan (c), \( Z \) mempunyai distribusi normal nonsentral di bawah \( H_0 \) seperti dibahas pada <a href="#nor1" class="ref"></a>. Jika \( H_0 \) benar, peluang galat tipe I maksimum sebesar \( \alpha \) terjadi ketika \( \mu = \mu_0 \). Aturan keputusan dalam \( M \) ekuivalen dengan aturan yang bersesuaian dalam \( Z \) melalui aljabar sederhana.</p>
+	</details>
+</div>
+
+<p>Bagian (a) adalah uji dua sisi baku, bagian (b) adalah uji sisi kanan, dan bagian (c) adalah uji sisi kiri. Dalam setiap kasus, uji hipotesis tersebut merupakan dual dari dugaan interval yang bersesuaian dalam bagian <a href="../interval/Normal.html">pendugaan pada model normal</a>.</p>
+
+<div class="unit" id="nor3">
+	<p class="math">Untuk setiap uji pada <a href="#nor2" class="ref"></a>, kita <em>gagal</em> menolak \(H_0\) pada tingkat signifikansi \(\alpha\) jika dan hanya jika \(\mu_0\) berada dalam interval kepercayaan \(1 - \alpha\) yang bersesuaian, yaitu</p>
+	<ol class="sub">
+		<li>\( M - z(1 - \alpha / 2) \frac{\sigma}{\sqrt{n}} \le \mu_0 \le M + z(1 - \alpha / 2) \frac{\sigma}{\sqrt{n}} \)</li>
+		<li>\( \mu_0 \ge M - z(1 - \alpha) \frac{\sigma}{\sqrt{n}}\)</li>
+		<li>\( \mu_0 \le M + z(1 - \alpha) \frac{\sigma}{\sqrt{n}}\)</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Hasil ini mengikuti <a href="#nor2" class="ref"></a>. Dalam setiap kasus, kita mulai dari pertidaksamaan yang bersesuaian dengan tidak menolak \( H_0 \), lalu menyelesaikannya terhadap \( \mu_0 \).</p>
+	</details>
+</div>
+
+<p>Uji dua sisi pada (a) menempatkan \( \alpha / 2 \) pada setiap ekor distribusi statistik uji \( Z \) di bawah \( H_0 \). Uji ini disebut <dfn>tak bias</dfn>. Kita tentu dapat membangun uji bias lain dengan membagi tingkat signifikansi \( \alpha \) secara tidak simetris antara ekor kiri dan kanan.</p>
+
+<div class="unit" id="nor4">
+	<p class="math">Untuk setiap \(\alpha, \, p \in (0, 1)\), uji berikut mempunyai tingkat signifikansi \(\alpha\): tolak \(H_0: \mu = \mu_0\) melawan \(H_1: \mu \ne \mu_0\) jika dan hanya jika \(Z \lt z(\alpha - p \alpha)\) atau \(Z \ge z(1 - p \alpha)\).</p>
+	<ol class="sub">
+		<li>\( p = \frac{1}{2} \) menghasilkan uji simetris dan tak bias.</li>
+		<li>\( p \downarrow 0 \) menghasilkan uji sisi kiri.</li>
+		<li>\( p \uparrow 1 \) menghasilkan uji sisi kanan.</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Seperti sebelumnya, \( H_0 \) merupakan hipotesis sederhana dan, jika \( H_0 \) benar, \( Z \) mempunyai distribusi normal baku. Karena itu, peluang menolak \( H_0 \) secara keliru adalah \( \alpha \) menurut definisi kuantil. Bagian (a)&ndash;(c) mengikuti sifat fungsi kuantil normal baku.</p>
+	</details>
+</div>
+
+<p>Nilai-\(P\) untuk uji-uji ini dapat dihitung dengan fungsi distribusi normal baku \(\Phi\).</p>
+
+<div class="unit" id="nor5">
+	<p class="math">Nilai-\(P\) untuk uji baku pada <a href="#nor2" class="ref"></a> berturut-turut adalah</p>
+	<ol class="sub">
+		<li>\( 2 \left[1 - \Phi\left(\left|Z\right|\right)\right]\)</li>
+		<li>\( 1 - \Phi(Z) \)</li>
+		<li>\( \Phi(Z) \)</li>
+	</ol>
+</div>
+
+<p>Ingat bahwa <dfn>fungsi kuasa</dfn> suatu uji parameter adalah peluang menolak hipotesis nol sebagai fungsi nilai parameter yang sebenarnya. Rangkaian hasil berikut menelaah fungsi kuasa uji pada <a href="#nor4" class="ref"></a>.</p>
+
+<div class="unit" id="nor6">
+	<p class="math">Fungsi kuasa uji dua sisi umum pada <a href="#nor4" class="ref"></a> adalah
+	\[ Q(\mu) = \Phi \left( z(\alpha - p \alpha) - \frac{\sqrt{n}}{\sigma} (\mu - \mu_0) \right) + \Phi \left( \frac{\sqrt{n}}{\sigma} (\mu - \mu_0) - z(1 - p \alpha) \right), \quad \mu \in \R \]</p>
+	<ol class="sub">
+		<li>\(Q\) menurun pada \((-\infty, m_0)\) dan meningkat pada \((m_0, \infty)\), dengan \(m_0 = \mu_0 + \left[z(\alpha - p \alpha) + z(1 - p \alpha)\right] \frac{\sigma}{2 \sqrt{n}}\).</li>
+		<li>\(Q(\mu_0) = \alpha\).</li>
+		<li>\(Q(\mu) \to 1\) ketika \(\mu \uparrow \infty\) dan \(Q(\mu) \to 1\) ketika \(\mu \downarrow -\infty\).</li>
+		<li>Jika \(p = \frac{1}{2}\), maka \(Q\) simetris terhadap \(\mu_0\) (dan \( m_0 = \mu_0 \)).</li>
+		<li>Ketika \(p\) meningkat, \(Q(\mu)\) meningkat jika \(\mu \gt \mu_0\) dan menurun jika \(\mu \lt \mu_0\).</li>
+	</ol>
+</div>
+
+<p>Jadi, dengan mengubah \( p \), kita dapat menaikkan kuasa uji pada sebagian nilai \( \mu \), tetapi hanya dengan mengorbankan kuasa pada nilai \( \mu \) lainnya.</p>
+
+<div class="unit" id="nor7">
+		<p class="math">Fungsi kuasa uji sisi kiri pada <a href="#nor4" class="ref"></a> adalah
+		\[ Q(\mu) = \Phi \left( z(\alpha) - \frac{\sqrt{n}}{\sigma}(\mu - \mu_0) \right), \quad \mu \in \R \]</p>
+		<ol class="sub">
+			<li>\(Q\) menurun pada \(\R\).</li>
+			<li>\(Q(\mu_0) = \alpha\).</li>
+			<li>\(Q(\mu) \to 0\) ketika \(\mu \uparrow \infty\) dan \(Q(\mu) \to 1\) ketika \(\mu \downarrow -\infty\).</li>
+		</ol>
+</div>
+
+<div class="unit" id="nor8">
+	<p class="math">Fungsi kuasa uji sisi kanan pada <a href="#nor4" class="ref"></a> adalah
+	\[ Q(\mu) = \Phi \left( z(\alpha) + \frac{\sqrt{n}}{\sigma}(\mu - \mu_0) \right), \quad \mu \in \R \]</p>
+	<ol class="sub">
+		<li>\(Q\) meningkat pada \(\R\).</li>
+		<li>\(Q(\mu_0) = \alpha\).</li>
+		<li>\(Q(\mu) \to 1\) ketika \(\mu \uparrow \infty\) dan \(Q(\mu) \to 0\) ketika \(\mu \downarrow -\infty\).</li>
+	</ol>
+</div>
+
+<div class="unit" id="nor9">
+	<p class="math">Untuk setiap uji satu sisi, memperbesar ukuran sampel \(n\) atau memperkecil simpangan baku \(\sigma\) menaikkan kuasa di seluruh arah alternatif yang bersesuaian. Hal yang sama berlaku bagi uji dua sisi simetris pada setiap nilai alternatif; untuk pembagian ekor asimetris umum pada <a href="#nor4" class="ref"></a>, kenaikan kuasa tidak harus seragam pada kedua sisi.</p>
+</div>
+
+<div class="unit" id="nor10">
+	<p class="app">Dalam <a href="https://www.randomservices.org/random/apps/MeanTest.html" class="ancillary">eksperimen uji rata-rata</a>, pilih statistik uji normal dan distribusi asal sampel normal dengan simpangan baku \(\sigma = 2\), ukuran sampel \(n = 20\), serta \(\mu_0 = 0\). Jalankan eksperimen 1.000 kali untuk beberapa nilai rata-rata distribusi sebenarnya \(\mu\). Untuk setiap nilai \(\mu\), perhatikan distribusi nilai-\(P\).</p>
+</div>
+
+<div class="unit" id="nor11">
+	<p class="app">Dalam <a href="https://www.randomservices.org/random/apps/MeanEstimate.html" class="ancillary">eksperimen pendugaan rata-rata</a>, pilih variabel pivot normal dan distribusi normal dengan \(\mu = 0\), simpangan baku \(\sigma = 2\), tingkat kepercayaan \(1 - \alpha = 0.90\), serta ukuran sampel \(n = 10\). Untuk setiap dari ketiga jenis interval kepercayaan, jalankan eksperimen 20 kali. Nyatakan hipotesis dan tingkat signifikansi yang bersesuaian; untuk setiap pengulangan, berikan himpunan \(\mu_0\) yang menyebabkan hipotesis nol ditolak.</p>
+</div>
+
+<p>Dalam banyak kasus, langkah pertama adalah <em>merancang</em> eksperimen agar tingkat signifikansinya \(\alpha\) dan agar uji mempunyai kuasa \(\beta\) pada alternatif tertentu \(\mu_1\).</p>
+
+<div class="unit" id="nor12">
+	<p class="math">Untuk salah satu uji satu sisi pada <a href="#nor2" class="ref"></a>, ukuran sampel \(n\) yang diperlukan bagi uji dengan tingkat signifikansi \(\alpha\) dan kuasa \(\beta\) pada alternatif \(\mu_1\)—yang harus berada pada arah alternatif yang diuji—adalah
+	\[ n = \left( \frac{\sigma \left[z(\beta) - z(\alpha)\right]}{\mu_1 - \mu_0} \right)^2 \]</p>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Hasil ini diperoleh dengan menyamakan fungsi kuasa dengan \(\beta\), lalu menyelesaikannya terhadap \(n\). Untuk ukuran sampel aktual, bulatkan ruas kanan ke atas ke bilangan bulat.</p>
+	</details>
+</div>
+
+<div class="unit" id="nor13">
+	<p class="math">Untuk uji dua sisi tak bias, ukuran sampel \(n\) yang diperlukan bagi uji dengan tingkat signifikansi \(\alpha\) dan kuasa \(\beta\) pada alternatif \(\mu_1\) secara hampiran adalah
+	\[ n = \left( \frac{\sigma \left[z(\beta) - z(\alpha / 2)\right]}{\mu_1 - \mu_0} \right)^2 \]</p>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Dalam fungsi kuasa uji dua sisi pada <a href="#nor6" class="ref"></a>, suku kedua dapat diabaikan jika \(\mu_1 \lt \mu_0\), sedangkan suku pertama dapat diabaikan jika \(\mu_1 \gt \mu_0\). Bulatkan hasil ke atas dan periksa kembali kuasa eksak setelah pembulatan karena rumus ini merupakan hampiran.</p>
+	</details>
+</div>
+
+<h4 id="stu">Uji Rata-Rata dengan Simpangan Baku Tidak Diketahui</h4>
+
+<p>Selanjutnya, kita membangun uji bagi \(\mu\) tanpa mengasumsikan bahwa \(\sigma\) diketahui. Dalam penerapan, tentu saja, \( \sigma \) biasanya memang tidak diketahui.</p>
+
+<div class="unit" id="stu1">
+	<p class="math">Untuk nilai hipotesis \( \mu_0 \in \R \), definisikan statistik uji
+	\[ T = \frac{M - \mu_0}{S \big/ \sqrt{n}} \]</p>
+	<ol class="sub">
+		<li>Jika \( \mu = \mu_0 \), statistik \( T \) mempunyai distribusi \( t \) Student dengan \( n - 1 \) derajat kebebasan.</li>
+		<li>Jika \( \mu \ne \mu_0 \), maka \( T \) mempunyai <a href="https://www.randomservices.org/random/special/Student.html#non">distribusi \( t \) nonsentral</a> dengan \( n - 1 \) derajat kebebasan dan parameter nonsentral \( \frac{\mu - \mu_0}{\sigma / \sqrt{n}} \).</li>
+	</ol>
+</div>
+
+<p>Pada kasus (b), grafik fungsi kepadatan peluang \( T \) menyerupai distribusi \( t \) biasa dengan \( n - 1 \) derajat kebebasan, tetapi bukan sekadar translasi; arah pergeseran massanya ditentukan oleh apakah \( \mu \gt \mu_0 \) atau \( \mu \lt \mu_0 \).</p>
+
+<div class="unit" id="stu2">
+	<p class="math">Untuk \( \alpha \in (0, 1) \), setiap uji berikut mempunyai tingkat signifikansi \( \alpha \):</p>
+	<ol class="sub">
+		<li>Tolak \( H_0: \mu = \mu_0 \) melawan \( H_1: \mu \ne \mu_0 \) jika dan hanya jika \( T \lt -t_{n-1}(1 - \alpha /2) \) atau \( T \gt t_{n-1}(1 - \alpha / 2) \); secara ekuivalen, jika dan hanya jika \( M \lt \mu_0 - t_{n-1}(1 - \alpha / 2) \frac{S}{\sqrt{n}} \) atau \( M \gt \mu_0 + t_{n-1}(1 - \alpha / 2) \frac{S}{\sqrt{n}} \).</li>
+		<li>Tolak \( H_0: \mu \le \mu_0 \) melawan \( H_1: \mu \gt \mu_0 \) jika dan hanya jika \( T \gt t_{n-1}(1 - \alpha) \); secara ekuivalen, jika dan hanya jika \( M \gt \mu_0 + t_{n-1}(1 - \alpha) \frac{S}{\sqrt{n}} \).</li>
+		<li>Tolak \( H_0: \mu \ge \mu_0 \) melawan \( H_1: \mu \lt \mu_0 \) jika dan hanya jika \( T \lt -t_{n-1}(1 - \alpha) \); secara ekuivalen, jika dan hanya jika \( M \lt \mu_0 - t_{n-1}(1 - \alpha) \frac{S}{\sqrt{n}} \).</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Pada bagian (a), \( T \) mempunyai distribusi t Student dengan \( n - 1 \) derajat kebebasan di bawah \( H_0 \). Karena itu, jika \( H_0 \) benar, peluang menolak \( H_0 \) secara keliru adalah \( \alpha \) menurut definisi kuantil. Pada bagian (b) dan (c), \( T \) mempunyai distribusi \( t \) nonsentral dengan \( n - 1 \) derajat kebebasan di bawah \( H_0 \), sebagaimana pada <a href="#stu1" class="ref"></a>. Jadi, jika \( H_0 \) benar, peluang galat tipe I maksimum sebesar \( \alpha \) terjadi ketika \( \mu = \mu_0 \). Aturan keputusan dalam \( M \) ekuivalen dengan aturan yang bersesuaian dalam \( T \) melalui aljabar sederhana.</p>
+	</details>
+</div>
+
+<p>Bagian (a) adalah uji dua sisi baku, bagian (b) adalah uji sisi kanan, dan bagian (c) adalah uji sisi kiri. Dalam setiap kasus, uji hipotesis tersebut merupakan dual dari dugaan interval yang bersesuaian dalam bagian <a href="../interval/Normal.html">pendugaan pada model normal</a>.</p>
+
+<div class="unit" id="stu3">
+	<p class="math">Untuk setiap uji pada <a href="#stu2" class="ref"></a>, kita <em>gagal</em> menolak \(H_0\) pada tingkat signifikansi \(\alpha\) jika dan hanya jika \(\mu_0\) berada dalam interval kepercayaan \(1 - \alpha\) yang bersesuaian.</p>
+	<ol class="sub">
+		<li>\( M - t_{n-1}(1 - \alpha / 2) \frac{S}{\sqrt{n}} \le \mu_0 \le M + t_{n-1}(1 - \alpha / 2) \frac{S}{\sqrt{n}} \)</li>
+		<li>\( \mu_0 \ge M - t_{n-1}(1 - \alpha) \frac{S}{\sqrt{n}}\)</li>
+		<li>\( \mu_0 \le M + t_{n-1}(1 - \alpha) \frac{S}{\sqrt{n}}\)</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Hasil ini mengikuti <a href="#stu2" class="ref"></a>. Dalam setiap kasus, kita mulai dari pertidaksamaan yang bersesuaian dengan <em>tidak</em> menolak \( H_0 \), lalu menyelesaikannya terhadap \( \mu_0 \).</p>
+	</details>
+</div>
+
+<p>Uji dua sisi pada (a) menempatkan \( \alpha / 2 \) pada setiap ekor distribusi statistik uji \( T \) di bawah \( H_0 \). Uji ini disebut <dfn>tak bias</dfn>. Kita tentu dapat membangun uji bias lain dengan membagi tingkat signifikansi \( \alpha \) secara tidak simetris antara ekor kiri dan kanan.</p>
+
+<div class="unit" id="stu5">
+	<p class="math">Untuk setiap \(\alpha, \, p \in (0, 1)\), uji berikut mempunyai tingkat signifikansi \(\alpha\): tolak \(H_0: \mu = \mu_0\) melawan \(H_1: \mu \ne \mu_0\) jika dan hanya jika \(T \lt t_{n-1}(\alpha - p \alpha)\) atau \(T \ge t_{n-1}(1 - p \alpha)\); secara ekuivalen, jika dan hanya jika \( M \lt \mu_0 + t_{n-1}(\alpha - p \alpha) \frac{S}{\sqrt{n}} \) atau \( M \gt \mu_0 + t_{n-1}(1 - p \alpha) \frac{S}{\sqrt{n}} \).</p>
+	<ol class="sub">
+		<li>\( p = \frac{1}{2} \) menghasilkan uji simetris dan tak bias.</li>
+		<li>\( p \downarrow 0 \) menghasilkan uji sisi kiri.</li>
+		<li>\( p \uparrow 1 \) menghasilkan uji sisi kanan.</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Sekali lagi, \( H_0 \) merupakan hipotesis sederhana dan, di bawah \( H_0 \), statistik uji \( T \) mempunyai distribusi \( t \) Student dengan \( n - 1 \) derajat kebebasan. Karena itu, jika \( H_0 \) benar, peluang menolak \( H_0 \) secara keliru adalah \( \alpha \) menurut definisi kuantil. Bagian (a)&ndash;(c) mengikuti sifat fungsi kuantil.</p>
+	</details>
+</div>
+
+<p>Nilai-\(P\) untuk uji-uji ini dapat dihitung dengan fungsi distribusi \(\Phi_{n-1}\) dari distribusi \(t\) dengan \(n - 1\) derajat kebebasan.</p>
+
+<div class="unit" id="stu6">
+	<p class="math">Nilai-\(P\) untuk uji baku pada <a href="#stu2" class="ref"></a> berturut-turut adalah</p>
+	<ol class="sub">
+		<li>\( 2 \left[1 - \Phi_{n-1}\left(\left|T\right|\right)\right]\)</li>
+		<li>\( 1 - \Phi_{n-1}(T) \)</li>
+		<li>\( \Phi_{n-1}(T) \)</li>
+	</ol>
+</div>
+
+<div class="unit" id="stu7">
+	<p class="app">Dalam <a href="https://www.randomservices.org/random/apps/MeanTest.html" class="ancillary">eksperimen uji rata-rata</a>, pilih statistik uji Student dan distribusi asal sampel normal dengan simpangan baku \(\sigma = 2\), ukuran sampel \(n = 20\), serta \(\mu_0 = 1\). Jalankan eksperimen 1.000 kali untuk beberapa nilai rata-rata distribusi sebenarnya \(\mu\). Untuk setiap nilai \(\mu\), perhatikan distribusi empiris nilai-\(P\).</p>
+</div>
+
+<div class="unit" id="stu8">
+	<p class="app">Dalam <a href="https://www.randomservices.org/random/apps/MeanEstimate.html" class="ancillary">eksperimen pendugaan rata-rata</a>, pilih variabel pivot Student dan distribusi asal sampel normal dengan rata-rata 0 serta simpangan baku 2. Pilih tingkat kepercayaan 0,90 dan ukuran sampel 10. Untuk setiap dari ketiga jenis interval, jalankan eksperimen 20 kali. Nyatakan hipotesis dan tingkat signifikansi yang bersesuaian; untuk setiap pengulangan, berikan himpunan \(\mu_0\) yang menyebabkan hipotesis nol ditolak.</p>
+</div>
+
+<p>Fungsi kuasa uji \( t \) pada <a href="#stu5" class="ref"></a> dapat dihitung secara eksplisit memakai fungsi distribusi \(t\) nonsentral. Secara kualitatif, grafik fungsi kuasanya serupa dengan kasus ketika \(\sigma\) diketahui, yaitu <a href="#nor6" class="ref"></a> (dua sisi), <a href="#nor7" class="ref"></a> (sisi kiri), dan <a href="#nor8" class="ref"></a> (sisi kanan).</p>
+
+<p>Jika batas atas \(\sigma_0\) bagi simpangan baku \(\sigma\) diketahui, dugaan konservatif ukuran sampel yang diperlukan untuk tingkat signifikansi dan kuasa tertentu dapat diperoleh dengan metode variabel pivot normal: <a href="#nor13" class="ref"></a> untuk uji dua sisi dan <a href="#nor12" class="ref"></a> untuk uji satu sisi.</p>
+
+<h4 id="chi">Uji Simpangan Baku</h4>
+
+<p>Selanjutnya, kita membangun uji hipotesis bagi simpangan baku distribusi \( \sigma \). Jadi, \( \sigma \) diasumsikan tidak diketahui dan, hampir selalu, \( \mu \) juga tidak diketahui.</p>
+
+<div class="unit" id="chi1">
+	<p class="math">Untuk nilai hipotesis \( \sigma_0 \in (0, \infty)\), definisikan statistik uji
+	\[ V = \frac{n - 1}{\sigma_0^2} S^2 \]</p>
+	<ol class="sub">
+		<li>Jika \( \sigma = \sigma_0 \), maka \( V \) mempunyai distribusi khi-kuadrat dengan \( n - 1 \) derajat kebebasan.</li>
+		<li>Jika \( \sigma \ne \sigma_0 \), maka \( V \) mempunyai <a href="https://www.randomservices.org/random/special/Gamma.html">distribusi gamma</a> dengan parameter bentuk \( (n - 1) / 2 \) dan parameter skala \( 2 \sigma^2 \big/ \sigma_0^2 \).</li>
+	</ol>
+</div>
+
+<p>Ingat bahwa distribusi khi-kuadrat biasa dengan \( n - 1 \) derajat kebebasan adalah distribusi gamma dengan parameter bentuk \( (n - 1) / 2 \) dan parameter skala \( 2 \). Jadi, pada kasus (b), distribusi khi-kuadrat biasa dikalikan faktor \( \sigma^2 \big/ \sigma_0^2 \). Khususnya, faktor skala itu lebih besar dari 1 jika \( \sigma \gt \sigma_0 \) dan lebih kecil dari 1 jika \( \sigma \lt \sigma_0 \).</p>
+
+<div class="unit" id="chi2">
+	<p class="math">Untuk setiap \(\alpha \in (0, 1)\), uji berikut mempunyai tingkat signifikansi \(\alpha\):</p>
+	<ol class="sub">
+		<li>Tolak \(H_0: \sigma = \sigma_0\) melawan \(H_1: \sigma \ne \sigma_0\) jika dan hanya jika \(V \lt \chi_{n-1}^2(\alpha / 2)\) atau \(V \gt \chi_{n-1}^2(1 - \alpha / 2)\); secara ekuivalen, jika dan hanya jika \( S^2 \lt \chi_{n-1}^2(\alpha / 2) \frac{\sigma_0^2}{n - 1} \) atau \( S^2 \gt \chi_{n-1}^2(1 - \alpha / 2) \frac{\sigma_0^2}{n - 1} \).</li>
+		<li>Tolak \(H_0: \sigma \ge \sigma_0\) melawan \(H_1: \sigma \lt \sigma_0\) jika dan hanya jika \(V \lt \chi_{n-1}^2(\alpha)\); secara ekuivalen, jika dan hanya jika \( S^2 \lt \chi_{n-1}^2(\alpha) \frac{\sigma_0^2}{n - 1} \).</li>
+		<li>Tolak \(H_0: \sigma \le \sigma_0\) melawan \(H_1: \sigma \gt \sigma_0\) jika dan hanya jika \(V \gt \chi_{n-1}^2(1 - \alpha)\); secara ekuivalen, jika dan hanya jika \( S^2 \gt \chi_{n-1}^2(1 - \alpha) \frac{\sigma_0^2}{n - 1} \).</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Logikanya hampir sama dengan uji hipotesis sebelumnya. Pada bagian (a), \( H_0 \) merupakan hipotesis sederhana dan, di bawah \( H_0 \), statistik uji \( V \) mempunyai distribusi khi-kuadrat dengan \( n - 1 \) derajat kebebasan. Jadi, jika \( H_0 \) benar, peluang menolak \( H_0 \) secara keliru adalah \( \alpha \) menurut definisi kuantil. Pada bagian (b) dan (c), \( V \) mempunyai distribusi gamma yang lebih umum di bawah \( H_0 \), seperti dibahas pada <a href="#chi1" class="ref"></a>. Jika \( H_0 \) benar, peluang galat tipe I maksimum sebesar \( \alpha \) terjadi ketika \( \sigma = \sigma_0 \).</p>
+	</details>
+</div>
+
+<p>Bagian (a) adalah uji dua sisi berekor sama yang menempatkan \( \alpha / 2 \) pada setiap ekor distribusi khi-kuadrat statistik uji \( V \) di bawah \( H_0 \); pembagian ekor sama ini tidak dengan sendirinya menjamin uji tak bias. Bagian (b) adalah uji sisi kiri dan bagian (c) uji sisi kanan. Sekali lagi, terdapat dualitas antara uji hipotesis dan dugaan interval yang dibangun dalam bagian <a href="../interval/Normal.html">pendugaan pada model normal</a>.</p>
+
+<div class="unit" id="chi3">
+	<p class="math">Untuk setiap uji pada <a href="#chi2" class="ref"></a>, kita <em>gagal</em> menolak \(H_0\) pada tingkat signifikansi \(\alpha\) jika dan hanya jika \(\sigma_0^2\) berada dalam interval kepercayaan \(1 - \alpha\) yang bersesuaian. Yaitu</p>
+	<ol class="sub">
+		<li>\( \frac{n - 1}{\chi_{n-1}^2(1 - \alpha / 2)} S^2 \le \sigma_0^2 \le \frac{n - 1}{\chi_{n-1}^2(\alpha / 2)} S^2 \)</li>
+		<li>\( \sigma_0^2 \le \frac{n - 1}{\chi_{n-1}^2(\alpha)} S^2 \)</li>
+		<li>\( \sigma_0^2 \ge \frac{n - 1}{\chi_{n-1}^2(1 - \alpha)} S^2 \)</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Hasil ini mengikuti <a href="#chi2" class="ref"></a>. Dalam setiap kasus, kita mulai dari pertidaksamaan yang bersesuaian dengan <em>tidak</em> menolak \( H_0 \), lalu menyelesaikannya terhadap \( \sigma_0^2 \).</p>
+	</details>
+</div>
+
+<p>Seperti sebelumnya, kita dapat membangun uji dua sisi yang lebih umum dengan membagi tingkat signifikansi \( \alpha \) secara sembarang antara ekor kiri dan kanan distribusi khi-kuadrat.</p>
+
+<div class="unit" id="chi4">
+	<p class="math">Untuk setiap \(\alpha, \, p \in (0, 1)\), uji berikut mempunyai tingkat signifikansi \(\alpha\): tolak \(H_0: \sigma = \sigma_0\) melawan \(H_1: \sigma \ne \sigma_0\) jika dan hanya jika \(V \lt \chi_{n-1}^2(\alpha - p \alpha)\) atau \(V \gt \chi_{n-1}^2(1 - p \alpha)\); secara ekuivalen, jika dan hanya jika \( S^2 \lt \chi_{n-1}^2(\alpha - p \alpha) \frac{\sigma_0^2}{n - 1} \) atau \( S^2 \gt \chi_{n-1}^2(1 -  p \alpha) \frac{\sigma_0^2}{n - 1} \).</p>
+	<ol class="sub">
+		<li>\( p = \frac{1}{2} \) menghasilkan uji berekor sama.</li>
+		<li>\( p \downarrow 0 \) menghasilkan uji sisi kiri.</li>
+		<li>\( p \uparrow 1 \) menghasilkan uji sisi kanan.</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Seperti sebelumnya, \( H_0 \) merupakan hipotesis sederhana dan, di bawah \( H_0 \), statistik uji \( V \) mempunyai distribusi khi-kuadrat dengan \( n - 1 \) derajat kebebasan. Jadi, jika \( H_0 \) benar, peluang menolak \( H_0 \) secara keliru adalah \( \alpha \) menurut definisi kuantil. Bagian (a)&ndash;(c) mengikuti sifat fungsi kuantil.</p>
+	</details>
+</div>
+
+<p>Ingat kembali bahwa <dfn>fungsi kuasa</dfn> suatu uji parameter adalah peluang menolak hipotesis nol sebagai fungsi nilai parameter yang sebenarnya. Fungsi kuasa uji bagi \( \sigma \) dapat dinyatakan dengan fungsi distribusi \( G_{n-1} \) dari distribusi khi-kuadrat dengan \( n - 1 \) derajat kebebasan.</p>
+
+<div class="unit" id="chi5">
+	<p class="math">Fungsi kuasa uji dua sisi umum pada <a href="#chi4" class="ref"></a> diberikan oleh rumus berikut dan mempunyai sifat-sifat yang dinyatakan:
+	\[ Q(\sigma) = 1 - G_{n-1} \left( \frac{\sigma_0^2}{\sigma^2} \chi_{n-1}^2(1 - p \, \alpha) \right) + G_{n-1} \left(\frac{\sigma_0^2}{\sigma^2} \chi_{n-1}^2(\alpha - p \, \alpha) \right)\]</p>
+	<ol class="sub">
+		<li>\(Q\) mula-mula menurun lalu meningkat pada \((0, \infty)\); titik minimumnya pada umumnya tidak tepat di \(\sigma_0\).</li>
+		<li>\(Q(\sigma_0) = \alpha\).</li>
+		<li>\(Q(\sigma) \to 1\) ketika \(\sigma \uparrow \infty\) dan \(Q(\sigma) \to 1\) ketika \(\sigma \downarrow 0\).</li>
+	</ol>
+</div>
+
+<div class="unit" id="chi6">
+	<p class="math">Fungsi kuasa uji sisi kanan pada <a href="#chi2" class="ref"></a> diberikan oleh rumus berikut dan mempunyai sifat-sifat yang dinyatakan:
+	\[ Q(\sigma) = 1 - G_{n-1} \left( \frac{\sigma_0^2}{\sigma^2} \chi_{n-1}^2(1 - \alpha) \right) \]</p>
+	<ol class="sub">
+		<li>\(Q\) meningkat pada \((0, \infty)\).</li>
+		<li>\(Q(\sigma_0) = \alpha\).</li>
+		<li>\(Q(\sigma) \to 1\) ketika \(\sigma \uparrow \infty\) dan \(Q(\sigma) \to 0\) ketika \(\sigma \downarrow 0\).</li>
+	</ol>
+</div>
+
+<div class="unit" id="chi7">
+	<p class="math">Fungsi kuasa uji sisi kiri pada <a href="#chi2" class="ref"></a> diberikan oleh rumus berikut dan mempunyai sifat-sifat yang dinyatakan:
+	\[ Q(\sigma) = G_{n-1} \left( \frac{\sigma_0^2}{\sigma^2} \chi_{n-1}^2(\alpha) \right) \]</p>
+	<ol class="sub">
+		<li>\(Q\) menurun pada \((0, \infty)\).</li>
+		<li>\(Q(\sigma_0) =\alpha\).</li>
+		<li>\(Q(\sigma) \to 0\) ketika \(\sigma \uparrow \infty\), sedangkan
+		\(Q(\sigma) \to 1\) ketika \(\sigma \downarrow 0\); jadi, limit pada ujung ini berbeda dari limit pada ujung \(\sigma \uparrow \infty\).</li>
+	</ol>
+</div>
+
+<div class="unit" id="chi8">
+	<p class="app">Dalam <a href="https://www.randomservices.org/random/apps/VarianceTestExperiment.html" class="ancillary">eksperimen uji varians</a>, pilih distribusi normal dengan rata-rata 0, tingkat signifikansi 0,1, ukuran sampel 10, dan simpangan baku hipotesis 1,0. Untuk berbagai nilai simpangan baku sebenarnya, jalankan simulasi 1.000 kali. Catat frekuensi relatif penolakan hipotesis nol dan gambarkan kurva kuasa empiris.</p>
+	<ol class="sub">
+		<li>Uji dua sisi</li>
+		<li>Uji sisi kiri</li>
+		<li>Uji sisi kanan</li>
+	</ol>
+</div>
+
+<div class="unit" id="chi9">
+	<p class="app">Dalam <a href="https://www.randomservices.org/random/apps/VarianceEstimate.html" class="ancillary">eksperimen pendugaan varians</a>, pilih distribusi normal dengan rata-rata 0 dan simpangan baku 2, tingkat kepercayaan 0,90, serta ukuran sampel 10. Jalankan eksperimen 20 kali. Nyatakan hipotesis dan tingkat signifikansi yang bersesuaian; untuk setiap pengulangan, berikan himpunan simpangan baku hipotesis yang menyebabkan hipotesis nol ditolak.</p>
+	<ol class="sub">
+		<li>Interval kepercayaan dua sisi</li>
+		<li>Batas bawah kepercayaan</li>
+		<li>Batas atas kepercayaan</li>
+	</ol>
+</div>
+
+<h3 id="exe">Latihan</h3>
+
+<h4 id="rob">Robustitas</h4>
+
+<p>Asumsi utama kita adalah bahwa distribusi asal sampel bersifat normal. Tentu saja, dalam masalah statistika nyata, kecil kemungkinan kita mengetahui banyak hal tentang distribusi asal sampel, apalagi mengetahui bahwa distribusi itu normal. Jika distribusi asal sebenarnya tidak normal dan ukuran sampel \(n\) cukup besar, distribusi rata-rata sampel masih mendekati normal menurut <a href="../sample/CLT.html">teorema limit pusat</a>, sehingga uji rata-rata \(\mu\) juga dapat berlaku secara hampiran. Sebaliknya, uji varians \(\sigma^2\) kurang robust terhadap penyimpangan dari asumsi normalitas. Latihan berikut menjelajahi gagasan-gagasan ini.</p>
+
+<div class="unit" id="rob1">
+	<p class="app">Dalam <a href="https://www.randomservices.org/random/apps/MeanTest.html" class="ancillary">eksperimen uji rata-rata</a>, pilih <a href="https://www.randomservices.org/random/special/Gamma.html">distribusi gamma</a> dengan parameter bentuk 1 dan parameter skala 1. Untuk ketiga uji, berbagai ukuran sampel, dan berbagai nilai \(\mu_0\), jalankan eksperimen 1.000 kali. Untuk setiap konfigurasi, perhatikan distribusi empiris nilai-\(P\).</p>
+</div>
+
+<div class="unit" id="rob2">
+	<p class="app">Dalam <a href="https://www.randomservices.org/random/apps/MeanTest.html" class="ancillary">eksperimen uji rata-rata</a>, pilih <a href="https://www.randomservices.org/random/dist/Continuous.html">distribusi seragam</a> pada \([0, 4]\). Untuk ketiga uji serta berbagai ukuran sampel dan nilai \(\mu_0\), jalankan eksperimen 1.000 kali. Untuk setiap konfigurasi, perhatikan distribusi empiris nilai-\(P\).</p>
+</div>
+
+<p>Seberapa besar \(n\) harus dipilih agar prosedur pengujian bekerja baik bergantung pada distribusi asal; makin jauh distribusi itu menyimpang dari normalitas—terutama dalam kemencengan dan perilaku ekor—makin besar \(n\) yang mungkin diperlukan. Konvergensi dalam teorema limit pusat sering cukup cepat, tetapi aturan praktis 30 pengamatan bukan jaminan universal; validitas hampiran harus diperiksa untuk distribusi dan tujuan uji yang bersangkutan.</p>
+
+<div class="unit" id="rob3">
+	<p class="app">Dalam <a href="https://www.randomservices.org/random/apps/VarianceTestExperiment.html" class="ancillary">eksperimen uji varians</a>, pilih <a href="https://www.randomservices.org/random/special/Gamma.html">distribusi gamma</a> dengan parameter bentuk 1 dan parameter skala 1. Untuk ketiga uji serta berbagai tingkat signifikansi, ukuran sampel, dan nilai \(\sigma_0\), jalankan eksperimen 1.000 kali. Untuk setiap konfigurasi, catat frekuensi relatif penolakan \(H_0\). Ketika \(H_0\) benar, bandingkan frekuensi relatif itu dengan tingkat signifikansi.</p>
+</div>
+
+<div class="unit" id="rob4">
+	<p class="app">Dalam <a href="https://www.randomservices.org/random/apps/VarianceTestExperiment.html" class="ancillary">eksperimen uji varians</a>, pilih <a href="https://www.randomservices.org/random/dist/Continuous.html">distribusi seragam</a> pada \([0, 4]\). Untuk ketiga uji serta berbagai tingkat signifikansi, ukuran sampel, dan nilai \(\sigma_0\), jalankan eksperimen 1.000 kali. Untuk setiap konfigurasi, catat frekuensi relatif penolakan \(H_0\). Ketika \(H_0\) benar, bandingkan frekuensi relatif itu dengan tingkat signifikansi.</p>
+</div>
+
+<h4 id="com">Latihan Komputasi</h4>
+
+<div class="unit" id="com1">
+	<p class="math">Panjang suatu komponen hasil pemesinan seharusnya 10 sentimeter. Karena proses produksi tidak sempurna, panjang sebenarnya merupakan variabel acak. Simpangan baku disebabkan oleh faktor inheren dalam proses yang relatif stabil sepanjang waktu. Dari data historis, simpangan baku diketahui dengan ketelitian tinggi sebesar 0,3. Sebaliknya, rata-rata dapat diatur dengan menyesuaikan berbagai parameter proses sehingga cukup sering berubah ke nilai yang tidak diketahui. Kita ingin menguji \(H_0: \mu = 10\) melawan \(H_1: \mu \ne 10\).</p>
+	<ol class="sub">
+		<li>Andaikan sampel 100 komponen mempunyai rata-rata 10,1. Lakukan uji pada tingkat signifikansi 0,1.</li>
+		<li>Hitung nilai-\(P\) untuk data pada (a).</li>
+		<li>Hitung kuasa uji pada (a) ketika \(\mu = 10.05\).</li>
+		<li>Hitung hampiran ukuran sampel yang diperlukan untuk tingkat signifikansi 0,1 dan kuasa 0,8 ketika \(\mu = 10.05\).</li>
+	</ol>
+	<details>
+	<summary>Rincian:</summary>
+	<ol class="sub">
+		<li>Statistik uji 3,333, nilai kritis \(\pm 1.645\). Tolak \(H_0\).</li>
+		<li>\(P \approx 0.0009\)</li>
+		<li>Kuasa uji pada 10,05 kira-kira 0,5092.</li>
+		<li>Ukuran sampel 223.</li>
+	</ol>
+	</details>
+</div>
+
+<div class="unit" id="com2">
+	<p class="math">Sekantong keripik kentang merek tertentu diiklankan mempunyai berat 250 gram. Berat sebenarnya (dalam gram) merupakan variabel acak. Andaikan sampel 75 kantong mempunyai rata-rata 248 dan simpangan baku 5. Pada tingkat signifikansi 0,05, lakukan uji berikut:</p>
+	<ol class="sub">
+		<li>\(H_0: \mu \ge 250\) melawan \(H_1: \mu \lt 250\)</li>
+		<li>\(H_0: \sigma \ge 7\) melawan \(H_1: \sigma \lt 7\)</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<ol class="sub">
+			<li>Statistik uji \(-3.464\), nilai kritis \(-1.665\). Tolak \(H_0\).</li>
+			<li>\(P \approx 0.00015\), sehingga tolak \(H_0\).</li>
+		</ol>
+	</details>
+</div>
+
+<div class="unit" id="com3">
+	<p class="math">Pada sebuah perusahaan pemasaran jarak jauh, durasi panggilan penawaran melalui telepon (dalam detik) merupakan variabel acak. Sampel 50 panggilan mempunyai rata-rata 310 dan simpangan baku 25. Pada tingkat signifikansi 0,1, dapatkah kita menyimpulkan bahwa</p>
+	<ol class="sub">
+		<li>\(\mu \gt 300\)?</li>
+		<li>\(\sigma \gt 20\)?</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<ol class="sub">
+			<li>Statistik uji 2,828, nilai kritis 1,2991. Tolak \(H_0\).</li>
+			<li>\(P = 0.0071\), sehingga tolak \(H_0\).</li>
+		</ol>
+	</details>
+</div>
+
+<div class="unit" id="com4">
+	<p class="math">Di suatu perkebunan, berat buah persik (dalam ounce [oz]) pada saat panen merupakan variabel acak. Sampel 100 buah persik mempunyai rata-rata 8,2 dan simpangan baku 1,0. Pada tingkat signifikansi 0,01, dapatkah kita menyimpulkan bahwa</p>
+	<ol class="sub">
+		<li>\(\mu \gt 8\)?</li>
+		<li>\(\sigma \lt 1.5\)?</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<ol class="sub">
+			<li>Statistik uji 2,0, nilai kritis 2,3646. Gagal menolak \(H_0\).</li>
+			<li>\(P \lt 0.0001\), sehingga tolak \(H_0\).</li>
+		</ol>
+	</details>
+</div>
+
+<div class="unit" id="com5">
+	<p class="math">Upah per jam untuk jenis pekerjaan konstruksi tertentu merupakan variabel acak dengan simpangan baku 1,25. Dalam sampel 25 pekerja, upah rata-ratanya $6,75. Pada tingkat signifikansi 0,01, dapatkah kita menyimpulkan bahwa \(\mu \lt 7.00\)?</p>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Statistik uji \(-1\), nilai kritis \(-2.326\). Gagal menolak \(H_0\).</p>
+	</details>
+</div>
+
+<h4 id="dat">Latihan Analisis Data</h4>
+
+<div class="unit" id="dat1">
+	<p class="stat">Dengan <a href="https://www.randomservices.org/random/data/Michelson.html" class="ancillary">data Michelson</a>, ujilah apakah kecepatan cahaya lebih besar dari 730 (+299000) km/detik pada tingkat signifikansi 0,005.</p>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Statistik uji 15,49, nilai kritis 2,6270. Tolak \(H_0\).</p>
+	</details>
+</div>
+
+<div class="unit" id="dat2">
+	<p class="stat">Dengan <a href="https://www.randomservices.org/random/data/Cavendish.html" class="ancillary">data Cavendish</a>, ujilah apakah massa jenis Bumi kurang dari 5,5 kali massa jenis air pada tingkat signifikansi 0,05.</p>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Statistik uji \(-1.269\), nilai kritis \(-1.7017\). Gagal menolak \(H_0\).</p>
+	</details>
+</div>
+
+<div class="unit" id="dat3">
+	<p class="stat">Dengan <a href="https://www.randomservices.org/random/data/Short.html" class="ancillary">data Short</a>, ujilah apakah paralaks Matahari berbeda dari 9 detik busur pada tingkat signifikansi 0,1.</p>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Statistik uji \(-3.730\), nilai kritis \(\pm 1.6749\). Tolak \(H_0\).</p>
+	</details>
+</div>
+
+<div class="unit" id="dat4">
+	<p class="stat">Dengan <a href="https://www.randomservices.org/random/data/Fisher.html" class="ancillary">data iris Fisher</a>, lakukan uji berikut pada tingkat signifikansi 0,1:</p>
+	<ol class="sub">
+		<li>Rata-rata panjang mahkota iris Setosa berbeda dari 15 mm.</li>
+		<li>Rata-rata panjang mahkota iris Virginica lebih besar dari 52 mm.</li>
+		<li>Rata-rata panjang mahkota iris Versicolor kurang dari 44 mm.</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<ol class="sub">
+			<li>Statistik uji \(-1.563\), nilai kritis \(\pm 1.6766\). Gagal menolak \(H_0\).</li>
+			<li>Statistik uji 4,556, nilai kritis 1,2991. Tolak \(H_0\).</li>
+			<li>Statistik uji \(-1.028\), nilai kritis \(-1.2991\). Gagal menolak \(H_0\).</li>
+		</ol>
+	</details>
+</div>
+
+<footer>
+	<ol class="map">
+		<li class="parent"><a href="https://www.randomservices.org/random/index.html">Random</a></li>
+		<li class="parent"><a href="index.html">8. Pengujian Hipotesis</a></li>
+		<li class="child"><a href="Introduction.html" title="Pendahuluan">1</a></li>
+		<li class="current">2</li>
+		<li class="child"><a href="Bernoulli.html" title="Uji dalam Model Bernoulli">3</a></li>
+		<li class="child"><a href="BivariateNormal.html" title="Uji dalam Model Normal Dua Sampel">4</a></li>
+		<li class="child"><a href="Likelihood.html" title="Uji Rasio Kemungkinan">5</a></li>
+		<li class="child"><a href="ChiSquare.html" title="Uji Khi-Kuadrat">6</a></li>
+		<li class="details"><button type="button" title="Perluas Rincian" onclick="expandDetails(true);"><img src="../icons/Plus.svg" alt="Perluas"></button></li>
+		<li class="details"><button type="button" title="Ciutkan Rincian" onclick="expandDetails(false);"><img src="../icons/Minus.svg" alt="Ciutkan"></button></li>
+	</ol>
+	<ul class="map">
+		<li class="sister"><a href="https://www.randomservices.org/random/apps/index.html" class="ancillary">Aplikasi</a></li>
+		<li class="sister"><a href="https://www.randomservices.org/random/data/index.html" class="ancillary">Himpunan Data</a></li>
+		<li class="child"><a href="https://www.randomservices.org/random/biographies/index.html" class="ancillary">Biografi</a></li>
+	</ul>
+
+	<section class="edition-notice" data-o006-edition-notice="v1">
+		<p><strong>Pemberitahuan edisi.</strong> Terjemahan Bahasa Indonesia ini mengadaptasi <a href="https://www.randomservices.org/random/">Random: Probability, Mathematical Statistics, and Stochastic Processes</a> karya Kyle Siegrist. Perubahan pada halaman ini mencakup penerjemahan, penambahan ID halaman stabil, pengalihan tautan korpus yang telah diterjemahkan ke edisi lokal, pengubahan tautan pelengkap menjadi HTTPS resmi, serta koreksi matematis, rujukan silang, jawaban, parameter, dan ejaan terbatas yang dicatat dalam daftar koreksi edisi.</p>
+		<p>Penerjemahan dan rekayasa edisi dilakukan dengan OpenAI Codex gpt-5.6-sol, Ultra, atas instruksi pengguna. Seluruh kredit bagi sumber, penulis, dan kontributor manusia tetap dipertahankan.</p>
+		<p>Situs asal menyatakan <a href="https://creativecommons.org/licenses/by/2.0/">CC BY 2.0</a>, sedangkan halaman <a href="https://www.randomservices.org/random/Credits.html">Kredit</a> menautkan <a href="https://creativecommons.org/licenses/by/1.0/">CC BY 1.0</a>; perbedaan ini dipertahankan. Edisi independen ini tidak didukung maupun disahkan oleh Kyle Siegrist atau Random Services. Tautan ke aplikasi, data, dan biografi pihak ketiga tidak menyatakan hak untuk mendistribusikan ulang materi tersebut.</p>
+	</section>
+</footer>
+
+<script>getReferences();</script>
+
+</body>
+</html>

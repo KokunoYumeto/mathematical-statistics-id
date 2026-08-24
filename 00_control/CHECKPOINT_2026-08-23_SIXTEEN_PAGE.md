@@ -103,7 +103,7 @@ GitHub boundary commit `4677fcf1ef8357de89ae0afd4e640e8076530873`, workflow
 concept `22059763`; all seven files / 88,066,334 bytes match anonymously and
 zero drafts remain. Evidence is
 `ZENODO_PUBLICATION_RECEIPT_2026-08-23_SIXTEEN_PAGE.json` (SHA-256
-`0e42ba66454a0338822d702c28fec51d2130c64a59f15a8b020a903f2a2d83b1`).
+`144f27aef7b2d0ba87289c12893f17047fd66ef9b8d09f7a84380bbb2ff77ec9`).
 
 The existing Figshare article could not be advanced: authenticated preflight
 returned `403 InactiveAccount`, while its public API returned

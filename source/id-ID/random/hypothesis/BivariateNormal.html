@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="id-ID">
+
+<head>
+<meta charset="utf-8">
+	<title>Pengujian pada Model Normal Dua Sampel</title>
+	<meta name="author" content="Kyle Siegrist">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="keywords" content="probabilitas, statistika, uji hipotesis, model normal dua sampel, model normal bivariat, selisih rata-rata, rasio varians, distribusi t Student, distribusi khi-kuadrat, distribusi Fisher F">
+	<link rel="icon" href="../icons/Icon.svg" type="image/svg">
+	<link rel="stylesheet" href="../Screen.css" type="text/css" media="screen">
+	<script src="../Basic.js"></script>
+	<script src="../../MathJax/tex-svg.js" id="MathJax-script" async></script>
+</head>
+
+<body>
+
+<div class="latex">
+	\(\newcommand{\R}{\mathbb{R}}\) 
+	\(\newcommand{\N}{\mathbb{N}}\)
+	\(\newcommand{\Z}{\mathbb{Z}}\)
+	\(\newcommand{\P}{\mathbb{P}}\)
+	\(\newcommand{\E}{\mathbb{E}}\)
+	\(\newcommand{\var}{\text{var}}\)
+	\(\newcommand{\sd}{\text{sd}}\)
+	\(\newcommand{\bs}{\boldsymbol}\)
+	\(\newcommand{\cov}{\text{cov}}\)
+</div>
+
+<header>
+	<ol class="map">
+		<li class="parent"><a href="https://www.randomservices.org/random/index.html">Random</a></li>
+		<li class="parent"><a href="index.html">8. Pengujian Hipotesis</a></li>
+		<li class="child"><a href="Introduction.html" title="Pendahuluan">1</a></li>
+		<li class="child"><a href="Normal.html" title="Pengujian pada Model Normal">2</a></li>
+		<li class="child"><a href="Bernoulli.html" title="Uji dalam Model Bernoulli">3</a></li>
+		<li class="current">4</li>
+		<li class="child"><a href="Likelihood.html" title="Uji Rasio Likelihood">5</a></li>
+		<li class="child"><a href="ChiSquare.html" title="Uji Khi-Kuadrat">6</a></li>
+		<li class="details"><button type="button" title="Perluas Rincian" onclick="expandDetails(true);"><img src="../icons/Plus.svg" alt="Perluas"></button></li>
+		<li class="details"><button type="button" title="Ciutkan Rincian" onclick="expandDetails(false);"><img src="../icons/Minus.svg" alt="Ciutkan"></button></li>
+	</ol>
+	<h2 id="o006.random.hypothesis.bivariate-normal.page">4. Pengujian pada Model Normal Dua Sampel</h2>
+</header>
+
+<p>Dalam bagian ini, kita mempelajari uji hipotesis pada model normal dua sampel dan model normal bivariat. Bagian ini sejajar dengan pembahasan <a href="../interval/BivariateNormal.html">pendugaan pada model normal dua sampel</a> dalam bab <a href="../interval/index.html">pendugaan himpunan</a>.</p>
+
+<h3 id="two">Model Normal Dua Sampel</h3>
+
+<p>Misalkan \(\bs{X} = (X_1, X_2, \ldots, X_m)\) adalah sampel acak berukuran \(m\) dari <a href="https://www.randomservices.org/random/special/Normal.html">distribusi normal</a> dengan <a href="https://www.randomservices.org/random/expect/Properties.html">rata-rata</a> \(\mu\) dan simpangan baku \(\sigma\), sedangkan \(\bs{Y} = (Y_1, Y_2, \ldots, Y_n)\) adalah sampel acak berukuran \(n\) dari distribusi normal dengan rata-rata \(\nu\) dan simpangan baku \(\tau\). Selain itu, misalkan sampel \(\bs{X}\) dan \(\bs{Y}\) <a href="https://www.randomservices.org/random/prob/Independence.html">saling bebas</a>.</p>
+
+<p>Situasi ini sering muncul ketika variabel acak menyatakan pengukuran yang diminati pada objek-objek suatu populasi, sedangkan kedua sampel bersesuaian dengan dua perlakuan berbeda. Misalnya, kita mungkin tertarik pada tekanan darah suatu populasi pasien. Vektor \(\bs{X}\) mencatat tekanan darah sampel kontrol, sedangkan vektor \(\bs{Y}\) mencatat tekanan darah sampel yang menerima obat baru. Demikian pula, kita mungkin tertarik pada hasil panen jagung per ekar. Vektor \(\bs{X}\) mencatat hasil sampel yang menerima satu jenis pupuk, sedangkan vektor \(\bs{Y}\) mencatat hasil sampel yang menerima jenis pupuk lain.</p>
+
+<p>Biasanya perhatian kita tertuju pada perbandingan parameter kedua distribusi asal sampel, baik rata-rata maupun variansnya. Dalam bagian ini, kita membangun uji bagi selisih rata-rata dan rasio varians. Seperti pada masalah pendugaan sebelumnya, prosedurnya bergantung pada parameter mana yang diketahui. Unsur utama konstruksi uji adalah <a href="../sample/Mean.html">rata-rata sampel</a>, <a href="../sample/Variance.html">varians sampel</a>, dan <a href="../sample/Normal.html">sifat khusus</a> statistik tersebut ketika distribusi asal sampelnya normal.</p>
+
+<div class="unit" id="dfn1">
+	<p class="dfn">Kita menggunakan notasi berikut bagi rata-rata sampel dan varians sampel dari sampel generik \(\bs{U} = (U_1, U_2, \ldots, U_k)\):
+	\[ M(\bs{U}) = \frac{1}{k} \sum_{i=1}^k U_i, \quad S^2(\bs{U}) = \frac{1}{k - 1} \sum_{i=1}^k [U_i - M(\bs{U})]^2 \]</p>
+</div>
+
+<h4 id="nor">Uji Selisih Rata-Rata dengan Simpangan Baku Diketahui</h4>
+
+<p>Pertama, kita menelaah uji bagi selisih rata-rata \(\nu - \mu\) dengan asumsi simpangan baku \(\sigma\) dan \(\tau\) diketahui. Asumsi ini sering, tetapi tidak selalu, kurang realistis. Dalam sebagian masalah statistika, varians stabil sehingga setidaknya diketahui secara hampiran, sedangkan rata-rata dapat berbeda akibat perlakuan yang berbeda. Kasus ini juga merupakan titik awal yang baik karena analisisnya relatif mudah.</p>
+
+<div class="unit" id="nor1">
+	<p class="math">Untuk nilai hipotesis selisih rata-rata \( \delta \in \R \), definisikan statistik uji
+	\[ Z = \frac{[M(\bs{Y}) - M(\bs{X})] - \delta}{\sqrt{\sigma^2 / m + \tau^2 / n}} \]</p>
+	<ol class="sub">
+		<li>Jika \( \nu - \mu = \delta \), maka \( Z \) mempunyai distribusi normal baku.</li>
+		<li>Jika \( \nu - \mu \ne \delta \), maka \(Z\) mempunyai distribusi normal dengan rata-rata \([(\nu - \mu) - \delta] \big/ {\sqrt{\sigma^2 / m + \tau^2 / n}}\) dan varians 1.</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Dari sifat sampel normal, \( M(\bs{X}) \) mempunyai distribusi normal dengan rata-rata \( \mu \) dan varians \( \sigma^2 / m \); demikian pula, \( M(\bs{Y}) \) mempunyai distribusi normal dengan rata-rata \( \nu \) dan varians \( \tau^2 / n \). Karena kedua sampel saling bebas, \( M(\bs{X}) \) dan \( M(\bs{Y}) \) saling bebas. Jadi, \( M(\bs{Y}) - M(\bs{X}) \) mempunyai distribusi normal dengan rata-rata \( \nu - \mu \) dan varians \( \sigma^2 / m + \tau^2 / n \). Hasil akhir mengikuti karena \( Z \) merupakan fungsi linear dari \( M(\bs{Y}) - M(\bs{X}) \).</p>
+	</details>
+</div>
+
+<p>Bagian (b) sebenarnya mencakup bagian (a), tetapi keduanya dipisahkan karena memainkan peran penting yang berbeda dalam uji hipotesis. Pada bagian (b), rata-rata yang tidak nol dapat dipandang sebagai <dfn>parameter nonsentral</dfn>.</p>
+
+<p>Seperti biasa, untuk \(p \in (0, 1)\), misalkan \(z(p)\) menyatakan <a href="https://www.randomservices.org/random/dist/CDF.html#qnt">kuantil</a> berorde \(p\) dari distribusi normal baku. Untuk nilai \(p\) tertentu, \(z(p)\) dapat diperoleh dari <a href="https://www.randomservices.org/random/apps/QuantileApp.html" class="ancillary">aplikasi kuantil</a> atau sebagian besar paket perangkat lunak statistika. Ingat pula bahwa, berdasarkan simetri, \(z(1 - p) = -z(p)\).</p>
+
+<div class="unit" id="nor2">
+	<p class="math">Untuk setiap \( \alpha \in (0, 1) \), uji berikut mempunyai tingkat signifikansi \(\alpha\):</p>
+	<ol class="sub">
+		<li>Tolak \(H_0: \nu - \mu = \delta\) melawan \(H_1: \nu - \mu \ne \delta\) jika dan hanya jika \(Z \lt -z(1 - \alpha / 2)\) atau \(Z \gt z(1 - \alpha / 2)\); secara ekuivalen, jika dan hanya jika \( M(\bs{Y}) - M(\bs{X}) \gt \delta + z(1 - \alpha / 2) \sqrt{\sigma^2 / m + \tau^2 / n} \) atau \( M(\bs{Y}) - M(\bs{X}) \lt \delta - z(1 - \alpha / 2) \sqrt{\sigma^2 / m + \tau^2 / n} \).</li>
+		<li>Tolak \(H_0: \nu - \mu \ge \delta\) melawan \(H_1: \nu - \mu \lt \delta\) jika dan hanya jika \(Z \lt -z(1 - \alpha)\); secara ekuivalen, jika dan hanya jika \( M(\bs{Y}) - M(\bs{X}) \lt \delta - z(1 - \alpha) \sqrt{\sigma^2 / m + \tau^2 / n} \).</li>
+		<li>Tolak \(H_0: \nu - \mu \le \delta\) melawan \(H_1: \nu - \mu \gt \delta\) jika dan hanya jika \(Z \gt z( 1 - \alpha)\); secara ekuivalen, jika dan hanya jika \( M(\bs{Y}) - M(\bs{X}) \gt \delta + z(1 - \alpha) \sqrt{\sigma^2 / m + \tau^2 / n} \).</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Logikanya sama dengan yang telah kita gunakan. Pada bagian (a), \( H_0 \) merupakan hipotesis sederhana dan, di bawah hipotesis ini, \( Z \) mempunyai distribusi normal baku. Karena itu, jika \( H_0 \) benar, peluang menolak \( H_0 \) secara keliru adalah \( \alpha \) menurut definisi kuantil. Pada bagian (b) dan (c), \( H_0 \) menentukan suatu rentang nilai \( \nu - \mu \) dan, di bawah \( H_0 \), \( Z \) mempunyai distribusi normal tak baku menurut <a href="#nor1" class="ref"></a>. Peluang galat tipe I terbesar adalah \( \alpha \) dan terjadi ketika \( \nu - \mu = \delta \). Aturan keputusan dalam \( M(\bs{Y}) - M(\bs{X}) \) ekuivalen dengan aturan dalam \( Z \) melalui aljabar sederhana.</p>
+	</details>
+</div>
+
+<div class="unit" id="nor3">
+	<p class="math">Untuk setiap uji di atas, kita <em>gagal</em> menolak \(H_0\) pada tingkat signifikansi \(\alpha\) jika dan hanya jika \(\delta\) berada dalam interval kepercayaan bertingkat \(1 - \alpha\) yang bersesuaian.</p>
+	<ol class="sub">
+		<li>\( [M(\bs{Y}) - M(\bs{X})] - z(1 - \alpha / 2) \sqrt{\sigma^2 / m + \tau^2 / n} \le \delta \le [M(\bs{Y}) - M(\bs{X})] + z(1 - \alpha / 2) \sqrt{\sigma^2 / m + \tau^2 / n} \)</li>
+		<li>\( \delta \le [M(\bs{Y}) - M(\bs{X})] + z(1 - \alpha) \sqrt{\sigma^2 / m + \tau^2 / n} \)</li>
+		<li>\( \delta \ge [M(\bs{Y}) - M(\bs{X})] - z(1 - \alpha) \sqrt{\sigma^2 / m + \tau^2 / n} \)</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Hasil ini mengikuti <a href="#nor2" class="ref"></a>. Dalam setiap kasus, kita mulai dari pertidaksamaan yang bersesuaian dengan <em>tidak</em> menolak hipotesis nol, lalu menyelesaikannya terhadap \( \delta \).</p>
+	</details>
+</div>
+
+<h4 id="stu">Uji Selisih Rata-Rata dengan Simpangan Baku Tidak Diketahui</h4>
+
+<p>Selanjutnya, kita membangun uji bagi selisih rata-rata \(\nu - \mu\) dengan asumsi yang lebih realistis bahwa simpangan baku \(\sigma\) dan \(\tau\) tidak diketahui. Dalam kasus ini, statistik uji yang sesuai lebih sulit ditemukan, tetapi analisis dapat dilakukan pada kasus khusus ketika kedua simpangan baku sama. Karena itu, kita mengasumsikan \(\sigma = \tau\) dan nilai bersama \(\sigma\) tidak diketahui. Asumsi ini masuk akal apabila terdapat variabilitas inheren pada variabel pengukuran yang tidak berubah meskipun perlakuan berbeda diterapkan pada objek-objek populasi.</p>
+
+<div class="unit" id="stu0">
+	<p class="dfn">Ingat bahwa <dfn>penduga gabungan</dfn> bagi varians bersama \(\sigma^2\) adalah rata-rata tertimbang kedua varians sampel, dengan derajat kebebasan sebagai bobotnya:
+	\[ S^2(\bs{X}, \bs{Y}) = \frac{(m - 1) S^2(\bs{X}) + (n - 1) S^2(\bs{Y})}{m + n - 2} \]
+	Statistik \( S^2(\bs{X}, \bs{Y}) \) merupakan penduga tak bias dan konsisten bagi varians bersama \( \sigma^2 \).</p>
+</div>
+
+<div class="unit" id="stu1">
+	<p class="math">Untuk nilai hipotesis \( \delta \in \R \), definisikan statistik uji
+	\[ T = \frac{[M(\bs{Y}) - M(\bs{X})] - \delta}{S(\bs{X}, \bs{Y}) \sqrt{1 / m + 1 / n}} \]</p>
+	<ol class="sub">
+		<li>Jika \( \nu - \mu = \delta \), maka \( T \) mempunyai <a href="https://www.randomservices.org/random/special/Student.html">distribusi \(t\) Student</a> dengan \(m + n - 2\) derajat kebebasan.</li>
+		<li>Jika \( \nu - \mu \ne \delta \), maka \( T \) mempunyai <a href="https://www.randomservices.org/random/special/Student.html#non">distribusi \( t \) nonsentral</a> dengan \( m + n - 2 \) derajat kebebasan dan parameter nonsentral
+		\[ \frac{(\nu - \mu) - \delta}{\sigma \sqrt{1/m + 1 /n}} \]</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Bagian (b) sebenarnya mencakup bagian (a), sebab distribusi \( t \) biasa merupakan kasus khusus distribusi \( t \) nonsentral dengan parameter nonsentral 0. Melalui aljabar dasar, \( T \) dapat ditulis sebagai
+		\[ T = \frac{Z + a}{\sqrt{V \big/ (m + n - 2)}}\]
+		dengan \( Z \) sebagai skor baku \( M(\bs{Y}) - M(\bs{X}) \), \( a \) sebagai parameter nonsentral dalam teorema, dan \( V = \frac{m + n - 2}{\sigma^2} S^2(\bs{X}, \bs{Y}) \). Jadi, \( Z \) mempunyai distribusi normal baku, \( V \) mempunyai distribusi khi-kuadrat dengan \( m + n - 2 \) derajat kebebasan, serta \( Z \) dan \( V \) saling bebas. Menurut definisi, \( T \) mempunyai distribusi \( t \) nonsentral dengan \( m + n - 2 \) derajat kebebasan dan parameter nonsentral \( a \).</p>
+	</details>
+</div>
+
+<p>Seperti biasa, untuk \(k \gt 0\) dan \(p \in (0, 1)\), misalkan \(t_k(p)\) menyatakan <a href="https://www.randomservices.org/random/dist/CDF.html#qnt">kuantil</a> berorde \(p\) dari distribusi \(t\) dengan \(k\) derajat kebebasan. Untuk nilai \(k\) dan \(p\) tertentu, \(t_k(p)\) dapat dihitung dengan <a href="https://www.randomservices.org/random/apps/QuantileApp.html" class="ancillary">aplikasi kuantil</a> atau sebagian besar paket perangkat lunak statistika. Ingat pula bahwa, berdasarkan simetri, \(t_k(1 - p) = -t_k(p)\).</p>
+
+<div class="unit" id="stu2">
+	<p class="math">Uji berikut mempunyai tingkat signifikansi \(\alpha\):</p>
+	<ol class="sub">
+		<li>Tolak \(H_0: \nu - \mu = \delta\) melawan \(H_1: \nu - \mu \ne \delta\) jika dan hanya jika \(T \lt -t_{m + n - 2}(1 - \alpha / 2)\) atau \(T \gt t_{m + n - 2}(1 - \alpha / 2)\); secara ekuivalen, jika dan hanya jika \( M(\bs{Y}) - M(\bs{X}) \gt \delta + t_{m+n-2}(1 - \alpha / 2) S(\bs{X}, \bs{Y}) \sqrt{1 / m + 1 / n} \) atau \( M(\bs{Y}) - M(\bs{X}) \lt \delta - t_{m+n-2}(1 - \alpha / 2) S(\bs{X}, \bs{Y}) \sqrt{1 / m + 1 / n} \).</li>
+		<li>Tolak \(H_0: \nu - \mu \ge \delta\) melawan \(H_1: \nu - \mu \lt \delta\) jika dan hanya jika \(T \lt -t_{m+n-2}(1 - \alpha)\); secara ekuivalen, jika dan hanya jika \( M(\bs{Y}) - M(\bs{X}) \lt \delta - t_{m+n-2}(1 - \alpha) S(\bs{X}, \bs{Y}) \sqrt{1 / m + 1 / n} \).</li>
+		<li>Tolak \(H_0: \nu - \mu \le \delta\) melawan \(H_1: \nu - \mu \gt \delta\) jika dan hanya jika \(T \gt t_{m+n-2}(1 - \alpha)\); secara ekuivalen, jika dan hanya jika \( M(\bs{Y}) - M(\bs{X}) \gt \delta + t_{m+n-2}(1 - \alpha) S(\bs{X}, \bs{Y}) \sqrt{1 / m + 1 / n} \).</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Logikanya sama seperti sebelumnya. Pada bagian (a), \( H_0 \) merupakan hipotesis sederhana dan, di bawah hipotesis ini, \( T \) mempunyai distribusi \( t \) dengan \( m + n - 2 \) derajat kebebasan. Karena itu, jika \( H_0 \) benar, peluang menolak \( H_0 \) secara keliru adalah \( \alpha \) menurut definisi kuantil. Pada bagian (b) dan (c), \( H_0 \) menentukan suatu rentang nilai \( \nu - \mu \) dan, di bawah \( H_0 \), \( T \) mempunyai distribusi \( t \) nonsentral menurut <a href="#stu1" class="ref"></a>. Peluang galat tipe I terbesar adalah \( \alpha \) dan terjadi ketika \( \nu - \mu = \delta \). Aturan keputusan dalam \( M(\bs{Y}) - M(\bs{X}) \) ekuivalen dengan aturan dalam \( T \) melalui aljabar sederhana.</p>
+	</details>
+</div>
+
+<div class="unit" id="stu3">
+	<p class="math">Untuk setiap uji di atas, kita gagal menolak \(H_0\) pada tingkat signifikansi \(\alpha\) jika dan hanya jika \(\delta\) berada dalam interval kepercayaan bertingkat \(1 - \alpha\) yang bersesuaian.</p>
+	<ol class="sub">
+		<li>\( [M(\bs{Y}) - M(\bs{X})] - t_{m+n-2}(1 - \alpha / 2) S(\bs{X}, \bs{Y}) \sqrt{1 / m + 1 / n} \le \delta \le [M(\bs{Y}) - M(\bs{X})] + t_{m+n-2}(1 - \alpha / 2) S(\bs{X}, \bs{Y}) \sqrt{1 / m + 1 / n} \)</li>
+		<li>\( \delta \le [M(\bs{Y}) - M(\bs{X})] + t_{m+n-2}(1 - \alpha) S(\bs{X}, \bs{Y}) \sqrt{1 / m + 1 / n} \)</li>
+		<li>\( \delta \ge [M(\bs{Y}) - M(\bs{X})] - t_{m+n-2}(1 - \alpha) S(\bs{X}, \bs{Y}) \sqrt{1 / m + 1 / n} \)</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Hasil ini mengikuti <a href="#stu2" class="ref"></a>. Dalam setiap kasus, kita mulai dari pertidaksamaan yang bersesuaian dengan <em>tidak</em> menolak hipotesis nol, lalu menyelesaikannya terhadap \( \delta \).</p>
+	</details>
+</div>
+
+<h4 id="fsh">Uji Rasio Varians</h4>
+
+<p>Selanjutnya, kita membangun uji bagi rasio varians distribusi \(\tau^2 / \sigma^2\). Asumsi dasarnya adalah bahwa kedua varians dan, tentu saja, kedua rata-rata \(\mu\) serta \(\nu\) tidak diketahui.</p>
+
+<div class="unit" id="fsh1">
+	<p class="math">Untuk nilai hipotesis \( \rho \in (0, \infty) \), definisikan statistik uji
+	\[ F = \frac{S^2(\bs{X})}{S^2(\bs{Y})} \rho \]</p>
+	<ol class="sub">
+		<li>Jika \( \tau^2 / \sigma^2 = \rho \), maka \( F \) mempunyai <a href="https://www.randomservices.org/random/special/Fisher.html">distribusi \(F\)</a> dengan \(m - 1\) derajat kebebasan pada pembilang dan \(n - 1\) derajat kebebasan pada penyebut.</li>
+		<li>Jika \( \tau^2 / \sigma^2 \ne \rho \), maka \( F \) mempunyai distribusi \( F \) terskala dengan \( m - 1 \) derajat kebebasan pada pembilang, \( n - 1 \) derajat kebebasan pada penyebut, dan faktor skala \( \rho \frac{\sigma^2}{\tau^2} \).</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Bagian (b) mencakup bagian (a) ketika \( \rho = \tau^2 / \sigma^2 \), sehingga cukup membuktikan (b). Perhatikan bahwa
+		\[ F = \left(\frac{S^2(\bs{X}) \big/ \sigma^2}{S^2(\bs{Y}) \big/ \tau^2}\right) \rho \frac{\sigma^2}{\tau^2} \]
+		Akan tetapi, \( (m - 1) S^2(\bs{X}) \big/ \sigma^2 \) mempunyai distribusi khi-kuadrat dengan \( m - 1 \) derajat kebebasan, sedangkan \( (n - 1) S^2(\bs{Y}) \big/ \tau^2 \) mempunyai distribusi khi-kuadrat dengan \( n - 1 \) derajat kebebasan; kedua variabel itu saling bebas. Karena rasio pada tampilan di atas menggunakan masing-masing variabel setelah dibagi derajat kebebasannya, rasio tersebut mempunyai distribusi \( F \) dengan \( m - 1 \) derajat kebebasan pada pembilang dan \( n - 1 \) derajat kebebasan pada penyebut.</p>
+	</details>
+</div>
+
+<div class="unit" id="fsh2">
+	<p class="math">Uji berikut mempunyai tingkat signifikansi \( \alpha \); notasi kuantil mengikuti bagian pendugaan yang dirujuk di atas:</p>
+	<ol class="sub">
+		<li>Tolak \(H_0: \tau^2 / \sigma^2 = \rho\) melawan \(H_1: \tau^2 / \sigma^2 \ne \rho\) jika dan hanya jika \(F \gt f_{m-1, n-1}(1 - \alpha / 2)\) atau \(F \lt f_{m-1, n-1}(\alpha / 2 )\).</li>
+		<li>Tolak \(H_0: \tau^2 / \sigma^2 \le \rho\) melawan \(H_1: \tau^2 / \sigma^2 \gt \rho\) jika dan hanya jika \(F \lt f_{m-1, n-1}(\alpha)\).</li>
+		<li>Tolak \(H_0: \tau^2 / \sigma^2 \ge \rho\) melawan \(H_1: \tau^2 / \sigma^2 \lt \rho\) jika dan hanya jika \(F \gt f_{m-1, n-1}(1 - \alpha)\).</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Buktinya menggunakan argumen biasa. Pada bagian (a), \( H_0 \) merupakan hipotesis sederhana dan, di bawah hipotesis ini, \( F \) mempunyai distribusi \( F \) dengan \( m - 1 \) derajat kebebasan pada pembilang dan \( n - 1 \) derajat kebebasan pada penyebut. Karena itu, jika \( H_0 \) benar, peluang menolak \( H_0 \) secara keliru adalah \( \alpha \) menurut definisi kuantil. Pada bagian (b) dan (c), \( H_0 \) menentukan suatu rentang nilai \( \tau^2 / \sigma^2 \) dan, di bawah \( H_0 \), \( F \) mempunyai distribusi \( F \) terskala menurut teorema <a href="#fsh1" class="ref"></a>. Peluang galat tipe I terbesar adalah \( \alpha \) dan terjadi ketika \( \tau^2 / \sigma^2 = \rho \).</p>
+	</details>
+</div>
+
+<div class="unit" id="fsh3">
+	<p class="math">Untuk setiap uji di atas, kita <em>gagal</em> menolak \(H_0\) pada tingkat signifikansi \(\alpha\) jika dan hanya jika \(\rho\) berada dalam interval kepercayaan bertingkat \(1 - \alpha\) yang bersesuaian.</p>
+	<ol class="sub">
+		<li>\( \frac{S^2(\bs{Y})}{S^2(\bs{X})} f_{m-1,n-1}(\alpha / 2) \le \rho \le \frac{S^2(\bs{Y})}{S^2(\bs{X})} f_{m-1,n-1}(1 - \alpha / 2) \)</li>
+		<li>\(\rho \ge \frac{S^2(\bs{Y})}{S^2(\bs{X})} f_{m-1,n-1}(\alpha) \)</li>
+		<li>\( \rho \le \frac{S^2(\bs{Y})}{S^2(\bs{X})} f_{m-1,n-1}(1 - \alpha) \)</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Hasil ini mengikuti <a href="#fsh2" class="ref"></a>. Dalam setiap kasus, kita mulai dari pertidaksamaan yang bersesuaian dengan <em>tidak</em> menolak hipotesis nol, lalu menyelesaikannya terhadap \( \rho \).</p>
+	</details>
+</div>
+
+<h3 id="biv">Pengujian pada Model Normal Bivariat</h3>
+
+<p>Dalam subbagian ini, kita menelaah model yang sepintas mirip dengan model normal dua sampel, tetapi sebenarnya jauh lebih sederhana. Misalkan
+\[ ((X_1, Y_1), (X_2, Y_2), \ldots, (X_n, Y_n)) \]
+merupakan sampel acak berukuran \(n\) dari <a href="https://www.randomservices.org/random/special/MultiNormal.html">distribusi normal bivariat</a> bagi \((X, Y)\), dengan \(\E(X) = \mu\), \(\E(Y) = \nu\), \(\var(X) = \sigma^2\), \(\var(Y) = \tau^2\), dan \(\cov(X, Y) = \delta\).</p>
+
+<p>Jadi, alih-alih <em>sepasang sampel</em>, kita mempunyai <em>sampel pasangan</em>. Perbedaan mendasarnya adalah bahwa, dalam model ini, variabel \( X \) dan \( Y \) diukur pada objek yang <em>sama</em> dari suatu sampel populasi, sedangkan pada model sebelumnya variabel \( X \) dan \( Y \) diukur pada dua sampel berbeda. Model bivariat muncul, misalnya, dalam <dfn>eksperimen sebelum-sesudah</dfn>, ketika suatu pengukuran dicatat pada sampel \(n\) objek sebelum dan sesudah perlakuan. Sebagai contoh, kita dapat mencatat tekanan darah sampel \(n\) pasien sebelum dan sesudah pemberian obat tertentu.</p>
+
+<p>Kita menggunakan notasi biasa bagi rata-rata sampel dan varians sampel dari \(\bs{X} = (X_1, X_2, \ldots, X_n)\) serta \(\bs{Y} = (Y_1, Y_2, \ldots, Y_n)\) pada definisi <a href="#dfn1" class="ref"></a>. Ingat pula bahwa <a href="../sample/Covariance.html">kovarians sampel</a> dari \( (\bs{X}, \bs{Y}) \) adalah
+\[ S(\bs{X}, \bs{Y}) = \frac{1}{n - 1} \sum_{i=1}^n [X_i - M(\bs{X})][Y_i - M(\bs{Y})] \]
+(jangan disamakan dengan penduga gabungan simpangan baku pada definisi <a href="#stu0" class="ref"></a>).</p>
+
+<div class="unit" id="biv1">
+	<p class="math">Barisan selisih \(\bs{Y} - \bs{X} = (Y_1 - X_1, Y_2 - X_2, \ldots, Y_n - X_n)\) merupakan sampel acak berukuran \(n\) dari distribusi \(Y - X\). Distribusi asal sampelnya normal dengan</p>
+	<ol class="sub">
+		<li> \(\E(Y - X) = \nu - \mu\)</li>
+		<li>\(\var(Y - X) = \sigma^2 + \tau^2 - 2 \, \delta\)</li>
+	</ol>
+</div>
+
+<div class="unit" id="biv2">
+	<p class="math">Rata-rata sampel dan varians sampel dari sampel selisih adalah</p>
+	<ol class="sub">
+		<li>\(M(\bs{Y} - \bs{X}) = M(\bs{Y}) - M(\bs{X})\)</li>
+		<li>\(S^2(\bs{Y} - \bs{X}) = S^2(\bs{X}) + S^2(\bs{Y}) - 2 \, S(\bs{X}, \bs{Y})\)</li>
+	</ol>
+</div>
+
+<p>Sampel selisih \(\bs{Y} - \bs{X}\) mengikuti model normal satu variabel. Bagian tentang <a href="Normal.html">pengujian pada model normal</a> dapat digunakan untuk menguji rata-rata distribusi \(\nu - \mu \) dan varians distribusi \(\sigma^2 + \tau^2 - 2  \delta\).</p>
+
+<h3 id="exe">Latihan Komputasi</h3>
+
+<div class="unit" id="exe1">
+	<p class="math">Sebuah obat baru sedang dikembangkan untuk menurunkan kadar zat kimia tertentu dalam darah. Sampel 36 pasien menerima plasebo, sedangkan sampel 49 pasien menerima obat tersebut. Statistiknya (dalam mg) adalah \(m_1 = 87\), \(s_1\ = 4\), \(m_2 = 63\), dan \(s_2 = 6\). Ujilah pernyataan berikut pada tingkat signifikansi 10%:</p>
+	<ol class="sub">
+		<li>\(H_0: \sigma_1 = \sigma_2\) melawan \(H_1: \sigma_1 \ne \sigma_2\).</li>
+		<li>\(H_0: \mu_1 \le \mu_2\) melawan \(H_1: \mu_1 \gt \mu_2\) (dengan asumsi \(\sigma_1 = \sigma_2\)).</li>
+		<li>Berdasarkan (b), apakah obat tersebut efektif?</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<ol class="sub">
+			<li>Statistik uji F = 16/36 ≈ 0,444, nilai kritis 0,585 dan 1,667. Tolak \(H_0\).</li>
+			<li>Statistik uji gabungan sekitar 20,82, nilai kritis sisi kanan \(1.2918\). Tolak \(H_0\).</li>
+			<li>Ya: data memberikan bukti sangat kuat bahwa rata-rata pada kelompok plasebo lebih tinggi, sehingga obat mendukung penurunan kadar zat tersebut. Namun, karena (a) menolak kesamaan varians, analisis terapan sebaiknya mengonfirmasi kesimpulan dengan uji Welch, bukan hanya uji gabungan yang diminta pada (b).</li>
+		</ol>
+	</details>
+</div>
+
+<div class="unit" id="exe2">
+	<p class="math">Sebuah perusahaan mengklaim bahwa suplemen herbal meningkatkan kecerdasan. Sampel 25 orang menjalani tes IQ baku sebelum dan sesudah mengonsumsi suplemen. Statistik sebelum dan sesudahnya adalah \(m_1 = 105\), \(s_1 = 13\), \(m_2 = 110\), \(s_2 = 17\), dan \(s_{1, \, 2} = 190\). Pada tingkat signifikansi 10%, apakah klaim perusahaan itu dapat dipercaya?</p>
+	<details>
+		<summary>Rincian:</summary>
+		<p>Statistik uji berpasangan sekitar 2,831, nilai kritis 1,3178. Tolak \(H_0\).</p>
+	</details>
+</div>
+
+<div class="unit" id="exe3">
+	<p class="stat">Dalam <a href="https://www.randomservices.org/random/data/Iris.html" class="ancillary">data iris Fisher</a>, perhatikan variabel panjang mahkota pada sampel iris Versicolor dan Virginica. Ujilah pernyataan berikut pada tingkat signifikansi 10%:</p>
+	<ol class="sub">
+		<li>\(H_0: \sigma_1 = \sigma_2\) melawan \(H_1: \sigma_1 \ne \sigma_2\).</li>
+		<li>\(H_0: \mu_1 \ge \mu_2\) melawan \(H_1: \mu_1 \lt \mu_2\) (dengan asumsi \(\sigma_1 = \sigma_2\)).</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<ol class="sub">
+			<li>Statistik uji sekitar 0,944, nilai kritis 0,6222 dan 1,6073. Gagal menolak \(H_0\).</li>
+			<li>Statistik uji \(-11.303\), nilai kritis sisi kiri \(-1.2902\). Tolak \(H_0\).</li>
+		</ol>
+	</details>
+</div>
+
+<div class="unit" id="exe4">
+	<p class="math">Sebuah pabrik mempunyai dua mesin yang menghasilkan batang bundar dengan diameter kritis (dalam cm). Sampel 100 batang dari mesin pertama mempunyai rata-rata 10,3 dan simpangan baku 1,2. Sampel 100 batang dari mesin kedua mempunyai rata-rata 9,8 dan simpangan baku 1,6. Ujilah hipotesis berikut pada tingkat signifikansi 10%.</p>
+	<ol class="sub">
+		<li>\(H_0: \sigma_1 = \sigma_2\) melawan \(H_1: \sigma_1 \ne \sigma_2\).</li>
+		<li>\(H_0: \mu_1 = \mu_2\) melawan \(H_1: \mu_1 \ne \mu_2\) (dengan asumsi \(\sigma_1 = \sigma_2\)).</li>
+	</ol>
+	<details>
+		<summary>Rincian:</summary>
+		<ol class="sub">
+			<li>Statistik uji 0,5625, nilai kritis 0,7173 dan 1,3941. Tolak \(H_0\).</li>
+			<li>Statistik uji \(-2.500\), nilai kritis \(\pm 1.6526\). Tolak \(H_0\). Karena (a) menolak kesamaan varians, kesimpulan terapan sebaiknya juga diperiksa dengan uji Welch.</li>
+		</ol>
+	</details>
+</div>
+
+<footer>
+	<ol class="map">
+		<li class="parent"><a href="https://www.randomservices.org/random/index.html">Random</a></li>
+		<li class="parent"><a href="index.html">8. Pengujian Hipotesis</a></li>
+		<li class="child"><a href="Introduction.html" title="Pendahuluan">1</a></li>
+		<li class="child"><a href="Normal.html" title="Pengujian pada Model Normal">2</a></li>
+		<li class="child"><a href="Bernoulli.html" title="Uji dalam Model Bernoulli">3</a></li>
+		<li class="current">4</li>
+		<li class="child"><a href="Likelihood.html" title="Uji Rasio Likelihood">5</a></li>
+		<li class="child"><a href="ChiSquare.html" title="Uji Khi-Kuadrat">6</a></li>
+		<li class="details"><button type="button" title="Perluas Rincian" onclick="expandDetails(true);"><img src="../icons/Plus.svg" alt="Perluas"></button></li>
+		<li class="details"><button type="button" title="Ciutkan Rincian" onclick="expandDetails(false);"><img src="../icons/Minus.svg" alt="Ciutkan"></button></li>
+	</ol>
+	<ul class="map">
+		<li class="sister"><a href="https://www.randomservices.org/random/apps/index.html" class="ancillary">Aplikasi</a></li>
+		<li class="sister"><a href="https://www.randomservices.org/random/data/index.html" class="ancillary">Himpunan Data</a></li>
+		<li class="child"><a href="https://www.randomservices.org/random/biographies/index.html" class="ancillary">Biografi</a></li>
+	</ul>
+
+	<section class="edition-notice" data-o006-edition-notice="v1">
+		<p><strong>Pemberitahuan edisi.</strong> Terjemahan Bahasa Indonesia ini mengadaptasi <a href="https://www.randomservices.org/random/">Random: Probability, Mathematical Statistics, and Stochastic Processes</a> karya Kyle Siegrist. Perubahan pada halaman ini mencakup penerjemahan, penambahan ID halaman stabil, pengalihan tautan korpus yang telah diterjemahkan ke edisi lokal, pengubahan tautan pelengkap menjadi HTTPS resmi, serta koreksi matematis, rujukan silang, jawaban, parameter, dan ejaan terbatas yang dicatat dalam daftar koreksi edisi.</p>
+		<p>Penerjemahan dan rekayasa edisi dilakukan dengan OpenAI Codex gpt-5.6-sol, Ultra, atas instruksi pengguna. Seluruh kredit bagi sumber, penulis, dan kontributor manusia tetap dipertahankan.</p>
+		<p>Situs asal menyatakan <a href="https://creativecommons.org/licenses/by/2.0/">CC BY 2.0</a>, sedangkan halaman <a href="https://www.randomservices.org/random/Credits.html">Kredit</a> menautkan <a href="https://creativecommons.org/licenses/by/1.0/">CC BY 1.0</a>; perbedaan ini dipertahankan. Edisi independen ini tidak didukung maupun disahkan oleh Kyle Siegrist atau Random Services. Tautan ke aplikasi, data, dan biografi pihak ketiga tidak menyatakan hak untuk mendistribusikan ulang materi tersebut.</p>
+	</section>
+</footer>
+
+<script>getReferences();</script>
+
+</body>
+</html>

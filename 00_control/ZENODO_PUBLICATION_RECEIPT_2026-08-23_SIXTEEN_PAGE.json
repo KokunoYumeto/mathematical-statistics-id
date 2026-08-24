@@ -10,6 +10,24 @@
   "public_versions": 4,
   "unsubmitted_drafts": 0,
   "reader_first_html_order_verified": true,
+  "api_file_array_order": [
+    "40_LICENSE.md",
+    "00_statistika-matematis-id-reader-2026.08.23.16.pdf",
+    "30_mathematical-statistics-id-2026.08.23.16-modular-backend.zip",
+    "10_mathematical-statistics-id-2026.08.23.16-reader-html.zip",
+    "SHA256SUMS.txt",
+    "20_mathematical-statistics-id-2026.08.23.16-source-provenance.zip",
+    "50_mathematical-statistics-id-2026.08.23.16-release-manifest.json"
+  ],
+  "reader_disposition": "The public HTML download list presents the 00_ PDF first and Zenodo selects it for the preview/thumbnail; the public API file array has a separate non-reader-first storage order recorded above.",
+  "checksum_manifest_disposition": {
+    "non_self_entries_verified": 6,
+    "self_entry_valid": false,
+    "listed_sha256": "f1f219a8baaf12ea243ea1eb7eb037dc3fe8290289d3a2333f39ab01b965bd81",
+    "actual_sha256": "a431a55b334536090fe0632a247cab85026a4adeec5c74354085326f973d80ba",
+    "cause": "The v16 wrapper inherited the prior generated SHA256SUMS bytes and then included that preimage in a newly generated self-entry. A checksum file cannot reliably checksum its final own contents; future releases must omit the self-entry.",
+    "published_record_immutable": true
+  },
   "public_readback": {
     "method": "credential-free HTTPS API and file downloads",
     "files": [

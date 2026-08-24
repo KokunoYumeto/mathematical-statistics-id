@@ -211,6 +211,7 @@ LOCAL_URLS = {
     "https://www.randomservices.org/random/point/Likelihood.html": "Likelihood.html",
     "https://www.randomservices.org/random/point/Bayes.html": "Bayes.html",
     "https://www.randomservices.org/random/point/Unbiased.html": "Unbiased.html",
+    "https://www.randomservices.org/random/point/Sufficient.html": "Sufficient.html",
     "https://www.randomservices.org/random/sample/index.html": "../sample/index.html",
     "https://www.randomservices.org/random/sample/Introduction.html": "../sample/Introduction.html",
     "https://www.randomservices.org/random/sample/Mean.html": "../sample/Mean.html",
@@ -348,15 +349,15 @@ def main() -> None:
     required_links = (
         'href="index.html"', 'href="Estimators.html"', 'href="Moments.html"',
         'href="Likelihood.html"', 'href="Bayes.html"',
-        'href="https://www.randomservices.org/random/point/Sufficient.html"',
+        'href="Sufficient.html"',
         'href="../sample/Introduction.html"', 'href="../sample/Mean.html"',
         'href="../sample/CLT.html"', 'href="../sample/Variance.html"',
     )
     for link in required_links:
         if link not in text:
             raise RuntimeError(f"required navigation target missing: {link}")
-    if 'href="Sufficient.html"' in text:
-        raise RuntimeError("future Sufficient page was incorrectly routed locally")
+    if 'href="https://www.randomservices.org/random/point/Sufficient.html"' in text:
+        raise RuntimeError("completed Sufficient page was incorrectly routed upstream")
     for phrase in (
         '<html lang="en">', "JavaScript:openAncillary", "Expand Details",
         "Contract Details", ">Details:<", ">Point Estimation<",

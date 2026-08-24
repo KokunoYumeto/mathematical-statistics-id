@@ -1,13 +1,57 @@
 # Current state — O006 / C140 Mathematical Statistics (id-ID)
 
-Updated: 2026-08-23
+Updated: 2026-08-24
 
 ## Status
 
-Edition source admitted; exact authority and component-rights freezes complete; the
-first sixteen contiguous Indonesian pages and the full 29-page machine backend
-are locally verified. Every entity on those sixteen pages is now bound to its target
-path, locale, byte count, and SHA-256. The repository was public before the
+### Authoritative current boundary
+
+The independent Random chapters 5–8 Indonesian edition is now a complete
+29-of-29 local release candidate. Translation, locale-neutral backend, offline
+HTML reader, desktop/mobile browser QA, consolidated PDF, full-raster visual
+review, and deterministic replay gates pass. The reader is 67 files /
+2,962,390 bytes with manifest SHA-256
+`ce25e1505462bbe60cfe35a46844b40d1646baff18dff72a9f3f8bbf376c9887`;
+the backend contains 6,567 entities / 9,035 relations with every document and
+entity bound to id-ID. The accepted PDF is 255 A4 pages / 118,920,837 bytes /
+SHA-256
+`556a589cfdd54c9a7e7b5022976371ce31b68e11f947484bbc40cf7a6849a5bc`.
+All 255 pages were reviewed in 13 contact sheets after correcting the rejected
+candidate's split Variance table; visual-QA receipt SHA-256 is
+`42366aec2a0e9f5be4a6fb4421ea0965ff831ce2f854f5f5100cacac1f8a91ff`.
+All 29 HTML routes pass fresh desktop/mobile rendering with 10,177 MathJax
+containers and zero incomplete images, MathJax errors, console problems,
+page-level overflows, or uncontained wide surfaces; browser receipt SHA-256 is
+`e400173a33e51d04e43b5be4d2528c6ecfe22042c61af2e46dbcee9069e6a786`.
+
+The active cursor is publication: make one narrow final commit/push, verify
+Pages and release `v2026.08.24.29` anonymously, then publish the deterministic
+seven-file package as version `2026.08.24.29` in existing Zenodo concept
+`10.5281/zenodo.22059763` and persist readback receipts. Exact local evidence is
+`CHECKPOINT_2026-08-24_COMPLETE_29_PAGE.md`; `CURRENT_CURSOR.md` is the sole
+compact executable cursor. No upstream communication has been sent.
+
+The chronological material below is retained as historical evidence of earlier
+partial checkpoints. Any statement below that calls ordinal 16 the current
+reader/release boundary is superseded by the authoritative boundary above.
+
+Edition source admitted; exact authority and component-rights freezes complete.
+The working translation is now contiguous and complete through ordinal 29 of
+29. The exact 29-row translation ledger is 18,051 bytes / SHA-256
+`0020120921729c13f003838c99df930d279ab454f40d9d9e63a8b749af7f21a1`;
+the 328-record adverse ledger is 148,245 bytes / SHA-256
+`aeede5b4da0cad80460d845d065cec5eeaff00d3c7d56a00252df8246f86dfc9`.
+The interval batch (17–22) and hypothesis batch (23–29) both pass their bounded
+deterministic gates. The hypothesis receipt is 6,685 bytes / SHA-256
+`4f5b41183acbd23fabd94be5c019f2c5efb8361a6eae20aaf4cb5e754e935c89`.
+The last fully generated, visually inspected, and publicly verified
+reader/backend/PDF checkpoint remains ordinal 16 while the single consolidated
+29-page backend/HTML/PDF/visual/release gate is being executed. Previously
+translated pages changed only where required to point newly admitted chapter
+links at local reader files; all historical public receipts and immutable
+release bytes remain intact. Every entity on the sixteen-page public checkpoint
+is still evidenced by its historical target path, locale, byte count, and
+SHA-256. The repository was public before the
 publishing account was suspended; the repaired
 three- and four-page Pages checkpoints remain historical evidence. The
 five-page boundary through the central limit theorem remains publicly verified.
@@ -684,11 +728,63 @@ four submitted versions / zero drafts. Exact receipts are
 `GITHUB_PUBLICATION_RECEIPT_2026-08-23_SIXTEEN_PAGE.json` and
 `ZENODO_PUBLICATION_RECEIPT_2026-08-23_SIXTEEN_PAGE.json`.
 
+The immutable v16 `SHA256SUMS.txt` correctly identifies the other six release
+files but contains a stale self-hash: listed
+`f1f219a8baaf12ea243ea1eb7eb037dc3fe8290289d3a2333f39ab01b965bd81`,
+actual public SHA-256
+`a431a55b334536090fe0632a247cab85026a4adeec5c74354085326f973d80ba`.
+`O006-ADV-0203` records this packaging defect. Future checksum inventories must
+omit their own final checksum file; the published checkpoint remains immutable.
+
 The attempted Figshare update failed before mutation with authenticated
 `403 InactiveAccount`; credential-free article readback returned
 `404 EntityNotFound`. No duplicate item and no falsely licensed bytes were
 created. `FIGSHARE_PUBLICATION_ATTEMPT_2026-08-23_SIXTEEN_PAGE.json` records
 the exact disposition. No upstream communication has been sent.
+
+## Interval-estimation production batch completed
+
+The corrected cadence preserves the verified sixteen-page public checkpoint
+and completes ordinals 17–22 as one contiguous chapter batch. No per-page PDF,
+browser, GitHub, Zenodo, or Figshare cycle was run. Exact current targets are:
+
+- ordinal 17 `random/interval/index.html`: 10,531 bytes, SHA-256
+  `7f916c20af7b9b3900b7c9b51d83a44a88e8444e1f7c6d26b7b10169e433eeca`;
+- ordinal 18 `random/interval/Introduction.html`: 29,222 bytes, SHA-256
+  `08a909091adb7a04bb1bf65f8a0cfb68c93e8a23ecb0ab9e9af622d751a5737c`,
+  plus target-only `Tails-id.svg`, 2,150 bytes, SHA-256
+  `b218a05a39687f1e5c7bf0a14c1702b49e6ce24129e378ede2bcfa7a9fe2c151`;
+- ordinal 19 `random/interval/Normal.html`: 43,532 bytes, SHA-256
+  `af3bcc48806beca8e1a2f3316ef8575ff5a821ad8859483aed7bc0d6326f38fb`;
+- ordinal 20 `random/interval/Bernoulli.html`: 32,296 bytes, SHA-256
+  `1c89c081968fcbc40b80b6613e2dff3b0a517eed0f5441eb5593c846fa63296e`;
+- ordinal 21 `random/interval/BivariateNormal.html`: 32,937 bytes, SHA-256
+  `81bf90dd372e1b7f0fc9f22e3e4ac467e64e6f27bccc8425552d05791225ba3d`;
+- ordinal 22 `random/interval/Bayes.html`: 26,682 bytes, SHA-256
+  `0206aa5be5b49c8d833845af957358d93a351211a47b52d2bef7175e7a8f3fe3`.
+
+All translated inbound and interval-chapter links are integrated. The bounded
+chapter gate passes 1,592 source elements, 1,593 target-core elements, 1,456
+protected TeX spans, 110 units, 59 disclosures, and 127 checked local links.
+The sole topology delta is the declared restoration of a missing paragraph
+opening on ordinal 21. Receipt `INTERVAL_BATCH_QA_2026-08-23.json` is 4,770
+bytes, SHA-256
+`4bddeb6421610791380a24609e712924b370391d7cf859ed89d67d475fbbe368`.
+
+The translation ledger has 22 contiguous complete rows, 13,072 bytes,
+SHA-256 `2cebf5250cb6b2f5aa86bad2777cd3e4e4c7f8a4c387c1c29e65c16ce15945b1`.
+The adverse ledger has 255 valid contiguous entries through `O006-ADV-0255`,
+116,267 bytes, SHA-256
+`b4d6e52cba879837b6f94ceab3823a51ef026212746c3869bed765d1e7a6fd66`.
+The terminology glossary has 42 rows / 7,334 bytes, SHA-256
+`cd7a10378ea4ce3ec9e9993812f751e475a8661ec6b9ca40a535769769153db7`.
+
+The generated reader and backend intentionally remain at their verified
+ordinal-16 identities. The next executable source is ordinal 23,
+`random/hypothesis/index.html`, authority 8,129 bytes / SHA-256
+`4965a9bfd13b94d932cdd44268b3322078f1e9fce934173c84e170c6a6d6ed1f`.
+Translate ordinals 23–29 contiguously with bounded production checks, then run
+one consolidated complete-edition build/backend/PDF/visual/release gate.
 
 ## Rights boundary
 
@@ -813,11 +909,13 @@ Two complete backend/build/QA check-only sequences reproduced the sixteen-page
 identities. The new 197-page PDF carries the normalized terminology and exact
 provenance.
 
-1. Continue immediately through the remaining 13 source pages, beginning with
-   `random/interval/index.html` (core ordinal 17), while growing the same
-   deterministic reader and stable-ID backend.
-2. Maintain later substantial verified checkpoints as new versions in the
-   same Zenodo concept lineage and as fast-forward GitHub releases.
+1. Continue immediately through the remaining seven source pages, beginning
+   with `random/hypothesis/index.html` (core ordinal 23), as one contiguous
+   hypothesis-testing batch with bounded structural and mathematical checks.
+2. At the complete 29-page boundary, run one consolidated deterministic
+   reader/backend/PDF/visual gate and publish the verified result as the next
+   version in the same Zenodo concept lineage and as a fast-forward GitHub
+   release.
 3. Retry exactly Figshare article `33314784` only after account reactivation;
    do not create a duplicate or attach mixed-rights bytes under CC0.
 4. Keep Penn State reconstruction, the one-page Random completeness donor, and
