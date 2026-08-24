@@ -3,6 +3,7 @@ __pycache__/
 .cache/
 .tmp/
 .publication-work/
+release/
 
 # The complete 205-file evidentiary freeze remains local because a frozen
 # ancillary is not automatically cleared for republication.  The bounded
@@ -11,4 +12,3 @@ __pycache__/
 authority/upstream/**
 authority/component-assets/**
 authority/component-licenses/**
-

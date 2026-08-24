@@ -1,0 +1,717 @@
+{
+  "credential_access": false,
+  "local_scope": {
+    "bounded_raw_files": 131,
+    "complete_scope": "29 of 29 core pages",
+    "reader_bytes": 2962390,
+    "reader_files": 67,
+    "reader_manifest_sha256": "ce25e1505462bbe60cfe35a46844b40d1646baff18dff72a9f3f8bbf376c9887",
+    "release_pdf": {
+      "bytes": 118920837,
+      "checksum_rows": 6,
+      "physical_pages": 255,
+      "sha256": "556a589cfdd54c9a7e7b5022976371ce31b68e11f947484bbc40cf7a6849a5bc"
+    }
+  },
+  "mode": "verify-public",
+  "pages_readback": {
+    "all_size_and_sha256_matches": true,
+    "bytes": 2962390,
+    "files": 67,
+    "manifest_sha256": "ce25e1505462bbe60cfe35a46844b40d1646baff18dff72a9f3f8bbf376c9887",
+    "method": "anonymous HTTPS download of every reader-manifest row",
+    "root_complete_29_of_29_present": true,
+    "root_model_provenance_present": true,
+    "root_source_author_credit_present": true,
+    "url": "https://kokunoyumeto.github.io/mathematical-statistics-id/"
+  },
+  "raw_commit_readback": {
+    "files": [
+      {
+        "bytes": 539,
+        "path": ".gitattributes",
+        "sha256": "33763aad468b6fe1612cdf4bbb4dc48e133c3f942ac8c2b21f4c5ce9716b530b"
+      },
+      {
+        "bytes": 149482,
+        "path": "00_control/ADVERSE_LEDGER.jsonl",
+        "sha256": "e1b7d73ff16fe53552acafa32b15a885bf3c812e4ee8f4ec22830a7850efc277"
+      },
+      {
+        "bytes": 5872,
+        "path": "00_control/C140_CONFIGURED_ARCHITECTURE_2026-08-21.md",
+        "sha256": "318d498dd4e6cc5fe3cc5ed9c1ba713fdabb5fe208d7df16a3a54a9669fcfd0c"
+      },
+      {
+        "bytes": 5794,
+        "path": "00_control/CHECKPOINT_2026-08-24_COMPLETE_29_PAGE.md",
+        "sha256": "f1bf4c70c24ee238a053029baf66aa48d75038b980bca281c444c93bfed54eb0"
+      },
+      {
+        "bytes": 4738,
+        "path": "00_control/CURRENT_CURSOR.md",
+        "sha256": "c718bc4abd76a2f44db7e535d62a56fca2be142824bc106193476d21462552dd"
+      },
+      {
+        "bytes": 54448,
+        "path": "00_control/CURRENT_STATE.md",
+        "sha256": "4660737b8fb3ee0cca7556e810022256af90cf3c7eced60b8c6ff16bb52fd89e"
+      },
+      {
+        "bytes": 8032,
+        "path": "00_control/DECISION_LOG.md",
+        "sha256": "80364011c47f9a3a1e505fc0e82464233dcb9bae6c475e89eb822883b43e3fcb"
+      },
+      {
+        "bytes": 6685,
+        "path": "00_control/HYPOTHESIS_BATCH_QA_2026-08-23.json",
+        "sha256": "42393865dbb724163c97ff3454d66aa5fdd1d01eb3f11f6e1b3d10108c8b8176"
+      },
+      {
+        "bytes": 4770,
+        "path": "00_control/INTERVAL_BATCH_QA_2026-08-23.json",
+        "sha256": "0acbf6422d8325ad104a7e6e664af7eece90e6faa790baffa34c3f01d8c6d1e5"
+      },
+      {
+        "bytes": 2468,
+        "path": "00_control/LIVE_BROWSER_QA_2026-08-24_COMPLETE_29_PAGE.json",
+        "sha256": "e400173a33e51d04e43b5be4d2528c6ecfe22042c61af2e46dbcee9069e6a786"
+      },
+      {
+        "bytes": 1438,
+        "path": "00_control/RIGHTS_AND_COMPONENTS.md",
+        "sha256": "0b23e73e23b28bad42bf769ec16a83a5ce418a64ff851e51565939c3856f1b39"
+      },
+      {
+        "bytes": 3387,
+        "path": "00_control/SOURCE_AUTHORITY.json",
+        "sha256": "3e307d3a09c029ec488fdede9de4ac093e660b2a74001921696db75c4662b936"
+      },
+      {
+        "bytes": 7334,
+        "path": "00_control/TERMINOLOGY_GLOSSARY_ID_ID.csv",
+        "sha256": "cd7a10378ea4ce3ec9e9993812f751e475a8661ec6b9ca40a535769769153db7"
+      },
+      {
+        "bytes": 7011,
+        "path": "00_control/TERMINOLOGY_QA_2026-08-22.md",
+        "sha256": "46ce8b83bcd730e832bdc904c209eae754d5f6e97a95b1ec0f87c842c0bf4832"
+      },
+      {
+        "bytes": 18419,
+        "path": "00_control/TRANSLATION_LEDGER.csv",
+        "sha256": "ea9487f8f7cfc50318902caf878c85e527a4a8c4ec2e4d1f2796d3f4a9f85704"
+      },
+      {
+        "bytes": 4785,
+        "path": "00_control/WORKFLOW.md",
+        "sha256": "c386d3ed9e04a3837915c0346ff753aa45e35655241e2b6a45034cb3f55710ce"
+      },
+      {
+        "bytes": 4260,
+        "path": "authority/component-licenses/cards/adrian-kennard-cards-authority.html",
+        "sha256": "fb59cf861e0661d89af0d5f0a5b98f185881909b739e92c43efba66006fc945e"
+      },
+      {
+        "bytes": 7048,
+        "path": "authority/component-licenses/cc0-1.0/legalcode.txt",
+        "sha256": "a2010f343487d3f7618affe54f789f5487602331c0a8d03f49e9a7c547cf0499"
+      },
+      {
+        "bytes": 753,
+        "path": "authority/component-licenses/FREEZE_RECEIPT.json",
+        "sha256": "55460a73c59f38992c38cfd0e54407cbcb57713c070104b248d040edcab220f6"
+      },
+      {
+        "bytes": 11358,
+        "path": "authority/component-licenses/mathjax-3.1.2/LICENSE.txt",
+        "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+      },
+      {
+        "bytes": 32398,
+        "path": "authority/component-licenses/monty/svg-silh-cc0-authority.html",
+        "sha256": "f7f5f77d6973ca6cad43550be7f2c8729a7ee484d350fff2f20c45e6aca4bd82"
+      },
+      {
+        "bytes": 1330,
+        "path": "authority/component-licenses/URL_MANIFEST.csv",
+        "sha256": "8a06fecb45a9696c8308e268cbbdacb5d3685ab48a2e10f9d2b4d534395cb777"
+      },
+      {
+        "bytes": 358443,
+        "path": "authority/REFERENCE_URL_MANIFEST.csv",
+        "sha256": "ffb82f5cded17f48b40be83f582d908be69f6f2ff1f64a262cb8dd661cd95004"
+      },
+      {
+        "bytes": 2020,
+        "path": "authority/SOURCE_FREEZE_RECEIPT.json",
+        "sha256": "a2acff91b787c87bb7e14925ef854521c582a2ef5735777f967ac2e44b64f232"
+      },
+      {
+        "bytes": 50913,
+        "path": "authority/SOURCE_URL_MANIFEST.csv",
+        "sha256": "d36e0f8bf9fa44a38a7504f9688a08af6787d88ede99298316a3e022b6f799f5"
+      },
+      {
+        "bytes": 23703,
+        "path": "authority/upstream/random/hypothesis/Bernoulli.html",
+        "sha256": "a3691cdf98c1b182bf434ec94479cfea344e1e555c5928ee74555ff09ce0e603"
+      },
+      {
+        "bytes": 26540,
+        "path": "authority/upstream/random/hypothesis/BivariateNormal.html",
+        "sha256": "4a1e7607fc2ca8d18704b5cf8a9edecb5bc45556399ea6bb9ed4965c9d7669f8"
+      },
+      {
+        "bytes": 39651,
+        "path": "authority/upstream/random/hypothesis/ChiSquare.html",
+        "sha256": "379cf5939801c94b251884c0c82f0e6efc7ecce35cec11a645881d7ca9c7a6aa"
+      },
+      {
+        "bytes": 8129,
+        "path": "authority/upstream/random/hypothesis/index.html",
+        "sha256": "4965a9bfd13b94d932cdd44268b3322078f1e9fce934173c84e170c6a6d6ed1f"
+      },
+      {
+        "bytes": 20738,
+        "path": "authority/upstream/random/hypothesis/Introduction.html",
+        "sha256": "fb05a9d71b55ba113e2f71afa052bc059b35f2c5b6946012c19ecbc693faab1a"
+      },
+      {
+        "bytes": 21772,
+        "path": "authority/upstream/random/hypothesis/Likelihood.html",
+        "sha256": "60b047835a3f644cd2317c8ab984b8d41ae7669f53c1d32a79705942670b9b04"
+      },
+      {
+        "bytes": 43435,
+        "path": "authority/upstream/random/hypothesis/Normal.html",
+        "sha256": "fd7bc50171fc51310f41e9132005b66cdbbd31bf507a70a0246394b05a379ab2"
+      },
+      {
+        "bytes": 23436,
+        "path": "authority/upstream/random/interval/Bayes.html",
+        "sha256": "f89dfc9ed4b9475b2cd83b467f19cfbfa6164600f14567f4237fdae9076d1cb7"
+      },
+      {
+        "bytes": 27886,
+        "path": "authority/upstream/random/interval/Bernoulli.html",
+        "sha256": "764f961e4f0db2562a3b1e42a446d3b5b3854cd8dc3468d017ee544f3aa87750"
+      },
+      {
+        "bytes": 30167,
+        "path": "authority/upstream/random/interval/BivariateNormal.html",
+        "sha256": "fde8da8c5d1e7b7d583f9eb47dac719234f1a63072c0333bdb815c117078211a"
+      },
+      {
+        "bytes": 7789,
+        "path": "authority/upstream/random/interval/index.html",
+        "sha256": "85fcad0292636fbae0935ebb775a87b9e4dbdf33692b5e2823b353163d168403"
+      },
+      {
+        "bytes": 24577,
+        "path": "authority/upstream/random/interval/Introduction.html",
+        "sha256": "e5e6cb402c737c1d63a58ef4509975633f9cfa483f8f0afa8860ff9b6dbb4ee3"
+      },
+      {
+        "bytes": 40632,
+        "path": "authority/upstream/random/interval/Normal.html",
+        "sha256": "21c59dd27f38c17148de5af35d53d94a01c51cd4f230c81d75e91173a9917586"
+      },
+      {
+        "bytes": 49645,
+        "path": "authority/upstream/random/point/Bayes.html",
+        "sha256": "96904b1fd4ab905bbffa62bd5cc0d965b3c969e543a983124e968718ed25d550"
+      },
+      {
+        "bytes": 37864,
+        "path": "authority/upstream/random/point/Estimators.html",
+        "sha256": "10914ffca9034209da0111918cfb534d60982bde0bba142a11d61d43114c6e2a"
+      },
+      {
+        "bytes": 8311,
+        "path": "authority/upstream/random/point/index.html",
+        "sha256": "b0e3e9e5f55bfd4ebac0047dafff725628d6a0ca6e638d7a2847095b311d637c"
+      },
+      {
+        "bytes": 49551,
+        "path": "authority/upstream/random/point/Likelihood.html",
+        "sha256": "f8c94e3de84f7a025fd32395169938f37e7fd7958d5a8be9d56b54ed307d6ffd"
+      },
+      {
+        "bytes": 48492,
+        "path": "authority/upstream/random/point/Moments.html",
+        "sha256": "43755b5bee6179fca8d7c1c964e7c6a9bb1a9de6f3916130100c69e666a3194e"
+      },
+      {
+        "bytes": 57507,
+        "path": "authority/upstream/random/point/Sufficient.html",
+        "sha256": "4d7402f2a960ea2b4232e57e4ee5992ac29801b9269f300f17f8e83074d5a0e4"
+      },
+      {
+        "bytes": 28635,
+        "path": "authority/upstream/random/point/Unbiased.html",
+        "sha256": "0d9765c5c7b5b8a54b29fc45c3a435d20e2a9200e027609658345087dedcd531"
+      },
+      {
+        "bytes": 40239,
+        "path": "authority/upstream/random/sample/CLT.html",
+        "sha256": "ee6dc9f8e9feb14f19f96a0206c3289a4aedfc014f5e3dabf79422e1dc29f9e3"
+      },
+      {
+        "bytes": 75623,
+        "path": "authority/upstream/random/sample/Covariance.html",
+        "sha256": "1009a5a6a129ee5592aed6c2b914973ae82bb7e7685c477c4c205dbe47fd7072"
+      },
+      {
+        "bytes": 8952,
+        "path": "authority/upstream/random/sample/index.html",
+        "sha256": "9f7b9a075c430efbae92192e131152c6728f7827dc3dde987ce871ec9d6ae35c"
+      },
+      {
+        "bytes": 31343,
+        "path": "authority/upstream/random/sample/Introduction.html",
+        "sha256": "0af72fbf0202413525cae99e696cfa70014a803d6c5ac7a7dcafd1577742414f"
+      },
+      {
+        "bytes": 30754,
+        "path": "authority/upstream/random/sample/LLN.html",
+        "sha256": "8662dfc55683fa40c79a5d453a450730e2ba151716a20eb61a2db307c33f5e85"
+      },
+      {
+        "bytes": 42746,
+        "path": "authority/upstream/random/sample/Mean.html",
+        "sha256": "e21a3da7773a6f7f925b4cb0c583d5331abb1656fe01ed952c8d42b26f238cab"
+      },
+      {
+        "bytes": 35940,
+        "path": "authority/upstream/random/sample/Normal.html",
+        "sha256": "d9a62017ae3a8488aedac3eceedb15d8b68243ae60894104ab88564ace25ff79"
+      },
+      {
+        "bytes": 63965,
+        "path": "authority/upstream/random/sample/OrderStatistics.html",
+        "sha256": "19ff485c600d4294e888c1b3d05ff7eb9196449f958d3325fd72b416aca56d63"
+      },
+      {
+        "bytes": 55878,
+        "path": "authority/upstream/random/sample/Variance.html",
+        "sha256": "452e2841007fad173229a9bb069a4acdda8e0d0bc6c1632f7239ef585248b0c6"
+      },
+      {
+        "bytes": 30840,
+        "path": "backend/BACKEND_RECEIPT.json",
+        "sha256": "bfa3aabef34574f31c88eb83b641af4b429bd8ad55f50a0c14ecb898ef18baf3"
+      },
+      {
+        "bytes": 10766387,
+        "path": "backend/entities.jsonl",
+        "sha256": "153065119b66897db7cdf94699fa36a58f7cac2294f89669683dbc863b242fdd"
+      },
+      {
+        "bytes": 11897,
+        "path": "backend/entities.schema.json",
+        "sha256": "c4ef6a1f83a3077871db72360e88fd0c54b0080beecda717377a519d4da955ab"
+      },
+      {
+        "bytes": 1182589,
+        "path": "backend/relations.csv",
+        "sha256": "b235f4d4d724c7fe8653dfd06b075b2225cc2d116f3b87d0fda950d47030159a"
+      },
+      {
+        "bytes": 313482,
+        "path": "build/FIRST_UNIT_BUILD_RECEIPT.json",
+        "sha256": "9025eff944aff93122480c8e6dc30d761f6236eaa92eca6edfd953f460487521"
+      },
+      {
+        "bytes": 6646,
+        "path": "build/FIRST_UNIT_MANIFEST.csv",
+        "sha256": "ce25e1505462bbe60cfe35a46844b40d1646baff18dff72a9f3f8bbf376c9887"
+      },
+      {
+        "bytes": 202369,
+        "path": "build/FIRST_UNIT_QA_RECEIPT.json",
+        "sha256": "78b6e99ce044f9c9c9464eb197c2d9530fb1816ca9f9b7d016ff982040067737"
+      },
+      {
+        "bytes": 97300,
+        "path": "build/PDF_READER_RECEIPT.json",
+        "sha256": "7de9ed37c5a4f881f94edaa09d988f239e1e222581c419314171fcc1b095ae50"
+      },
+      {
+        "bytes": 1890,
+        "path": "build/PDF_VISUAL_QA_RECEIPT.json",
+        "sha256": "42366aec2a0e9f5be4a6fb4421ea0965ff831ce2f854f5f5100cacac1f8a91ff"
+      },
+      {
+        "bytes": 2162,
+        "path": "LICENSE.md",
+        "sha256": "1cd59cc44cb5c7cbf1a171d8920f6346b6577b7e2057e059c08258117e56565d"
+      },
+      {
+        "bytes": 3753,
+        "path": "README.md",
+        "sha256": "f40c7d3aeb896b267ddb56bdda3c5785230eef654f376bba15af40fdb04cbf88"
+      },
+      {
+        "bytes": 141,
+        "path": "requirements.txt",
+        "sha256": "e0df41a48d82fd832100be65ff143d241c3ec237f58e19450240b7fdc581804f"
+      },
+      {
+        "bytes": 145823,
+        "path": "scripts/build_first_unit.py",
+        "sha256": "c15dd7d8fc492d401db00d73f43452c92157b7ea6c79ba58cdbc9bc30d77fcde"
+      },
+      {
+        "bytes": 44120,
+        "path": "scripts/build_pdf_reader.py",
+        "sha256": "e06e955a8c87eff0d0fa0af6a826d47723bb23309831a94aeeb0c7cfad35f083"
+      },
+      {
+        "bytes": 17057,
+        "path": "scripts/freeze_component_assets.py",
+        "sha256": "decfde57be74d664fbfea815d0c5f26d6a9760bb63ffa36a0888f4e36dd8cb59"
+      },
+      {
+        "bytes": 16994,
+        "path": "scripts/freeze_random_core.py",
+        "sha256": "0823d0f320216e03befe7d4f1cee41b93abfee81af857ad4afcc3095c5545115"
+      },
+      {
+        "bytes": 68331,
+        "path": "scripts/generate_random_backend.py",
+        "sha256": "a8be1840b424a078754a8d605e39b23e13d80e2f74f006c521ac7e7725ef1bfc"
+      },
+      {
+        "bytes": 51949,
+        "path": "scripts/localize_bayes.py",
+        "sha256": "8638e15f615a2f82cc788ea0b4439ef974d46af3ae7db5a247525b12bacc7b1a"
+      },
+      {
+        "bytes": 81929,
+        "path": "scripts/localize_covariance.py",
+        "sha256": "3370f044075912cb43b8bf45ab9c8d1c170b1f0aaa7395bcb7dc7a42d7417ec5"
+      },
+      {
+        "bytes": 52935,
+        "path": "scripts/localize_estimators.py",
+        "sha256": "9d20d6ebf4f32810e0d3c04b021b04869f825015cbd0e8b70ac34073257d0a93"
+      },
+      {
+        "bytes": 40136,
+        "path": "scripts/localize_hypothesis_bernoulli.py",
+        "sha256": "6956c1430afa7cfede2fea79f3d6c7fbbd8dafa3be288c77ffcc6afdce95d3fc"
+      },
+      {
+        "bytes": 39629,
+        "path": "scripts/localize_hypothesis_bivariate_normal.py",
+        "sha256": "c8a7ccf65a3e18c9ad9f8d7675ed496f2c873441735df4824b666f644f9b469c"
+      },
+      {
+        "bytes": 52601,
+        "path": "scripts/localize_hypothesis_chi_square.py",
+        "sha256": "1157b4176afb4fae6fb91c2c2d96fcc19baa86119a17b454b2af7db06f6df542"
+      },
+      {
+        "bytes": 17403,
+        "path": "scripts/localize_hypothesis_index.py",
+        "sha256": "0bff9e30a41e02d1b9ef5e796c5fd5d6c169fc1b953f9c635bc5ef6ce5e746ab"
+      },
+      {
+        "bytes": 33550,
+        "path": "scripts/localize_hypothesis_introduction.py",
+        "sha256": "32b6644b77a715f5faa0846f88e09c14ffc6514f366da904293aa204616c8225"
+      },
+      {
+        "bytes": 36630,
+        "path": "scripts/localize_hypothesis_likelihood.py",
+        "sha256": "6c0b19079325687d674ce6c2d230df466df2fe1ebf5d7fbc059875e684e66ec4"
+      },
+      {
+        "bytes": 54500,
+        "path": "scripts/localize_hypothesis_normal.py",
+        "sha256": "d3eca8263913978c53b23910b257d280235146ed5953dc20a73de69c9ee906ba"
+      },
+      {
+        "bytes": 38415,
+        "path": "scripts/localize_interval_bayes.py",
+        "sha256": "73708d938e8fde9fbabe28c3415b3f5366bedb9ff86f4a3b4a717bf9b1838b2e"
+      },
+      {
+        "bytes": 43276,
+        "path": "scripts/localize_interval_bernoulli.py",
+        "sha256": "2bcbac0982e65c706a41afb8a3643336369a52decc02e7ea385597a333cf005e"
+      },
+      {
+        "bytes": 40765,
+        "path": "scripts/localize_interval_bivariate_normal.py",
+        "sha256": "9116b87334b5eb0f601b88e6d8e4cf402339a30404287efb717fa1b8aee1f716"
+      },
+      {
+        "bytes": 14170,
+        "path": "scripts/localize_interval_index.py",
+        "sha256": "dbee244febdd8b09749f281aa1a92e218a2f910a57b306673714205016b943ce"
+      },
+      {
+        "bytes": 34891,
+        "path": "scripts/localize_interval_introduction.py",
+        "sha256": "40d07f4aa93d8c7e4bd393b404a4e9eb3a34cec57470c0cc9fdd51b521329b34"
+      },
+      {
+        "bytes": 47904,
+        "path": "scripts/localize_interval_normal.py",
+        "sha256": "bd054fc7c6bdd3c275ad36b980553ff7d876daa0850f05e643cec4d2a9183669"
+      },
+      {
+        "bytes": 57964,
+        "path": "scripts/localize_likelihood.py",
+        "sha256": "3ec5392029d4d2cfe41c31eb2b6d49d887eb3c926af1e20911b067af7ed93d16"
+      },
+      {
+        "bytes": 55593,
+        "path": "scripts/localize_moments.py",
+        "sha256": "f35a98fbd12721e006721a01d7ac72238b461e453fd90d6d3d918bb0f6e2b1aa"
+      },
+      {
+        "bytes": 44338,
+        "path": "scripts/localize_normal.py",
+        "sha256": "9fa8475ed17237c242ed966efe1179168760c140ac44b5106860095148e57829"
+      },
+      {
+        "bytes": 72352,
+        "path": "scripts/localize_order_statistics.py",
+        "sha256": "c53f0e36be13298ad91585612d6abc42acd380f1c9e9d73a4b88399c8f3c7e21"
+      },
+      {
+        "bytes": 14875,
+        "path": "scripts/localize_point_index.py",
+        "sha256": "bc08005f18301ff7cc226dd5fae288411112f5b9fcb328c9e8fc437194aebb85"
+      },
+      {
+        "bytes": 60538,
+        "path": "scripts/localize_sufficient.py",
+        "sha256": "040d8dfd069687d54bc8b40069214018cf2b09448a754177f18c890a387c9b6c"
+      },
+      {
+        "bytes": 35850,
+        "path": "scripts/localize_unbiased.py",
+        "sha256": "02e87cb459f8ae0ace2d0e27ea3eb5d9601628862498e384b6f180521dca4c4c"
+      },
+      {
+        "bytes": 2075,
+        "path": "scripts/make_pdf_contact_sheets.py",
+        "sha256": "8c545057797714df4fc615c2b4854adfb92c15d0a4f959a401d8bc8eb9b885b1"
+      },
+      {
+        "bytes": 31000,
+        "path": "scripts/package_zenodo_complete_v29.py",
+        "sha256": "0986431a519b9f6df68c991fb3c87ad319227270e24e948041dce631ade3f5c0"
+      },
+      {
+        "bytes": 29062,
+        "path": "scripts/publish_zenodo_complete_v29.py",
+        "sha256": "247fe7d8190d0d3be021fcbde96be12e970f7b9706d05b729894edc6e4a160a0"
+      },
+      {
+        "bytes": 143099,
+        "path": "scripts/qa_first_unit.py",
+        "sha256": "2af638075a8dd1afb45c254614957789b4f6ce6c7cff925c65ecb00242c5d680"
+      },
+      {
+        "bytes": 13566,
+        "path": "scripts/qa_pdf_reader.py",
+        "sha256": "30a2a0f9c68db539f81c668d358fa876026309ad0cc0712210cf51b7f2a102f6"
+      },
+      {
+        "bytes": 30711,
+        "path": "scripts/render_pdf_pages.mjs",
+        "sha256": "8ec6f7b229520ab0394c456c4c2d525b42a7074236d8b7d6fcd06e1143b88011"
+      },
+      {
+        "bytes": 19616,
+        "path": "scripts/verify_github_complete_v29.py",
+        "sha256": "29f7e336239911a2d95ae32c77cfc18a9ed4c2754171e7a8d7989a2435831486"
+      },
+      {
+        "bytes": 25254,
+        "path": "source/id-ID/random/hypothesis/Bernoulli.html",
+        "sha256": "168ff2a166b5edb072769ce0f864643c885ee7d21d86fdaa2d5b972d6f8b63b6"
+      },
+      {
+        "bytes": 28967,
+        "path": "source/id-ID/random/hypothesis/BivariateNormal.html",
+        "sha256": "989484b9977c0b4c45fd0d9a92e7395e13afac36d0592b190e8c1e450cbdb371"
+      },
+      {
+        "bytes": 43445,
+        "path": "source/id-ID/random/hypothesis/ChiSquare.html",
+        "sha256": "60d8904caea827a840db04aad5f7f651ab5c6ed78672e8f0c7fcd577604ff24e"
+      },
+      {
+        "bytes": 11004,
+        "path": "source/id-ID/random/hypothesis/index.html",
+        "sha256": "b62fab08942335d949d1215343b940deae14c53d0838546b822f94bc525a1f92"
+      },
+      {
+        "bytes": 22835,
+        "path": "source/id-ID/random/hypothesis/Introduction.html",
+        "sha256": "9f7f70b22feb389a995fc6a672a1205bdb8d1b9be5904d20b393d92cfdf572b6"
+      },
+      {
+        "bytes": 27218,
+        "path": "source/id-ID/random/hypothesis/Likelihood.html",
+        "sha256": "6820733f2c4be519ccf75c4d63f3aad7b3a1dc7c19eb50c14dc150c3a7c4cad1"
+      },
+      {
+        "bytes": 45674,
+        "path": "source/id-ID/random/hypothesis/Normal.html",
+        "sha256": "950c0a21622a7a4fc0619e5dc6880cdfa6925ad6e43fac4013d4e3cffb7ccf14"
+      },
+      {
+        "bytes": 26647,
+        "path": "source/id-ID/random/interval/Bayes.html",
+        "sha256": "b5239a340d36d4c485f308c2ce9c45f92c91b7a97258997b8303083b358239b8"
+      },
+      {
+        "bytes": 32226,
+        "path": "source/id-ID/random/interval/Bernoulli.html",
+        "sha256": "fbc7286cc20c168bd728ffa55aca23d469da995fbc8520a84f908654be9e51b7"
+      },
+      {
+        "bytes": 32867,
+        "path": "source/id-ID/random/interval/BivariateNormal.html",
+        "sha256": "2ba7e95b6ecfb3be8bf55d40a713565e017d08c343c6b15efedce173adbbe0af"
+      },
+      {
+        "bytes": 10426,
+        "path": "source/id-ID/random/interval/index.html",
+        "sha256": "3b63ca86e9f01b14417b52008244a36ba266017b7d9999aa8bf2f21031d7ccc1"
+      },
+      {
+        "bytes": 29222,
+        "path": "source/id-ID/random/interval/Introduction.html",
+        "sha256": "08a909091adb7a04bb1bf65f8a0cfb68c93e8a23ecb0ab9e9af622d751a5737c"
+      },
+      {
+        "bytes": 43462,
+        "path": "source/id-ID/random/interval/Normal.html",
+        "sha256": "9beed9d4ef4f2afbdea26cd50024568045f7fb32aa44052991ba83aedef3502d"
+      },
+      {
+        "bytes": 2150,
+        "path": "source/id-ID/random/interval/Tails-id.svg",
+        "sha256": "b218a05a39687f1e5c7bf0a14c1702b49e6ce24129e378ede2bcfa7a9fe2c151"
+      },
+      {
+        "bytes": 56499,
+        "path": "source/id-ID/random/point/Bayes.html",
+        "sha256": "66c14a5fc64e97f9d09d6dffa32b67f6f3a55479dbb64a6d3a4e6993802b3949"
+      },
+      {
+        "bytes": 44020,
+        "path": "source/id-ID/random/point/Estimators.html",
+        "sha256": "23f6940603401a83919b84a9360ddcf8c6fdc735a3a8649004004b1e2aea66b2"
+      },
+      {
+        "bytes": 10918,
+        "path": "source/id-ID/random/point/index.html",
+        "sha256": "94b1667bcda20460d50bf5a5c0a41e9b251d5cd0aba82215c6aeafa8224ab2a4"
+      },
+      {
+        "bytes": 58031,
+        "path": "source/id-ID/random/point/Likelihood.html",
+        "sha256": "74f6de9f13552a69eba9e8dd9f9331a135b6215bbf68eaa6f2100776044182cd"
+      },
+      {
+        "bytes": 57149,
+        "path": "source/id-ID/random/point/Moments.html",
+        "sha256": "094f2a7873e044eefa74ff8dc10314db7e7fe1692ee0d699f19cc18e25e617bb"
+      },
+      {
+        "bytes": 60895,
+        "path": "source/id-ID/random/point/Sufficient.html",
+        "sha256": "255ac88f235727301ee341eef79b9578910be88b7e2e038d4dfecc0ed686513c"
+      },
+      {
+        "bytes": 31696,
+        "path": "source/id-ID/random/point/Unbiased.html",
+        "sha256": "3c2cfcb97a93cd3ed2fdbb5fab2c7325e568a2b9ea8348fd4193f1f7431c0bfb"
+      },
+      {
+        "bytes": 46158,
+        "path": "source/id-ID/random/sample/CLT.html",
+        "sha256": "a14208c4431c5791e16a89eab6c5ffa6c4d3e5067dfc2a37bab4942a4a32c54a"
+      },
+      {
+        "bytes": 80832,
+        "path": "source/id-ID/random/sample/Covariance.html",
+        "sha256": "4e6fcf5c80bbe47c86d5c691b664d6cdf8166433475dc76e9749a04b57dbdf3c"
+      },
+      {
+        "bytes": 11435,
+        "path": "source/id-ID/random/sample/index.html",
+        "sha256": "f10455daf04ce812f4741c19d4bd77cda3003c3f7ef388563ff1afde37e4803b"
+      },
+      {
+        "bytes": 36255,
+        "path": "source/id-ID/random/sample/Introduction.html",
+        "sha256": "93d024c214562d5c423b5b0af49c9c1ac31617d1dca7cd70e609d531759fda5c"
+      },
+      {
+        "bytes": 34798,
+        "path": "source/id-ID/random/sample/LLN.html",
+        "sha256": "0cdc62ab382ed056df3d779a69fcda2aca37e9a07f53d306df93708d39130b82"
+      },
+      {
+        "bytes": 45916,
+        "path": "source/id-ID/random/sample/Mean.html",
+        "sha256": "bee0af18dda05972b15fa32129aa4fdf8754b7a9ed6f5048f18c35b5f513ab7a"
+      },
+      {
+        "bytes": 38395,
+        "path": "source/id-ID/random/sample/Normal.html",
+        "sha256": "acfba98e96a35fd02d95d224155db7b5c949c22c594199e8bc7997a6917548a0"
+      },
+      {
+        "bytes": 68771,
+        "path": "source/id-ID/random/sample/OrderStatistics.html",
+        "sha256": "f3fc339316b0a4a082ac034f72b54e81b88a6db031574ccdbcb1b02eef260b33"
+      },
+      {
+        "bytes": 59540,
+        "path": "source/id-ID/random/sample/Variance.html",
+        "sha256": "8fe6580df746676dff827cd57b4507941d2c2046c5a417bb4b1b722554910ac4"
+      }
+    ],
+    "method": "anonymous raw.githubusercontent.com exact bounded package inventory"
+  },
+  "release": {
+    "asset": {
+      "anonymous_download_match": true,
+      "bytes": 118920837,
+      "name": "statistika-matematis-id-reader.pdf",
+      "sha256": "556a589cfdd54c9a7e7b5022976371ce31b68e11f947484bbc40cf7a6849a5bc"
+    },
+    "completion_claim": "complete 29 of 29 core pages",
+    "draft": false,
+    "prerelease": false,
+    "tag": "v2026.08.24.29",
+    "tag_commit": "f2aab7b9a0578dd76624e183fc47e3c1faa664e8",
+    "url": "https://github.com/KokunoYumeto/mathematical-statistics-id/releases/tag/v2026.08.24.29"
+  },
+  "repository": {
+    "branch": "main",
+    "commit": "f2aab7b9a0578dd76624e183fc47e3c1faa664e8",
+    "previous_public_commit": "4677fcf1ef8357de89ae0afd4e640e8076530873",
+    "url": "https://github.com/KokunoYumeto/mathematical-statistics-id"
+  },
+  "result": "pass",
+  "schema": "o006.random.github-complete-publication-readback.v1",
+  "version": "2026.08.24.29",
+  "workflow": {
+    "conclusion": "success",
+    "head_sha": "f2aab7b9a0578dd76624e183fc47e3c1faa664e8",
+    "run_id": 32697247434,
+    "url": "https://github.com/KokunoYumeto/mathematical-statistics-id/actions/runs/32697247434"
+  }
+}

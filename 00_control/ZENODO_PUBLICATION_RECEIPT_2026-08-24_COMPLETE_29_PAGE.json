@@ -1,0 +1,99 @@
+{
+  "concept_doi": "10.5281/zenodo.22059763",
+  "concept_record_id": "22059763",
+  "draft_id": "22076539",
+  "draft_reused": true,
+  "local_bytes": 122203013,
+  "local_files": 7,
+  "local_inventory": [
+    {
+      "bytes": 118920837,
+      "name": "00_statistika-matematis-id-reader-2026.08.24.29.pdf",
+      "sha256": "556a589cfdd54c9a7e7b5022976371ce31b68e11f947484bbc40cf7a6849a5bc"
+    },
+    {
+      "bytes": 1059814,
+      "name": "10_mathematical-statistics-id-2026.08.24.29-reader-html.zip",
+      "sha256": "3d3274e7d20b5825b974dfc9baf3cb6cbead806df65d01eb649c918d1d9d87ea"
+    },
+    {
+      "bytes": 1140442,
+      "name": "20_mathematical-statistics-id-2026.08.24.29-source-provenance.zip",
+      "sha256": "0829a73dcb2edc1a4673e4045266405a3d073326eab83dbf7bdbbd584d2cb25f"
+    },
+    {
+      "bytes": 1034463,
+      "name": "30_mathematical-statistics-id-2026.08.24.29-modular-backend.zip",
+      "sha256": "096cd9f2b12e41c96a5c3f14cb45a857a774ff5274fbe53d73792c80cf020412"
+    },
+    {
+      "bytes": 2162,
+      "name": "40_LICENSE.md",
+      "sha256": "1cd59cc44cb5c7cbf1a171d8920f6346b6577b7e2057e059c08258117e56565d"
+    },
+    {
+      "bytes": 44577,
+      "name": "50_mathematical-statistics-id-2026.08.24.29-release-manifest.json",
+      "sha256": "a0b606bd7b8c0453d4e31bea5a27f1c011af6db17d0be36efeaee8d3746e7b58"
+    },
+    {
+      "bytes": 718,
+      "name": "SHA256SUMS.txt",
+      "sha256": "888d4d5c11056482e7b51ae3f2b3e17bd07161e161fa33c1570b9308da7e4b23"
+    }
+  ],
+  "mode": "publish",
+  "public": {
+    "complete_scope": "29 of 29 core pages",
+    "conceptdoi": "10.5281/zenodo.22059763",
+    "doi": "10.5281/zenodo.22076539",
+    "files": [
+      {
+        "bytes": 118920837,
+        "name": "00_statistika-matematis-id-reader-2026.08.24.29.pdf",
+        "sha256": "556a589cfdd54c9a7e7b5022976371ce31b68e11f947484bbc40cf7a6849a5bc"
+      },
+      {
+        "bytes": 1059814,
+        "name": "10_mathematical-statistics-id-2026.08.24.29-reader-html.zip",
+        "sha256": "3d3274e7d20b5825b974dfc9baf3cb6cbead806df65d01eb649c918d1d9d87ea"
+      },
+      {
+        "bytes": 1140442,
+        "name": "20_mathematical-statistics-id-2026.08.24.29-source-provenance.zip",
+        "sha256": "0829a73dcb2edc1a4673e4045266405a3d073326eab83dbf7bdbbd584d2cb25f"
+      },
+      {
+        "bytes": 1034463,
+        "name": "30_mathematical-statistics-id-2026.08.24.29-modular-backend.zip",
+        "sha256": "096cd9f2b12e41c96a5c3f14cb45a857a774ff5274fbe53d73792c80cf020412"
+      },
+      {
+        "bytes": 2162,
+        "name": "40_LICENSE.md",
+        "sha256": "1cd59cc44cb5c7cbf1a171d8920f6346b6577b7e2057e059c08258117e56565d"
+      },
+      {
+        "bytes": 44577,
+        "name": "50_mathematical-statistics-id-2026.08.24.29-release-manifest.json",
+        "sha256": "a0b606bd7b8c0453d4e31bea5a27f1c011af6db17d0be36efeaee8d3746e7b58"
+      },
+      {
+        "bytes": 718,
+        "name": "SHA256SUMS.txt",
+        "sha256": "888d4d5c11056482e7b51ae3f2b3e17bd07161e161fa33c1570b9308da7e4b23"
+      }
+    ],
+    "public_versions": 5,
+    "reader_first_html_verified": true,
+    "record_id": "22076539",
+    "title": "Statistika Matematis — Edisi Bahasa Indonesia (id-ID): Edisi Lengkap Bab 5–8",
+    "url": "https://zenodo.org/records/22076539",
+    "version": "2026.08.24.29"
+  },
+  "schema": "o006.random.zenodo-complete-publication.v1",
+  "submitted_versions": 5,
+  "translation_provenance": "OpenAI Codex gpt-5.6-sol, Ultra",
+  "unsubmitted_drafts": 0,
+  "version": "2026.08.24.29"
+}

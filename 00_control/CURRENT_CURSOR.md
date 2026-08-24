@@ -6,8 +6,9 @@ Updated: 2026-08-24
 
 - Role: O006 / C140 Mathematical Statistics.
 - Locale: `id-ID`.
-- Active component: independent complete Indonesian edition of Kyle
-  Siegrist's *Random*, chapters 5–8.
+- Completed component: independent Indonesian edition of Kyle Siegrist's
+  *Random*, chapters 5–8. It is frozen at the public release boundary below;
+  do not resume its translation loop.
 - Immutable authority manifest: `authority/SOURCE_URL_MANIFEST.csv`, SHA-256
   `d36e0f8bf9fa44a38a7504f9688a08af6787d88ede99298316a3e022b6f799f5`.
 - Frozen authority: 29 core documents / 1,003,900 bytes; 205 files /
@@ -68,27 +69,48 @@ Updated: 2026-08-24
   byte identity above has zero observed visual defects. The HTML reader remains
   accessibility-first because the merged PDF is not tagged.
 
-## Current release cursor
+## Publication boundary — complete
 
-The complete local release gate passes. Canonical checkpoint:
-`CHECKPOINT_2026-08-24_COMPLETE_29_PAGE.md`. The next executable action is one
-narrow final repository commit and push, then clean Pages verification, tag and
-release `v2026.08.24.29` with exactly the reader PDF, anonymous byte readback,
-deterministic seven-file packaging with that exact commit, and publication as
-version `2026.08.24.29` in existing Zenodo concept
-`10.5281/zenodo.22059763`. Do not create a duplicate Zenodo concept, retry
-Figshare, ask for publication confirmation, or contact upstream.
+- Source release commit and tag:
+  `f2aab7b9a0578dd76624e183fc47e3c1faa664e8` /
+  `v2026.08.24.29`.
+- GitHub release:
+  `https://github.com/KokunoYumeto/mathematical-statistics-id/releases/tag/v2026.08.24.29`.
+- Pages: `https://kokunoyumeto.github.io/mathematical-statistics-id/`;
+  workflow run `32697247434` passed at the release commit. Anonymous readback
+  matched all 67 reader files, all 131 bounded raw source/backend files, and
+  the 118,920,837-byte PDF.
+- Zenodo: version `2026.08.24.29`, record `22076539`, DOI
+  `10.5281/zenodo.22076539`, in existing concept
+  `10.5281/zenodo.22059763`. Anonymous readback matched all seven files /
+  122,203,013 bytes and found five public versions and no draft.
+- Canonical publication checkpoint:
+  `CHECKPOINT_2026-08-24_PUBLICATION_COMPLETE.md`. Exact receipts are
+  `GITHUB_PUBLICATION_RECEIPT_2026-08-24_COMPLETE_29_PAGE.json`,
+  `ZENODO_PUBLICATION_RECEIPT_2026-08-24_COMPLETE_29_PAGE.json`, and
+  `ZENODO_PUBLIC_READBACK_2026-08-24_COMPLETE_29_PAGE.json`.
+- No upstream message was sent. Do not create another Random release, retry
+  Figshare, or contact upstream unless a later direct instruction changes that
+  disposition.
 
-After GitHub and Zenodo publication receipts are persisted, this independent
-Random edition is complete. Overall O006/C140 then continues in a separate
-component and repository with complete Penn State STAT 415, exactly the Random
-completeness donor page, and the original rigor/simulation/multiple-regression/
-mastery companion defined in `C140_CONFIGURED_ARCHITECTURE_2026-08-21.md`.
+## Next executable action
+
+Overall O006/C140 remains active. Begin the distinct Penn State STAT 415
+component in a separate path and repository, using the exact 14-document
+authority manifest and component boundary in
+`C140_CONFIGURED_ARCHITECTURE_2026-08-21.md`. First freeze the landing page plus
+Lessons 00–12, anchors, code, figures, direct assets, response metadata, and
+component-specific rights without claiming public QMD source. Establish the
+new component's durable workflow/cursor and normalized semantic source, then
+translate the landing/index plus complete Lesson 00 as the first contiguous
+id-ID reader unit. Keep the exact Random completeness donor and original
+companion separate within that C140 collection.
 
 ## Recovery order
 
-Read `WORKFLOW.md`, this file, `CURRENT_STATE.md`, the complete checkpoint,
-`SOURCE_FREEZE_RECEIPT.json`, the final translation-ledger row, the backend/
-reader/PDF receipts, and the final publication receipts. Never treat historical
-16-page checkpoint text as the current cursor and never run a broad workspace
-or repository scan.
+Read `WORKFLOW.md`, this file, `CURRENT_STATE.md`, the publication-complete
+checkpoint, the final publication receipts, and
+`C140_CONFIGURED_ARCHITECTURE_2026-08-21.md`. The Random source/backend/build
+receipts remain immutable supporting evidence. Never treat historical 16-page
+checkpoint text as the current cursor and never run a broad workspace or
+repository scan.

@@ -280,8 +280,20 @@ def validate_draft_metadata(metadata: object, expected: dict[str, object]) -> No
     ):
         if metadata.get(key) != expected.get(key):
             raise RuntimeError(f"Zenodo draft metadata mismatch: {key}")
-    if metadata.get("creators") != expected.get("creators"):
-        raise RuntimeError("Zenodo draft creator metadata mismatch")
+    actual_creators = metadata.get("creators")
+    expected_creators = expected.get("creators")
+    if not isinstance(actual_creators, list) or not isinstance(expected_creators, list):
+        raise RuntimeError("Zenodo draft creator metadata is not a list")
+    if [row.get("name") for row in actual_creators if isinstance(row, dict)] != [
+        row.get("name") for row in expected_creators if isinstance(row, dict)
+    ]:
+        raise RuntimeError("Zenodo draft creator-name metadata mismatch")
+    for row in actual_creators:
+        if not isinstance(row, dict):
+            raise RuntimeError("Zenodo draft creator metadata contains a non-object")
+        extra_values = [value for key, value in row.items() if key != "name"]
+        if any(value not in (None, "") for value in extra_values):
+            raise RuntimeError("Zenodo added non-null creator metadata")
     if set(metadata.get("keywords") or []) != set(expected.get("keywords") or []):
         raise RuntimeError("Zenodo draft keyword metadata mismatch")
     if metadata.get("related_identifiers") != expected.get("related_identifiers"):

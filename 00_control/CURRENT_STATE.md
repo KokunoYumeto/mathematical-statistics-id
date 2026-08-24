@@ -6,8 +6,8 @@ Updated: 2026-08-24
 
 ### Authoritative current boundary
 
-The independent Random chapters 5–8 Indonesian edition is now a complete
-29-of-29 local release candidate. Translation, locale-neutral backend, offline
+The independent Random chapters 5–8 Indonesian edition is complete, published,
+and anonymously verified at 29 of 29 source pages. Translation, locale-neutral backend, offline
 HTML reader, desktop/mobile browser QA, consolidated PDF, full-raster visual
 review, and deterministic replay gates pass. The reader is 67 files /
 2,962,390 bytes with manifest SHA-256
@@ -24,12 +24,23 @@ containers and zero incomplete images, MathJax errors, console problems,
 page-level overflows, or uncontained wide surfaces; browser receipt SHA-256 is
 `e400173a33e51d04e43b5be4d2528c6ecfe22042c61af2e46dbcee9069e6a786`.
 
-The active cursor is publication: make one narrow final commit/push, verify
-Pages and release `v2026.08.24.29` anonymously, then publish the deterministic
-seven-file package as version `2026.08.24.29` in existing Zenodo concept
-`10.5281/zenodo.22059763` and persist readback receipts. Exact local evidence is
-`CHECKPOINT_2026-08-24_COMPLETE_29_PAGE.md`; `CURRENT_CURSOR.md` is the sole
-compact executable cursor. No upstream communication has been sent.
+The release commit is `f2aab7b9a0578dd76624e183fc47e3c1faa664e8`.
+GitHub tag/release `v2026.08.24.29` and Pages workflow run `32697247434`
+passed; anonymous readback matched all 67 Pages files, 131 bounded raw files,
+and the exact PDF. Zenodo record `22076539` / DOI
+`10.5281/zenodo.22076539` is public in existing concept
+`10.5281/zenodo.22059763`; anonymous readback matched all seven release files /
+122,203,013 bytes, with zero remaining draft. Publication evidence is
+`CHECKPOINT_2026-08-24_PUBLICATION_COMPLETE.md` and the three complete-edition
+GitHub/Zenodo receipts. No upstream communication has been sent.
+
+The Random component is terminally complete. The active cursor has moved to a
+separate Penn State STAT 415 component/repository: freeze and normalize the
+official landing page plus Lessons 00–12 and their component-level rights and
+assets, then translate the landing/index plus complete Lesson 00 as the first
+contiguous id-ID unit. The exact donor and original companion remain distinct
+components under the architecture recorded in
+`C140_CONFIGURED_ARCHITECTURE_2026-08-21.md`.
 
 The chronological material below is retained as historical evidence of earlier
 partial checkpoints. Any statement below that calls ordinal 16 the current

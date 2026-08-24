@@ -40,6 +40,8 @@ penggabungan deterministik.
 - Rilis edisi lengkap: <https://github.com/KokunoYumeto/mathematical-statistics-id/releases/tag/v2026.08.24.29>
 - DOI konsep Zenodo, selalu menunjuk versi terbaru:
   <https://doi.org/10.5281/zenodo.22059763>
+- DOI versi lengkap 29/29:
+  <https://doi.org/10.5281/zenodo.22076539>
 - Karya sumber resmi: <https://www.randomservices.org/random/>
 
 Figshare tidak menjadi jalur berkas publik untuk edisi ini: layanan tidak
