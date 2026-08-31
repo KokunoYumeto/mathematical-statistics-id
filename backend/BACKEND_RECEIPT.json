@@ -375,7 +375,7 @@
     "entities.jsonl": {
       "bytes": 10766387,
       "records": 6567,
-      "sha256": "153065119b66897db7cdf94699fa36a58f7cac2294f89669683dbc863b242fdd"
+      "sha256": "6b9061f30187fce6acc4da67822157a8016612ba9147ad33c619bff06f04b77d"
     },
     "relations.csv": {
       "bytes": 1182589,
@@ -409,7 +409,7 @@
       "translated": 6567,
       "untranslated": 0
     },
-    "ledger_bytes": 18419,
+    "ledger_bytes": 18457,
     "ledger_columns": [
       "ordinal",
       "source_path",
@@ -423,7 +423,7 @@
     ],
     "ledger_path": "00_control/TRANSLATION_LEDGER.csv",
     "ledger_rows": 29,
-    "ledger_sha256": "ea9487f8f7cfc50318902caf878c85e527a4a8c4ec2e4d1f2796d3f4a9f85704",
+    "ledger_sha256": "5404f35ddafcf7b58311e61f1d416544d1e41470a46bf8d6cd685401cdd77170",
     "required_document_count": 29,
     "required_ordinals": [
       1,
@@ -664,10 +664,10 @@
         "source_path": "random/point/Sufficient.html",
         "source_sha256": "4d7402f2a960ea2b4232e57e4ee5992ac29801b9269f300f17f8e83074d5a0e4",
         "status": "complete",
-        "target_bytes": 60895,
+        "target_bytes": 60900,
         "target_locale": "id-ID",
         "target_path": "source/id-ID/random/point/Sufficient.html",
-        "target_sha256": "255ac88f235727301ee341eef79b9578910be88b7e2e038d4dfecc0ed686513c"
+        "target_sha256": "18b0305dc25a19a834204fdf84029ff67408f98262024717abf597c745a00197"
       },
       {
         "ordinal": 17,

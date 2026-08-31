@@ -23,11 +23,11 @@
       "sha256": "94b1667bcda20460d50bf5a5c0a41e9b251d5cd0aba82215c6aeafa8224ab2a4"
     },
     {
-      "bytes": 60895,
+      "bytes": 60900,
       "interval_link_occurrences": 1,
       "local_links_checked": 75,
       "path": "random/point/Sufficient.html",
-      "sha256": "255ac88f235727301ee341eef79b9578910be88b7e2e038d4dfecc0ed686513c"
+      "sha256": "18b0305dc25a19a834204fdf84029ff67408f98262024717abf597c745a00197"
     }
   ],
   "pages": [
@@ -143,8 +143,8 @@
     "units": 110
   },
   "translation_ledger": {
-    "bytes": 18419,
+    "bytes": 18457,
     "path": "00_control/TRANSLATION_LEDGER.csv",
-    "sha256": "ea9487f8f7cfc50318902caf878c85e527a4a8c4ec2e4d1f2796d3f4a9f85704"
+    "sha256": "5404f35ddafcf7b58311e61f1d416544d1e41470a46bf8d6cd685401cdd77170"
   }
 }

@@ -4481,11 +4481,11 @@
         "status": "complete"
       },
       {
-        "bytes": 60895,
+        "bytes": 60900,
         "ledger_target_path": "source/id-ID/random/point/Sufficient.html",
         "ordinal": 16,
         "relative_path": "random/point/Sufficient.html",
-        "sha256": "255ac88f235727301ee341eef79b9578910be88b7e2e038d4dfecc0ed686513c",
+        "sha256": "18b0305dc25a19a834204fdf84029ff67408f98262024717abf597c745a00197",
         "status": "complete"
       },
       {
@@ -7320,9 +7320,9 @@
         "sha256": "094f2a7873e044eefa74ff8dc10314db7e7fe1692ee0d699f19cc18e25e617bb"
       },
       {
-        "bytes": 60895,
+        "bytes": 60900,
         "relative_path": "random/point/Sufficient.html",
-        "sha256": "255ac88f235727301ee341eef79b9578910be88b7e2e038d4dfecc0ed686513c"
+        "sha256": "18b0305dc25a19a834204fdf84029ff67408f98262024717abf597c745a00197"
       },
       {
         "bytes": 31696,
@@ -7442,8 +7442,8 @@
     ],
     "manifest_bytes": 6646,
     "manifest_path": "build/FIRST_UNIT_MANIFEST.csv",
-    "manifest_sha256": "ce25e1505462bbe60cfe35a46844b40d1646baff18dff72a9f3f8bbf376c9887",
-    "total_bytes": 2962390
+    "manifest_sha256": "39505336959c82717981cc21f26b0353d435059042bc57a61976280b440a561e",
+    "total_bytes": 2962395
   },
   "reader_customizations": [
     {
@@ -7475,7 +7475,7 @@
     }
   },
   "translation_ledger": {
-    "bytes": 18419,
+    "bytes": 18457,
     "path": "00_control/TRANSLATION_LEDGER.csv",
     "required_document_count": 29,
     "required_ordinals": [
@@ -7509,7 +7509,7 @@
       28,
       29
     ],
-    "sha256": "ea9487f8f7cfc50318902caf878c85e527a4a8c4ec2e4d1f2796d3f4a9f85704",
+    "sha256": "5404f35ddafcf7b58311e61f1d416544d1e41470a46bf8d6cd685401cdd77170",
     "verified_rows": [
       {
         "ordinal": 1,
@@ -7667,9 +7667,9 @@
         "source_path": "random/point/Sufficient.html",
         "source_sha256": "4d7402f2a960ea2b4232e57e4ee5992ac29801b9269f300f17f8e83074d5a0e4",
         "status": "complete",
-        "target_bytes": 60895,
+        "target_bytes": 60900,
         "target_path": "source/id-ID/random/point/Sufficient.html",
-        "target_sha256": "255ac88f235727301ee341eef79b9578910be88b7e2e038d4dfecc0ed686513c"
+        "target_sha256": "18b0305dc25a19a834204fdf84029ff67408f98262024717abf597c745a00197"
       },
       {
         "ordinal": 17,

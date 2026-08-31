@@ -396,11 +396,11 @@
   ],
   "build": {
     "reader_file_count": 67,
-    "reader_manifest_sha256": "ce25e1505462bbe60cfe35a46844b40d1646baff18dff72a9f3f8bbf376c9887",
-    "reader_total_bytes": 2962390,
+    "reader_manifest_sha256": "39505336959c82717981cc21f26b0353d435059042bc57a61976280b440a561e",
+    "reader_total_bytes": 2962395,
     "receipt_bytes": 313482,
     "receipt_path": "build/FIRST_UNIT_BUILD_RECEIPT.json",
-    "receipt_sha256": "9025eff944aff93122480c8e6dc30d761f6236eaa92eca6edfd953f460487521"
+    "receipt_sha256": "91ee83f7c92b2929795e3afa94cf019abeedf022279ae5edd02ad0743de01d44"
   },
   "math_text_localizations": [
     {
@@ -539,7 +539,7 @@
     "raw_math_environments": 34,
     "raw_script_style_blocks": 80,
     "readable_layout_css_appends": 1,
-    "reader_bytes": 2962390,
+    "reader_bytes": 2962395,
     "reader_files": 67,
     "source_elements": 10872,
     "svg_files": 11,
@@ -3741,17 +3741,17 @@
       "raw_math_environments": 0,
       "raw_math_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "raw_script_style_blocks": 3,
-      "reader_bytes": 60895,
-      "reader_sha256": "255ac88f235727301ee341eef79b9578910be88b7e2e038d4dfecc0ed686513c",
+      "reader_bytes": 60900,
+      "reader_sha256": "18b0305dc25a19a834204fdf84029ff67408f98262024717abf597c745a00197",
       "reader_target_byte_identical": true,
       "source_bytes": 57507,
       "source_sha256": "4d7402f2a960ea2b4232e57e4ee5992ac29801b9269f300f17f8e83074d5a0e4",
-      "target_bytes": 60895,
+      "target_bytes": 60900,
       "target_core_elements": 436,
       "target_hierarchy_sha256": "09ed2f9346887b3c5ba20e1981f35bbb8dc6d40d9cac9a48820c9c93bb4012c8",
       "target_math_sha256": "3e2547e06ef1e9e70118d0db39a1b8592300a635305fee861537749c0d5a41d1",
       "target_raw_math_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-      "target_sha256": "255ac88f235727301ee341eef79b9578910be88b7e2e038d4dfecc0ed686513c",
+      "target_sha256": "18b0305dc25a19a834204fdf84029ff67408f98262024717abf597c745a00197",
       "units": 39
     },
     "random/point/Unbiased.html": {
@@ -4196,11 +4196,11 @@
     }
   ],
   "translation_ledger": {
-    "bytes": 18419,
+    "bytes": 18457,
     "complete_sequence": "1-29",
     "path": "00_control/TRANSLATION_LEDGER.csv",
     "rows": 29,
-    "sha256": "ea9487f8f7cfc50318902caf878c85e527a4a8c4ec2e4d1f2796d3f4a9f85704"
+    "sha256": "5404f35ddafcf7b58311e61f1d416544d1e41470a46bf8d6cd685401cdd77170"
   },
   "transport_hardening": [
     {
