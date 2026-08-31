@@ -1,6 +1,6 @@
 # Current state — O006 / C140 Mathematical Statistics (id-ID)
 
-Updated: 2026-08-24
+Updated: 2026-08-31
 
 ## Status
 
@@ -34,12 +34,14 @@ and the exact PDF. Zenodo record `22076539` / DOI
 `CHECKPOINT_2026-08-24_PUBLICATION_COMPLETE.md` and the three complete-edition
 GitHub/Zenodo receipts. No upstream communication has been sent.
 
-The Random component is terminally complete. The active cursor has moved to a
-separate Penn State STAT 415 component/repository: freeze and normalize the
-official landing page plus Lessons 00–12 and their component-level rights and
-assets, then translate the landing/index plus complete Lesson 00 as the first
-contiguous id-ID unit. The exact donor and original companion remain distinct
-components under the architecture recorded in
+The Random component is terminally complete. The distinct Penn State STAT 415
+collection is now also terminally complete in its separate repository: all 14
+Penn documents, the exact completeness donor, and all 39 original companion
+documents have been translated/authored, built, published, and anonymously
+verified. The terminal collection checkpoint is
+`components/c140-companion/00_control/CHECKPOINT_2026-08-31_C5_PUBLICATION_COMPLETE.md`
+in `penn-state-stat-415-id`. No O006/C140 action remains. Component identities
+and licences remain separate under the architecture recorded in
 `C140_CONFIGURED_ARCHITECTURE_2026-08-21.md`.
 
 The chronological material below is retained as historical evidence of earlier

@@ -1,6 +1,6 @@
 # Production cursor
 
-Updated: 2026-08-24
+Updated: 2026-08-31
 
 ## Lane and authority
 
@@ -93,18 +93,19 @@ Updated: 2026-08-24
   Figshare, or contact upstream unless a later direct instruction changes that
   disposition.
 
-## Next executable action
+## Terminal collection disposition
 
-Overall O006/C140 remains active. Begin the distinct Penn State STAT 415
-component in a separate path and repository, using the exact 14-document
-authority manifest and component boundary in
-`C140_CONFIGURED_ARCHITECTURE_2026-08-21.md`. First freeze the landing page plus
-Lessons 00–12, anchors, code, figures, direct assets, response metadata, and
-component-specific rights without claiming public QMD source. Establish the
-new component's durable workflow/cursor and normalized semantic source, then
-translate the landing/index plus complete Lesson 00 as the first contiguous
-id-ID reader unit. Keep the exact Random completeness donor and original
-companion separate within that C140 collection.
+The distinct Penn State STAT 415 collection is complete in the separate
+`penn-state-stat-415-id` repository: landing/index plus Lessons 00–12, the exact
+Random completeness donor, and the 39-document original companion all passed
+their deterministic build/QA, publication, and anonymous public-byte readback
+gates. Pages run `33405870018` matched 259 files / 35,170,536 bytes; GitHub and
+Zenodo each matched the complete 65-file C5 preservation package. Its terminal
+checkpoint is
+`components/c140-companion/00_control/CHECKPOINT_2026-08-31_C5_PUBLICATION_COMPLETE.md`
+in that repository. No O006/C140 translation, audit, build, publication,
+readback, or upstream-report action remains. Preserve this independent Random
+edition and the collection as separate component identities.
 
 ## Recovery order
 
